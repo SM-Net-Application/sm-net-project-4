@@ -64,24 +64,21 @@ public class Operations {
 	public static void runInitialize(String url, String user, String password, String key)
 			throws OperationCouldNotBeCompleted {
 
-		// Con la key Software encrypto la key User
-
 		SecretKey secretKey = Crypt.generateKey(key);
+
 		if (secretKey != null) {
 
-			// Con la key User cryptata encrypto user e password
-			String userEncrypted = Crypt.encrypt(user, secretKey);
-			String passwordEncrypted = Crypt.encrypt(password, secretKey);
+			String userEnc = Crypt.encrypt(user, secretKey);
+			String passwordEnc = Crypt.encrypt(password, secretKey);
 
-			if (userEncrypted != null && passwordEncrypted != null) {
+			if (userEnc != null && passwordEnc != null) {
 
-				// Inserisco i dati nel database
-
-				// JSON.executeHttpPostJSON(url, JSONRequest.GET_COUNT_USERS());
-
+				JSONObject jsonObject = JSON.executeHttpPostJSON(url, JSONRequest.RUN_INIT(userEnc, passwordEnc));
+				JSONStatus status = JSONRequest.getStatus(jsonObject);
+				if (!JSONRequest.isRequestOK(status))
+					throw new OperationCouldNotBeCompleted(status.getText());
 			} else
 				throw new OperationCouldNotBeCompleted("Unable to encrypt user and password");
-
 		} else
 			throw new OperationCouldNotBeCompleted("The inserted key can not be used");
 	}

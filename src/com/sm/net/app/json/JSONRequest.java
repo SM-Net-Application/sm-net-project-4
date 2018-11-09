@@ -11,6 +11,13 @@ public class JSONRequest {
 		return create(Integer.valueOf(1));
 	}
 
+	public static JSONObject RUN_INIT(String userEncrypted, String passwordEncrypted) {
+		JSONObject jsonObj = create(Integer.valueOf(2));
+		jsonObj.put("user", userEncrypted);
+		jsonObj.put("password", passwordEncrypted);
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
