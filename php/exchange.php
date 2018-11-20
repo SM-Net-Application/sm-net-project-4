@@ -10,15 +10,7 @@ if (! empty ( $jsonObjPar )) {
 					include 'query/sp_tool_q1.php';
 					break;
 				case 2 :
-					if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
-						if (! empty ( $jsonObj ["user"] ) && ! empty ( $jsonObj ["password"] )) {
-							include 'query/sp_tool_q2.php';
-						} else {
-							$response ["status"] = 6;
-						}
-					} else {
-						$response ["status"] = 6;
-					}
+					include 'query/sp_tool_q2.php';
 					break;
 			}
 		} else {
