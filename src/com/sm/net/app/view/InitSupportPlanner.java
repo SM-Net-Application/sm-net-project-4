@@ -1,8 +1,17 @@
 package com.sm.net.app.view;
 
+import com.sm.net.app.AppInfos;
+import com.sm.net.app.exceptions.OperationCouldNotBeCompleted;
+import com.sm.net.app.operations.Operations;
+import com.sm.net.auth.Authenticator;
+import com.sm.net.auth.ValidationType;
+import com.sm.net.fx.AlertDesigner;
+import com.sm.net.util.Html;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -58,23 +67,94 @@ public class InitSupportPlanner {
 
 			@Override
 			public void handle(ActionEvent event) {
-				checkFields();
+
+				String url = textFieldUrl.getText();
+				String user = textFieldUsername.getText();
+				String password = textFieldPassword.getText();
+				String key = textFieldKey.getText();
+
+				if (checkFields(url, user, password, key)) {
+					try {
+						if (Operations.noUsersInDatabase(url)) {
+							Operations.runInitialize(url, user, password, key);
+							new AlertDesigner("Database inizializzato con successo", initSupportPlannerStage,
+									AlertType.INFORMATION, "Utente creato!", AppInfos.ICON).show();
+						} else
+							new AlertDesigner("Il database non necessita di essere inizializzato",
+									"La tabella utenti non è vuota.", initSupportPlannerStage, AlertType.ERROR,
+									"Attenzione!", AppInfos.ICON).show();
+					} catch (OperationCouldNotBeCompleted e) {
+						new AlertDesigner("L'operazione non può essere completata", e.getMessage(),
+								initSupportPlannerStage, AlertType.ERROR, "Attenzione!", AppInfos.ICON).show();
+					}
+				}
 			}
 		});
 
 	}
 
-	protected void checkFields() {
-		String url = textFieldUrl.getText();
-		String user = textFieldUsername.getText();
-		String pwd = textFieldPassword.getText();
-		String key = textFieldKey.getText();
+	protected boolean checkFields(String url, String user, String password, String key) {
 
-		if (!url.isEmpty() && !user.isEmpty() && !pwd.isEmpty() && !key.isEmpty()) {
+		boolean check = true;
+		check = checkURL(url);
+		if (check)
+			check = checkUsername(user);
+		if (check)
+			check = checkPassword(password);
+		if (check)
+			check = checkKey(key);
 
-		}else{
-			System.out.println("Compilare tutti i campi");
+		return check;
+	}
+
+	private boolean checkKey(String key) {
+
+		boolean check = true;
+
+		if (!Authenticator.isValid(key, ValidationType.VERY_STRONG)) {
+			check = false;
+			new AlertDesigner("L'Encryption-Key fornita non è valida", ValidationType.VERY_STRONG.getInfo(),
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", AppInfos.ICON).show();
 		}
+		return check;
+	}
+
+	private boolean checkPassword(String pwd) {
+		boolean check = true;
+
+		if (!Authenticator.isValid(pwd, ValidationType.VERY_STRONG)) {
+			check = false;
+			new AlertDesigner("La password fornita non è valida", ValidationType.VERY_STRONG.getInfo(),
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", AppInfos.ICON).show();
+		}
+
+		return check;
+	}
+
+	private boolean checkUsername(String user) {
+
+		boolean check = true;
+
+		if (!Authenticator.isValid(user, ValidationType.VERY_STRONG)) {
+			check = false;
+			new AlertDesigner("L'username fornito non è valido", "Formato:\n" + ValidationType.VERY_STRONG.getInfo(),
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", AppInfos.ICON).show();
+		}
+
+		return check;
+	}
+
+	private boolean checkURL(String url) {
+
+		boolean check = true;
+
+		if (!Html.isValidUrl(url)) {
+			check = false;
+			new AlertDesigner("L'URL fornito non è valido", "Formato:\nhttp[s]://mysite.org[/home/]",
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", AppInfos.ICON).show();
+		}
+
+		return check;
 	}
 
 	public Stage getInitSupportPlannerStage() {

@@ -8,8 +8,6 @@ import javax.crypto.SecretKey;
 import org.ini4j.Wini;
 
 import com.sm.net.app.view.SupportPlannerTools;
-import com.sm.net.auth.Authenticator;
-import com.sm.net.auth.ValidationType;
 import com.sm.net.util.Crypt;
 import com.sm.net.util.MyApp;
 
@@ -49,13 +47,14 @@ public class SupportPlannerToolsMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		System.out.println(Authenticator.isValid("Password", ValidationType.VERY_STRONG));
+		// System.out.println(Authenticator.isValid("Password",
+		// ValidationType.VERY_STRONG));
 
-		// if (initSettings()) {
-		// loadGUI(primaryStage);
-		// } else {
-		// exit();
-		// }
+		if (initSettings()) {
+			loadGUI(primaryStage);
+		} else {
+			exit();
+		}
 	}
 
 	private void exit() {
@@ -155,32 +154,4 @@ public class SupportPlannerToolsMain extends Application {
 	private static SecretKey generateKeySoftware() {
 		return Crypt.generateKey("SupportPlanner");
 	}
-
-	// private void testCrypt() {
-	// SecretKey key = Crypt.generateKey("Salvatore");
-	//
-	// String encrypt = Crypt.encrypt("Testo da cryptare", key);
-	// System.out.println(encrypt);
-	//
-	// String decrypt = Crypt.decrypt(encrypt, key);
-	// System.out.println(decrypt);
-	// }
-
-	// private void testCheckUsers(final String URL) {
-	// try {
-	// if (Operations.isNoUsers(URL)) {
-	//
-	// String user = "SMolaro";
-	// String password = "PasswordSMolaro";
-	// String key = "SMNetKey";
-	//
-	// Operations.runInitialize(URL, user, password, key);
-	//
-	// } else
-	// System.out.println("Ci sono utenti");
-	// } catch (OperationCouldNotBeCompleted e) {
-	// System.out.println(e.getMessage());
-	// }
-	// }
-
 }

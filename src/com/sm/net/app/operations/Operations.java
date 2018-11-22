@@ -20,7 +20,7 @@ public class Operations {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean isNoUsers(String url) throws OperationCouldNotBeCompleted {
+	public static boolean noUsersInDatabase(String url) throws OperationCouldNotBeCompleted {
 
 		JSONObject jsonObject = JSON.executeHttpPostJSON(url, JSONRequest.GET_COUNT_USERS());
 		JSONStatus status = JSONRequest.getStatus(jsonObject);
@@ -47,8 +47,6 @@ public class Operations {
 				throw new OperationCouldNotBeCompleted("The key \"result\" is not present in the JSON array");
 		} else
 			throw new OperationCouldNotBeCompleted(status.getText());
-
-		System.out.println(jsonObject.toString());
 
 		return false;
 	}
