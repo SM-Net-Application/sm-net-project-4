@@ -2,7 +2,7 @@ package com.sm.net.app.view;
 
 import java.io.IOException;
 
-import com.sm.net.app.AppInfos;
+import com.sm.net.sp.Meta;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,7 +39,7 @@ public class SupportPlannerTools {
 		// Image(getClass().getResourceAsStream("resources/icon.png")));
 
 		// this.labelLogo.getStyleClass().add("title");
-		this.labelLogo.setText(AppInfos.getAppName());
+		this.labelLogo.setText(Meta.getAppName());
 
 		// this.buttonCreateAdmin.getStyleClass().add("button");
 		this.buttonCreateAdmin.setText("Inizializza SupportPlanner");
@@ -72,7 +72,7 @@ public class SupportPlannerTools {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 
-			stage.setTitle("SM-Net: " + AppInfos.getAppName());
+			stage.setTitle("SM-Net: " + Meta.getAppName());
 			stage.getIcons().add(new Image(SupportPlannerTools.class.getResourceAsStream("resources/icon.png")));
 
 			stage.setResizable(false);
