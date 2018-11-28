@@ -4,7 +4,7 @@ import com.sm.net.app.exceptions.OperationCouldNotBeCompleted;
 import com.sm.net.app.operations.Operations;
 import com.sm.net.auth.Authenticator;
 import com.sm.net.auth.ValidationType;
-import com.sm.net.fx.AlertDesigner;
+import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.sp.Meta;
 import com.sm.net.util.Html;
 
