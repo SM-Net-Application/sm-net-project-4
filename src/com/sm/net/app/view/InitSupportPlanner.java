@@ -78,14 +78,14 @@ public class InitSupportPlanner {
 						if (Operations.noUsersInDatabase(url)) {
 							Operations.runInitialize(url, user, password, key);
 							new AlertDesigner("Database inizializzato con successo", initSupportPlannerStage,
-									AlertType.INFORMATION, "Utente creato!", Meta.ICON).show();
+									AlertType.INFORMATION, "Utente creato!", Meta.Resources.ICON).show();
 						} else
 							new AlertDesigner("Il database non necessita di essere inizializzato",
 									"La tabella utenti non è vuota.", initSupportPlannerStage, AlertType.ERROR,
-									"Attenzione!", Meta.ICON).show();
+									"Attenzione!", Meta.Resources.ICON).show();
 					} catch (OperationCouldNotBeCompleted e) {
 						new AlertDesigner("L'operazione non può essere completata", e.getMessage(),
-								initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.ICON).show();
+								initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.Resources.ICON).show();
 					}
 				}
 			}
@@ -114,7 +114,7 @@ public class InitSupportPlanner {
 		if (!Authenticator.isValid(key, ValidationType.VERY_STRONG)) {
 			check = false;
 			new AlertDesigner("L'Encryption-Key fornita non è valida", ValidationType.VERY_STRONG.getInfo(),
-					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.ICON).show();
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.Resources.ICON).show();
 		}
 		return check;
 	}
@@ -125,7 +125,7 @@ public class InitSupportPlanner {
 		if (!Authenticator.isValid(pwd, ValidationType.VERY_STRONG)) {
 			check = false;
 			new AlertDesigner("La password fornita non è valida", ValidationType.VERY_STRONG.getInfo(),
-					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.ICON).show();
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.Resources.ICON).show();
 		}
 
 		return check;
@@ -138,7 +138,7 @@ public class InitSupportPlanner {
 		if (!Authenticator.isValid(user, ValidationType.VERY_STRONG)) {
 			check = false;
 			new AlertDesigner("L'username fornito non è valido", "Formato:\n" + ValidationType.VERY_STRONG.getInfo(),
-					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.ICON).show();
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.Resources.ICON).show();
 		}
 
 		return check;
@@ -151,7 +151,7 @@ public class InitSupportPlanner {
 		if (!Html.isValidUrl(url)) {
 			check = false;
 			new AlertDesigner("L'URL fornito non è valido", "Formato:\nhttp[s]://mysite.org[/home/]",
-					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.ICON).show();
+					initSupportPlannerStage, AlertType.ERROR, "Attenzione!", Meta.Resources.ICON).show();
 		}
 
 		return check;

@@ -1,6 +1,18 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.background {
+.listViewStyle1 {
+	-fx-font-size: 12.0pt;
+}
+
+.buttonStyle1 {
+	-fx-font-size: 12.0pt;
+}
+
+.labelStyle1 {
+	-fx-font-size: 12.0pt;
+}
+
+/*.background {
 	-fx-background-color: linear-gradient(#004e99 0.0%, #007eff 100.0%);
 }
 
@@ -27,4 +39,4 @@
 	-fx-background-color:  #ebeced;
 	-fx-border-color:  #d1d7dd;
 	-fx-text-fill:  #6e7275;
-}
+}*/

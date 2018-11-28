@@ -3,19 +3,25 @@ package com.sm.net.sp;
 import java.io.File;
 import java.io.IOException;
 
-import javax.crypto.SecretKey;
-
-import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.settings.SettingsConf;
-import com.sm.net.util.Crypt;
-import com.sm.net.util.FilesFolders;
+import com.sm.net.directory.Directory;
+import com.sm.net.file.Extensions;
+import com.sm.net.file.FileUtils;
+import com.sm.net.project.Language;
+import com.sm.net.sp.view.init.language.InitLanguage;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class SupportPlannerMain extends Application {
 
 	// public static final SecretKey KEY_SOFTWARE = generateKeySoftware();
+
+	private File settingsFile;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -23,6 +29,8 @@ public class SupportPlannerMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+
+		checkSettings(primaryStage);
 
 		// System.out.println(Authenticator.isValid("Password",
 		// ValidationType.VERY_STRONG));
@@ -33,34 +41,141 @@ public class SupportPlannerMain extends Application {
 		// exit();
 		// }
 
-		if (Meta.getFileSettings().exists()) {
+		// if (Meta.getFileSettings().exists()) {
+		//
+		// // Access check
+		//
+		// System.out.println("File Settings exists");
+		//
+		// } else {
+		//
+		// // Access create
+		//
+		// System.out.println("File Settings NOT exists");
+		//
+		// try {
+		//
+		// Settings settings = new Settings(new
+		// SettingsConf(Meta.SETTINGS_FOLDER, Meta.SETTINGS_FILE));
+		// System.out.println("File Settings is created");
+		//
+		// } catch (IOException e) {
+		// System.out.println("Error: " + e.getMessage());
+		// exit();
+		// }
+		// }
+		//
+		// exit();
+	}
 
-			// Access check
+	private void checkSettings(Stage stage) {
 
-			System.out.println("File Settings exists");
+		this.settingsFile = Meta.Settings.getFile();
 
+		if (this.settingsFile != null) {
+
+			if (this.settingsFile.exists()) {
+				// loadSettings();
+			} else {
+				initProject(stage);
+			}
 		} else {
+			exitError("ERR001");
+		}
+	}
 
-			// Access create
+	private void initProject(Stage stage) {
 
-			System.out.println("File Settings NOT exists");
+		checkLanguages(stage);
 
-			try {
-				
-				Settings settings = new Settings(new SettingsConf(Meta.SETTINGS_FOLDER, Meta.SETTINGS_FILE));
-				System.out.println("File Settings is created");
-				
-			} catch (IOException e) {
-				System.out.println("Error: " + e.getMessage());
-				exit();
+	}
+
+	private void checkLanguages(Stage stage) {
+
+		File[] allFiles = Directory.listAllFiles(Meta.Languages.getDirectory());
+
+		if (allFiles != null) {
+
+			if (allFiles.length > 0) {
+
+				ObservableList<Language> languages = checkLanguagesProperties(allFiles);
+
+				if (languages.size() > 0) {
+
+					initLanguageView(stage, languages);
+
+				} else {
+					exitError("ERR004");
+				}
+			} else {
+				exitError("ERR003");
+			}
+		} else {
+			exitError("ERR002");
+		}
+	}
+
+	private ObservableList<Language> checkLanguagesProperties(File[] allFiles) {
+
+		ObservableList<Language> languages = FXCollections.observableArrayList();
+
+		for (File file : allFiles) {
+
+			if (FileUtils.getExtensionWithDot(file.getName()).equals(Extensions.PROPERTIES)) {
+
+				try {
+					Language lang = new Language(file);
+					if (lang.isLoaded() && !lang.getLanguage().equals("null")) {
+						languages.add(lang);
+					}
+				} catch (IOException e) {
+				}
 			}
 		}
 
-		exit();
+		return languages;
 	}
 
-	private void exit() {
+	private void initLanguageView(Stage stage, ObservableList<Language> languages) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.INIT_LANGUAGE);
+
+			AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+
+			Scene scene = new Scene(anchorPane);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			stage.setScene(scene);
+			stage.setTitle(Meta.Application.getFullTitle());
+			stage.getIcons().add(Meta.Resources.ICON);
+
+			stage.setResizable(false);
+
+			InitLanguage controller = (InitLanguage) fxmlLoader.getController();
+			controller.setLanguages(languages);
+			controller.init();
+
+			stage.show();
+
+		} catch (IOException e) {
+			exitError("ERR005");
+		}
+	}
+
+	private void exitError(String errorCode) {
+		System.out.println(errorCode);
 		System.exit(0);
+	}
+
+	public File getSettingsFile() {
+		return settingsFile;
+	}
+
+	public void setSettingsFile(File settingsFile) {
+		this.settingsFile = settingsFile;
 	}
 
 	// private void loadGUI(Stage primaryStage) {
