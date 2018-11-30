@@ -7,6 +7,7 @@ import com.sm.net.directory.Directory;
 import com.sm.net.file.Extensions;
 import com.sm.net.file.FileUtils;
 import com.sm.net.project.Language;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.init.language.InitLanguage;
 
 import javafx.application.Application;
@@ -15,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class SupportPlannerMain extends Application {
@@ -22,6 +24,7 @@ public class SupportPlannerMain extends Application {
 	// public static final SecretKey KEY_SOFTWARE = generateKeySoftware();
 
 	private File settingsFile;
+	private SupportPlannerView supportPlannerViewCtrl;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -86,11 +89,38 @@ public class SupportPlannerMain extends Application {
 
 	private void initProject(Stage stage) {
 
-		checkLanguages(stage);
+		initSupportPlannerView(stage);
+		checkLanguages();
 
 	}
 
-	private void checkLanguages(Stage stage) {
+	private void initSupportPlannerView(Stage stage) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.SUPPORTPLANNER_VIEW);
+
+			BorderPane borderPane = (BorderPane) fxmlLoader.load();
+
+			Scene scene = new Scene(borderPane);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			stage.setScene(scene);
+			stage.setTitle(Meta.Application.getFullTitle());
+			stage.getIcons().add(Meta.Resources.ICON);
+
+			this.supportPlannerViewCtrl = (SupportPlannerView) fxmlLoader.getController();
+			this.supportPlannerViewCtrl.setSupportPlannerViewStage(stage);
+
+			stage.show();
+
+		} catch (IOException e) {
+			exitError("ERR005");
+		}
+	}
+
+	private void checkLanguages() {
 
 		File[] allFiles = Directory.listAllFiles(Meta.Languages.getDirectory());
 
@@ -102,7 +132,7 @@ public class SupportPlannerMain extends Application {
 
 				if (languages.size() > 0) {
 
-					initLanguageView(stage, languages);
+					initLanguageView(languages);
 
 				} else {
 					exitError("ERR004");
@@ -136,7 +166,7 @@ public class SupportPlannerMain extends Application {
 		return languages;
 	}
 
-	private void initLanguageView(Stage stage, ObservableList<Language> languages) {
+	private void initLanguageView(ObservableList<Language> languages) {
 
 		try {
 
@@ -145,23 +175,15 @@ public class SupportPlannerMain extends Application {
 
 			AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
 
-			Scene scene = new Scene(anchorPane);
-			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
-
-			stage.setScene(scene);
-			stage.setTitle(Meta.Application.getFullTitle());
-			stage.getIcons().add(Meta.Resources.ICON);
-
-			stage.setResizable(false);
-
 			InitLanguage controller = (InitLanguage) fxmlLoader.getController();
 			controller.setLanguages(languages);
+			controller.setSupportPlannerViewCtrl(this.supportPlannerViewCtrl);
 			controller.init();
 
-			stage.show();
+			this.supportPlannerViewCtrl.loadLanguageView(anchorPane);
 
 		} catch (IOException e) {
-			exitError("ERR005");
+			exitError("ERR006");
 		}
 	}
 

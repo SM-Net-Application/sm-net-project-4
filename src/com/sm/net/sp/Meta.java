@@ -7,6 +7,7 @@ import com.sm.net.file.Extensions;
 import com.sm.net.path.PathBuilder;
 import com.sm.net.project.Project;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.access.create.AccessCreate;
 import com.sm.net.sp.view.init.language.InitLanguage;
 
 import javafx.scene.image.Image;
@@ -58,6 +59,7 @@ public class Meta {
 	public static class Views {
 		public static final URL SUPPORTPLANNER_VIEW = SupportPlannerView.class.getResource("SupportPlannerView.fxml");
 		public static final URL INIT_LANGUAGE = InitLanguage.class.getResource("InitLanguage.fxml");
+		public static final URL ACCESS_CREATE = AccessCreate.class.getResource("AccessCreate.fxml");
 	}
 
 	public static class Themes {
