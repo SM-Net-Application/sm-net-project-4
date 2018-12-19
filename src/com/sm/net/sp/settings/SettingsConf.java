@@ -6,54 +6,15 @@ import java.io.IOException;
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
-import com.sm.net.util.MyApp;
-
 public class SettingsConf {
 
-	public static final String FILE_EXT = ".ini";
-
-	private String folderName;
-	private String fileName;
 	private File iniFile;
 	private Wini ini;
 
-	public SettingsConf(String folderName, String fileName) throws InvalidFileFormatException, IOException {
-		super();
+	public SettingsConf(File file) throws InvalidFileFormatException, IOException {
 
-		this.folderName = folderName;
-		settings(fileName);
-	}
-
-	public SettingsConf(String fileName) throws InvalidFileFormatException, IOException {
-		this.folderName = "";
-		settings(fileName);
-	}
-
-	private void settings(String fileName) throws InvalidFileFormatException, IOException {
-
-		this.fileName = fileName;
-		this.iniFile = MyApp.getMyAppFile(folderName, fileNameExt(fileName), true);
-		this.ini = new Wini(this.iniFile);
-	}
-
-	private String fileNameExt(String fileName) {
-		return fileName + FILE_EXT;
-	}
-
-	public String getFolderName() {
-		return folderName;
-	}
-
-	public void setFolderName(String folderName) {
-		this.folderName = folderName;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+		this.iniFile = file;
+		this.ini = new Wini(file);
 	}
 
 	public Wini getIni() {

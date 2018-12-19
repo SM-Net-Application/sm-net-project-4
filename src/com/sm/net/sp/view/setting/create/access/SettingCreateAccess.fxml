@@ -3,13 +3,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.access.create.AccessCreate">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.setting.create.access.SettingCreateAccess">
    <children>
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,37 +21,45 @@
                   </Label>
                </children>
             </StackPane>
-            <HBox>
+            <StackPane alignment="CENTER_LEFT">
                <children>
                   <Label fx:id="labelPassword" text="Label">
-                     <HBox.margin>
+                     <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
+                     </StackPane.margin>
                   </Label>
-                  <TextField fx:id="textFieldPassword" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </TextField>
                </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <Label fx:id="labelPasswordConfirm" text="Label">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="textFiedlPasswordConfirm" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
+            </StackPane>
             <StackPane>
                <children>
-                  <Button fx:id="buttonCreate" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                  <PasswordField fx:id="passwordFieldPassword">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </PasswordField>
+               </children>
+            </StackPane>
+            <StackPane alignment="CENTER_LEFT">
+               <children>
+                  <Label fx:id="labelPasswordConfirm" text="Label">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <PasswordField fx:id="passwordFiedlPasswordConfirm">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </PasswordField>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <Button fx:id="buttonCreate" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>

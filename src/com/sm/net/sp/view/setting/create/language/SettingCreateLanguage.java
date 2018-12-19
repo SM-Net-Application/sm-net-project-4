@@ -1,11 +1,11 @@
-package com.sm.net.sp.view.init.language;
+package com.sm.net.sp.view.setting.create.language;
 
 import java.io.IOException;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.access.create.AccessCreate;
+import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,7 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
-public class InitLanguage {
+public class SettingCreateLanguage {
 
 	@FXML
 	private Label labelSelect;
@@ -31,89 +31,80 @@ public class InitLanguage {
 	private Button buttonNext;
 
 	private SupportPlannerView supportPlannerViewCtrl;
+	
 	private ObservableList<Language> languages;
 
 	@FXML
 	private void initialize() {
-		setStyleClass();
+		styleClasses();
 	}
 
-	private void setStyleClass() {
+	public void objectInitialize() {
+		listeners();
+		dataListViewLang();
+	}
+
+	private void styleClasses() {
 		labelSelect.getStyleClass().add("labelStyle1");
 		listViewLang.getStyleClass().add("listViewStyle1");
 		buttonNext.getStyleClass().add("buttonStyle1");
 	}
 
-	public void init() {
-
-		initListeners();
-		initViewListViewLang();
-	}
-
-	private void initViewListViewLang() {
-
+	private void dataListViewLang() {
 		if (languages.size() > 0) {
 			listViewLang.setItems(languages);
 			listViewLang.getSelectionModel().selectFirst();
 		}
 	}
 
-	private void initListeners() {
-		addListenerListViewLang();
-		addListenerButtonNext();
+	private void listeners() {
+		listenerListViewLang();
+		listenerButtonNext();
 	}
 
-	private void addListenerButtonNext() {
-		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
+	private void listenerListViewLang() {
+		listViewLang.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if (newValue.intValue() > -1)
+					viewUpdate();
+			}
+		});
+	}
 
+	private void listenerButtonNext() {
+		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-
 				Language lang = listViewLang.getSelectionModel().getSelectedItem();
-				if (lang != null) {
-					initAccessCreateView();
-				}
+				if (lang != null)
+					viewSettingCreateAccess(lang);
 			}
 
 		});
 	}
 
-	private void initAccessCreateView() {
+	private void viewSettingCreateAccess(Language language) {
 
 		try {
 
 			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(Meta.Views.ACCESS_CREATE);
+			fxmlLoader.setLocation(Meta.Views.SETTING_CREATE_ACCESS);
 
 			AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
 
-			AccessCreate controller = (AccessCreate) fxmlLoader.getController();
-			// controller.setLanguages(languages);
-			// controller.setSupportPlannerViewCtrl(this.supportPlannerViewCtrl);
-			// controller.init();
+			SettingCreateAccess controller = (SettingCreateAccess) fxmlLoader.getController();
+			controller.setLanguage(language);
+			controller.setSupportPlannerViewCtrl(this.supportPlannerViewCtrl);
+			controller.objectInitialize();
 
-			this.supportPlannerViewCtrl.loadAccessCreateView(anchorPane);
+			this.supportPlannerViewCtrl.viewSettingCreateAccess(anchorPane);
 
 		} catch (IOException e) {
-			// this.supportPlannerViewCtrl.exitError("ERR007");
 		}
 	}
 
-	private void addListenerListViewLang() {
-
-		listViewLang.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-				if (newValue.intValue() > -1)
-					updateGUI();
-			}
-		});
-
-	}
-
-	private void updateGUI() {
+	private void viewUpdate() {
 
 		Language language = listViewLang.getSelectionModel().getSelectedItem();
 		labelSelect.setText(language.getString("VIEW001LAB001"));

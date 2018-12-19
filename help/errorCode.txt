@@ -1,6 +1,0 @@
-ERR001 - Il software non riesce a determinare l'oggetto File per il file settings.ini
-ERR002 - Il software non riesce a determinare l'oggetto File per la directory languages
-ERR003 - La directory languages non contiene nessun file
-ERR004 - La directory languages non contiene file properties validi
-ERR005 - Il software non riesce a caricare il Layout principale
-ERR005 - Il software non riesce a caricare nel Layout principale il Layout per la selezione della lingua
