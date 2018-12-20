@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class HomeAccess {
 
@@ -23,6 +24,7 @@ public class HomeAccess {
 	private Settings settings;
 	private Language language;
 	private SupportPlannerView supportPlannerViewCtrl;
+	private Stage viewSupportPlannerStage;
 
 	@FXML
 	private void initialize() {
@@ -60,7 +62,8 @@ public class HomeAccess {
 
 				if (checkSettings()) {
 
-					// Actions.checkUser(url, key, user, password);
+					Actions.checkUser(settings.getDatabaseUrl(), settings.getUsernameEncrypted(),
+							settings.getUserPasswordReEncrypted(), settings, viewSupportPlannerStage);
 
 				} else
 					new AlertDesigner(language.getStringWithNewLine("MEX004"),
@@ -84,7 +87,7 @@ public class HomeAccess {
 			status = (settings.getUsernameEncrypted() != null);
 
 		if (status)
-			status = (settings.getPasswordReEncrypted() != null);
+			status = (settings.getUserPasswordReEncrypted() != null);
 
 		return status;
 	}
@@ -107,6 +110,14 @@ public class HomeAccess {
 
 	public void setSupportPlannerViewCtrl(SupportPlannerView supportPlannerViewCtrl) {
 		this.supportPlannerViewCtrl = supportPlannerViewCtrl;
+	}
+
+	public Stage getViewSupportPlannerStage() {
+		return viewSupportPlannerStage;
+	}
+
+	public void setViewSupportPlannerStage(Stage viewSupportPlannerStage) {
+		this.viewSupportPlannerStage = viewSupportPlannerStage;
 	}
 
 }

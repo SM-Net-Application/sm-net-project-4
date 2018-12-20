@@ -248,6 +248,7 @@ public class SupportPlannerView {
 			HomeAccess ctrl = (HomeAccess) fxmlLoader.getController();
 			ctrl.setSettings(this.settings);
 			ctrl.setSupportPlannerViewCtrl(this);
+			ctrl.setViewSupportPlannerStage(viewSupportPlannerStage);
 			ctrl.objectInitialize();
 
 			this.viewSupportPlannerBorderPane.setCenter(layout);

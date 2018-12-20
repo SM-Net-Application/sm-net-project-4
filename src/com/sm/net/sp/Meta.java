@@ -9,6 +9,7 @@ import com.sm.net.project.Project;
 import com.sm.net.sp.view.SupportPlannerHome;
 import com.sm.net.sp.view.SupportPlannerMenu;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.SupportPlannerWaitWindow;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.HomeUser;
@@ -83,6 +84,8 @@ public class Meta {
 		public static final URL SUPPORTPLANNER_HOME_ACCESS = HomeAccess.class.getResource("HomeAccess.fxml");
 		public static final URL SUPPORTPLANNER_HOME_USER = HomeUser.class.getResource("HomeUser.fxml");
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
+		public static final URL SUPPORTPLANNER_WAIT = SupportPlannerWaitWindow.class
+				.getResource("SupportPlannerWaitWindow.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
 		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");

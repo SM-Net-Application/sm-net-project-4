@@ -97,7 +97,7 @@ public class Settings {
 		return null;
 	}
 
-	public String getPasswordReEncrypted() {
+	public String getUserPasswordReEncrypted() {
 
 		if (!userPasswordEncrypted.trim().isEmpty())
 			if (applicationKey != null) {

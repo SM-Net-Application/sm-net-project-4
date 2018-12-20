@@ -40,6 +40,11 @@
 	-fx-font-size: 14.0pt;
 }
 
+.anchorPaneStyle1 {
+	-fx-background-color: #8f8f8f;
+	-fx-border-color: #ebebeb;
+}
+
 /*.background {
 	-fx-background-color: linear-gradient(#004e99 0.0%, #007eff 100.0%);
 }
