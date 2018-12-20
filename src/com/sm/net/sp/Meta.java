@@ -10,8 +10,11 @@ import com.sm.net.sp.view.SupportPlannerHome;
 import com.sm.net.sp.view.SupportPlannerMenu;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.check.access.CheckAccess;
+import com.sm.net.sp.view.home.access.HomeAccess;
+import com.sm.net.sp.view.home.user.HomeUser;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
+import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
 
@@ -51,6 +54,10 @@ public class Meta {
 		public static final String KEY_URL = "url";
 		public static final String KEY_DB_KEY = "key";
 
+		public static final String SECTION_USER = "user";
+		public static final String KEY_USERNAME = "username";
+		public static final String KEY_USERPASS = "userpassword";
+
 		public static File getFile() {
 
 			String absoulutePath = PathBuilder.concatFolder(Project.currentWorkingDirectory(), FOLDER);
@@ -73,9 +80,12 @@ public class Meta {
 
 		public static final URL SUPPORTPLANNER_VIEW = SupportPlannerView.class.getResource("SupportPlannerView.fxml");
 		public static final URL SUPPORTPLANNER_HOME = SupportPlannerHome.class.getResource("SupportPlannerHome.fxml");
+		public static final URL SUPPORTPLANNER_HOME_ACCESS = HomeAccess.class.getResource("HomeAccess.fxml");
+		public static final URL SUPPORTPLANNER_HOME_USER = HomeUser.class.getResource("HomeUser.fxml");
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
+		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");
 		public static final URL CHECK_ACCESS = CheckAccess.class.getResource("CheckAccess.fxml");
 		public static final URL SETTING_CREATE_LANGUAGE = SettingCreateLanguage.class
 				.getResource("SettingCreateLanguage.fxml");
@@ -101,5 +111,7 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/menu_settings_user.png"));
 		public static final Image MENU_BACK = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/menu_back.png"));
+		public static final Image HOME_ACCESS = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/home_access.png"));
 	}
 }

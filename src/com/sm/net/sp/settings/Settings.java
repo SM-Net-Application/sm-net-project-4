@@ -11,6 +11,7 @@ import org.ini4j.Wini;
 import com.sm.net.path.PathBuilder;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.util.Crypt;
 
 public class Settings {
 
@@ -18,10 +19,12 @@ public class Settings {
 
 	private Language language;
 	private String languageName;
+	private SecretKey applicationKey;
 	private String passwordEncrypted;
 	private String databaseUrl;
 	private String databaseKeyEncrypted;
-	private SecretKey applicationKey;
+	private String username;
+	private String userPasswordEncrypted;
 
 	public Settings(SettingsConf settingsConf) {
 		super();
@@ -32,6 +35,8 @@ public class Settings {
 	public void setDefaultSettings() {
 		this.databaseUrl = "";
 		this.databaseKeyEncrypted = "";
+		this.username = "";
+		this.userPasswordEncrypted = "";
 	}
 
 	public void save() throws IOException {
@@ -41,6 +46,8 @@ public class Settings {
 		ini.add(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_PASSWORD, passwordEncrypted);
 		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, databaseUrl);
 		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, databaseKeyEncrypted);
+		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, username);
+		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, userPasswordEncrypted);
 		ini.store();
 	}
 
@@ -54,6 +61,9 @@ public class Settings {
 		this.passwordEncrypted = ini.get(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_PASSWORD, String.class);
 		this.databaseUrl = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, String.class);
 		this.databaseKeyEncrypted = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, String.class);
+
+		this.username = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, String.class);
+		this.userPasswordEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, String.class);
 	}
 
 	private Language languageLoad() throws FileNotFoundException, IOException {
@@ -62,6 +72,44 @@ public class Settings {
 				this.languageName);
 		File languagePropertiesFile = new File(languagePathPropertiesFile);
 		return new Language(languagePropertiesFile);
+	}
+
+	public SecretKey getDatabaseSecretKey() {
+
+		if (!databaseKeyEncrypted.trim().isEmpty())
+			if (applicationKey != null) {
+				String databaseKey = Crypt.decrypt(databaseKeyEncrypted, applicationKey);
+				if (databaseKey != null)
+					return Crypt.generateKey(databaseKey);
+			}
+
+		return null;
+	}
+
+	public String getUsernameEncrypted() {
+
+		if (!username.trim().isEmpty()) {
+			SecretKey databaseSecretKey = getDatabaseSecretKey();
+			if (databaseSecretKey != null)
+				return Crypt.encrypt(username, databaseSecretKey);
+		}
+
+		return null;
+	}
+
+	public String getPasswordReEncrypted() {
+
+		if (!userPasswordEncrypted.trim().isEmpty())
+			if (applicationKey != null) {
+				String userPasswordDecrypted = Crypt.decrypt(userPasswordEncrypted, applicationKey);
+				if (userPasswordDecrypted != null) {
+					SecretKey databaseSecretKey = getDatabaseSecretKey();
+					if (databaseSecretKey != null)
+						return Crypt.encrypt(userPasswordDecrypted, databaseSecretKey);
+				}
+			}
+
+		return null;
 	}
 
 	public SettingsConf getSettingsConf() {
@@ -119,5 +167,21 @@ public class Settings {
 
 	public void setApplicationKey(SecretKey applicationKey) {
 		this.applicationKey = applicationKey;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUserPasswordEncrypted() {
+		return userPasswordEncrypted;
+	}
+
+	public void setUserPasswordEncrypted(String userPasswordEncrypted) {
+		this.userPasswordEncrypted = userPasswordEncrypted;
 	}
 }

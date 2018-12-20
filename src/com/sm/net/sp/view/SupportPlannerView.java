@@ -13,11 +13,14 @@ import com.sm.net.file.FileUtils;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.settings.SettingsConf;
 import com.sm.net.sp.view.check.access.CheckAccess;
+import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
+import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
 import com.sm.net.util.Crypt;
 
@@ -36,25 +39,30 @@ public class SupportPlannerView {
 	private BorderPane viewSupportPlannerBorderPane;
 
 	private Stage viewSupportPlannerStage;
-
 	private SupportPlannerView ctrlViewSupportPlanner;
+	private User user;
 
 	private Settings settings;
 	private int left;
-
 	private int center;
 
 	public void objectInitialize() {
 
 		this.left = 0;
 		this.center = 0;
+		this.user = null;
 
 		this.settings = null;
-		if (settingsCheckFile()) {
+
+		settingsInitialize();
+	}
+
+	private void settingsInitialize() {
+
+		if (settingsCheckFile())
 			settingsLoad();
-		} else {
+		else
 			settingsCreate();
-		}
 	}
 
 	private void settingsLoad() {
@@ -86,9 +94,7 @@ public class SupportPlannerView {
 		ObservableList<Language> languages = languagesCheckPropertiesFiles();
 
 		if (languagesHaveValid(languages))
-
 			viewSettingCreateLanguage(languages);
-
 		else {
 			new AlertDesigner(Meta.Application.getFullTitle() + " Error:", "No Valid File Language",
 					viewSupportPlannerStage, AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON)
@@ -200,11 +206,20 @@ public class SupportPlannerView {
 
 	public void viewSupportPlannerHome() {
 
-		try {
+		this.viewSupportPlannerStage.setMinWidth(1000);
+		this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setMinHeight(500);
+		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setResizable(true);
+		this.viewSupportPlannerStage.setMaximized(true);
 
-			// FXMLLoader fxmlLoaderHome = new FXMLLoader();
-			// fxmlLoaderHome.setLocation(Meta.Views.SUPPORTPLANNER_HOME);
-			// AnchorPane layoutHome = (AnchorPane) fxmlLoaderHome.load();
+		viewSupportPlannerHomeMenu();
+		loadHome();
+	}
+
+	private void viewSupportPlannerHomeMenu() {
+
+		try {
 
 			FXMLLoader fxmlLoaderMenu = new FXMLLoader();
 			fxmlLoaderMenu.setLocation(Meta.Views.SUPPORTPLANNER_MENU);
@@ -214,24 +229,35 @@ public class SupportPlannerView {
 			ctrlMenu.setCtrlSupportPlannerView(this);
 			ctrlMenu.objectInitialize();
 
-			// SupportPlannerHome controller = (SupportPlannerHome)
-			// fxmlLoader.getController();
-			// controller.setLanguages(languages);
-			// controller.setSupportPlannerViewCtrl(this.ctrlViewSupportPlanner);
-			// controller.objectInitialize();
-
-			this.viewSupportPlannerStage.setMinWidth(500);
-			this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
-			this.viewSupportPlannerStage.setMinHeight(500);
-			this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
-			this.viewSupportPlannerStage.setResizable(true);
-			this.viewSupportPlannerStage.setMaximized(true);
-
 			this.viewSupportPlannerBorderPane.setTop(layoutMenu);
-			this.viewSupportPlannerBorderPane.setCenter(null);
 
 		} catch (IOException e) {
 		}
+	}
+
+	private void viewSupportPlannerHomeAccess() {
+
+		this.left = 0;
+		this.viewSupportPlannerBorderPane.setCenter(null);
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.SUPPORTPLANNER_HOME_ACCESS);
+			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+			HomeAccess ctrl = (HomeAccess) fxmlLoader.getController();
+			ctrl.setSettings(this.settings);
+			ctrl.setSupportPlannerViewCtrl(this);
+			ctrl.objectInitialize();
+
+			this.viewSupportPlannerBorderPane.setCenter(layout);
+
+		} catch (IOException e) {
+		}
+
+	}
+
+	private void viewSupportPlannerHomeUser() {
 
 	}
 
@@ -265,7 +291,12 @@ public class SupportPlannerView {
 	public void loadMenuSettingsList() {
 
 		if (this.left != 1) {
+
 			this.left = 1;
+			this.center = 0;
+
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
@@ -306,36 +337,38 @@ public class SupportPlannerView {
 	}
 
 	public void loadMenuSettingUser() {
+
 		if (this.center != 2) {
 			this.center = 2;
-			// try {
-			//
-			// FXMLLoader fxmlLoader = new FXMLLoader();
-			// fxmlLoader.setLocation(Meta.Views.MENU_SETTINGS_LIST);
-			// AnchorPane layout = (AnchorPane) fxmlLoader.load();
-			// SettingsList ctrl = (SettingsList) fxmlLoader.getController();
-			// ctrl.setSettings(this.settings);
-			// ctrl.setCtrlViewSupportPlanner(this.ctrlViewSupportPlanner);
-			// ctrl.objectInitialize();
-			//
-			this.viewSupportPlannerBorderPane.setCenter(null);
-			//
-			// } catch (IOException e) {
-			// }
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MENU_SETTING_USER);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				SettingUser ctrl = (SettingUser) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				// ctrl.setCtrlViewSupportPlanner(this.ctrlViewSupportPlanner);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
 		}
 	}
 
 	public void loadHome() {
 
 		this.left = 0;
-		this.center = 0;
-
-		loadMenuHome();
-		this.viewSupportPlannerBorderPane.setCenter(null);
-	}
-
-	private void loadMenuHome() {
 		this.viewSupportPlannerBorderPane.setLeft(null);
+		this.center = 0;
+		this.viewSupportPlannerBorderPane.setCenter(null);
+
+		if (this.user != null)
+			viewSupportPlannerHomeUser();
+		else
+			viewSupportPlannerHomeAccess();
 	}
 
 	public Stage getViewSupportPlannerStage() {
@@ -352,5 +385,13 @@ public class SupportPlannerView {
 
 	public void setCtrlViewSupportPlanner(SupportPlannerView ctrlViewSupportPlanner) {
 		this.ctrlViewSupportPlanner = ctrlViewSupportPlanner;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

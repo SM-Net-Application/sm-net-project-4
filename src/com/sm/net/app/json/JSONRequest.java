@@ -5,6 +5,18 @@ import org.json.JSONObject;
 
 import com.sm.net.util.enumeration.JSONStatus;
 
+/**
+ * Gestione delle richieste JSON Un JSON-Object viene creato con un indice: type
+ * type --> determina il tipo di richiesta In base alla richiesta vengono
+ * aggiunte le informazioni necessarie
+ * 
+ * <li>1 - Conta il numero di utenti</li>
+ * <li>2 - Inserisci il primo utente (admin) [Non ancora completo]</li>
+ * <li>3 - Verifica utente</li>
+ * 
+ * @author SM-Net
+ *
+ */
 public class JSONRequest {
 
 	public static JSONObject GET_COUNT_USERS() {
@@ -13,6 +25,13 @@ public class JSONRequest {
 
 	public static JSONObject RUN_INIT(String userEncrypted, String passwordEncrypted) {
 		JSONObject jsonObj = create(Integer.valueOf(2));
+		jsonObj.put("user", userEncrypted);
+		jsonObj.put("password", passwordEncrypted);
+		return jsonObj;
+	}
+
+	public static JSONObject CHECK_USER(String userEncrypted, String passwordEncrypted) {
+		JSONObject jsonObj = create(Integer.valueOf(3));
 		jsonObj.put("user", userEncrypted);
 		jsonObj.put("password", passwordEncrypted);
 		return jsonObj;
