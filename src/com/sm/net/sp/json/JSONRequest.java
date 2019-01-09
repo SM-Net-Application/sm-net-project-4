@@ -1,4 +1,4 @@
-package com.sm.net.app.json;
+package com.sm.net.sp.json;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +13,7 @@ import com.sm.net.util.enumeration.JSONStatus;
  * <li>1 - Conta il numero di utenti</li>
  * <li>2 - Inserisci il primo utente (admin) [Non ancora completo]</li>
  * <li>3 - Verifica utente</li>
+ * <li>4 - Elenco degli utenti</li>
  * 
  * @author SM-Net
  *
@@ -34,6 +35,24 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(3));
 		jsonObj.put("user", userEncrypted);
 		jsonObj.put("password", passwordEncrypted);
+		return jsonObj;
+	}
+
+	public static JSONObject GET_ALL_USERS() {
+		return create(Integer.valueOf(4));
+	}
+
+	public static JSONObject INSERT_NEW_USER(String userEncrypted, String passwordEncrypted) {
+		JSONObject jsonObj = create(Integer.valueOf(2));
+		jsonObj.put("user", userEncrypted);
+		jsonObj.put("password", passwordEncrypted);
+		return jsonObj;
+	}
+
+	public static JSONObject UPDATE_USER_RULES(String spUserID, String spRoleAdmin) {
+		JSONObject jsonObj = create(Integer.valueOf(5));
+		jsonObj.put("spUserID", spUserID);
+		jsonObj.put("spRoleAdmin", spRoleAdmin);
 		return jsonObj;
 	}
 

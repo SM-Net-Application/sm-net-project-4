@@ -63,7 +63,8 @@ public class HomeAccess {
 				if (checkSettings()) {
 
 					Actions.checkUser(settings.getDatabaseUrl(), settings.getUsernameEncrypted(),
-							settings.getUserPasswordReEncrypted(), settings, viewSupportPlannerStage);
+							settings.getUserPasswordReEncrypted(), settings, viewSupportPlannerStage,
+							supportPlannerViewCtrl);
 
 				} else
 					new AlertDesigner(language.getStringWithNewLine("MEX004"),

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxWidth="350.0" minWidth="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.menu.settings.SettingsList">
+<AnchorPane maxWidth="350.0" minWidth="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.HomeUserMenuList">
    <children>
       <HBox prefHeight="437.0" prefWidth="264.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,13 +18,13 @@
                <children>
                   <HBox>
                      <children>
-                        <Label fx:id="settingsLabel" maxHeight="1.7976931348623157E308" text="Label">
+                        <Label fx:id="menuLabel" maxHeight="1.7976931348623157E308" text="Label">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin></Label>
                         <StackPane alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button fx:id="settingsButton" mnemonicParsing="false" text="Button">
+                              <Button fx:id="menuButton" mnemonicParsing="false" text="Button">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
@@ -33,7 +33,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <ListView fx:id="settingsListView" VBox.vgrow="ALWAYS">
+                  <ListView fx:id="menuListView" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

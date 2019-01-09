@@ -9,10 +9,11 @@ import com.sm.net.project.Project;
 import com.sm.net.sp.view.SupportPlannerHome;
 import com.sm.net.sp.view.SupportPlannerMenu;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.SupportPlannerWaitWindow;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
-import com.sm.net.sp.view.home.user.HomeUser;
+import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
+import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
+import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
@@ -82,10 +83,7 @@ public class Meta {
 		public static final URL SUPPORTPLANNER_VIEW = SupportPlannerView.class.getResource("SupportPlannerView.fxml");
 		public static final URL SUPPORTPLANNER_HOME = SupportPlannerHome.class.getResource("SupportPlannerHome.fxml");
 		public static final URL SUPPORTPLANNER_HOME_ACCESS = HomeAccess.class.getResource("HomeAccess.fxml");
-		public static final URL SUPPORTPLANNER_HOME_USER = HomeUser.class.getResource("HomeUser.fxml");
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
-		public static final URL SUPPORTPLANNER_WAIT = SupportPlannerWaitWindow.class
-				.getResource("SupportPlannerWaitWindow.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
 		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");
@@ -94,6 +92,10 @@ public class Meta {
 				.getResource("SettingCreateLanguage.fxml");
 		public static final URL SETTING_CREATE_ACCESS = SettingCreateAccess.class
 				.getResource("SettingCreateAccess.fxml");
+		public static final URL HOME_USER_MENU_LIST = HomeUserMenuList.class.getResource("HomeUserMenuList.fxml");
+		public static final URL HOME_USER_MENU_USERLIST = HomeUserMenuUsersList.class
+				.getResource("HomeUserMenuUsersList.fxml");
+		public static final URL HOME_USER_MENU_USER_ADD = MenuUsersAdd.class.getResource("MenuUsersAdd.fxml");
 	}
 
 	public static class Themes {
@@ -116,5 +118,13 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/menu_back.png"));
 		public static final Image HOME_ACCESS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/home_access.png"));
+		public static final Image USER_MENU_LOGOUT = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/logout.png"));
+		public static final Image USER_MENU_USERS = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_users.png"));
+		public static final Image USER_MENU_USERS_ADD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/addUser_50x50.png"));
+		public static final Image USER_MENU_USERS_DEL = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/deleteUser_50x50.png"));
 	}
 }

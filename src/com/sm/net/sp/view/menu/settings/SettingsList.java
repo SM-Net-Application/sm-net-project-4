@@ -68,10 +68,8 @@ public class SettingsList {
 	private void listenerSettingsListView() {
 
 		settingsListView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
 				if (newValue.intValue() > -1)
 					loadSettings();
 			}

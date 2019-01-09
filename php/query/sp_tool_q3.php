@@ -1,4 +1,5 @@
 <?php
+// Check username and password - LOGIN
 if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
 	if (! empty ( $jsonObj ["user"] ) && ! empty ( $jsonObj ["password"] )) {
 		require_once __DIR__ . '/config.php';
@@ -8,7 +9,7 @@ if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "SELECT spUserName, spUserPassword FROM sp_users WHERE";
+			$query = "SELECT spUserID, spUserName, spRoleAdmin FROM sp_users WHERE";
 			$query .= " ";
 			$query .= "spUserName='" . $jsonObj ["user"] . "'";
 			$query .= " AND ";
@@ -22,8 +23,9 @@ if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
 				while ( $resultRow = $result->fetch_assoc () ) {
 					$resultRow = array_map ( "utf8_encode", $resultRow );
 					$row = array ();
+					$row ["spUserID"] = $resultRow ["spUserID"];
 					$row ["spUserName"] = $resultRow ["spUserName"];
-					$row ["spUserPassword"] = $resultRow ["spUserPassword"];
+					$row ["spRoleAdmin"] = $resultRow ["spRoleAdmin"];
 					array_push ( $response ["result"], $row );
 				}
 			} else {

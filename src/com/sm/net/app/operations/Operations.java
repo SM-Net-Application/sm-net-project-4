@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.sm.net.app.exceptions.OperationCouldNotBeCompleted;
-import com.sm.net.app.json.JSONRequest;
+import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.util.Crypt;
 import com.sm.net.util.JSON;
 import com.sm.net.util.enumeration.JSONStatus;

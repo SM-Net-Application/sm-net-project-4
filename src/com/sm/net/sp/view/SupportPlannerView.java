@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.crypto.SecretKey;
 
 import org.ini4j.InvalidFileFormatException;
+import org.json.JSONObject;
 
 import com.sm.net.directory.Directory;
 import com.sm.net.file.Extensions;
@@ -18,6 +19,8 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.settings.SettingsConf;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
+import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
+import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
@@ -33,7 +36,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class SupportPlannerView {
+public class SupportPlannerView implements SupportPlannerCallback {
 
 	@FXML
 	private BorderPane viewSupportPlannerBorderPane;
@@ -211,7 +214,7 @@ public class SupportPlannerView {
 		this.viewSupportPlannerStage.setMinHeight(500);
 		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
 		this.viewSupportPlannerStage.setResizable(true);
-		this.viewSupportPlannerStage.setMaximized(true);
+		// this.viewSupportPlannerStage.setMaximized(true);
 
 		viewSupportPlannerHomeMenu();
 		loadHome();
@@ -237,29 +240,90 @@ public class SupportPlannerView {
 
 	private void viewSupportPlannerHomeAccess() {
 
-		this.left = 0;
-		this.viewSupportPlannerBorderPane.setCenter(null);
+		if (this.center != 3) {
 
-		try {
+			this.left = 0;
+			this.center = 3;
+			this.viewSupportPlannerBorderPane.setLeft(null);
 
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(Meta.Views.SUPPORTPLANNER_HOME_ACCESS);
-			AnchorPane layout = (AnchorPane) fxmlLoader.load();
-			HomeAccess ctrl = (HomeAccess) fxmlLoader.getController();
-			ctrl.setSettings(this.settings);
-			ctrl.setSupportPlannerViewCtrl(this);
-			ctrl.setViewSupportPlannerStage(viewSupportPlannerStage);
-			ctrl.objectInitialize();
+			try {
 
-			this.viewSupportPlannerBorderPane.setCenter(layout);
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.SUPPORTPLANNER_HOME_ACCESS);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				HomeAccess ctrl = (HomeAccess) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setSupportPlannerViewCtrl(this);
+				ctrl.setViewSupportPlannerStage(viewSupportPlannerStage);
+				ctrl.objectInitialize();
 
-		} catch (IOException e) {
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	@Override
+	public void viewSupportPlannerHomeUser() {
+
+		if (this.left != 2) {
+
+			this.left = 2;
+			this.center = 0;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_LIST);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				HomeUserMenuList ctrl = (HomeUserMenuList) fxmlLoader.getController();
+				ctrl.setUser(this.user);
+				ctrl.setSettings(this.settings);
+				ctrl.setCtrlSupportPlannerView(this);
+				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setLeft(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	public void viewHomeUserMenuUsers() {
+
+		if (this.center != 4) {
+
+			this.center = 4;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_USERLIST);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				HomeUserMenuUsersList ctrl = (HomeUserMenuUsersList) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
 		}
 
 	}
 
-	private void viewSupportPlannerHomeUser() {
+	@Override
+	public void setUserLogin(JSONObject jsonObject) {
+		this.user = new User(jsonObject, settings.getDatabaseSecretKey());
+	}
 
+	public void setUserlogout() {
+		this.user = null;
 	}
 
 	public void settingsCreateNewFile(Language language, String password) {
@@ -295,7 +359,6 @@ public class SupportPlannerView {
 
 			this.left = 1;
 			this.center = 0;
-
 			this.viewSupportPlannerBorderPane.setCenter(null);
 
 			try {
