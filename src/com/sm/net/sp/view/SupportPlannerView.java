@@ -390,7 +390,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 				SettingDatabase ctrl = (SettingDatabase) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
-				// ctrl.setCtrlViewSupportPlanner(this.ctrlViewSupportPlanner);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);

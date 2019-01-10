@@ -86,6 +86,7 @@ public class Meta {
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
+		public static final URL MENU_SETTING_DB_ROOT = SettingDatabase.class.getResource("SettingDatabaseAddSuperuser.fxml");
 		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");
 		public static final URL CHECK_ACCESS = CheckAccess.class.getResource("CheckAccess.fxml");
 		public static final URL SETTING_CREATE_LANGUAGE = SettingCreateLanguage.class
@@ -126,5 +127,7 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/addUser_50x50.png"));
 		public static final Image USER_MENU_USERS_DEL = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/deleteUser_50x50.png"));
+		public static final Image SUPERUSER = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/superuser_50x50.png"));
 	}
 }

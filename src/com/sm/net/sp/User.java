@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 public class User {
 
 	private IntegerProperty userID;
+	private boolean spUserSU;
 	private String usernameEncrypted;
 	private StringProperty usernameProperty;
 	private BooleanProperty roleAdminProperty;
@@ -40,6 +41,7 @@ public class User {
 	private void defaultCostructor(JSONObject jsonObject, SecretKey secretKey) {
 
 		this.userID = new SimpleIntegerProperty(jsonObject.getInt("spUserID"));
+		this.spUserSU = checkBoolean(jsonObject.getInt("spUserSU"));
 		this.usernameEncrypted = jsonObject.getString("spUserName");
 		this.usernameProperty = new SimpleStringProperty(usernameDecrypt(secretKey));
 		this.roleAdminProperty = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spRoleAdmin")));
@@ -107,6 +109,14 @@ public class User {
 
 	public void setUserID(IntegerProperty userID) {
 		this.userID = userID;
+	}
+
+	public boolean isSpUserSU() {
+		return spUserSU;
+	}
+
+	public void setSpUserSU(boolean spUserSU) {
+		this.spUserSU = spUserSU;
 	}
 
 }

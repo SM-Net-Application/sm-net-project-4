@@ -9,7 +9,9 @@ import com.sm.net.sp.User;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerCallback;
+import com.sm.net.sp.view.home.user.menu.users.MenuUsersAddCallback;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersListCallback;
+import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
 import com.sm.net.util.JSON;
 
 import javafx.collections.FXCollections;
@@ -126,11 +128,14 @@ public class Actions {
 							}
 
 							callback.updateTable(listUser);
-
-						} else
-							new AlertDesigner(settings.getLanguage().getString("MEX006"), viewSupportPlannerStage,
-									AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON)
-											.showAndWait();
+						}
+					// } else
+					// new
+					// AlertDesigner(settings.getLanguage().getString("MEX006"),
+					// viewSupportPlannerStage,
+					// AlertType.ERROR, Meta.Application.getFullTitle(),
+					// Meta.Resources.ICON)
+					// .showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -212,6 +217,71 @@ public class Actions {
 		taskThread.start();
 	}
 
+	/**
+	 * Insert Root user
+	 * 
+	 * @param url
+	 * @param username
+	 * @param password
+	 * @param settings
+	 * @param ownerStage
+	 * @param callback
+	 */
+	public static void insertRootUser(String username, String password, Settings settings, Stage ownerStage) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue())
+							ownerStage.close();
+						else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.INSERT_ROOT_USER(username, password));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * Update User Rules
+	 * 
+	 * @param spUserID
+	 * @param spRoleAdmin
+	 * @param settings
+	 * @param ownerStage
+	 * @param callback
+	 */
 	public static void updateUserRules(String spUserID, String spRoleAdmin, Settings settings, Stage ownerStage,
 			MenuUsersListCallback callback) {
 
@@ -257,6 +327,200 @@ public class Actions {
 		taskThread.start();
 	}
 
+	/**
+	 * Delete User
+	 * 
+	 * @param spUserID
+	 * @param settings
+	 * @param ownerStage
+	 * @param callback
+	 */
+	public static void deleteUser(String spUserID, Settings settings, Stage ownerStage,
+			MenuUsersListCallback callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue())
+							callback.updateListUsers();
+						else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.DELETE_USER(spUserID));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * Check Username
+	 * 
+	 * @param url
+	 * @param username
+	 * @param passwordEncrypted
+	 * @param password
+	 * @param settings
+	 * @param ownerStage
+	 * @param callback
+	 */
+	public static void checkUsername(String username, String password, Settings settings, Stage ownerStage,
+			MenuUsersAddCallback callbackAdd) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							if (jsonArray.length() > 0) {
+
+								JSONObject resultQuery = (JSONObject) jsonArray.get(0);
+								if (resultQuery != null)
+									if (resultQuery.getInt("users") == 0)
+										callbackAdd.usernameNotExists(username, password);
+									else
+										callbackAdd.usernameExists();
+							}
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.CHECK_USERNAME(username));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * Check No Users
+	 * 
+	 * @param settings
+	 * @param ownerStage
+	 * @param callback
+	 */
+	public static void checkNoUsers(Settings settings, Stage ownerStage, SettingsDatabaseCallback callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							if (jsonArray.length() > 0) {
+
+								JSONObject resultQuery = (JSONObject) jsonArray.get(0);
+								if (resultQuery != null)
+									if (resultQuery.getInt("users") == 0)
+										callback.usernameNotExists();
+									else
+										callback.usernameExists();
+							}
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.GET_COUNT_USERS());
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * Create Alert Window
+	 * 
+	 * @param settings
+	 * @param title
+	 * @param contentText
+	 * @param stageOwner
+	 * @return
+	 */
 	private static Alert createWaitAlert(Settings settings, String title, String contentText, Stage stageOwner) {
 
 		Alert waitAlert = new Alert(AlertType.NONE);

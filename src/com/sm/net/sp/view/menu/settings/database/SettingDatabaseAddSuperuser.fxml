@@ -9,22 +9,22 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.menu.settings.database.SettingDatabase">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.menu.settings.database.SettingDatabaseAddSuperuser">
    <children>
-      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane>
                <children>
                   <Label fx:id="titleLabel" text="Label">
                      <StackPane.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </Label>
                </children>
             </StackPane>
             <StackPane alignment="CENTER_LEFT">
                <children>
-                  <Label fx:id="urlLabel" text="Label">
+                  <Label fx:id="usernameLabel" text="Label">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
@@ -33,7 +33,7 @@
             </StackPane>
             <StackPane>
                <children>
-                  <TextField fx:id="urlTextField">
+                  <TextField fx:id="usernameTextField">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
@@ -42,7 +42,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT">
                <children>
-                  <Label fx:id="decryptionKeyLabel" text="Label">
+                  <Label fx:id="passwordLabel" text="Label">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
@@ -51,16 +51,34 @@
             </StackPane>
             <StackPane>
                <children>
-                  <PasswordField fx:id="decryptionKeyPasswordField">
+                  <PasswordField fx:id="passwordField">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </PasswordField>
                </children>
             </StackPane>
-            <StackPane alignment="CENTER_RIGHT">
+            <StackPane alignment="CENTER_LEFT">
                <children>
-                  <Button fx:id="userSUButton" mnemonicParsing="false" text="Button">
+                  <Label fx:id="keyLabel" text="Label">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <PasswordField fx:id="keyPasswordField">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </PasswordField>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <Button fx:id="createButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>

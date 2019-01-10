@@ -11,9 +11,13 @@ import com.sm.net.util.enumeration.JSONStatus;
  * aggiunte le informazioni necessarie
  * 
  * <li>1 - Conta il numero di utenti</li>
- * <li>2 - Inserisci il primo utente (admin) [Non ancora completo]</li>
+ * <li>2 - Inserisci utente</li>
  * <li>3 - Verifica utente</li>
  * <li>4 - Elenco degli utenti</li>
+ * <li>5 - Aggiorna ruoli utente</li>
+ * <li>6 - Elimina utente</li>
+ * <li>7 - Verifica nome utente</li>
+ * <li>8 - Inserisci utente root</li>
  * 
  * @author SM-Net
  *
@@ -53,6 +57,25 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(5));
 		jsonObj.put("spUserID", spUserID);
 		jsonObj.put("spRoleAdmin", spRoleAdmin);
+		return jsonObj;
+	}
+
+	public static JSONObject DELETE_USER(String spUserID) {
+		JSONObject jsonObj = create(Integer.valueOf(6));
+		jsonObj.put("spUserID", spUserID);
+		return jsonObj;
+	}
+
+	public static JSONObject CHECK_USERNAME(String spUserName) {
+		JSONObject jsonObj = create(Integer.valueOf(7));
+		jsonObj.put("spUserName", spUserName);
+		return jsonObj;
+	}
+
+	public static JSONObject INSERT_ROOT_USER(String userEncrypted, String passwordEncrypted) {
+		JSONObject jsonObj = create(Integer.valueOf(8));
+		jsonObj.put("user", userEncrypted);
+		jsonObj.put("password", passwordEncrypted);
 		return jsonObj;
 	}
 

@@ -2,6 +2,7 @@ package com.sm.net.sp.view.home.user.menu.users;
 
 import java.io.IOException;
 
+import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.User;
@@ -12,7 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,9 +51,7 @@ public class HomeUserMenuUsersList implements MenuUsersListCallback {
 
 	private Settings settings;
 	private Language language;
-	// private SupportPlannerView ctrlSupportPlannerView;
 	private Stage stageSupportPlannerView;
-	// private User user;
 
 	@FXML
 	private void initialize() {
@@ -79,7 +81,6 @@ public class HomeUserMenuUsersList implements MenuUsersListCallback {
 	public void objectInitialize() {
 		this.language = settings.getLanguage();
 		listeners();
-		// cellFactory();
 		viewUpdate();
 
 		updateListUsers();
@@ -92,7 +93,25 @@ public class HomeUserMenuUsersList implements MenuUsersListCallback {
 
 	private void listeners() {
 		listenerUserAddButton();
-		// listenerMenuButton();
+		listenerUserDeleteButton();
+	}
+
+	private void listenerUserDeleteButton() {
+		userDeleteButton.setOnAction(event -> {
+
+			if (userTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+				User selectedUser = userTableView.getSelectionModel().getSelectedItem();
+
+				Alert alert = new AlertDesigner(language.getString("TEXT0006"), selectedUser.getUsername(),
+						stageSupportPlannerView, AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
+						Meta.Resources.ICON);
+				if (alert.showAndWait().get() == ButtonType.OK)
+					Actions.deleteUser(String.valueOf(selectedUser.getUserID().get()), settings,
+							stageSupportPlannerView, this);
+			}
+
+		});
 	}
 
 	private void listenerUserAddButton() {

@@ -1,5 +1,5 @@
 <?php
-// Get all users
+// Get all users no SU
 require_once __DIR__ . '/config.php';
 $database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
 mysqli_set_charset ( $conn, 'utf8' );
@@ -7,7 +7,7 @@ if (! $database) {
 	$response ["status"] = 4;
 	$response ["error"] = mysqli_connect_error ();
 } else {
-	$query = "SELECT spUserID, spUserName, spRoleAdmin FROM sp_users";
+	$query = "SELECT spUserID, spUserSU, spUserName, spRoleAdmin FROM sp_users WHERE spUserSU=0";
 	$result = mysqli_query ( $database, $query );
 	
 	if (mysqli_num_rows ( $result ) > 0) {
@@ -17,6 +17,7 @@ if (! $database) {
 			$resultRow = array_map ( "utf8_encode", $resultRow );
 			$row = array ();
 			$row ["spUserID"] = $resultRow ["spUserID"];
+			$row ["spUserSU"] = $resultRow ["spUserSU"];
 			$row ["spUserName"] = $resultRow ["spUserName"];
 			$row ["spRoleAdmin"] = $resultRow ["spRoleAdmin"];
 			array_push ( $response ["result"], $row );

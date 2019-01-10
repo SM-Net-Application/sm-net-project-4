@@ -66,6 +66,7 @@ public class HomeUserMenuList {
 		menuButton.setOnAction(value -> {
 
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.initOwner(stageSupportPlannerView);
 			alert.setTitle(Meta.Application.getFullTitle());
 			alert.setHeaderText(this.language.getString("MEX009"));
 			alert.setContentText(null);
@@ -113,7 +114,7 @@ public class HomeUserMenuList {
 
 		this.language = settings.getLanguage();
 
-		menuLabel.setText(language.getString("USERMENU000"));
+		menuLabel.setText(setMenuLabel());
 
 		menuButton.setText("");
 		menuButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_LOGOUT));
@@ -121,9 +122,24 @@ public class HomeUserMenuList {
 		buildMenuList();
 	}
 
+	private String setMenuLabel() {
+
+		String menuLabel = language.getString("USERMENU000");
+		menuLabel += ": " + user.getUsername();
+
+		if (user.isSpUserSU())
+			menuLabel += " (" + language.getString("TEXT0010") + ")";
+
+		return menuLabel;
+	}
+
 	private void buildMenuList() {
-		if (this.user.isRoleAdmin())
-			menuListView.getItems().add(EnumHomeUserMenuList.USERS);
+		if (this.user.isSpUserSU())
+			menuListView.getItems().addAll(EnumHomeUserMenuList.values());
+		else {
+			if (this.user.isRoleAdmin())
+				menuListView.getItems().add(EnumHomeUserMenuList.USERS);
+		}
 	}
 
 	private void loadSettings() {
