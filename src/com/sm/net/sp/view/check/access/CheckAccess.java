@@ -57,6 +57,7 @@ public class CheckAccess {
 		accessButton.setText(language.getString("VIEW003BUT001"));
 		accessButton.setDefaultButton(true);
 		passwordPasswordField.setAlignment(Pos.CENTER);
+		passwordPasswordField.setMinWidth(500);
 	}
 
 	private void listeners() {

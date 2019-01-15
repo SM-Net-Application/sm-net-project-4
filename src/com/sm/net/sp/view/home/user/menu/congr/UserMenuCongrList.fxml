@@ -77,7 +77,65 @@
           </Tab>
           <Tab fx:id="familyTab" text="Untitled Tab 2">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <StackPane VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TableView fx:id="familiesTableView">
+                                      <columns>
+                                        <TableColumn fx:id="familyIDTableColumn" prefWidth="75.0" text="C1" />
+                                        <TableColumn fx:id="familyNameTableColumn" prefWidth="75.0" text="C2" />
+                                          <TableColumn fx:id="familyCountTableColumn" prefWidth="75.0" text="C2" />
+                                          <TableColumn fx:id="familyStreetTableColumn" prefWidth="75.0" text="C2" />
+                                          <TableColumn fx:id="familyNummerTableColumn" prefWidth="75.0" text="C2" />
+                                          <TableColumn fx:id="familyPostCodeTableColumn" prefWidth="75.0" text="C2" />
+                                          <TableColumn fx:id="familyCityTableColumn" prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TableView>
+                                 </children>
+                              </StackPane>
+                              <HBox>
+                                 <children>
+                                    <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Button fx:id="familiesUpdateButton" mnemonicParsing="false" text="Button">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </Button>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <Button fx:id="familyAddButton" mnemonicParsing="false" text="Button">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </Button>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane>
+                                       <children>
+                                          <Button fx:id="familyDeleteButton" mnemonicParsing="false" text="Button">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </Button>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>

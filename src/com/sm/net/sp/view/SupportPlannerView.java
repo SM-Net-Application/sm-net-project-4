@@ -197,8 +197,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			controller.objectInitialize();
 
 			this.viewSupportPlannerBorderPane.setCenter(layout);
-			this.viewSupportPlannerStage.setMinWidth(500);
-			this.viewSupportPlannerStage.setMaxWidth(500);
+			//this.viewSupportPlannerStage.setMinWidth(500);
+			//this.viewSupportPlannerStage.setMaxWidth(500);
 			this.viewSupportPlannerStage.setMinHeight(175);
 			this.viewSupportPlannerStage.setMaxHeight(175);
 			this.viewSupportPlannerStage.setMaximized(false);

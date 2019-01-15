@@ -103,6 +103,8 @@ public class Meta {
 				.getResource("UserMenuCongrList.fxml");
 		public static final URL HOME_USER_MENU_CONGR_MEMBER_EDITOR = UserMenuCongrList.class
 				.getResource("UserMenuCongrMemberEditor.fxml");
+		public static final URL HOME_USER_MENU_CONGR_FAMILY_EDITOR = UserMenuCongrList.class
+				.getResource("UserMenuCongrFamilyEditor.fxml");
 	}
 
 	public static class Themes {

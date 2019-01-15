@@ -6,6 +6,7 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.settings.Settings;
 
@@ -58,6 +59,39 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	@FXML
 	private Button membersUpdateButton;
 
+	@FXML
+	private TableView<Family> familiesTableView;
+
+	@FXML
+	private TableColumn<Family, Integer> familyIDTableColumn;
+
+	@FXML
+	private TableColumn<Family, String> familyNameTableColumn;
+
+	@FXML
+	private TableColumn<Family, Integer> familyCountTableColumn;
+
+	@FXML
+	private TableColumn<Family, String> familyStreetTableColumn;
+
+	@FXML
+	private TableColumn<Family, String> familyNummerTableColumn;
+
+	@FXML
+	private TableColumn<Family, String> familyPostCodeTableColumn;
+
+	@FXML
+	private TableColumn<Family, String> familyCityTableColumn;
+
+	@FXML
+	private Button familyAddButton;
+
+	@FXML
+	private Button familyDeleteButton;
+
+	@FXML
+	private Button familiesUpdateButton;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -82,10 +116,15 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 		membersTab.getStyleClass().add("tabStyle1");
 		familyTab.getStyleClass().add("tabStyle1");
 		membersTableView.getStyleClass().add("tableViewStyle1");
+		familiesTableView.getStyleClass().add("tableViewStyle1");
 
 		memberAddButton.getStyleClass().add("buttonStyle2");
 		memberDeleteButton.getStyleClass().add("buttonStyle2");
 		membersUpdateButton.getStyleClass().add("buttonStyle2");
+
+		familyAddButton.getStyleClass().add("buttonStyle2");
+		familyDeleteButton.getStyleClass().add("buttonStyle2");
+		familiesUpdateButton.getStyleClass().add("buttonStyle2");
 	}
 
 	public void objectInitialize() {
@@ -104,6 +143,7 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 		listenerMemberDeleteButton();
 		listenerMembersUpdateButton();
 		listenerMembersTableView();
+		listenerFamilyAddButton();
 	}
 
 	private void listenerMembersTableView() {
@@ -119,6 +159,10 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 
 	private void listenerMemberAddButton() {
 		memberAddButton.setOnAction(event -> newMember());
+	}
+
+	private void listenerFamilyAddButton() {
+		familyAddButton.setOnAction(event -> newFamily());
 	}
 
 	private void listenerMemberDeleteButton() {
@@ -175,6 +219,40 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 				e.printStackTrace();
 			}
 
+		}
+	}
+
+	private void newFamily() {
+
+		if (!isAlreadyOpen(language.getString("TEXT0015"))) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				UserMenuCongrFamilyEditor ctrl = (UserMenuCongrFamilyEditor) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.objectInitialize();
+
+				Tab newFamilyTab = new Tab(language.getString("TEXT0015"), layout);
+				newFamilyTab.setClosable(true);
+				newFamilyTab.getStyleClass().add("tabStyle1");
+				newFamilyTab.setGraphic(new ImageView(Meta.Resources.PLUS));
+
+				ctrl.setCongrTabPane(congrTabPane);
+				ctrl.setMembersTab(membersTab);
+				ctrl.setNewMemberTab(newFamilyTab);
+
+				congrTabPane.getTabs().add(newFamilyTab);
+				congrTabPane.getSelectionModel().select(newFamilyTab);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -251,6 +329,24 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 		memberDeleteButton.setGraphic(new ImageView(Meta.Resources.MEMBER_DEL));
 		membersUpdateButton.setText("");
 		membersUpdateButton.setGraphic(new ImageView(Meta.Resources.UPDATE));
+
+		familyIDTableColumn.setText(language.getString("TEXT0005"));
+		familyIDTableColumn.setMinWidth(50);
+		familyIDTableColumn.setMaxWidth(50);
+		familyIDTableColumn.setResizable(false);
+		familyNameTableColumn.setText(language.getString("TEXT0025"));
+		familyCountTableColumn.setText(language.getString("TEXT0026"));
+		familyStreetTableColumn.setText(language.getString("TEXT0027"));
+		familyNummerTableColumn.setText(language.getString("TEXT0028"));
+		familyPostCodeTableColumn.setText(language.getString("TEXT0029"));
+		familyCityTableColumn.setText(language.getString("TEXT0030"));
+
+		familyAddButton.setText("");
+		familyAddButton.setGraphic(new ImageView(Meta.Resources.FAMILY_ADD));
+		familyDeleteButton.setText("");
+		familyDeleteButton.setGraphic(new ImageView(Meta.Resources.FAMILY_DEL));
+		familiesUpdateButton.setText("");
+		familiesUpdateButton.setGraphic(new ImageView(Meta.Resources.UPDATE));
 	}
 
 	@Override
