@@ -5,8 +5,8 @@ import java.io.IOException;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.User;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 
 import javafx.collections.ObservableList;

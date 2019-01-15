@@ -18,6 +18,10 @@ import com.sm.net.util.enumeration.JSONStatus;
  * <li>6 - Elimina utente</li>
  * <li>7 - Verifica nome utente</li>
  * <li>8 - Inserisci utente root</li>
+ * <li>9 - Elenco dei componenti</li>
+ * <li>10 - Inserisci componente</li>
+ * <li>11 - Aggiorna componente</li>
+ * <li>12 - Elimina componente</li>
  * 
  * @author SM-Net
  *
@@ -79,6 +83,36 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject GET_ALL_MEMBERS() {
+		return create(Integer.valueOf(9));
+	}
+
+	public static JSONObject INSERT_MEMBER(String spInf1, String spInf2, String spInf3, String spInf4) {
+		JSONObject jsonObj = create(Integer.valueOf(10));
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		return jsonObj;
+	}
+
+	public static JSONObject UPDATE_MEMBER(String spMemberID, String spInf1, String spInf2, String spInf3,
+			String spInf4) {
+		JSONObject jsonObj = create(Integer.valueOf(11));
+		jsonObj.put("spMemberID", spMemberID);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		return jsonObj;
+	}
+
+	public static JSONObject DELETE_MEMBER(String spMemberID) {
+		JSONObject jsonObj = create(Integer.valueOf(12));
+		jsonObj.put("spMemberID", spMemberID);
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -112,4 +146,5 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
+
 }

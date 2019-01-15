@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.User;
+import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 
@@ -149,6 +149,9 @@ public class HomeUserMenuList {
 		switch (menuItem) {
 		case USERS:
 			ctrlSupportPlannerView.viewHomeUserMenuUsers();
+			break;
+		case CONGREGATION:
+			ctrlSupportPlannerView.viewHomeUserMenuCongregation();
 			break;
 		}
 	}

@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 
 public enum EnumHomeUserMenuList {
 
-	USERS("USERMENU001", Meta.Resources.USER_MENU_USERS);
+	USERS("USERMENU001", Meta.Resources.USER_MENU_USERS), CONGREGATION("USERMENU002", Meta.Resources.USER_MENU_CONGR);
 
 	private String name;
 	private Image image;

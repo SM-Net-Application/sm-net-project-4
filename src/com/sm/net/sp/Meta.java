@@ -12,6 +12,7 @@ import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
+import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
 import com.sm.net.sp.view.menu.settings.SettingsList;
@@ -86,7 +87,8 @@ public class Meta {
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
-		public static final URL MENU_SETTING_DB_ROOT = SettingDatabase.class.getResource("SettingDatabaseAddSuperuser.fxml");
+		public static final URL MENU_SETTING_DB_ROOT = SettingDatabase.class
+				.getResource("SettingDatabaseAddSuperuser.fxml");
 		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");
 		public static final URL CHECK_ACCESS = CheckAccess.class.getResource("CheckAccess.fxml");
 		public static final URL SETTING_CREATE_LANGUAGE = SettingCreateLanguage.class
@@ -97,6 +99,10 @@ public class Meta {
 		public static final URL HOME_USER_MENU_USERLIST = HomeUserMenuUsersList.class
 				.getResource("HomeUserMenuUsersList.fxml");
 		public static final URL HOME_USER_MENU_USER_ADD = MenuUsersAdd.class.getResource("MenuUsersAdd.fxml");
+		public static final URL HOME_USER_MENU_CONGRLIST = UserMenuCongrList.class
+				.getResource("UserMenuCongrList.fxml");
+		public static final URL HOME_USER_MENU_CONGR_MEMBER_EDITOR = UserMenuCongrList.class
+				.getResource("UserMenuCongrMemberEditor.fxml");
 	}
 
 	public static class Themes {
@@ -123,11 +129,33 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/logout.png"));
 		public static final Image USER_MENU_USERS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_users.png"));
+		public static final Image USER_MENU_CONGR = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_congr_20x20.png"));
 		public static final Image USER_MENU_USERS_ADD = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/addUser_50x50.png"));
 		public static final Image USER_MENU_USERS_DEL = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/deleteUser_50x50.png"));
 		public static final Image SUPERUSER = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/superuser_50x50.png"));
+		public static final Image MEMBER = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/person_35x35.png"));
+		public static final Image MEMBER_ADD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/person_add_50x50.png"));
+		public static final Image MEMBER_DEL = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/person_delete_50x50.png"));
+		public static final Image FAMILY = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/family2_35x35.png"));
+		public static final Image FAMILY_ADD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/family2_add_50x50.png"));
+		public static final Image FAMILY_DEL = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/family2_delete_50x50.png"));
+		public static final Image PLUS = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/plus_35x35.png"));
+		public static final Image MEMBER_PERSONAL_INFO = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/personal_info_35x45.png"));
+		public static final Image SAVE = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/save_50x50.png"));
+		public static final Image UPDATE = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/update_50x50.png"));
 	}
 }

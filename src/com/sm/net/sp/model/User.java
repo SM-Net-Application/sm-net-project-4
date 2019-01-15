@@ -1,4 +1,4 @@
-package com.sm.net.sp;
+package com.sm.net.sp.model;
 
 import javax.crypto.SecretKey;
 
