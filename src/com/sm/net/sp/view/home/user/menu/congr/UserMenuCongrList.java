@@ -96,6 +96,9 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	private Language language;
 	private Stage ownerStage;
 
+	private ObservableList<Member> membersList;
+	private ObservableList<Family> familiesList;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -107,6 +110,14 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 		memberIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
 		memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
 		memberNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+
+		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
+		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+		familyCountTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
+		familyStreetTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
+		familyNummerTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
+		familyPostCodeTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf4DecryptedProperty());
+		familyCityTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf5DecryptedProperty());
 	}
 
 	private void styleClasses() {
@@ -130,12 +141,8 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
-		getMembers();
-	}
-
-	@Override
-	public void getMembers() {
-		Actions.getAllMembers(settings, ownerStage, this);
+		updateMembersTable();
+		updateFamiliesTable();
 	}
 
 	private void listeners() {
@@ -143,7 +150,11 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 		listenerMemberDeleteButton();
 		listenerMembersUpdateButton();
 		listenerMembersTableView();
+
 		listenerFamilyAddButton();
+		listenerFamilyDeleteButton();
+		listenerFamilyUpdateButton();
+		listenerFamiliesTableView();
 	}
 
 	private void listenerMembersTableView() {
@@ -152,6 +163,17 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
 					editMember(row.getItem());
+			});
+			return row;
+		});
+	}
+
+	private void listenerFamiliesTableView() {
+		familiesTableView.setRowFactory(param -> {
+			TableRow<Family> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty()))
+					editFamily(row.getItem());
 			});
 			return row;
 		});
@@ -169,8 +191,16 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 		memberDeleteButton.setOnAction(event -> deleteMember());
 	}
 
+	private void listenerFamilyDeleteButton() {
+		familyDeleteButton.setOnAction(event -> deleteFamily());
+	}
+
 	private void listenerMembersUpdateButton() {
-		membersUpdateButton.setOnAction(event -> getMembers());
+		membersUpdateButton.setOnAction(event -> updateMembersTable());
+	}
+
+	private void listenerFamilyUpdateButton() {
+		familiesUpdateButton.setOnAction(event -> updateFamiliesTable());
 	}
 
 	private void deleteMember() {
@@ -183,6 +213,20 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteMember(String.valueOf(member.getSpMemberID()), settings, ownerStage, this);
+		}
+
+	}
+
+	private void deleteFamily() {
+
+		if (familiesTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			Family family = familiesTableView.getSelectionModel().getSelectedItem();
+
+			Alert alert = new AlertDesigner(language.getString("TEXT0034"), family.getSpInf1Decrypted(), ownerStage,
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+			if (alert.showAndWait().get() == ButtonType.OK)
+				Actions.deleteFamily(String.valueOf(family.getSpFamID()), settings, ownerStage, this);
 		}
 
 	}
@@ -201,7 +245,6 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
-				ctrl.objectInitialize();
 
 				Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
 				newMemberTab.setClosable(true);
@@ -214,6 +257,8 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 
 				congrTabPane.getTabs().add(newMemberTab);
 				congrTabPane.getSelectionModel().select(newMemberTab);
+
+				ctrl.objectInitialize();
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -236,7 +281,6 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
-				ctrl.objectInitialize();
 
 				Tab newFamilyTab = new Tab(language.getString("TEXT0015"), layout);
 				newFamilyTab.setClosable(true);
@@ -246,9 +290,12 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 				ctrl.setCongrTabPane(congrTabPane);
 				ctrl.setMembersTab(membersTab);
 				ctrl.setNewMemberTab(newFamilyTab);
+				ctrl.setMembersList(this.membersList);
 
 				congrTabPane.getTabs().add(newFamilyTab);
 				congrTabPane.getSelectionModel().select(newFamilyTab);
+
+				ctrl.objectInitialize();
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -290,6 +337,44 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 			}
 
 		}
+	}
+
+	private void editFamily(Family family) {
+
+		if (!isAlreadyOpen(family.getSpInf1Decrypted())) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				UserMenuCongrFamilyEditor ctrl = (UserMenuCongrFamilyEditor) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedFamily(family);
+
+				Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
+				newFamilyTab.setClosable(true);
+				newFamilyTab.getStyleClass().add("tabStyle1");
+				newFamilyTab.setGraphic(new ImageView(Meta.Resources.FAMILY));
+
+				ctrl.setCongrTabPane(congrTabPane);
+				ctrl.setMembersTab(membersTab);
+				ctrl.setNewMemberTab(newFamilyTab);
+				ctrl.setMembersList(this.membersList);
+
+				congrTabPane.getTabs().add(newFamilyTab);
+				congrTabPane.getSelectionModel().select(newFamilyTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	private boolean isAlreadyOpen(String label) {
@@ -350,11 +435,32 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	}
 
 	@Override
-	public void updateTable(ObservableList<Member> list) {
+	public void updateMembersTable() {
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
 
-		list.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
+	@Override
+	public void updateFamiliesTable() {
+		Actions.getAllFamilies(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembersTable(ObservableList<Member> list) {
+
+		this.membersList = list;
+		membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
-		membersTableView.setItems(list);
+
+		membersTableView.setItems(membersList);
+	}
+
+	@Override
+	public void updateFamiliesTable(ObservableList<Family> list) {
+
+		this.familiesList = list;
+		familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
+
+		familiesTableView.setItems(familiesList);
 	}
 
 	public Settings getSettings() {
@@ -371,5 +477,13 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 
 	public void setOwnerStage(Stage ownerStage) {
 		this.ownerStage = ownerStage;
+	}
+
+	public ObservableList<Member> getMembersList() {
+		return membersList;
+	}
+
+	public void setMembersList(ObservableList<Member> membersList) {
+		this.membersList = membersList;
 	}
 }

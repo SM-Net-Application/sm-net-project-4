@@ -1,6 +1,6 @@
 <?php
 // Insert member
-if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] )) {
+if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] )) {
 	if (! empty ( $jsonObj ["spInf1"] ) && ! empty ( $jsonObj ["spInf2"] ) && ! empty ( $jsonObj ["spInf3"] )) {
 		require_once __DIR__ . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
@@ -9,11 +9,12 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "INSERT INTO sp_members (spInf1, spInf2, spInf3, spInf4) VALUES (";
+			$query = "INSERT INTO sp_members (spInf1, spInf2, spInf3, spInf4, spInf5) VALUES (";
 			$query .= "'" . $jsonObj ["spInf1"] . "', ";
 			$query .= "'" . $jsonObj ["spInf2"] . "', ";
 			$query .= "'" . $jsonObj ["spInf3"] . "', ";
-			$query .= $jsonObj ["spInf4"] . ")";
+			$query .= $jsonObj ["spInf4"] . ", ";
+			$query .= $jsonObj ["spInf5"] . ")";
 			
 			if ($database->query ( $query ) === TRUE) {
 				$response ["status"] = 0;

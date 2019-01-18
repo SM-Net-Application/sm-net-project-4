@@ -87,12 +87,13 @@ public class JSONRequest {
 		return create(Integer.valueOf(9));
 	}
 
-	public static JSONObject INSERT_MEMBER(String spInf1, String spInf2, String spInf3, String spInf4) {
+	public static JSONObject INSERT_MEMBER(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5) {
 		JSONObject jsonObj = create(Integer.valueOf(10));
 		jsonObj.put("spInf1", spInf1);
 		jsonObj.put("spInf2", spInf2);
 		jsonObj.put("spInf3", spInf3);
 		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
 		return jsonObj;
 	}
 
@@ -110,6 +111,45 @@ public class JSONRequest {
 	public static JSONObject DELETE_MEMBER(String spMemberID) {
 		JSONObject jsonObj = create(Integer.valueOf(12));
 		jsonObj.put("spMemberID", spMemberID);
+		return jsonObj;
+	}
+
+	public static JSONObject INSERT_FAMILY(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+			String idToRemove, String idToSet) {
+		JSONObject jsonObj = create(Integer.valueOf(13));
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("idToRemove", idToRemove);
+		jsonObj.put("idToSet", idToSet);
+		return jsonObj;
+	}
+
+	public static JSONObject GET_ALL_FAMILIES() {
+		return create(Integer.valueOf(14));
+	}
+
+	public static JSONObject UPDATE_FAMILY(String spFamID, String spInf1, String spInf2, String spInf3, String spInf4,
+			String spInf5, String idToRemove, String idToSet) {
+
+		JSONObject jsonObj = create(Integer.valueOf(15));
+		jsonObj.put("spFamID", spFamID);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("idToRemove", idToRemove);
+		jsonObj.put("idToSet", idToSet);
+		return jsonObj;
+	}
+
+	public static JSONObject DELETE_FAMILY(String spFamilyID) {
+
+		JSONObject jsonObj = create(Integer.valueOf(16));
+		jsonObj.put("spFamilyID", spFamilyID);
 		return jsonObj;
 	}
 
@@ -146,5 +186,4 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
-
 }

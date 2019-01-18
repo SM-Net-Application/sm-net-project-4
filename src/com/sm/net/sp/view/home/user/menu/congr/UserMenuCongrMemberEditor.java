@@ -143,7 +143,7 @@ public class UserMenuCongrMemberEditor {
 	}
 
 	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4) {
-		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, settings, ownerStage, congrTabPane, newMemberTab,
+		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", settings, ownerStage, congrTabPane, newMemberTab,
 				membersTab, ownerCtrl);
 	}
 

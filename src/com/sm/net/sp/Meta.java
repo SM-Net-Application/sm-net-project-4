@@ -159,5 +159,9 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/save_50x50.png"));
 		public static final Image UPDATE = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/update_50x50.png"));
+		public static final Image ARROW_BACK = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/arrow_back2_50x50.png"));
+		public static final Image ARROW_FRONT = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/arrow_front2_50x50.png"));
 	}
 }

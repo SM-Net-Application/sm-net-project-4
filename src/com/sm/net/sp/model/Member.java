@@ -21,6 +21,7 @@ public class Member {
 	private StringProperty spInf2Decrypted;
 	private StringProperty spInf3Decrypted;
 	private IntegerProperty spInf4;
+	private IntegerProperty spInf5;
 
 	public Member(JSONObject jsonObject, SecretKey secretKey) {
 		super();
@@ -37,6 +38,7 @@ public class Member {
 		this.spInf2Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf2Encrypted.get(), secretKey));
 		this.spInf3Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf3Encrypted.get(), secretKey));
 		this.spInf4 = new SimpleIntegerProperty(jsonObject.getInt("spInf4"));
+		this.spInf5 = new SimpleIntegerProperty(jsonObject.getInt("spInf5"));
 	}
 
 	public final IntegerProperty spMemberIDProperty() {
@@ -142,4 +144,17 @@ public class Member {
 	public final String getNameStyle2() {
 		return this.getSpInf2Decrypted() + ", " + this.getSpInf3Decrypted();
 	}
+
+	public final IntegerProperty spInf5Property() {
+		return this.spInf5;
+	}
+
+	public final int getSpInf5() {
+		return this.spInf5Property().get();
+	}
+
+	public final void setSpInf5(final int spInf5) {
+		this.spInf5Property().set(spInf5);
+	}
+
 }

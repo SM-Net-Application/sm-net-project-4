@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.json.JSONRequest;
+import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
@@ -530,8 +531,8 @@ public class Actions {
 	 * @param membersTab
 	 * @param callback
 	 */
-	public static void insertMember(String spInf1, String spInf2, String spInf3, String spInf4, Settings settings,
-			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
+	public static void insertMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
 			UserMenuCongrListCallback callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
@@ -571,7 +572,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.INSERT_MEMBER(spInf1, spInf2, spInf3, spInf4));
+						JSONRequest.INSERT_MEMBER(spInf1, spInf2, spInf3, spInf4, spInf5));
 			}
 		};
 
@@ -615,7 +616,7 @@ public class Actions {
 								list.add(new Member(json, settings.getDatabaseSecretKey()));
 							}
 
-							callback.updateTable(list);
+							callback.updateMembersTable(list);
 						}
 				});
 				setOnCancelled(value -> {
@@ -705,26 +706,13 @@ public class Actions {
 	}
 
 	/**
-	 * Create Alert Window
+	 * Delete member
 	 * 
+	 * @param spMemberID
 	 * @param settings
-	 * @param title
-	 * @param contentText
-	 * @param stageOwner
-	 * @return
+	 * @param ownerStage
+	 * @param callback
 	 */
-	private static Alert createWaitAlert(Settings settings, String title, String contentText, Stage stageOwner) {
-
-		Alert waitAlert = new Alert(AlertType.NONE);
-		waitAlert.setResult(ButtonType.OK);
-
-		waitAlert.setTitle(title);
-		waitAlert.setContentText(contentText);
-		waitAlert.initOwner(stageOwner);
-
-		return waitAlert;
-	}
-
 	public static void deleteMember(String spMemberID, Settings settings, Stage ownerStage,
 			UserMenuCongrList callback) {
 
@@ -743,7 +731,7 @@ public class Actions {
 
 					if (result != null)
 						if (result.booleanValue())
-							callback.getMembers();
+							callback.updateMembersTable();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
 									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
@@ -770,5 +758,284 @@ public class Actions {
 		Thread taskThread = new Thread(task);
 		taskThread.start();
 
+	}
+
+	/**
+	 * Delete Family
+	 * 
+	 * @param spFamilyID
+	 * @param settings
+	 * @param ownerStage
+	 * @param userMenuCongrList
+	 */
+	public static void deleteFamily(String spFamilyID, Settings settings, Stage ownerStage,
+			UserMenuCongrList ownerCtrl) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+							ownerCtrl.updateMembersTable();
+							ownerCtrl.updateFamiliesTable();
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.DELETE_FAMILY(spFamilyID));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * Insert family
+	 * 
+	 * @param spInf1
+	 * @param spInf2
+	 * @param spInf3
+	 * @param spInf4
+	 * @param spInf5
+	 * @param idToSet
+	 * @param idToRemove
+	 * @param settings
+	 * @param ownerStage
+	 * @param congrTabPane
+	 * @param newFamilyTab
+	 * @param familiesTab
+	 * @param ownerCtrl
+	 */
+	public static void insertFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+			String idToRemove, String idToSet, Settings settings, Stage ownerStage, TabPane congrTabPane,
+			Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							congrTabPane.getTabs().remove(newFamilyTab);
+							congrTabPane.getSelectionModel().select(familiesTab);
+							ownerCtrl.updateMembersTable();
+							ownerCtrl.updateFamiliesTable();
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.INSERT_FAMILY(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Get All Families from Database
+	 * 
+	 * @param url
+	 * @param username
+	 * @param password
+	 * @param settings
+	 * @param ownerStage
+	 * @param callback
+	 */
+	public static void getAllFamilies(Settings settings, Stage ownerStage, UserMenuCongrListCallback callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							ObservableList<Family> list = FXCollections.observableArrayList();
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								list.add(new Family(json, settings.getDatabaseSecretKey()));
+							}
+
+							callback.updateFamiliesTable(list);
+						}
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.GET_ALL_FAMILIES());
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * 
+	 * Update family
+	 * 
+	 * @param spFamID
+	 * @param spInf1
+	 * @param spInf2
+	 * @param spInf3
+	 * @param spInf4
+	 * @param spInf5
+	 * @param idToRemove
+	 * @param idToSet
+	 * @param settings
+	 * @param ownerStage
+	 * @param congrTabPane
+	 * @param newFamilyTab
+	 * @param familiesTab
+	 * @param ownerCtrl
+	 */
+	public static void updateFamily(String spFamID, String spInf1, String spInf2, String spInf3, String spInf4,
+			String spInf5, String idToRemove, String idToSet, Settings settings, Stage ownerStage, TabPane congrTabPane,
+			Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+							congrTabPane.getTabs().remove(newFamilyTab);
+							congrTabPane.getSelectionModel().select(familiesTab);
+							ownerCtrl.updateMembersTable();
+							ownerCtrl.updateFamiliesTable();
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_FAMILY(spFamID, spInf1,
+						spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Create Alert Window
+	 * 
+	 * @param settings
+	 * @param title
+	 * @param contentText
+	 * @param stageOwner
+	 * @return
+	 */
+	private static Alert createWaitAlert(Settings settings, String title, String contentText, Stage stageOwner) {
+
+		Alert waitAlert = new Alert(AlertType.NONE);
+		waitAlert.setResult(ButtonType.OK);
+
+		waitAlert.setTitle(title);
+		waitAlert.setContentText(contentText);
+		waitAlert.initOwner(stageOwner);
+
+		return waitAlert;
 	}
 }

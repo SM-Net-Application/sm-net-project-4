@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrFamilyEditor">
+<AnchorPane maxHeight="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrFamilyEditor">
    <children>
       <VBox maxHeight="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,7 +48,7 @@
                         </StackPane>
                         <HBox>
                            <children>
-                              <VBox>
+                              <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
                                     <StackPane alignment="CENTER_LEFT">
                                        <children>
@@ -70,7 +70,7 @@
                                     </StackPane>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                              <VBox>
                                  <children>
                                     <StackPane alignment="CENTER_LEFT">
                                        <children>
@@ -96,7 +96,7 @@
                         </HBox>
                         <HBox>
                            <children>
-                              <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                              <VBox>
                                  <children>
                                     <StackPane alignment="CENTER_LEFT">
                                        <children>
@@ -118,7 +118,7 @@
                                     </StackPane>
                                  </children>
                               </VBox>
-                              <VBox>
+                              <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
                                     <StackPane alignment="CENTER_LEFT">
                                        <children>
