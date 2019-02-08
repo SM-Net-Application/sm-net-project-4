@@ -313,7 +313,11 @@ public class UserMenuCongrFamilyEditor {
 
 		this.language = settings.getLanguage();
 
-		titleLabel.setText(language.getString("TEXT0031"));
+		if (this.selectedFamily != null)
+			titleLabel.setText(language.getString("TEXT0023"));
+		else
+			titleLabel.setText(language.getString("TEXT0031"));
+
 		familyNameLabel.setText(language.getString("TEXT0025"));
 		familyStreetLabel.setText(language.getString("TEXT0027"));
 		familyNummerLabel.setText(language.getString("TEXT0028"));

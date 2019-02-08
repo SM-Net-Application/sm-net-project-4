@@ -13,6 +13,7 @@ import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
 import com.sm.net.sp.view.menu.settings.SettingsList;
@@ -105,6 +106,10 @@ public class Meta {
 				.getResource("UserMenuCongrMemberEditor.fxml");
 		public static final URL HOME_USER_MENU_CONGR_FAMILY_EDITOR = UserMenuCongrList.class
 				.getResource("UserMenuCongrFamilyEditor.fxml");
+		public static final URL HOME_USER_MENU_SERGROUPS = UserMenuSerGroupsList.class
+				.getResource("UserMenuSerGroupsList.fxml");
+		public static final URL HOME_USER_MENU_SERGROUPS_EDITOR = UserMenuSerGroupsList.class
+				.getResource("UserMenuSerGroupsEditor.fxml");
 	}
 
 	public static class Themes {
@@ -163,5 +168,11 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/arrow_back2_50x50.png"));
 		public static final Image ARROW_FRONT = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/arrow_front2_50x50.png"));
+		public static final Image USER_MENU_SERVICEGROUPS = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/bag_20x20.png"));
+		public static final Image SERVICEGROUPS_ADD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_add_50x50.png"));
+		public static final Image SERVICEGROUPS_DEL = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_del_50x50.png"));
 	}
 }

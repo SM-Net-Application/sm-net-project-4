@@ -21,6 +21,7 @@ import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
@@ -197,8 +198,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			controller.objectInitialize();
 
 			this.viewSupportPlannerBorderPane.setCenter(layout);
-			//this.viewSupportPlannerStage.setMinWidth(500);
-			//this.viewSupportPlannerStage.setMaxWidth(500);
+			// this.viewSupportPlannerStage.setMinWidth(500);
+			// this.viewSupportPlannerStage.setMaxWidth(500);
 			this.viewSupportPlannerStage.setMinHeight(175);
 			this.viewSupportPlannerStage.setMaxHeight(175);
 			this.viewSupportPlannerStage.setMaximized(false);
@@ -332,6 +333,32 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				UserMenuCongrList ctrl = (UserMenuCongrList) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void viewHomeUserMenuSerGroups() {
+
+		if (this.center != 6) {
+
+			this.center = 6;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_SERGROUPS);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				UserMenuSerGroupsList ctrl = (UserMenuSerGroupsList) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.objectInitialize();
@@ -485,4 +512,5 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 }
