@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.view.home.user.menu.users.MenuUsersListCallback;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.property.BooleanProperty;
@@ -30,8 +29,7 @@ public class User {
 		defaultCostructor(jsonObject, secretKey);
 	}
 
-	public User(JSONObject jsonObject, SecretKey secretKey, Settings settings, Stage ownerStage,
-			MenuUsersListCallback callback) {
+	public User(JSONObject jsonObject, SecretKey secretKey, Settings settings, Stage ownerStage, UpdateData callback) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
 		this.roleAdminProperty.addListener((observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(),

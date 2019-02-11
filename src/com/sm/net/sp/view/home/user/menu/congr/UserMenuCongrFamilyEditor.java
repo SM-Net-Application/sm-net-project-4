@@ -275,16 +275,16 @@ public class UserMenuCongrFamilyEditor {
 			if (selectedFamily != null)
 				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet);
 			else
-				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet);
+				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
 					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
-	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String idToRemove,
-			String idToSet) {
+	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf6,
+			String idToRemove, String idToSet) {
 
-		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet, settings, ownerStage,
+		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, idToRemove, idToSet, settings, ownerStage,
 				congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 

@@ -8,6 +8,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 
 import javafx.collections.ObservableList;
@@ -27,7 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class UserMenuCongrList implements UserMenuCongrListCallback {
+public class UserMenuCongrList extends UpdateDataAdapter {
 
 	@FXML
 	private TabPane congrTabPane;
@@ -141,8 +142,8 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
-		updateMembersTable();
-		updateFamiliesTable();
+		updateMembers();
+		updateFamilies();
 	}
 
 	private void listeners() {
@@ -196,11 +197,11 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	}
 
 	private void listenerMembersUpdateButton() {
-		membersUpdateButton.setOnAction(event -> updateMembersTable());
+		membersUpdateButton.setOnAction(event -> updateMembers());
 	}
 
 	private void listenerFamilyUpdateButton() {
-		familiesUpdateButton.setOnAction(event -> updateFamiliesTable());
+		familiesUpdateButton.setOnAction(event -> updateFamilies());
 	}
 
 	private void deleteMember() {
@@ -435,17 +436,17 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	}
 
 	@Override
-	public void updateMembersTable() {
+	public void updateMembers() {
 		Actions.getAllMembers(settings, ownerStage, this);
 	}
 
 	@Override
-	public void updateFamiliesTable() {
+	public void updateFamilies() {
 		Actions.getAllFamilies(settings, ownerStage, this);
 	}
 
 	@Override
-	public void updateMembersTable(ObservableList<Member> list) {
+	public void updateMembers(ObservableList<Member> list) {
 
 		this.membersList = list;
 		membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
@@ -455,7 +456,7 @@ public class UserMenuCongrList implements UserMenuCongrListCallback {
 	}
 
 	@Override
-	public void updateFamiliesTable(ObservableList<Family> list) {
+	public void updateFamilies(ObservableList<Family> list) {
 
 		this.familiesList = list;
 		familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));

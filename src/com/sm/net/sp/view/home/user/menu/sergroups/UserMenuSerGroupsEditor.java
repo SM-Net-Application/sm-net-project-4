@@ -1,18 +1,16 @@
 package com.sm.net.sp.view.home.user.menu.sergroups;
 
-import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Family;
-import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.SerGroup;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.util.Crypt;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -24,7 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class UserMenuSerGroupsEditor {
+public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 	@FXML
 	private Label titleLabel;
@@ -51,16 +49,16 @@ public class UserMenuSerGroupsEditor {
 	private Label familiesLabel;
 
 	@FXML
-	private TableView<Member> familiesTableView;
+	private TableView<Family> familiesTableView;
 
 	@FXML
-	private TableColumn<Member, Integer> familiesIDTableColumn;
+	private TableColumn<Family, Integer> familiesIDTableColumn;
 
 	@FXML
-	private TableColumn<Member, String> familiesNameTableColumn;
+	private TableColumn<Family, String> familiesNameTableColumn;
 
 	@FXML
-	private TableColumn<Member, String> familiesMembersTableColumn;
+	private TableColumn<Family, Integer> familiesMembersTableColumn;
 
 	@FXML
 	private Button serGroupsAddFamily;
@@ -72,16 +70,16 @@ public class UserMenuSerGroupsEditor {
 	private Label serGroupsFamiliesLabel;
 
 	@FXML
-	private TableView<Member> serGroupsFamiliesTableView;
+	private TableView<Family> serGroupsFamiliesTableView;
 
 	@FXML
-	private TableColumn<Member, Integer> serGroupsFamiliesIDTableColumn;
+	private TableColumn<Family, Integer> serGroupsFamiliesIDTableColumn;
 
 	@FXML
-	private TableColumn<Member, String> serGroupsFamiliesNameTableColumn;
+	private TableColumn<Family, String> serGroupsFamiliesNameTableColumn;
 
 	@FXML
-	private TableColumn<Member, String> serGroupsFamiliesMembersTableColumn;
+	private TableColumn<Family, Integer> serGroupsFamiliesMembersTableColumn;
 
 	@FXML
 	private Button saveButton;
@@ -89,15 +87,14 @@ public class UserMenuSerGroupsEditor {
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
-	private TabPane congrTabPane;
-	private Tab newFamilyTab;
-	private Tab familiesTab;
+	private TabPane serGroupsTabPane;
+	private Tab serGroupTab;
 	private UserMenuSerGroupsList ownerCtrl;
-	private Family selectedFamily;
+	private SerGroup selectedSerGroups;
 
-	private ObservableList<Member> membersList;
-	private ObservableList<Member> membersAvailableList;
-	private ObservableList<Member> familyMembersList;
+	private ObservableList<Family> familiesList;
+	private ObservableList<Family> familiesAvailableList;
+	private ObservableList<Family> serGroupsFamilyList;
 
 	@FXML
 	private void initialize() {
@@ -107,15 +104,16 @@ public class UserMenuSerGroupsEditor {
 
 	private void cellValueFactory() {
 
-		familiesIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
-		familiesNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
-		familiesMembersTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+		familiesIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
+		familiesNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+		familiesMembersTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
 
 		serGroupsFamiliesIDTableColumn
-				.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
-		serGroupsFamiliesNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
+				.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
+		serGroupsFamiliesNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
 		serGroupsFamiliesMembersTableColumn
-				.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+				.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
 	}
 
 	private void styleClasses() {
@@ -149,8 +147,8 @@ public class UserMenuSerGroupsEditor {
 
 	private void initValue() {
 
-		// membersAvaiableListBuild();
-		// familyMembersListBuild();
+		familiesListBuild();
+		serGroupsMembersListBuild();
 
 		// if (selectedFamily != null) {
 		//
@@ -160,129 +158,137 @@ public class UserMenuSerGroupsEditor {
 		// }
 	}
 
-	private void membersAvaiableListBuild() {
-
-		membersAvailableList = FXCollections.observableArrayList();
-
-		for (Member member : membersList)
-			if (member.getSpInf5() == -1)
-				membersAvailableList.add(member);
-
-		familiesTableView.setItems(membersAvailableList);
+	private void familiesListBuild() {
+		familiesList = FXCollections.observableArrayList();
+		Actions.getAllFamilies(settings, ownerStage, this);
 	}
 
-	private void familyMembersListBuild() {
+	@Override
+	public void updateFamilies(ObservableList<Family> list) {
+		super.updateFamilies(list);
 
-		familyMembersList = FXCollections.observableArrayList();
+		this.familiesList = list;
+		familiesAvaiableListBuild();
+	}
 
-		if (selectedFamily != null) {
-			for (Member member : membersList)
-				if (member.getSpInf5() == selectedFamily.getSpFamID())
-					familyMembersList.add(member);
-		}
+	private void familiesAvaiableListBuild() {
 
-		serGroupsFamiliesTableView.setItems(familyMembersList);
+		familiesAvailableList = FXCollections.observableArrayList();
+
+		for (Family family : familiesList)
+			if (family.getSpInf6() == -1)
+				familiesAvailableList.add(family);
+
+		familiesAvailableList.sort((a, b) -> (a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted())));
+		familiesTableView.setItems(familiesAvailableList);
+	}
+
+	private void serGroupsMembersListBuild() {
+
+		serGroupsFamilyList = FXCollections.observableArrayList();
+		//
+		// if (selectedSerGroups != null) {
+		// for (Family family : familiesList)
+		// if (family.getSpInf6() == selectedSerGroups.getSpInf6())
+		// serGroupsMembersList.add(family);
+		// }
+		//
+		serGroupsFamiliesTableView.setItems(serGroupsFamilyList);
 	}
 
 	private void listeners() {
-		listenerFamilyAddMember();
-		listenerFamilyRemoveMember();
+		listenerSerGroupAddFamily();
+		listenerSerGroupRemoveFamily();
 		listenerSaveButton();
 	}
 
-	private void listenerFamilyRemoveMember() {
-		serGroupsRemoveFamily.setOnAction(event -> familyRemoveMember());
+	private void listenerSerGroupAddFamily() {
+		serGroupsAddFamily.setOnAction(event -> serGroupAddFamily());
 	}
 
-	private void listenerFamilyAddMember() {
-		serGroupsAddFamily.setOnAction(event -> familyAddMember());
+	private void listenerSerGroupRemoveFamily() {
+		serGroupsRemoveFamily.setOnAction(event -> serGroupRemoveFamily());
 	}
 
-	private void familyAddMember() {
+	private void serGroupAddFamily() {
 
 		if (familiesTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			Member member = familiesTableView.getSelectionModel().getSelectedItem();
-			familiesTableView.getItems().remove(member);
+			Family family = familiesTableView.getSelectionModel().getSelectedItem();
+			familiesTableView.getItems().remove(family);
 
-			familyMembersList.add(member);
-			familyMembersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
-					.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
-
-			checkFamilyName(member);
+			serGroupsFamilyList.add(family);
+			serGroupsFamilyList.sort((a, b) -> (a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted())));
 		}
 	}
 
-	private void checkFamilyName(Member member) {
-		if (familyMembersList.size() == 1)
-			if (serGroupsNameTextField.getText().isEmpty())
-				serGroupsNameTextField.setText(member.getNameStyle2());
-	}
-
-	private void familyRemoveMember() {
+	private void serGroupRemoveFamily() {
 
 		if (serGroupsFamiliesTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			Member member = serGroupsFamiliesTableView.getSelectionModel().getSelectedItem();
-			serGroupsFamiliesTableView.getItems().remove(member);
+			Family family = serGroupsFamiliesTableView.getSelectionModel().getSelectedItem();
+			serGroupsFamiliesTableView.getItems().remove(family);
 
-			membersAvailableList.add(member);
-			membersAvailableList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
-					.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
+			familiesAvailableList.add(family);
+			familiesAvailableList.sort((a, b) -> (a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted())));
 		}
 	}
 
 	private void listenerSaveButton() {
-		saveButton.setOnAction(event -> saveFamily());
+		saveButton.setOnAction(event -> saveSerGroup());
 	}
 
-	private void saveFamily() {
+	private void saveSerGroup() {
 
-		if (checkFields()) {
-
-			String spInf1 = Crypt.encrypt(serGroupsNameTextField.getText(), settings.getDatabaseSecretKey());
-			// String spInf2 =
-			// Crypt.encrypt(serGroupsOverseerComboBox.getText(),
-			// settings.getDatabaseSecretKey());
-			// String spInf3 = Crypt.encrypt(familyNummerTextField.getText(),
-			// settings.getDatabaseSecretKey());
-			// String spInf4 = Crypt.encrypt(familyPostCodeTextField.getText(),
-			// settings.getDatabaseSecretKey());
-			// String spInf5 = Crypt.encrypt(familyCityTextField.getText(),
-			// settings.getDatabaseSecretKey());
-
-			String idToRemove = "";
-
-			for (Member member : membersAvailableList)
-				if (member.getSpInf5() != -1)
-					idToRemove += idToRemove.isEmpty() ? member.getSpMemberID() : ", " + member.getSpMemberID();
-
-			String idToSet = "";
-
-			for (Member member : familyMembersList)
-				if (member.getSpInf5() == -1)
-					idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " + member.getSpMemberID();
-
-			// if (selectedFamily != null)
-			// editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove,
-			// idToSet);
-			// else
-			// newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove,
-			// idToSet);
-		} else
-			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+		// if (checkFields()) {
+		//
+		// String spInf1 = Crypt.encrypt(serGroupsNameTextField.getText(),
+		// settings.getDatabaseSecretKey());
+		// // String spInf2 =
+		// // Crypt.encrypt(serGroupsOverseerComboBox.getText(),
+		// // settings.getDatabaseSecretKey());
+		// // String spInf3 = Crypt.encrypt(familyNummerTextField.getText(),
+		// // settings.getDatabaseSecretKey());
+		// // String spInf4 = Crypt.encrypt(familyPostCodeTextField.getText(),
+		// // settings.getDatabaseSecretKey());
+		// // String spInf5 = Crypt.encrypt(familyCityTextField.getText(),
+		// // settings.getDatabaseSecretKey());
+		//
+		// String idToRemove = "";
+		//
+		// for (Member member : familiesAvailableList)
+		// if (member.getSpInf5() != -1)
+		// idToRemove += idToRemove.isEmpty() ? member.getSpMemberID() : ", " +
+		// member.getSpMemberID();
+		//
+		// String idToSet = "";
+		//
+		// for (Member member : serGroupsMembersList)
+		// if (member.getSpInf5() == -1)
+		// idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " +
+		// member.getSpMemberID();
+		//
+		// // if (selectedFamily != null)
+		// // editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove,
+		// // idToSet);
+		// // else
+		// // newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove,
+		// // idToSet);
+		// } else
+		// new AlertDesigner(language.getStringWithNewLine("TEXT0004"),
+		// ownerStage, AlertType.ERROR,
+		// Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
-	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String idToRemove,
-			String idToSet) {
+	private void newSerGroup(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+			String idToRemove, String idToSet) {
 
 		// Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5,
 		// idToRemove, idToSet, settings, ownerStage,
 		// congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 
-	private void editFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+	private void editSerGroup(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
 			String idToRemove, String idToSet) {
 
 		// Actions.updateFamily(String.valueOf(selectedFamily.getSpFamID()),
@@ -295,12 +301,12 @@ public class UserMenuSerGroupsEditor {
 
 		boolean status = true;
 
-		if (serGroupsNameTextField.getText().isEmpty())
-			status = false;
-
-		if (status)
-			if (familyMembersList.size() == 0)
-				status = false;
+		// if (serGroupsNameTextField.getText().isEmpty())
+		// status = false;
+		//
+		// if (status)
+		// if (serGroupsMembersList.size() == 0)
+		// status = false;
 
 		return status;
 	}
@@ -309,7 +315,7 @@ public class UserMenuSerGroupsEditor {
 
 		this.language = settings.getLanguage();
 
-		if (this.selectedFamily != null)
+		if (this.selectedSerGroups != null)
 			titleLabel.setText(language.getString("TEXT0023"));
 		else
 			titleLabel.setText(language.getString("TEXT0039"));
@@ -348,28 +354,20 @@ public class UserMenuSerGroupsEditor {
 		this.settings = settings;
 	}
 
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
 	public Stage getOwnerStage() {
 		return ownerStage;
 	}
 
 	public void setOwnerStage(Stage ownerStage) {
 		this.ownerStage = ownerStage;
-	}
-
-	public TabPane getCongrTabPane() {
-		return congrTabPane;
-	}
-
-	public void setCongrTabPane(TabPane congrTabPane) {
-		this.congrTabPane = congrTabPane;
-	}
-
-	public Tab getNewMemberTab() {
-		return newFamilyTab;
-	}
-
-	public void setNewMemberTab(Tab newMemberTab) {
-		this.newFamilyTab = newMemberTab;
 	}
 
 	public UserMenuSerGroupsList getOwnerCtrl() {
@@ -380,43 +378,27 @@ public class UserMenuSerGroupsEditor {
 		this.ownerCtrl = ownerCtrl;
 	}
 
-	public Tab getMembersTab() {
-		return familiesTab;
+	public SerGroup getSelectedSerGroups() {
+		return selectedSerGroups;
 	}
 
-	public void setMembersTab(Tab membersTab) {
-		this.familiesTab = membersTab;
+	public void setSelectedSerGroups(SerGroup selectedSerGroups) {
+		this.selectedSerGroups = selectedSerGroups;
 	}
 
-	public ObservableList<Member> getMembersList() {
-		return membersList;
+	public TabPane getSerGroupsTabPane() {
+		return serGroupsTabPane;
 	}
 
-	public void setMembersList(ObservableList<Member> membersList) {
-		this.membersList = membersList;
+	public void setSerGroupsTabPane(TabPane serGroupsTabPane) {
+		this.serGroupsTabPane = serGroupsTabPane;
 	}
 
-	public ObservableList<Member> getMembersAvailableList() {
-		return membersAvailableList;
+	public Tab getSerGroupTab() {
+		return serGroupTab;
 	}
 
-	public void setMembersAvailableList(ObservableList<Member> membersAvailableList) {
-		this.membersAvailableList = membersAvailableList;
-	}
-
-	public ObservableList<Member> getFamilyMembersList() {
-		return familyMembersList;
-	}
-
-	public void setFamilyMembersList(ObservableList<Member> familyMembersList) {
-		this.familyMembersList = familyMembersList;
-	}
-
-	public Family getSelectedFamily() {
-		return selectedFamily;
-	}
-
-	public void setSelectedFamily(Family selectedFamily) {
-		this.selectedFamily = selectedFamily;
+	public void setSerGroupTab(Tab serGroupTab) {
+		this.serGroupTab = serGroupTab;
 	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 
 import javafx.collections.ObservableList;
@@ -21,7 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class UserMenuSerGroupsList implements UserMenuSerGroupsCallback {
+public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	@FXML
 	private TabPane serGroupsTabPane;
@@ -95,7 +96,7 @@ public class UserMenuSerGroupsList implements UserMenuSerGroupsCallback {
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
-		updateSerGroupsTable();
+		updateSerGroups();
 	}
 
 	private void listeners() {
@@ -125,7 +126,7 @@ public class UserMenuSerGroupsList implements UserMenuSerGroupsCallback {
 	}
 
 	private void listenerSerGroupsUpdateButton() {
-		serGroupsUpdateButton.setOnAction(event -> updateSerGroupsTable());
+		serGroupsUpdateButton.setOnAction(event -> updateSerGroups());
 	}
 
 	private void deleteSerGroups() {
@@ -166,9 +167,9 @@ public class UserMenuSerGroupsList implements UserMenuSerGroupsCallback {
 				newSerGroupsTab.getStyleClass().add("tabStyle1");
 				newSerGroupsTab.setGraphic(new ImageView(Meta.Resources.PLUS));
 
-				ctrl.setCongrTabPane(serGroupsTabPane);
+				// ctrl.setCongrTabPane(serGroupsTabPane);
 				// ctrl.setMembersTab(membersTab);
-				ctrl.setNewMemberTab(newSerGroupsTab);
+				// ctrl.setNewMemberTab(newSerGroupsTab);
 				// ctrl.setMembersList(this.membersList);
 
 				serGroupsTabPane.getTabs().add(newSerGroupsTab);
@@ -196,16 +197,16 @@ public class UserMenuSerGroupsList implements UserMenuSerGroupsCallback {
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
-				ctrl.setSelectedFamily(family);
+				// ctrl.setSelectedFamily(family);
 
 				Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
 				newFamilyTab.setClosable(true);
 				newFamilyTab.getStyleClass().add("tabStyle1");
 				newFamilyTab.setGraphic(new ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
 
-				ctrl.setCongrTabPane(serGroupsTabPane);
+				// ctrl.setCongrTabPane(serGroupsTabPane);
 				// ctrl.setMembersTab(membersTab);
-				ctrl.setNewMemberTab(newFamilyTab);
+				// ctrl.setNewMemberTab(newFamilyTab);
 				// ctrl.setMembersList(this.membersList);
 
 				serGroupsTabPane.getTabs().add(newFamilyTab);
@@ -260,12 +261,12 @@ public class UserMenuSerGroupsList implements UserMenuSerGroupsCallback {
 	}
 
 	@Override
-	public void updateSerGroupsTable() {
+	public void updateSerGroups() {
 		// Actions.getAllFamilies(settings, ownerStage, this);
 	}
 
 	@Override
-	public void updateFamiliesTable(ObservableList<Family> list) {
+	public void updateFamilies(ObservableList<Family> list) {
 
 		this.familiesList = list;
 		familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));

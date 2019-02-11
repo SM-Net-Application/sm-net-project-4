@@ -8,13 +8,12 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
-import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrListCallback;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAddCallback;
-import com.sm.net.sp.view.home.user.menu.users.MenuUsersListCallback;
 import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
 import com.sm.net.util.JSON;
 
@@ -106,8 +105,7 @@ public class Actions {
 	 * @param viewSupportPlannerStage
 	 * @param callback
 	 */
-	public static void getAllUsers(String url, Settings settings, Stage viewSupportPlannerStage,
-			MenuUsersListCallback callback) {
+	public static void getAllUsers(String url, Settings settings, Stage viewSupportPlannerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), viewSupportPlannerStage);
@@ -133,7 +131,7 @@ public class Actions {
 										viewSupportPlannerStage, callback));
 							}
 
-							callback.updateTable(listUser);
+							callback.updateUsers(listUser);
 						}
 					// } else
 					// new
@@ -177,7 +175,7 @@ public class Actions {
 	 * @param callback
 	 */
 	public static void insertNewUser(String url, String username, String password, Settings settings, Stage ownerStage,
-			MenuUsersListCallback callback) {
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -194,7 +192,7 @@ public class Actions {
 
 					if (result != null)
 						if (result.booleanValue()) {
-							callback.updateListUsers();
+							callback.updateUsers();
 							ownerStage.close();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
@@ -289,7 +287,7 @@ public class Actions {
 	 * @param callback
 	 */
 	public static void updateUserRules(String spUserID, String spRoleAdmin, Settings settings, Stage ownerStage,
-			MenuUsersListCallback callback) {
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -341,8 +339,7 @@ public class Actions {
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void deleteUser(String spUserID, Settings settings, Stage ownerStage,
-			MenuUsersListCallback callback) {
+	public static void deleteUser(String spUserID, Settings settings, Stage ownerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -359,7 +356,7 @@ public class Actions {
 
 					if (result != null)
 						if (result.booleanValue())
-							callback.updateListUsers();
+							callback.updateUsers();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
 									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
@@ -533,7 +530,7 @@ public class Actions {
 	 */
 	public static void insertMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
 			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
-			UserMenuCongrListCallback callback) {
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -591,7 +588,7 @@ public class Actions {
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void getAllMembers(Settings settings, Stage ownerStage, UserMenuCongrListCallback callback) {
+	public static void getAllMembers(Settings settings, Stage ownerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -616,7 +613,7 @@ public class Actions {
 								list.add(new Member(json, settings.getDatabaseSecretKey()));
 							}
 
-							callback.updateMembersTable(list);
+							callback.updateMembers(list);
 						}
 				});
 				setOnCancelled(value -> {
@@ -657,7 +654,7 @@ public class Actions {
 	 */
 	public static void updateMember(String spMemberID, String spInf1, String spInf2, String spInf3, String spInf4,
 			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
-			UserMenuCongrListCallback callback) {
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -731,7 +728,7 @@ public class Actions {
 
 					if (result != null)
 						if (result.booleanValue())
-							callback.updateMembersTable();
+							callback.updateMembers();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
 									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
@@ -786,8 +783,8 @@ public class Actions {
 
 					if (result != null)
 						if (result.booleanValue()) {
-							ownerCtrl.updateMembersTable();
-							ownerCtrl.updateFamiliesTable();
+							ownerCtrl.updateMembers();
+							ownerCtrl.updateFamilies();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
 									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
@@ -823,6 +820,7 @@ public class Actions {
 	 * @param spInf3
 	 * @param spInf4
 	 * @param spInf5
+	 * @param spInf6
 	 * @param idToSet
 	 * @param idToRemove
 	 * @param settings
@@ -833,7 +831,7 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void insertFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String idToRemove, String idToSet, Settings settings, Stage ownerStage, TabPane congrTabPane,
+			String spInf6, String idToRemove, String idToSet, Settings settings, Stage ownerStage, TabPane congrTabPane,
 			Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
@@ -854,8 +852,8 @@ public class Actions {
 
 							congrTabPane.getTabs().remove(newFamilyTab);
 							congrTabPane.getSelectionModel().select(familiesTab);
-							ownerCtrl.updateMembersTable();
-							ownerCtrl.updateFamiliesTable();
+							ownerCtrl.updateMembers();
+							ownerCtrl.updateFamilies();
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
@@ -876,7 +874,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.INSERT_FAMILY(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet));
+						JSONRequest.INSERT_FAMILY(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, idToRemove, idToSet));
 			}
 		};
 
@@ -896,7 +894,7 @@ public class Actions {
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void getAllFamilies(Settings settings, Stage ownerStage, UserMenuCongrListCallback callback) {
+	public static void getAllFamilies(Settings settings, Stage ownerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -921,7 +919,7 @@ public class Actions {
 								list.add(new Family(json, settings.getDatabaseSecretKey()));
 							}
 
-							callback.updateFamiliesTable(list);
+							callback.updateFamilies(list);
 						}
 				});
 				setOnCancelled(value -> {
@@ -987,8 +985,8 @@ public class Actions {
 						if (result.booleanValue()) {
 							congrTabPane.getTabs().remove(newFamilyTab);
 							congrTabPane.getSelectionModel().select(familiesTab);
-							ownerCtrl.updateMembersTable();
-							ownerCtrl.updateFamiliesTable();
+							ownerCtrl.updateMembers();
+							ownerCtrl.updateFamilies();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
 									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();

@@ -115,13 +115,14 @@ public class JSONRequest {
 	}
 
 	public static JSONObject INSERT_FAMILY(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String idToRemove, String idToSet) {
+			String spInf6, String idToRemove, String idToSet) {
 		JSONObject jsonObj = create(Integer.valueOf(13));
 		jsonObj.put("spInf1", spInf1);
 		jsonObj.put("spInf2", spInf2);
 		jsonObj.put("spInf3", spInf3);
 		jsonObj.put("spInf4", spInf4);
 		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("spInf6", spInf6);
 		jsonObj.put("idToRemove", idToRemove);
 		jsonObj.put("idToSet", idToSet);
 		return jsonObj;

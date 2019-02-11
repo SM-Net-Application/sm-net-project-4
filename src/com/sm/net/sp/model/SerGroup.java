@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Family {
+public class SerGroup {
 
 	private IntegerProperty spFamID;
 	private StringProperty spInf1Encrypted;
@@ -29,7 +29,7 @@ public class Family {
 
 	private IntegerProperty spFamMembers;
 
-	public Family(JSONObject jsonObject, SecretKey secretKey) {
+	public SerGroup(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
 	}

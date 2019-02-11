@@ -58,6 +58,84 @@ public class UserMenuCongrMemberEditor {
 	private CheckBox genderFemaleCheckBox;
 
 	@FXML
+	private Tab memberAppointmentAndPrivilegeTab;
+
+	@FXML
+	private Label generalLabel;
+	@FXML
+	private CheckBox studentCheckBox;
+	@FXML
+	private CheckBox unbaptizedPublisherCheckBox;
+	@FXML
+	private CheckBox baptizedPublisherCheckBox;
+
+	@FXML
+	private Tab studentTab;
+
+	@FXML
+	private CheckBox bibleReadingCheckBox;
+	@FXML
+	private CheckBox initialCallCheckBox;
+	@FXML
+	private CheckBox returnVisitCheckBox;
+	@FXML
+	private CheckBox bibleStudyCheckBox;
+	@FXML
+	private CheckBox talkCheckBox;
+
+	@FXML
+	private Tab privilegeTab;
+
+	@FXML
+	private Label soundSystemLabel;
+	@FXML
+	private CheckBox microphoneHandlerMidweekCheckBox;
+	@FXML
+	private CheckBox MicrophoneHandlerWeekendCheckBox;
+	@FXML
+	private CheckBox soundSystemMixerMidweekCheckBox;
+	@FXML
+	private CheckBox soundSystemMixerWeekendCheckBox;
+	@FXML
+	private CheckBox soundSystemPCMidweekCheckBox;
+	@FXML
+	private CheckBox soundSystemPCWeekendCheckBox;
+
+	@FXML
+	private Label readerLabel;
+	@FXML
+	private CheckBox readerCongregationBibleStudyCheckBox;
+	@FXML
+	private CheckBox readerWatchtowerCheckBox;
+
+	@FXML
+	private Label attendantLabel;
+	@FXML
+	private CheckBox attendantMidweekCheckBox;
+	@FXML
+	private CheckBox attendantWeekendCheckBox;
+
+	@FXML
+	private Tab appointmentTab;
+
+	@FXML
+	private CheckBox ministerialServantCheckBox;
+	@FXML
+	private CheckBox elderCheckBox;
+	@FXML
+	private CheckBox regularPioneerCheckBox;
+	@FXML
+	private CheckBox specialPioneerCheckBox;
+
+	@FXML
+	private Tab onthersTab;
+
+	@FXML
+	private CheckBox markedCheckBox;
+	@FXML
+	private CheckBox disfellowshippedCheckBox;
+
+	@FXML
 	private Button saveButton;
 
 	private Settings settings;
@@ -89,6 +167,48 @@ public class UserMenuCongrMemberEditor {
 		genderMaleCheckBox.getStyleClass().add("checkBoxStyle1");
 		genderFemaleCheckBox.getStyleClass().add("checkBoxStyle1");
 		saveButton.getStyleClass().add("buttonStyle1");
+
+		memberAppointmentAndPrivilegeTab.getStyleClass().add("tabStyle1");
+		generalLabel.getStyleClass().add("labelStyle2");
+		studentCheckBox.getStyleClass().add("checkBoxStyle1");
+		unbaptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
+		baptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		studentTab.getStyleClass().add("tabStyle1");
+		bibleReadingCheckBox.getStyleClass().add("checkBoxStyle1");
+		initialCallCheckBox.getStyleClass().add("checkBoxStyle1");
+		returnVisitCheckBox.getStyleClass().add("checkBoxStyle1");
+		bibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
+		talkCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		privilegeTab.getStyleClass().add("tabStyle1");
+		soundSystemLabel.getStyleClass().add("labelStyle2");
+		microphoneHandlerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
+		MicrophoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
+		soundSystemMixerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
+		soundSystemMixerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
+		soundSystemPCMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
+		soundSystemPCWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		readerLabel.getStyleClass().add("labelStyle2");
+		readerCongregationBibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
+		readerWatchtowerCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		attendantLabel.getStyleClass().add("labelStyle2");
+		attendantMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
+		attendantWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		appointmentTab.getStyleClass().add("tabStyle1");
+
+		ministerialServantCheckBox.getStyleClass().add("checkBoxStyle1");
+		elderCheckBox.getStyleClass().add("checkBoxStyle1");
+		regularPioneerCheckBox.getStyleClass().add("checkBoxStyle1");
+		specialPioneerCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		onthersTab.getStyleClass().add("tabStyle1");
+
+		markedCheckBox.getStyleClass().add("checkBoxStyle1");
+		disfellowshippedCheckBox.getStyleClass().add("checkBoxStyle1");
 	}
 
 	public void objectInitialize() {
@@ -232,6 +352,48 @@ public class UserMenuCongrMemberEditor {
 
 		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
 		saveButton.setText(language.getString("TEXT0022"));
+
+		memberAppointmentAndPrivilegeTab.setText(language.getString("TEXT0042"));
+		generalLabel.setText(language.getString("TEXT0043"));
+		studentCheckBox.setText(language.getString("TEXT0044"));
+		unbaptizedPublisherCheckBox.setText(language.getString("TEXT0045"));
+		baptizedPublisherCheckBox.setText(language.getString("TEXT0046"));
+
+		studentTab.setText(language.getString("TEXT0044"));
+		bibleReadingCheckBox.setText(language.getString("TEXT0047"));
+		initialCallCheckBox.setText(language.getString("TEXT0048"));
+		returnVisitCheckBox.setText(language.getString("TEXT0049"));
+		bibleStudyCheckBox.setText(language.getString("TEXT0050"));
+		talkCheckBox.setText(language.getString("TEXT0051"));
+
+		privilegeTab.setText(language.getString("TEXT0052"));
+		soundSystemLabel.setText(language.getString("TEXT0053"));
+		microphoneHandlerMidweekCheckBox.setText(language.getString("TEXT0054"));
+		MicrophoneHandlerWeekendCheckBox.setText(language.getString("TEXT0055"));
+		soundSystemMixerMidweekCheckBox.setText(language.getString("TEXT0056"));
+		soundSystemMixerWeekendCheckBox.setText(language.getString("TEXT0057"));
+		soundSystemPCMidweekCheckBox.setText(language.getString("TEXT0058"));
+		soundSystemPCWeekendCheckBox.setText(language.getString("TEXT0059"));
+
+		readerLabel.setText(language.getString("TEXT0060"));
+		readerCongregationBibleStudyCheckBox.setText(language.getString("TEXT0061"));
+		readerWatchtowerCheckBox.setText(language.getString("TEXT0062"));
+
+		attendantLabel.setText(language.getString("TEXT0063"));
+		attendantMidweekCheckBox.setText(language.getString("TEXT0064"));
+		attendantWeekendCheckBox.setText(language.getString("TEXT0065"));
+
+		appointmentTab.setText(language.getString("TEXT0066"));
+
+		ministerialServantCheckBox.setText(language.getString("TEXT0067"));
+		elderCheckBox.setText(language.getString("TEXT0068"));
+		regularPioneerCheckBox.setText(language.getString("TEXT0069"));
+		specialPioneerCheckBox.setText(language.getString("TEXT0070"));
+
+		onthersTab.setText(language.getString("TEXT0071"));
+
+		markedCheckBox.setText(language.getString("TEXT0072"));
+		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
 	}
 
 	public Settings getSettings() {

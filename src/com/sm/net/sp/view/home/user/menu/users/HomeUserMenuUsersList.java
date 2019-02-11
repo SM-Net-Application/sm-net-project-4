@@ -6,6 +6,7 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 
@@ -26,7 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class HomeUserMenuUsersList implements MenuUsersListCallback {
+public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 	@FXML
 	private Label userLabel;
@@ -83,11 +84,11 @@ public class HomeUserMenuUsersList implements MenuUsersListCallback {
 		listeners();
 		viewUpdate();
 
-		updateListUsers();
+		updateUsers();
 	}
 
 	@Override
-	public void updateListUsers() {
+	public void updateUsers() {
 		Actions.getAllUsers(settings.getDatabaseUrl(), settings, stageSupportPlannerView, this);
 	}
 
@@ -181,7 +182,7 @@ public class HomeUserMenuUsersList implements MenuUsersListCallback {
 	}
 
 	@Override
-	public void updateTable(ObservableList<User> listUser) {
+	public void updateUsers(ObservableList<User> listUser) {
 		userTableView.setItems(listUser);
 	}
 

@@ -6,7 +6,6 @@ import java.net.URL;
 import com.sm.net.file.Extensions;
 import com.sm.net.path.PathBuilder;
 import com.sm.net.project.Project;
-import com.sm.net.sp.view.SupportPlannerHome;
 import com.sm.net.sp.view.SupportPlannerMenu;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.check.access.CheckAccess;
@@ -83,7 +82,6 @@ public class Meta {
 	public static class Views {
 
 		public static final URL SUPPORTPLANNER_VIEW = SupportPlannerView.class.getResource("SupportPlannerView.fxml");
-		public static final URL SUPPORTPLANNER_HOME = SupportPlannerHome.class.getResource("SupportPlannerHome.fxml");
 		public static final URL SUPPORTPLANNER_HOME_ACCESS = HomeAccess.class.getResource("HomeAccess.fxml");
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
