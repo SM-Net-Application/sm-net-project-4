@@ -87,24 +87,82 @@ public class JSONRequest {
 		return create(Integer.valueOf(9));
 	}
 
-	public static JSONObject INSERT_MEMBER(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5) {
+	public static JSONObject INSERT_MEMBER(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
+			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
+			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29) {
+
 		JSONObject jsonObj = create(Integer.valueOf(10));
 		jsonObj.put("spInf1", spInf1);
 		jsonObj.put("spInf2", spInf2);
 		jsonObj.put("spInf3", spInf3);
 		jsonObj.put("spInf4", spInf4);
 		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("spInf6", spInf6);
+		jsonObj.put("spInf7", spInf7);
+		jsonObj.put("spInf8", spInf8);
+		jsonObj.put("spInf9", spInf9);
+		jsonObj.put("spInf10", spInf10);
+		jsonObj.put("spInf11", spInf11);
+		jsonObj.put("spInf12", spInf12);
+		jsonObj.put("spInf13", spInf13);
+		jsonObj.put("spInf14", spInf14);
+		jsonObj.put("spInf15", spInf15);
+		jsonObj.put("spInf16", spInf16);
+		jsonObj.put("spInf17", spInf17);
+		jsonObj.put("spInf18", spInf18);
+		jsonObj.put("spInf19", spInf19);
+		jsonObj.put("spInf20", spInf20);
+		jsonObj.put("spInf21", spInf21);
+		jsonObj.put("spInf22", spInf22);
+		jsonObj.put("spInf23", spInf23);
+		jsonObj.put("spInf24", spInf24);
+		jsonObj.put("spInf25", spInf25);
+		jsonObj.put("spInf26", spInf26);
+		jsonObj.put("spInf27", spInf27);
+		jsonObj.put("spInf28", spInf28);
+		jsonObj.put("spInf29", spInf29);
 		return jsonObj;
 	}
 
 	public static JSONObject UPDATE_MEMBER(String spMemberID, String spInf1, String spInf2, String spInf3,
-			String spInf4) {
+			String spInf4, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
+			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
+			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
+			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29) {
+
 		JSONObject jsonObj = create(Integer.valueOf(11));
 		jsonObj.put("spMemberID", spMemberID);
 		jsonObj.put("spInf1", spInf1);
 		jsonObj.put("spInf2", spInf2);
 		jsonObj.put("spInf3", spInf3);
 		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf6", spInf6);
+		jsonObj.put("spInf7", spInf7);
+		jsonObj.put("spInf8", spInf8);
+		jsonObj.put("spInf9", spInf9);
+		jsonObj.put("spInf10", spInf10);
+		jsonObj.put("spInf11", spInf11);
+		jsonObj.put("spInf12", spInf12);
+		jsonObj.put("spInf13", spInf13);
+		jsonObj.put("spInf14", spInf14);
+		jsonObj.put("spInf15", spInf15);
+		jsonObj.put("spInf16", spInf16);
+		jsonObj.put("spInf17", spInf17);
+		jsonObj.put("spInf18", spInf18);
+		jsonObj.put("spInf19", spInf19);
+		jsonObj.put("spInf20", spInf20);
+		jsonObj.put("spInf21", spInf21);
+		jsonObj.put("spInf22", spInf22);
+		jsonObj.put("spInf23", spInf23);
+		jsonObj.put("spInf24", spInf24);
+		jsonObj.put("spInf25", spInf25);
+		jsonObj.put("spInf26", spInf26);
+		jsonObj.put("spInf27", spInf27);
+		jsonObj.put("spInf28", spInf28);
+		jsonObj.put("spInf29", spInf29);
+
 		return jsonObj;
 	}
 
@@ -151,6 +209,34 @@ public class JSONRequest {
 
 		JSONObject jsonObj = create(Integer.valueOf(16));
 		jsonObj.put("spFamilyID", spFamilyID);
+		return jsonObj;
+	}
+
+	public static JSONObject INSERT_SERGROUP(String spInf1, String spInf2, String spInf3, String idToRemove,
+			String idToSet) {
+		JSONObject jsonObj = create(Integer.valueOf(17));
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("idToRemove", idToRemove);
+		jsonObj.put("idToSet", idToSet);
+		return jsonObj;
+	}
+
+	public static JSONObject GET_ALL_SERGROUPS() {
+		return create(Integer.valueOf(18));
+	}
+
+	public static JSONObject UPDATE_SERGROUP(String spSerGrID, String spInf1, String spInf2, String spInf3,
+			String idToRemove, String idToSet) {
+
+		JSONObject jsonObj = create(Integer.valueOf(19));
+		jsonObj.put("spSerGrID", spSerGrID);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("idToRemove", idToRemove);
+		jsonObj.put("idToSet", idToSet);
 		return jsonObj;
 	}
 

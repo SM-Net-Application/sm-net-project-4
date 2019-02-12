@@ -157,7 +157,9 @@ public class Meta {
 		public static final Image PLUS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/plus_35x35.png"));
 		public static final Image MEMBER_PERSONAL_INFO = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/personal_info_35x45.png"));
+				SupportPlannerMain.class.getResourceAsStream("resources/personal_info_45x35.png"));
+		public static final Image MEMBER_PRIVILEGES = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/privilege2_45x35.png"));
 		public static final Image SAVE = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/save_50x50.png"));
 		public static final Image UPDATE = new Image(

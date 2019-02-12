@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.model.Family;
+import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 
@@ -31,25 +32,25 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 	private Tab serGroupsTab;
 
 	@FXML
-	private TableView<Family> serGroupsTableView;
+	private TableView<SerGroup> serGroupsTableView;
 
 	@FXML
-	private TableColumn<Family, Integer> serGroupsIDTableColumn;
+	private TableColumn<SerGroup, Integer> serGroupsIDTableColumn;
 
 	@FXML
-	private TableColumn<Family, String> serGroupsNameTableColumn;
+	private TableColumn<SerGroup, String> serGroupsNameTableColumn;
 
 	@FXML
-	private TableColumn<Family, Integer> serGroupsOverseerTableColumn;
+	private TableColumn<SerGroup, String> serGroupsOverseerTableColumn;
 
 	@FXML
-	private TableColumn<Family, String> serGroupsAssistantTableColumn;
+	private TableColumn<SerGroup, String> serGroupsAssistantTableColumn;
 
 	@FXML
-	private TableColumn<Family, String> serGroupsFamiliesTableColumn;
+	private TableColumn<SerGroup, Integer> serGroupsFamiliesTableColumn;
 
 	@FXML
-	private TableColumn<Family, String> serGroupsMembersTableColumn;
+	private TableColumn<SerGroup, Integer> serGroupsMembersTableColumn;
 
 	@FXML
 	private Button serGroupsAddButton;
@@ -64,7 +65,7 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 
-	private ObservableList<Family> familiesList;
+	private ObservableList<SerGroup> serGroupsList;
 
 	@FXML
 	private void initialize() {
@@ -74,11 +75,14 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	private void cellValueFactory() {
 
-		serGroupsIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
+		serGroupsIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spSerGrIDProperty().asObject());
 		serGroupsNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
-		serGroupsAssistantTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
-		serGroupsFamiliesTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
-		serGroupsMembersTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf4DecryptedProperty());
+		serGroupsOverseerTableColumn.setCellValueFactory(cellData -> cellData.getValue().overseerProperty());
+		serGroupsAssistantTableColumn.setCellValueFactory(cellData -> cellData.getValue().assistantProperty());
+		serGroupsFamiliesTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().spSerGroupFamiliesProperty().asObject());
+		serGroupsMembersTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().spSerGroupMembersProperty().asObject());
 	}
 
 	private void styleClasses() {
@@ -108,10 +112,10 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	private void listenerSerGroupsTableView() {
 		serGroupsTableView.setRowFactory(param -> {
-			TableRow<Family> row = new TableRow<>();
+			TableRow<SerGroup> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
-					editFamily(row.getItem());
+					editSerGroup(row.getItem());
 			});
 			return row;
 		});
@@ -167,10 +171,8 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 				newSerGroupsTab.getStyleClass().add("tabStyle1");
 				newSerGroupsTab.setGraphic(new ImageView(Meta.Resources.PLUS));
 
-				// ctrl.setCongrTabPane(serGroupsTabPane);
-				// ctrl.setMembersTab(membersTab);
-				// ctrl.setNewMemberTab(newSerGroupsTab);
-				// ctrl.setMembersList(this.membersList);
+				ctrl.setSerGroupsTabPane(serGroupsTabPane);
+				ctrl.setSerGroupTab(newSerGroupsTab);
 
 				serGroupsTabPane.getTabs().add(newSerGroupsTab);
 				serGroupsTabPane.getSelectionModel().select(newSerGroupsTab);
@@ -183,41 +185,43 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		}
 	}
 
-	private void editFamily(Family family) {
+	private void editSerGroup(SerGroup serGroup) {
 
-		if (!isAlreadyOpen(family.getSpInf1Decrypted())) {
-
-			try {
-
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
-				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-
-				UserMenuSerGroupsEditor ctrl = (UserMenuSerGroupsEditor) fxmlLoader.getController();
-				ctrl.setSettings(this.settings);
-				ctrl.setOwnerStage(ownerStage);
-				ctrl.setOwnerCtrl(this);
-				// ctrl.setSelectedFamily(family);
-
-				Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
-				newFamilyTab.setClosable(true);
-				newFamilyTab.getStyleClass().add("tabStyle1");
-				newFamilyTab.setGraphic(new ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
-
-				// ctrl.setCongrTabPane(serGroupsTabPane);
-				// ctrl.setMembersTab(membersTab);
-				// ctrl.setNewMemberTab(newFamilyTab);
-				// ctrl.setMembersList(this.membersList);
-
-				serGroupsTabPane.getTabs().add(newFamilyTab);
-				serGroupsTabPane.getSelectionModel().select(newFamilyTab);
-
-				ctrl.objectInitialize();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		// if (!isAlreadyOpen(family.getSpInf1Decrypted())) {
+		//
+		// try {
+		//
+		// FXMLLoader fxmlLoader = new FXMLLoader();
+		// fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
+		// AnchorPane layout = (AnchorPane) fxmlLoader.load();
+		//
+		// UserMenuSerGroupsEditor ctrl = (UserMenuSerGroupsEditor)
+		// fxmlLoader.getController();
+		// ctrl.setSettings(this.settings);
+		// ctrl.setOwnerStage(ownerStage);
+		// ctrl.setOwnerCtrl(this);
+		// // ctrl.setSelectedFamily(family);
+		//
+		// Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
+		// newFamilyTab.setClosable(true);
+		// newFamilyTab.getStyleClass().add("tabStyle1");
+		// newFamilyTab.setGraphic(new
+		// ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
+		//
+		// // ctrl.setCongrTabPane(serGroupsTabPane);
+		// // ctrl.setMembersTab(membersTab);
+		// // ctrl.setNewMemberTab(newFamilyTab);
+		// // ctrl.setMembersList(this.membersList);
+		//
+		// serGroupsTabPane.getTabs().add(newFamilyTab);
+		// serGroupsTabPane.getSelectionModel().select(newFamilyTab);
+		//
+		// ctrl.objectInitialize();
+		//
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		// }
 
 	}
 
@@ -262,16 +266,16 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	@Override
 	public void updateSerGroups() {
-		// Actions.getAllFamilies(settings, ownerStage, this);
+		Actions.getAllSerGroups(settings, ownerStage, this);
 	}
 
 	@Override
-	public void updateFamilies(ObservableList<Family> list) {
+	public void updateSerGroups(ObservableList<SerGroup> list) {
 
-		this.familiesList = list;
-		familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
+		serGroupsList = list;
+		serGroupsList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
 
-		serGroupsTableView.setItems(familiesList);
+		serGroupsTableView.setItems(serGroupsList);
 	}
 
 	public Settings getSettings() {

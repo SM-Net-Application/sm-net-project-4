@@ -1,16 +1,20 @@
 package com.sm.net.sp.view.home.user.menu.sergroups;
 
+import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.util.Crypt;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -37,13 +41,13 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 	private Label serGroupsOverseerLabel;
 
 	@FXML
-	private ComboBox<String> serGroupsOverseerComboBox;
+	private ComboBox<Member> serGroupsOverseerComboBox;
 
 	@FXML
 	private Label serGroupsAssistantLabel;
 
 	@FXML
-	private ComboBox<String> serGroupsAssistantComboBox;
+	private ComboBox<Member> serGroupsAssistantComboBox;
 
 	@FXML
 	private Label familiesLabel;
@@ -92,6 +96,9 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 	private UserMenuSerGroupsList ownerCtrl;
 	private SerGroup selectedSerGroups;
 
+	private ObservableList<Member> membersList;
+	private ObservableList<Member> serGroupOverseerList;
+	private ObservableList<Member> serGroupsAssistantList;
 	private ObservableList<Family> familiesList;
 	private ObservableList<Family> familiesAvailableList;
 	private ObservableList<Family> serGroupsFamilyList;
@@ -149,13 +156,49 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 		familiesListBuild();
 		serGroupsMembersListBuild();
-
+		membersListBuild();
 		// if (selectedFamily != null) {
 		//
 		// this.serGroupsNameTextField.setText(selectedFamily.getSpInf1Decrypted());
 		// //
 		// this.serGroupsOverseerComboBox.setText(selectedFamily.getSpInf2Decrypted());
 		// }
+	}
+
+	private void membersListBuild() {
+		membersList = FXCollections.observableArrayList();
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembers(ObservableList<Member> list) {
+		super.updateMembers(list);
+
+		this.membersList = list;
+		this.membersList.sort((a, b) -> a.getNameStyle1().compareTo(b.getNameStyle1()));
+
+		overseenListBuild();
+		assistantListBuild();
+	}
+
+	private void overseenListBuild() {
+		serGroupOverseerList = FXCollections.observableArrayList();
+
+		for (Member member : membersList)
+			if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
+				serGroupOverseerList.add(member);
+
+		serGroupsOverseerComboBox.setItems(serGroupOverseerList);
+	}
+
+	private void assistantListBuild() {
+		serGroupsAssistantList = FXCollections.observableArrayList();
+
+		for (Member member : membersList)
+			if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
+				serGroupsAssistantList.add(member);
+
+		serGroupsAssistantComboBox.setItems(serGroupsAssistantList);
 	}
 
 	private void familiesListBuild() {
@@ -240,73 +283,73 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 	private void saveSerGroup() {
 
-		// if (checkFields()) {
-		//
-		// String spInf1 = Crypt.encrypt(serGroupsNameTextField.getText(),
-		// settings.getDatabaseSecretKey());
-		// // String spInf2 =
-		// // Crypt.encrypt(serGroupsOverseerComboBox.getText(),
-		// // settings.getDatabaseSecretKey());
-		// // String spInf3 = Crypt.encrypt(familyNummerTextField.getText(),
-		// // settings.getDatabaseSecretKey());
-		// // String spInf4 = Crypt.encrypt(familyPostCodeTextField.getText(),
-		// // settings.getDatabaseSecretKey());
-		// // String spInf5 = Crypt.encrypt(familyCityTextField.getText(),
-		// // settings.getDatabaseSecretKey());
-		//
-		// String idToRemove = "";
-		//
-		// for (Member member : familiesAvailableList)
-		// if (member.getSpInf5() != -1)
-		// idToRemove += idToRemove.isEmpty() ? member.getSpMemberID() : ", " +
-		// member.getSpMemberID();
-		//
-		// String idToSet = "";
-		//
-		// for (Member member : serGroupsMembersList)
-		// if (member.getSpInf5() == -1)
-		// idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " +
-		// member.getSpMemberID();
-		//
-		// // if (selectedFamily != null)
-		// // editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove,
-		// // idToSet);
-		// // else
-		// // newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove,
-		// // idToSet);
-		// } else
-		// new AlertDesigner(language.getStringWithNewLine("TEXT0004"),
-		// ownerStage, AlertType.ERROR,
-		// Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+		if (checkFields()) {
+
+			String spInf1 = Crypt.encrypt(serGroupsNameTextField.getText(), settings.getDatabaseSecretKey());
+
+			Member overseer = serGroupsOverseerComboBox.getSelectionModel().getSelectedItem();
+			String spInf2 = String.valueOf(overseer.getSpMemberID());
+
+			String spInf3 = "-1";
+			if (serGroupsAssistantComboBox.getSelectionModel().getSelectedIndex() > -1) {
+				Member assistant = serGroupsAssistantComboBox.getSelectionModel().getSelectedItem();
+				spInf3 = String.valueOf(assistant.getSpMemberID());
+			}
+
+			String idToRemove = "";
+
+			for (Family family : familiesAvailableList)
+				if (family.getSpInf6() != -1)
+					idToRemove += idToRemove.isEmpty() ? family.getSpFamID() : ", " + family.getSpFamID();
+
+			String idToSet = "";
+
+			for (Family family : serGroupsFamilyList)
+				if (family.getSpInf6() == -1)
+					idToSet += idToSet.isEmpty() ? family.getSpFamID() : ", " + family.getSpFamID();
+
+			if (selectedSerGroups != null)
+				editSerGroup(spInf1, spInf2, spInf3, idToRemove, idToSet);
+			else
+				newSerGroup(spInf1, spInf2, spInf3, idToRemove, idToSet);
+		} else
+			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
+					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
-	private void newSerGroup(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String idToRemove, String idToSet) {
-
-		// Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5,
-		// idToRemove, idToSet, settings, ownerStage,
-		// congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
+	private void newSerGroup(String spInf1, String spInf2, String spInf3, String idToRemove, String idToSet) {
+		Actions.insertSerGroup(spInf1, spInf2, spInf3, idToRemove, idToSet, settings, ownerStage, serGroupsTabPane,
+				serGroupTab, ownerCtrl);
 	}
 
-	private void editSerGroup(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String idToRemove, String idToSet) {
-
-		// Actions.updateFamily(String.valueOf(selectedFamily.getSpFamID()),
-		// spInf1, spInf2, spInf3, spInf4, spInf5,
-		// idToRemove, idToSet, settings, ownerStage, congrTabPane,
-		// newFamilyTab, familiesTab, ownerCtrl);
+	private void editSerGroup(String spInf1, String spInf2, String spInf3, String idToRemove, String idToSet) {
+		Actions.updateSerGroup(String.valueOf(selectedSerGroups.getSpSerGrID()), spInf1, spInf2, spInf3, idToRemove,
+				idToSet, settings, ownerStage, this.serGroupsTabPane, serGroupTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
 
 		boolean status = true;
 
-		// if (serGroupsNameTextField.getText().isEmpty())
-		// status = false;
-		//
-		// if (status)
-		// if (serGroupsMembersList.size() == 0)
-		// status = false;
+		if (serGroupsNameTextField.getText().isEmpty())
+			status = false;
+
+		if (status)
+			if (serGroupsFamilyList.size() == 0)
+				status = false;
+
+		if (status)
+			if (!(serGroupsOverseerComboBox.getSelectionModel().getSelectedIndex() > -1))
+				status = false;
+
+		if (status)
+			if (serGroupsAssistantComboBox.getSelectionModel().getSelectedIndex() > -1) {
+				Member overseer = serGroupsOverseerComboBox.getSelectionModel().getSelectedItem();
+				Member assistant = serGroupsAssistantComboBox.getSelectionModel().getSelectedItem();
+
+				if (overseer.getSpMemberID() == assistant.getSpMemberID())
+					status = false;
+			}
 
 		return status;
 	}
@@ -401,4 +444,5 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 	public void setSerGroupTab(Tab serGroupTab) {
 		this.serGroupTab = serGroupTab;
 	}
+
 }

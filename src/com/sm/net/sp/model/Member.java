@@ -493,4 +493,9 @@ public class Member {
 		this.spInf29Property().set(spInf29);
 	}
 
+	@Override
+	public String toString() {
+		return getNameStyle1();
+	}
+
 }

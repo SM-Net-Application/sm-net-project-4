@@ -8,6 +8,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
@@ -518,6 +519,31 @@ public class Actions {
 	/**
 	 * Insert Member
 	 * 
+	 * @param spInf29
+	 * @param spInf28
+	 * @param spInf27
+	 * @param spInf26
+	 * @param spInf25
+	 * @param spInf24
+	 * @param spInf23
+	 * @param spInf22
+	 * @param spInf21
+	 * @param spInf20
+	 * @param spInf19
+	 * @param spInf18
+	 * @param spInf17
+	 * @param spInf16
+	 * @param spInf15
+	 * @param spInf14
+	 * @param spInf13
+	 * @param spInf12
+	 * @param spInf11
+	 * @param spInf10
+	 * @param spInf9
+	 * @param spInf8
+	 * @param spInf7
+	 * @param spInf6
+	 * 
 	 * @param url
 	 * @param username
 	 * @param password
@@ -529,8 +555,11 @@ public class Actions {
 	 * @param callback
 	 */
 	public static void insertMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
-			UpdateData callback) {
+			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
+			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
+			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -569,7 +598,10 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.INSERT_MEMBER(spInf1, spInf2, spInf3, spInf4, spInf5));
+						JSONRequest.INSERT_MEMBER(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
+								spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
+								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
+								spInf28, spInf29));
 			}
 		};
 
@@ -642,6 +674,31 @@ public class Actions {
 	/**
 	 * Update Member
 	 * 
+	 * @param spInf29
+	 * @param spInf28
+	 * @param spInf27
+	 * @param spInf26
+	 * @param spInf25
+	 * @param spInf24
+	 * @param spInf23
+	 * @param spInf22
+	 * @param spInf21
+	 * @param spInf20
+	 * @param spInf19
+	 * @param spInf18
+	 * @param spInf17
+	 * @param spInf16
+	 * @param spInf15
+	 * @param spInf14
+	 * @param spInf13
+	 * @param spInf12
+	 * @param spInf11
+	 * @param spInf10
+	 * @param spInf9
+	 * @param spInf8
+	 * @param spInf7
+	 * @param spInf6
+	 * 
 	 * @param url
 	 * @param username
 	 * @param password
@@ -653,8 +710,11 @@ public class Actions {
 	 * @param callback
 	 */
 	public static void updateMember(String spMemberID, String spInf1, String spInf2, String spInf3, String spInf4,
-			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
-			UpdateData callback) {
+			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
+			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
+			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -693,7 +753,10 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.UPDATE_MEMBER(spMemberID, spInf1, spInf2, spInf3, spInf4));
+						JSONRequest.UPDATE_MEMBER(spMemberID, spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8,
+								spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
+								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
+								spInf28, spInf29));
 			}
 		};
 
@@ -1014,6 +1077,186 @@ public class Actions {
 		Thread taskThread = new Thread(task);
 		taskThread.start();
 
+	}
+
+	/**
+	 * Insert new Service Group
+	 * 
+	 * @param spInf1
+	 * @param spInf2
+	 * @param spInf3
+	 * @param idToRemove
+	 * @param idToSet
+	 * @param settings
+	 * @param ownerStage
+	 * @param tabPane
+	 * @param newTab
+	 * @param callback
+	 */
+	public static void insertSerGroup(String spInf1, String spInf2, String spInf3, String idToRemove, String idToSet,
+			Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							tabPane.getTabs().remove(newTab);
+							callback.updateSerGroups();
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.INSERT_SERGROUP(spInf1, spInf2, spInf3, idToRemove, idToSet));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Update Service Group
+	 * 
+	 * @param spSerGrID
+	 * @param spInf1
+	 * @param spInf2
+	 * @param spInf3
+	 * @param idToRemove
+	 * @param idToSet
+	 * @param settings
+	 * @param ownerStage
+	 * @param tabPane
+	 * @param tab
+	 * @param callback
+	 */
+	public static void updateSerGroup(String spSerGrID, String spInf1, String spInf2, String spInf3, String idToRemove,
+			String idToSet, Settings settings, Stage ownerStage, TabPane tabPane, Tab tab, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+							tabPane.getTabs().remove(tab);
+							callback.updateSerGroups();
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.UPDATE_SERGROUP(spSerGrID, spInf1, spInf2, spInf3, idToRemove, idToSet));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	public static void getAllSerGroups(Settings settings, Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							ObservableList<SerGroup> list = FXCollections.observableArrayList();
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								list.add(new SerGroup(json, settings.getDatabaseSecretKey()));
+							}
+
+							callback.updateSerGroups(list);
+						}
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.GET_ALL_SERGROUPS());
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
 	}
 
 	/**

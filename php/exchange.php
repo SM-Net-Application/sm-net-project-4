@@ -54,6 +54,12 @@ if (! empty ( $jsonObjPar )) {
 				case 16 :
 					include 'query/sp_tool_q16.php';
 					break;
+				case 17 :
+					include 'query/sp_tool_q17.php';
+					break;
+				case 18 :
+					include 'query/sp_tool_q18.php';
+					break;
 			}
 		} else {
 			$response ["status"] = 3;

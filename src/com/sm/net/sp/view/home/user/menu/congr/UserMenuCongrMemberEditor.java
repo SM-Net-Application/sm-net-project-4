@@ -91,7 +91,7 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private CheckBox microphoneHandlerMidweekCheckBox;
 	@FXML
-	private CheckBox MicrophoneHandlerWeekendCheckBox;
+	private CheckBox microphoneHandlerWeekendCheckBox;
 	@FXML
 	private CheckBox soundSystemMixerMidweekCheckBox;
 	@FXML
@@ -184,7 +184,7 @@ public class UserMenuCongrMemberEditor {
 		privilegeTab.getStyleClass().add("tabStyle1");
 		soundSystemLabel.getStyleClass().add("labelStyle2");
 		microphoneHandlerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
-		MicrophoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
+		microphoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
 		soundSystemMixerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
 		soundSystemMixerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
 		soundSystemPCMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
@@ -218,6 +218,7 @@ public class UserMenuCongrMemberEditor {
 	}
 
 	private void initValue() {
+
 		if (selectedMember != null) {
 
 			surnameTextField.setText(selectedMember.getSpInf2Decrypted());
@@ -229,8 +230,44 @@ public class UserMenuCongrMemberEditor {
 			else
 				genderFemaleCheckBox.setSelected(true);
 
+			setCheckBoxes();
+
 		} else
 			this.genderMaleCheckBox.setSelected(true);
+	}
+
+	private void setCheckBoxes() {
+
+		this.studentCheckBox.setSelected((selectedMember.getSpInf6() == 1));
+		this.unbaptizedPublisherCheckBox.setSelected((selectedMember.getSpInf7() == 1));
+		this.baptizedPublisherCheckBox.setSelected((selectedMember.getSpInf8() == 1));
+
+		this.ministerialServantCheckBox.setSelected((selectedMember.getSpInf9() == 1));
+		this.elderCheckBox.setSelected((selectedMember.getSpInf10() == 1));
+		this.regularPioneerCheckBox.setSelected((selectedMember.getSpInf11() == 1));
+		this.specialPioneerCheckBox.setSelected((selectedMember.getSpInf12() == 1));
+
+		this.bibleReadingCheckBox.setSelected((selectedMember.getSpInf13() == 1));
+		this.initialCallCheckBox.setSelected((selectedMember.getSpInf14() == 1));
+		this.returnVisitCheckBox.setSelected((selectedMember.getSpInf15() == 1));
+		this.bibleStudyCheckBox.setSelected((selectedMember.getSpInf16() == 1));
+		this.talkCheckBox.setSelected((selectedMember.getSpInf17() == 1));
+
+		this.markedCheckBox.setSelected((selectedMember.getSpInf18() == 1));
+		this.disfellowshippedCheckBox.setSelected((selectedMember.getSpInf19() == 1));
+
+		this.microphoneHandlerMidweekCheckBox.setSelected((selectedMember.getSpInf20() == 1));
+		this.microphoneHandlerWeekendCheckBox.setSelected((selectedMember.getSpInf21() == 1));
+		this.soundSystemMixerMidweekCheckBox.setSelected((selectedMember.getSpInf22() == 1));
+		this.soundSystemMixerWeekendCheckBox.setSelected((selectedMember.getSpInf23() == 1));
+		this.soundSystemPCMidweekCheckBox.setSelected((selectedMember.getSpInf24() == 1));
+		this.soundSystemPCWeekendCheckBox.setSelected((selectedMember.getSpInf25() == 1));
+
+		this.readerCongregationBibleStudyCheckBox.setSelected((selectedMember.getSpInf26() == 1));
+		this.readerWatchtowerCheckBox.setSelected((selectedMember.getSpInf27() == 1));
+
+		this.attendantMidweekCheckBox.setSelected((selectedMember.getSpInf28() == 1));
+		this.attendantWeekendCheckBox.setSelected((selectedMember.getSpInf29() == 1));
 	}
 
 	private void listeners() {
@@ -251,29 +288,74 @@ public class UserMenuCongrMemberEditor {
 			String spInf1 = Crypt.encrypt(nameTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf2 = Crypt.encrypt(surnameTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf3 = Crypt.encrypt(nameShortTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf4 = getSpInf4();
+			String spInf4 = genderMaleCheckBox.isSelected() ? "0" : "1";
+
+			String spInf6 = !this.studentCheckBox.isSelected() ? "0" : "1";
+			String spInf7 = !this.unbaptizedPublisherCheckBox.isSelected() ? "0" : "1";
+			String spInf8 = !this.baptizedPublisherCheckBox.isSelected() ? "0" : "1";
+
+			String spInf9 = !this.ministerialServantCheckBox.isSelected() ? "0" : "1";
+			String spInf10 = !this.elderCheckBox.isSelected() ? "0" : "1";
+			String spInf11 = !this.regularPioneerCheckBox.isSelected() ? "0" : "1";
+			String spInf12 = !this.specialPioneerCheckBox.isSelected() ? "0" : "1";
+
+			String spInf13 = !this.bibleReadingCheckBox.isSelected() ? "0" : "1";
+			String spInf14 = !this.initialCallCheckBox.isSelected() ? "0" : "1";
+			String spInf15 = !this.returnVisitCheckBox.isSelected() ? "0" : "1";
+			String spInf16 = !this.bibleStudyCheckBox.isSelected() ? "0" : "1";
+			String spInf17 = !this.talkCheckBox.isSelected() ? "0" : "1";
+
+			String spInf18 = !this.markedCheckBox.isSelected() ? "0" : "1";
+			String spInf19 = !this.disfellowshippedCheckBox.isSelected() ? "0" : "1";
+
+			String spInf20 = !this.microphoneHandlerMidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf21 = !this.microphoneHandlerWeekendCheckBox.isSelected() ? "0" : "1";
+			String spInf22 = !this.soundSystemMixerMidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf23 = !this.soundSystemMixerWeekendCheckBox.isSelected() ? "0" : "1";
+			String spInf24 = !this.soundSystemPCMidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf25 = !this.soundSystemPCWeekendCheckBox.isSelected() ? "0" : "1";
+
+			String spInf26 = !this.readerCongregationBibleStudyCheckBox.isSelected() ? "0" : "1";
+			String spInf27 = !this.readerWatchtowerCheckBox.isSelected() ? "0" : "1";
+
+			String spInf28 = !this.attendantMidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf29 = !this.attendantWeekendCheckBox.isSelected() ? "0" : "1";
 
 			if (selectedMember != null)
-				editMember(spInf1, spInf2, spInf3, spInf4);
+				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
+						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
+						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29);
 			else
-				newMember(spInf1, spInf2, spInf3, spInf4);
+				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
+						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
+						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
 					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
-	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4) {
-		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", settings, ownerStage, congrTabPane, newMemberTab,
-				membersTab, ownerCtrl);
+	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
+			String spInf8, String spInf9, String spInf10, String spInf11, String spInf12, String spInf13,
+			String spInf14, String spInf15, String spInf16, String spInf17, String spInf18, String spInf19,
+			String spInf20, String spInf21, String spInf22, String spInf23, String spInf24, String spInf25,
+			String spInf26, String spInf27, String spInf28, String spInf29) {
+
+		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", spInf6, spInf7, spInf8, spInf9, spInf10, spInf11,
+				spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
+				spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, settings, ownerStage, congrTabPane,
+				newMemberTab, membersTab, ownerCtrl);
 	}
 
-	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4) {
-		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, settings,
-				ownerStage, congrTabPane, newMemberTab, membersTab, ownerCtrl);
-	}
+	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
+			String spInf8, String spInf9, String spInf10, String spInf11, String spInf12, String spInf13,
+			String spInf14, String spInf15, String spInf16, String spInf17, String spInf18, String spInf19,
+			String spInf20, String spInf21, String spInf22, String spInf23, String spInf24, String spInf25,
+			String spInf26, String spInf27, String spInf28, String spInf29) {
 
-	private String getSpInf4() {
-		return genderMaleCheckBox.isSelected() ? "0" : "1";
+		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, spInf6,
+				spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
+				spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
+				settings, ownerStage, congrTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
@@ -354,6 +436,8 @@ public class UserMenuCongrMemberEditor {
 		saveButton.setText(language.getString("TEXT0022"));
 
 		memberAppointmentAndPrivilegeTab.setText(language.getString("TEXT0042"));
+		memberAppointmentAndPrivilegeTab.setGraphic(new ImageView(Meta.Resources.MEMBER_PRIVILEGES));
+
 		generalLabel.setText(language.getString("TEXT0043"));
 		studentCheckBox.setText(language.getString("TEXT0044"));
 		unbaptizedPublisherCheckBox.setText(language.getString("TEXT0045"));
@@ -369,7 +453,7 @@ public class UserMenuCongrMemberEditor {
 		privilegeTab.setText(language.getString("TEXT0052"));
 		soundSystemLabel.setText(language.getString("TEXT0053"));
 		microphoneHandlerMidweekCheckBox.setText(language.getString("TEXT0054"));
-		MicrophoneHandlerWeekendCheckBox.setText(language.getString("TEXT0055"));
+		microphoneHandlerWeekendCheckBox.setText(language.getString("TEXT0055"));
 		soundSystemMixerMidweekCheckBox.setText(language.getString("TEXT0056"));
 		soundSystemMixerWeekendCheckBox.setText(language.getString("TEXT0057"));
 		soundSystemPCMidweekCheckBox.setText(language.getString("TEXT0058"));
