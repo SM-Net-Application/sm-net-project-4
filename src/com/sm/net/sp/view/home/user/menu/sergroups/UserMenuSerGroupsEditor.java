@@ -155,14 +155,20 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 	private void initValue() {
 
 		familiesListBuild();
-		serGroupsMembersListBuild();
 		membersListBuild();
-		// if (selectedFamily != null) {
-		//
-		// this.serGroupsNameTextField.setText(selectedFamily.getSpInf1Decrypted());
-		// //
-		// this.serGroupsOverseerComboBox.setText(selectedFamily.getSpInf2Decrypted());
-		// }
+
+		if (selectedSerGroups != null)
+			this.serGroupsNameTextField.setText(selectedSerGroups.getSpInf1Decrypted());
+	}
+
+	private Member selectMemberComboBox(ComboBox<Member> comboBox, int idMember) {
+
+		ObservableList<Member> items = comboBox.getItems();
+		for (Member member : items)
+			if (idMember == member.getSpMemberID())
+				return member;
+
+		return null;
 	}
 
 	private void membersListBuild() {
@@ -189,6 +195,11 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 				serGroupOverseerList.add(member);
 
 		serGroupsOverseerComboBox.setItems(serGroupOverseerList);
+
+		if (selectedSerGroups != null)
+			this.serGroupsOverseerComboBox.getSelectionModel()
+					.select(selectMemberComboBox(this.serGroupsOverseerComboBox, selectedSerGroups.getSpInf2()));
+
 	}
 
 	private void assistantListBuild() {
@@ -199,6 +210,10 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 				serGroupsAssistantList.add(member);
 
 		serGroupsAssistantComboBox.setItems(serGroupsAssistantList);
+
+		if (selectedSerGroups != null)
+			this.serGroupsAssistantComboBox.getSelectionModel()
+					.select(selectMemberComboBox(this.serGroupsAssistantComboBox, selectedSerGroups.getSpInf3()));
 	}
 
 	private void familiesListBuild() {
@@ -212,6 +227,7 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 		this.familiesList = list;
 		familiesAvaiableListBuild();
+		serGroupsFamilyListBuild();
 	}
 
 	private void familiesAvaiableListBuild() {
@@ -226,16 +242,15 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 		familiesTableView.setItems(familiesAvailableList);
 	}
 
-	private void serGroupsMembersListBuild() {
+	private void serGroupsFamilyListBuild() {
 
 		serGroupsFamilyList = FXCollections.observableArrayList();
-		//
-		// if (selectedSerGroups != null) {
-		// for (Family family : familiesList)
-		// if (family.getSpInf6() == selectedSerGroups.getSpInf6())
-		// serGroupsMembersList.add(family);
-		// }
-		//
+
+		if (selectedSerGroups != null)
+			for (Family family : familiesList)
+				if (family.getSpInf6() == selectedSerGroups.getSpSerGrID())
+					serGroupsFamilyList.add(family);
+
 		serGroupsFamiliesTableView.setItems(serGroupsFamilyList);
 	}
 

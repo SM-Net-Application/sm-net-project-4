@@ -2,6 +2,7 @@ package com.sm.net.sp.view.home.user.menu.sergroups;
 
 import java.io.IOException;
 
+import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -12,7 +13,10 @@ import com.sm.net.sp.settings.Settings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -137,18 +141,14 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 		if (serGroupsTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			// Family family =
-			// familiesTableView.getSelectionModel().getSelectedItem();
+			SerGroup serGroup = serGroupsTableView.getSelectionModel().getSelectedItem();
 
-			// Alert alert = new AlertDesigner(language.getString("TEXT0034"),
-			// family.getSpInf1Decrypted(), ownerStage,
-			// AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
-			// Meta.Resources.ICON);
-			// if (alert.showAndWait().get() == ButtonType.OK)
-			// Actions.deleteFamily(String.valueOf(family.getSpFamID()),
-			// settings, ownerStage, this);
+			Alert alert = new AlertDesigner(language.getString("TEXT0074"), serGroup.getSpInf1Decrypted(), ownerStage,
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+
+			if (alert.showAndWait().get() == ButtonType.OK)
+				Actions.deleteSerGroup(String.valueOf(serGroup.getSpSerGrID()), settings, ownerStage, this);
 		}
-
 	}
 
 	private void newSerGroups() {
@@ -187,41 +187,37 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	private void editSerGroup(SerGroup serGroup) {
 
-		// if (!isAlreadyOpen(family.getSpInf1Decrypted())) {
-		//
-		// try {
-		//
-		// FXMLLoader fxmlLoader = new FXMLLoader();
-		// fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
-		// AnchorPane layout = (AnchorPane) fxmlLoader.load();
-		//
-		// UserMenuSerGroupsEditor ctrl = (UserMenuSerGroupsEditor)
-		// fxmlLoader.getController();
-		// ctrl.setSettings(this.settings);
-		// ctrl.setOwnerStage(ownerStage);
-		// ctrl.setOwnerCtrl(this);
-		// // ctrl.setSelectedFamily(family);
-		//
-		// Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
-		// newFamilyTab.setClosable(true);
-		// newFamilyTab.getStyleClass().add("tabStyle1");
-		// newFamilyTab.setGraphic(new
-		// ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
-		//
-		// // ctrl.setCongrTabPane(serGroupsTabPane);
-		// // ctrl.setMembersTab(membersTab);
-		// // ctrl.setNewMemberTab(newFamilyTab);
-		// // ctrl.setMembersList(this.membersList);
-		//
-		// serGroupsTabPane.getTabs().add(newFamilyTab);
-		// serGroupsTabPane.getSelectionModel().select(newFamilyTab);
-		//
-		// ctrl.objectInitialize();
-		//
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// }
+		if (!isAlreadyOpen(serGroup.getSpInf1Decrypted())) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_SERGROUPS_EDITOR);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				UserMenuSerGroupsEditor ctrl = (UserMenuSerGroupsEditor) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedSerGroups(serGroup);
+
+				Tab newTab = new Tab(serGroup.getSpInf1Decrypted(), layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tabStyle1");
+				newTab.setGraphic(new ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
+
+				ctrl.setSerGroupsTabPane(serGroupsTabPane);
+				ctrl.setSerGroupTab(newTab);
+
+				serGroupsTabPane.getTabs().add(newTab);
+				serGroupsTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 

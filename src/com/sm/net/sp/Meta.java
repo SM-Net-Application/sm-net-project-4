@@ -12,6 +12,7 @@ import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
@@ -22,6 +23,7 @@ import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Meta {
 
@@ -108,6 +110,9 @@ public class Meta {
 				.getResource("UserMenuSerGroupsList.fxml");
 		public static final URL HOME_USER_MENU_SERGROUPS_EDITOR = UserMenuSerGroupsList.class
 				.getResource("UserMenuSerGroupsEditor.fxml");
+		public static final URL HOME_USER_MENU_MEETINGS = UserMenuMeetings.class.getResource("UserMenuMeetings.fxml");
+		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
+				.getResource("UserMenuMeetingsEditor.fxml");
 	}
 
 	public static class Themes {
@@ -174,5 +179,20 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_add_50x50.png"));
 		public static final Image SERVICEGROUPS_DEL = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_del_50x50.png"));
+		public static final Image USER_MENU_MEETINGS = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/meetings_20x20.png"));
+		public static final Image USER_MENU_MEETINGS_TREASURES = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/treasures.png"));
+		public static final Image USER_MENU_MEETINGS_MINISTRY = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/ministry.png"));
+		public static final Image USER_MENU_MEETINGS_CHRISTIANS = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/christians.png"));
+
+		public static ImageView createTabIcon(Image image) {
+			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(50);
+			imageView.setFitHeight(50);
+			return imageView;
+		}
 	}
 }

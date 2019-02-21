@@ -156,6 +156,9 @@ public class HomeUserMenuList {
 		case SERVICEGROUPS:
 			ctrlSupportPlannerView.viewHomeUserMenuSerGroups();
 			break;
+		case MEETINGS:
+			ctrlSupportPlannerView.viewHomeUserMenuMeetings();
+			break;
 		}
 	}
 

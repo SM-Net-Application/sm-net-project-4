@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetingsEditor">
+   <children>
+      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="treasuresTab" text="Treasures">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="generalLabel" text="Generali">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Separator prefWidth="200.0">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Separator>
+                                          <HBox>
+                                             <children>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="presidentLabel" text="Presidente">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="pray1Label" text="Preghiera iniziale">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="song1Label" text="Cantico iniziale">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="bibleChaptersLabel" text="Capitoli in programma">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="openingCommentsLabel" text="Commenti introduttivi">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <ComboBox fx:id="presidentComboBox">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </ComboBox>
+                                                      <ComboBox fx:id="pray1ComboBox">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </ComboBox>
+                                                      <TextField fx:id="song1TextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <TextField fx:id="bibleChaptersTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <HBox>
+                                                         <children>
+                                                            <TextField fx:id="openingCommentsMinTextField">
+                                                               <HBox.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                            <Label fx:id="openingCommentsMinLabel" text="Min.">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <VBox>
+                                                         <children>
+                                                            <TextField fx:id="openingCommentsTextTextField">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </VBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Separator orientation="VERTICAL">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Separator>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="treasuresLabel" text="Tesori della Parola di Dio">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Separator>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Separator>
+                                          <Label fx:id="talkLabel" text="Discorso">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox>
+                                             <children>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField fx:id="talkMinTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="talkMinLabel" text="Min.">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField fx:id="talkTextTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <ComboBox fx:id="talkComboBox" maxWidth="1.7976931348623157E308">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="diggingLabel" text="Scaviamo per trovare gemme spirituali">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox>
+                                             <children>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField fx:id="diggingMinTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="diggingMinLabel" text="Min.">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField fx:id="diggingTextTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <ComboBox fx:id="diggingComboBox" maxWidth="1.7976931348623157E308">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="bibleReadingLabel" text="Lettura biblica">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox>
+                                             <children>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField fx:id="bibleReadingMinTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="bibleReadingMinLabel" text="Min.">
+                                                         <VBox.margin>
+                                                            <Insets left="5.0" right="5.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField fx:id="bibleReadingTextTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <TextField fx:id="bibleReadingMaterialsTextField">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox maxWidth="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <ComboBox fx:id="bibleReadingComboBox" maxWidth="1.7976931348623157E308">
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="ministryTab" text="Ministry">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="christiansTab" text="Christians">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

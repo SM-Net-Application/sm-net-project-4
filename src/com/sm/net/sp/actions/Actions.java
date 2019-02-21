@@ -1260,6 +1260,55 @@ public class Actions {
 	}
 
 	/**
+	 * Delete Service Group
+	 * 
+	 */
+	public static void deleteSerGroup(String spSerGrID, Settings settings, Stage ownerStage, UpdateData ownerCtrl) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue())
+							ownerCtrl.updateSerGroups();
+						else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.DELETE_SERGROUP(spSerGrID));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
 	 * Create Alert Window
 	 * 
 	 * @param settings

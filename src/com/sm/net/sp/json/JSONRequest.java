@@ -240,6 +240,13 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject DELETE_SERGROUP(String spSerGrID) {
+
+		JSONObject jsonObj = create(Integer.valueOf(20));
+		jsonObj.put("spSerGrID", spSerGrID);
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
