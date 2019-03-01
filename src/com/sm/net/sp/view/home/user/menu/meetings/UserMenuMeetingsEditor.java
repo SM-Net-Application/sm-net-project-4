@@ -1,20 +1,39 @@
 package com.sm.net.sp.view.home.user.menu.meetings;
 
+import java.io.IOException;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.MinistryPart;
+import com.sm.net.sp.model.MinistryType;
+import com.sm.net.sp.model.MinistryTypeTranslated;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
-public class UserMenuMeetingsEditor {
+public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	@FXML
 	private TabPane tabPane;
@@ -91,6 +110,28 @@ public class UserMenuMeetingsEditor {
 	@FXML
 	private ComboBox<Member> bibleReadingComboBox;
 
+	@FXML
+	private TableView<MinistryPart> ministryTableView;
+	@FXML
+	private TableColumn<MinistryPart, String> ministryTypeTableColumn;
+	@FXML
+	private TableColumn<MinistryPart, String> ministryFulltextTableColumn;
+	@FXML
+	private TableColumn<MinistryPart, Integer> ministryMinTableColumn;
+	@FXML
+	private TableColumn<MinistryPart, String> ministryThemeTableColumn;
+	@FXML
+	private TableColumn<MinistryPart, String> ministryMaterialTableColumn;
+	@FXML
+	private TableColumn<MinistryPart, Member> ministryMember1TableColumn;
+	@FXML
+	private TableColumn<MinistryPart, Member> ministryMember2TableColumn;
+
+	@FXML
+	private Button addMinistryPartButton;
+	@FXML
+	private Button removeMinistryPartButton;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -99,9 +140,17 @@ public class UserMenuMeetingsEditor {
 	private TabPane ownerTabPane;
 	private Tab thisTab;
 
+	private ObservableList<MinistryTypeTranslated> ministryTypeTranslatedList;
+	private ObservableList<MinistryPart> ministryPartList;
+	private ObservableList<Member> memberList;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
+
+		tableViewEditCommit();
+		cellValueFactory();
+		cellFactory();
 	}
 
 	private void styleClasses() {
@@ -148,15 +197,163 @@ public class UserMenuMeetingsEditor {
 		bibleReadingTextTextField.getStyleClass().add("textFieldStyle3");
 		bibleReadingMaterialsTextField.getStyleClass().add("textFieldStyle3");
 		bibleReadingComboBox.getStyleClass().add("comboBoxStyle2");
+
+		ministryTableView.getStyleClass().add("tableViewStyle1");
+		ministryMinTableColumn.getStyleClass().add("tableColumnStyle1");
+	}
+
+	private void cellValueFactory() {
+
+		ministryTypeTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().getMinistryTypeTranslated().nameProperty());
+		ministryFulltextTableColumn.setCellValueFactory(cellData -> cellData.getValue().fullTextProperty());
+		ministryMinTableColumn.setCellValueFactory(cellData -> cellData.getValue().minProperty().asObject());
+		ministryThemeTableColumn.setCellValueFactory(cellData -> cellData.getValue().themeProperty());
+		ministryMaterialTableColumn.setCellValueFactory(cellData -> cellData.getValue().materialProperty());
+		ministryMember1TableColumn.setCellValueFactory(cellData -> cellData.getValue().studentProperty());
+		ministryMember2TableColumn.setCellValueFactory(cellData -> cellData.getValue().assistantProperty());
+	}
+
+	private void cellFactory() {
+
+		ministryMinTableColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToInteger()));
+		ministryThemeTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		ministryMaterialTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+	}
+
+	private StringConverter<Integer> stringToInteger() {
+
+		return new StringConverter<Integer>() {
+
+			@Override
+			public String toString(Integer object) {
+				return object.toString();
+			}
+
+			@Override
+			public Integer fromString(String string) {
+
+				Integer value = Integer.valueOf(0);
+				try {
+					value = Integer.valueOf(string);
+				} catch (NumberFormatException e) {
+				}
+
+				return value;
+			}
+		};
+	}
+
+	private void tableViewEditCommit() {
+
+		ministryTableView.setEditable(true);
+		ministryMinTableColumn.setOnEditCommit(event -> ministryMinOnEditCommit(event));
+		ministryThemeTableColumn.setOnEditCommit(event -> ministryThemeOnEditCommit(event));
+		ministryMaterialTableColumn.setOnEditCommit(event -> ministryMaterialOnEditCommit(event));
+	}
+
+	private void ministryMinOnEditCommit(CellEditEvent<MinistryPart, Integer> event) {
+
+		MinistryPart ministryPart = event.getTableView().getItems().get(event.getTablePosition().getRow());
+		ministryPart.setMin(event.getNewValue().intValue());
+	}
+
+	private void ministryThemeOnEditCommit(CellEditEvent<MinistryPart, String> event) {
+
+		MinistryPart ministryPart = event.getTableView().getItems().get(event.getTablePosition().getRow());
+		ministryPart.setTheme(event.getNewValue());
+	}
+
+	private void ministryMaterialOnEditCommit(CellEditEvent<MinistryPart, String> event) {
+
+		MinistryPart ministryPart = event.getTableView().getItems().get(event.getTablePosition().getRow());
+		ministryPart.setMaterial(event.getNewValue());
 	}
 
 	public void objectInitialize() {
-		listeners();
 		viewUpdate();
+		listeners();
+		initData();
+	}
+
+	private void initData() {
+
+		memberList = FXCollections.observableArrayList();
+
+		ministryTypeTranslatedList = MinistryType.getMinistryTypeTranslated(language);
+
+		ministryPartList = FXCollections.observableArrayList();
+		ministryPartList.add(new MinistryPart(ministryTypeTranslatedList.get(0), "", 3, "theme", "material",
+				Member.emptyMember(language), Member.emptyMember(language)));
+		ministryPartList.add(new MinistryPart(ministryTypeTranslatedList.get(1), "", 5, "theme2", "material2",
+				Member.emptyMember(language), Member.emptyMember(language)));
+		ministryTableView.setItems(ministryPartList);
+
+		updateMembers();
+	}
+
+	@Override
+	public void updateMembers() {
+		super.updateMembers();
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembers(ObservableList<Member> list) {
+		super.updateMembers(list);
+		memberList = list;
 	}
 
 	private void listeners() {
-		// listenerVarName();
+		listenerMinistryTableView();
+	}
+
+	private void listenerMinistryTableView() {
+		ministryTableView.setRowFactory(param -> {
+			TableRow<MinistryPart> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty()))
+					editMinistryPart(row.getItem());
+			});
+			return row;
+		});
+	}
+
+	private void editMinistryPart(MinistryPart rowItem) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_MEETINGS_MINISTRY_PART_EDITOR);
+			Scene scene = new Scene(fxmlLoader.load());
+
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle(Meta.Application.getFullTitle());
+			stage.getIcons().add(Meta.Resources.ICON);
+
+			stage.setResizable(false);
+
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(ownerStage);
+
+			MinistryPartEditor ctrl = (MinistryPartEditor) fxmlLoader.getController();
+			ctrl.setSettings(this.settings);
+			ctrl.setOwnerStage(ownerStage);
+			ctrl.setThisStage(stage);
+			ctrl.setMinistryPart(rowItem);
+			ctrl.setMinistryTableView(ministryTableView);
+			ctrl.setMembersList(memberList);
+			ctrl.setMinistryTypeTranslatedList(ministryTypeTranslatedList);
+			ctrl.objectInitialize();
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void viewUpdate() {
@@ -186,6 +383,14 @@ public class UserMenuMeetingsEditor {
 
 		bibleReadingLabel.setText(language.getString("TEXT0047"));
 		bibleReadingMinLabel.setText(language.getString("TEXT0089"));
+
+		ministryTypeTableColumn.setText(language.getString("TEXT0091"));
+		ministryFulltextTableColumn.setText(language.getString("TEXT0092"));
+		ministryMinTableColumn.setText(language.getString("TEXT0093"));
+		ministryThemeTableColumn.setText(language.getString("TEXT0094"));
+		ministryMaterialTableColumn.setText(language.getString("TEXT0095"));
+		ministryMember1TableColumn.setText(language.getString("TEXT0083") + " / " + language.getString("TEXT0044"));
+		ministryMember2TableColumn.setText(language.getString("TEXT0038"));
 	}
 
 	public Settings getSettings() {
@@ -242,6 +447,22 @@ public class UserMenuMeetingsEditor {
 
 	public void setThisTab(Tab thisTab) {
 		this.thisTab = thisTab;
+	}
+
+	public ObservableList<MinistryPart> getMinistryPartList() {
+		return ministryPartList;
+	}
+
+	public void setMinistryPartList(ObservableList<MinistryPart> ministryPartList) {
+		this.ministryPartList = ministryPartList;
+	}
+
+	public ObservableList<MinistryTypeTranslated> getMinistryTypeTranslatedList() {
+		return ministryTypeTranslatedList;
+	}
+
+	public void setMinistryTypeTranslatedList(ObservableList<MinistryTypeTranslated> ministryTypeTranslatedList) {
+		this.ministryTypeTranslatedList = ministryTypeTranslatedList;
 	}
 
 }

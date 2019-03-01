@@ -75,6 +75,10 @@
 	-fx-font-size: 12.0pt;
 }
 
+.tableColumnStyle1{
+	-fx-alignment: center;
+}
+
 .tabPaneStyle1{
 	-fx-tab-min-width:225.0px;
 	-fx-tab-min-height:60.0px;

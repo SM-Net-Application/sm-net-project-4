@@ -113,6 +113,8 @@ public class Meta {
 		public static final URL HOME_USER_MENU_MEETINGS = UserMenuMeetings.class.getResource("UserMenuMeetings.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
 				.getResource("UserMenuMeetingsEditor.fxml");
+		public static final URL HOME_USER_MENU_MEETINGS_MINISTRY_PART_EDITOR = UserMenuMeetings.class
+				.getResource("MinistryPartEditor.fxml");
 	}
 
 	public static class Themes {
@@ -122,7 +124,8 @@ public class Meta {
 
 	public static class Resources {
 
-		public static final Image ICON = new Image(SupportPlannerMain.class.getResourceAsStream("resources/icon.png"));
+		public static final Image ICON = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/iconSP.png"));
 		public static final Image MENU_APP = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/menu_app.png"));
 		public static final Image MENU_APP_SETTINGS = new Image(

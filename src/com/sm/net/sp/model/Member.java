@@ -4,6 +4,7 @@ import javax.crypto.SecretKey;
 
 import org.json.JSONObject;
 
+import com.sm.net.project.Language;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.property.IntegerProperty;
@@ -47,6 +48,10 @@ public class Member {
 	private IntegerProperty spInf28;
 	private IntegerProperty spInf29;
 
+	public Member() {
+		super();
+	}
+
 	public Member(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
@@ -87,6 +92,62 @@ public class Member {
 		this.spInf27 = new SimpleIntegerProperty(jsonObject.getInt("spInf27"));
 		this.spInf28 = new SimpleIntegerProperty(jsonObject.getInt("spInf28"));
 		this.spInf29 = new SimpleIntegerProperty(jsonObject.getInt("spInf29"));
+	}
+
+	public static Member emptyMember(Language language) {
+
+		Member member = new Member();
+
+		member.spMemberID = new SimpleIntegerProperty(0);
+		member.spInf1Encrypted = new SimpleStringProperty("");
+		member.spInf2Encrypted = new SimpleStringProperty("");
+		member.spInf3Encrypted = new SimpleStringProperty("");
+		member.spInf1Decrypted = new SimpleStringProperty("");
+		member.spInf2Decrypted = new SimpleStringProperty(language.getString("TEXT0096"));
+		member.spInf3Decrypted = new SimpleStringProperty("");
+		member.spInf4 = new SimpleIntegerProperty(1);
+		member.spInf5 = new SimpleIntegerProperty(1);
+		member.spInf6 = new SimpleIntegerProperty(1);
+		member.spInf7 = new SimpleIntegerProperty(1);
+		member.spInf8 = new SimpleIntegerProperty(1);
+		member.spInf9 = new SimpleIntegerProperty(1);
+		member.spInf10 = new SimpleIntegerProperty(1);
+		member.spInf11 = new SimpleIntegerProperty(1);
+		member.spInf12 = new SimpleIntegerProperty(1);
+		member.spInf13 = new SimpleIntegerProperty(1);
+		member.spInf14 = new SimpleIntegerProperty(1);
+		member.spInf15 = new SimpleIntegerProperty(1);
+		member.spInf16 = new SimpleIntegerProperty(1);
+		member.spInf17 = new SimpleIntegerProperty(1);
+		member.spInf18 = new SimpleIntegerProperty(1);
+		member.spInf19 = new SimpleIntegerProperty(1);
+		member.spInf20 = new SimpleIntegerProperty(1);
+		member.spInf21 = new SimpleIntegerProperty(1);
+		member.spInf22 = new SimpleIntegerProperty(1);
+		member.spInf23 = new SimpleIntegerProperty(1);
+		member.spInf24 = new SimpleIntegerProperty(1);
+		member.spInf25 = new SimpleIntegerProperty(1);
+		member.spInf26 = new SimpleIntegerProperty(1);
+		member.spInf27 = new SimpleIntegerProperty(1);
+		member.spInf28 = new SimpleIntegerProperty(1);
+		member.spInf29 = new SimpleIntegerProperty(1);
+
+		return member;
+	}
+
+	public final String getNameStyle1() {
+		return (!this.getSpInf1Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + ", " + this.getSpInf1Decrypted())
+				: this.getSpInf2Decrypted();
+	}
+
+	public final String getNameStyle2() {
+		return (!this.getSpInf3Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + ", " + this.getSpInf3Decrypted())
+				: this.getSpInf2Decrypted();
+	}
+
+	@Override
+	public String toString() {
+		return getNameStyle1();
 	}
 
 	public final IntegerProperty spMemberIDProperty() {
@@ -183,14 +244,6 @@ public class Member {
 
 	public final void setSpInf4(final int spInf4) {
 		this.spInf4Property().set(spInf4);
-	}
-
-	public final String getNameStyle1() {
-		return this.getSpInf2Decrypted() + ", " + this.getSpInf1Decrypted();
-	}
-
-	public final String getNameStyle2() {
-		return this.getSpInf2Decrypted() + ", " + this.getSpInf3Decrypted();
 	}
 
 	public final IntegerProperty spInf5Property() {
@@ -491,11 +544,6 @@ public class Member {
 
 	public final void setSpInf29(final int spInf29) {
 		this.spInf29Property().set(spInf29);
-	}
-
-	@Override
-	public String toString() {
-		return getNameStyle1();
 	}
 
 }
