@@ -9,26 +9,21 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class MinistryPart {
+public class ChristiansPart {
 
-	private ObjectProperty<MinistryTypeTranslated> ministryTypeTranslated;
 	private StringProperty fullText;
 	private IntegerProperty min;
 	private StringProperty theme;
 	private StringProperty material;
-	private ObjectProperty<Member> student;
-	private ObjectProperty<Member> assistant;
+	private ObjectProperty<Member> teacher;
 
-	public MinistryPart(MinistryTypeTranslated ministryTypeTranslated, String fullText, Integer min, String theme,
-			String material, Member student, Member assistant) {
+	public ChristiansPart(String fullText, Integer min, String theme, String material, Member teacher) {
 		super();
-		this.ministryTypeTranslated = new SimpleObjectProperty<MinistryTypeTranslated>(ministryTypeTranslated);
 		this.fullText = new SimpleStringProperty(fullText);
 		this.min = new SimpleIntegerProperty(min);
 		this.theme = new SimpleStringProperty(theme);
 		this.material = new SimpleStringProperty(material);
-		this.student = new SimpleObjectProperty<Member>(student);
-		this.assistant = new SimpleObjectProperty<Member>(assistant);
+		this.teacher = new SimpleObjectProperty<Member>(teacher);
 	}
 
 	public final StringProperty fullTextProperty() {
@@ -79,55 +74,26 @@ public class MinistryPart {
 		this.materialProperty().set(material);
 	}
 
-	public final ObjectProperty<MinistryTypeTranslated> ministryTypeTranslatedProperty() {
-		return this.ministryTypeTranslated;
+	public final ObjectProperty<Member> teacherProperty() {
+		return this.teacher;
 	}
 
-	public final MinistryTypeTranslated getMinistryTypeTranslated() {
-		return this.ministryTypeTranslatedProperty().get();
+	public final Member getTeacher() {
+		return this.teacherProperty().get();
 	}
 
-	public final void setMinistryTypeTranslated(final MinistryTypeTranslated ministryTypeTranslated) {
-		this.ministryTypeTranslatedProperty().set(ministryTypeTranslated);
+	public final void setTeacher(final Member teacher) {
+		this.teacherProperty().set(teacher);
 	}
 
-	public final ObjectProperty<Member> studentProperty() {
-		return this.student;
+	public static ChristiansPart newMinistryPart(Language language) {
+		return new ChristiansPart("", 0, "", "", Member.emptyMember(language));
 	}
 
-	public final Member getStudent() {
-		return this.studentProperty().get();
-	}
-
-	public final void setStudent(final Member student) {
-		this.studentProperty().set(student);
-	}
-
-	public final ObjectProperty<Member> assistantProperty() {
-		return this.assistant;
-	}
-
-	public final Member getAssistant() {
-		return this.assistantProperty().get();
-	}
-
-	public final void setAssistant(final Member assistant) {
-		this.assistantProperty().set(assistant);
-	}
-
-	public static MinistryPart newMinistryPart(Language language) {
-
-		return new MinistryPart(new MinistryTypeTranslated(MinistryType.INITIAL_CALL, language), "", 0, "", "",
-				Member.emptyMember(language), Member.emptyMember(language));
-	}
-
-	public String printMinistryPart(Language language) {
+	public String printChristiansPart(Language language) {
 
 		String text = "";
 
-		text += language.getString("TEXT0091");
-		text += " : " + this.ministryTypeTranslated.get().getName();
-		text += "\n";
 		text += language.getString("TEXT0093");
 		text += " : " + this.getMin();
 		text += "\n";
@@ -137,8 +103,8 @@ public class MinistryPart {
 		text += language.getString("TEXT0095");
 		text += " : " + this.getMaterial();
 		text += "\n";
-		text += language.getString("TEXT0044");
-		text += " : " + this.getStudent().getNameStyle1();
+		text += language.getString("TEXT0098");
+		text += " : " + this.getTeacher().getNameStyle1();
 
 		return text;
 	}

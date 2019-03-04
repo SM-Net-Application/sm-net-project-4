@@ -190,6 +190,10 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/ministry.png"));
 		public static final Image USER_MENU_MEETINGS_CHRISTIANS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/christians.png"));
+		public static final Image USER_MENU_MEETINGS_MINISTRY_ADD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/ministry_add.png"));
+		public static final Image USER_MENU_MEETINGS_MINISTRY_DELETE = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/ministry_delete.png"));
 
 		public static ImageView createTabIcon(Image image) {
 			ImageView imageView = new ImageView(image);

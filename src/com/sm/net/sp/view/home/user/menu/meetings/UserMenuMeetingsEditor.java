@@ -2,9 +2,11 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 
 import java.io.IOException;
 
+import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.MinistryType;
@@ -18,7 +20,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -28,6 +32,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -128,9 +133,40 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private TableColumn<MinistryPart, Member> ministryMember2TableColumn;
 
 	@FXML
-	private Button addMinistryPartButton;
+	private Button ministryPartAddButton;
 	@FXML
-	private Button removeMinistryPartButton;
+	private Button ministryPartDeleteButton;
+
+	@FXML
+	private TableView<ChristiansPart> christiansPartTableView;
+	@FXML
+	private TableColumn<ChristiansPart, String> christiansPartFulltextTableColumn;
+	@FXML
+	private TableColumn<ChristiansPart, Integer> christiansPartMinTableColumn;
+	@FXML
+	private TableColumn<ChristiansPart, String> christiansPartThemeTableColumn;
+	@FXML
+	private TableColumn<ChristiansPart, String> christiansPartMaterialTableColumn;
+	@FXML
+	private TableColumn<ChristiansPart, Member> christiansPartTeacherTableColumn;
+
+	@FXML
+	private Button christiansPartAddButton;
+	@FXML
+	private Button christiansPartDeleteButton;
+
+	@FXML
+	private Label congregationBibleStudyLabel;
+	@FXML
+	private TextField congregationBibleStudyMinTextField;
+	@FXML
+	private Label congregationBibleStudyMinLabel;
+	@FXML
+	private TextField congregationBibleStudyTextTextField;
+	@FXML
+	private TextField congregationBibleStudyMaterialTextField;
+	@FXML
+	private ComboBox<Member> congregationBibleStudyComboBox;
 
 	private Settings settings;
 	private Language language;
@@ -200,6 +236,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		ministryTableView.getStyleClass().add("tableViewStyle1");
 		ministryMinTableColumn.getStyleClass().add("tableColumnStyle1");
+
+		ministryPartAddButton.getStyleClass().add("buttonStyle2");
+		ministryPartDeleteButton.getStyleClass().add("buttonStyle2");
 	}
 
 	private void cellValueFactory() {
@@ -283,10 +322,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryTypeTranslatedList = MinistryType.getMinistryTypeTranslated(language);
 
 		ministryPartList = FXCollections.observableArrayList();
-		ministryPartList.add(new MinistryPart(ministryTypeTranslatedList.get(0), "", 3, "theme", "material",
-				Member.emptyMember(language), Member.emptyMember(language)));
-		ministryPartList.add(new MinistryPart(ministryTypeTranslatedList.get(1), "", 5, "theme2", "material2",
-				Member.emptyMember(language), Member.emptyMember(language)));
+
 		ministryTableView.setItems(ministryPartList);
 
 		updateMembers();
@@ -306,6 +342,38 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void listeners() {
 		listenerMinistryTableView();
+		listenerMinistryPartAddButton();
+		listenerMinistryPartDeleteButton();
+	}
+
+	private void listenerMinistryPartAddButton() {
+		ministryPartAddButton.setOnAction(event -> ministryPartAddButtonOnActionEvent());
+	}
+
+	private void listenerMinistryPartDeleteButton() {
+		ministryPartDeleteButton.setOnAction(event -> ministryPartDeleteButtonOnActionEvent());
+	}
+
+	private void ministryPartAddButtonOnActionEvent() {
+		ministryPartList.add(MinistryPart.newMinistryPart(language));
+		ministryTableView.refresh();
+	}
+
+	private void ministryPartDeleteButtonOnActionEvent() {
+
+		if (ministryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			MinistryPart ministryPart = ministryTableView.getSelectionModel().getSelectedItem();
+
+			Alert alert = new AlertDesigner(language.getString("TEXT0097"), ministryPart.printMinistryPart(language),
+					ownerStage, AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
+				int index = ministryTableView.getSelectionModel().getSelectedIndex();
+				ministryTableView.getItems().remove(index);
+				ministryTableView.refresh();
+			}
+		}
 	}
 
 	private void listenerMinistryTableView() {
@@ -391,6 +459,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMaterialTableColumn.setText(language.getString("TEXT0095"));
 		ministryMember1TableColumn.setText(language.getString("TEXT0083") + " / " + language.getString("TEXT0044"));
 		ministryMember2TableColumn.setText(language.getString("TEXT0038"));
+
+		ministryPartAddButton.setText(null);
+		ministryPartAddButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
+		ministryPartDeleteButton.setText(null);
+		ministryPartDeleteButton
+				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
 	}
 
 	public Settings getSettings() {
