@@ -115,6 +115,8 @@ public class Meta {
 				.getResource("UserMenuMeetingsEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_MINISTRY_PART_EDITOR = UserMenuMeetings.class
 				.getResource("MinistryPartEditor.fxml");
+		public static final URL HOME_USER_MENU_MEETINGS_CHRISTIANS_PART_EDITOR = UserMenuMeetings.class
+				.getResource("ChristiansPartEditor.fxml");
 	}
 
 	public static class Themes {
@@ -194,6 +196,12 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/ministry_add.png"));
 		public static final Image USER_MENU_MEETINGS_MINISTRY_DELETE = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/ministry_delete.png"));
+		public static final Image USER_MENU_MEETINGS_CHRISTIANS_ADD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/christians_add.png"));
+		public static final Image USER_MENU_MEETINGS_CHRISTIANS_DELETE = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/christians_delete.png"));
+		public static final Image USER_MENU_MEETINGS_WOL_LOAD = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/wol_load.png"));
 
 		public static ImageView createTabIcon(Image image) {
 			ImageView imageView = new ImageView(image);

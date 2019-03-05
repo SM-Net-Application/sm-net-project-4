@@ -3,6 +3,9 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 import java.io.IOException;
 
 import com.sm.net.javafx.AlertDesigner;
+import com.sm.net.jw.wol.Languages;
+import com.sm.net.jw.wol.Programm;
+import com.sm.net.jw.wol.Programm.PartWithMaterial;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -21,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -32,13 +36,17 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 public class UserMenuMeetingsEditor extends UpdateDataAdapter {
+
+	@FXML
+	private Button loadWeekFromWOLButton;
+	@FXML
+	private Button saveWeekButton;
 
 	@FXML
 	private TabPane tabPane;
@@ -138,6 +146,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private Button ministryPartDeleteButton;
 
 	@FXML
+	private Label song2Label;
+	@FXML
+	private TextField song2TextField;
+
+	@FXML
 	private TableView<ChristiansPart> christiansPartTableView;
 	@FXML
 	private TableColumn<ChristiansPart, String> christiansPartFulltextTableColumn;
@@ -168,6 +181,27 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	@FXML
 	private ComboBox<Member> congregationBibleStudyComboBox;
 
+	@FXML
+	private Label endLabel;
+
+	@FXML
+	private Label reviewLabel;
+	@FXML
+	private Label reviewMinLabel;
+	@FXML
+	private TextField reviewTextTextField;
+	@FXML
+	private TextField reviewMinTextField;
+
+	@FXML
+	private Label song3Label;
+	@FXML
+	private TextField song3TextField;
+	@FXML
+	private Label pray2Label;
+	@FXML
+	private ComboBox<Member> pray2ComboBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -179,6 +213,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<MinistryTypeTranslated> ministryTypeTranslatedList;
 	private ObservableList<MinistryPart> ministryPartList;
 	private ObservableList<Member> memberList;
+	private ObservableList<ChristiansPart> christiansPartList;
 
 	@FXML
 	private void initialize() {
@@ -239,6 +274,38 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		ministryPartAddButton.getStyleClass().add("buttonStyle2");
 		ministryPartDeleteButton.getStyleClass().add("buttonStyle2");
+
+		song2Label.getStyleClass().add("labelStyle3");
+		song2TextField.getStyleClass().add("textFieldStyle2");
+
+		christiansPartTableView.getStyleClass().add("tableViewStyle1");
+		christiansPartMinTableColumn.getStyleClass().add("tableColumnStyle1");
+
+		christiansPartAddButton.getStyleClass().add("buttonStyle2");
+		christiansPartDeleteButton.getStyleClass().add("buttonStyle2");
+
+		congregationBibleStudyLabel.getStyleClass().add("labelStyle2");
+		congregationBibleStudyMinTextField.getStyleClass().add("textFieldStyle2");
+		congregationBibleStudyMinLabel.getStyleClass().add("labelStyle3");
+		congregationBibleStudyTextTextField.getStyleClass().add("textFieldStyle3");
+		congregationBibleStudyMaterialTextField.getStyleClass().add("textFieldStyle3");
+		congregationBibleStudyComboBox.getStyleClass().add("comboBoxStyle2");
+
+		endLabel.getStyleClass().add("labelStyle2");
+
+		reviewLabel.getStyleClass().add("labelStyle3");
+		reviewMinTextField.getStyleClass().add("textFieldStyle2");
+		reviewMinLabel.getStyleClass().add("labelStyle3");
+		reviewTextTextField.getStyleClass().add("textFieldStyle3");
+
+		song3Label.getStyleClass().add("labelStyle3");
+		song3TextField.getStyleClass().add("textFieldStyle2");
+
+		pray2Label.getStyleClass().add("labelStyle3");
+		pray2ComboBox.getStyleClass().add("comboBoxStyle2");
+
+		loadWeekFromWOLButton.getStyleClass().add("buttonStyle2");
+		saveWeekButton.getStyleClass().add("buttonStyle2");
 	}
 
 	private void cellValueFactory() {
@@ -251,6 +318,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMaterialTableColumn.setCellValueFactory(cellData -> cellData.getValue().materialProperty());
 		ministryMember1TableColumn.setCellValueFactory(cellData -> cellData.getValue().studentProperty());
 		ministryMember2TableColumn.setCellValueFactory(cellData -> cellData.getValue().assistantProperty());
+
+		christiansPartFulltextTableColumn.setCellValueFactory(cellData -> cellData.getValue().fullTextProperty());
+		christiansPartMinTableColumn.setCellValueFactory(cellData -> cellData.getValue().minProperty().asObject());
+		christiansPartThemeTableColumn.setCellValueFactory(cellData -> cellData.getValue().themeProperty());
+		christiansPartMaterialTableColumn.setCellValueFactory(cellData -> cellData.getValue().materialProperty());
+		christiansPartTeacherTableColumn.setCellValueFactory(cellData -> cellData.getValue().teacherProperty());
 	}
 
 	private void cellFactory() {
@@ -258,6 +331,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMinTableColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToInteger()));
 		ministryThemeTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		ministryMaterialTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+		christiansPartMinTableColumn.setCellFactory(TextFieldTableCell.forTableColumn(stringToInteger()));
+		christiansPartThemeTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		christiansPartMaterialTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 	}
 
 	private StringConverter<Integer> stringToInteger() {
@@ -289,6 +366,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMinTableColumn.setOnEditCommit(event -> ministryMinOnEditCommit(event));
 		ministryThemeTableColumn.setOnEditCommit(event -> ministryThemeOnEditCommit(event));
 		ministryMaterialTableColumn.setOnEditCommit(event -> ministryMaterialOnEditCommit(event));
+
+		christiansPartTableView.setEditable(true);
+		christiansPartMinTableColumn.setOnEditCommit(event -> christiansPartMinOnEditCommit(event));
+		christiansPartThemeTableColumn.setOnEditCommit(event -> christiansPartThemeOnEditCommit(event));
+		christiansPartMaterialTableColumn.setOnEditCommit(event -> christiansPartMaterialOnEditCommit(event));
 	}
 
 	private void ministryMinOnEditCommit(CellEditEvent<MinistryPart, Integer> event) {
@@ -309,6 +391,24 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryPart.setMaterial(event.getNewValue());
 	}
 
+	private void christiansPartMinOnEditCommit(CellEditEvent<ChristiansPart, Integer> event) {
+
+		ChristiansPart christiansPartPart = event.getTableView().getItems().get(event.getTablePosition().getRow());
+		christiansPartPart.setMin(event.getNewValue().intValue());
+	}
+
+	private void christiansPartThemeOnEditCommit(CellEditEvent<ChristiansPart, String> event) {
+
+		ChristiansPart christiansPartPart = event.getTableView().getItems().get(event.getTablePosition().getRow());
+		christiansPartPart.setTheme(event.getNewValue());
+	}
+
+	private void christiansPartMaterialOnEditCommit(CellEditEvent<ChristiansPart, String> event) {
+
+		ChristiansPart christiansPartPart = event.getTableView().getItems().get(event.getTablePosition().getRow());
+		christiansPartPart.setMaterial(event.getNewValue());
+	}
+
 	public void objectInitialize() {
 		viewUpdate();
 		listeners();
@@ -324,6 +424,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryPartList = FXCollections.observableArrayList();
 
 		ministryTableView.setItems(ministryPartList);
+
+		christiansPartList = FXCollections.observableArrayList();
+
+		christiansPartTableView.setItems(christiansPartList);
 
 		updateMembers();
 	}
@@ -344,6 +448,64 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		listenerMinistryTableView();
 		listenerMinistryPartAddButton();
 		listenerMinistryPartDeleteButton();
+
+		listenerChristiansPartTableView();
+		listenerChristiansPartAddButton();
+		listenerChristiansPartDeleteButton();
+
+		listenerLoadWeekFromWOLButton();
+	}
+
+	private void listenerLoadWeekFromWOLButton() {
+		loadWeekFromWOLButton.setOnAction(event -> loadWeekFromWOLOnAction());
+	}
+
+	private void loadWeekFromWOLOnAction() {
+
+		// TODO: Da sistemare
+
+		Languages wolLang = Language.getWOLLang(language);
+		if (wolLang != null) {
+
+			Programm programm = new Programm(selectedWeek.getFrom(), wolLang);
+
+			if (programm != null) {
+
+				song1TextField.setText(programm.getSong1().getSong().toString());
+
+				bibleChaptersTextField.setText(programm.getWeekBible());
+
+				openingCommentsMinTextField.setText(programm.getOpeningComment().getMin().toString());
+				openingCommentsTextTextField.setText(programm.getOpeningComment().getTitle());
+
+				talkMinTextField.setText(programm.getTreasuresSpeaking().getMin().toString());
+				talkTextTextField.setText(programm.getTreasuresSpeaking().getTitle());
+
+				diggingMinTextField.setText(programm.getTreasuresGems().getMin().toString());
+				diggingTextTextField.setText(programm.getTreasuresGems().getTitle());
+
+				bibleReadingMinTextField.setText(programm.getTreasuresBibleReading().getMin().toString());
+				bibleReadingTextTextField.setText(programm.getTreasuresBibleReading().getTitle());
+				bibleReadingMaterialsTextField.setText(programm.getTreasuresBibleReading().getMaterial());
+
+				ministryPartList.clear();
+				for (PartWithMaterial part : programm.getMinistry())
+					ministryPartList.add(new MinistryPart(new MinistryTypeTranslated(MinistryType.DISCUSSION, language),
+							part.getFullTitle(), part.getMin(), part.getTitle(), part.getMaterial(),
+							Member.emptyMember(language), Member.emptyMember(language)));
+
+				song2TextField.setText(programm.getSong2().getSong().toString());
+
+				christiansPartList.clear();
+				for (PartWithMaterial part : programm.getChristianLiving())
+					christiansPartList.add(new ChristiansPart(part.getFullTitle(), part.getMin(), part.getTitle(),
+							part.getMaterial(), Member.emptyMember(language)));
+
+				congregationBibleStudyMinTextField.setText("");
+				congregationBibleStudyTextTextField.setText("");
+				congregationBibleStudyMaterialTextField.setText("");
+			}
+		}
 	}
 
 	private void listenerMinistryPartAddButton() {
@@ -424,6 +586,84 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		}
 	}
 
+	private void listenerChristiansPartAddButton() {
+		christiansPartAddButton.setOnAction(event -> christiansPartAddButtonOnActionEvent());
+	}
+
+	private void listenerChristiansPartDeleteButton() {
+		christiansPartDeleteButton.setOnAction(event -> christiansPartDeleteButtonOnActionEvent());
+	}
+
+	private void christiansPartAddButtonOnActionEvent() {
+		christiansPartList.add(ChristiansPart.newChristiansPart(language));
+		christiansPartTableView.refresh();
+	}
+
+	private void christiansPartDeleteButtonOnActionEvent() {
+
+		if (christiansPartTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			ChristiansPart christiansPart = christiansPartTableView.getSelectionModel().getSelectedItem();
+
+			Alert alert = new AlertDesigner(language.getString("TEXT0097"),
+					christiansPart.printChristiansPart(language), ownerStage, AlertType.CONFIRMATION,
+					Meta.Application.getFullTitle(), Meta.Resources.ICON);
+
+			if (alert.showAndWait().get() == ButtonType.OK) {
+				int index = christiansPartTableView.getSelectionModel().getSelectedIndex();
+				christiansPartTableView.getItems().remove(index);
+				christiansPartTableView.refresh();
+			}
+		}
+	}
+
+	private void listenerChristiansPartTableView() {
+		christiansPartTableView.setRowFactory(param -> {
+			TableRow<ChristiansPart> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty()))
+					editChristiansPart(row.getItem());
+			});
+			return row;
+		});
+	}
+
+	private void editChristiansPart(ChristiansPart rowItem) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_MEETINGS_CHRISTIANS_PART_EDITOR);
+			Scene scene = new Scene(fxmlLoader.load());
+
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle(Meta.Application.getFullTitle());
+			stage.getIcons().add(Meta.Resources.ICON);
+
+			stage.setResizable(false);
+
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(ownerStage);
+
+			ChristiansPartEditor ctrl = (ChristiansPartEditor) fxmlLoader.getController();
+			ctrl.setSettings(this.settings);
+			ctrl.setOwnerStage(ownerStage);
+			ctrl.setThisStage(stage);
+			ctrl.setChristiansPart(rowItem);
+			ctrl.setChristiansPartTableView(christiansPartTableView);
+			ctrl.setMembersList(memberList);
+			ctrl.objectInitialize();
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void viewUpdate() {
 
 		this.language = settings.getLanguage();
@@ -465,6 +705,35 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryPartDeleteButton.setText(null);
 		ministryPartDeleteButton
 				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
+
+		song2Label.setText(language.getString("TEXT0099"));
+
+		christiansPartFulltextTableColumn.setText(language.getString("TEXT0092"));
+		christiansPartMinTableColumn.setText(language.getString("TEXT0093"));
+		christiansPartThemeTableColumn.setText(language.getString("TEXT0094"));
+		christiansPartMaterialTableColumn.setText(language.getString("TEXT0095"));
+		christiansPartTeacherTableColumn.setText(language.getString("TEXT0098"));
+
+		christiansPartAddButton.setText(null);
+		christiansPartAddButton
+				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
+		christiansPartDeleteButton.setText(null);
+		christiansPartDeleteButton
+				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
+
+		congregationBibleStudyLabel.setText(language.getString("TEXT0061"));
+		congregationBibleStudyMinLabel.setText(language.getString("TEXT0089"));
+
+		endLabel.setText(language.getString("TEXT0103"));
+		reviewLabel.setText(language.getString("TEXT0101"));
+		reviewMinLabel.setText(language.getString("TEXT0089"));
+		song3Label.setText(language.getString("TEXT0100"));
+		pray2Label.setText(language.getString("TEXT0102"));
+
+		loadWeekFromWOLButton.setText(null);
+		loadWeekFromWOLButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
+		saveWeekButton.setText(null);
+		saveWeekButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.SAVE));
 	}
 
 	public Settings getSettings() {
@@ -537,6 +806,14 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public void setMinistryTypeTranslatedList(ObservableList<MinistryTypeTranslated> ministryTypeTranslatedList) {
 		this.ministryTypeTranslatedList = ministryTypeTranslatedList;
+	}
+
+	public ObservableList<ChristiansPart> getChristiansPartList() {
+		return christiansPartList;
+	}
+
+	public void setChristiansPartList(ObservableList<ChristiansPart> christiansPartList) {
+		this.christiansPartList = christiansPartList;
 	}
 
 }

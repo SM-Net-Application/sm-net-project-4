@@ -86,7 +86,7 @@ public class ChristiansPart {
 		this.teacherProperty().set(teacher);
 	}
 
-	public static ChristiansPart newMinistryPart(Language language) {
+	public static ChristiansPart newChristiansPart(Language language) {
 		return new ChristiansPart("", 0, "", "", Member.emptyMember(language));
 	}
 

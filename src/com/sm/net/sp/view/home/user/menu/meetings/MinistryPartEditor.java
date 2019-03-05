@@ -51,10 +51,6 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 	@FXML
 	private ListView<Member> assistantsListView;
 	@FXML
-	private Button removeStudentButton;
-	@FXML
-	private Button removeAssistantButton;
-	@FXML
 	private Button saveButton;
 
 	private Settings settings;
