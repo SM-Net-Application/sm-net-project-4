@@ -3,9 +3,6 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 import java.io.IOException;
 
 import com.sm.net.javafx.AlertDesigner;
-import com.sm.net.jw.wol.Languages;
-import com.sm.net.jw.wol.Programm;
-import com.sm.net.jw.wol.Programm.PartWithMaterial;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -464,48 +461,51 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		// TODO: Da sistemare
 
-		Languages wolLang = Language.getWOLLang(language);
-		if (wolLang != null) {
-
-			Programm programm = new Programm(selectedWeek.getFrom(), wolLang);
-
-			if (programm != null) {
-
-				song1TextField.setText(programm.getSong1().getSong().toString());
-
-				bibleChaptersTextField.setText(programm.getWeekBible());
-
-				openingCommentsMinTextField.setText(programm.getOpeningComment().getMin().toString());
-				openingCommentsTextTextField.setText(programm.getOpeningComment().getTitle());
-
-				talkMinTextField.setText(programm.getTreasuresSpeaking().getMin().toString());
-				talkTextTextField.setText(programm.getTreasuresSpeaking().getTitle());
-
-				diggingMinTextField.setText(programm.getTreasuresGems().getMin().toString());
-				diggingTextTextField.setText(programm.getTreasuresGems().getTitle());
-
-				bibleReadingMinTextField.setText(programm.getTreasuresBibleReading().getMin().toString());
-				bibleReadingTextTextField.setText(programm.getTreasuresBibleReading().getTitle());
-				bibleReadingMaterialsTextField.setText(programm.getTreasuresBibleReading().getMaterial());
-
-				ministryPartList.clear();
-				for (PartWithMaterial part : programm.getMinistry())
-					ministryPartList.add(new MinistryPart(new MinistryTypeTranslated(MinistryType.DISCUSSION, language),
-							part.getFullTitle(), part.getMin(), part.getTitle(), part.getMaterial(),
-							Member.emptyMember(language), Member.emptyMember(language)));
-
-				song2TextField.setText(programm.getSong2().getSong().toString());
-
-				christiansPartList.clear();
-				for (PartWithMaterial part : programm.getChristianLiving())
-					christiansPartList.add(new ChristiansPart(part.getFullTitle(), part.getMin(), part.getTitle(),
-							part.getMaterial(), Member.emptyMember(language)));
-
-				congregationBibleStudyMinTextField.setText("");
-				congregationBibleStudyTextTextField.setText("");
-				congregationBibleStudyMaterialTextField.setText("");
-			}
-		}
+		// Languages wolLang = Language.getWOLLang(language);
+		// if (wolLang != null) {
+		//
+		// Programm programm = new Programm(selectedWeek.getFrom(), wolLang);
+		//
+		// if (programm != null) {
+		//
+		// song1TextField.setText(programm.getSong1().getSong().toString());
+		//
+		// bibleChaptersTextField.setText(programm.getWeekBible());
+		//
+		// openingCommentsMinTextField.setText(programm.getOpeningComment().getMin().toString());
+		// openingCommentsTextTextField.setText(programm.getOpeningComment().getTitle());
+		//
+		// talkMinTextField.setText(programm.getTreasuresSpeaking().getMin().toString());
+		// talkTextTextField.setText(programm.getTreasuresSpeaking().getTitle());
+		//
+		// diggingMinTextField.setText(programm.getTreasuresGems().getMin().toString());
+		// diggingTextTextField.setText(programm.getTreasuresGems().getTitle());
+		//
+		// bibleReadingMinTextField.setText(programm.getTreasuresBibleReading().getMin().toString());
+		// bibleReadingTextTextField.setText(programm.getTreasuresBibleReading().getTitle());
+		// bibleReadingMaterialsTextField.setText(programm.getTreasuresBibleReading().getMaterial());
+		//
+		// ministryPartList.clear();
+		// for (PartWithMaterial part : programm.getMinistry())
+		// ministryPartList.add(new MinistryPart(new
+		// MinistryTypeTranslated(MinistryType.DISCUSSION, language),
+		// part.getFullTitle(), part.getMin(), part.getTitle(),
+		// part.getMaterial(),
+		// Member.emptyMember(language), Member.emptyMember(language)));
+		//
+		// song2TextField.setText(programm.getSong2().getSong().toString());
+		//
+		// christiansPartList.clear();
+		// for (PartWithMaterial part : programm.getChristianLiving())
+		// christiansPartList.add(new ChristiansPart(part.getFullTitle(),
+		// part.getMin(), part.getTitle(),
+		// part.getMaterial(), Member.emptyMember(language)));
+		//
+		// congregationBibleStudyMinTextField.setText("");
+		// congregationBibleStudyTextTextField.setText("");
+		// congregationBibleStudyMaterialTextField.setText("");
+		// }
+		// }
 	}
 
 	private void listenerMinistryPartAddButton() {

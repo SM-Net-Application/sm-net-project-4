@@ -6,7 +6,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.util.Html;
+import com.sm.net.util.EasyHtml;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -94,7 +94,7 @@ public class HomeAccess {
 	}
 
 	private boolean checkDatabaseURL() {
-		return Html.isValidUrl(this.settings.getDatabaseUrl());
+		return EasyHtml.isValidUrl(this.settings.getDatabaseUrl());
 	}
 
 	public Settings getSettings() {
