@@ -1,5 +1,7 @@
 package com.sm.net.sp.model;
 
+import com.sm.net.jw.wol.MinistryType;
+import com.sm.net.jw.wol.MinistryTypeTranslated;
 import com.sm.net.project.Language;
 
 import javafx.beans.property.IntegerProperty;

@@ -3,14 +3,16 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 import java.io.IOException;
 
 import com.sm.net.javafx.AlertDesigner;
+import com.sm.net.jw.wol.MinistryType;
+import com.sm.net.jw.wol.MinistryTypeTranslated;
+import com.sm.net.jw.wol.ScheduleForMeeting;
+import com.sm.net.jw.wol.ScheduleForMeetingHTML;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
-import com.sm.net.sp.model.MinistryType;
-import com.sm.net.sp.model.MinistryTypeTranslated;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
@@ -416,7 +418,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		memberList = FXCollections.observableArrayList();
 
-		ministryTypeTranslatedList = MinistryType.getMinistryTypeTranslated(language);
+		ministryTypeTranslatedList = MinistryType.getAllMinistryTypeTranslated(language);
 
 		ministryPartList = FXCollections.observableArrayList();
 
@@ -459,53 +461,68 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void loadWeekFromWOLOnAction() {
 
-		// TODO: Da sistemare
+		// TODO: Usare Language
 
-		// Languages wolLang = Language.getWOLLang(language);
-		// if (wolLang != null) {
-		//
-		// Programm programm = new Programm(selectedWeek.getFrom(), wolLang);
-		//
-		// if (programm != null) {
-		//
-		// song1TextField.setText(programm.getSong1().getSong().toString());
-		//
-		// bibleChaptersTextField.setText(programm.getWeekBible());
-		//
-		// openingCommentsMinTextField.setText(programm.getOpeningComment().getMin().toString());
-		// openingCommentsTextTextField.setText(programm.getOpeningComment().getTitle());
-		//
-		// talkMinTextField.setText(programm.getTreasuresSpeaking().getMin().toString());
-		// talkTextTextField.setText(programm.getTreasuresSpeaking().getTitle());
-		//
-		// diggingMinTextField.setText(programm.getTreasuresGems().getMin().toString());
-		// diggingTextTextField.setText(programm.getTreasuresGems().getTitle());
-		//
-		// bibleReadingMinTextField.setText(programm.getTreasuresBibleReading().getMin().toString());
-		// bibleReadingTextTextField.setText(programm.getTreasuresBibleReading().getTitle());
-		// bibleReadingMaterialsTextField.setText(programm.getTreasuresBibleReading().getMaterial());
-		//
-		// ministryPartList.clear();
-		// for (PartWithMaterial part : programm.getMinistry())
-		// ministryPartList.add(new MinistryPart(new
-		// MinistryTypeTranslated(MinistryType.DISCUSSION, language),
-		// part.getFullTitle(), part.getMin(), part.getTitle(),
-		// part.getMaterial(),
-		// Member.emptyMember(language), Member.emptyMember(language)));
-		//
-		// song2TextField.setText(programm.getSong2().getSong().toString());
-		//
-		// christiansPartList.clear();
-		// for (PartWithMaterial part : programm.getChristianLiving())
-		// christiansPartList.add(new ChristiansPart(part.getFullTitle(),
-		// part.getMin(), part.getTitle(),
-		// part.getMaterial(), Member.emptyMember(language)));
-		//
-		// congregationBibleStudyMinTextField.setText("");
-		// congregationBibleStudyTextTextField.setText("");
-		// congregationBibleStudyMaterialTextField.setText("");
-		// }
-		// }
+		Alert alert = new AlertDesigner("Programma per la settimana",
+				"Vuoi scaricare il programma da Watchtower Online Library?", ownerStage, AlertType.CONFIRMATION,
+				Meta.Application.getFullTitle(), Meta.Resources.ICON);
+
+		if (alert.showAndWait().get() == ButtonType.OK) {
+			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
+					selectedWeek.getFrom());
+			scheduleForMeetingHTML.download();
+
+			if (scheduleForMeetingHTML != null) {
+				ScheduleForMeeting scheduleForMeeting = new ScheduleForMeeting(scheduleForMeetingHTML.getRelevantRows(),
+						language);
+				if (scheduleForMeeting != null) {
+
+					song1TextField.setText(scheduleForMeeting.getSong1().getSongNo().toString());
+
+					bibleChaptersTextField.setText(scheduleForMeeting.getBibleChapters());
+
+					openingCommentsMinTextField.setText(scheduleForMeeting.getOpeningComments().getMin().toString());
+					openingCommentsTextTextField.setText(scheduleForMeeting.getOpeningComments().getTitle());
+
+					talkMinTextField.setText(scheduleForMeeting.getTreasuresTalk().getMin().toString());
+					talkTextTextField.setText(scheduleForMeeting.getTreasuresTalk().getTitle());
+
+					diggingMinTextField.setText(scheduleForMeeting.getTreasuresDigging().getMin().toString());
+					diggingTextTextField.setText(scheduleForMeeting.getTreasuresDigging().getTitle());
+
+					bibleReadingMinTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getMin().toString());
+					bibleReadingTextTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getTextPart());
+					bibleReadingMaterialsTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getBible());
+
+					ministryPartList.clear();
+					for (ScheduleForMeeting.MinistryPart part : scheduleForMeeting.getMinistryPartsList())
+						ministryPartList.add(new MinistryPart(part.getMinistryTypeTranslated(), part.getText(),
+								part.getMin(), part.getTextPart(), part.getMaterial(), Member.emptyMember(language),
+								Member.emptyMember(language)));
+
+					song2TextField.setText(scheduleForMeeting.getSong2().getSongNo().toString());
+
+					christiansPartList.clear();
+					for (ScheduleForMeeting.ChristiansPart part : scheduleForMeeting.getChristiansPartsList())
+						christiansPartList.add(new ChristiansPart(part.getText(), part.getMin(), part.getTextPart(),
+								part.getBody(), Member.emptyMember(language)));
+
+					congregationBibleStudyMinTextField
+							.setText(scheduleForMeeting.getCongregationBibleStudy().getMin().toString());
+					congregationBibleStudyTextTextField
+							.setText(scheduleForMeeting.getCongregationBibleStudy().getTextPart());
+					congregationBibleStudyMaterialTextField
+							.setText(scheduleForMeeting.getCongregationBibleStudy().getBody());
+
+					reviewMinTextField.setText(scheduleForMeeting.getReview().getMin().toString());
+					reviewTextTextField.setText(scheduleForMeeting.getReview().getTitle());
+
+					song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
+
+				}
+			}
+		}
+
 	}
 
 	private void listenerMinistryPartAddButton() {

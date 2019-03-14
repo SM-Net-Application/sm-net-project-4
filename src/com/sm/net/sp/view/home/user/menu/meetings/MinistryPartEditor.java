@@ -1,10 +1,10 @@
 package com.sm.net.sp.view.home.user.menu.meetings;
 
+import com.sm.net.jw.wol.MinistryTypeTranslated;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
-import com.sm.net.sp.model.MinistryTypeTranslated;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 

@@ -20,7 +20,12 @@ public class ChristiansPart {
 	public ChristiansPart(String fullText, Integer min, String theme, String material, Member teacher) {
 		super();
 		this.fullText = new SimpleStringProperty(fullText);
-		this.min = new SimpleIntegerProperty(min);
+
+		if (min != null)
+			this.min = new SimpleIntegerProperty(min);
+		else
+			this.min = new SimpleIntegerProperty(Integer.valueOf(0));
+
 		this.theme = new SimpleStringProperty(theme);
 		this.material = new SimpleStringProperty(material);
 		this.teacher = new SimpleObjectProperty<Member>(teacher);
