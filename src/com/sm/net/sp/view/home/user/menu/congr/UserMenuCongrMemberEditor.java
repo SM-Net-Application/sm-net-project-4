@@ -70,8 +70,18 @@ public class UserMenuCongrMemberEditor {
 	private CheckBox baptizedPublisherCheckBox;
 
 	@FXML
-	private Tab studentTab;
+	private Tab assignmentsTab;
 
+	@FXML
+	private Label treasuresLabel;
+	@FXML
+	private Label ministryLabel;
+	@FXML
+	private Label christiansLabel;
+	@FXML
+	private CheckBox treasuresTalkCheckBox;
+	@FXML
+	private CheckBox diggingCheckBox;
 	@FXML
 	private CheckBox bibleReadingCheckBox;
 	@FXML
@@ -82,12 +92,22 @@ public class UserMenuCongrMemberEditor {
 	private CheckBox bibleStudyCheckBox;
 	@FXML
 	private CheckBox talkCheckBox;
+	@FXML
+	private CheckBox christiansCheckBox;
 
 	@FXML
 	private Tab privilegeTab;
 
 	@FXML
+	private Label conductorLabel;
+	@FXML
 	private Label soundSystemLabel;
+	@FXML
+	private CheckBox presidentCheckBox;
+	@FXML
+	private CheckBox bibleStudyCongregationCheckBox;
+	@FXML
+	private CheckBox watchtowerStudyCheckBox;
 	@FXML
 	private CheckBox microphoneHandlerMidweekCheckBox;
 	@FXML
@@ -174,15 +194,25 @@ public class UserMenuCongrMemberEditor {
 		unbaptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
 		baptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
 
-		studentTab.getStyleClass().add("tabStyle1");
+		assignmentsTab.getStyleClass().add("tabStyle1");
+		treasuresLabel.getStyleClass().add("labelStyle2");
+		ministryLabel.getStyleClass().add("labelStyle2");
+		christiansLabel.getStyleClass().add("labelStyle2");
+		treasuresTalkCheckBox.getStyleClass().add("checkBoxStyle1");
+		diggingCheckBox.getStyleClass().add("checkBoxStyle1");
 		bibleReadingCheckBox.getStyleClass().add("checkBoxStyle1");
 		initialCallCheckBox.getStyleClass().add("checkBoxStyle1");
 		returnVisitCheckBox.getStyleClass().add("checkBoxStyle1");
 		bibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
 		talkCheckBox.getStyleClass().add("checkBoxStyle1");
+		christiansCheckBox.getStyleClass().add("checkBoxStyle1");
 
 		privilegeTab.getStyleClass().add("tabStyle1");
+		conductorLabel.getStyleClass().add("labelStyle2");
 		soundSystemLabel.getStyleClass().add("labelStyle2");
+		presidentCheckBox.getStyleClass().add("checkBoxStyle1");
+		bibleStudyCongregationCheckBox.getStyleClass().add("checkBoxStyle1");
+		watchtowerStudyCheckBox.getStyleClass().add("checkBoxStyle1");
 		microphoneHandlerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
 		microphoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
 		soundSystemMixerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
@@ -443,15 +473,25 @@ public class UserMenuCongrMemberEditor {
 		unbaptizedPublisherCheckBox.setText(language.getString("TEXT0045"));
 		baptizedPublisherCheckBox.setText(language.getString("TEXT0046"));
 
-		studentTab.setText(language.getString("TEXT0044"));
+		assignmentsTab.setText(language.getString("TEXT0104"));
+		treasuresLabel.setText(language.getString("TEXT0080"));
+		ministryLabel.setText(language.getString("TEXT0081"));
+		christiansLabel.setText(language.getString("TEXT0082"));
+		treasuresTalkCheckBox.setText(language.getString("TEXT0051"));
+		diggingCheckBox.setText(language.getString("TEXT0088"));
 		bibleReadingCheckBox.setText(language.getString("TEXT0047"));
 		initialCallCheckBox.setText(language.getString("TEXT0048"));
 		returnVisitCheckBox.setText(language.getString("TEXT0049"));
 		bibleStudyCheckBox.setText(language.getString("TEXT0050"));
 		talkCheckBox.setText(language.getString("TEXT0051"));
+		christiansCheckBox.setText(language.getString("TEXT0082"));
 
 		privilegeTab.setText(language.getString("TEXT0052"));
+		conductorLabel.setText(language.getString("TEXT0105"));
 		soundSystemLabel.setText(language.getString("TEXT0053"));
+		presidentCheckBox.setText(language.getString("TEXT0083"));
+		bibleStudyCongregationCheckBox.setText(language.getString("TEXT0061"));
+		watchtowerStudyCheckBox.setText(language.getString("TEXT0062"));
 		microphoneHandlerMidweekCheckBox.setText(language.getString("TEXT0054"));
 		microphoneHandlerWeekendCheckBox.setText(language.getString("TEXT0055"));
 		soundSystemMixerMidweekCheckBox.setText(language.getString("TEXT0056"));
