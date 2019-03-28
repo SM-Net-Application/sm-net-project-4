@@ -45,6 +45,15 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private TableColumn<User, Boolean> userTableColumnRoleAdmin;
 
 	@FXML
+	private TableColumn<User, Boolean> userTableColumnUsers;
+	@FXML
+	private TableColumn<User, Boolean> userTableColumnCongregations;
+	@FXML
+	private TableColumn<User, Boolean> userTableColumnServiceGroups;
+	@FXML
+	private TableColumn<User, Boolean> userTableColumnMeetings;
+
+	@FXML
 	private Button userAddButton;
 
 	@FXML
@@ -63,12 +72,23 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 	private void tableColumnsCellFactory() {
 		userTableColumnRoleAdmin.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnRoleAdmin));
+		userTableColumnUsers.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnUsers));
+		userTableColumnCongregations.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnCongregations));
+		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
+		userTableColumnMeetings.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMeetings));
 	}
 
 	private void tableColumnsCellValueFactory() {
 		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
 		userTableColumnName.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
 		userTableColumnRoleAdmin.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
+
+		
+		//TODO: Sistemare
+		userTableColumnUsers.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
+		userTableColumnCongregations.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
+		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
+		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
 	}
 
 	private void styleClasses() {
@@ -165,6 +185,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnID.setText(language.getString("TEXT0005"));
 		userTableColumnName.setText(language.getString("VIEW007LAB002"));
 		userTableColumnRoleAdmin.setText(language.getString("TEXT0002"));
+		userTableColumnUsers.setText(language.getString("USERMENU001"));
+		userTableColumnCongregations.setText(language.getString("USERMENU002"));
+		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
+		userTableColumnMeetings.setText(language.getString("USERMENU004"));
 
 		userTableView.setEditable(true);
 		userTableColumnID.setMinWidth(50);
@@ -174,6 +198,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnName.setMaxWidth(350);
 		userTableColumnName.setResizable(false);
 		userTableColumnRoleAdmin.setEditable(true);
+		userTableColumnUsers.setEditable(true);
+		userTableColumnCongregations.setEditable(true);
+		userTableColumnServiceGroups.setEditable(true);
+		userTableColumnMeetings.setEditable(true);
 
 		userAddButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_USERS_ADD));
 		userAddButton.setText(null);

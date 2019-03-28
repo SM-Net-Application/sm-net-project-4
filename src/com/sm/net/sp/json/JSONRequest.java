@@ -57,10 +57,16 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
-	public static JSONObject UPDATE_USER_RULES(String spUserID, String spRoleAdmin) {
+	public static JSONObject UPDATE_USER_RULES(String spUserID, String spRoleAdmin, String spInf1, String spInf2,
+			String spInf3, String spInf4) {
+
 		JSONObject jsonObj = create(Integer.valueOf(5));
 		jsonObj.put("spUserID", spUserID);
 		jsonObj.put("spRoleAdmin", spRoleAdmin);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
 		return jsonObj;
 	}
 

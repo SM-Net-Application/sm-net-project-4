@@ -23,39 +23,33 @@ public class UserMenuCongrMemberEditor {
 
 	@FXML
 	private TabPane memberTabPane;
-
 	@FXML
 	private Tab memberPersonalTab;
 
 	@FXML
 	private Label titleLabel;
-
 	@FXML
 	private Label surnameLabel;
-
 	@FXML
 	private TextField surnameTextField;
-
 	@FXML
 	private Label nameLabel;
-
 	@FXML
 	private TextField nameTextField;
-
 	@FXML
 	private Label nameShortLabel;
-
 	@FXML
 	private TextField nameShortTextField;
-
 	@FXML
 	private Label genderLabel;
-
 	@FXML
 	private CheckBox genderMaleCheckBox;
-
 	@FXML
 	private CheckBox genderFemaleCheckBox;
+	@FXML
+	private Label singlenessLabel;
+	@FXML
+	private TextField singlenessTextField;
 
 	@FXML
 	private Tab memberAppointmentAndPrivilegeTab;
@@ -103,6 +97,24 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private Label soundSystemLabel;
 	@FXML
+	private Label privilegeLabel;
+	@FXML
+	private Label prayStartLabel;
+	@FXML
+	private Label prayEndLabel;
+	@FXML
+	private Label soundSystemMicrophoneHandlerLabel;
+	@FXML
+	private Label soundSystemMixerLabel;
+	@FXML
+	private Label soundSystemPCLabel;
+	@FXML
+	private Label meetingLabel;
+	@FXML
+	private Label meetingMidweekLabel;
+	@FXML
+	private Label meetingWeekendLabel;
+	@FXML
 	private CheckBox presidentCheckBox;
 	@FXML
 	private CheckBox bibleStudyCongregationCheckBox;
@@ -120,14 +132,20 @@ public class UserMenuCongrMemberEditor {
 	private CheckBox soundSystemPCMidweekCheckBox;
 	@FXML
 	private CheckBox soundSystemPCWeekendCheckBox;
-
+	@FXML
+	private CheckBox prayStartMidweekCheckBox;
+	@FXML
+	private CheckBox prayStartWeekendCheckBox;
+	@FXML
+	private CheckBox prayEndMidweekCheckBox;
+	@FXML
+	private CheckBox prayEndWeekendCheckBox;
 	@FXML
 	private Label readerLabel;
 	@FXML
 	private CheckBox readerCongregationBibleStudyCheckBox;
 	@FXML
 	private CheckBox readerWatchtowerCheckBox;
-
 	@FXML
 	private Label attendantLabel;
 	@FXML
@@ -151,9 +169,23 @@ public class UserMenuCongrMemberEditor {
 	private Tab onthersTab;
 
 	@FXML
+	private CheckBox inactiveCheckBox;
+	@FXML
 	private CheckBox markedCheckBox;
 	@FXML
 	private CheckBox disfellowshippedCheckBox;
+
+	@FXML
+	private Tab memberContactsTab;
+
+	@FXML
+	private Label smartphoneLabel;
+	@FXML
+	private TextField smartphoneTextField;
+	@FXML
+	private Label emailLabel;
+	@FXML
+	private TextField emailTextField;
 
 	@FXML
 	private Button saveButton;
@@ -183,6 +215,8 @@ public class UserMenuCongrMemberEditor {
 		nameTextField.getStyleClass().add("textFieldStyle1");
 		nameShortLabel.getStyleClass().add("labelStyle1");
 		nameShortTextField.getStyleClass().add("textFieldStyle1");
+		singlenessLabel.getStyleClass().add("labelStyle1");
+		singlenessTextField.getStyleClass().add("textFieldStyle1");
 		genderLabel.getStyleClass().add("labelStyle1");
 		genderMaleCheckBox.getStyleClass().add("checkBoxStyle1");
 		genderFemaleCheckBox.getStyleClass().add("checkBoxStyle1");
@@ -209,24 +243,35 @@ public class UserMenuCongrMemberEditor {
 
 		privilegeTab.getStyleClass().add("tabStyle1");
 		conductorLabel.getStyleClass().add("labelStyle2");
-		soundSystemLabel.getStyleClass().add("labelStyle2");
+		soundSystemLabel.getStyleClass().add("labelStyle1");
+		privilegeLabel.getStyleClass().add("labelStyle2");
+		prayStartLabel.getStyleClass().add("labelStyle1");
+		prayEndLabel.getStyleClass().add("labelStyle1");
+		soundSystemMicrophoneHandlerLabel.getStyleClass().add("labelStyle1");
+		soundSystemMixerLabel.getStyleClass().add("labelStyle1");
+		soundSystemPCLabel.getStyleClass().add("labelStyle1");
+		meetingLabel.getStyleClass().add("labelStyle2");
+		meetingMidweekLabel.getStyleClass().add("labelStyle2");
+		meetingWeekendLabel.getStyleClass().add("labelStyle2");
 		presidentCheckBox.getStyleClass().add("checkBoxStyle1");
 		bibleStudyCongregationCheckBox.getStyleClass().add("checkBoxStyle1");
 		watchtowerStudyCheckBox.getStyleClass().add("checkBoxStyle1");
-		microphoneHandlerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
-		microphoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
-		soundSystemMixerMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
-		soundSystemMixerWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
-		soundSystemPCMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
-		soundSystemPCWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
-
+		microphoneHandlerMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
+		microphoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
+		soundSystemMixerMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
+		soundSystemMixerWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
+		soundSystemPCMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
+		soundSystemPCWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
+		prayStartMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
+		prayStartWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
+		prayEndMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
+		prayEndWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
 		readerLabel.getStyleClass().add("labelStyle2");
 		readerCongregationBibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
 		readerWatchtowerCheckBox.getStyleClass().add("checkBoxStyle1");
-
-		attendantLabel.getStyleClass().add("labelStyle2");
-		attendantMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
-		attendantWeekendCheckBox.getStyleClass().add("checkBoxStyle1");
+		attendantLabel.getStyleClass().add("labelStyle1");
+		attendantMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
+		attendantWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
 
 		appointmentTab.getStyleClass().add("tabStyle1");
 
@@ -237,8 +282,16 @@ public class UserMenuCongrMemberEditor {
 
 		onthersTab.getStyleClass().add("tabStyle1");
 
+		inactiveCheckBox.getStyleClass().add("checkBoxStyle1");
 		markedCheckBox.getStyleClass().add("checkBoxStyle1");
 		disfellowshippedCheckBox.getStyleClass().add("checkBoxStyle1");
+
+		memberContactsTab.getStyleClass().add("tabStyle1");
+
+		smartphoneLabel.getStyleClass().add("labelStyle3");
+		smartphoneTextField.getStyleClass().add("textFieldStyle1");
+		emailLabel.getStyleClass().add("labelStyle3");
+		emailTextField.getStyleClass().add("textFieldStyle1");
 	}
 
 	public void objectInitialize() {
@@ -458,6 +511,7 @@ public class UserMenuCongrMemberEditor {
 		surnameLabel.setText(language.getString("TEXT0013"));
 		nameLabel.setText(language.getString("TEXT0014"));
 		nameShortLabel.setText(language.getString("TEXT0018"));
+		singlenessLabel.setText(language.getString("TEXT0065"));
 		genderLabel.setText(language.getString("TEXT0019"));
 		genderMaleCheckBox.setText(language.getString("TEXT0020"));
 		genderFemaleCheckBox.setText(language.getString("TEXT0021"));
@@ -489,23 +543,36 @@ public class UserMenuCongrMemberEditor {
 		privilegeTab.setText(language.getString("TEXT0052"));
 		conductorLabel.setText(language.getString("TEXT0105"));
 		soundSystemLabel.setText(language.getString("TEXT0053"));
+		privilegeLabel.setText(language.getString("TEXT0052"));
+		prayStartLabel.setText(language.getString("TEXT0084"));
+		prayEndLabel.setText(language.getString("TEXT0102"));
+		soundSystemMicrophoneHandlerLabel.setText(language.getString("TEXT0054"));
+		soundSystemMixerLabel.setText(language.getString("TEXT0056"));
+		soundSystemPCLabel.setText(language.getString("TEXT0058"));
+
+		meetingLabel.setText(language.getString("TEXT0055"));
+		meetingMidweekLabel.setText(language.getString("TEXT0057"));
+		meetingWeekendLabel.setText(language.getString("TEXT0059"));
+
 		presidentCheckBox.setText(language.getString("TEXT0083"));
 		bibleStudyCongregationCheckBox.setText(language.getString("TEXT0061"));
 		watchtowerStudyCheckBox.setText(language.getString("TEXT0062"));
-		microphoneHandlerMidweekCheckBox.setText(language.getString("TEXT0054"));
-		microphoneHandlerWeekendCheckBox.setText(language.getString("TEXT0055"));
-		soundSystemMixerMidweekCheckBox.setText(language.getString("TEXT0056"));
-		soundSystemMixerWeekendCheckBox.setText(language.getString("TEXT0057"));
-		soundSystemPCMidweekCheckBox.setText(language.getString("TEXT0058"));
-		soundSystemPCWeekendCheckBox.setText(language.getString("TEXT0059"));
-
+		microphoneHandlerMidweekCheckBox.setText("");
+		microphoneHandlerWeekendCheckBox.setText("");
+		soundSystemMixerMidweekCheckBox.setText("");
+		soundSystemMixerWeekendCheckBox.setText("");
+		soundSystemPCMidweekCheckBox.setText("");
+		soundSystemPCWeekendCheckBox.setText("");
+		prayStartMidweekCheckBox.setText("");
+		prayStartWeekendCheckBox.setText("");
+		prayEndMidweekCheckBox.setText("");
+		prayEndWeekendCheckBox.setText("");
 		readerLabel.setText(language.getString("TEXT0060"));
 		readerCongregationBibleStudyCheckBox.setText(language.getString("TEXT0061"));
 		readerWatchtowerCheckBox.setText(language.getString("TEXT0062"));
-
 		attendantLabel.setText(language.getString("TEXT0063"));
-		attendantMidweekCheckBox.setText(language.getString("TEXT0064"));
-		attendantWeekendCheckBox.setText(language.getString("TEXT0065"));
+		attendantMidweekCheckBox.setText("");
+		attendantWeekendCheckBox.setText("");
 
 		appointmentTab.setText(language.getString("TEXT0066"));
 
@@ -516,8 +583,15 @@ public class UserMenuCongrMemberEditor {
 
 		onthersTab.setText(language.getString("TEXT0071"));
 
+		inactiveCheckBox.setText(language.getString("TEXT0064"));
 		markedCheckBox.setText(language.getString("TEXT0072"));
 		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
+
+		memberContactsTab.setText(language.getString("TEXT0106"));
+		memberContactsTab.setGraphic(new ImageView(Meta.Resources.MEMBER_CONTACTS));
+
+		smartphoneLabel.setText(language.getString("TEXT0107"));
+		emailLabel.setText(language.getString("TEXT0108"));
 	}
 
 	public Settings getSettings() {

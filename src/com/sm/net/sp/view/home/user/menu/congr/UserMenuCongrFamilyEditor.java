@@ -59,6 +59,11 @@ public class UserMenuCongrFamilyEditor {
 	private TextField familyCityTextField;
 
 	@FXML
+	private Label familyPhoneLabel;
+	@FXML
+	private TextField familyPhoneTextField;
+
+	@FXML
 	private Label membersLabel;
 
 	@FXML
@@ -137,12 +142,14 @@ public class UserMenuCongrFamilyEditor {
 		familyCityLabel.getStyleClass().add("labelStyle1");
 		membersLabel.getStyleClass().add("labelStyle1");
 		familyMembersLabel.getStyleClass().add("labelStyle1");
+		familyPhoneLabel.getStyleClass().add("labelStyle1");
 
 		familyNameTextField.getStyleClass().add("textFieldStyle1");
 		familyStreetTextField.getStyleClass().add("textFieldStyle1");
 		familyNummerTextField.getStyleClass().add("textFieldStyle1");
 		familyPostCodeTextField.getStyleClass().add("textFieldStyle1");
 		familyCityTextField.getStyleClass().add("textFieldStyle1");
+		familyPhoneTextField.getStyleClass().add("textFieldStyle1");
 
 		membersTableView.getStyleClass().add("tableViewStyle1");
 
@@ -323,6 +330,7 @@ public class UserMenuCongrFamilyEditor {
 		familyNummerLabel.setText(language.getString("TEXT0028"));
 		familyPostCodeLabel.setText(language.getString("TEXT0029"));
 		familyCityLabel.setText(language.getString("TEXT0030"));
+		familyPhoneLabel.setText(language.getString("TEXT0109"));
 		membersLabel.setText(language.getString("TEXT0032"));
 		memberIDTableColumn.setText(language.getString("TEXT0005"));
 		memberIDTableColumn.setMinWidth(50);

@@ -14,6 +14,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.stage.Stage;
 
 public class User {
@@ -24,6 +25,11 @@ public class User {
 	private StringProperty usernameProperty;
 	private BooleanProperty roleAdminProperty;
 
+	private BooleanProperty spInf1;
+	private BooleanProperty spInf2;
+	private BooleanProperty spInf3;
+	private BooleanProperty spInf4;
+
 	public User(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
@@ -32,8 +38,20 @@ public class User {
 	public User(JSONObject jsonObject, SecretKey secretKey, Settings settings, Stage ownerStage, UpdateData callback) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
-		this.roleAdminProperty.addListener((observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(),
-				getSpRole(roleAdminProperty.get()), settings, ownerStage, callback));
+		this.roleAdminProperty.addListener(listenerUpdateRules(settings, ownerStage, callback));
+
+		this.spInf1.addListener(listenerUpdateRules(settings, ownerStage, callback));
+		this.spInf2.addListener(listenerUpdateRules(settings, ownerStage, callback));
+		this.spInf3.addListener(listenerUpdateRules(settings, ownerStage, callback));
+		this.spInf4.addListener(listenerUpdateRules(settings, ownerStage, callback));
+	}
+
+	private ChangeListener<? super Boolean> listenerUpdateRules(Settings settings, Stage ownerStage,
+			UpdateData callback) {
+
+		return (observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(),
+				getSpRole(roleAdminProperty.get()), getSpRole(spInf1.get()), getSpRole(spInf2.get()),
+				getSpRole(spInf3.get()), getSpRole(spInf4.get()), settings, ownerStage, callback);
 	}
 
 	private void defaultCostructor(JSONObject jsonObject, SecretKey secretKey) {
@@ -43,6 +61,11 @@ public class User {
 		this.usernameEncrypted = jsonObject.getString("spUserName");
 		this.usernameProperty = new SimpleStringProperty(usernameDecrypt(secretKey));
 		this.roleAdminProperty = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spRoleAdmin")));
+
+		this.spInf1 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf1")));
+		this.spInf2 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf2")));
+		this.spInf3 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf3")));
+		this.spInf4 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf4")));
 	}
 
 	private String getSpRole(boolean role) {
@@ -115,6 +138,54 @@ public class User {
 
 	public void setSpUserSU(boolean spUserSU) {
 		this.spUserSU = spUserSU;
+	}
+
+	public final BooleanProperty spInf1Property() {
+		return this.spInf1;
+	}
+
+	public final boolean isSpInf1() {
+		return this.spInf1Property().get();
+	}
+
+	public final void setSpInf1(final boolean spInf1) {
+		this.spInf1Property().set(spInf1);
+	}
+
+	public final BooleanProperty spInf2Property() {
+		return this.spInf2;
+	}
+
+	public final boolean isSpInf2() {
+		return this.spInf2Property().get();
+	}
+
+	public final void setSpInf2(final boolean spInf2) {
+		this.spInf2Property().set(spInf2);
+	}
+
+	public final BooleanProperty spInf3Property() {
+		return this.spInf3;
+	}
+
+	public final boolean isSpInf3() {
+		return this.spInf3Property().get();
+	}
+
+	public final void setSpInf3(final boolean spInf3) {
+		this.spInf3Property().set(spInf3);
+	}
+
+	public final BooleanProperty spInf4Property() {
+		return this.spInf4;
+	}
+
+	public final boolean isSpInf4() {
+		return this.spInf4Property().get();
+	}
+
+	public final void setSpInf4(final boolean spInf4) {
+		this.spInf4Property().set(spInf4);
 	}
 
 }

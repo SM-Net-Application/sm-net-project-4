@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -33,6 +33,10 @@
                         <TableColumn fx:id="userTableColumnID" prefWidth="75.0" text="Column X" />
                       <TableColumn fx:id="userTableColumnName" prefWidth="75.0" text="C1" />
                       <TableColumn fx:id="userTableColumnRoleAdmin" prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="userTableColumnUsers" prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="userTableColumnCongregations" prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="userTableColumnServiceGroups" prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="userTableColumnMeetings" prefWidth="75.0" text="C2" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
