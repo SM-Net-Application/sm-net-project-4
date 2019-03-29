@@ -23,7 +23,6 @@ public class User {
 	private boolean spUserSU;
 	private String usernameEncrypted;
 	private StringProperty usernameProperty;
-	private BooleanProperty roleAdminProperty;
 
 	private BooleanProperty spInf1;
 	private BooleanProperty spInf2;
@@ -38,7 +37,6 @@ public class User {
 	public User(JSONObject jsonObject, SecretKey secretKey, Settings settings, Stage ownerStage, UpdateData callback) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
-		this.roleAdminProperty.addListener(listenerUpdateRules(settings, ownerStage, callback));
 
 		this.spInf1.addListener(listenerUpdateRules(settings, ownerStage, callback));
 		this.spInf2.addListener(listenerUpdateRules(settings, ownerStage, callback));
@@ -49,9 +47,9 @@ public class User {
 	private ChangeListener<? super Boolean> listenerUpdateRules(Settings settings, Stage ownerStage,
 			UpdateData callback) {
 
-		return (observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(),
-				getSpRole(roleAdminProperty.get()), getSpRole(spInf1.get()), getSpRole(spInf2.get()),
-				getSpRole(spInf3.get()), getSpRole(spInf4.get()), settings, ownerStage, callback);
+		return (observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(), getSpRole(spInf1.get()),
+				getSpRole(spInf2.get()), getSpRole(spInf3.get()), getSpRole(spInf4.get()), settings, ownerStage,
+				callback);
 	}
 
 	private void defaultCostructor(JSONObject jsonObject, SecretKey secretKey) {
@@ -60,7 +58,6 @@ public class User {
 		this.spUserSU = checkBoolean(jsonObject.getInt("spUserSU"));
 		this.usernameEncrypted = jsonObject.getString("spUserName");
 		this.usernameProperty = new SimpleStringProperty(usernameDecrypt(secretKey));
-		this.roleAdminProperty = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spRoleAdmin")));
 
 		this.spInf1 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf1")));
 		this.spInf2 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf2")));
@@ -100,28 +97,12 @@ public class User {
 		this.usernameProperty.set(username);
 	}
 
-	public boolean isRoleAdmin() {
-		return roleAdminProperty.get();
-	}
-
-	public void setRoleAdmin(boolean roleAdmin) {
-		this.roleAdminProperty.set(roleAdmin);
-	}
-
 	public StringProperty getUsernameProperty() {
 		return usernameProperty;
 	}
 
 	public void setUsernameProperty(StringProperty usernameProperty) {
 		this.usernameProperty = usernameProperty;
-	}
-
-	public BooleanProperty getRoleAdminProperty() {
-		return roleAdminProperty;
-	}
-
-	public void setRoleAdminProperty(BooleanProperty roleAdminProperty) {
-		this.roleAdminProperty = roleAdminProperty;
 	}
 
 	public IntegerProperty getUserID() {

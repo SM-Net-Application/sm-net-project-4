@@ -42,9 +42,6 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private TableColumn<User, String> userTableColumnName;
 
 	@FXML
-	private TableColumn<User, Boolean> userTableColumnRoleAdmin;
-
-	@FXML
 	private TableColumn<User, Boolean> userTableColumnUsers;
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnCongregations;
@@ -71,7 +68,6 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	}
 
 	private void tableColumnsCellFactory() {
-		userTableColumnRoleAdmin.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnRoleAdmin));
 		userTableColumnUsers.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnUsers));
 		userTableColumnCongregations.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnCongregations));
 		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
@@ -81,14 +77,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private void tableColumnsCellValueFactory() {
 		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
 		userTableColumnName.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
-		userTableColumnRoleAdmin.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
-
-		
-		//TODO: Sistemare
-		userTableColumnUsers.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
-		userTableColumnCongregations.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
-		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
-		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().getRoleAdminProperty());
+		userTableColumnUsers.setCellValueFactory(cellData -> cellData.getValue().spInf1Property());
+		userTableColumnCongregations.setCellValueFactory(cellData -> cellData.getValue().spInf2Property());
+		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().spInf3Property());
+		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().spInf4Property());
 	}
 
 	private void styleClasses() {
@@ -184,7 +176,6 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userLabel.setText(language.getString("TEXT0001"));
 		userTableColumnID.setText(language.getString("TEXT0005"));
 		userTableColumnName.setText(language.getString("VIEW007LAB002"));
-		userTableColumnRoleAdmin.setText(language.getString("TEXT0002"));
 		userTableColumnUsers.setText(language.getString("USERMENU001"));
 		userTableColumnCongregations.setText(language.getString("USERMENU002"));
 		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
@@ -197,7 +188,6 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnName.setMinWidth(350);
 		userTableColumnName.setMaxWidth(350);
 		userTableColumnName.setResizable(false);
-		userTableColumnRoleAdmin.setEditable(true);
 		userTableColumnUsers.setEditable(true);
 		userTableColumnCongregations.setEditable(true);
 		userTableColumnServiceGroups.setEditable(true);

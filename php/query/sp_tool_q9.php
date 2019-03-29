@@ -9,7 +9,9 @@ if (! $database) {
 } else {
 	$query = "SELECT spMemberID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9";
 	$query .= ", spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20";
-	$query .= ", spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29 FROM sp_members";
+	$query .= ", spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf39, spInf40";
+	$query .= ", spInf41";
+	$query .= " FROM sp_members";
 	$result = mysqli_query ( $database, $query );
 	
 	if (mysqli_num_rows ( $result ) > 0) {
@@ -48,6 +50,11 @@ if (! $database) {
 			$row ["spInf27"] = $resultRow ["spInf27"];
 			$row ["spInf28"] = $resultRow ["spInf28"];
 			$row ["spInf29"] = $resultRow ["spInf29"];
+			
+			$row ["spInf39"] = $resultRow ["spInf39"];
+			$row ["spInf40"] = $resultRow ["spInf40"];
+			$row ["spInf41"] = $resultRow ["spInf41"];
+			
 			array_push ( $response ["result"], $row );
 		}
 	} else {

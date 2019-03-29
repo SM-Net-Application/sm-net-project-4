@@ -30,13 +30,12 @@
                <children>
                   <TableView fx:id="userTableView" maxHeight="1.7976931348623157E308">
                     <columns>
-                        <TableColumn fx:id="userTableColumnID" prefWidth="75.0" text="Column X" />
-                      <TableColumn fx:id="userTableColumnName" prefWidth="75.0" text="C1" />
-                      <TableColumn fx:id="userTableColumnRoleAdmin" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="userTableColumnUsers" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="userTableColumnCongregations" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="userTableColumnServiceGroups" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="userTableColumnMeetings" prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="userTableColumnID" prefWidth="75.0" text="id" />
+                      <TableColumn fx:id="userTableColumnName" prefWidth="75.0" text="name" />
+                        <TableColumn fx:id="userTableColumnUsers" prefWidth="75.0" text="users" />
+                        <TableColumn fx:id="userTableColumnCongregations" prefWidth="75.0" text="congr" />
+                        <TableColumn fx:id="userTableColumnServiceGroups" prefWidth="75.0" text="sergr" />
+                        <TableColumn fx:id="userTableColumnMeetings" prefWidth="75.0" text="meeting" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

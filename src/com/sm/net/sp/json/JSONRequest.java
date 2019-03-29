@@ -57,12 +57,11 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
-	public static JSONObject UPDATE_USER_RULES(String spUserID, String spRoleAdmin, String spInf1, String spInf2,
-			String spInf3, String spInf4) {
+	public static JSONObject UPDATE_USER_RULES(String spUserID, String spInf1, String spInf2, String spInf3,
+			String spInf4) {
 
 		JSONObject jsonObj = create(Integer.valueOf(5));
 		jsonObj.put("spUserID", spUserID);
-		jsonObj.put("spRoleAdmin", spRoleAdmin);
 		jsonObj.put("spInf1", spInf1);
 		jsonObj.put("spInf2", spInf2);
 		jsonObj.put("spInf3", spInf3);
@@ -97,7 +96,8 @@ public class JSONRequest {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29) {
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf39,
+			String spInf40, String spInf41) {
 
 		JSONObject jsonObj = create(Integer.valueOf(10));
 		jsonObj.put("spInf1", spInf1);
@@ -129,6 +129,11 @@ public class JSONRequest {
 		jsonObj.put("spInf27", spInf27);
 		jsonObj.put("spInf28", spInf28);
 		jsonObj.put("spInf29", spInf29);
+
+		jsonObj.put("spInf39", spInf39);
+		jsonObj.put("spInf40", spInf40);
+		jsonObj.put("spInf41", spInf41);
+
 		return jsonObj;
 	}
 
@@ -136,7 +141,8 @@ public class JSONRequest {
 			String spInf4, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
 			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
-			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29) {
+			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29,
+			String spInf39, String spInf40, String spInf41) {
 
 		JSONObject jsonObj = create(Integer.valueOf(11));
 		jsonObj.put("spMemberID", spMemberID);
@@ -168,6 +174,10 @@ public class JSONRequest {
 		jsonObj.put("spInf27", spInf27);
 		jsonObj.put("spInf28", spInf28);
 		jsonObj.put("spInf29", spInf29);
+
+		jsonObj.put("spInf39", spInf39);
+		jsonObj.put("spInf40", spInf40);
+		jsonObj.put("spInf41", spInf41);
 
 		return jsonObj;
 	}

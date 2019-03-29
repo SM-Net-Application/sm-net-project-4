@@ -365,7 +365,16 @@
                                                                               </Separator>
                                                                               <StackPane alignment="CENTER_LEFT">
                                                                                  <children>
-                                                                                    <CheckBox fx:id="presidentCheckBox" mnemonicParsing="false" text="presidente">
+                                                                                    <CheckBox fx:id="presidentMidweekCheckBox" mnemonicParsing="false" text="presidente">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </CheckBox>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
+                                                                                 <children>
+                                                                                    <CheckBox fx:id="presidentWeekendCheckBox" mnemonicParsing="false" text="pri2">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -654,14 +663,7 @@
                                                                                     </VBox>
                                                                                     <VBox HBox.hgrow="ALWAYS">
                                                                                        <children>
-                                                                                          <StackPane>
-                                                                                             <children>
-                                                                                                <CheckBox fx:id="prayStartWeekendCheckBox" mnemonicParsing="false" text="pri2">
-                                                                                                   <StackPane.margin>
-                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                                                   </StackPane.margin></CheckBox>
-                                                                                             </children>
-                                                                                          </StackPane>
+                                                                                          <StackPane minHeight="35.0" />
                                                                                           <Separator prefWidth="200.0" />
                                                                                           <StackPane>
                                                                                              <children>

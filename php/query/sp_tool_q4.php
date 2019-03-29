@@ -7,7 +7,7 @@ if (! $database) {
 	$response ["status"] = 4;
 	$response ["error"] = mysqli_connect_error ();
 } else {
-	$query = "SELECT spUserID, spUserSU, spUserName, spRoleAdmin FROM sp_users WHERE spUserSU=0";
+	$query = "SELECT spUserID, spUserSU, spUserName, spInf1, spInf2, spInf3, spInf4 FROM sp_users WHERE spUserSU=0";
 	$result = mysqli_query ( $database, $query );
 	
 	if (mysqli_num_rows ( $result ) > 0) {
@@ -18,8 +18,11 @@ if (! $database) {
 			$row = array ();
 			$row ["spUserID"] = $resultRow ["spUserID"];
 			$row ["spUserSU"] = $resultRow ["spUserSU"];
-			$row ["spUserName"] = $resultRow ["spUserName"];
-			$row ["spRoleAdmin"] = $resultRow ["spRoleAdmin"];
+			$row ["spUserName"] = $resultRow ["spUserName"];			
+			$row ["spInf1"] = $resultRow ["spInf1"];
+			$row ["spInf2"] = $resultRow ["spInf2"];
+			$row ["spInf3"] = $resultRow ["spInf3"];
+			$row ["spInf4"] = $resultRow ["spInf4"];
 			array_push ( $response ["result"], $row );
 		}
 	} else {

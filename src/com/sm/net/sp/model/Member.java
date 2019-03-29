@@ -16,10 +16,10 @@ public class Member {
 
 	private IntegerProperty spMemberID;
 	private StringProperty spInf1Encrypted;
-	private StringProperty spInf2Encrypted;
-	private StringProperty spInf3Encrypted;
 	private StringProperty spInf1Decrypted;
+	private StringProperty spInf2Encrypted;
 	private StringProperty spInf2Decrypted;
+	private StringProperty spInf3Encrypted;
 	private StringProperty spInf3Decrypted;
 	private IntegerProperty spInf4;
 	private IntegerProperty spInf5;
@@ -48,6 +48,13 @@ public class Member {
 	private IntegerProperty spInf28;
 	private IntegerProperty spInf29;
 
+	private StringProperty spInf39Encrypted;
+	private StringProperty spInf39Decrypted;
+	private StringProperty spInf40Encrypted;
+	private StringProperty spInf40Decrypted;
+	private StringProperty spInf41Encrypted;
+	private StringProperty spInf41Decrypted;
+
 	public Member() {
 		super();
 	}
@@ -61,10 +68,10 @@ public class Member {
 
 		this.spMemberID = new SimpleIntegerProperty(jsonObject.getInt("spMemberID"));
 		this.spInf1Encrypted = new SimpleStringProperty(jsonObject.getString("spInf1"));
-		this.spInf2Encrypted = new SimpleStringProperty(jsonObject.getString("spInf2"));
-		this.spInf3Encrypted = new SimpleStringProperty(jsonObject.getString("spInf3"));
 		this.spInf1Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf1Encrypted.get(), secretKey));
+		this.spInf2Encrypted = new SimpleStringProperty(jsonObject.getString("spInf2"));
 		this.spInf2Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf2Encrypted.get(), secretKey));
+		this.spInf3Encrypted = new SimpleStringProperty(jsonObject.getString("spInf3"));
 		this.spInf3Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf3Encrypted.get(), secretKey));
 		this.spInf4 = new SimpleIntegerProperty(jsonObject.getInt("spInf4"));
 		this.spInf5 = new SimpleIntegerProperty(jsonObject.getInt("spInf5"));
@@ -92,6 +99,13 @@ public class Member {
 		this.spInf27 = new SimpleIntegerProperty(jsonObject.getInt("spInf27"));
 		this.spInf28 = new SimpleIntegerProperty(jsonObject.getInt("spInf28"));
 		this.spInf29 = new SimpleIntegerProperty(jsonObject.getInt("spInf29"));
+
+		this.spInf39Encrypted = new SimpleStringProperty(jsonObject.getString("spInf39"));
+		this.spInf39Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf39Encrypted.get(), secretKey));
+		this.spInf40Encrypted = new SimpleStringProperty(jsonObject.getString("spInf40"));
+		this.spInf40Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf40Encrypted.get(), secretKey));
+		this.spInf41Encrypted = new SimpleStringProperty(jsonObject.getString("spInf41"));
+		this.spInf41Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf41Encrypted.get(), secretKey));
 	}
 
 	public static Member emptyMember(Language language) {
@@ -100,10 +114,10 @@ public class Member {
 
 		member.spMemberID = new SimpleIntegerProperty(0);
 		member.spInf1Encrypted = new SimpleStringProperty("");
-		member.spInf2Encrypted = new SimpleStringProperty("");
-		member.spInf3Encrypted = new SimpleStringProperty("");
 		member.spInf1Decrypted = new SimpleStringProperty("");
+		member.spInf2Encrypted = new SimpleStringProperty("");
 		member.spInf2Decrypted = new SimpleStringProperty(language.getString("TEXT0096"));
+		member.spInf3Encrypted = new SimpleStringProperty("");
 		member.spInf3Decrypted = new SimpleStringProperty("");
 		member.spInf4 = new SimpleIntegerProperty(1);
 		member.spInf5 = new SimpleIntegerProperty(1);
@@ -131,6 +145,13 @@ public class Member {
 		member.spInf27 = new SimpleIntegerProperty(1);
 		member.spInf28 = new SimpleIntegerProperty(1);
 		member.spInf29 = new SimpleIntegerProperty(1);
+
+		member.spInf39Encrypted = new SimpleStringProperty("");
+		member.spInf39Decrypted = new SimpleStringProperty("");
+		member.spInf40Encrypted = new SimpleStringProperty("");
+		member.spInf40Decrypted = new SimpleStringProperty("");
+		member.spInf41Encrypted = new SimpleStringProperty("");
+		member.spInf41Decrypted = new SimpleStringProperty("");
 
 		return member;
 	}
@@ -544,6 +565,78 @@ public class Member {
 
 	public final void setSpInf29(final int spInf29) {
 		this.spInf29Property().set(spInf29);
+	}
+
+	public final StringProperty spInf39EncryptedProperty() {
+		return this.spInf39Encrypted;
+	}
+
+	public final String getSpInf39Encrypted() {
+		return this.spInf39EncryptedProperty().get();
+	}
+
+	public final void setSpInf39Encrypted(final String spInf39Encrypted) {
+		this.spInf39EncryptedProperty().set(spInf39Encrypted);
+	}
+
+	public final StringProperty spInf39DecryptedProperty() {
+		return this.spInf39Decrypted;
+	}
+
+	public final String getSpInf39Decrypted() {
+		return this.spInf39DecryptedProperty().get();
+	}
+
+	public final void setSpInf39Decrypted(final String spInf39Decrypted) {
+		this.spInf39DecryptedProperty().set(spInf39Decrypted);
+	}
+
+	public final StringProperty spInf40EncryptedProperty() {
+		return this.spInf40Encrypted;
+	}
+
+	public final String getSpInf40Encrypted() {
+		return this.spInf40EncryptedProperty().get();
+	}
+
+	public final void setSpInf40Encrypted(final String spInf40Encrypted) {
+		this.spInf40EncryptedProperty().set(spInf40Encrypted);
+	}
+
+	public final StringProperty spInf40DecryptedProperty() {
+		return this.spInf40Decrypted;
+	}
+
+	public final String getSpInf40Decrypted() {
+		return this.spInf40DecryptedProperty().get();
+	}
+
+	public final void setSpInf40Decrypted(final String spInf40Decrypted) {
+		this.spInf40DecryptedProperty().set(spInf40Decrypted);
+	}
+
+	public final StringProperty spInf41EncryptedProperty() {
+		return this.spInf41Encrypted;
+	}
+
+	public final String getSpInf41Encrypted() {
+		return this.spInf41EncryptedProperty().get();
+	}
+
+	public final void setSpInf41Encrypted(final String spInf41Encrypted) {
+		this.spInf41EncryptedProperty().set(spInf41Encrypted);
+	}
+
+	public final StringProperty spInf41DecryptedProperty() {
+		return this.spInf41Decrypted;
+	}
+
+	public final String getSpInf41Decrypted() {
+		return this.spInf41DecryptedProperty().get();
+	}
+
+	public final void setSpInf41Decrypted(final String spInf41Decrypted) {
+		this.spInf41DecryptedProperty().set(spInf41Decrypted);
 	}
 
 }

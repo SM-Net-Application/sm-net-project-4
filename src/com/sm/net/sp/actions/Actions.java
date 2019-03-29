@@ -287,8 +287,8 @@ public class Actions {
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void updateUserRules(String spUserID, String spRoleAdmin, String spInf1, String spInf2, String spInf3,
-			String spInf4, Settings settings, Stage ownerStage, UpdateData callback) {
+	public static void updateUserRules(String spUserID, String spInf1, String spInf2, String spInf3, String spInf4,
+			Settings settings, Stage ownerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -323,7 +323,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.UPDATE_USER_RULES(spUserID, spRoleAdmin, spInf1, spInf2, spInf3, spInf4));
+						JSONRequest.UPDATE_USER_RULES(spUserID, spInf1, spInf2, spInf3, spInf4));
 			}
 		};
 
@@ -543,6 +543,9 @@ public class Actions {
 	 * @param spInf8
 	 * @param spInf7
 	 * @param spInf6
+	 * @param spInf39
+	 * @param spInf40
+	 * @param spInf41
 	 * 
 	 * @param url
 	 * @param username
@@ -558,8 +561,9 @@ public class Actions {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, Settings settings,
-			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf39,
+			String spInf40, String spInf41, Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab,
+			Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -601,7 +605,7 @@ public class Actions {
 						JSONRequest.INSERT_MEMBER(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
 								spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
-								spInf28, spInf29));
+								spInf28, spInf29, spInf39, spInf40, spInf41));
 			}
 		};
 
@@ -698,6 +702,9 @@ public class Actions {
 	 * @param spInf8
 	 * @param spInf7
 	 * @param spInf6
+	 * @param spInf39
+	 * @param spInf40
+	 * @param spInf41
 	 * 
 	 * @param url
 	 * @param username
@@ -713,8 +720,9 @@ public class Actions {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, Settings settings,
-			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf39,
+			String spInf40, String spInf41, Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab,
+			Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -756,7 +764,7 @@ public class Actions {
 						JSONRequest.UPDATE_MEMBER(spMemberID, spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8,
 								spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
-								spInf28, spInf29));
+								spInf28, spInf29, spInf39, spInf40, spInf41));
 			}
 		};
 

@@ -137,8 +137,14 @@ public class HomeUserMenuList {
 		if (this.user.isSpUserSU())
 			menuListView.getItems().addAll(EnumHomeUserMenuList.values());
 		else {
-			if (this.user.isRoleAdmin())
+			if (this.user.isSpInf1())
 				menuListView.getItems().add(EnumHomeUserMenuList.USERS);
+			if (this.user.isSpInf2())
+				menuListView.getItems().add(EnumHomeUserMenuList.CONGREGATION);
+			if (this.user.isSpInf3())
+				menuListView.getItems().add(EnumHomeUserMenuList.SERVICEGROUPS);
+			if (this.user.isSpInf4())
+				menuListView.getItems().add(EnumHomeUserMenuList.MEETINGS);
 		}
 	}
 
