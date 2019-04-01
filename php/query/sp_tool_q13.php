@@ -1,6 +1,6 @@
 <?php
 // Insert family
-if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf6"] ) && isset ( $jsonObj ["idToRemove"] ) && isset ( $jsonObj ["idToSet"] )) {
+if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf6"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["idToRemove"] ) && isset ( $jsonObj ["idToSet"] )) {
 	if (! empty ( $jsonObj ["spInf1"] ) && ! empty ( $jsonObj ["spInf2"] ) && ! empty ( $jsonObj ["spInf3"] ) && ! empty ( $jsonObj ["spInf4"] ) && ! empty ( $jsonObj ["spInf5"] )) {
 		require_once __DIR__ . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
@@ -9,13 +9,14 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "INSERT INTO sp_fam (spInf1, spInf2, spInf3, spInf4, spInf5, spInf6) VALUES (";
+			$query = "INSERT INTO sp_fam (spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7) VALUES (";
 			$query .= "'" . $jsonObj ["spInf1"] . "', ";
 			$query .= "'" . $jsonObj ["spInf2"] . "', ";
 			$query .= "'" . $jsonObj ["spInf3"] . "', ";
 			$query .= "'" . $jsonObj ["spInf4"] . "', ";
 			$query .= "'" . $jsonObj ["spInf5"] . "', ";
-			$query .= "'" . $jsonObj ["spInf6"] . "')";
+			$query .= "'" . $jsonObj ["spInf6"] . "', ";
+			$query .= "'" . $jsonObj ["spInf7"] . "')";
 			
 			if ($database->query ( $query ) === TRUE) {
 				

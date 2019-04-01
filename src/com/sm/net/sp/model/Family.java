@@ -29,6 +29,9 @@ public class Family {
 
 	private IntegerProperty spFamMembers;
 
+	private StringProperty spInf7Encrypted;
+	private StringProperty spInf7Decrypted;
+
 	public Family(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
@@ -53,6 +56,9 @@ public class Family {
 		this.spFamMembers = new SimpleIntegerProperty(jsonObject.getInt("spFamMembers"));
 
 		this.spInf6 = new SimpleIntegerProperty(jsonObject.getInt("spInf6"));
+
+		this.spInf7Encrypted = new SimpleStringProperty(jsonObject.getString("spInf7"));
+		this.spInf7Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf7Encrypted.get(), secretKey));
 	}
 
 	public final IntegerProperty spFamIDProperty() {
@@ -209,6 +215,30 @@ public class Family {
 
 	public final void setSpInf6(final int spInf6) {
 		this.spInf6Property().set(spInf6);
+	}
+
+	public final StringProperty spInf7EncryptedProperty() {
+		return this.spInf7Encrypted;
+	}
+
+	public final String getSpInf7Encrypted() {
+		return this.spInf7EncryptedProperty().get();
+	}
+
+	public final void setSpInf7Encrypted(final String spInf7Encrypted) {
+		this.spInf7EncryptedProperty().set(spInf7Encrypted);
+	}
+
+	public final StringProperty spInf7DecryptedProperty() {
+		return this.spInf7Decrypted;
+	}
+
+	public final String getSpInf7Decrypted() {
+		return this.spInf7DecryptedProperty().get();
+	}
+
+	public final void setSpInf7Decrypted(final String spInf7Decrypted) {
+		this.spInf7DecryptedProperty().set(spInf7Decrypted);
 	}
 
 }

@@ -27,37 +27,26 @@ public class UserMenuCongrFamilyEditor {
 
 	@FXML
 	private Label titleLabel;
-
 	@FXML
 	private Label familyNameLabel;
-
 	@FXML
 	private TextField familyNameTextField;
-
 	@FXML
 	private Label familyStreetLabel;
-
 	@FXML
 	private TextField familyStreetTextField;
-
 	@FXML
 	private Label familyNummerLabel;
-
 	@FXML
 	private TextField familyNummerTextField;
-
 	@FXML
 	private Label familyPostCodeLabel;
-
 	@FXML
 	private TextField familyPostCodeTextField;
-
 	@FXML
 	private Label familyCityLabel;
-
 	@FXML
 	private TextField familyCityTextField;
-
 	@FXML
 	private Label familyPhoneLabel;
 	@FXML
@@ -178,6 +167,7 @@ public class UserMenuCongrFamilyEditor {
 			this.familyNummerTextField.setText(selectedFamily.getSpInf3Decrypted());
 			this.familyPostCodeTextField.setText(selectedFamily.getSpInf4Decrypted());
 			this.familyCityTextField.setText(selectedFamily.getSpInf5Decrypted());
+			this.familyPhoneTextField.setText(selectedFamily.getSpInf7Decrypted());
 		}
 	}
 
@@ -266,6 +256,7 @@ public class UserMenuCongrFamilyEditor {
 			String spInf3 = Crypt.encrypt(familyNummerTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf4 = Crypt.encrypt(familyPostCodeTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf5 = Crypt.encrypt(familyCityTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf7 = Crypt.encrypt(familyPhoneTextField.getText(), settings.getDatabaseSecretKey());
 
 			String idToRemove = "";
 
@@ -280,26 +271,26 @@ public class UserMenuCongrFamilyEditor {
 					idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " + member.getSpMemberID();
 
 			if (selectedFamily != null)
-				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet);
+				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, idToRemove, idToSet);
 			else
-				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", idToRemove, idToSet);
+				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
 					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
 	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf6,
-			String idToRemove, String idToSet) {
+			String spInf7, String idToRemove, String idToSet) {
 
-		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, idToRemove, idToSet, settings, ownerStage,
-				congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
+		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, idToRemove, idToSet, settings,
+				ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 
-	private void editFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+	private void editFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf7,
 			String idToRemove, String idToSet) {
 
 		Actions.updateFamily(String.valueOf(selectedFamily.getSpFamID()), spInf1, spInf2, spInf3, spInf4, spInf5,
-				idToRemove, idToSet, settings, ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
+				spInf7, idToRemove, idToSet, settings, ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {

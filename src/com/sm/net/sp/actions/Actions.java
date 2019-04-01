@@ -519,51 +519,16 @@ public class Actions {
 	/**
 	 * Insert Member
 	 * 
-	 * @param spInf29
-	 * @param spInf28
-	 * @param spInf27
-	 * @param spInf26
-	 * @param spInf25
-	 * @param spInf24
-	 * @param spInf23
-	 * @param spInf22
-	 * @param spInf21
-	 * @param spInf20
-	 * @param spInf19
-	 * @param spInf18
-	 * @param spInf17
-	 * @param spInf16
-	 * @param spInf15
-	 * @param spInf14
-	 * @param spInf13
-	 * @param spInf12
-	 * @param spInf11
-	 * @param spInf10
-	 * @param spInf9
-	 * @param spInf8
-	 * @param spInf7
-	 * @param spInf6
-	 * @param spInf39
-	 * @param spInf40
-	 * @param spInf41
-	 * 
-	 * @param url
-	 * @param username
-	 * @param password
-	 * @param settings
-	 * @param ownerStage
-	 * @param newMemberTab
-	 * @param congrTabPane
-	 * @param membersTab
-	 * @param callback
 	 */
 	public static void insertMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf39,
-			String spInf40, String spInf41, Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab,
-			Tab membersTab, UpdateData callback) {
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
+			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
+			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
+			String spInf43, String spInf44, String spInf45, String spInf46, Settings settings, Stage ownerStage,
+			TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -605,7 +570,9 @@ public class Actions {
 						JSONRequest.INSERT_MEMBER(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
 								spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
-								spInf28, spInf29, spInf39, spInf40, spInf41));
+								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
+								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
+								spInf46));
 			}
 		};
 
@@ -677,52 +644,16 @@ public class Actions {
 
 	/**
 	 * Update Member
-	 * 
-	 * @param spInf29
-	 * @param spInf28
-	 * @param spInf27
-	 * @param spInf26
-	 * @param spInf25
-	 * @param spInf24
-	 * @param spInf23
-	 * @param spInf22
-	 * @param spInf21
-	 * @param spInf20
-	 * @param spInf19
-	 * @param spInf18
-	 * @param spInf17
-	 * @param spInf16
-	 * @param spInf15
-	 * @param spInf14
-	 * @param spInf13
-	 * @param spInf12
-	 * @param spInf11
-	 * @param spInf10
-	 * @param spInf9
-	 * @param spInf8
-	 * @param spInf7
-	 * @param spInf6
-	 * @param spInf39
-	 * @param spInf40
-	 * @param spInf41
-	 * 
-	 * @param url
-	 * @param username
-	 * @param password
-	 * @param settings
-	 * @param ownerStage
-	 * @param newMemberTab
-	 * @param congrTabPane
-	 * @param membersTab
-	 * @param callback
 	 */
 	public static void updateMember(String spMemberID, String spInf1, String spInf2, String spInf3, String spInf4,
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf39,
-			String spInf40, String spInf41, Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newMemberTab,
-			Tab membersTab, UpdateData callback) {
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
+			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
+			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
+			String spInf43, String spInf44, String spInf45, String spInf46, Settings settings, Stage ownerStage,
+			TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -764,7 +695,9 @@ public class Actions {
 						JSONRequest.UPDATE_MEMBER(spMemberID, spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8,
 								spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
-								spInf28, spInf29, spInf39, spInf40, spInf41));
+								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
+								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
+								spInf46));
 			}
 		};
 
@@ -902,8 +835,8 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void insertFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String spInf6, String idToRemove, String idToSet, Settings settings, Stage ownerStage, TabPane congrTabPane,
-			Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+			String spInf6, String spInf7, String idToRemove, String idToSet, Settings settings, Stage ownerStage,
+			TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -944,8 +877,8 @@ public class Actions {
 
 			@Override
 			protected JSONObject call() throws Exception {
-				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.INSERT_FAMILY(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, idToRemove, idToSet));
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.INSERT_FAMILY(spInf1, spInf2,
+						spInf3, spInf4, spInf5, spInf6, spInf7, idToRemove, idToSet));
 			}
 		};
 
@@ -1036,8 +969,8 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void updateFamily(String spFamID, String spInf1, String spInf2, String spInf3, String spInf4,
-			String spInf5, String idToRemove, String idToSet, Settings settings, Stage ownerStage, TabPane congrTabPane,
-			Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+			String spInf5, String spInf7, String idToRemove, String idToSet, Settings settings, Stage ownerStage,
+			TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1077,7 +1010,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_FAMILY(spFamID, spInf1,
-						spInf2, spInf3, spInf4, spInf5, idToRemove, idToSet));
+						spInf2, spInf3, spInf4, spInf5, spInf7, idToRemove, idToSet));
 			}
 		};
 
