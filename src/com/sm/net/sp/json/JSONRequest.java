@@ -3,6 +3,7 @@ package com.sm.net.sp.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sm.net.sp.model.Week;
 import com.sm.net.util.enumeration.JSONStatus;
 
 /**
@@ -292,6 +293,13 @@ public class JSONRequest {
 
 		JSONObject jsonObj = create(Integer.valueOf(20));
 		jsonObj.put("spSerGrID", spSerGrID);
+		return jsonObj;
+	}
+
+	public static JSONObject GET_ALL_WEEKS(Week weekStart, Week weekEnd) {
+		JSONObject jsonObj = create(Integer.valueOf(21));
+		jsonObj.put("keyStart", weekStart.getKey());
+		jsonObj.put("keyEnd", weekEnd.getKey());
 		return jsonObj;
 	}
 

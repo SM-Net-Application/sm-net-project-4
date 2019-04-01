@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.DateUtil;
@@ -18,11 +20,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class UserMenuMeetings {
+public class UserMenuMeetings extends UpdateDataAdapter {
 
 	@FXML
 	private TabPane tabPane;
@@ -36,6 +37,8 @@ public class UserMenuMeetings {
 	private TableColumn<Week, LocalDate> fromTableColumn;
 	@FXML
 	private TableColumn<Week, LocalDate> toTableColumn;
+	@FXML
+	private TableColumn<Week, String> typeColumn;
 
 	private Settings settings;
 	private Language language;
@@ -53,6 +56,7 @@ public class UserMenuMeetings {
 		weekTableColumn.setCellValueFactory(cellData -> cellData.getValue().weekProperty().asObject());
 		fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
+		typeColumn.setCellValueFactory(cellData -> cellData.getValue().getWeekTypeTranslated().nameProperty());
 	}
 
 	private void styleClasses() {
@@ -71,6 +75,7 @@ public class UserMenuMeetings {
 
 	private void initData() {
 		loadCalendar();
+		updateWeeks();
 	}
 
 	private void loadCalendar() {
@@ -101,16 +106,41 @@ public class UserMenuMeetings {
 			int currentMonth = day.getMonthValue();
 
 			if (lastMonth == currentMonth)
-				calendar.add(new Week(day));
+				calendar.add(new Week(day, language));
 			else {
 				countMonth = countMonth + 1;
 				if (countMonth < 4)
-					calendar.add(new Week(day));
+					calendar.add(new Week(day, language));
 			}
 
 		} while (countMonth < 4);
 
 		weekTableView.setItems(calendar);
+	}
+
+	@Override
+	public void updateWeeks() {
+		super.updateWeeks();
+
+		if (this.calendar != null)
+			if (this.calendar.size() > 0) {
+				Week weekStart = this.calendar.get(0);
+				Week weekEnd = this.calendar.get(this.calendar.size() - 1);
+
+				Actions.getAllWeeks(weekStart, weekEnd, this.settings, this.ownerStage, this);
+			}
+	}
+
+	@Override
+	public void updateWeeks(ObservableList<Week> list) {
+		super.updateWeeks(list);
+
+		if (list != null) {
+			for (Week week : this.calendar)
+				week.updateType(list, this.language);
+
+			this.weekTableView.refresh();
+		}
 	}
 
 	private void listeners() {
@@ -147,7 +177,9 @@ public class UserMenuMeetings {
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
 				newTab.getStyleClass().add("tabStyle1");
-				newTab.setGraphic(new ImageView(Meta.Resources.USER_MENU_MEETINGS));
+				// newTab.setGraphic(new
+				// ImageView(Meta.Resources.USER_MENU_MEETINGS));
+				newTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.CALENDAR));
 
 				ctrl.setOwnerTabPane(tabPane);
 				ctrl.setThisTab(newTab);
@@ -180,9 +212,11 @@ public class UserMenuMeetings {
 		this.language = settings.getLanguage();
 
 		calendarTab.setText(language.getString("TEXT0075"));
+		calendarTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.CALENDAR));
 		weekTableColumn.setText(language.getString("TEXT0076"));
 		fromTableColumn.setText(language.getString("TEXT0077"));
 		toTableColumn.setText(language.getString("TEXT0078"));
+		typeColumn.setText(language.getString("TEXT0091"));
 	}
 
 	public Settings getSettings() {

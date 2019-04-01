@@ -11,6 +11,7 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
@@ -1250,6 +1251,74 @@ public class Actions {
 	}
 
 	/**
+	 * Get All Week Type
+	 * 
+	 * @param weekStart
+	 * @param weekEnd
+	 */
+	public static void getAllWeeks(Week weekStart, Week weekEnd, Settings settings, Stage ownerStage,
+			UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							ObservableList<Week> list = FXCollections.observableArrayList();
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								list.add(new Week(json, settings.getLanguage()));
+							}
+
+							callback.updateWeeks(list);
+
+						} else {
+							callback.updateWeeks(null);
+							// new
+							// AlertDesigner(settings.getLanguage().getString("MEX006"),
+							// ownerStage, AlertType.ERROR,
+							// Meta.Application.getFullTitle(),
+							// Meta.Resources.ICON).showAndWait();
+						}
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_ALL_WEEKS(weekStart, weekEnd));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
 	 * Create Alert Window
 	 * 
 	 * @param settings
@@ -1269,4 +1338,5 @@ public class Actions {
 
 		return waitAlert;
 	}
+
 }

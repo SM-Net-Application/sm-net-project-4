@@ -188,6 +188,9 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_del_50x50.png"));
 		public static final Image USER_MENU_MEETINGS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/meetings_20x20.png"));
+		public static final Image INFO = new Image(SupportPlannerMain.class.getResourceAsStream("resources/info.png"));
+		public static final Image CALENDAR = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/calendar.png"));
 		public static final Image USER_MENU_MEETINGS_TREASURES = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/treasures.png"));
 		public static final Image USER_MENU_MEETINGS_MINISTRY = new Image(

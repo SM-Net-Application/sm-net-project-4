@@ -15,6 +15,8 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekType;
+import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
 
 import javafx.collections.FXCollections;
@@ -28,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -50,11 +53,18 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	@FXML
 	private TabPane tabPane;
 	@FXML
+	private Tab generalTab;
+	@FXML
 	private Tab treasuresTab;
 	@FXML
 	private Tab ministryTab;
 	@FXML
 	private Tab christiansTab;
+
+	@FXML
+	private Label typeWeekLabel;
+	@FXML
+	private ListView<WeekTypeTranslated> typeWeekListView;
 
 	@FXML
 	private Label generalLabel;
@@ -214,6 +224,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<Member> memberList;
 	private ObservableList<ChristiansPart> christiansPartList;
 
+	private ObservableList<WeekTypeTranslated> weekTypesList;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -225,9 +237,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void styleClasses() {
 		tabPane.getStyleClass().add("tabPaneStyle2");
+		generalTab.getStyleClass().add("tabStyle1");
 		treasuresTab.getStyleClass().add("tabStyle1");
 		ministryTab.getStyleClass().add("tabStyle1");
 		christiansTab.getStyleClass().add("tabStyle1");
+
+		typeWeekLabel.getStyleClass().add("labelStyle2");
+		typeWeekListView.getStyleClass().add("listViewStyle1");
 
 		generalLabel.getStyleClass().add("labelStyle2");
 		treasuresLabel.getStyleClass().add("labelStyle2");
@@ -427,6 +443,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		christiansPartList = FXCollections.observableArrayList();
 
 		christiansPartTableView.setItems(christiansPartList);
+
+		weekTypesList = FXCollections.observableArrayList();
+		weekTypesList.addAll(WeekType.getNotEmptyWeekTypeTranslated(language));
+		this.typeWeekListView.setItems(weekTypesList);
+		if (weekTypesList.size() > 0)
+			this.typeWeekListView.getSelectionModel().select(0);
 
 		updateMembers();
 	}
@@ -685,6 +707,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		this.language = settings.getLanguage();
 
+		generalTab.setText(language.getString("TEXT0043"));
+		generalTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.INFO));
 		treasuresTab.setText(language.getString("TEXT0080"));
 		treasuresTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
 		ministryTab.setText(language.getString("TEXT0081"));
@@ -692,6 +716,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		christiansTab.setText(language.getString("TEXT0082"));
 		christiansTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
 
+		typeWeekLabel.setText(language.getString("TEXT0122"));
 		generalLabel.setText(language.getString("TEXT0079"));
 		treasuresLabel.setText(language.getString("TEXT0080"));
 

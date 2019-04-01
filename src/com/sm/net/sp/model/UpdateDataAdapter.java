@@ -35,4 +35,14 @@ public class UpdateDataAdapter implements UpdateData {
 	@Override
 	public void updateSerGroups(ObservableList<SerGroup> list) {
 	}
+
+	@Override
+	public void updateWeeks(ObservableList<Week> list) {
+
+	}
+
+	@Override
+	public void updateWeeks() {
+
+	}
 }
