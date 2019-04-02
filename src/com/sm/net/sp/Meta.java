@@ -212,6 +212,9 @@ public class Meta {
 			ImageView imageView = new ImageView(image);
 			imageView.setFitWidth(50);
 			imageView.setFitHeight(50);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+			// imageView.setCache(true);
 			return imageView;
 		}
 	}

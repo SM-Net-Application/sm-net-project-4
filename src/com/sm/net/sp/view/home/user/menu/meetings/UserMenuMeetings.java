@@ -28,6 +28,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	@FXML
 	private TabPane tabPane;
 	@FXML
+	private Tab generalTab;
+	@FXML
 	private Tab calendarTab;
 	@FXML
 	private TableView<Week> weekTableView;
@@ -63,6 +65,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		tabPane.getStyleClass().add("tabPaneStyle1");
 
+		generalTab.getStyleClass().add("tabStyle1");
 		calendarTab.getStyleClass().add("tabStyle1");
 		weekTableView.getStyleClass().add("tableViewStyle1");
 	}
@@ -211,6 +214,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		this.language = settings.getLanguage();
 
+		generalTab.setText(language.getString("TEXT0043"));
+		generalTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.INFO));
 		calendarTab.setText(language.getString("TEXT0075"));
 		calendarTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.CALENDAR));
 		weekTableColumn.setText(language.getString("TEXT0076"));
