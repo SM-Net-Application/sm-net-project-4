@@ -62,6 +62,24 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	@FXML
 	private TextField weekendTimeMinutesTextField;
 	@FXML
+	private Label kingdomHallLabel;
+	@FXML
+	private Label kingdomHallStreetLabel;
+	@FXML
+	private Label kingdomHallNumberLabel;
+	@FXML
+	private Label kingdomHallPostcodeLabel;
+	@FXML
+	private Label kingdomHallCityLabel;
+	@FXML
+	private TextField kingdomHallStreetTextField;
+	@FXML
+	private TextField kingdomHallNumberTextField;
+	@FXML
+	private TextField kingdomHallPostcodeTextField;
+	@FXML
+	private TextField kingdomHallCityTextField;
+	@FXML
 	private Tab calendarTab;
 	@FXML
 	private TableView<Week> weekTableView;
@@ -109,6 +127,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		meetingLabel.getStyleClass().add("labelStyle2");
 		meetingMidweekLabel.getStyleClass().add("labelStyle2");
 		meetingWeekendLabel.getStyleClass().add("labelStyle2");
+		kingdomHallLabel.getStyleClass().add("labelStyle2");
+		kingdomHallStreetLabel.getStyleClass().add("labelStyle3");
+		kingdomHallNumberLabel.getStyleClass().add("labelStyle3");
+		kingdomHallPostcodeLabel.getStyleClass().add("labelStyle3");
+		kingdomHallCityLabel.getStyleClass().add("labelStyle3");
 
 		mondayRadioButton.getStyleClass().add("radioButtonStyle1");
 		tuesdayRadioButton.getStyleClass().add("radioButtonStyle1");
@@ -122,6 +145,10 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		midweekTimeMinutesTextField.getStyleClass().add("textFieldStyle1");
 		weekendTimeHourTextField.getStyleClass().add("textFieldStyle1");
 		weekendTimeMinutesTextField.getStyleClass().add("textFieldStyle1");
+		kingdomHallStreetTextField.getStyleClass().add("textFieldStyle1");
+		kingdomHallNumberTextField.getStyleClass().add("textFieldStyle1");
+		kingdomHallPostcodeTextField.getStyleClass().add("textFieldStyle1");
+		kingdomHallCityTextField.getStyleClass().add("textFieldStyle1");
 	}
 
 	public void objectInitialize() {
@@ -407,6 +434,12 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		fromTableColumn.setText(language.getString("TEXT0077"));
 		toTableColumn.setText(language.getString("TEXT0078"));
 		typeColumn.setText(language.getString("TEXT0091"));
+
+		kingdomHallLabel.setText(language.getString("TEXT0130"));
+		kingdomHallStreetLabel.setText(language.getString("TEXT0027"));
+		kingdomHallNumberLabel.setText(language.getString("TEXT0028"));
+		kingdomHallPostcodeLabel.setText(language.getString("TEXT0029"));
+		kingdomHallCityLabel.setText(language.getString("TEXT0030"));
 	}
 
 	public Settings getSettings() {

@@ -18,12 +18,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -32,64 +34,72 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	@FXML
 	private TabPane congrTabPane;
-
+	@FXML
+	private Tab generalTab;
 	@FXML
 	private Tab membersTab;
-
 	@FXML
 	private Tab familyTab;
 
 	@FXML
-	private TableView<Member> membersTableView;
+	private Label congrLabel;
+	@FXML
+	private TextField congrTextField;
+	@FXML
+	private Label overseer1Label;
+	@FXML
+	private Label overseer1NameLabel;
+	@FXML
+	private TextField overseer1NameTextField;
+	@FXML
+	private Label overseer1WifeLabel;
+	@FXML
+	private TextField overseer1WifeTextField;
+	@FXML
+	private Label overseer2Label;
+	@FXML
+	private Label overseer2NameLabel;
+	@FXML
+	private TextField overseer2NameTextField;
+	@FXML
+	private Label overseer2WifeLabel;
+	@FXML
+	private TextField overseer2WifeTextField;
 
+	@FXML
+	private TableView<Member> membersTableView;
 	@FXML
 	private TableColumn<Member, Integer> memberIDTableColumn;
-
 	@FXML
 	private TableColumn<Member, String> memberSurnameTableColumn;
-
 	@FXML
 	private TableColumn<Member, String> memberNameTableColumn;
-
 	@FXML
 	private Button memberAddButton;
-
 	@FXML
 	private Button memberDeleteButton;
-
 	@FXML
 	private Button membersUpdateButton;
-
 	@FXML
 	private TableView<Family> familiesTableView;
-
 	@FXML
 	private TableColumn<Family, Integer> familyIDTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> familyNameTableColumn;
-
 	@FXML
 	private TableColumn<Family, Integer> familyCountTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> familyStreetTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> familyNummerTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> familyPostCodeTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> familyCityTableColumn;
-
 	@FXML
 	private Button familyAddButton;
-
 	@FXML
 	private Button familyDeleteButton;
-
 	@FXML
 	private Button familiesUpdateButton;
 
@@ -125,6 +135,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		congrTabPane.getStyleClass().add("tabPaneStyle1");
 
+		generalTab.getStyleClass().add("tabStyle1");
 		membersTab.getStyleClass().add("tabStyle1");
 		familyTab.getStyleClass().add("tabStyle1");
 		membersTableView.getStyleClass().add("tableViewStyle1");
@@ -137,6 +148,20 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familyAddButton.getStyleClass().add("buttonStyle2");
 		familyDeleteButton.getStyleClass().add("buttonStyle2");
 		familiesUpdateButton.getStyleClass().add("buttonStyle2");
+
+		congrLabel.getStyleClass().add("labelStyle2");
+		congrTextField.getStyleClass().add("textFieldStyle1");
+
+		overseer1Label.getStyleClass().add("labelStyle2");
+		overseer1NameLabel.getStyleClass().add("labelStyle3");
+		overseer1NameTextField.getStyleClass().add("textFieldStyle1");
+		overseer1WifeLabel.getStyleClass().add("labelStyle3");
+		overseer1WifeTextField.getStyleClass().add("textFieldStyle1");
+		overseer2Label.getStyleClass().add("labelStyle2");
+		overseer2NameLabel.getStyleClass().add("labelStyle3");
+		overseer2NameTextField.getStyleClass().add("textFieldStyle1");
+		overseer2WifeLabel.getStyleClass().add("labelStyle3");
+		overseer2WifeTextField.getStyleClass().add("textFieldStyle1");
 	}
 
 	public void objectInitialize() {
@@ -395,6 +420,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
 
+		generalTab.setText(language.getString("TEXT0043"));
+		generalTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.INFO));
+		generalTab.setClosable(false);
 		membersTab.setText(language.getString("TEXT0011"));
 		membersTab.setGraphic(new ImageView(Meta.Resources.MEMBER));
 		membersTab.setClosable(false);
@@ -433,6 +461,14 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familyDeleteButton.setGraphic(new ImageView(Meta.Resources.FAMILY_DEL));
 		familiesUpdateButton.setText("");
 		familiesUpdateButton.setGraphic(new ImageView(Meta.Resources.UPDATE));
+
+		congrLabel.setText(language.getString("USERMENU002"));
+		overseer1Label.setText(language.getString("TEXT0131"));
+		overseer1NameLabel.setText(language.getString("TEXT0037"));
+		overseer1WifeLabel.setText(language.getString("TEXT0133"));
+		overseer2Label.setText(language.getString("TEXT0132"));
+		overseer2NameLabel.setText(language.getString("TEXT0037"));
+		overseer2WifeLabel.setText(language.getString("TEXT0133"));
 	}
 
 	@Override
