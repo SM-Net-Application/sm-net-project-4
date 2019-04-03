@@ -15,11 +15,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,6 +33,34 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private TabPane tabPane;
 	@FXML
 	private Tab generalTab;
+	@FXML
+	private Label meetingLabel;
+	@FXML
+	private Label meetingMidweekLabel;
+	@FXML
+	private Label meetingWeekendLabel;
+	@FXML
+	private RadioButton mondayRadioButton;
+	@FXML
+	private RadioButton tuesdayRadioButton;
+	@FXML
+	private RadioButton wednesdayRadioButton;
+	@FXML
+	private RadioButton thursdayRadioButton;
+	@FXML
+	private RadioButton fridayRadioButton;
+	@FXML
+	private RadioButton saturdayRadioButton;
+	@FXML
+	private RadioButton sundayRadioButton;
+	@FXML
+	private TextField midweekTimeHourTextField;
+	@FXML
+	private TextField midweekTimeMinutesTextField;
+	@FXML
+	private TextField weekendTimeHourTextField;
+	@FXML
+	private TextField weekendTimeMinutesTextField;
 	@FXML
 	private Tab calendarTab;
 	@FXML
@@ -46,6 +78,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 	private ObservableList<Week> calendar;
+
+	private String bufferMidweekTimeHour;
+	private String bufferMidweekTimeMinutes;
+	private String bufferWeekendTimeHour;
+	private String bufferWeekendTimeMinutes;
 
 	@FXML
 	private void initialize() {
@@ -68,6 +105,23 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		generalTab.getStyleClass().add("tabStyle1");
 		calendarTab.getStyleClass().add("tabStyle1");
 		weekTableView.getStyleClass().add("tableViewStyle1");
+
+		meetingLabel.getStyleClass().add("labelStyle2");
+		meetingMidweekLabel.getStyleClass().add("labelStyle2");
+		meetingWeekendLabel.getStyleClass().add("labelStyle2");
+
+		mondayRadioButton.getStyleClass().add("radioButtonStyle1");
+		tuesdayRadioButton.getStyleClass().add("radioButtonStyle1");
+		wednesdayRadioButton.getStyleClass().add("radioButtonStyle1");
+		thursdayRadioButton.getStyleClass().add("radioButtonStyle1");
+		fridayRadioButton.getStyleClass().add("radioButtonStyle1");
+		saturdayRadioButton.getStyleClass().add("radioButtonStyle1");
+		sundayRadioButton.getStyleClass().add("radioButtonStyle1");
+
+		midweekTimeHourTextField.getStyleClass().add("textFieldStyle1");
+		midweekTimeMinutesTextField.getStyleClass().add("textFieldStyle1");
+		weekendTimeHourTextField.getStyleClass().add("textFieldStyle1");
+		weekendTimeMinutesTextField.getStyleClass().add("textFieldStyle1");
 	}
 
 	public void objectInitialize() {
@@ -77,8 +131,29 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	private void initData() {
+		setRadioButtonGroup();
+		loadGeneralInfo();
 		loadCalendar();
 		updateWeeks();
+	}
+
+	private void setRadioButtonGroup() {
+
+		ToggleGroup midweek = new ToggleGroup();
+		ToggleGroup weekend = new ToggleGroup();
+
+		mondayRadioButton.setToggleGroup(midweek);
+		tuesdayRadioButton.setToggleGroup(midweek);
+		wednesdayRadioButton.setToggleGroup(midweek);
+		thursdayRadioButton.setToggleGroup(midweek);
+		fridayRadioButton.setToggleGroup(midweek);
+
+		saturdayRadioButton.setToggleGroup(weekend);
+		sundayRadioButton.setToggleGroup(weekend);
+	}
+
+	private void loadGeneralInfo() {
+
 	}
 
 	private void loadCalendar() {
@@ -148,6 +223,103 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	private void listeners() {
 		listenerWeekTableView();
+
+		listenerMidweekTimeHourTextField();
+		listenerMidweekTimeMinutesTextField();
+		listenerWeekendTimeHourTextField();
+		listenerWeekendTimeMinutesTextField();
+	}
+
+	private void listenerMidweekTimeHourTextField() {
+		midweekTimeHourTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkMidweekTimeHour(newValue));
+	}
+
+	private void listenerMidweekTimeMinutesTextField() {
+		midweekTimeMinutesTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkMidweekTimeMinutes(newValue));
+	}
+
+	private void listenerWeekendTimeHourTextField() {
+		weekendTimeHourTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkWeekendTimeHour(newValue));
+	}
+
+	private void listenerWeekendTimeMinutesTextField() {
+		weekendTimeMinutesTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkWeekendTimeMinutes(newValue));
+	}
+
+	private void checkMidweekTimeHour(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferMidweekTimeHour = midweekTimeHourTextField.getText();
+		else {
+			String newText = midweekTimeHourTextField.getText();
+			if (!newText.isEmpty())
+				if (!isValidHour(newText))
+					midweekTimeHourTextField.setText(this.bufferMidweekTimeHour);
+		}
+	}
+
+	private void checkMidweekTimeMinutes(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferMidweekTimeMinutes = midweekTimeMinutesTextField.getText();
+		else {
+			String newText = midweekTimeMinutesTextField.getText();
+			if (!newText.isEmpty())
+				if (!isValidMinutes(newText))
+					midweekTimeMinutesTextField.setText(this.bufferMidweekTimeMinutes);
+		}
+	}
+
+	private void checkWeekendTimeHour(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferWeekendTimeHour = weekendTimeHourTextField.getText();
+		else {
+			String newText = weekendTimeHourTextField.getText();
+			if (!newText.isEmpty())
+				if (!isValidHour(newText))
+					weekendTimeHourTextField.setText(this.bufferWeekendTimeHour);
+		}
+	}
+
+	private void checkWeekendTimeMinutes(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferWeekendTimeMinutes = weekendTimeMinutesTextField.getText();
+		else {
+			String newText = weekendTimeMinutesTextField.getText();
+			if (!newText.isEmpty())
+				if (!isValidMinutes(newText))
+					weekendTimeMinutesTextField.setText(this.bufferWeekendTimeMinutes);
+		}
+	}
+
+	private boolean isValidHour(String text) {
+
+		try {
+			Integer hour = Integer.valueOf(text);
+			if (!(hour.intValue() < 0) && !(hour.intValue() > 23))
+				return true;
+		} catch (NumberFormatException e) {
+		}
+
+		return false;
+	}
+
+	private boolean isValidMinutes(String text) {
+
+		try {
+			Integer minutes = Integer.valueOf(text);
+			if (!(minutes.intValue() < 0) && !(minutes.intValue() > 59))
+				return true;
+		} catch (NumberFormatException e) {
+		}
+
+		return false;
 	}
 
 	private void listenerWeekTableView() {
@@ -216,6 +388,19 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		generalTab.setText(language.getString("TEXT0043"));
 		generalTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.INFO));
+
+		meetingLabel.setText(language.getString("TEXT0055"));
+		meetingMidweekLabel.setText(language.getString("TEXT0057"));
+		meetingWeekendLabel.setText(language.getString("TEXT0059"));
+
+		mondayRadioButton.setText(language.getString("TEXT0123"));
+		tuesdayRadioButton.setText(language.getString("TEXT0124"));
+		wednesdayRadioButton.setText(language.getString("TEXT0125"));
+		thursdayRadioButton.setText(language.getString("TEXT0126"));
+		fridayRadioButton.setText(language.getString("TEXT0127"));
+		saturdayRadioButton.setText(language.getString("TEXT0128"));
+		sundayRadioButton.setText(language.getString("TEXT0129"));
+
 		calendarTab.setText(language.getString("TEXT0075"));
 		calendarTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.CALENDAR));
 		weekTableColumn.setText(language.getString("TEXT0076"));

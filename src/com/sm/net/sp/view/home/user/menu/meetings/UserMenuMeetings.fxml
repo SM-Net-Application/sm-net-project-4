@@ -26,7 +26,7 @@
                            <children>
                               <StackPane alignment="CENTER_LEFT">
                                  <children>
-                                    <Label text="adunanze">
+                                    <Label fx:id="meetingLabel" text="adunanze">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
@@ -44,16 +44,16 @@
                                        <children>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <Label text="infrasettimanale">
+                                                <Label fx:id="meetingMidweekLabel" text="infrasettimanale">
                                                    <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
                                                    </StackPane.margin>
                                                 </Label>
                                              </children>
                                           </StackPane>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="lunedi">
+                                                <RadioButton fx:id="mondayRadioButton" mnemonicParsing="false" text="lunedi">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -62,7 +62,7 @@
                                           </StackPane>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="martedi">
+                                                <RadioButton fx:id="tuesdayRadioButton" mnemonicParsing="false" text="martedi">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -71,7 +71,7 @@
                                           </StackPane>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="mercoledi">
+                                                <RadioButton fx:id="wednesdayRadioButton" mnemonicParsing="false" text="mercoledi">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -80,7 +80,7 @@
                                           </StackPane>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="giovedi">
+                                                <RadioButton fx:id="thursdayRadioButton" mnemonicParsing="false" text="giovedi">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -89,7 +89,7 @@
                                           </StackPane>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="venerdi">
+                                                <RadioButton fx:id="fridayRadioButton" mnemonicParsing="false" text="venerdi">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -98,14 +98,14 @@
                                           </StackPane>
                                           <Separator prefWidth="200.0">
                                              <VBox.margin>
-                                                <Insets left="5.0" right="5.0" />
+                                                <Insets left="5.0" right="5.0" top="25.0" />
                                              </VBox.margin>
                                           </Separator>
                                           <HBox alignment="CENTER">
                                              <children>
                                                 <StackPane alignment="CENTER_LEFT">
                                                    <children>
-                                                      <TextField maxWidth="40.0">
+                                                      <TextField fx:id="midweekTimeHourTextField" maxWidth="40.0">
                                                          <StackPane.margin>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
@@ -123,7 +123,7 @@
                                                 </StackPane>
                                                 <StackPane alignment="CENTER_LEFT">
                                                    <children>
-                                                      <TextField maxWidth="40.0">
+                                                      <TextField fx:id="midweekTimeMinutesTextField" maxWidth="40.0">
                                                          <StackPane.margin>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
@@ -131,6 +131,9 @@
                                                    </children>
                                                 </StackPane>
                                              </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
                                           </HBox>
                                        </children>
                                     </VBox>
@@ -143,16 +146,16 @@
                                        <children>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <Label text="fine settimana">
+                                                <Label fx:id="meetingWeekendLabel" text="fine settimana">
                                                    <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
                                                    </StackPane.margin>
                                                 </Label>
                                              </children>
                                           </StackPane>
                                           <StackPane alignment="CENTER_LEFT">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="sabato">
+                                                <RadioButton fx:id="saturdayRadioButton" mnemonicParsing="false" text="sabato">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -161,7 +164,7 @@
                                           </StackPane>
                                           <StackPane alignment="TOP_LEFT" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="domenica">
+                                                <RadioButton fx:id="sundayRadioButton" mnemonicParsing="false" text="domenica">
                                                    <StackPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
@@ -170,21 +173,21 @@
                                           </StackPane>
                                           <Separator prefWidth="200.0">
                                              <VBox.margin>
-                                                <Insets left="5.0" right="5.0" />
+                                                <Insets left="5.0" right="5.0" top="25.0" />
                                              </VBox.margin>
                                           </Separator>
                                           <HBox alignment="BOTTOM_CENTER">
                                              <children>
                                                 <StackPane alignment="BOTTOM_CENTER">
                                                    <children>
-                                                      <TextField maxWidth="40.0">
+                                                      <TextField fx:id="weekendTimeHourTextField" maxWidth="40.0">
                                                          <StackPane.margin>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </TextField>
                                                    </children>
                                                 </StackPane>
-                                                <StackPane alignment="BOTTOM_CENTER">
+                                                <StackPane>
                                                    <children>
                                                       <Label text=":">
                                                          <StackPane.margin>
@@ -195,7 +198,7 @@
                                                 </StackPane>
                                                 <StackPane alignment="BOTTOM_CENTER">
                                                    <children>
-                                                      <TextField maxWidth="40.0">
+                                                      <TextField fx:id="weekendTimeMinutesTextField" maxWidth="40.0">
                                                          <StackPane.margin>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>

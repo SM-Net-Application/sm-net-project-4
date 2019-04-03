@@ -105,6 +105,10 @@
 	-fx-min-height: 15.0pt; 
 }
 
+.radioButtonStyle1 {
+	-fx-font-size: 12.0pt;
+}
+
 /*.background {
 	-fx-background-color: linear-gradient(#004e99 0.0%, #007eff 100.0%);
 }
