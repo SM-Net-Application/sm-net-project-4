@@ -23,4 +23,6 @@ public interface UpdateData {
 	public abstract void updateWeeks(ObservableList<Week> list);
 
 	public abstract void updateWeeks();
+
+	public abstract void checkInfo(boolean exists);
 }

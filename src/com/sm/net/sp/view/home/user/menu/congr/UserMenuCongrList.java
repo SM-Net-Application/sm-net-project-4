@@ -7,9 +7,12 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.Info;
+import com.sm.net.sp.model.Info.EnumActions;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.util.Crypt;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -110,6 +113,12 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private ObservableList<Member> membersList;
 	private ObservableList<Family> familiesList;
 
+	private String bufferCongr;
+	private String bufferOverseer1;
+	private String bufferOverseer1Wife;
+	private String bufferOverseer2;
+	private String bufferOverseer2Wife;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -172,6 +181,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	}
 
 	private void listeners() {
+		listenerCongrTextField();
+
+		listenerOverseer1NameTextField();
+		listenerOverseer1WifeTextField();
+		listenerOverseer2NameTextField();
+		listenerOverseer2WifeTextField();
+
 		listenerMemberAddButton();
 		listenerMemberDeleteButton();
 		listenerMembersUpdateButton();
@@ -181,6 +197,86 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		listenerFamilyDeleteButton();
 		listenerFamilyUpdateButton();
 		listenerFamiliesTableView();
+	}
+
+	private void listenerCongrTextField() {
+		congrTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> congrTextFieldFocused(newValue.booleanValue()));
+	}
+
+	private void listenerOverseer1NameTextField() {
+		overseer1NameTextField.focusedProperty().addListener(
+				(observable, oldValue, newValue) -> overseer1NameTextFieldFocused(newValue.booleanValue()));
+	}
+
+	private void listenerOverseer1WifeTextField() {
+		overseer1WifeTextField.focusedProperty().addListener(
+				(observable, oldValue, newValue) -> overseer1WifeTextFieldFocused(newValue.booleanValue()));
+	}
+
+	private void listenerOverseer2NameTextField() {
+		overseer2NameTextField.focusedProperty().addListener(
+				(observable, oldValue, newValue) -> overseer2NameTextFieldFocused(newValue.booleanValue()));
+	}
+
+	private void listenerOverseer2WifeTextField() {
+		overseer2WifeTextField.focusedProperty().addListener(
+				(observable, oldValue, newValue) -> overseer2WifeTextFieldFocused(newValue.booleanValue()));
+	}
+
+	private void congrTextFieldFocused(boolean focused) {
+		if (focused)
+			bufferCongr = congrTextField.getText();
+		else {
+			String newText = congrTextField.getText();
+			if (!newText.equals(bufferCongr))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.CONGR,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void overseer1NameTextFieldFocused(boolean focused) {
+		if (focused)
+			bufferOverseer1 = overseer1NameTextField.getText();
+		else {
+			String newText = overseer1NameTextField.getText();
+			if (!newText.equals(bufferOverseer1))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void overseer1WifeTextFieldFocused(boolean focused) {
+		if (focused)
+			bufferOverseer1Wife = overseer1WifeTextField.getText();
+		else {
+			String newText = overseer1WifeTextField.getText();
+			if (!newText.equals(bufferOverseer1Wife))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1WIFE,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void overseer2NameTextFieldFocused(boolean focused) {
+		if (focused)
+			bufferOverseer2 = overseer2NameTextField.getText();
+		else {
+			String newText = overseer2NameTextField.getText();
+			if (!newText.equals(bufferOverseer2))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void overseer2WifeTextFieldFocused(boolean focused) {
+		if (focused)
+			bufferOverseer2Wife = overseer2WifeTextField.getText();
+		else {
+			String newText = overseer2WifeTextField.getText();
+			if (!newText.equals(bufferOverseer2Wife))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2WIFE,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
 	}
 
 	private void listenerMembersTableView() {

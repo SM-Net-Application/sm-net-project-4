@@ -303,6 +303,26 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject CHECK_INFO(String key) {
+		JSONObject jsonObj = create(Integer.valueOf(22));
+		jsonObj.put("keyInf", key);
+		return jsonObj;
+	}
+
+	public static JSONObject INSERT_INFO(String key, String value) {
+		JSONObject jsonObj = create(Integer.valueOf(23));
+		jsonObj.put("keyInf", key);
+		jsonObj.put("inf", value);
+		return jsonObj;
+	}
+
+	public static JSONObject UPDATE_INFO(String key, String value) {
+		JSONObject jsonObj = create(Integer.valueOf(24));
+		jsonObj.put("keyInf", key);
+		jsonObj.put("inf", value);
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -336,4 +356,5 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
+
 }

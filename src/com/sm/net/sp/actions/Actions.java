@@ -1319,6 +1319,149 @@ public class Actions {
 	}
 
 	/**
+	 * Check if a info is present
+	 */
+	public static void checkInfo(String key, Settings settings, Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue())
+							callback.checkInfo(true);
+						else
+							callback.checkInfo(false);
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.CHECK_INFO(key));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Update Info
+	 */
+	public static void updateInfo(String key, String value, Settings settings, Stage ownerStage) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (!result.booleanValue())
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_INFO(key, value));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
+	 * Insert Info
+	 */
+	public static void insertInfo(String key, String value, Settings settings, Stage ownerStage) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (!result.booleanValue())
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.INSERT_INFO(key, value));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	/**
 	 * Create Alert Window
 	 * 
 	 * @param settings

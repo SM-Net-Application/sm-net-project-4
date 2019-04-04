@@ -45,4 +45,9 @@ public class UpdateDataAdapter implements UpdateData {
 	public void updateWeeks() {
 
 	}
+
+	@Override
+	public void checkInfo(boolean exists) {
+
+	}
 }
