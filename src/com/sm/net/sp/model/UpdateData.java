@@ -25,4 +25,6 @@ public interface UpdateData {
 	public abstract void updateWeeks();
 
 	public abstract void checkInfo(boolean exists);
+
+	public abstract void updateInfo(Info info);
 }

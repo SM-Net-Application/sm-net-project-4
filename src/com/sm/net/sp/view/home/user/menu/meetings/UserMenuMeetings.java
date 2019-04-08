@@ -6,9 +6,12 @@ import java.time.LocalDate;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Info;
+import com.sm.net.sp.model.Info.EnumActions;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 
 import javafx.collections.FXCollections;
@@ -23,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -97,10 +101,18 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private Stage ownerStage;
 	private ObservableList<Week> calendar;
 
+	private ToggleGroup midweekToggleGroup;
+	private ToggleGroup weekendToggleGroup;
+
 	private String bufferMidweekTimeHour;
 	private String bufferMidweekTimeMinutes;
 	private String bufferWeekendTimeHour;
 	private String bufferWeekendTimeMinutes;
+
+	private String bufferKingdomHallStreet;
+	private String bufferKingdomHallNumber;
+	private String bufferKingdomHallPostCode;
+	private String bufferKingdomHallCity;
 
 	@FXML
 	private void initialize() {
@@ -152,9 +164,9 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	public void objectInitialize() {
-		listeners();
 		viewUpdate();
 		initData();
+		listeners();
 	}
 
 	private void initData() {
@@ -166,21 +178,90 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	private void setRadioButtonGroup() {
 
-		ToggleGroup midweek = new ToggleGroup();
-		ToggleGroup weekend = new ToggleGroup();
+		midweekToggleGroup = new ToggleGroup();
+		weekendToggleGroup = new ToggleGroup();
 
-		mondayRadioButton.setToggleGroup(midweek);
-		tuesdayRadioButton.setToggleGroup(midweek);
-		wednesdayRadioButton.setToggleGroup(midweek);
-		thursdayRadioButton.setToggleGroup(midweek);
-		fridayRadioButton.setToggleGroup(midweek);
+		mondayRadioButton.setToggleGroup(midweekToggleGroup);
+		mondayRadioButton.setUserData("1");
+		tuesdayRadioButton.setToggleGroup(midweekToggleGroup);
+		tuesdayRadioButton.setUserData("2");
+		wednesdayRadioButton.setToggleGroup(midweekToggleGroup);
+		wednesdayRadioButton.setUserData("3");
+		thursdayRadioButton.setToggleGroup(midweekToggleGroup);
+		thursdayRadioButton.setUserData("4");
+		fridayRadioButton.setToggleGroup(midweekToggleGroup);
+		fridayRadioButton.setUserData("5");
 
-		saturdayRadioButton.setToggleGroup(weekend);
-		sundayRadioButton.setToggleGroup(weekend);
+		saturdayRadioButton.setToggleGroup(weekendToggleGroup);
+		saturdayRadioButton.setUserData("6");
+		sundayRadioButton.setToggleGroup(weekendToggleGroup);
+		sundayRadioButton.setUserData("7");
 	}
 
 	private void loadGeneralInfo() {
+		Actions.getUserMenuMeetingsInfo(settings, ownerStage, this);
+	}
 
+	@Override
+	public void updateInfo(Info info) {
+		super.updateInfo(info);
+
+		String dayMidweekMeeting = info.getDayMidweekMeeting();
+		if (dayMidweekMeeting != null) {
+			switch (dayMidweekMeeting) {
+			case "1":
+				midweekToggleGroup.selectToggle(mondayRadioButton);
+				break;
+			case "2":
+				midweekToggleGroup.selectToggle(tuesdayRadioButton);
+				break;
+			case "3":
+				midweekToggleGroup.selectToggle(wednesdayRadioButton);
+				break;
+			case "4":
+				midweekToggleGroup.selectToggle(thursdayRadioButton);
+				break;
+			case "5":
+				midweekToggleGroup.selectToggle(fridayRadioButton);
+				break;
+
+			default:
+				midweekToggleGroup.selectToggle(null);
+				break;
+			}
+		}
+
+		String dayWeekendMeeting = info.getDayWeekendMeeting();
+		if (dayWeekendMeeting != null) {
+			switch (dayWeekendMeeting) {
+			case "6":
+				weekendToggleGroup.selectToggle(saturdayRadioButton);
+				break;
+			case "7":
+				weekendToggleGroup.selectToggle(sundayRadioButton);
+				break;
+			default:
+				weekendToggleGroup.selectToggle(null);
+				break;
+			}
+		}
+
+		setTextField(midweekTimeHourTextField, info.getHourMidweekMeeting());
+		setTextField(midweekTimeMinutesTextField, info.getMinuteMidweekMeeting());
+		setTextField(weekendTimeHourTextField, info.getHourWeekendMeeting());
+		setTextField(weekendTimeMinutesTextField, info.getMinuteWeekendMeeting());
+
+		setTextField(kingdomHallStreetTextField, info.getKingdomHallLocationStreet());
+		setTextField(kingdomHallNumberTextField, info.getKingdomHallLocationNumber());
+		setTextField(kingdomHallPostcodeTextField, info.getKingdomHallLocationPostcode());
+		setTextField(kingdomHallCityTextField, info.getKingdomHallLocationCity());
+	}
+
+	private void setTextField(TextField tf, String text) {
+		if (text != null)
+			tf.setText(text);
+		else
+			tf.setText("");
 	}
 
 	private void loadCalendar() {
@@ -249,12 +330,119 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	private void listeners() {
-		listenerWeekTableView();
+
+		listenerMidweekToggleGroup();
+		listenerWeekendToogleGroup();
 
 		listenerMidweekTimeHourTextField();
 		listenerMidweekTimeMinutesTextField();
 		listenerWeekendTimeHourTextField();
 		listenerWeekendTimeMinutesTextField();
+
+		listenerKingdomHallStreetTextField();
+		listenerKingdomHallNumberTextField();
+		listenerKingdomHallPostcodeTextField();
+		listenerKingdomHallCityTextField();
+
+		listenerWeekTableView();
+	}
+
+	private void listenerMidweekToggleGroup() {
+		midweekToggleGroup.selectedToggleProperty()
+				.addListener((observable, oldValue, newValue) -> midweekChanged(newValue));
+	}
+
+	private void listenerWeekendToogleGroup() {
+		weekendToggleGroup.selectedToggleProperty()
+				.addListener((observable, oldValue, newValue) -> weekendChanged(newValue));
+	}
+
+	private void midweekChanged(Toggle newValue) {
+		if (newValue != null) {
+			String value = (String) newValue.getUserData();
+			if (value != null)
+				if (!value.isEmpty())
+					Info.runAction(EnumActions.SAVE, Info.KEYS.DAYMIDWEEKMEETING,
+							Crypt.encrypt(value, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void weekendChanged(Toggle newValue) {
+		if (newValue != null) {
+			String value = (String) newValue.getUserData();
+			if (value != null)
+				if (!value.isEmpty())
+					Info.runAction(EnumActions.SAVE, Info.KEYS.DAYWEEKENDMEETING,
+							Crypt.encrypt(value, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void listenerKingdomHallStreetTextField() {
+		kingdomHallStreetTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkKingdomHallStreetTextField(newValue));
+	}
+
+	private void listenerKingdomHallNumberTextField() {
+		kingdomHallNumberTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkKingdomHallNumberTextField(newValue));
+	}
+
+	private void listenerKingdomHallPostcodeTextField() {
+		kingdomHallPostcodeTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkKingdomHallPostcodeTextField(newValue));
+	}
+
+	private void listenerKingdomHallCityTextField() {
+		kingdomHallCityTextField.focusedProperty()
+				.addListener((observable, oldValue, newValue) -> checkKingdomHallCityTextField(newValue));
+	}
+
+	private void checkKingdomHallStreetTextField(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferKingdomHallStreet = kingdomHallStreetTextField.getText();
+		else {
+			String newText = kingdomHallStreetTextField.getText();
+			if (!newText.equals(this.bufferKingdomHallStreet))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.KINGDOMHALLLOCATIONSTREET,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void checkKingdomHallNumberTextField(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferKingdomHallNumber = kingdomHallNumberTextField.getText();
+		else {
+			String newText = kingdomHallNumberTextField.getText();
+			if (!newText.equals(this.bufferKingdomHallNumber))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.KINGDOMHALLLOCATIONNUMBER,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void checkKingdomHallPostcodeTextField(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferKingdomHallPostCode = kingdomHallPostcodeTextField.getText();
+		else {
+			String newText = kingdomHallPostcodeTextField.getText();
+			if (!newText.equals(this.bufferKingdomHallPostCode))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.KINGDOMHALLLOCATIONPOSTCODE,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
+	}
+
+	private void checkKingdomHallCityTextField(Boolean focused) {
+
+		if (focused.booleanValue())
+			this.bufferKingdomHallCity = kingdomHallCityTextField.getText();
+		else {
+			String newText = kingdomHallCityTextField.getText();
+			if (!newText.equals(this.bufferKingdomHallCity))
+				Info.runAction(EnumActions.SAVE, Info.KEYS.KINGDOMHALLLOCATIONCITY,
+						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+		}
 	}
 
 	private void listenerMidweekTimeHourTextField() {
@@ -286,6 +474,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 			if (!newText.isEmpty())
 				if (!isValidHour(newText))
 					midweekTimeHourTextField.setText(this.bufferMidweekTimeHour);
+				else {
+					if (!newText.equals(this.bufferMidweekTimeHour))
+						Info.runAction(EnumActions.SAVE, Info.KEYS.HOURMIDWEEKMEETING,
+								Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+				}
 		}
 	}
 
@@ -298,6 +491,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 			if (!newText.isEmpty())
 				if (!isValidMinutes(newText))
 					midweekTimeMinutesTextField.setText(this.bufferMidweekTimeMinutes);
+				else {
+					if (!newText.equals(this.bufferMidweekTimeMinutes))
+						Info.runAction(EnumActions.SAVE, Info.KEYS.MINUTEMIDWEEKMEETING,
+								Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+				}
 		}
 	}
 
@@ -310,6 +508,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 			if (!newText.isEmpty())
 				if (!isValidHour(newText))
 					weekendTimeHourTextField.setText(this.bufferWeekendTimeHour);
+				else {
+					if (!newText.equals(this.bufferWeekendTimeHour))
+						Info.runAction(EnumActions.SAVE, Info.KEYS.HOURWEEKENDMEETING,
+								Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+				}
 		}
 	}
 
@@ -322,6 +525,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 			if (!newText.isEmpty())
 				if (!isValidMinutes(newText))
 					weekendTimeMinutesTextField.setText(this.bufferWeekendTimeMinutes);
+				else {
+					if (!newText.equals(this.bufferWeekendTimeMinutes))
+						Info.runAction(EnumActions.SAVE, Info.KEYS.MINUTEWEEKENDMEETING,
+								Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
+				}
 		}
 	}
 

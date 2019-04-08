@@ -323,6 +323,12 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject GET_INFO(String select) {
+		JSONObject jsonObj = create(Integer.valueOf(25));
+		jsonObj.put("select", select);
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -345,7 +351,7 @@ public class JSONRequest {
 			status = true;
 			break;
 		default:
-			System.out.println(jsonStatus.getText());
+			//System.out.println(jsonStatus.getText());
 			break;
 		}
 		return status;

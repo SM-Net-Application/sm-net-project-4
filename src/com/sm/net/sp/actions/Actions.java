@@ -7,6 +7,7 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
@@ -1461,6 +1462,115 @@ public class Actions {
 		taskThread.start();
 	}
 
+	public static void getUserMenuCongrListInfo(Settings settings, Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							Info info = new Info();
+
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								info.setInfo(settings, json);
+							}
+
+							callback.updateInfo(info);
+						}
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_INFO(Info.KEYS.getUserMenuCongrListSelect()));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	public static void getUserMenuMeetingsInfo(Settings settings, Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							Info info = new Info();
+
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								info.setInfo(settings, json);
+							}
+
+							callback.updateInfo(info);
+						}
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_INFO(Info.KEYS.getUserMenuMeetingsSelect()));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
 	/**
 	 * Create Alert Window
 	 * 
@@ -1481,5 +1591,4 @@ public class Actions {
 
 		return waitAlert;
 	}
-
 }

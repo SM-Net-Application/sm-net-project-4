@@ -50,4 +50,9 @@ public class UpdateDataAdapter implements UpdateData {
 	public void checkInfo(boolean exists) {
 
 	}
+
+	@Override
+	public void updateInfo(Info info) {
+
+	}
 }

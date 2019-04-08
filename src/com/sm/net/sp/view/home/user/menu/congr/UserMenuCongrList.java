@@ -176,8 +176,31 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
+		initInfo();
 		updateMembers();
 		updateFamilies();
+	}
+
+	private void initInfo() {
+		Actions.getUserMenuCongrListInfo(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateInfo(Info info) {
+		super.updateInfo(info);
+
+		setTextField(congrTextField, info.getCongr());
+		setTextField(overseer1NameTextField, info.getOverseer1());
+		setTextField(overseer1WifeTextField, info.getOverseer1wife());
+		setTextField(overseer2NameTextField, info.getOverseer2());
+		setTextField(overseer2WifeTextField, info.getOverseer2wife());
+	}
+
+	private void setTextField(TextField tf, String text) {
+		if (text != null)
+			tf.setText(text);
+		else
+			tf.setText("");
 	}
 
 	private void listeners() {
