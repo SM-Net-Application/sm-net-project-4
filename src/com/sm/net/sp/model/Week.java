@@ -62,10 +62,15 @@ public class Week {
 				: "";
 	}
 
-	public void updateType(ObservableList<Week> list, Language language) {
+	public void updateOnlineWeekInfo(ObservableList<Week> list, Language language) {
 
 		for (Week week : list)
 			if (this.equals(week)) {
+
+				this.setSpWeekID(week.getSpWeekID());
+				this.setSpInf1(week.getSpInf1());
+				this.setSpInf2(week.getSpInf2());
+
 				this.weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 						new WeekTypeTranslated(WeekType.getFromOrdinal(week.getSpInf2()), language));
 
@@ -77,10 +82,19 @@ public class Week {
 	public boolean equals(Object obj) {
 
 		if (obj != null)
-			if (obj instanceof Week)
-				if (getKey().equals(((Week) obj).getKey()))
-					return true;
+			if (obj instanceof Week) {
+				Week onlineWeek = (Week) obj;
 
+				if (onlineWeek.spWeekIDProperty() != null)
+					if (onlineWeek.spInf1Property() != null) {
+						String onlineWeekKey = String.valueOf(onlineWeek.spInf1.get());
+						if (onlineWeekKey != null)
+							if (!onlineWeekKey.isEmpty()) {
+								if (getKey().equals(onlineWeekKey))
+									return true;
+							}
+					}
+			}
 		return false;
 	}
 
@@ -141,6 +155,9 @@ public class Week {
 	}
 
 	public final void setSpWeekID(final int spWeekID) {
+		if (this.spWeekIDProperty() == null)
+			this.spWeekID = new SimpleIntegerProperty();
+
 		this.spWeekIDProperty().set(spWeekID);
 	}
 
@@ -153,6 +170,9 @@ public class Week {
 	}
 
 	public final void setSpInf1(final int spInf1) {
+		if (this.spInf1Property() == null)
+			this.spInf1 = new SimpleIntegerProperty();
+
 		this.spInf1Property().set(spInf1);
 	}
 
@@ -165,6 +185,9 @@ public class Week {
 	}
 
 	public final void setSpInf2(final int spInf2) {
+		if (this.spInf2Property() == null)
+			this.spInf2 = new SimpleIntegerProperty();
+
 		this.spInf2Property().set(spInf2);
 	}
 

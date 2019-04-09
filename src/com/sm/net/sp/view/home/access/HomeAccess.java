@@ -1,12 +1,12 @@
 package com.sm.net.sp.view.home.access;
 
+import com.sm.net.easy.html.EasyHtml;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.util.EasyHtml;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

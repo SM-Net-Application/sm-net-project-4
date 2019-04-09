@@ -223,8 +223,15 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<MinistryPart> ministryPartList;
 	private ObservableList<Member> memberList;
 	private ObservableList<ChristiansPart> christiansPartList;
-
 	private ObservableList<WeekTypeTranslated> weekTypesList;
+
+	private ObservableList<Member> presidentList;
+	private ObservableList<Member> prayStartList;
+	private ObservableList<Member> talkList;
+	private ObservableList<Member> diggingList;
+	private ObservableList<Member> bibleReadingList;
+	private ObservableList<Member> congregationBibleStudyList;
+	private ObservableList<Member> prayEndList;
 
 	@FXML
 	private void initialize() {
@@ -426,8 +433,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public void objectInitialize() {
 		viewUpdate();
-		listeners();
 		initData();
+		listeners();
 	}
 
 	private void initData() {
@@ -450,7 +457,47 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		if (weekTypesList.size() > 0)
 			this.typeWeekListView.getSelectionModel().select(0);
 
+		presidentList = FXCollections.observableArrayList();
+		prayStartList = FXCollections.observableArrayList();
+		talkList = FXCollections.observableArrayList();
+		diggingList = FXCollections.observableArrayList();
+		bibleReadingList = FXCollections.observableArrayList();
+		congregationBibleStudyList = FXCollections.observableArrayList();
+		prayEndList = FXCollections.observableArrayList();
+
+		addEmptyMember();
+
+		presidentComboBox.setItems(presidentList);
+		pray1ComboBox.setItems(prayStartList);
+		talkComboBox.setItems(talkList);
+		diggingComboBox.setItems(diggingList);
+		bibleReadingComboBox.setItems(bibleReadingList);
+		congregationBibleStudyComboBox.setItems(congregationBibleStudyList);
+		pray2ComboBox.setItems(prayEndList);
+
+		selectFirst();
+
 		updateMembers();
+		loadSelectedWeek();
+	}
+
+	private void loadSelectedWeek() {
+
+		if (this.selectedWeek != null)
+			if (this.selectedWeek.spWeekIDProperty() != null) {
+
+				// Week type
+				for (int i = 0; i < typeWeekListView.getItems().size(); i++) {
+
+					WeekTypeTranslated weekTypeTranslated = typeWeekListView.getItems().get(i);
+					if (weekTypeTranslated.getOrdinal() == this.selectedWeek.getSpInf2()) {
+						typeWeekListView.getSelectionModel().select(i);
+						break;
+					}
+				}
+
+				// TODO: Other info load
+			}
 	}
 
 	@Override
@@ -463,6 +510,65 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	public void updateMembers(ObservableList<Member> list) {
 		super.updateMembers(list);
 		memberList = list;
+		updateLists();
+	}
+
+	private void updateLists() {
+		resetLists();
+		addEmptyMember();
+		setLists();
+		selectFirst();
+	}
+
+	private void selectFirst() {
+
+		presidentComboBox.getSelectionModel().selectFirst();
+		pray1ComboBox.getSelectionModel().selectFirst();
+		talkComboBox.getSelectionModel().selectFirst();
+		diggingComboBox.getSelectionModel().selectFirst();
+		bibleReadingComboBox.getSelectionModel().selectFirst();
+		congregationBibleStudyComboBox.getSelectionModel().selectFirst();
+		pray2ComboBox.getSelectionModel().selectFirst();
+	}
+
+	private void setLists() {
+		for (Member member : this.memberList) {
+
+			if (member.getSpInf33() == 1)
+				this.presidentList.add(member);
+			if (member.getSpInf34() == 1)
+				this.prayStartList.add(member);
+			if (member.getSpInf35() == 1)
+				this.talkList.add(member);
+			if (member.getSpInf31() == 1)
+				this.diggingList.add(member);
+			if (member.getSpInf13() == 1)
+				this.bibleReadingList.add(member);
+			if (member.getSpInf42() == 1)
+				this.congregationBibleStudyList.add(member);
+			if (member.getSpInf35() == 1)
+				this.prayEndList.add(member);
+		}
+	}
+
+	private void addEmptyMember() {
+		this.presidentList.add(Member.emptyMember(language));
+		this.prayStartList.add(Member.emptyMember(language));
+		this.talkList.add(Member.emptyMember(language));
+		this.diggingList.add(Member.emptyMember(language));
+		this.bibleReadingList.add(Member.emptyMember(language));
+		this.congregationBibleStudyList.add(Member.emptyMember(language));
+		this.prayEndList.add(Member.emptyMember(language));
+	}
+
+	private void resetLists() {
+		this.presidentList.clear();
+		this.prayStartList.clear();
+		this.talkList.clear();
+		this.diggingList.clear();
+		this.bibleReadingList.clear();
+		this.congregationBibleStudyList.clear();
+		this.prayEndList.clear();
 	}
 
 	private void listeners() {
@@ -475,6 +581,49 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		listenerChristiansPartDeleteButton();
 
 		listenerLoadWeekFromWOLButton();
+
+		listenerSaveWeekButton();
+	}
+
+	private void listenerSaveWeekButton() {
+		saveWeekButton.setOnAction(event -> saveWeek());
+	}
+
+	private void saveWeek() {
+
+		// TODO: Save process
+		if (checkFields()) {
+
+			// spWeekID INT ID
+			// spInf1 INT Key = Formato: (z.B.: 201901)
+			// spInf2 INT Tipo settimana
+
+			// spInf2 WeekType
+			String spInf2 = String.valueOf(WeekType.STANDARD.getOrdinal());
+			if (typeWeekListView.getSelectionModel().getSelectedIndex() > -1) {
+				WeekTypeTranslated weekTypeTranslated = typeWeekListView.getSelectionModel().getSelectedItem();
+				spInf2 = String.valueOf(weekTypeTranslated.getOrdinal());
+			}
+
+			if (this.selectedWeek.spWeekIDProperty() != null) {
+				// editWeek
+			} else {
+				// newWeek
+
+				// spInf1 WeekKey
+				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
+
+				Actions.insertWeek(spInf1, spInf2, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+			}
+		}
+	}
+
+	private boolean checkFields() {
+
+		// TODO: Check all fields
+		boolean status = true;
+
+		return status;
 	}
 
 	private void listenerLoadWeekFromWOLButton() {
@@ -720,7 +869,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		generalLabel.setText(language.getString("TEXT0079"));
 		treasuresLabel.setText(language.getString("TEXT0080"));
 
-		presidentLabel.setText(language.getString("TEXT0083"));
+		presidentLabel.setText(language.getString("TEXT0134"));
 		bibleChaptersLabel.setText(language.getString("TEXT0086"));
 		song1Label.setText(language.getString("TEXT0085"));
 		pray1Label.setText(language.getString("TEXT0084"));

@@ -323,7 +323,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		if (list != null) {
 			for (Week week : this.calendar)
-				week.updateType(list, this.language);
+				week.updateOnlineWeekInfo(list, this.language);
 
 			this.weekTableView.refresh();
 		}
@@ -587,8 +587,6 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
 				newTab.getStyleClass().add("tabStyle1");
-				// newTab.setGraphic(new
-				// ImageView(Meta.Resources.USER_MENU_MEETINGS));
 				newTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.CALENDAR));
 
 				ctrl.setOwnerTabPane(tabPane);

@@ -329,6 +329,13 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject INSERT_WEEK(String spInf1, String spInf2) {
+		JSONObject jsonObj = create(Integer.valueOf(26));
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -351,7 +358,7 @@ public class JSONRequest {
 			status = true;
 			break;
 		default:
-			//System.out.println(jsonStatus.getText());
+			// System.out.println(jsonStatus.getText());
 			break;
 		}
 		return status;
