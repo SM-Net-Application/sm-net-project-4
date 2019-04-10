@@ -18,6 +18,7 @@ import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.util.Crypt;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -478,26 +479,20 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		selectFirst();
 
 		updateMembers();
-		loadSelectedWeek();
 	}
 
-	private void loadSelectedWeek() {
+	private void setMemberComboBoxIndex(ComboBox<Member> cb, int id) {
 
-		if (this.selectedWeek != null)
-			if (this.selectedWeek.spWeekIDProperty() != null) {
+		cb.getSelectionModel().selectFirst();
 
-				// Week type
-				for (int i = 0; i < typeWeekListView.getItems().size(); i++) {
+		for (int i = 0; i < cb.getItems().size(); i++) {
 
-					WeekTypeTranslated weekTypeTranslated = typeWeekListView.getItems().get(i);
-					if (weekTypeTranslated.getOrdinal() == this.selectedWeek.getSpInf2()) {
-						typeWeekListView.getSelectionModel().select(i);
-						break;
-					}
-				}
-
-				// TODO: Other info load
+			Member member = cb.getItems().get(i);
+			if (member.getSpMemberID() == id) {
+				cb.getSelectionModel().select(i);
+				break;
 			}
+		}
 	}
 
 	@Override
@@ -511,6 +506,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		super.updateMembers(list);
 		memberList = list;
 		updateLists();
+		loadSelectedWeek();
 	}
 
 	private void updateLists() {
@@ -571,6 +567,49 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.prayEndList.clear();
 	}
 
+	private void loadSelectedWeek() {
+
+		if (this.selectedWeek != null)
+			if (this.selectedWeek.spWeekIDProperty() != null) {
+
+				// Week type
+				for (int i = 0; i < typeWeekListView.getItems().size(); i++) {
+
+					WeekTypeTranslated weekTypeTranslated = typeWeekListView.getItems().get(i);
+					if (weekTypeTranslated.getOrdinal() == this.selectedWeek.getSpInf2()) {
+						typeWeekListView.getSelectionModel().select(i);
+						break;
+					}
+				}
+
+				setMemberComboBoxIndex(this.presidentComboBox, this.selectedWeek.getSpInf3());
+				setMemberComboBoxIndex(this.pray1ComboBox, this.selectedWeek.getSpInf4());
+				this.song1TextField.setText(this.selectedWeek.getSpInf5());
+				this.bibleChaptersTextField.setText(this.selectedWeek.getSpInf6());
+				this.openingCommentsMinTextField.setText(this.selectedWeek.getSpInf7());
+				this.openingCommentsTextTextField.setText(this.selectedWeek.getSpInf8());
+				this.talkMinTextField.setText(this.selectedWeek.getSpInf9());
+				this.talkTextTextField.setText(this.selectedWeek.getSpInf10());
+				setMemberComboBoxIndex(this.talkComboBox, this.selectedWeek.getSpInf11());
+				this.diggingMinTextField.setText(this.selectedWeek.getSpInf12());
+				this.diggingTextTextField.setText(this.selectedWeek.getSpInf13());
+				setMemberComboBoxIndex(this.diggingComboBox, this.selectedWeek.getSpInf14());
+				this.bibleReadingMinTextField.setText(this.selectedWeek.getSpInf15());
+				this.bibleReadingTextTextField.setText(this.selectedWeek.getSpInf16());
+				this.bibleReadingMaterialsTextField.setText(this.selectedWeek.getSpInf17());
+				setMemberComboBoxIndex(this.bibleReadingComboBox, this.selectedWeek.getSpInf18());
+				this.song2TextField.setText(this.selectedWeek.getSpInf19());
+				this.congregationBibleStudyMinTextField.setText(this.selectedWeek.getSpInf20());
+				this.congregationBibleStudyTextTextField.setText(this.selectedWeek.getSpInf21());
+				this.congregationBibleStudyMaterialTextField.setText(this.selectedWeek.getSpInf22());
+				setMemberComboBoxIndex(this.congregationBibleStudyComboBox, this.selectedWeek.getSpInf23());
+				this.reviewMinTextField.setText(this.selectedWeek.getSpInf24());
+				this.reviewTextTextField.setText(this.selectedWeek.getSpInf25());
+				this.song3TextField.setText(this.selectedWeek.getSpInf26());
+				setMemberComboBoxIndex(this.pray2ComboBox, this.selectedWeek.getSpInf27());
+			}
+	}
+
 	private void listeners() {
 		listenerMinistryTableView();
 		listenerMinistryPartAddButton();
@@ -594,16 +633,42 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		// TODO: Save process
 		if (checkFields()) {
 
-			// spWeekID INT ID
-			// spInf1 INT Key = Formato: (z.B.: 201901)
-			// spInf2 INT Tipo settimana
-
 			// spInf2 WeekType
 			String spInf2 = String.valueOf(WeekType.STANDARD.getOrdinal());
 			if (typeWeekListView.getSelectionModel().getSelectedIndex() > -1) {
 				WeekTypeTranslated weekTypeTranslated = typeWeekListView.getSelectionModel().getSelectedItem();
 				spInf2 = String.valueOf(weekTypeTranslated.getOrdinal());
 			}
+
+			String spInf3 = String.valueOf(presidentComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf4 = String.valueOf(pray1ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf5 = Crypt.encrypt(song1TextField.getText(), settings.getDatabaseSecretKey());
+			String spInf6 = Crypt.encrypt(bibleChaptersTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf7 = Crypt.encrypt(openingCommentsMinTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf8 = Crypt.encrypt(openingCommentsTextTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf9 = Crypt.encrypt(talkMinTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf10 = Crypt.encrypt(talkTextTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf11 = String.valueOf(talkComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf12 = Crypt.encrypt(diggingMinTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf13 = Crypt.encrypt(diggingTextTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf14 = String.valueOf(diggingComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf15 = Crypt.encrypt(bibleReadingMinTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf16 = Crypt.encrypt(bibleReadingTextTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf17 = Crypt.encrypt(bibleReadingMaterialsTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf18 = String.valueOf(bibleReadingComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf19 = Crypt.encrypt(song2TextField.getText(), settings.getDatabaseSecretKey());
+			String spInf20 = Crypt.encrypt(congregationBibleStudyMinTextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf21 = Crypt.encrypt(congregationBibleStudyTextTextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf22 = Crypt.encrypt(congregationBibleStudyMaterialTextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf23 = String
+					.valueOf(congregationBibleStudyComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf24 = Crypt.encrypt(reviewMinTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf25 = Crypt.encrypt(reviewTextTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf26 = Crypt.encrypt(song3TextField.getText(), settings.getDatabaseSecretKey());
+			String spInf27 = String.valueOf(pray2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
 
 			if (this.selectedWeek.spWeekIDProperty() != null) {
 				// editWeek
@@ -613,7 +678,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				// spInf1 WeekKey
 				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
 
-				Actions.insertWeek(spInf1, spInf2, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
+						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
+						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, settings, ownerStage,
+						ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
 	}

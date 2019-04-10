@@ -323,7 +323,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		if (list != null) {
 			for (Week week : this.calendar)
-				week.updateOnlineWeekInfo(list, this.language);
+				week.updateOnlineWeekInfo(list, this.language, this.settings);
 
 			this.weekTableView.refresh();
 		}
