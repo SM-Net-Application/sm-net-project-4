@@ -670,6 +670,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			String spInf26 = Crypt.encrypt(song3TextField.getText(), settings.getDatabaseSecretKey());
 			String spInf27 = String.valueOf(pray2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
 
+			String spInfMinistryParts = getMinistryParts();
+			String spInfChristiansParts = getChristiansParts();
+
 			if (this.selectedWeek.spWeekIDProperty() != null) {
 				// editWeek
 			} else {
@@ -680,10 +683,81 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
 						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
-						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, settings, ownerStage,
-						ownerTabPane, thisTab, ownerCtrl);
+						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInfMinistryParts,
+						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
+	}
+
+	private String getMinistryParts() {
+
+		String ministryParts = "";
+
+		int count = 0;
+		for (MinistryPart mp : ministryPartList) {
+
+			count += 1;
+
+			String spInf1 = Week.buildKey(this.getSelectedWeek().getTo());
+			String spInf2 = String.valueOf(count);
+			String spInf3 = String.valueOf(mp.getMinistryTypeTranslated().getOrdinal());
+			String spInf4 = Crypt.encrypt(String.valueOf(mp.getMin()), settings.getDatabaseSecretKey());
+			String spInf5 = Crypt.encrypt(mp.getTheme(), settings.getDatabaseSecretKey());
+			String spInf6 = Crypt.encrypt(mp.getMaterial(), settings.getDatabaseSecretKey());
+			String spInf7 = String.valueOf(mp.getStudent().getSpMemberID());
+			String spInf8 = String.valueOf(mp.getAssistant().getSpMemberID());
+			// TODO: Modificare quando aggiungo quelli della seconda sala
+			String spInf9 = String.valueOf(mp.getStudent().getSpMemberID());
+			String spInf10 = String.valueOf(mp.getAssistant().getSpMemberID());
+
+			String insert = "(";
+			insert += spInf1;
+			insert += ", " + spInf2;
+			insert += ", " + spInf3;
+			insert += ", '" + spInf4 + "'";
+			insert += ", '" + spInf5 + "'";
+			insert += ", '" + spInf6 + "'";
+			insert += ", " + spInf7;
+			insert += ", " + spInf8;
+			insert += ", " + spInf9;
+			insert += ", " + spInf10;
+			insert += ")";
+
+			ministryParts += ministryParts.isEmpty() ? insert : ", " + insert;
+		}
+
+		return ministryParts;
+	}
+
+	private String getChristiansParts() {
+
+		String christiansParts = "";
+
+		int count = 0;
+		for (ChristiansPart cp : christiansPartList) {
+
+			count += 1;
+
+			String spInf1 = Week.buildKey(this.getSelectedWeek().getTo());
+			String spInf2 = String.valueOf(count);
+			String spInf3 = Crypt.encrypt(String.valueOf(cp.getMin()), settings.getDatabaseSecretKey());
+			String spInf4 = Crypt.encrypt(cp.getTheme(), settings.getDatabaseSecretKey());
+			String spInf5 = Crypt.encrypt(cp.getMaterial(), settings.getDatabaseSecretKey());
+			String spInf6 = String.valueOf(cp.getTeacher().getSpMemberID());
+
+			String insert = "(";
+			insert += spInf1;
+			insert += ", " + spInf2;
+			insert += ", '" + spInf3 + "'";
+			insert += ", '" + spInf4 + "'";
+			insert += ", '" + spInf5 + "'";
+			insert += ", " + spInf6;
+			insert += ")";
+
+			christiansParts += christiansParts.isEmpty() ? insert : ", " + insert;
+		}
+
+		return christiansParts;
 	}
 
 	private boolean checkFields() {

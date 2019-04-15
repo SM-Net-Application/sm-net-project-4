@@ -333,7 +333,7 @@ public class JSONRequest {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27) {
+			String spInf25, String spInf26, String spInf27, String spInfMinistryParts, String spInfChristiansParts) {
 
 		JSONObject jsonObj = create(Integer.valueOf(26));
 		jsonObj.put("spInf1", spInf1);
@@ -363,6 +363,8 @@ public class JSONRequest {
 		jsonObj.put("spInf25", spInf25);
 		jsonObj.put("spInf26", spInf26);
 		jsonObj.put("spInf27", spInf27);
+		jsonObj.put("spInfMP", spInfMinistryParts);
+		jsonObj.put("spInfCP", spInfChristiansParts);
 		return jsonObj;
 	}
 

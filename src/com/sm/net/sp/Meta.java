@@ -128,6 +128,8 @@ public class Meta {
 
 		public static final Image ICON = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/iconSP.png"));
+		public static final Image PRINT = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/print.png"));
 		public static final Image MENU_APP = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/menu_app.png"));
 		public static final Image MENU_APP_SETTINGS = new Image(
@@ -209,6 +211,16 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/wol_load.png"));
 
 		public static ImageView createTabIcon(Image image) {
+			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(50);
+			imageView.setFitHeight(50);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+			// imageView.setCache(true);
+			return imageView;
+		}
+
+		public static ImageView createButtonIcon(Image image) {
 			ImageView imageView = new ImageView(image);
 			imageView.setFitWidth(50);
 			imageView.setFitHeight(50);

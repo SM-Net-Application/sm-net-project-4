@@ -56,6 +56,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private Button userDeleteButton;
 
+	@FXML
+	private Button userPrintButton;
+
 	private Settings settings;
 	private Language language;
 	private Stage stageSupportPlannerView;
@@ -89,6 +92,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		userAddButton.getStyleClass().add("buttonStyle3");
 		userDeleteButton.getStyleClass().add("buttonStyle3");
+		userPrintButton.getStyleClass().add("buttonStyle3");
 	}
 
 	public void objectInitialize() {
@@ -105,8 +109,21 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	}
 
 	private void listeners() {
+		listenerUserPrintButton();
 		listenerUserAddButton();
 		listenerUserDeleteButton();
+	}
+
+	private void listenerUserPrintButton() {
+		this.userPrintButton.setOnAction(event -> printUser());
+	}
+
+	private void printUser() {
+
+		if (userTableView.getSelectionModel().getSelectedIndex() > -1) {
+			User user = userTableView.getSelectionModel().getSelectedItem();
+			Actions.printUser(user, settings, stageSupportPlannerView, language);
+		}
 	}
 
 	private void listenerUserDeleteButton() {
@@ -197,6 +214,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userAddButton.setText(null);
 		userDeleteButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_USERS_DEL));
 		userDeleteButton.setText(null);
+		userPrintButton.setGraphic(Meta.Resources.createButtonIcon(Meta.Resources.PRINT));
+		userPrintButton.setText(null);
 	}
 
 	@Override

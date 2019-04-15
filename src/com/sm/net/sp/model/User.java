@@ -29,6 +29,8 @@ public class User {
 	private BooleanProperty spInf3;
 	private BooleanProperty spInf4;
 
+	private StringProperty passwordEncrypted;
+
 	public User(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
@@ -63,6 +65,8 @@ public class User {
 		this.spInf2 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf2")));
 		this.spInf3 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf3")));
 		this.spInf4 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf4")));
+
+		this.passwordEncrypted = new SimpleStringProperty(jsonObject.getString("spUserPassword"));
 	}
 
 	private String getSpRole(boolean role) {
@@ -167,6 +171,18 @@ public class User {
 
 	public final void setSpInf4(final boolean spInf4) {
 		this.spInf4Property().set(spInf4);
+	}
+
+	public final StringProperty passwordEncryptedProperty() {
+		return this.passwordEncrypted;
+	}
+
+	public final String getPasswordEncrypted() {
+		return this.passwordEncryptedProperty().get();
+	}
+
+	public final void setPasswordEncrypted(final String passwordEncrypted) {
+		this.passwordEncryptedProperty().set(passwordEncrypted);
 	}
 
 }

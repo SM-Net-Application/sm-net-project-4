@@ -1,10 +1,15 @@
 package com.sm.net.sp.actions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.sm.net.javafx.AlertDesigner;
+import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.jasper.Jasper;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
@@ -18,17 +23,27 @@ import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAddCallback;
 import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.JSON;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Actions {
 
@@ -1323,8 +1338,8 @@ public class Actions {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, Settings settings, Stage ownerStage, TabPane tabPane,
-			Tab newTab, UpdateData callback) {
+			String spInf25, String spInf26, String spInf27, String spInfMinistryParts, String spInfChristiansParts,
+			Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1366,7 +1381,8 @@ public class Actions {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.INSERT_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 								spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
-								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27));
+								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
+								spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 
@@ -1626,6 +1642,71 @@ public class Actions {
 		Thread taskThread = new Thread(task);
 		taskThread.start();
 
+	}
+
+	public static void printUser(User user, Settings settings, Stage ownerStage, Language language) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<Void> task = new Task<Void>() {
+
+			{
+				setOnSucceeded(value -> waitAlert.close());
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected Void call() throws Exception {
+
+				String reportPath = Jasper.Layouts.SP_USER_LAYOUT.getAbsolutePath();
+
+				Map<String, Object> parameters = new HashMap<String, Object>();
+				parameters.put("txtaccess", language.getString("jasper.layout.user.txtaccess"));
+				parameters.put("txtconfig", language.getString("jasper.layout.user.txtconfig"));
+				parameters.put("txtusername", language.getString("jasper.layout.user.txtusername"));
+				parameters.put("txtpassword", language.getString("jasper.layout.user.txtpassword"));
+				parameters.put("txturl", language.getString("jasper.layout.user.txturl"));
+				parameters.put("txtkey", language.getString("jasper.layout.user.txtkey"));
+
+				parameters.put("image", Jasper.Layouts.SP_IMAGE_LAYOUT.getAbsolutePath());
+				parameters.put("username", user.getUsername());
+				parameters.put("password", Crypt.decrypt(user.getPasswordEncrypted(), settings.getDatabaseSecretKey()));
+				parameters.put("url", settings.getDatabaseUrl());
+				parameters.put("key", Crypt.decrypt(settings.getDatabaseKeyEncrypted(), settings.getApplicationKey()));
+
+				try {
+					JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+					JRDataSource jrDataSource = new JREmptyDataSource();
+					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, jrDataSource);
+
+					JasperViewer jv = new JasperViewer(jasperPrint, false);
+					jv.setTitle(Meta.Application.getFullTitle());
+					jv.setIconImage(SwingFXUtils.fromFXImage(Meta.Resources.ICON, null));
+					jv.setVisible(true);
+
+				} catch (JRException e) {
+					System.out.println(e.getMessage());
+				}
+
+				return null;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
 	}
 
 	/**
