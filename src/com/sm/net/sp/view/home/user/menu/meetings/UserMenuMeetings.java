@@ -8,6 +8,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Info.EnumActions;
+import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
@@ -100,6 +101,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 	private ObservableList<Week> calendar;
+	private ObservableList<Member> membersList;
 
 	private ToggleGroup midweekToggleGroup;
 	private ToggleGroup weekendToggleGroup;
@@ -173,7 +175,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		setRadioButtonGroup();
 		loadGeneralInfo();
 		loadCalendar();
-		updateWeeks();
+		updateMembers();
+		// updateWeeks();
 	}
 
 	private void setRadioButtonGroup() {
@@ -305,6 +308,25 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	@Override
+	public void updateMembers() {
+		super.updateMembers();
+
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembers(ObservableList<Member> list) {
+		super.updateMembers(list);
+
+		if (list != null)
+			this.membersList = list;
+		else
+			this.membersList = FXCollections.observableArrayList();
+
+		updateWeeks();
+	}
+
+	@Override
 	public void updateWeeks() {
 		super.updateWeeks();
 
@@ -313,7 +335,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				Week weekStart = this.calendar.get(0);
 				Week weekEnd = this.calendar.get(this.calendar.size() - 1);
 
-				Actions.getAllWeeks(weekStart, weekEnd, this.settings, this.ownerStage, this);
+				Actions.getAllWeeks(weekStart, weekEnd, this.settings, this.ownerStage, this.membersList, this);
 			}
 	}
 
@@ -579,6 +601,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				UserMenuMeetingsEditor ctrl = (UserMenuMeetingsEditor) fxmlLoader.getController();
+				ctrl.setMemberList(this.membersList);
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
@@ -678,5 +701,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setCalendar(ObservableList<Week> calendar) {
 		this.calendar = calendar;
+	}
+
+	public ObservableList<Member> getMembersList() {
+		return membersList;
+	}
+
+	public void setMembersList(ObservableList<Member> membersList) {
+		this.membersList = membersList;
 	}
 }

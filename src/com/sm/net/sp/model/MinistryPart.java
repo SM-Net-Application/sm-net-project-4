@@ -1,8 +1,12 @@
 package com.sm.net.sp.model;
 
+import org.json.JSONObject;
+
 import com.sm.net.jw.wol.MinistryType;
 import com.sm.net.jw.wol.MinistryTypeTranslated;
 import com.sm.net.project.Language;
+import com.sm.net.sp.settings.Settings;
+import com.sm.net.util.Crypt;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -10,6 +14,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 
 public class MinistryPart {
 
@@ -31,6 +36,53 @@ public class MinistryPart {
 		this.material = new SimpleStringProperty(material);
 		this.student = new SimpleObjectProperty<Member>(student);
 		this.assistant = new SimpleObjectProperty<Member>(assistant);
+	}
+
+	public MinistryPart(JSONObject jb, Language language, Settings settings, ObservableList<Member> membersList) {
+
+		// int spWeekMinID = jb.getInt("spWeekMinID");
+		// int spInf1 = jb.getInt("spInf1");
+		// int spInf2 = jb.getInt("spInf2");
+		int spInf3 = jb.getInt("spInf3");
+		String spInf4 = jb.getString("spInf4");
+		String spInf5 = jb.getString("spInf5");
+		String spInf6 = jb.getString("spInf6");
+		int spInf7 = jb.getInt("spInf7");
+		int spInf8 = jb.getInt("spInf8");
+		// int spInf9 = jb.getInt("spInf9");
+		// int spInf10 = jb.getInt("spInf10");
+
+		this.ministryTypeTranslated = new SimpleObjectProperty<MinistryTypeTranslated>(
+				new MinistryTypeTranslated(spInf3, language));
+		this.fullText = new SimpleStringProperty("");
+
+		if (!spInf4.isEmpty())
+			this.min = new SimpleIntegerProperty(
+					Integer.valueOf(Crypt.decrypt(spInf4, settings.getDatabaseSecretKey())));
+		else
+			this.min = new SimpleIntegerProperty(Integer.valueOf(0));
+
+		if (!spInf5.isEmpty())
+			this.theme = new SimpleStringProperty(Crypt.decrypt(spInf5, settings.getDatabaseSecretKey()));
+		else
+			this.theme = new SimpleStringProperty("");
+
+		if (!spInf6.isEmpty())
+			this.material = new SimpleStringProperty(Crypt.decrypt(spInf6, settings.getDatabaseSecretKey()));
+		else
+			this.material = new SimpleStringProperty("");
+
+		this.student = new SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf7, language));
+		this.assistant = new SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf8, language));
+
+		// TODO: Aggiungere seconda sala
+
+		// this.student2 = new
+		// SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf9,
+		// language));
+		// this.assistant2 = new
+		// SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf10,
+		// language));
 	}
 
 	public final StringProperty fullTextProperty() {

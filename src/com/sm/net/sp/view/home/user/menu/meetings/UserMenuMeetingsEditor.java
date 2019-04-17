@@ -222,8 +222,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private ObservableList<MinistryTypeTranslated> ministryTypeTranslatedList;
 	private ObservableList<MinistryPart> ministryPartList;
-	private ObservableList<Member> memberList;
 	private ObservableList<ChristiansPart> christiansPartList;
+	private ObservableList<Member> memberList;
 	private ObservableList<WeekTypeTranslated> weekTypesList;
 
 	private ObservableList<Member> presidentList;
@@ -440,7 +440,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void initData() {
 
-		memberList = FXCollections.observableArrayList();
+		if (memberList == null)
+			memberList = FXCollections.observableArrayList();
 
 		ministryTypeTranslatedList = MinistryType.getAllMinistryTypeTranslated(language);
 
@@ -478,7 +479,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		selectFirst();
 
-		updateMembers();
+		// updateMembers();
+		updateLists();
+		loadSelectedWeek();
 	}
 
 	private void setMemberComboBoxIndex(ComboBox<Member> cb, int id) {
@@ -495,19 +498,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		}
 	}
 
-	@Override
-	public void updateMembers() {
-		super.updateMembers();
-		Actions.getAllMembers(settings, ownerStage, this);
-	}
-
-	@Override
-	public void updateMembers(ObservableList<Member> list) {
-		super.updateMembers(list);
-		memberList = list;
-		updateLists();
-		loadSelectedWeek();
-	}
+	// @Override
+	// public void updateMembers() {
+	// super.updateMembers();
+	// Actions.getAllMembers(settings, ownerStage, this);
+	// }
+	//
+	// @Override
+	// public void updateMembers(ObservableList<Member> list) {
+	// super.updateMembers(list);
+	// memberList = list;
+	// updateLists();
+	// loadSelectedWeek();
+	// }
 
 	private void updateLists() {
 		resetLists();
@@ -607,6 +610,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				this.reviewTextTextField.setText(this.selectedWeek.getSpInf25());
 				this.song3TextField.setText(this.selectedWeek.getSpInf26());
 				setMemberComboBoxIndex(this.pray2ComboBox, this.selectedWeek.getSpInf27());
+
+				this.ministryPartList.addAll(this.selectedWeek.getMinistryPartList());
+				this.christiansPartList.addAll(this.selectedWeek.getChristiansPartList());
+
+				this.ministryTableView.refresh();
+				this.christiansPartTableView.refresh();
 			}
 	}
 
@@ -1147,6 +1156,14 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public void setChristiansPartList(ObservableList<ChristiansPart> christiansPartList) {
 		this.christiansPartList = christiansPartList;
+	}
+
+	public ObservableList<Member> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(ObservableList<Member> memberList) {
+		this.memberList = memberList;
 	}
 
 }

@@ -11,6 +11,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 
 public class Member {
 
@@ -207,6 +208,15 @@ public class Member {
 	@Override
 	public String toString() {
 		return getNameStyle1();
+	}
+
+	public static Member getFromID(ObservableList<Member> membersList, int id, Language language) {
+
+		for (Member member : membersList)
+			if (member.getSpMemberID() == id)
+				return member;
+
+		return Member.emptyMember(language);
 	}
 
 	public final IntegerProperty spMemberIDProperty() {

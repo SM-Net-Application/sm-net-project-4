@@ -365,6 +365,7 @@ public class JSONRequest {
 		jsonObj.put("spInf27", spInf27);
 		jsonObj.put("spInfMP", spInfMinistryParts);
 		jsonObj.put("spInfCP", spInfChristiansParts);
+
 		return jsonObj;
 	}
 

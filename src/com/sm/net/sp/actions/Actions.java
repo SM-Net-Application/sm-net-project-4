@@ -1273,7 +1273,7 @@ public class Actions {
 	 * @param weekEnd
 	 */
 	public static void getAllWeeks(Week weekStart, Week weekEnd, Settings settings, Stage ownerStage,
-			UpdateData callback) {
+			ObservableList<Member> membersList, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1295,7 +1295,7 @@ public class Actions {
 							JSONArray jsonArray = jsonObject.getJSONArray("result");
 							for (Object object : jsonArray) {
 								JSONObject json = (JSONObject) object;
-								list.add(new Week(json, settings.getLanguage()));
+								list.add(new Week(json, settings.getLanguage(), settings, membersList));
 							}
 
 							callback.updateWeeks(list);

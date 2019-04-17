@@ -25,7 +25,9 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 				$response ["status"] = 0;
 				$response ["result"] = array ();
 				while ( $resultRow = $result->fetch_assoc () ) {
+					
 					$resultRow = array_map ( "utf8_encode", $resultRow );
+					
 					$row = array ();
 					$row ["spWeekID"] = $resultRow ["spWeekID"];
 					$row ["spInf1"] = $resultRow ["spInf1"];
@@ -55,6 +57,70 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 					$row ["spInf25"] = $resultRow ["spInf25"];
 					$row ["spInf26"] = $resultRow ["spInf26"];
 					$row ["spInf27"] = $resultRow ["spInf27"];
+					
+					// Ho bisogno della WeekCode
+					$spInf1 = $resultRow ["spInf1"];
+					
+					// Devo caricare le parti ministero
+					$row ["spInfMIN"] = array ();
+					// Query
+					$query_min = "SELECT spWeekMinID, spInf1, spInf2, spInf3, spInf4, spInf5,";
+					$query_min .= " spInf6, spInf7, spInf8, spInf9, spInf10";
+					$query_min .= " FROM sp_week_min";
+					$query_min .= " WHERE  spInf1='" . $spInf1 . "'";
+					$query_min .= " ORDER BY spInf2";
+					// Eseguo la query
+					$result_min = mysqli_query ( $database, $query_min );
+					if (mysqli_num_rows ( $result_min ) > 0) {
+						while ( $resultRow_min = $result_min->fetch_assoc () ) {
+							
+							$resultRow_min = array_map ( "utf8_encode", $resultRow_min );
+							
+							$row_min = array ();
+							$row_min ["spWeekMinID"] = $resultRow_min ["spWeekMinID"];
+							$row_min ["spInf1"] = $resultRow_min ["spInf1"];
+							$row_min ["spInf2"] = $resultRow_min ["spInf2"];
+							$row_min ["spInf3"] = $resultRow_min ["spInf3"];
+							$row_min ["spInf4"] = $resultRow_min ["spInf4"];
+							$row_min ["spInf5"] = $resultRow_min ["spInf5"];
+							$row_min ["spInf6"] = $resultRow_min ["spInf6"];
+							$row_min ["spInf7"] = $resultRow_min ["spInf7"];
+							$row_min ["spInf8"] = $resultRow_min ["spInf8"];
+							$row_min ["spInf9"] = $resultRow_min ["spInf9"];
+							$row_min ["spInf10"] = $resultRow_min ["spInf10"];
+							
+							array_push ( $row ["spInfMIN"], $row_min );
+						}
+					}
+					
+					// Devo caricare le parti vita cristiana
+					$row ["spInfCR"] = array ();
+					// Query
+					$query_cr = "SELECT spWeekCrID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6";
+					$query_cr .= " FROM sp_week_cr";
+					$query_cr .= " WHERE  spInf1='" . $spInf1 . "'";
+					$query_cr .= " ORDER BY spInf2";
+					// Eseguo la query
+					$result_cr = mysqli_query ( $database, $query_cr );
+					if (mysqli_num_rows ( $result_cr ) > 0) {
+						while ( $resultRow_cr = $result_cr->fetch_assoc () ) {
+							
+							$resultRow_cr = array_map ( "utf8_encode", $resultRow_cr );
+							
+							$row_cr = array ();
+							$row_cr ["spWeekCrID"] = $resultRow_cr ["spWeekCrID"];
+							$row_cr ["spInf1"] = $resultRow_cr ["spInf1"];
+							$row_cr ["spInf2"] = $resultRow_cr ["spInf2"];
+							$row_cr ["spInf3"] = $resultRow_cr ["spInf3"];
+							$row_cr ["spInf4"] = $resultRow_cr ["spInf4"];
+							$row_cr ["spInf5"] = $resultRow_cr ["spInf5"];
+							$row_cr ["spInf6"] = $resultRow_cr ["spInf6"];
+							
+							array_push ( $row ["spInfCR"], $row_cr );
+						}
+					}
+					
+					// Carico la riga nel risultato
 					array_push ( $response ["result"], $row );
 				}
 			} else {

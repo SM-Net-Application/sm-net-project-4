@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.sm.net.project.Language;
@@ -17,6 +18,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Week {
@@ -55,6 +57,9 @@ public class Week {
 	private StringProperty spInf26;
 	private IntegerProperty spInf27;
 
+	private ObjectProperty<ObservableList<MinistryPart>> ministryPartList;
+	private ObjectProperty<ObservableList<ChristiansPart>> christiansPartList;
+
 	private ObjectProperty<WeekTypeTranslated> weekTypeTranslated;
 
 	public Week(LocalDate day, Language language) {
@@ -69,7 +74,7 @@ public class Week {
 				new WeekTypeTranslated(WeekType.EMPTY, language));
 	}
 
-	public Week(JSONObject jsonObject, Language language) {
+	public Week(JSONObject jsonObject, Language language, Settings settings, ObservableList<Member> membersList) {
 
 		this.spWeekID = new SimpleIntegerProperty(jsonObject.getInt("spWeekID"));
 		this.spInf1 = new SimpleIntegerProperty(jsonObject.getInt("spInf1"));
@@ -101,8 +106,42 @@ public class Week {
 		this.spInf26 = new SimpleStringProperty(jsonObject.getString("spInf26"));
 		this.spInf27 = new SimpleIntegerProperty(jsonObject.getInt("spInf27"));
 
+		this.ministryPartList = new SimpleObjectProperty<ObservableList<MinistryPart>>(
+				getMinistryPartsList(jsonObject, language, settings, membersList));
+
+		this.christiansPartList = new SimpleObjectProperty<ObservableList<ChristiansPart>>(
+				getChristiansPartsList(jsonObject, language, settings, membersList));
+
 		weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 				new WeekTypeTranslated(WeekType.EMPTY, language));
+	}
+
+	private ObservableList<MinistryPart> getMinistryPartsList(JSONObject jsonObject, Language language,
+			Settings settings, ObservableList<Member> membersList) {
+
+		ObservableList<MinistryPart> list = FXCollections.observableArrayList();
+
+		JSONArray jsonArray = jsonObject.getJSONArray("spInfMIN");
+		for (Object o : jsonArray)
+			if (o != null)
+				if (o instanceof JSONObject)
+					list.add(new MinistryPart((JSONObject) o, language, settings, membersList));
+
+		return list;
+	}
+
+	private ObservableList<ChristiansPart> getChristiansPartsList(JSONObject jsonObject, Language language,
+			Settings settings, ObservableList<Member> membersList) {
+
+		ObservableList<ChristiansPart> list = FXCollections.observableArrayList();
+
+		JSONArray jsonArray = jsonObject.getJSONArray("spInfCR");
+		for (Object o : jsonArray)
+			if (o != null)
+				if (o instanceof JSONObject)
+					list.add(new ChristiansPart((JSONObject) o, language, settings, membersList));
+
+		return list;
 	}
 
 	public static String buildKey(LocalDate date) {
@@ -151,6 +190,9 @@ public class Week {
 
 				this.weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 						new WeekTypeTranslated(WeekType.getFromOrdinal(week.getSpInf2()), language));
+
+				this.setMinistryPartList(week.getMinistryPartList());
+				this.setChristiansPartList(week.getChristiansPartList());
 
 				break;
 			}
@@ -655,4 +697,35 @@ public class Week {
 
 		this.spInf27Property().set(spInf27);
 	}
+
+	public final ObjectProperty<ObservableList<MinistryPart>> ministryPartListProperty() {
+		return this.ministryPartList;
+	}
+
+	public final ObservableList<MinistryPart> getMinistryPartList() {
+		return this.ministryPartListProperty().get();
+	}
+
+	public final void setMinistryPartList(final ObservableList<MinistryPart> ministryPartList) {
+		if (this.ministryPartListProperty() == null)
+			this.ministryPartList = new SimpleObjectProperty<ObservableList<MinistryPart>>();
+
+		this.ministryPartListProperty().set(ministryPartList);
+	}
+
+	public final ObjectProperty<ObservableList<ChristiansPart>> christiansPartListProperty() {
+		return this.christiansPartList;
+	}
+
+	public final ObservableList<ChristiansPart> getChristiansPartList() {
+		return this.christiansPartListProperty().get();
+	}
+
+	public final void setChristiansPartList(final ObservableList<ChristiansPart> christiansPartList) {
+		if (this.christiansPartListProperty() == null)
+			this.christiansPartList = new SimpleObjectProperty<ObservableList<ChristiansPart>>();
+
+		this.christiansPartListProperty().set(christiansPartList);
+	}
+
 }
