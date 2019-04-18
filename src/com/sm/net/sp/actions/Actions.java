@@ -1392,6 +1392,65 @@ public class Actions {
 
 	}
 
+	public static void updateWeek(String spWeekID, String spInf1, String spInf2, String spInf3, String spInf4,
+			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
+			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
+			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
+			String spInf24, String spInf25, String spInf26, String spInf27, String spInfMinistryParts,
+			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
+			UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							tabPane.getTabs().remove(newTab);
+							callback.updateWeeks();
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.UPDATE_WEEK(spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
+								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
+								spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26,
+								spInf27, spInfMinistryParts, spInfChristiansParts));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
 	/**
 	 * Check if a info is present
 	 */

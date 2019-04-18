@@ -684,10 +684,18 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 			if (this.selectedWeek.spWeekIDProperty() != null) {
 				// editWeek
+
+				String spWeekID = String.valueOf(selectedWeek.getSpWeekID());
+				String spInf1 = String.valueOf(selectedWeek.getSpInf1());
+
+				Actions.updateWeek(spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
+						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
+						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInfMinistryParts,
+						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+
 			} else {
 				// newWeek
 
-				// spInf1 WeekKey
 				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
 
 				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,

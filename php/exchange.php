@@ -84,6 +84,9 @@ if (! empty ( $jsonObjPar )) {
 				case 26 :
 					include 'query/sp_tool_q26.php';
 					break;
+				case 27 :
+					include 'query/sp_tool_q27.php';
+					break;
 			}
 		} else {
 			$response ["status"] = 3;
