@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -122,38 +124,90 @@
                <VBox.margin>
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin></Separator>
-            <HBox VBox.vgrow="ALWAYS">
-               <children>
-                  <VBox HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label fx:id="studentLabel" maxHeight="1.7976931348623157E308" text="Studente">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <ListView fx:id="studentsListView">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </ListView>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="assistantVBox" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label fx:id="assistantLabel" maxHeight="1.7976931348623157E308" text="Assistente">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <ListView fx:id="assistantsListView">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </ListView>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
+            <TabPane fx:id="hallsTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab fx:id="hall1Tab" closable="false" text="Sala principale">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="studentLabel" maxHeight="1.7976931348623157E308" text="Studente">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ListView fx:id="studentsListView">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </ListView>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="assistantVBox" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="assistantLabel" maxHeight="1.7976931348623157E308" text="Assistente">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ListView fx:id="assistantsListView">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </ListView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="hall2Tab" closable="false" text="Seconda sala">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="student2Label" maxHeight="1.7976931348623157E308" text="Studente">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ListView fx:id="students2ListView">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </ListView>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="assistantVBox1" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="assistant2Label" maxHeight="1.7976931348623157E308" text="Assistente">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ListView fx:id="assistants2ListView">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </VBox.margin>
+                                          </ListView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
             <StackPane alignment="CENTER_RIGHT">
                <children>
                   <Button fx:id="saveButton" mnemonicParsing="false" text="Button">

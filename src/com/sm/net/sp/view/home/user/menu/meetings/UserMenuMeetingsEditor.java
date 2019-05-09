@@ -149,6 +149,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private TableColumn<MinistryPart, Member> ministryMember1TableColumn;
 	@FXML
 	private TableColumn<MinistryPart, Member> ministryMember2TableColumn;
+	@FXML
+	private TableColumn<MinistryPart, Member> ministryMember3TableColumn;
+	@FXML
+	private TableColumn<MinistryPart, Member> ministryMember4TableColumn;
 
 	@FXML
 	private Button ministryPartAddButton;
@@ -341,6 +345,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMaterialTableColumn.setCellValueFactory(cellData -> cellData.getValue().materialProperty());
 		ministryMember1TableColumn.setCellValueFactory(cellData -> cellData.getValue().studentProperty());
 		ministryMember2TableColumn.setCellValueFactory(cellData -> cellData.getValue().assistantProperty());
+		ministryMember3TableColumn.setCellValueFactory(cellData -> cellData.getValue().student2Property());
+		ministryMember4TableColumn.setCellValueFactory(cellData -> cellData.getValue().assistant2Property());
 
 		christiansPartFulltextTableColumn.setCellValueFactory(cellData -> cellData.getValue().fullTextProperty());
 		christiansPartMinTableColumn.setCellValueFactory(cellData -> cellData.getValue().minProperty().asObject());
@@ -642,7 +648,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		// TODO: Save process
 		if (checkFields()) {
 
-			// spInf2 WeekType
 			String spInf2 = String.valueOf(WeekType.STANDARD.getOrdinal());
 			if (typeWeekListView.getSelectionModel().getSelectedIndex() > -1) {
 				WeekTypeTranslated weekTypeTranslated = typeWeekListView.getSelectionModel().getSelectedItem();
@@ -723,9 +728,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			String spInf6 = Crypt.encrypt(mp.getMaterial(), settings.getDatabaseSecretKey());
 			String spInf7 = String.valueOf(mp.getStudent().getSpMemberID());
 			String spInf8 = String.valueOf(mp.getAssistant().getSpMemberID());
-			// TODO: Modificare quando aggiungo quelli della seconda sala
-			String spInf9 = String.valueOf(mp.getStudent().getSpMemberID());
-			String spInf10 = String.valueOf(mp.getAssistant().getSpMemberID());
+			String spInf9 = String.valueOf(mp.getStudent2().getSpMemberID());
+			String spInf10 = String.valueOf(mp.getAssistant2().getSpMemberID());
 
 			String insert = "(";
 			insert += spInf1;
@@ -793,9 +797,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		// TODO: Usare Language
 
-		Alert alert = new AlertDesigner("Programma per la settimana",
-				"Vuoi scaricare il programma da Watchtower Online Library?", ownerStage, AlertType.CONFIRMATION,
-				Meta.Application.getFullTitle(), Meta.Resources.ICON);
+		Alert alert = new AlertDesigner(language.getString("TEXT0137"), language.getString("TEXT0138"), ownerStage,
+				AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
 
 		if (alert.showAndWait().get() == ButtonType.OK) {
 			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
@@ -828,6 +831,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 					for (ScheduleForMeeting.MinistryPart part : scheduleForMeeting.getMinistryPartsList())
 						ministryPartList.add(new MinistryPart(part.getMinistryTypeTranslated(), part.getText(),
 								part.getMin(), part.getTextPart(), part.getMaterial(), Member.emptyMember(language),
+								Member.emptyMember(language), Member.emptyMember(language),
 								Member.emptyMember(language)));
 
 					song2TextField.setText(scheduleForMeeting.getSong2().getSongNo().toString());
@@ -1047,8 +1051,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMinTableColumn.setText(language.getString("TEXT0093"));
 		ministryThemeTableColumn.setText(language.getString("TEXT0094"));
 		ministryMaterialTableColumn.setText(language.getString("TEXT0095"));
-		ministryMember1TableColumn.setText(language.getString("TEXT0083") + " / " + language.getString("TEXT0044"));
+		ministryMember1TableColumn.setText(language.getString("TEXT0135"));
 		ministryMember2TableColumn.setText(language.getString("TEXT0038"));
+		ministryMember3TableColumn.setText(language.getString("TEXT0136"));
+		ministryMember4TableColumn.setText(language.getString("TEXT0038"));
 
 		ministryPartAddButton.setText(null);
 		ministryPartAddButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));

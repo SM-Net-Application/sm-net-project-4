@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -33,10 +35,6 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 	@FXML
 	private Label materialLabel;
 	@FXML
-	private Label studentLabel;
-	@FXML
-	private Label assistantLabel;
-	@FXML
 	private ComboBox<MinistryTypeTranslated> typeComboBox;
 	@FXML
 	private TextField wolTextTextField;
@@ -47,9 +45,27 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 	@FXML
 	private TextField materialTextField;
 	@FXML
+	private TabPane hallsTabPane;
+	@FXML
+	private Tab hall1Tab;
+	@FXML
+	private Tab hall2Tab;
+	@FXML
+	private Label studentLabel;
+	@FXML
 	private ListView<Member> studentsListView;
 	@FXML
+	private Label assistantLabel;
+	@FXML
 	private ListView<Member> assistantsListView;
+	@FXML
+	private Label student2Label;
+	@FXML
+	private ListView<Member> students2ListView;
+	@FXML
+	private Label assistant2Label;
+	@FXML
+	private ListView<Member> assistants2ListView;
 	@FXML
 	private Button saveButton;
 
@@ -78,8 +94,6 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		minLabel.getStyleClass().add("labelStyle3");
 		themeLabel.getStyleClass().add("labelStyle3");
 		materialLabel.getStyleClass().add("labelStyle3");
-		studentLabel.getStyleClass().add("labelStyle1");
-		assistantLabel.getStyleClass().add("labelStyle1");
 
 		typeComboBox.getStyleClass().add("comboBoxStyle1");
 		wolTextTextField.getStyleClass().add("textFieldStyle1");
@@ -87,8 +101,19 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		themeTextField.getStyleClass().add("textFieldStyle1");
 		materialTextField.getStyleClass().add("textFieldStyle1");
 
+		hallsTabPane.getStyleClass().add("tabPaneStyle1");
+		hall1Tab.getStyleClass().add("tabStyle1");
+		hall2Tab.getStyleClass().add("tabStyle1");
+
+		studentLabel.getStyleClass().add("labelStyle1");
 		studentsListView.getStyleClass().add("listViewStyle1");
+		assistantLabel.getStyleClass().add("labelStyle1");
 		assistantsListView.getStyleClass().add("listViewStyle1");
+
+		student2Label.getStyleClass().add("labelStyle1");
+		students2ListView.getStyleClass().add("listViewStyle1");
+		assistant2Label.getStyleClass().add("labelStyle1");
+		assistants2ListView.getStyleClass().add("listViewStyle1");
 
 		saveButton.getStyleClass().add("buttonStyle2");
 	}
@@ -104,11 +129,39 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 
 		initData();
 		updateValidMembersListViews(typeComboBox.getSelectionModel().getSelectedIndex());
+		selectMembers(this.studentsListView, this.ministryPart.getStudent());
+		selectMembers(this.assistantsListView, this.ministryPart.getAssistant());
+		selectMembers(this.students2ListView, this.ministryPart.getStudent2());
+		selectMembers(this.assistants2ListView, this.ministryPart.getAssistant2());
 	}
 
 	private void listeners() {
 		listenerTypeComboBox();
 		listenerSaveButton();
+	}
+
+	private void selectMembers(ListView<Member> listView, Member member) {
+
+		if (member != null) {
+
+			ObservableList<Member> items = listView.getItems();
+			if (items != null) {
+
+				boolean find = false;
+				int index = -1;
+
+				for (Member listViewMember : items) {
+					index += 1;
+					if (listViewMember.getSpMemberID() == member.getSpMemberID()) {
+						find = true;
+						break;
+					}
+				}
+
+				if (find)
+					listView.getSelectionModel().select(index);
+			}
+		}
 	}
 
 	private void listenerTypeComboBox() {
@@ -135,12 +188,20 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		Member assistant = (assistantsListView.getSelectionModel().getSelectedIndex() > -1)
 				? assistantsListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
 
+		Member student2 = (students2ListView.getSelectionModel().getSelectedIndex() > -1)
+				? students2ListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
+
+		Member assistant2 = (assistants2ListView.getSelectionModel().getSelectedIndex() > -1)
+				? assistants2ListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
+
 		ministryPart.setMinistryTypeTranslated(ministryTypeTranslated);
 		ministryPart.setMin(Integer.valueOf(min));
 		ministryPart.setTheme(theme);
 		ministryPart.setMaterial(material);
 		ministryPart.setStudent(student);
 		ministryPart.setAssistant(assistant);
+		ministryPart.setStudent2(student2);
+		ministryPart.setAssistant2(assistant2);
 
 		ministryTableView.refresh();
 
@@ -156,8 +217,17 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		minLabel.setText(language.getString("TEXT0093"));
 		themeLabel.setText(language.getString("TEXT0094"));
 		materialLabel.setText(language.getString("TEXT0095"));
-		studentLabel.setText(language.getString("TEXT0083") + " / " + language.getString("TEXT0044"));
+
+		hall1Tab.setText(language.getString("TEXT0135"));
+		hall2Tab.setText(language.getString("TEXT0136"));
+
+		// studentLabel.setText(language.getString("TEXT0134") + " / " +
+		// language.getString("TEXT0044"));
+		// student2Label.setText(language.getString("TEXT0134") + " / " +
+		// language.getString("TEXT0044"));
+
 		assistantLabel.setText(language.getString("TEXT0038"));
+		assistant2Label.setText(language.getString("TEXT0038"));
 
 		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
 		saveButton.setText("");
@@ -188,6 +258,17 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		}
 
 		typeComboBox.getSelectionModel().select(index);
+
+		switch (typeComboBox.getItems().get(index).getType()) {
+		case DISCUSSION:
+			studentLabel.setText(language.getString("TEXT0134"));
+			student2Label.setText(language.getString("TEXT0134"));
+			break;
+		default:
+			studentLabel.setText(language.getString("TEXT0044"));
+			student2Label.setText(language.getString("TEXT0044"));
+			break;
+		}
 	}
 
 	public void updateValidMembersListViews(Number newValue) {
@@ -200,18 +281,28 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 
 				switch (typeComboBox.getSelectionModel().getSelectedItem().getType()) {
 				case DISCUSSION:
+					studentLabel.setText(language.getString("TEXT0134"));
+					student2Label.setText(language.getString("TEXT0134"));
 					GUIUpdateForDiscussion();
 					break;
 				case INITIAL_CALL:
+					studentLabel.setText(language.getString("TEXT0044"));
+					student2Label.setText(language.getString("TEXT0044"));
 					GUIUpdateForInitialCall();
 					break;
 				case RETURN_VISIT:
+					studentLabel.setText(language.getString("TEXT0044"));
+					student2Label.setText(language.getString("TEXT0044"));
 					GUIUpdateForReturnVisit();
 					break;
 				case BIBLE_STUDY:
+					studentLabel.setText(language.getString("TEXT0044"));
+					student2Label.setText(language.getString("TEXT0044"));
 					GUIUpdateForBibleStudy();
 					break;
 				case TALK:
+					studentLabel.setText(language.getString("TEXT0044"));
+					student2Label.setText(language.getString("TEXT0044"));
 					GUIUpdateForTalk();
 					break;
 				}
@@ -273,6 +364,8 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 
 		studentsListView.setItems(list1);
 		assistantsListView.setItems(list2);
+		students2ListView.setItems(list1);
+		assistants2ListView.setItems(list2);
 	}
 
 	public Settings getSettings() {

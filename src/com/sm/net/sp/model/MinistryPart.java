@@ -25,9 +25,11 @@ public class MinistryPart {
 	private StringProperty material;
 	private ObjectProperty<Member> student;
 	private ObjectProperty<Member> assistant;
+	private ObjectProperty<Member> student2;
+	private ObjectProperty<Member> assistant2;
 
 	public MinistryPart(MinistryTypeTranslated ministryTypeTranslated, String fullText, Integer min, String theme,
-			String material, Member student, Member assistant) {
+			String material, Member student, Member assistant, Member student2, Member assistant2) {
 		super();
 		this.ministryTypeTranslated = new SimpleObjectProperty<MinistryTypeTranslated>(ministryTypeTranslated);
 		this.fullText = new SimpleStringProperty(fullText);
@@ -36,6 +38,8 @@ public class MinistryPart {
 		this.material = new SimpleStringProperty(material);
 		this.student = new SimpleObjectProperty<Member>(student);
 		this.assistant = new SimpleObjectProperty<Member>(assistant);
+		this.student2 = new SimpleObjectProperty<Member>(student2);
+		this.assistant2 = new SimpleObjectProperty<Member>(assistant2);
 	}
 
 	public MinistryPart(JSONObject jb, Language language, Settings settings, ObservableList<Member> membersList) {
@@ -49,8 +53,8 @@ public class MinistryPart {
 		String spInf6 = jb.getString("spInf6");
 		int spInf7 = jb.getInt("spInf7");
 		int spInf8 = jb.getInt("spInf8");
-		// int spInf9 = jb.getInt("spInf9");
-		// int spInf10 = jb.getInt("spInf10");
+		int spInf9 = jb.getInt("spInf9");
+		int spInf10 = jb.getInt("spInf10");
 
 		this.ministryTypeTranslated = new SimpleObjectProperty<MinistryTypeTranslated>(
 				new MinistryTypeTranslated(spInf3, language));
@@ -75,14 +79,8 @@ public class MinistryPart {
 		this.student = new SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf7, language));
 		this.assistant = new SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf8, language));
 
-		// TODO: Aggiungere seconda sala
-
-		// this.student2 = new
-		// SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf9,
-		// language));
-		// this.assistant2 = new
-		// SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf10,
-		// language));
+		this.student2 = new SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf9, language));
+		this.assistant2 = new SimpleObjectProperty<Member>(Member.getFromID(membersList, spInf10, language));
 	}
 
 	public final StringProperty fullTextProperty() {
@@ -172,7 +170,8 @@ public class MinistryPart {
 	public static MinistryPart newMinistryPart(Language language) {
 
 		return new MinistryPart(new MinistryTypeTranslated(MinistryType.INITIAL_CALL, language), "", 0, "", "",
-				Member.emptyMember(language), Member.emptyMember(language));
+				Member.emptyMember(language), Member.emptyMember(language), Member.emptyMember(language),
+				Member.emptyMember(language));
 	}
 
 	public String printMinistryPart(Language language) {
@@ -195,6 +194,30 @@ public class MinistryPart {
 		text += " : " + this.getStudent().getNameStyle1();
 
 		return text;
+	}
+
+	public final ObjectProperty<Member> student2Property() {
+		return this.student2;
+	}
+
+	public final Member getStudent2() {
+		return this.student2Property().get();
+	}
+
+	public final void setStudent2(final Member student2) {
+		this.student2Property().set(student2);
+	}
+
+	public final ObjectProperty<Member> assistant2Property() {
+		return this.assistant2;
+	}
+
+	public final Member getAssistant2() {
+		return this.assistant2Property().get();
+	}
+
+	public final void setAssistant2(final Member assistant2) {
+		this.assistant2Property().set(assistant2);
 	}
 
 }
