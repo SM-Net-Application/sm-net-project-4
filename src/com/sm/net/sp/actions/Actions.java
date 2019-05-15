@@ -1,5 +1,6 @@
 package com.sm.net.sp.actions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +11,12 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.jasper.Jasper;
+import com.sm.net.sp.jasper.model.JRMinistryPart;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
@@ -43,6 +46,7 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class Actions {
@@ -1748,6 +1752,70 @@ public class Actions {
 				try {
 					JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
 					JRDataSource jrDataSource = new JREmptyDataSource();
+					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, jrDataSource);
+
+					JasperViewer jv = new JasperViewer(jasperPrint, false);
+					jv.setTitle(Meta.Application.getFullTitle());
+					jv.setIconImage(SwingFXUtils.fromFXImage(Meta.Resources.ICON, null));
+					jv.setVisible(true);
+
+				} catch (JRException e) {
+					System.out.println(e.getMessage());
+				}
+
+				return null;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	public static void printWeek(Week selectedWeek, Settings settings, Stage ownerStage, Language language) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<Void> task = new Task<Void>() {
+
+			{
+				setOnSucceeded(value -> waitAlert.close());
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected Void call() throws Exception {
+
+				String reportPath = Jasper.Layouts.SP_MINISTRY_PART_ROW_LAYOUT.getAbsolutePath();
+
+				ArrayList<JRMinistryPart> jrMinistryPart = new ArrayList<>();
+
+				for (MinistryPart ministryPart : selectedWeek.getMinistryPartList())
+					jrMinistryPart.add(new JRMinistryPart(String.format("Min.%d", ministryPart.getMin()),
+							ministryPart.getMaterial()));
+
+				System.out.println(jrMinistryPart.size());
+
+				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(jrMinistryPart);
+
+				Map<String, Object> parameters = new HashMap<String, Object>();
+				parameters.put("header", "EFFICACI NEL MINISTERO");
+
+				try {
+					JasperReport jasperReport = JasperCompileManager.compileReport(reportPath);
+					// JRDataSource jrDataSource = new JREmptyDataSource();
 					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, jrDataSource);
 
 					JasperViewer jv = new JasperViewer(jasperPrint, false);

@@ -50,6 +50,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private Button loadWeekFromWOLButton;
 	@FXML
 	private Button saveWeekButton;
+	@FXML
+	private Button printWeekButton;
 
 	@FXML
 	private TabPane tabPane;
@@ -637,6 +639,23 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		listenerLoadWeekFromWOLButton();
 
 		listenerSaveWeekButton();
+
+		listenerPrintWeekButton();
+	}
+
+	private void listenerPrintWeekButton() {
+		printWeekButton.setOnAction(event -> printWeek());
+
+	}
+
+	private void printWeek() {
+
+		// TODO:
+		// Verificare i requisiti per stampare la settimana
+		// La stampa viene eseguita tramite la classe Actions
+
+		Actions.printWeek(this.selectedWeek, settings, this.ownerStage, language);
+
 	}
 
 	private void listenerSaveWeekButton() {
