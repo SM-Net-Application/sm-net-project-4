@@ -205,6 +205,16 @@ public class Member {
 				: this.getSpInf2Decrypted();
 	}
 
+	public final String getNameStyle3() {
+		return (!this.getSpInf1Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + " " + this.getSpInf1Decrypted())
+				: this.getSpInf2Decrypted();
+	}
+
+	public final String getNameStyle4() {
+		return (!this.getSpInf3Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + " " + this.getSpInf3Decrypted())
+				: this.getSpInf2Decrypted();
+	}
+
 	@Override
 	public String toString() {
 		return getNameStyle1();

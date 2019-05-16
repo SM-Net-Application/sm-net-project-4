@@ -1801,12 +1801,8 @@ public class Actions {
 				String reportPath = Jasper.Layouts.SP_MINISTRY_PART_ROW_LAYOUT.getAbsolutePath();
 
 				ArrayList<JRMinistryPart> jrMinistryPart = new ArrayList<>();
-
 				for (MinistryPart ministryPart : selectedWeek.getMinistryPartList())
-					jrMinistryPart.add(new JRMinistryPart(String.format("Min.%d", ministryPart.getMin()),
-							ministryPart.getMaterial()));
-
-				System.out.println(jrMinistryPart.size());
+					jrMinistryPart.add(JRMinistryPart.newObject(ministryPart, language));
 
 				JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(jrMinistryPart);
 
