@@ -28,6 +28,8 @@ public class JRMinistryPart {
 
 		Integer partType = Integer.valueOf(ministryPart.getMinistryTypeTranslated().getOrdinal());
 
+		//TODO: Usare language per le stringe
+		
 		String min = String.format("Min.%d", ministryPart.getMin());
 
 		String theme = ministryPart.getTheme();

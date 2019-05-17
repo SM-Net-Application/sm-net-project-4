@@ -18,6 +18,8 @@ public class Jasper {
 		public static final File SP_IMAGE_LAYOUT = getImage("iconSP");
 		public static final File SP_USER_LAYOUT = getLayout("spUsers");
 		public static final File SP_MINISTRY_PART_ROW_LAYOUT = getLayout("spMeetingMinistryPartRow");
+		public static final File SP_CHRISTIANS_PART_ROW_LAYOUT = getLayout("spMeetingChristiansPartRow");
+		public static final File SP_WEEK_LAYOUT = getLayout("spMeetingWeek");
 
 		public static File getLayout(String name) {
 
