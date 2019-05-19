@@ -2,7 +2,9 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -19,8 +21,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -29,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -96,6 +101,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private TableColumn<Week, LocalDate> toTableColumn;
 	@FXML
 	private TableColumn<Week, String> typeColumn;
+	@FXML
+	private Button printButton;
 
 	private Settings settings;
 	private Language language;
@@ -163,6 +170,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		kingdomHallNumberTextField.getStyleClass().add("textFieldStyle1");
 		kingdomHallPostcodeTextField.getStyleClass().add("textFieldStyle1");
 		kingdomHallCityTextField.getStyleClass().add("textFieldStyle1");
+
+		printButton.getStyleClass().add("buttonStyle3");
 	}
 
 	public void objectInitialize() {
@@ -172,6 +181,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	private void initData() {
+		this.weekTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		setRadioButtonGroup();
 		loadGeneralInfo();
 		loadCalendar();
@@ -367,6 +377,31 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		listenerKingdomHallCityTextField();
 
 		listenerWeekTableView();
+
+		listenerPrintButton();
+	}
+
+	private void listenerPrintButton() {
+		this.printButton.setOnAction(event -> printWeeks());
+	}
+
+	private void printWeeks() {
+
+		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			ArrayList<Week> printableWeeks = new ArrayList<>();
+
+			ObservableList<Week> weeks = this.weekTableView.getSelectionModel().getSelectedItems();
+			for (Week week : weeks)
+				if (week.spWeekIDProperty() != null)
+					printableWeeks.add(week);
+
+			if (printableWeeks.size() > 0)
+				Actions.printWeek(printableWeeks, settings, ownerStage, language);
+			else // TODO: Il messaggio deve essere preso dal language
+				new AlertDesigner("Nessuna settimana stampabile", ownerStage, AlertType.ERROR,
+						Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+		}
 	}
 
 	private void listenerMidweekToggleGroup() {
@@ -669,6 +704,9 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		kingdomHallNumberLabel.setText(language.getString("TEXT0028"));
 		kingdomHallPostcodeLabel.setText(language.getString("TEXT0029"));
 		kingdomHallCityLabel.setText(language.getString("TEXT0030"));
+
+		printButton.setGraphic(Meta.Resources.createButtonIcon(Meta.Resources.PRINT));
+		printButton.setText(null);
 	}
 
 	public Settings getSettings() {

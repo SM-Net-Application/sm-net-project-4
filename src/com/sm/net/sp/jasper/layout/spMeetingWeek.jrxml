@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-05-17T09:59:01 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<parameter name="jasperReportMinistryPart" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="jasperReportChristiansPart" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="jrDataSourceMinistryPart" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<parameter name="jrDataSourceChristiansPart" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<parameter name="weekHeader" class="java.lang.String"/>
-	<parameter name="treasuresHeader" class="java.lang.String"/>
-	<parameter name="headerMinistryPart" class="java.lang.String"/>
-	<parameter name="headerChristiansPart" class="java.lang.String"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="jasperReportMinistryPart" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="jasperReportChristiansPart" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="jrDataSourceMinistryPart" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="jrDataSourceChristiansPart" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="weekHeader" class="java.lang.String"/>
+	<field name="treasuresHeader" class="java.lang.String"/>
+	<field name="ministryPartHeader" class="java.lang.String"/>
+	<field name="christiansPartHeader" class="java.lang.String"/>
 	<group name="weekHeader">
 		<groupHeader>
 			<band height="17">
@@ -37,7 +45,7 @@
 					<textElement verticalAlignment="Top">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{weekHeader}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{weekHeader}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -65,7 +73,7 @@
 					<textElement verticalAlignment="Top">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{treasuresHeader}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{treasuresHeader}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -278,7 +286,7 @@
 					<textElement verticalAlignment="Top">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{headerMinistryPart}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{ministryPartHeader}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -289,8 +297,8 @@
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				<subreport>
 					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="5" uuid="0daf0871-3f2e-4287-b42a-f99b554bcd62"/>
-					<dataSourceExpression><![CDATA[$P{jrDataSourceMinistryPart}]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{jasperReportMinistryPart}]]></subreportExpression>
+					<dataSourceExpression><![CDATA[$F{jrDataSourceMinistryPart}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$F{jasperReportMinistryPart}]]></subreportExpression>
 				</subreport>
 			</band>
 		</groupHeader>
@@ -318,7 +326,7 @@
 					<textElement verticalAlignment="Top">
 						<font fontName="SansSerif" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{headerChristiansPart}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{christiansPartHeader}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -362,8 +370,8 @@
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				<subreport>
 					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="5" uuid="232a495e-0408-4dde-9cd5-2db7e3bbdf0c"/>
-					<dataSourceExpression><![CDATA[$P{jrDataSourceChristiansPart}]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{jasperReportChristiansPart}]]></subreportExpression>
+					<dataSourceExpression><![CDATA[$F{jrDataSourceChristiansPart}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$F{jasperReportChristiansPart}]]></subreportExpression>
 				</subreport>
 			</band>
 		</groupHeader>

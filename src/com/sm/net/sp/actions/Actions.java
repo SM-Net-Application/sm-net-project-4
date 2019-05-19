@@ -11,14 +11,11 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.jasper.Jasper;
-import com.sm.net.sp.jasper.model.JRChristiansPart;
-import com.sm.net.sp.jasper.model.JRMinistryPart;
+import com.sm.net.sp.jasper.model.JRWeek;
 import com.sm.net.sp.json.JSONRequest;
-import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
@@ -1774,7 +1771,7 @@ public class Actions {
 		taskThread.start();
 	}
 
-	public static void printWeek(Week selectedWeek, Settings settings, Stage ownerStage, Language language) {
+	public static void printWeek(ArrayList<Week> weeks, Settings settings, Stage ownerStage, Language language) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1800,40 +1797,32 @@ public class Actions {
 			@Override
 			protected Void call() throws Exception {
 
-				String ministryPartReport = Jasper.Layouts.SP_MINISTRY_PART_ROW_LAYOUT.getAbsolutePath();
-				String christiansPartReport = Jasper.Layouts.SP_CHRISTIANS_PART_ROW_LAYOUT.getAbsolutePath();
-				String weekPartReport = Jasper.Layouts.SP_WEEK_LAYOUT.getAbsolutePath();
-
-				ArrayList<JRMinistryPart> jrMinistryPart = new ArrayList<>();
-				for (MinistryPart ministryPart : selectedWeek.getMinistryPartList())
-					jrMinistryPart.add(JRMinistryPart.newObject(ministryPart, language));
-
-				JRBeanCollectionDataSource jrDataSourceMinistryPart = new JRBeanCollectionDataSource(jrMinistryPart);
-
-				ArrayList<JRChristiansPart> jrChristiansPart = new ArrayList<>();
-				for (ChristiansPart christiansPart : selectedWeek.getChristiansPartList())
-					jrChristiansPart.add(JRChristiansPart.newObject(christiansPart, language));
-
-				JRBeanCollectionDataSource jrDataSourceChristiansPart = new JRBeanCollectionDataSource(
-						jrChristiansPart);
-
 				try {
-					JasperReport jasperReportWeek = JasperCompileManager.compileReport(weekPartReport);
-					JasperReport jasperReportMinistryPart = JasperCompileManager.compileReport(ministryPartReport);
-					JasperReport jasperReportChristiansPart = JasperCompileManager.compileReport(christiansPartReport);
+
+					String programmReportFile = Jasper.Layouts.SP_PROGRAMM_LAYOUT.getAbsolutePath();
+					String weekReportFile = Jasper.Layouts.SP_WEEK_LAYOUT.getAbsolutePath();
+
+					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
+					JasperReport weekJasperReport = JasperCompileManager.compileReport(weekReportFile);
+
+					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
+					
+					for (Week week : weeks)
+						jrWeeks.add(JRWeek.newObject(week, language));
+					
+					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
+					
+					String congregationName = "CONGREGAZIONE ALBSTADT-ITALIENISCH";
+					String programmName = "PROGRAMMA DELL'ADUNANZA INFRASETTIMANALE";
 
 					Map<String, Object> parameters = new HashMap<String, Object>();
-					parameters.put("jasperReportMinistryPart", jasperReportMinistryPart);
-					parameters.put("jasperReportChristiansPart", jasperReportChristiansPart);
-					parameters.put("jrDataSourceMinistryPart", jrDataSourceMinistryPart);
-					parameters.put("jrDataSourceChristiansPart", jrDataSourceChristiansPart);
-					parameters.put("weekHeader", "SETTIMANA DEL ::: | GENESI 1-3");
-					parameters.put("treasuresHeader", "TESORI DELLA PAROLA DI DIO");
-					parameters.put("headerMinistryPart", "EFFICACI NEL MINISTERO");
-					parameters.put("headerChristiansPart", "VITA CRISTIANA");
+					parameters.put("congregationName", congregationName);
+					parameters.put("programmName", programmName);
+					parameters.put("jrWeekReport", weekJasperReport);
+//					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
 
-					JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReportWeek, parameters,
-							new JREmptyDataSource());
+					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
+							jrWeeksDataSource);
 
 					JasperViewer jv = new JasperViewer(jasperPrint, false);
 					jv.setTitle(Meta.Application.getFullTitle());

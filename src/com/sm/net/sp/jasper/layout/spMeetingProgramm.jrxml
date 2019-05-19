@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingProgramm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="congregationName" class="java.lang.String"/>
+	<parameter name="programmName" class="java.lang.String"/>
+	<parameter name="jrWeekReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="jrWeeksDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<pageHeader>
+		<band height="60">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="60" forecolor="#FFFFFF" backcolor="#0B6798" uuid="976d792c-c89b-4ea1-bda7-af6b30392492">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#0B6798"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="30" forecolor="#FFFFFF" uuid="43b185ef-16a8-40b2-a933-ecc0fe3adc70">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{congregationName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="30" forecolor="#FFFFFF" uuid="9172e851-2e29-4f95-9542-519930e7aa3d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{programmName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="35">
+			<subreport>
+				<reportElement x="0" y="10" width="555" height="25" uuid="aae0c36a-3373-45cb-a030-ed835e3d0005">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[$F{jrWeeksDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{jrWeekReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
