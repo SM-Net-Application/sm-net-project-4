@@ -1,5 +1,7 @@
 package com.sm.net.sp.jasper.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.sm.net.project.Language;
@@ -63,12 +65,29 @@ public class JRWeek {
 		jrWeek.setJasperReportMinistryPart(JasperCompileManager.compileReport(ministryPartReport));
 		jrWeek.setJasperReportChristiansPart(JasperCompileManager.compileReport(christiansPartReport));
 
-		jrWeek.setWeekHeader("SETTIMANA DEL ::: | GENESI 1-3");
-		jrWeek.setTreasuresHeader("TESORI DELLA PAROLA DI DIO");
-		jrWeek.setMinistryPartHeader("EFFICACI NEL MINISTERO");
-		jrWeek.setChristiansPartHeader("VITA CRISTIANA");
+		jrWeek.setWeekHeader(checkWeekHeader(week, language));
+		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
+		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
+		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
 		return jrWeek;
+	}
+
+	private static String checkWeekHeader(Week week, Language language) {
+
+		LocalDate from = week.getFrom();
+
+		DateTimeFormatter dtfDay = DateTimeFormatter.ofPattern("d");
+		DateTimeFormatter dtfMonth = DateTimeFormatter.ofPattern("M");
+
+		String day = dtfDay.format(from);
+
+		String keyMonth = "time.months." + dtfMonth.format(from);
+		String month = language.getString(keyMonth);
+
+		String keyWeek = language.getString("jasper.layout.meeting.weekheader");
+
+		return String.format(keyWeek, day, month.toUpperCase(), week.getSpInf6());
 	}
 
 	public String getWeekHeader() {
