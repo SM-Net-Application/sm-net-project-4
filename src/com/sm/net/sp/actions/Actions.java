@@ -11,7 +11,7 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.jasper.Jasper;
-import com.sm.net.sp.jasper.model.JRWeek2;
+import com.sm.net.sp.jasper.model.JRWeek;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
@@ -1805,16 +1805,17 @@ public class Actions {
 					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
 					JasperReport weekJasperReport = JasperCompileManager.compileReport(weekReportFile);
 
-					ArrayList<JRWeek2> programm = new ArrayList<>();
-					programm.add(JRWeek2.newObject("1"));
-					programm.add(JRWeek2.newObject("2"));
-					programm.add(JRWeek2.newObject("3"));
-					
-					JRBeanCollectionDataSource programmDS = new JRBeanCollectionDataSource(programm);
+					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
+					for (Week week : weeks)
+						jrWeeks.add(JRWeek.newObject(week, language));
+
+					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
 					Map<String, Object> parameters = new HashMap<String, Object>();
+					parameters.put("congregationName", "CONGREGAZIONE ALBSTADT-ITALIENISCH");
+					parameters.put("programmName", "PROGRAMMA ADUNANZA INFRASETTIMANALE");
 					parameters.put("jrWeekReport", weekJasperReport);
-					parameters.put("programmDS", programmDS);
+					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
 
 					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
 							new JREmptyDataSource());
