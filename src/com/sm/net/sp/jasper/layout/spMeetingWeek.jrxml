@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2019-05-21T09:21:46 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -22,467 +23,387 @@
 	<field name="treasuresHeader" class="java.lang.String"/>
 	<field name="ministryPartHeader" class="java.lang.String"/>
 	<field name="christiansPartHeader" class="java.lang.String"/>
-	<group name="weekHeader">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement x="0" y="0" width="555" height="17" backcolor="#17365D" uuid="70d3c82d-21e2-4dd1-80a9-8ca137ebe569">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<textField>
-					<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="45cdacc1-7833-4296-b942-1ce3ab998189">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<textElement verticalAlignment="Top">
-						<font fontName="SansSerif" size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{weekHeader}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="treasuresHeader">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement x="0" y="0" width="555" height="17" backcolor="#A6A6A6" uuid="a0fb738d-b272-4079-b4fb-d2379086a515">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<textField>
-					<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="fce14cd8-f0b6-4a95-a4ec-ac6cc0323f72">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<textElement verticalAlignment="Top">
-						<font fontName="SansSerif" size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{treasuresHeader}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="song1startPray">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="06b7bfc8-2203-4f4f-a427-4b7039fe5054">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="27752c23-acb9-4a47-9dae-5e75727b9c03">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="18a457f5-5def-4361-9512-710ce837e824">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="470e4640-80a1-4dc7-b0fe-b30adbb4e89d">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="openingComments">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="718c5658-5125-4ea9-ab09-42098a841ba5">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="a67756d3-59f1-4e33-958d-47417f6dfa1e">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="2e4b8c50-3b0b-467f-902d-649b3e7f9f64">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="treasuresTalk">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="25b7f9cd-8c82-444e-9994-0274a030e54f">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="182c242e-be87-441f-af96-8caa176a39cd">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="ad5488e3-ed33-4de2-9c95-e78af2f9fc45">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="treasuresDigging">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="3b70902e-303a-48bf-9505-5a0a28840df9">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="f3d1a537-3943-4957-bbff-ed83b47c7ee2">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="cf2db0ff-ad4f-4b1b-8f1c-17f4c87ea10e">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="treasuresBibleReading">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="63c02db0-f043-4118-b6f0-aac15a0c12aa">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="877fa795-347e-4652-a709-ae3720da7dd1">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="deb93c92-2c85-45e9-a2a2-a5ad224ad0cc">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="f3893ecf-88d6-4c84-a9e3-3248cc316858">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="ministryPartHeader">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement x="0" y="0" width="555" height="17" backcolor="#DEA900" uuid="a5f3a182-963d-456a-9102-de1bbf18895d">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<textField>
-					<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="4f94c435-2a99-4c90-8fea-2d30e7c04272">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<textElement verticalAlignment="Top">
-						<font fontName="SansSerif" size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{ministryPartHeader}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="ministryPartRows">
-		<groupHeader>
-			<band height="5">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<subreport>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="5" uuid="0daf0871-3f2e-4287-b42a-f99b554bcd62"/>
-					<dataSourceExpression><![CDATA[$F{jrDataSourceMinistryPart}]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$F{jasperReportMinistryPart}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="christiansPartHeader">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement x="0" y="0" width="555" height="17" backcolor="#920000" uuid="69a9cd5d-2bf1-42c7-b830-39f3c2c9633a">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<textField>
-					<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="477e4299-b05a-456d-bfb3-69b6ff15b4a8">
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<textElement verticalAlignment="Top">
-						<font fontName="SansSerif" size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{christiansPartHeader}]]></textFieldExpression>
-				</textField>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="song2">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="98c46549-4fb2-4908-97eb-c6c0a5267ba3">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="587c1c84-bcb2-473c-857e-986e3c463a1d">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="b71dd76c-43c9-41f4-8148-8c28211e185f">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="christiansPartRows">
-		<groupHeader>
-			<band height="5">
-				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				<subreport>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="5" uuid="232a495e-0408-4dde-9cd5-2db7e3bbdf0c"/>
-					<dataSourceExpression><![CDATA[$F{jrDataSourceChristiansPart}]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$F{jasperReportChristiansPart}]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="congrBibleStudy">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="94451d34-02ef-4fd2-8e6e-b07e0ca2e1d3">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="4aa08dac-b94f-4702-b980-935914e4ee3c">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="5ddf0a1e-b658-4116-97fa-1aeeef8a11cc">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="review">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="de7d9ebb-4077-4251-b6f5-93873ce58dd5">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="aa6e1951-a87d-4900-8266-2d9692d5cfbd">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="11c3a959-07e9-40b2-8d0d-de22a056eee9">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
-	<group name="song3endPray">
-		<groupHeader>
-			<band height="17">
-				<rectangle>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="60168a2b-80b6-4f33-a442-547096f5ee73">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</rectangle>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="c26c2b61-c422-4030-8a36-6d2842400230">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="ecd7ea48-0391-429b-b87a-02218194293e">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="771080e0-1efa-498d-afc6-34883b0ce684">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					</reportElement>
-					<graphicElement>
-						<pen lineWidth="0.5"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
+	<detail>
+		<band height="146" splitType="Prevent">
+			<rectangle>
+				<reportElement x="0" y="10" width="555" height="17" backcolor="#17365D" uuid="d0b1e002-5703-4978-a38f-d7c8d38f95e4">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="10" width="550" height="17" forecolor="#FFFFFF" uuid="dd1c29ec-edb3-4f0d-ae1a-6c60ac8bc63d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{weekHeader}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="27" width="555" height="17" backcolor="#A6A6A6" uuid="1f2aacc1-01a7-4429-83a8-e2b9bdc902f8">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="27" width="550" height="17" forecolor="#FFFFFF" uuid="4a535cbc-af4c-4860-af2f-e87d3f392496">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresHeader}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="44" width="555" height="17" uuid="197bc4a6-a8f5-460e-924e-07e770970727">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="44" width="1" height="17" uuid="f143622f-21f2-48eb-bbb2-43da2cf3d4b6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="277" y="44" width="1" height="17" uuid="56086a3d-1503-4a1e-ab5f-797b61cfe499">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="416" y="44" width="1" height="17" uuid="0dec2b9a-f424-4afb-a8b1-44e629b5fff0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="61" width="555" height="17" uuid="93f8092e-f02e-49ee-b7e2-c754565a89ab">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="61" width="1" height="17" uuid="f9b7efa5-6bab-4536-96b0-e868ddb6db1c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="416" y="61" width="1" height="17" uuid="fa86ffe4-62ae-49a8-88a7-970ed03edfc5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="78" width="555" height="17" uuid="98717b25-ae86-40ba-84ca-7dd88a4a9e71">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="78" width="1" height="17" uuid="0282d751-2b0c-4edc-b12b-c28baa0c44b1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="416" y="78" width="1" height="17" uuid="5dd54486-602e-44b7-8c86-97105f69d797">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="95" width="555" height="17" uuid="82f03412-a11a-4f0e-b7c3-50ee0166836e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="95" width="1" height="17" uuid="a53d96b4-84eb-4c72-ac6e-fc290eb95233">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="416" y="95" width="1" height="17" uuid="30863e63-4ac0-4a6f-acc2-050ffae90c2a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="112" width="555" height="17" uuid="6166d397-4c03-42fa-925f-91ea55bb814f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="55" y="112" width="1" height="17" uuid="076a7560-9d00-4ee5-b13d-2b2d8dc13356">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="277" y="112" width="1" height="17" uuid="25e0fdf0-de85-4db5-b24a-e37cd71df4c4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="416" y="112" width="1" height="17" uuid="657675a2-6364-4d5d-883a-36126b721599">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="129" width="555" height="17" backcolor="#DEA900" uuid="4969cc4e-9627-402e-b82a-598327cf24f4">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="129" width="550" height="17" forecolor="#FFFFFF" uuid="205f89b2-2a80-456f-8f6b-6415c7530cc9">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ministryPartHeader}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="5">
+			<subreport>
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="555" height="5" uuid="4f641684-71e1-437d-bf30-275d44de17ae"/>
+				<dataSourceExpression><![CDATA[$F{jrDataSourceMinistryPart}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{jasperReportMinistryPart}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="34">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="17" backcolor="#920000" uuid="8cc1e249-61bb-4f61-ade1-80ddcd17a90b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="49f5aeb3-e85c-41c1-870d-5df74b5e9b42">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{christiansPartHeader}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="17" width="555" height="17" uuid="08f27f87-b49d-4707-abb3-33a2870ba305">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="17" width="1" height="17" uuid="270d511a-33bb-460d-af36-d7bac272e57c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="17" width="1" height="17" uuid="db58753d-70b0-468d-9b28-333566d4d4cb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="5">
+			<subreport>
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="555" height="5" uuid="ff787ebd-5780-46f6-b921-31b3f947fecc"/>
+				<dataSourceExpression><![CDATA[$F{jrDataSourceChristiansPart}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{jasperReportChristiansPart}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="51">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="29fdf044-2d33-4b5d-9e76-31cdc57b960f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="4cc8d683-5f18-4bda-a5e0-3777fb33aa60">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="e33f2dd5-82c0-46b0-9ae8-999151569d11">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="17" width="555" height="17" uuid="c86f3b21-45d1-4fbc-97f2-e288e2663310">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="17" width="1" height="17" uuid="8e276ba5-9025-4b89-b5b1-d9d734b42819">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="17" width="1" height="17" uuid="535309d8-ccf5-48e6-8c2b-bb6d907957e0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="34" width="555" height="17" uuid="16c0b3df-51fd-4271-ae95-195dcfc9add3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="34" width="1" height="17" uuid="958e40ae-2669-4b78-850b-689abfeab128">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="34" width="1" height="17" uuid="0f4792a4-6a95-40bb-a1af-77a2f3783c40">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="34" width="1" height="17" uuid="60a36589-d2d3-4155-b9b2-5ac3ca91a721">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
 </jasperReport>

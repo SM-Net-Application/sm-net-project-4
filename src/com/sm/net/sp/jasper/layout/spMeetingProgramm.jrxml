@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-05-21T08:32:15 -->
+<!-- 2019-05-21T09:09:48 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingProgramm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="congregationName" class="java.lang.String"/>
@@ -12,9 +12,9 @@
 	</queryString>
 	<group name="weeks">
 		<groupHeader>
-			<band height="25" splitType="Prevent">
+			<band height="25">
 				<subreport overflowType="Stretch">
-					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="25" isPrintWhenDetailOverflows="true" uuid="5e1d6eb9-a1ca-46af-a088-02e18340efed">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="25" uuid="5e1d6eb9-a1ca-46af-a088-02e18340efed">
 						<property name="com.jaspersoft.studio.unit.x" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
