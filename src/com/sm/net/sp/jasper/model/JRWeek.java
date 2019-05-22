@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import com.sm.net.project.Language;
 import com.sm.net.sp.jasper.Jasper;
 import com.sm.net.sp.model.ChristiansPart;
+import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.Week;
 
+import javafx.collections.ObservableList;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
@@ -19,6 +21,13 @@ public class JRWeek {
 
 	private String weekHeader;
 	private String treasuresHeader;
+	private String treasuresMinSong1;
+	private String treasuresSong1;
+	private String treasuresPray1;
+	private String treasuresPray1Name;
+	private String treasuresOpeningCommentsMin;
+	private String treasuresOpeningCommentsText;
+	private String treasuresPresident;
 	private String ministryPartHeader;
 	private String christiansPartHeader;
 
@@ -36,6 +45,13 @@ public class JRWeek {
 
 		this.weekHeader = "";
 		this.treasuresHeader = "";
+		this.treasuresMinSong1 = "";
+		this.treasuresSong1 = "";
+		this.treasuresPray1 = "";
+		this.treasuresPray1Name = "";
+		this.treasuresOpeningCommentsMin = "";
+		this.treasuresOpeningCommentsText = "";
+		this.treasuresPresident = "";
 		this.ministryPartHeader = "";
 		this.christiansPartHeader = "";
 		this.jasperReportMinistryPart = null;
@@ -44,7 +60,8 @@ public class JRWeek {
 		this.jrDataSourceChristiansPart = null;
 	}
 
-	public static JRWeek newObject(Week week, Language language) throws JRException {
+	public static JRWeek newObject(Week week, ObservableList<Member> membersList, Language language)
+			throws JRException {
 
 		JRWeek jrWeek = new JRWeek();
 
@@ -67,10 +84,37 @@ public class JRWeek {
 
 		jrWeek.setWeekHeader(checkWeekHeader(week, language));
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
+
+		jrWeek.setTreasuresMinSong1(
+				String.format(language.getString("jasper.layout.meeting.min"), Integer.valueOf(5).toString()));
+
+		jrWeek.setTreasuresSong1(String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf5()));
+		jrWeek.setTreasuresPray1(language.getString("jasper.layout.meeting.pray1"));
+
+		Member member = getMemberFromList(membersList, week.getSpInf4());
+		if (member != null)
+			jrWeek.setTreasuresPray1Name(member.getNameStyle4());
+
+		jrWeek.setTreasuresOpeningCommentsMin(
+				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf7()));
+
+		jrWeek.setTreasuresOpeningCommentsText(week.getSpInf8());
+
+		member = getMemberFromList(membersList, week.getSpInf3());
+		if (member != null)
+			jrWeek.setTreasuresPresident(member.getNameStyle4());
+
 		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
 		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
 		return jrWeek;
+	}
+
+	private static Member getMemberFromList(ObservableList<Member> membersList, int id) {
+		for (Member member : membersList)
+			if (member.getSpMemberID() == id)
+				return member;
+		return null;
 	}
 
 	private static String checkWeekHeader(Week week, Language language) {
@@ -153,4 +197,61 @@ public class JRWeek {
 	public void setJrDataSourceChristiansPart(JRBeanCollectionDataSource jrDataSourceChristiansPart) {
 		this.jrDataSourceChristiansPart = jrDataSourceChristiansPart;
 	}
+
+	public String getTreasuresMinSong1() {
+		return treasuresMinSong1;
+	}
+
+	public void setTreasuresMinSong1(String treasuresMinSong1) {
+		this.treasuresMinSong1 = treasuresMinSong1;
+	}
+
+	public String getTreasuresSong1() {
+		return treasuresSong1;
+	}
+
+	public void setTreasuresSong1(String treasuresSong1) {
+		this.treasuresSong1 = treasuresSong1;
+	}
+
+	public String getTreasuresPray1() {
+		return treasuresPray1;
+	}
+
+	public void setTreasuresPray1(String treasuresPray1) {
+		this.treasuresPray1 = treasuresPray1;
+	}
+
+	public String getTreasuresPray1Name() {
+		return treasuresPray1Name;
+	}
+
+	public void setTreasuresPray1Name(String treasuresPray1Name) {
+		this.treasuresPray1Name = treasuresPray1Name;
+	}
+
+	public String getTreasuresOpeningCommentsMin() {
+		return treasuresOpeningCommentsMin;
+	}
+
+	public void setTreasuresOpeningCommentsMin(String treasuresOpeningCommentsMin) {
+		this.treasuresOpeningCommentsMin = treasuresOpeningCommentsMin;
+	}
+
+	public String getTreasuresOpeningCommentsText() {
+		return treasuresOpeningCommentsText;
+	}
+
+	public void setTreasuresOpeningCommentsText(String treasuresOpeningCommentsText) {
+		this.treasuresOpeningCommentsText = treasuresOpeningCommentsText;
+	}
+
+	public String getTreasuresPresident() {
+		return treasuresPresident;
+	}
+
+	public void setTreasuresPresident(String treasuresPresident) {
+		this.treasuresPresident = treasuresPresident;
+	}
+
 }

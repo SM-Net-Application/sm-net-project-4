@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-05-21T09:21:46 -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -23,6 +22,13 @@
 	<field name="treasuresHeader" class="java.lang.String"/>
 	<field name="ministryPartHeader" class="java.lang.String"/>
 	<field name="christiansPartHeader" class="java.lang.String"/>
+	<field name="treasuresMinSong1" class="java.lang.String"/>
+	<field name="treasuresPray1" class="java.lang.String"/>
+	<field name="treasuresSong1" class="java.lang.String"/>
+	<field name="treasuresPray1Name" class="java.lang.String"/>
+	<field name="treasuresOpeningCommentsMin" class="java.lang.String"/>
+	<field name="treasuresOpeningCommentsText" class="java.lang.String"/>
+	<field name="treasuresPresident" class="java.lang.String"/>
 	<detail>
 		<band height="146" splitType="Prevent">
 			<rectangle>
@@ -66,7 +72,7 @@
 				<textFieldExpression><![CDATA[$F{treasuresHeader}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="44" width="555" height="17" uuid="197bc4a6-a8f5-460e-924e-07e770970727">
+				<reportElement mode="Opaque" x="0" y="44" width="555" height="17" uuid="197bc4a6-a8f5-460e-924e-07e770970727">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -74,6 +80,16 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</rectangle>
+			<textField>
+				<reportElement mode="Transparent" x="5" y="44" width="50" height="17" forecolor="#000000" uuid="a3f43441-358d-4887-b0d0-69f147200328">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresMinSong1}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="55" y="44" width="1" height="17" uuid="f143622f-21f2-48eb-bbb2-43da2cf3d4b6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -83,6 +99,17 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="44" width="217" height="17" forecolor="#000000" uuid="10d6ad2b-5002-409c-b508-0a280e07ba8b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresSong1}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="277" y="44" width="1" height="17" uuid="56086a3d-1503-4a1e-ab5f-797b61cfe499">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -93,6 +120,16 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="282" y="44" width="134" height="17" forecolor="#000000" uuid="6023e677-96cc-412e-927c-7d6cccfaa8f4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresPray1}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="416" y="44" width="1" height="17" uuid="0dec2b9a-f424-4afb-a8b1-44e629b5fff0">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -103,6 +140,16 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="421" y="44" width="134" height="17" forecolor="#000000" uuid="41e0fa4c-fa66-41d5-a59d-43dee8537f65">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresPray1Name}]]></textFieldExpression>
+			</textField>
 			<rectangle>
 				<reportElement x="0" y="61" width="555" height="17" uuid="93f8092e-f02e-49ee-b7e2-c754565a89ab">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -112,6 +159,16 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</rectangle>
+			<textField>
+				<reportElement mode="Transparent" x="5" y="61" width="50" height="17" forecolor="#000000" uuid="ebd7eeb3-fbf8-4582-8788-0f77dd138015">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresOpeningCommentsMin}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="55" y="61" width="1" height="17" uuid="f9b7efa5-6bab-4536-96b0-e868ddb6db1c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -121,6 +178,16 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="61" width="356" height="17" forecolor="#000000" uuid="d75f6f5e-1753-4016-a27d-1171d4b78bad">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresOpeningCommentsText}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="416" y="61" width="1" height="17" uuid="fa86ffe4-62ae-49a8-88a7-970ed03edfc5">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -131,6 +198,16 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="421" y="61" width="134" height="17" forecolor="#000000" uuid="b8314b46-9c0f-49e1-97ac-1528b615b9fb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{treasuresPresident}]]></textFieldExpression>
+			</textField>
 			<rectangle>
 				<reportElement x="0" y="78" width="555" height="17" uuid="98717b25-ae86-40ba-84ca-7dd88a4a9e71">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>

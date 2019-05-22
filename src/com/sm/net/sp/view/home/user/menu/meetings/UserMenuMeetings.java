@@ -397,7 +397,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 					printableWeeks.add(week);
 
 			if (printableWeeks.size() > 0)
-				Actions.printWeek(printableWeeks, settings, ownerStage, language);
+				Actions.printWeek(printableWeeks, membersList, settings, ownerStage, language);
 			else // TODO: Il messaggio deve essere preso dal language
 				new AlertDesigner("Nessuna settimana stampabile", ownerStage, AlertType.ERROR,
 						Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();

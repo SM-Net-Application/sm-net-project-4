@@ -21,9 +21,8 @@ public class JRChristiansPart {
 
 	public static JRChristiansPart newObject(ChristiansPart christiansPart, Language language) {
 
-		// TODO: Usare language per le stringe
-
-		String min = String.format("Min.%d", christiansPart.getMin());
+		String min = String.format(language.getString("jasper.layout.meeting.min"),
+				String.valueOf(christiansPart.getMin()));
 
 		String theme = christiansPart.getTheme();
 

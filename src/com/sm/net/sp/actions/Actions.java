@@ -1771,7 +1771,8 @@ public class Actions {
 		taskThread.start();
 	}
 
-	public static void printWeek(ArrayList<Week> weeks, Settings settings, Stage ownerStage, Language language) {
+	public static void printWeek(ArrayList<Week> weeks, ObservableList<Member> membersList, Settings settings,
+			Stage ownerStage, Language language) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1807,7 +1808,7 @@ public class Actions {
 
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
 					for (Week week : weeks)
-						jrWeeks.add(JRWeek.newObject(week, language));
+						jrWeeks.add(JRWeek.newObject(week, membersList, language));
 
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
