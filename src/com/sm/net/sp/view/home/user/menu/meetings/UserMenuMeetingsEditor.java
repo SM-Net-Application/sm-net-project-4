@@ -809,50 +809,59 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				ScheduleForMeeting scheduleForMeeting = new ScheduleForMeeting(scheduleForMeetingHTML.getRelevantRows(),
 						language);
 				if (scheduleForMeeting != null) {
+					if (scheduleForMeeting.isPresent()) {
 
-					song1TextField.setText(scheduleForMeeting.getSong1().getSongNo().toString());
+						song1TextField.setText(scheduleForMeeting.getSong1().getSongNo().toString());
 
-					bibleChaptersTextField.setText(scheduleForMeeting.getBibleChapters());
+						bibleChaptersTextField.setText(scheduleForMeeting.getBibleChapters());
 
-					openingCommentsMinTextField.setText(scheduleForMeeting.getOpeningComments().getMin().toString());
-					openingCommentsTextTextField.setText(scheduleForMeeting.getOpeningComments().getTitle());
+						openingCommentsMinTextField
+								.setText(scheduleForMeeting.getOpeningComments().getMin().toString());
+						openingCommentsTextTextField.setText(scheduleForMeeting.getOpeningComments().getTitle());
 
-					talkMinTextField.setText(scheduleForMeeting.getTreasuresTalk().getMin().toString());
-					talkTextTextField.setText(scheduleForMeeting.getTreasuresTalk().getTitle());
+						talkMinTextField.setText(scheduleForMeeting.getTreasuresTalk().getMin().toString());
+						talkTextTextField.setText(scheduleForMeeting.getTreasuresTalk().getTitle());
 
-					diggingMinTextField.setText(scheduleForMeeting.getTreasuresDigging().getMin().toString());
-					diggingTextTextField.setText(scheduleForMeeting.getTreasuresDigging().getTitle());
+						diggingMinTextField.setText(scheduleForMeeting.getTreasuresDigging().getMin().toString());
+						diggingTextTextField.setText(scheduleForMeeting.getTreasuresDigging().getTitle());
 
-					bibleReadingMinTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getMin().toString());
-					bibleReadingTextTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getTextPart());
-					bibleReadingMaterialsTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getBible());
+						bibleReadingMinTextField
+								.setText(scheduleForMeeting.getTreasuresBibleReading().getMin().toString());
+						bibleReadingTextTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getTextPart());
+						bibleReadingMaterialsTextField
+								.setText(scheduleForMeeting.getTreasuresBibleReading().getBible());
 
-					ministryPartList.clear();
-					for (ScheduleForMeeting.MinistryPart part : scheduleForMeeting.getMinistryPartsList())
-						ministryPartList.add(new MinistryPart(part.getMinistryTypeTranslated(), part.getText(),
-								part.getMin(), part.getTextPart(), part.getMaterial(), Member.emptyMember(language),
-								Member.emptyMember(language), Member.emptyMember(language),
-								Member.emptyMember(language)));
+						ministryPartList.clear();
+						for (ScheduleForMeeting.MinistryPart part : scheduleForMeeting.getMinistryPartsList())
+							ministryPartList.add(new MinistryPart(part.getMinistryTypeTranslated(), part.getText(),
+									part.getMin(), part.getTextPart(), part.getMaterial(), Member.emptyMember(language),
+									Member.emptyMember(language), Member.emptyMember(language),
+									Member.emptyMember(language)));
 
-					song2TextField.setText(scheduleForMeeting.getSong2().getSongNo().toString());
+						song2TextField.setText(scheduleForMeeting.getSong2().getSongNo().toString());
 
-					christiansPartList.clear();
-					for (ScheduleForMeeting.ChristiansPart part : scheduleForMeeting.getChristiansPartsList())
-						christiansPartList.add(new ChristiansPart(part.getText(), part.getMin(), part.getTextPart(),
-								part.getBody(), Member.emptyMember(language)));
+						christiansPartList.clear();
+						for (ScheduleForMeeting.ChristiansPart part : scheduleForMeeting.getChristiansPartsList())
+							christiansPartList.add(new ChristiansPart(part.getText(), part.getMin(), part.getTextPart(),
+									part.getBody(), Member.emptyMember(language)));
 
-					congregationBibleStudyMinTextField
-							.setText(scheduleForMeeting.getCongregationBibleStudy().getMin().toString());
-					congregationBibleStudyTextTextField
-							.setText(scheduleForMeeting.getCongregationBibleStudy().getTextPart());
-					congregationBibleStudyMaterialTextField
-							.setText(scheduleForMeeting.getCongregationBibleStudy().getBody());
+						congregationBibleStudyMinTextField
+								.setText(scheduleForMeeting.getCongregationBibleStudy().getMin().toString());
+						congregationBibleStudyTextTextField
+								.setText(scheduleForMeeting.getCongregationBibleStudy().getTextPart());
+						congregationBibleStudyMaterialTextField
+								.setText(scheduleForMeeting.getCongregationBibleStudy().getBody());
 
-					reviewMinTextField.setText(scheduleForMeeting.getReview().getMin().toString());
-					reviewTextTextField.setText(scheduleForMeeting.getReview().getTitle());
+						reviewMinTextField.setText(scheduleForMeeting.getReview().getMin().toString());
+						reviewTextTextField.setText(scheduleForMeeting.getReview().getTitle());
 
-					song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
+						song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
 
+					} else {
+						// TODO: Inserire il language
+						new AlertDesigner("Non sono riuscito a prendere le informazioni da internet", ownerStage,
+								AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+					}
 				}
 			}
 		}
