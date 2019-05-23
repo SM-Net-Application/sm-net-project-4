@@ -28,8 +28,30 @@ public class JRWeek {
 	private String treasuresOpeningCommentsMin;
 	private String treasuresOpeningCommentsText;
 	private String treasuresPresident;
+	private String treasuresTalkMin;
+	private String treasuresTalkTheme;
+	private String treasuresTalkName;
+	private String treasuresDiggingMin;
+	private String treasuresDiggingTheme;
+	private String treasuresDiggingName;
+	private String treasuresBibleReadingMin;
+	private String treasuresBibleReadingTheme;
+	private String treasuresBibleReadingName1;
+	private String treasuresBibleReadingName2;
 	private String ministryPartHeader;
+	private String christiansMinSong2;
+	private String christiansSong2;
 	private String christiansPartHeader;
+	private String christiansBibleStudyMin;
+	private String christiansBibleStudyText;
+	private String christiansBibleStudyName;
+	private String christiansBibleStudyReaderName;
+	private String christiansReviewMin;
+	private String christiansReviewText;
+	private String christiansMinSong3;
+	private String christiansSong3;
+	private String christiansPray2;
+	private String christiansPray2Name;
 
 	private JasperReport jasperReportMinistryPart;
 	private JasperReport jasperReportChristiansPart;
@@ -54,6 +76,28 @@ public class JRWeek {
 		this.treasuresPresident = "";
 		this.ministryPartHeader = "";
 		this.christiansPartHeader = "";
+		this.treasuresTalkMin = "";
+		this.treasuresTalkTheme = "";
+		this.treasuresTalkName = "";
+		this.treasuresDiggingMin = "";
+		this.treasuresDiggingTheme = "";
+		this.treasuresDiggingName = "";
+		this.treasuresBibleReadingMin = "";
+		this.treasuresBibleReadingTheme = "";
+		this.treasuresBibleReadingName1 = "";
+		this.treasuresBibleReadingName2 = "";
+		this.christiansMinSong2 = "";
+		this.christiansSong2 = "";
+		this.christiansBibleStudyMin = "";
+		this.christiansBibleStudyText = "";
+		this.christiansBibleStudyName = "";
+		this.christiansBibleStudyReaderName = "";
+		this.christiansReviewMin = "";
+		this.christiansReviewText = "";
+		this.christiansMinSong3 = "";
+		this.christiansSong3 = "";
+		this.christiansPray2 = "";
+		this.christiansPray2Name = "";
 		this.jasperReportMinistryPart = null;
 		this.jasperReportChristiansPart = null;
 		this.jrDataSourceMinistryPart = null;
@@ -85,8 +129,7 @@ public class JRWeek {
 		jrWeek.setWeekHeader(checkWeekHeader(week, language));
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
-		jrWeek.setTreasuresMinSong1(
-				String.format(language.getString("jasper.layout.meeting.min"), Integer.valueOf(5).toString()));
+		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 
 		jrWeek.setTreasuresSong1(String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf5()));
 		jrWeek.setTreasuresPray1(language.getString("jasper.layout.meeting.pray1"));
@@ -104,7 +147,61 @@ public class JRWeek {
 		if (member != null)
 			jrWeek.setTreasuresPresident(member.getNameStyle4());
 
+		jrWeek.setTreasuresTalkMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf9()));
+		jrWeek.setTreasuresTalkTheme(week.getSpInf10());
+
+		member = getMemberFromList(membersList, week.getSpInf11());
+		if (member != null)
+			jrWeek.setTreasuresTalkName(member.getNameStyle4());
+
+		jrWeek.setTreasuresDiggingMin(
+				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf12()));
+		jrWeek.setTreasuresDiggingTheme(week.getSpInf13());
+
+		member = getMemberFromList(membersList, week.getSpInf14());
+		if (member != null)
+			jrWeek.setTreasuresDiggingName(member.getNameStyle4());
+
+		jrWeek.setTreasuresBibleReadingMin(
+				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf15()));
+
+		jrWeek.setTreasuresBibleReadingTheme(String.format(language.getString("jasper.layout.meeting.dividedstyle"),
+				week.getSpInf16(), week.getSpInf17()));
+
+		member = getMemberFromList(membersList, week.getSpInf18());
+		if (member != null)
+			jrWeek.setTreasuresBibleReadingName1(member.getNameStyle4());
+
 		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
+
+		jrWeek.setChristiansMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		jrWeek.setChristiansSong2(String.format(language.getString("jasper.layout.meeting.song2"), week.getSpInf19()));
+
+		jrWeek.setChristiansBibleStudyMin(
+				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf20()));
+		jrWeek.setChristiansBibleStudyText(String.format(language.getString("jasper.layout.meeting.dividedstyle"),
+				week.getSpInf21(), week.getSpInf22()));
+
+		member = getMemberFromList(membersList, week.getSpInf23());
+		if (member != null)
+			jrWeek.setChristiansBibleStudyName(member.getNameStyle4());
+
+		// TODO: Integrare il nome quando verranno gestiti i lettori
+		jrWeek.setChristiansBibleStudyReaderName("");
+
+		jrWeek.setChristiansReviewMin(
+				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf24()));
+		jrWeek.setChristiansReviewText(week.getSpInf25());
+
+		jrWeek.setChristiansMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		jrWeek.setChristiansSong3(String.format(language.getString("jasper.layout.meeting.song3"), week.getSpInf26()));
+
+		jrWeek.setChristiansPray2(language.getString("jasper.layout.meeting.pray2"));
+
+		member = getMemberFromList(membersList, week.getSpInf27());
+		if (member != null)
+			jrWeek.setChristiansPray2Name(member.getNameStyle4());
+
 		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
 		return jrWeek;
@@ -252,6 +349,182 @@ public class JRWeek {
 
 	public void setTreasuresPresident(String treasuresPresident) {
 		this.treasuresPresident = treasuresPresident;
+	}
+
+	public String getTreasuresTalkMin() {
+		return treasuresTalkMin;
+	}
+
+	public void setTreasuresTalkMin(String treasuresTalkMin) {
+		this.treasuresTalkMin = treasuresTalkMin;
+	}
+
+	public String getTreasuresTalkTheme() {
+		return treasuresTalkTheme;
+	}
+
+	public void setTreasuresTalkTheme(String treasuresTalkTheme) {
+		this.treasuresTalkTheme = treasuresTalkTheme;
+	}
+
+	public String getTreasuresTalkName() {
+		return treasuresTalkName;
+	}
+
+	public void setTreasuresTalkName(String treasuresTalkName) {
+		this.treasuresTalkName = treasuresTalkName;
+	}
+
+	public String getTreasuresDiggingMin() {
+		return treasuresDiggingMin;
+	}
+
+	public void setTreasuresDiggingMin(String treasuresDiggingMin) {
+		this.treasuresDiggingMin = treasuresDiggingMin;
+	}
+
+	public String getTreasuresDiggingTheme() {
+		return treasuresDiggingTheme;
+	}
+
+	public void setTreasuresDiggingTheme(String treasuresDiggingTheme) {
+		this.treasuresDiggingTheme = treasuresDiggingTheme;
+	}
+
+	public String getTreasuresDiggingName() {
+		return treasuresDiggingName;
+	}
+
+	public void setTreasuresDiggingName(String treasuresDiggingName) {
+		this.treasuresDiggingName = treasuresDiggingName;
+	}
+
+	public String getTreasuresBibleReadingMin() {
+		return treasuresBibleReadingMin;
+	}
+
+	public void setTreasuresBibleReadingMin(String treasuresBibleReadingMin) {
+		this.treasuresBibleReadingMin = treasuresBibleReadingMin;
+	}
+
+	public String getTreasuresBibleReadingTheme() {
+		return treasuresBibleReadingTheme;
+	}
+
+	public void setTreasuresBibleReadingTheme(String treasuresBibleReadingTheme) {
+		this.treasuresBibleReadingTheme = treasuresBibleReadingTheme;
+	}
+
+	public String getTreasuresBibleReadingName1() {
+		return treasuresBibleReadingName1;
+	}
+
+	public void setTreasuresBibleReadingName1(String treasuresBibleReadingName1) {
+		this.treasuresBibleReadingName1 = treasuresBibleReadingName1;
+	}
+
+	public String getTreasuresBibleReadingName2() {
+		return treasuresBibleReadingName2;
+	}
+
+	public void setTreasuresBibleReadingName2(String treasuresBibleReadingName2) {
+		this.treasuresBibleReadingName2 = treasuresBibleReadingName2;
+	}
+
+	public String getChristiansMinSong2() {
+		return christiansMinSong2;
+	}
+
+	public void setChristiansMinSong2(String christiansMinSong2) {
+		this.christiansMinSong2 = christiansMinSong2;
+	}
+
+	public String getChristiansSong2() {
+		return christiansSong2;
+	}
+
+	public void setChristiansSong2(String christiansSong2) {
+		this.christiansSong2 = christiansSong2;
+	}
+
+	public String getChristiansBibleStudyMin() {
+		return christiansBibleStudyMin;
+	}
+
+	public void setChristiansBibleStudyMin(String christiansBibleStudyMin) {
+		this.christiansBibleStudyMin = christiansBibleStudyMin;
+	}
+
+	public String getChristiansBibleStudyText() {
+		return christiansBibleStudyText;
+	}
+
+	public void setChristiansBibleStudyText(String christiansBibleStudyText) {
+		this.christiansBibleStudyText = christiansBibleStudyText;
+	}
+
+	public String getChristiansBibleStudyName() {
+		return christiansBibleStudyName;
+	}
+
+	public void setChristiansBibleStudyName(String christiansBibleStudyName) {
+		this.christiansBibleStudyName = christiansBibleStudyName;
+	}
+
+	public String getChristiansBibleStudyReaderName() {
+		return christiansBibleStudyReaderName;
+	}
+
+	public void setChristiansBibleStudyReaderName(String christiansBibleStudyReaderName) {
+		this.christiansBibleStudyReaderName = christiansBibleStudyReaderName;
+	}
+
+	public String getChristiansReviewMin() {
+		return christiansReviewMin;
+	}
+
+	public void setChristiansReviewMin(String christiansReviewMin) {
+		this.christiansReviewMin = christiansReviewMin;
+	}
+
+	public String getChristiansReviewText() {
+		return christiansReviewText;
+	}
+
+	public void setChristiansReviewText(String christiansReviewText) {
+		this.christiansReviewText = christiansReviewText;
+	}
+
+	public String getChristiansMinSong3() {
+		return christiansMinSong3;
+	}
+
+	public void setChristiansMinSong3(String christiansMinSong3) {
+		this.christiansMinSong3 = christiansMinSong3;
+	}
+
+	public String getChristiansSong3() {
+		return christiansSong3;
+	}
+
+	public void setChristiansSong3(String christiansSong3) {
+		this.christiansSong3 = christiansSong3;
+	}
+
+	public String getChristiansPray2() {
+		return christiansPray2;
+	}
+
+	public void setChristiansPray2(String christiansPray2) {
+		this.christiansPray2 = christiansPray2;
+	}
+
+	public String getChristiansPray2Name() {
+		return christiansPray2Name;
+	}
+
+	public void setChristiansPray2Name(String christiansPray2Name) {
+		this.christiansPray2Name = christiansPray2Name;
 	}
 
 }

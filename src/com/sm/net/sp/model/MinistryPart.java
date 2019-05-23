@@ -34,7 +34,7 @@ public class MinistryPart {
 		this.ministryTypeTranslated = new SimpleObjectProperty<MinistryTypeTranslated>(ministryTypeTranslated);
 		this.fullText = new SimpleStringProperty(fullText);
 		this.min = new SimpleIntegerProperty(min);
-		this.theme = new SimpleStringProperty(theme);
+		this.theme = new SimpleStringProperty("<b>" + theme + "</b>");
 		this.material = new SimpleStringProperty(material);
 		this.student = new SimpleObjectProperty<Member>(student);
 		this.assistant = new SimpleObjectProperty<Member>(assistant);

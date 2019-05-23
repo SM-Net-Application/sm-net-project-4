@@ -32,7 +32,7 @@ public class ChristiansPart {
 		else
 			this.min = new SimpleIntegerProperty(Integer.valueOf(0));
 
-		this.theme = new SimpleStringProperty(theme);
+		this.theme = new SimpleStringProperty("<b>" + theme + "</b>");
 		this.material = new SimpleStringProperty(material);
 		this.teacher = new SimpleObjectProperty<Member>(teacher);
 	}
