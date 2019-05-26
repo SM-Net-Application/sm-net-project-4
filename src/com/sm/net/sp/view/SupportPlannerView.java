@@ -54,6 +54,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void objectInitialize() {
 
+		viewSupportPlannerBorderPane.getStyleClass().add("main_view_001");
+		
 		this.left = 0;
 		this.center = 0;
 		this.user = null;
@@ -163,11 +165,13 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 			this.viewSupportPlannerBorderPane.setCenter(layout);
 			this.viewSupportPlannerStage.setMinWidth(500);
-			this.viewSupportPlannerStage.setMaxWidth(500);
-			this.viewSupportPlannerStage.setMinHeight(500);
-			this.viewSupportPlannerStage.setMaxHeight(500);
+			this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
+			this.viewSupportPlannerStage.setWidth(500);
+			this.viewSupportPlannerStage.setMinHeight(600);
+			this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
+			this.viewSupportPlannerStage.setHeight(600);
 			this.viewSupportPlannerStage.setMaximized(false);
-			this.viewSupportPlannerStage.setResizable(false);
+//			this.viewSupportPlannerStage.setResizable(false);
 
 		} catch (IOException e) {
 		}

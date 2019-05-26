@@ -17,21 +17,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class SettingCreateLanguage {
 
 	@FXML
+	private ImageView logoImageView;
+	@FXML
+	private Label softwareNameLabel;
+	@FXML
 	private Label labelSelect;
-
 	@FXML
 	private ListView<Language> listViewLang;
-
 	@FXML
 	private Button buttonNext;
 
 	private SupportPlannerView supportPlannerViewCtrl;
-	
+
 	private ObservableList<Language> languages;
 
 	@FXML
@@ -40,14 +43,25 @@ public class SettingCreateLanguage {
 	}
 
 	public void objectInitialize() {
+
+		softwareNameLabel.setText(Meta.Application.getTitle());
+
+		logoImageView.setFitWidth(100);
+		logoImageView.setFitHeight(100);
+		logoImageView.setImage(Meta.Resources.ICON);
+
+		buttonNext.setMinWidth(200);
+		buttonNext.setGraphic(Meta.Resources.imageForButton(Meta.Resources.OK));
+
 		listeners();
 		dataListViewLang();
 	}
 
 	private void styleClasses() {
-		labelSelect.getStyleClass().add("labelStyle1");
+		softwareNameLabel.getStyleClass().add("label_software_name");
+		labelSelect.getStyleClass().add("label_header_001");
+		buttonNext.getStyleClass().add("button_image_001");
 		listViewLang.getStyleClass().add("listViewStyle1");
-		buttonNext.getStyleClass().add("buttonStyle1");
 	}
 
 	private void dataListViewLang() {

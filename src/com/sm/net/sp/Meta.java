@@ -209,6 +209,7 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/christians_delete.png"));
 		public static final Image USER_MENU_MEETINGS_WOL_LOAD = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/wol_load.png"));
+		public static final Image OK = new Image(SupportPlannerMain.class.getResourceAsStream("resources/ok.png"));
 
 		public static ImageView createTabIcon(Image image) {
 			ImageView imageView = new ImageView(image);
@@ -224,6 +225,16 @@ public class Meta {
 			ImageView imageView = new ImageView(image);
 			imageView.setFitWidth(50);
 			imageView.setFitHeight(50);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+			// imageView.setCache(true);
+			return imageView;
+		}
+		
+		public static ImageView imageForButton(Image image) {
+			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(40);
+			imageView.setFitHeight(40);
 			imageView.setPreserveRatio(true);
 			imageView.setSmooth(true);
 			// imageView.setCache(true);
