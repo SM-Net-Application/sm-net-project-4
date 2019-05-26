@@ -171,7 +171,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
 			this.viewSupportPlannerStage.setHeight(600);
 			this.viewSupportPlannerStage.setMaximized(false);
-//			this.viewSupportPlannerStage.setResizable(false);
+			this.viewSupportPlannerStage.setResizable(false);
 
 		} catch (IOException e) {
 		}
@@ -181,9 +181,11 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		this.viewSupportPlannerBorderPane.setCenter(accessCreateViewAnchorPane);
 		this.viewSupportPlannerStage.setMinWidth(500);
-		this.viewSupportPlannerStage.setMaxWidth(500);
-		this.viewSupportPlannerStage.setMinHeight(300);
-		this.viewSupportPlannerStage.setMaxHeight(300);
+		this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setWidth(500);
+		this.viewSupportPlannerStage.setMinHeight(500);
+		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setHeight(500);
 		this.viewSupportPlannerStage.setMaximized(false);
 		this.viewSupportPlannerStage.setResizable(false);
 	}
@@ -203,10 +205,12 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			controller.objectInitialize();
 
 			this.viewSupportPlannerBorderPane.setCenter(layout);
-			// this.viewSupportPlannerStage.setMinWidth(500);
-			// this.viewSupportPlannerStage.setMaxWidth(500);
-			this.viewSupportPlannerStage.setMinHeight(175);
-			this.viewSupportPlannerStage.setMaxHeight(175);
+			this.viewSupportPlannerStage.setMinWidth(500);
+			this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
+			this.viewSupportPlannerStage.setWidth(500);
+			this.viewSupportPlannerStage.setMinHeight(450);
+			this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
+			this.viewSupportPlannerStage.setHeight(450);
 			this.viewSupportPlannerStage.setMaximized(false);
 			this.viewSupportPlannerStage.setResizable(false);
 
@@ -218,10 +222,12 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		this.viewSupportPlannerStage.setMinWidth(1000);
 		this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setWidth(Double.MAX_VALUE);
 		this.viewSupportPlannerStage.setMinHeight(500);
 		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setHeight(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setMaximized(true);
 		this.viewSupportPlannerStage.setResizable(true);
-		// this.viewSupportPlannerStage.setMaximized(true);
 
 		viewSupportPlannerHomeMenu();
 		loadHome();

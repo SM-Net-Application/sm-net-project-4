@@ -61,7 +61,7 @@ public class SettingCreateLanguage {
 		softwareNameLabel.getStyleClass().add("label_software_name");
 		labelSelect.getStyleClass().add("label_header_001");
 		buttonNext.getStyleClass().add("button_image_001");
-		listViewLang.getStyleClass().add("listViewStyle1");
+		listViewLang.getStyleClass().add("list_view_001");
 	}
 
 	private void dataListViewLang() {

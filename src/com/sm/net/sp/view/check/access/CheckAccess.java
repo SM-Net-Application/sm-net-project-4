@@ -11,23 +11,24 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.ImageView;
 
 public class CheckAccess {
 
 	@FXML
+	private ImageView logoImageView;
+	@FXML
+	private Label softwareNameLabel;
+	@FXML
 	private Label passwordLabel;
-
 	@FXML
 	private PasswordField passwordPasswordField;
-
 	@FXML
 	private Button accessButton;
 
@@ -47,17 +48,29 @@ public class CheckAccess {
 	}
 
 	private void styleClasses() {
-		passwordLabel.getStyleClass().add("labelStyle2");
-		passwordPasswordField.getStyleClass().add("textFieldStyle1");
-		accessButton.getStyleClass().add("buttonStyle1");
+
+		softwareNameLabel.getStyleClass().add("label_software_name");
+
+		passwordLabel.getStyleClass().add("label_header_001");
+		passwordPasswordField.getStyleClass().add("text_field_001");
+		accessButton.getStyleClass().add("button_image_001");
 	}
 
 	private void viewUpdate() {
+
+		softwareNameLabel.setText(Meta.Application.getTitle());
+
+		logoImageView.setFitWidth(100);
+		logoImageView.setFitHeight(100);
+		logoImageView.setImage(Meta.Resources.ICON);
+
 		passwordLabel.setText(language.getString("VIEW003LAB001"));
+
 		accessButton.setText(language.getString("VIEW003BUT001"));
+		accessButton.setMinWidth(200);
+		accessButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.OK));
 		accessButton.setDefaultButton(true);
 		passwordPasswordField.setAlignment(Pos.CENTER);
-		passwordPasswordField.setMinWidth(500);
 	}
 
 	private void listeners() {
@@ -65,19 +78,17 @@ public class CheckAccess {
 	}
 
 	private void listenerAccessButton() {
-		accessButton.setOnAction(new EventHandler<ActionEvent>() {
+		accessButton.setOnAction(event -> checkAccess());
+	}
 
-			@Override
-			public void handle(ActionEvent event) {
+	private void checkAccess() {
 
-				if (checkFields())
-					ctrlViewSupportPlanner.viewSupportPlannerHome();
-				else
-					new AlertDesigner(language.getStringWithNewLine("MEX001"),
-							ctrlViewSupportPlanner.getViewSupportPlannerStage(), AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
-			}
-		});
+		if (checkFields())
+			ctrlViewSupportPlanner.viewSupportPlannerHome();
+		else
+			new AlertDesigner(language.getStringWithNewLine("MEX001"),
+					ctrlViewSupportPlanner.getViewSupportPlannerStage(), AlertType.ERROR,
+					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
 	private boolean checkFields() {

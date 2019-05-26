@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -18,20 +19,19 @@ import javafx.scene.control.PasswordField;
 public class SettingCreateAccess {
 
 	@FXML
+	private ImageView logoImageView;
+	@FXML
+	private Label softwareNameLabel;
+	@FXML
 	private Label labelTitle;
-
 	@FXML
 	private Label labelPassword;
-
 	@FXML
 	private Label labelPasswordConfirm;
-
 	@FXML
 	private PasswordField passwordFieldPassword;
-
 	@FXML
 	private PasswordField passwordFiedlPasswordConfirm;
-
 	@FXML
 	private Button buttonCreate;
 
@@ -49,12 +49,15 @@ public class SettingCreateAccess {
 	}
 
 	private void styleClasses() {
-		labelTitle.getStyleClass().add("labelStyle2");
-		labelPassword.getStyleClass().add("labelStyle1");
-		labelPasswordConfirm.getStyleClass().add("labelStyle1");
-		passwordFieldPassword.getStyleClass().add("textFieldStyle1");
-		passwordFiedlPasswordConfirm.getStyleClass().add("textFieldStyle1");
-		buttonCreate.getStyleClass().add("buttonStyle1");
+		
+		softwareNameLabel.getStyleClass().add("label_software_name");
+		
+		labelTitle.getStyleClass().add("label_header_001");
+		labelPassword.getStyleClass().add("label_set_001");
+		labelPasswordConfirm.getStyleClass().add("label_set_001");
+		passwordFieldPassword.getStyleClass().add("text_field_001");
+		passwordFiedlPasswordConfirm.getStyleClass().add("text_field_001");
+		buttonCreate.getStyleClass().add("button_image_001");
 	}
 
 	private void listeners() {
@@ -95,11 +98,20 @@ public class SettingCreateAccess {
 
 	private void viewUpdate() {
 
+		softwareNameLabel.setText(Meta.Application.getTitle());
+
+		logoImageView.setFitWidth(100);
+		logoImageView.setFitHeight(100);
+		logoImageView.setImage(Meta.Resources.ICON);
+
+		
 		labelTitle.setText(language.getString("VIEW002LAB001"));
 		labelPassword.setText(language.getString("VIEW002LAB002"));
 		labelPasswordConfirm.setText(language.getString("VIEW002LAB003"));
+		
 		buttonCreate.setText(language.getString("VIEW002BUT001"));
-
+		buttonCreate.setMinWidth(200);
+		buttonCreate.setGraphic(Meta.Resources.imageForButton(Meta.Resources.OK));
 		buttonCreate.setDefaultButton(true);
 	}
 
