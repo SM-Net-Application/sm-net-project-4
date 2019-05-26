@@ -31,16 +31,12 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 	@FXML
 	private Label userLabel;
-
 	@FXML
 	private TableView<User> userTableView;
-
 	@FXML
 	private TableColumn<User, Integer> userTableColumnID;
-
 	@FXML
 	private TableColumn<User, String> userTableColumnName;
-
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnUsers;
 	@FXML
@@ -49,13 +45,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private TableColumn<User, Boolean> userTableColumnServiceGroups;
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnMeetings;
-
 	@FXML
 	private Button userAddButton;
-
 	@FXML
 	private Button userDeleteButton;
-
 	@FXML
 	private Button userPrintButton;
 

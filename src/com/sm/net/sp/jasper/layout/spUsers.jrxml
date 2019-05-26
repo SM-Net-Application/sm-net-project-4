@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-04-15T15:21:52 -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spUsers" pageWidth="421" pageHeight="297" orientation="Landscape" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8411141d-ad34-47ae-8cd5-758b3ddd913f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -40,7 +39,7 @@
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Center">
-						<font fontName="Agency FB" size="22"/>
+						<font fontName="SansSerif" size="22"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtaccess}]]></textFieldExpression>
 				</textField>
@@ -61,7 +60,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Agency FB" size="12"/>
+						<font fontName="SansSerif" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtusername}]]></textFieldExpression>
 				</textField>
@@ -99,7 +98,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Agency FB" size="12"/>
+						<font fontName="SansSerif" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtpassword}]]></textFieldExpression>
 				</textField>
@@ -137,7 +136,7 @@
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Center">
-						<font fontName="Agency FB" size="22"/>
+						<font fontName="SansSerif" size="22"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtconfig}]]></textFieldExpression>
 				</textField>
@@ -158,7 +157,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Agency FB" size="12"/>
+						<font fontName="SansSerif" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txturl}]]></textFieldExpression>
 				</textField>
@@ -196,7 +195,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Agency FB" size="12"/>
+						<font fontName="SansSerif" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtkey}]]></textFieldExpression>
 				</textField>
@@ -230,7 +229,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font fontName="Agency FB" size="47"/>
+					<font fontName="SansSerif" size="40"/>
 				</textElement>
 				<text><![CDATA[Support Planner]]></text>
 			</staticText>
@@ -243,13 +242,13 @@
 	<pageFooter>
 		<band height="15">
 			<staticText>
-				<reportElement x="311" y="0" width="70" height="15" uuid="f235ed90-91cf-4624-b1f5-0ef70eff103b">
+				<reportElement x="0" y="0" width="381" height="15" uuid="f235ed90-91cf-4624-b1f5-0ef70eff103b">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right">
-					<font fontName="Agency FB"/>
+					<font fontName="SansSerif"/>
 				</textElement>
 				<text><![CDATA[Developed by SM-Net]]></text>
 			</staticText>

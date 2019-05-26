@@ -46,6 +46,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRFontNotFoundException;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class Actions {
@@ -1759,6 +1760,8 @@ public class Actions {
 					jv.setVisible(true);
 
 				} catch (JRException e) {
+					System.out.println(e.getMessage());
+				} catch (JRFontNotFoundException e) {
 					System.out.println(e.getMessage());
 				}
 
