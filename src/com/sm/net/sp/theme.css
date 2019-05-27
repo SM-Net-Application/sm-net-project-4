@@ -28,11 +28,15 @@
 
 .button_image_001 {
 	-fx-border-color: #5e6060;
-	-fx-border-radius: 10 10 10 10;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
 	-fx-background-color: #3c3f41;
-	-fx-background-radius: 10 10 10 10;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
 	-fx-text-fill: #bbbbbb;
 	-fx-font-size: 14.0pt;
+}
+
+.button_image_001:hover {
+	-fx-border-color: #4b6eaf;
 }
 
 .list_view_001 {
@@ -41,6 +45,33 @@
 
 .text_field_001 {
 	-fx-font-size: 12.0pt;
+}
+
+.menu_bar_001 {
+	-fx-background-color: #3c3f41;
+	-fx-selection-bar: #4b6eaf;
+}
+
+.menu_bar_001 .label {
+	-fx-font-size: 12.0pt;
+	-fx-text-fill: #bbbbbb;
+}
+
+.menu_item_001 {
+	-fx-background-color: #3c3f41;
+}
+
+.menu_item_001 .label {
+	-fx-font-size: 12.0pt;
+	-fx-text-fill: #bbbbbb;
+}
+
+.menu_item_001:focused {
+	-fx-background-color: #4b6eaf;
+}
+
+.context-menu {
+    -fx-background-color: #3c3f41;
 }
 
 .comboBoxStyle1 {

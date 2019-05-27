@@ -37,6 +37,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SupportPlannerView implements SupportPlannerCallback {
@@ -55,7 +56,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void objectInitialize() {
 
 		viewSupportPlannerBorderPane.getStyleClass().add("main_view_001");
-		
+
 		this.left = 0;
 		this.center = 0;
 		this.user = null;
@@ -222,7 +223,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		this.viewSupportPlannerStage.setMinWidth(1000);
 		this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
-		this.viewSupportPlannerStage.setWidth(Double.MAX_VALUE);
+		this.viewSupportPlannerStage.setWidth(Screen.getPrimary().getBounds().getWidth());
 		this.viewSupportPlannerStage.setMinHeight(500);
 		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
 		this.viewSupportPlannerStage.setHeight(Double.MAX_VALUE);

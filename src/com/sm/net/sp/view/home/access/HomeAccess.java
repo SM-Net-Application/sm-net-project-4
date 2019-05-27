@@ -11,9 +11,8 @@ import com.sm.net.sp.view.SupportPlannerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class HomeAccess {
@@ -32,7 +31,7 @@ public class HomeAccess {
 	}
 
 	private void styleClasses() {
-		accessButton.getStyleClass().add("buttonStyle3");
+		accessButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -45,8 +44,8 @@ public class HomeAccess {
 		this.language = settings.getLanguage();
 
 		accessButton.setText(language.getString("VIEW008BUT001"));
-		accessButton.setGraphic(new ImageView(Meta.Resources.HOME_ACCESS));
-		accessButton.setGraphicTextGap(25);
+		accessButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.HOME_ACCESS));
+		accessButton.setGraphicTextGap(25.0);
 	}
 
 	private void listeners() {

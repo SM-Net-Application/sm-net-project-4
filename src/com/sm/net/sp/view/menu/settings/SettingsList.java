@@ -5,17 +5,11 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
-import javafx.util.Callback;
 
 public class SettingsList {
 
@@ -45,9 +39,9 @@ public class SettingsList {
 
 	private void styleClasses() {
 
-		settingsLabel.getStyleClass().add("labelStyle1");
-		settingsListView.getStyleClass().add("listViewStyle1");
-		settingsButton.getStyleClass().add("buttonStyle2");
+		settingsLabel.getStyleClass().add("label_001");
+		settingsListView.getStyleClass().add("list_view_001");
+		settingsButton.getStyleClass().add("button_image_001");
 	}
 
 	private void listeners() {
@@ -56,23 +50,14 @@ public class SettingsList {
 	}
 
 	private void listenerSettingsButton() {
-		settingsButton.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				ctrlViewSupportPlanner.loadHome();
-			}
-		});
+		settingsButton.setOnAction(event -> ctrlViewSupportPlanner.loadHome());
 	}
 
 	private void listenerSettingsListView() {
 
-		settingsListView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				if (newValue.intValue() > -1)
-					loadSettings();
-			}
+		settingsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue.intValue() > -1)
+				loadSettings();
 		});
 	}
 
@@ -96,15 +81,7 @@ public class SettingsList {
 	}
 
 	private void cellFactorySettingsListView() {
-
-		settingsListView.setCellFactory(new Callback<ListView<EnumSettingsList>, ListCell<EnumSettingsList>>() {
-
-			@Override
-			public ListCell<EnumSettingsList> call(ListView<EnumSettingsList> param) {
-				return new SettingsMenuItem(language);
-			}
-		});
-
+		settingsListView.setCellFactory(param -> new SettingsMenuItem(language));
 	}
 
 	private void viewUpdate() {
@@ -112,11 +89,9 @@ public class SettingsList {
 		this.language = settings.getLanguage();
 
 		settingsLabel.setText(language.getString("VIEW004MEN002"));
-		// settingsLabel.setGraphic(new
-		// ImageView(Meta.Resources.MENU_APP_SETTINGS));
 
 		settingsButton.setText("");
-		settingsButton.setGraphic(new ImageView(Meta.Resources.MENU_BACK));
+		settingsButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MENU_BACK));
 
 		settingsListView.getItems().addAll((EnumSettingsList.values()));
 	}
@@ -152,7 +127,7 @@ public class SettingsList {
 
 			if (item != null) {
 				setText(language.getString(item.getName()));
-				setGraphic(new ImageView(item.getImage()));
+				setGraphic(Meta.Resources.imageForButtonSmall(item.getImage()));
 				setGraphicTextGap(25);
 			}
 		}

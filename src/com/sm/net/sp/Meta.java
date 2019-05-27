@@ -22,8 +22,10 @@ import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
 
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
 public class Meta {
 
@@ -212,33 +214,63 @@ public class Meta {
 		public static final Image OK = new Image(SupportPlannerMain.class.getResourceAsStream("resources/ok.png"));
 
 		public static ImageView createTabIcon(Image image) {
+
 			ImageView imageView = new ImageView(image);
 			imageView.setFitWidth(50);
 			imageView.setFitHeight(50);
 			imageView.setPreserveRatio(true);
 			imageView.setSmooth(true);
-			// imageView.setCache(true);
+
 			return imageView;
 		}
 
 		public static ImageView createButtonIcon(Image image) {
+
 			ImageView imageView = new ImageView(image);
 			imageView.setFitWidth(50);
 			imageView.setFitHeight(50);
 			imageView.setPreserveRatio(true);
 			imageView.setSmooth(true);
-			// imageView.setCache(true);
+
 			return imageView;
 		}
-		
+
 		public static ImageView imageForButton(Image image) {
+
 			ImageView imageView = new ImageView(image);
 			imageView.setFitWidth(40);
 			imageView.setFitHeight(40);
 			imageView.setPreserveRatio(true);
 			imageView.setSmooth(true);
-			// imageView.setCache(true);
+
 			return imageView;
+		}
+
+		public static ImageView imageForButtonSmall(Image image) {
+
+			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(25);
+			imageView.setFitHeight(25);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+
+			return imageView;
+		}
+
+		public static StackPane imageForMenu(Image image) {
+
+			StackPane sp = new StackPane();
+			sp.setPadding(new Insets(0.0, 10.0, 0.0, 0.0));
+
+			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(25);
+			imageView.setFitHeight(25);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+
+			sp.getChildren().add(imageView);
+
+			return sp;
 		}
 	}
 }

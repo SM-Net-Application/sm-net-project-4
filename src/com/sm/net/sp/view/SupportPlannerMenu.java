@@ -4,22 +4,20 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.settings.Settings;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 
 public class SupportPlannerMenu {
 
 	@FXML
 	private MenuBar menuBar;
-
 	@FXML
 	private Menu configMenuApp;
-
 	@FXML
 	private MenuItem configSettingsMenuItem;
 
@@ -38,7 +36,9 @@ public class SupportPlannerMenu {
 	}
 
 	private void styleClasses() {
-		menuBar.getStyleClass().add("menuBarStyle1");
+		menuBar.getStyleClass().add("menu_bar_001");
+		// configMenuApp.getStyleClass().add("menu_001");
+		configSettingsMenuItem.getStyleClass().add("menu_item_001");
 	}
 
 	private void viewUpdate() {
@@ -46,24 +46,19 @@ public class SupportPlannerMenu {
 		this.language = settings.getLanguage();
 
 		configMenuApp.setText(language.getString("VIEW004MEN001"));
-		configMenuApp.setGraphic(new ImageView(Meta.Resources.MENU_APP));
+		configMenuApp.setGraphic(Meta.Resources.imageForMenu(Meta.Resources.MENU_APP));
+
 		configSettingsMenuItem.setText(language.getString("VIEW004MEN002"));
-		configSettingsMenuItem.setGraphic(new ImageView(Meta.Resources.MENU_APP_SETTINGS));
+		configSettingsMenuItem.setGraphic(Meta.Resources.imageForMenu(Meta.Resources.MENU_APP_SETTINGS));
+		configSettingsMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
 	}
 
 	private void listeners() {
-		listenerConfigDatabaseMenuItem();
+		listenerConfigMenuApp();
 	}
 
-	private void listenerConfigDatabaseMenuItem() {
-
-		configSettingsMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				ctrlSupportPlannerView.loadMenuSettingsList();
-			}
-		});
+	private void listenerConfigMenuApp() {
+		configSettingsMenuItem.setOnAction(event -> ctrlSupportPlannerView.loadMenuSettingsList());
 	}
 
 	public Settings getSettings() {
