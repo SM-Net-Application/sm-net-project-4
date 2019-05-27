@@ -9,6 +9,11 @@
 	-fx-font-weight: bold;
 }
 
+.label_setting_name {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 25.0pt;
+}
+
 .label_header_001 {
 	-fx-text-fill: #bbbbbb;
 	-fx-font-size: 14.0pt;

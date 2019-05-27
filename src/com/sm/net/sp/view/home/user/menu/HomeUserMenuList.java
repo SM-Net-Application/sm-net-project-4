@@ -24,8 +24,9 @@ import javafx.util.Callback;
 public class HomeUserMenuList {
 
 	@FXML
+	private ImageView userImageView;
+	@FXML
 	private Label menuLabel;
-
 	@FXML
 	private ListView<EnumHomeUserMenuList> menuListView;
 
@@ -51,9 +52,26 @@ public class HomeUserMenuList {
 	}
 
 	private void styleClasses() {
-		menuLabel.getStyleClass().add("labelStyle1");
-		menuListView.getStyleClass().add("listViewStyle1");
-		menuButton.getStyleClass().add("buttonStyle2");
+
+		userImageView.setFitWidth(50);
+		userImageView.setFitHeight(50);
+		userImageView.setImage(Meta.Resources.MENU_SETTINGS_USER);
+
+		menuLabel.getStyleClass().add("label_001");
+		menuListView.getStyleClass().add("list_view_001");
+		menuButton.getStyleClass().add("button_image_001");
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		menuLabel.setText(setMenuLabel());
+
+		menuButton.setText("");
+		menuButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_LOGOUT));
+
+		buildMenuList();
 	}
 
 	private void listeners() {
@@ -110,22 +128,12 @@ public class HomeUserMenuList {
 
 	}
 
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		menuLabel.setText(setMenuLabel());
-
-		menuButton.setText("");
-		menuButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_LOGOUT));
-
-		buildMenuList();
-	}
-
 	private String setMenuLabel() {
 
-		String menuLabel = language.getString("USERMENU000");
-		menuLabel += ": " + user.getUsername();
+		// String menuLabel = language.getString("USERMENU000");
+		// menuLabel += ": " + user.getUsername();
+
+		String menuLabel = user.getUsername();
 
 		if (user.isSpUserSU())
 			menuLabel += " (" + language.getString("TEXT0010") + ")";

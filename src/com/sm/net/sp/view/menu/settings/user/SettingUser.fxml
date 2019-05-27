@@ -3,60 +3,93 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.menu.settings.user.SettingUser">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.menu.settings.user.SettingUser">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane>
+            <VBox>
                <children>
-                  <Label fx:id="titleLabel" text="Label">
-                     <StackPane.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                     </StackPane.margin>
-                  </Label>
+                  <StackPane>
+                     <children>
+                        <ImageView fx:id="userImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane>
+                     <children>
+                        <Label fx:id="titleLabel" text="Label">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
                </children>
-            </StackPane>
-            <StackPane alignment="CENTER_LEFT">
+            </VBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Separator>
+            <HBox>
                <children>
-                  <Label fx:id="usernameLabel" text="Label">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </Label>
+                  <VBox>
+                     <children>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="usernameLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="passwordLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <TextField fx:id="usernameTextField" maxWidth="1.7976931348623157E308">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <PasswordField fx:id="passwordField" maxWidth="1.7976931348623157E308">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </PasswordField>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
                </children>
-            </StackPane>
-            <StackPane alignment="CENTER_LEFT">
-               <children>
-                  <TextField fx:id="usernameTextField">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </TextField>
-               </children>
-            </StackPane>
-            <StackPane alignment="CENTER_LEFT">
-               <children>
-                  <Label fx:id="passwordLabel" text="Label">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </Label>
-               </children>
-            </StackPane>
-            <StackPane alignment="CENTER_LEFT">
-               <children>
-                  <PasswordField fx:id="passwordField">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </PasswordField>
-               </children>
-            </StackPane>
+            </HBox>
          </children>
       </VBox>
    </children>

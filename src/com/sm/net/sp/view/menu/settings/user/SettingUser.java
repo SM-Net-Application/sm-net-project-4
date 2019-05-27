@@ -20,17 +20,15 @@ import javafx.scene.image.ImageView;
 public class SettingUser {
 
 	@FXML
+	private ImageView userImageView;
+	@FXML
 	private Label titleLabel;
-
 	@FXML
 	private Label usernameLabel;
-
 	@FXML
 	private Label passwordLabel;
-
 	@FXML
 	private TextField usernameTextField;
-
 	@FXML
 	private PasswordField passwordField;
 
@@ -50,20 +48,22 @@ public class SettingUser {
 
 	private void styleClasses() {
 
-		titleLabel.getStyleClass().add("labelStyle2");
-		usernameLabel.getStyleClass().add("labelStyle1");
-		passwordLabel.getStyleClass().add("labelStyle1");
-		usernameTextField.getStyleClass().add("textFieldStyle1");
-		passwordField.getStyleClass().add("textFieldStyle1");
+		titleLabel.getStyleClass().add("label_setting_name");
+		usernameLabel.getStyleClass().add("label_set_001");
+		passwordLabel.getStyleClass().add("label_set_001");
+		usernameTextField.getStyleClass().add("text_field_001");
+		passwordField.getStyleClass().add("text_field_001");
 	}
 
 	private void viewUpdate() {
 
 		this.language = settings.getLanguage();
 
+		userImageView.setFitWidth(100);
+		userImageView.setFitHeight(100);
+		userImageView.setImage(Meta.Resources.MENU_SETTINGS_USER);
+
 		titleLabel.setText(language.getString("VIEW007LAB001"));
-		titleLabel.setGraphic(new ImageView(Meta.Resources.MENU_SETTINGS_USER));
-		titleLabel.setGraphicTextGap(25);
 		usernameLabel.setText(language.getString("VIEW007LAB002"));
 		passwordLabel.setText(language.getString("VIEW002LAB002"));
 	}

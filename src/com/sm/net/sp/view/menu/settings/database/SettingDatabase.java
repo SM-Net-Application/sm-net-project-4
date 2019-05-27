@@ -29,20 +29,17 @@ import javafx.stage.Stage;
 public class SettingDatabase implements SettingsDatabaseCallback {
 
 	@FXML
+	private ImageView databaseImageView;
+	@FXML
 	private Label titleLabel;
-
 	@FXML
 	private Label urlLabel;
-
 	@FXML
 	private TextField urlTextField;
-
 	@FXML
 	private Label decryptionKeyLabel;
-
 	@FXML
 	private PasswordField decryptionKeyPasswordField;
-
 	@FXML
 	private Button userSUButton;
 
@@ -59,6 +56,33 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		listeners();
 		viewUpdate();
 		loadSettings();
+	}
+
+	private void styleClasses() {
+
+		titleLabel.getStyleClass().add("label_setting_name");
+		urlLabel.getStyleClass().add("label_set_001");
+		decryptionKeyLabel.getStyleClass().add("label_set_001");
+		urlTextField.getStyleClass().add("text_field_001");
+		decryptionKeyPasswordField.getStyleClass().add("text_field_001");
+		userSUButton.getStyleClass().add("button_image_001");
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		databaseImageView.setFitWidth(100);
+		databaseImageView.setFitHeight(100);
+		databaseImageView.setImage(Meta.Resources.MENU_SETTINGS_DB);
+
+		titleLabel.setText(language.getString("VIEW005LAB001"));
+
+		urlLabel.setText(language.getString("VIEW005LAB002"));
+		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
+
+		userSUButton.setText(language.getString("TEXT0008"));
+		userSUButton.setGraphic(new ImageView(Meta.Resources.SUPERUSER));
 	}
 
 	private void listeners() {
@@ -158,30 +182,6 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 				}
 			}
 		});
-	}
-
-	private void styleClasses() {
-
-		titleLabel.getStyleClass().add("labelStyle2");
-		urlLabel.getStyleClass().add("labelStyle1");
-		urlTextField.getStyleClass().add("textFieldStyle1");
-		decryptionKeyLabel.getStyleClass().add("labelStyle1");
-		decryptionKeyPasswordField.getStyleClass().add("textFieldStyle1");
-		userSUButton.getStyleClass().add("buttonStyle1");
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		titleLabel.setText(language.getString("VIEW005LAB001"));
-		titleLabel.setGraphic(new ImageView(Meta.Resources.MENU_SETTINGS_DB));
-		titleLabel.setGraphicTextGap(25);
-		urlLabel.setText(language.getString("VIEW005LAB002"));
-		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
-
-		userSUButton.setText(language.getString("TEXT0008"));
-		userSUButton.setGraphic(new ImageView(Meta.Resources.SUPERUSER));
 	}
 
 	private void loadSettings() {
