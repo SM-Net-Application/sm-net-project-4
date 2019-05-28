@@ -31,6 +31,16 @@
 	-fx-min-height: 27.5pt; 
 }
 
+.label_002 {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 14.0pt;
+}
+
+.check_box_001 {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 12.0pt;
+}
+
 .button_image_001 {
 	-fx-border-color: #5e6060;
 	-fx-border-radius: 10.0 10.0 10.0 10.0;
@@ -50,6 +60,13 @@
 
 .text_field_001 {
 	-fx-font-size: 12.0pt;
+}
+
+.text_field_002 {
+	-fx-font-size: 12.0pt;
+	-fx-min-width: 50.0pt;
+	-fx-max-width: 50.0pt;
+	-fx-alignment: center;
 }
 
 .tab_pane_001 {

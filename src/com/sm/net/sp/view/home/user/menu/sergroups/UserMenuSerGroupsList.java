@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -30,38 +31,31 @@ import javafx.stage.Stage;
 public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	@FXML
+	private ImageView serGroupImageView;
+	@FXML
+	private Label headerLabel;
+	@FXML
 	private TabPane serGroupsTabPane;
-
 	@FXML
 	private Tab serGroupsTab;
-
 	@FXML
 	private TableView<SerGroup> serGroupsTableView;
-
 	@FXML
 	private TableColumn<SerGroup, Integer> serGroupsIDTableColumn;
-
 	@FXML
 	private TableColumn<SerGroup, String> serGroupsNameTableColumn;
-
 	@FXML
 	private TableColumn<SerGroup, String> serGroupsOverseerTableColumn;
-
 	@FXML
 	private TableColumn<SerGroup, String> serGroupsAssistantTableColumn;
-
 	@FXML
 	private TableColumn<SerGroup, Integer> serGroupsFamiliesTableColumn;
-
 	@FXML
 	private TableColumn<SerGroup, Integer> serGroupsMembersTableColumn;
-
 	@FXML
 	private Button serGroupsAddButton;
-
 	@FXML
 	private Button serGroupsDeleteButton;
-
 	@FXML
 	private Button serGroupsUpdateButton;
 
@@ -91,20 +85,57 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		serGroupsTabPane.getStyleClass().add("tabPaneStyle1");
+		headerLabel.getStyleClass().add("label_header_001");
 
-		serGroupsTab.getStyleClass().add("tabStyle1");
+		serGroupsTabPane.getStyleClass().add("tab_pane_001");
+
+		serGroupsTab.getStyleClass().add("tab_001");
+
 		serGroupsTableView.getStyleClass().add("tableViewStyle1");
 
-		serGroupsAddButton.getStyleClass().add("buttonStyle2");
-		serGroupsDeleteButton.getStyleClass().add("buttonStyle2");
-		serGroupsUpdateButton.getStyleClass().add("buttonStyle2");
+		serGroupsAddButton.getStyleClass().add("button_image_001");
+		serGroupsDeleteButton.getStyleClass().add("button_image_001");
+		serGroupsUpdateButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
 		updateSerGroups();
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		headerLabel.setText(language.getString("USERMENU003"));
+
+		serGroupImageView.setFitWidth(50);
+		serGroupImageView.setFitHeight(50);
+		serGroupImageView.setImage(Meta.Resources.USER_MENU_SERVICEGROUPS);
+
+		serGroupsTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
+
+		serGroupsTab.setText(language.getString("TEXT0035"));
+		serGroupsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.SERVICEGROUPS_GROUP));
+		serGroupsTab.setClosable(false);
+
+		serGroupsIDTableColumn.setText(language.getString("TEXT0005"));
+		serGroupsIDTableColumn.setMinWidth(50);
+		serGroupsIDTableColumn.setMaxWidth(50);
+		serGroupsIDTableColumn.setResizable(false);
+		serGroupsNameTableColumn.setText(language.getString("TEXT0036"));
+		serGroupsOverseerTableColumn.setText(language.getString("TEXT0037"));
+		serGroupsAssistantTableColumn.setText(language.getString("TEXT0038"));
+		serGroupsFamiliesTableColumn.setText(language.getString("TEXT0012"));
+		serGroupsMembersTableColumn.setText(language.getString("TEXT0011"));
+
+		serGroupsAddButton.setText("");
+		serGroupsAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SERVICEGROUPS_ADD));
+		serGroupsDeleteButton.setText("");
+		serGroupsDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SERVICEGROUPS_DEL));
+		serGroupsUpdateButton.setText("");
+		serGroupsUpdateButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.UPDATE));
 	}
 
 	private void listeners() {
@@ -168,8 +199,8 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 				Tab newSerGroupsTab = new Tab(language.getString("TEXT0015"), layout);
 				newSerGroupsTab.setClosable(true);
-				newSerGroupsTab.getStyleClass().add("tabStyle1");
-				newSerGroupsTab.setGraphic(new ImageView(Meta.Resources.PLUS));
+				newSerGroupsTab.getStyleClass().add("tab_001");
+				newSerGroupsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
 
 				ctrl.setSerGroupsTabPane(serGroupsTabPane);
 				ctrl.setSerGroupTab(newSerGroupsTab);
@@ -203,8 +234,8 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 				Tab newTab = new Tab(serGroup.getSpInf1Decrypted(), layout);
 				newTab.setClosable(true);
-				newTab.getStyleClass().add("tabStyle1");
-				newTab.setGraphic(new ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.SERVICEGROUPS_GROUP));
 
 				ctrl.setSerGroupsTabPane(serGroupsTabPane);
 				ctrl.setSerGroupTab(newTab);
@@ -230,34 +261,6 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 			}
 
 		return false;
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		serGroupsTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
-
-		serGroupsTab.setText(language.getString("TEXT0035"));
-		serGroupsTab.setGraphic(new ImageView(Meta.Resources.USER_MENU_SERVICEGROUPS));
-		serGroupsTab.setClosable(false);
-
-		serGroupsIDTableColumn.setText(language.getString("TEXT0005"));
-		serGroupsIDTableColumn.setMinWidth(50);
-		serGroupsIDTableColumn.setMaxWidth(50);
-		serGroupsIDTableColumn.setResizable(false);
-		serGroupsNameTableColumn.setText(language.getString("TEXT0036"));
-		serGroupsOverseerTableColumn.setText(language.getString("TEXT0037"));
-		serGroupsAssistantTableColumn.setText(language.getString("TEXT0038"));
-		serGroupsFamiliesTableColumn.setText(language.getString("TEXT0012"));
-		serGroupsMembersTableColumn.setText(language.getString("TEXT0011"));
-
-		serGroupsAddButton.setText("");
-		serGroupsAddButton.setGraphic(new ImageView(Meta.Resources.SERVICEGROUPS_ADD));
-		serGroupsDeleteButton.setText("");
-		serGroupsDeleteButton.setGraphic(new ImageView(Meta.Resources.SERVICEGROUPS_DEL));
-		serGroupsUpdateButton.setText("");
-		serGroupsUpdateButton.setGraphic(new ImageView(Meta.Resources.UPDATE));
 	}
 
 	@Override

@@ -179,13 +179,15 @@ public class Meta {
 		public static final Image SAVE = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/save_50x50.png"));
 		public static final Image UPDATE = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/update_50x50.png"));
+				SupportPlannerMain.class.getResourceAsStream("resources/update.png"));
 		public static final Image ARROW_BACK = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/arrow_back2_50x50.png"));
 		public static final Image ARROW_FRONT = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/arrow_front2_50x50.png"));
 		public static final Image USER_MENU_SERVICEGROUPS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/bag.png"));
+		public static final Image SERVICEGROUPS_GROUP = new Image(
+				SupportPlannerMain.class.getResourceAsStream("resources/group.png"));
 		public static final Image SERVICEGROUPS_ADD = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_add_50x50.png"));
 		public static final Image SERVICEGROUPS_DEL = new Image(
@@ -212,28 +214,6 @@ public class Meta {
 		public static final Image USER_MENU_MEETINGS_WOL_LOAD = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/wol_load.png"));
 		public static final Image OK = new Image(SupportPlannerMain.class.getResourceAsStream("resources/ok.png"));
-
-		public static ImageView createTabIcon(Image image) {
-
-			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(50);
-			imageView.setFitHeight(50);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
-
-			return imageView;
-		}
-
-		public static ImageView createButtonIcon(Image image) {
-
-			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(50);
-			imageView.setFitHeight(50);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
-
-			return imageView;
-		}
 
 		public static ImageView imageForButton(Image image) {
 

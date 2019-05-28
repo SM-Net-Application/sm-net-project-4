@@ -20,13 +20,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class UserMenuCongrFamilyEditor {
 
-	@FXML
-	private Label titleLabel;
 	@FXML
 	private Label familyNameLabel;
 	@FXML
@@ -123,30 +120,29 @@ public class UserMenuCongrFamilyEditor {
 
 	private void styleClasses() {
 
-		titleLabel.getStyleClass().add("labelStyle2");
-		familyNameLabel.getStyleClass().add("labelStyle1");
-		familyStreetLabel.getStyleClass().add("labelStyle1");
-		familyNummerLabel.getStyleClass().add("labelStyle1");
-		familyPostCodeLabel.getStyleClass().add("labelStyle1");
-		familyCityLabel.getStyleClass().add("labelStyle1");
-		membersLabel.getStyleClass().add("labelStyle1");
-		familyMembersLabel.getStyleClass().add("labelStyle1");
-		familyPhoneLabel.getStyleClass().add("labelStyle1");
+		familyNameLabel.getStyleClass().add("label_001");
+		familyStreetLabel.getStyleClass().add("label_001");
+		familyNummerLabel.getStyleClass().add("label_001");
+		familyPostCodeLabel.getStyleClass().add("label_001");
+		familyCityLabel.getStyleClass().add("label_001");
+		membersLabel.getStyleClass().add("label_001");
+		familyMembersLabel.getStyleClass().add("label_001");
+		familyPhoneLabel.getStyleClass().add("label_001");
 
-		familyNameTextField.getStyleClass().add("textFieldStyle1");
-		familyStreetTextField.getStyleClass().add("textFieldStyle1");
-		familyNummerTextField.getStyleClass().add("textFieldStyle1");
-		familyPostCodeTextField.getStyleClass().add("textFieldStyle1");
-		familyCityTextField.getStyleClass().add("textFieldStyle1");
-		familyPhoneTextField.getStyleClass().add("textFieldStyle1");
+		familyNameTextField.getStyleClass().add("text_field_001");
+		familyStreetTextField.getStyleClass().add("text_field_001");
+		familyNummerTextField.getStyleClass().add("text_field_001");
+		familyPostCodeTextField.getStyleClass().add("text_field_001");
+		familyCityTextField.getStyleClass().add("text_field_001");
+		familyPhoneTextField.getStyleClass().add("text_field_001");
 
 		membersTableView.getStyleClass().add("tableViewStyle1");
 
 		familyMembersTableView.getStyleClass().add("tableViewStyle1");
 
-		familyAddMember.getStyleClass().add("buttonStyle2");
-		familyRemoveMember.getStyleClass().add("buttonStyle2");
-		saveButton.getStyleClass().add("buttonStyle1");
+		familyAddMember.getStyleClass().add("button_image_001");
+		familyRemoveMember.getStyleClass().add("button_image_001");
+		saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -311,11 +307,6 @@ public class UserMenuCongrFamilyEditor {
 
 		this.language = settings.getLanguage();
 
-		if (this.selectedFamily != null)
-			titleLabel.setText(language.getString("TEXT0023"));
-		else
-			titleLabel.setText(language.getString("TEXT0031"));
-
 		familyNameLabel.setText(language.getString("TEXT0025"));
 		familyStreetLabel.setText(language.getString("TEXT0027"));
 		familyNummerLabel.setText(language.getString("TEXT0028"));
@@ -338,10 +329,10 @@ public class UserMenuCongrFamilyEditor {
 		familyMemberNameTableColumn.setText(language.getString("TEXT0014"));
 
 		familyAddMember.setText("");
-		familyAddMember.setGraphic(new ImageView(Meta.Resources.ARROW_FRONT));
+		familyAddMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_FRONT));
 		familyRemoveMember.setText("");
-		familyRemoveMember.setGraphic(new ImageView(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
+		familyRemoveMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_BACK));
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
 		saveButton.setText(language.getString("TEXT0022"));
 	}
 

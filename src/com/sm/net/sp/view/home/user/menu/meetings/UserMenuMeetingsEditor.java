@@ -248,91 +248,171 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	}
 
 	private void styleClasses() {
-		tabPane.getStyleClass().add("tabPaneStyle2");
-		generalTab.getStyleClass().add("tabStyle1");
-		treasuresTab.getStyleClass().add("tabStyle1");
-		ministryTab.getStyleClass().add("tabStyle1");
-		christiansTab.getStyleClass().add("tabStyle1");
 
-		typeWeekLabel.getStyleClass().add("labelStyle2");
+		tabPane.getStyleClass().add("tab_pane_002");
+
+		generalTab.getStyleClass().add("tab_001");
+		treasuresTab.getStyleClass().add("tab_001");
+		ministryTab.getStyleClass().add("tab_001");
+		christiansTab.getStyleClass().add("tab_001");
+
+		typeWeekLabel.getStyleClass().add("label_001");
+
 		typeWeekListView.getStyleClass().add("listViewStyle1");
 
-		generalLabel.getStyleClass().add("labelStyle2");
-		treasuresLabel.getStyleClass().add("labelStyle2");
+		generalLabel.getStyleClass().add("label_002");
+		treasuresLabel.getStyleClass().add("label_002");
 
-		presidentLabel.getStyleClass().add("labelStyle3");
+		presidentLabel.getStyleClass().add("label_set_001");
+		pray1Label.getStyleClass().add("label_set_001");
+		song1Label.getStyleClass().add("label_set_001");
+		bibleChaptersLabel.getStyleClass().add("label_set_001");
+		openingCommentsLabel.getStyleClass().add("label_set_001");
+
 		presidentComboBox.getStyleClass().add("comboBoxStyle2");
-
-		bibleChaptersLabel.getStyleClass().add("labelStyle3");
-		bibleChaptersTextField.getStyleClass().add("textFieldStyle3");
-
-		song1Label.getStyleClass().add("labelStyle3");
-		song1TextField.getStyleClass().add("textFieldStyle2");
-
-		pray1Label.getStyleClass().add("labelStyle3");
 		pray1ComboBox.getStyleClass().add("comboBoxStyle2");
+		song1TextField.getStyleClass().add("text_field_002");
+		bibleChaptersTextField.getStyleClass().add("text_field_001");
 
-		openingCommentsLabel.getStyleClass().add("labelStyle3");
-		openingCommentsMinTextField.getStyleClass().add("textFieldStyle2");
-		openingCommentsMinLabel.getStyleClass().add("labelStyle3");
-		openingCommentsTextTextField.getStyleClass().add("textFieldStyle3");
+		openingCommentsMinTextField.getStyleClass().add("text_field_002");
+		openingCommentsMinLabel.getStyleClass().add("label_set_001");
+		openingCommentsTextTextField.getStyleClass().add("text_field_001");
 
-		talkLabel.getStyleClass().add("labelStyle1");
-		talkMinTextField.getStyleClass().add("textFieldStyle2");
-		talkMinLabel.getStyleClass().add("labelStyle3");
-		talkTextTextField.getStyleClass().add("textFieldStyle3");
+		talkLabel.getStyleClass().add("label_001");
+		talkMinTextField.getStyleClass().add("text_field_002");
+		talkMinLabel.getStyleClass().add("label_set_001");
+		talkTextTextField.getStyleClass().add("text_field_001");
 		talkComboBox.getStyleClass().add("comboBoxStyle2");
 
-		diggingLabel.getStyleClass().add("labelStyle1");
-		diggingMinTextField.getStyleClass().add("textFieldStyle2");
-		diggingMinLabel.getStyleClass().add("labelStyle3");
-		diggingTextTextField.getStyleClass().add("textFieldStyle3");
+		diggingLabel.getStyleClass().add("label_001");
+		diggingMinTextField.getStyleClass().add("text_field_002");
+		diggingMinLabel.getStyleClass().add("label_set_001");
+		diggingTextTextField.getStyleClass().add("text_field_001");
 		diggingComboBox.getStyleClass().add("comboBoxStyle2");
 
-		bibleReadingLabel.getStyleClass().add("labelStyle1");
-		bibleReadingMinTextField.getStyleClass().add("textFieldStyle2");
-		bibleReadingMinLabel.getStyleClass().add("labelStyle3");
-		bibleReadingTextTextField.getStyleClass().add("textFieldStyle3");
-		bibleReadingMaterialsTextField.getStyleClass().add("textFieldStyle3");
+		bibleReadingLabel.getStyleClass().add("label_001");
+		bibleReadingMinTextField.getStyleClass().add("text_field_002");
+		bibleReadingMinLabel.getStyleClass().add("label_set_001");
+		bibleReadingTextTextField.getStyleClass().add("text_field_001");
+		bibleReadingMaterialsTextField.getStyleClass().add("text_field_001");
+
 		bibleReadingComboBox.getStyleClass().add("comboBoxStyle2");
 
 		ministryTableView.getStyleClass().add("tableViewStyle1");
 		ministryMinTableColumn.getStyleClass().add("tableColumnStyle1");
 
-		ministryPartAddButton.getStyleClass().add("buttonStyle2");
-		ministryPartDeleteButton.getStyleClass().add("buttonStyle2");
+		ministryPartAddButton.getStyleClass().add("button_image_001");
+		ministryPartDeleteButton.getStyleClass().add("button_image_001");
 
-		song2Label.getStyleClass().add("labelStyle3");
-		song2TextField.getStyleClass().add("textFieldStyle2");
+		song2Label.getStyleClass().add("label_001");
+		song2TextField.getStyleClass().add("text_field_001");
 
 		christiansPartTableView.getStyleClass().add("tableViewStyle1");
 		christiansPartMinTableColumn.getStyleClass().add("tableColumnStyle1");
 
-		christiansPartAddButton.getStyleClass().add("buttonStyle2");
-		christiansPartDeleteButton.getStyleClass().add("buttonStyle2");
+		christiansPartAddButton.getStyleClass().add("button_image_001");
+		christiansPartDeleteButton.getStyleClass().add("button_image_001");
 
-		congregationBibleStudyLabel.getStyleClass().add("labelStyle2");
-		congregationBibleStudyMinTextField.getStyleClass().add("textFieldStyle2");
-		congregationBibleStudyMinLabel.getStyleClass().add("labelStyle3");
-		congregationBibleStudyTextTextField.getStyleClass().add("textFieldStyle3");
-		congregationBibleStudyMaterialTextField.getStyleClass().add("textFieldStyle3");
+		congregationBibleStudyLabel.getStyleClass().add("label_001");
+		congregationBibleStudyMinTextField.getStyleClass().add("text_field_001");
+		congregationBibleStudyMinLabel.getStyleClass().add("label_001");
+		congregationBibleStudyTextTextField.getStyleClass().add("text_field_001");
+		congregationBibleStudyMaterialTextField.getStyleClass().add("text_field_001");
+
 		congregationBibleStudyComboBox.getStyleClass().add("comboBoxStyle2");
 
-		endLabel.getStyleClass().add("labelStyle2");
+		endLabel.getStyleClass().add("label_001");
 
-		reviewLabel.getStyleClass().add("labelStyle3");
-		reviewMinTextField.getStyleClass().add("textFieldStyle2");
-		reviewMinLabel.getStyleClass().add("labelStyle3");
-		reviewTextTextField.getStyleClass().add("textFieldStyle3");
+		reviewLabel.getStyleClass().add("label_001");
+		reviewMinTextField.getStyleClass().add("text_field_001");
+		reviewMinLabel.getStyleClass().add("label_001");
+		reviewTextTextField.getStyleClass().add("text_field_001");
 
-		song3Label.getStyleClass().add("labelStyle3");
-		song3TextField.getStyleClass().add("textFieldStyle2");
+		song3Label.getStyleClass().add("label_001");
+		song3TextField.getStyleClass().add("text_field_001");
 
-		pray2Label.getStyleClass().add("labelStyle3");
+		pray2Label.getStyleClass().add("label_001");
 		pray2ComboBox.getStyleClass().add("comboBoxStyle2");
 
-		loadWeekFromWOLButton.getStyleClass().add("buttonStyle2");
-		saveWeekButton.getStyleClass().add("buttonStyle2");
+		loadWeekFromWOLButton.getStyleClass().add("button_image_001");
+		saveWeekButton.getStyleClass().add("button_image_001");
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		generalTab.setText(language.getString("TEXT0043"));
+		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
+		treasuresTab.setText(language.getString("TEXT0080"));
+		treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
+		ministryTab.setText(language.getString("TEXT0081"));
+		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
+		christiansTab.setText(language.getString("TEXT0082"));
+		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
+
+		typeWeekLabel.setText(language.getString("TEXT0122"));
+		generalLabel.setText(language.getString("TEXT0079"));
+		treasuresLabel.setText(language.getString("TEXT0080"));
+
+		presidentLabel.setText(language.getString("TEXT0134"));
+		bibleChaptersLabel.setText(language.getString("TEXT0086"));
+		song1Label.setText(language.getString("TEXT0085"));
+		pray1Label.setText(language.getString("TEXT0084"));
+		openingCommentsLabel.setText(language.getString("TEXT0087"));
+		openingCommentsMinLabel.setText(language.getString("TEXT0089"));
+		talkLabel.setText(language.getString("TEXT0051"));
+		talkMinLabel.setText(language.getString("TEXT0089"));
+		diggingLabel.setText(language.getString("TEXT0088"));
+		diggingMinLabel.setText(language.getString("TEXT0089"));
+
+		bibleReadingLabel.setText(language.getString("TEXT0047"));
+		bibleReadingMinLabel.setText(language.getString("TEXT0089"));
+
+		ministryTypeTableColumn.setText(language.getString("TEXT0091"));
+		ministryFulltextTableColumn.setText(language.getString("TEXT0092"));
+		ministryMinTableColumn.setText(language.getString("TEXT0093"));
+		ministryThemeTableColumn.setText(language.getString("TEXT0094"));
+		ministryMaterialTableColumn.setText(language.getString("TEXT0095"));
+		ministryMember1TableColumn.setText(language.getString("TEXT0135"));
+		ministryMember2TableColumn.setText(language.getString("TEXT0038"));
+		ministryMember3TableColumn.setText(language.getString("TEXT0136"));
+		ministryMember4TableColumn.setText(language.getString("TEXT0038"));
+
+		ministryPartAddButton.setText(null);
+		ministryPartAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
+		ministryPartDeleteButton.setText(null);
+		ministryPartDeleteButton
+				.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
+
+		song2Label.setText(language.getString("TEXT0099"));
+
+		christiansPartFulltextTableColumn.setText(language.getString("TEXT0092"));
+		christiansPartMinTableColumn.setText(language.getString("TEXT0093"));
+		christiansPartThemeTableColumn.setText(language.getString("TEXT0094"));
+		christiansPartMaterialTableColumn.setText(language.getString("TEXT0095"));
+		christiansPartTeacherTableColumn.setText(language.getString("TEXT0098"));
+
+		christiansPartAddButton.setText(null);
+		christiansPartAddButton
+				.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
+		christiansPartDeleteButton.setText(null);
+		christiansPartDeleteButton
+				.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
+
+		congregationBibleStudyLabel.setText(language.getString("TEXT0061"));
+		congregationBibleStudyMinLabel.setText(language.getString("TEXT0089"));
+
+		endLabel.setText(language.getString("TEXT0103"));
+		reviewLabel.setText(language.getString("TEXT0101"));
+		reviewMinLabel.setText(language.getString("TEXT0089"));
+		song3Label.setText(language.getString("TEXT0100"));
+		pray2Label.setText(language.getString("TEXT0102"));
+
+		loadWeekFromWOLButton.setText(null);
+		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
+		saveWeekButton.setText(null);
+		saveWeekButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
 	}
 
 	private void cellValueFactory() {
@@ -1022,83 +1102,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		generalTab.setText(language.getString("TEXT0043"));
-		generalTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.INFO));
-		treasuresTab.setText(language.getString("TEXT0080"));
-		treasuresTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
-		ministryTab.setText(language.getString("TEXT0081"));
-		ministryTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
-		christiansTab.setText(language.getString("TEXT0082"));
-		christiansTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
-
-		typeWeekLabel.setText(language.getString("TEXT0122"));
-		generalLabel.setText(language.getString("TEXT0079"));
-		treasuresLabel.setText(language.getString("TEXT0080"));
-
-		presidentLabel.setText(language.getString("TEXT0134"));
-		bibleChaptersLabel.setText(language.getString("TEXT0086"));
-		song1Label.setText(language.getString("TEXT0085"));
-		pray1Label.setText(language.getString("TEXT0084"));
-		openingCommentsLabel.setText(language.getString("TEXT0087"));
-		openingCommentsMinLabel.setText(language.getString("TEXT0089"));
-		talkLabel.setText(language.getString("TEXT0051"));
-		talkMinLabel.setText(language.getString("TEXT0089"));
-		diggingLabel.setText(language.getString("TEXT0088"));
-		diggingMinLabel.setText(language.getString("TEXT0089"));
-
-		bibleReadingLabel.setText(language.getString("TEXT0047"));
-		bibleReadingMinLabel.setText(language.getString("TEXT0089"));
-
-		ministryTypeTableColumn.setText(language.getString("TEXT0091"));
-		ministryFulltextTableColumn.setText(language.getString("TEXT0092"));
-		ministryMinTableColumn.setText(language.getString("TEXT0093"));
-		ministryThemeTableColumn.setText(language.getString("TEXT0094"));
-		ministryMaterialTableColumn.setText(language.getString("TEXT0095"));
-		ministryMember1TableColumn.setText(language.getString("TEXT0135"));
-		ministryMember2TableColumn.setText(language.getString("TEXT0038"));
-		ministryMember3TableColumn.setText(language.getString("TEXT0136"));
-		ministryMember4TableColumn.setText(language.getString("TEXT0038"));
-
-		ministryPartAddButton.setText(null);
-		ministryPartAddButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
-		ministryPartDeleteButton.setText(null);
-		ministryPartDeleteButton
-				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
-
-		song2Label.setText(language.getString("TEXT0099"));
-
-		christiansPartFulltextTableColumn.setText(language.getString("TEXT0092"));
-		christiansPartMinTableColumn.setText(language.getString("TEXT0093"));
-		christiansPartThemeTableColumn.setText(language.getString("TEXT0094"));
-		christiansPartMaterialTableColumn.setText(language.getString("TEXT0095"));
-		christiansPartTeacherTableColumn.setText(language.getString("TEXT0098"));
-
-		christiansPartAddButton.setText(null);
-		christiansPartAddButton
-				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
-		christiansPartDeleteButton.setText(null);
-		christiansPartDeleteButton
-				.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
-
-		congregationBibleStudyLabel.setText(language.getString("TEXT0061"));
-		congregationBibleStudyMinLabel.setText(language.getString("TEXT0089"));
-
-		endLabel.setText(language.getString("TEXT0103"));
-		reviewLabel.setText(language.getString("TEXT0101"));
-		reviewMinLabel.setText(language.getString("TEXT0089"));
-		song3Label.setText(language.getString("TEXT0100"));
-		pray2Label.setText(language.getString("TEXT0102"));
-
-		loadWeekFromWOLButton.setText(null);
-		loadWeekFromWOLButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
-		saveWeekButton.setText(null);
-		saveWeekButton.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.SAVE));
 	}
 
 	public Settings getSettings() {

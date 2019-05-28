@@ -15,15 +15,6 @@
    <children>
       <VBox maxHeight="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane>
-               <children>
-                  <Label fx:id="titleLabel" text="Label">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </Label>
-               </children>
-            </StackPane>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
                   <VBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS">

@@ -23,68 +23,46 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 	@FXML
-	private Label titleLabel;
-
-	@FXML
 	private Label serGroupsNameLabel;
-
 	@FXML
 	private TextField serGroupsNameTextField;
-
 	@FXML
 	private Label serGroupsOverseerLabel;
-
 	@FXML
 	private ComboBox<Member> serGroupsOverseerComboBox;
-
 	@FXML
 	private Label serGroupsAssistantLabel;
-
 	@FXML
 	private ComboBox<Member> serGroupsAssistantComboBox;
-
 	@FXML
 	private Label familiesLabel;
-
 	@FXML
 	private TableView<Family> familiesTableView;
-
 	@FXML
 	private TableColumn<Family, Integer> familiesIDTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> familiesNameTableColumn;
-
 	@FXML
 	private TableColumn<Family, Integer> familiesMembersTableColumn;
-
 	@FXML
 	private Button serGroupsAddFamily;
-
 	@FXML
 	private Button serGroupsRemoveFamily;
-
 	@FXML
 	private Label serGroupsFamiliesLabel;
-
 	@FXML
 	private TableView<Family> serGroupsFamiliesTableView;
-
 	@FXML
 	private TableColumn<Family, Integer> serGroupsFamiliesIDTableColumn;
-
 	@FXML
 	private TableColumn<Family, String> serGroupsFamiliesNameTableColumn;
-
 	@FXML
 	private TableColumn<Family, Integer> serGroupsFamiliesMembersTableColumn;
-
 	@FXML
 	private Button saveButton;
 
@@ -125,15 +103,14 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		titleLabel.getStyleClass().add("labelStyle2");
-		serGroupsNameLabel.getStyleClass().add("labelStyle1");
-		serGroupsOverseerLabel.getStyleClass().add("labelStyle1");
-		serGroupsAssistantLabel.getStyleClass().add("labelStyle1");
+		serGroupsNameLabel.getStyleClass().add("label_001");
+		serGroupsOverseerLabel.getStyleClass().add("label_001");
+		serGroupsAssistantLabel.getStyleClass().add("label_001");
 
-		familiesLabel.getStyleClass().add("labelStyle1");
-		serGroupsFamiliesLabel.getStyleClass().add("labelStyle1");
+		familiesLabel.getStyleClass().add("label_001");
+		serGroupsFamiliesLabel.getStyleClass().add("label_001");
 
-		serGroupsNameTextField.getStyleClass().add("textFieldStyle1");
+		serGroupsNameTextField.getStyleClass().add("text_field_001");
 		serGroupsOverseerComboBox.getStyleClass().add("comboBoxStyle1");
 		serGroupsAssistantComboBox.getStyleClass().add("comboBoxStyle1");
 
@@ -141,15 +118,45 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 
 		serGroupsFamiliesTableView.getStyleClass().add("tableViewStyle1");
 
-		serGroupsAddFamily.getStyleClass().add("buttonStyle2");
-		serGroupsRemoveFamily.getStyleClass().add("buttonStyle2");
-		saveButton.getStyleClass().add("buttonStyle1");
+		serGroupsAddFamily.getStyleClass().add("button_image_001");
+		serGroupsRemoveFamily.getStyleClass().add("button_image_001");
+		saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
 		initValue();
 		viewUpdate();
 		listeners();
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		serGroupsNameLabel.setText(language.getString("TEXT0036"));
+		serGroupsOverseerLabel.setText(language.getString("TEXT0037"));
+		serGroupsAssistantLabel.setText(language.getString("TEXT0038"));
+		familiesLabel.setText(language.getString("TEXT0040"));
+		familiesIDTableColumn.setText(language.getString("TEXT0005"));
+		familiesIDTableColumn.setMinWidth(50);
+		familiesIDTableColumn.setMaxWidth(50);
+		familiesIDTableColumn.setResizable(false);
+		familiesNameTableColumn.setText(language.getString("TEXT0014"));
+		familiesMembersTableColumn.setText(language.getString("TEXT0011"));
+		serGroupsFamiliesLabel.setText(language.getString("TEXT0041"));
+		serGroupsFamiliesIDTableColumn.setText(language.getString("TEXT0005"));
+		serGroupsFamiliesIDTableColumn.setMinWidth(50);
+		serGroupsFamiliesIDTableColumn.setMaxWidth(50);
+		serGroupsFamiliesIDTableColumn.setResizable(false);
+		serGroupsFamiliesNameTableColumn.setText(language.getString("TEXT0014"));
+		serGroupsFamiliesMembersTableColumn.setText(language.getString("TEXT0011"));
+
+		serGroupsAddFamily.setText("");
+		serGroupsAddFamily.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_FRONT));
+		serGroupsRemoveFamily.setText("");
+		serGroupsRemoveFamily.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_BACK));
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveButton.setText(language.getString("TEXT0022"));
 	}
 
 	private void initValue() {
@@ -367,41 +374,6 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 			}
 
 		return status;
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		if (this.selectedSerGroups != null)
-			titleLabel.setText(language.getString("TEXT0023"));
-		else
-			titleLabel.setText(language.getString("TEXT0039"));
-
-		serGroupsNameLabel.setText(language.getString("TEXT0036"));
-		serGroupsOverseerLabel.setText(language.getString("TEXT0037"));
-		serGroupsAssistantLabel.setText(language.getString("TEXT0038"));
-		familiesLabel.setText(language.getString("TEXT0040"));
-		familiesIDTableColumn.setText(language.getString("TEXT0005"));
-		familiesIDTableColumn.setMinWidth(50);
-		familiesIDTableColumn.setMaxWidth(50);
-		familiesIDTableColumn.setResizable(false);
-		familiesNameTableColumn.setText(language.getString("TEXT0014"));
-		familiesMembersTableColumn.setText(language.getString("TEXT0011"));
-		serGroupsFamiliesLabel.setText(language.getString("TEXT0041"));
-		serGroupsFamiliesIDTableColumn.setText(language.getString("TEXT0005"));
-		serGroupsFamiliesIDTableColumn.setMinWidth(50);
-		serGroupsFamiliesIDTableColumn.setMaxWidth(50);
-		serGroupsFamiliesIDTableColumn.setResizable(false);
-		serGroupsFamiliesNameTableColumn.setText(language.getString("TEXT0014"));
-		serGroupsFamiliesMembersTableColumn.setText(language.getString("TEXT0011"));
-
-		serGroupsAddFamily.setText("");
-		serGroupsAddFamily.setGraphic(new ImageView(Meta.Resources.ARROW_FRONT));
-		serGroupsRemoveFamily.setText("");
-		serGroupsRemoveFamily.setGraphic(new ImageView(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
 	}
 
 	public Settings getSettings() {

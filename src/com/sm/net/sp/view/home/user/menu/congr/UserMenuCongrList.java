@@ -484,7 +484,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
 				newMemberTab.setClosable(true);
 				newMemberTab.getStyleClass().add("tab_001");
-				newMemberTab.setGraphic(new ImageView(Meta.Resources.PLUS));
+				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
 
 				ctrl.setCongrTabPane(congrTabPane);
 				ctrl.setMembersTab(membersTab);
@@ -498,7 +498,6 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 
@@ -519,8 +518,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				Tab newFamilyTab = new Tab(language.getString("TEXT0015"), layout);
 				newFamilyTab.setClosable(true);
-				newFamilyTab.getStyleClass().add("tabStyle1");
-				newFamilyTab.setGraphic(new ImageView(Meta.Resources.PLUS));
+				newFamilyTab.getStyleClass().add("tab_001");
+				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
 
 				ctrl.setCongrTabPane(congrTabPane);
 				ctrl.setMembersTab(membersTab);
@@ -557,8 +556,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				Tab newMemberTab = new Tab(member.getNameStyle1(), layout);
 				newMemberTab.setClosable(true);
-				newMemberTab.getStyleClass().add("tabStyle1");
-				newMemberTab.setGraphic(new ImageView(Meta.Resources.MEMBER));
+				newMemberTab.getStyleClass().add("tab_001");
+				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
 
 				ctrl.setCongrTabPane(congrTabPane);
 				ctrl.setMembersTab(membersTab);
@@ -592,8 +591,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
 				newFamilyTab.setClosable(true);
-				newFamilyTab.getStyleClass().add("tabStyle1");
-				newFamilyTab.setGraphic(new ImageView(Meta.Resources.FAMILY));
+				newFamilyTab.getStyleClass().add("tab_001");
+				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
 
 				ctrl.setCongrTabPane(congrTabPane);
 				ctrl.setMembersTab(membersTab);

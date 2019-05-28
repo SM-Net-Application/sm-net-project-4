@@ -19,7 +19,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class MinistryPartEditor extends UpdateDataAdapter {
@@ -229,7 +228,7 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		assistantLabel.setText(language.getString("TEXT0038"));
 		assistant2Label.setText(language.getString("TEXT0038"));
 
-		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
 		saveButton.setText("");
 	}
 

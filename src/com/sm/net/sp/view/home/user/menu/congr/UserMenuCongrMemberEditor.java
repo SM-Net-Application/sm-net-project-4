@@ -9,14 +9,13 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class UserMenuCongrMemberEditor {
@@ -24,10 +23,11 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private TabPane memberTabPane;
 	@FXML
-	private Tab memberPersonalTab;
+	private TabPane memberInfoTabPane;
 
 	@FXML
-	private Label titleLabel;
+	private Tab memberPersonalTab;
+
 	@FXML
 	private Label surnameLabel;
 	@FXML
@@ -215,6 +215,7 @@ public class UserMenuCongrMemberEditor {
 	private void styleClasses() {
 
 		memberTabPane.getStyleClass().add("tab_pane_002");
+		memberInfoTabPane.getStyleClass().add("tab_pane_002");
 
 		memberPersonalTab.getStyleClass().add("tab_001");
 		memberAppointmentAndPrivilegeTab.getStyleClass().add("tab_001");
@@ -224,32 +225,32 @@ public class UserMenuCongrMemberEditor {
 		onthersTab.getStyleClass().add("tab_001");
 		memberContactsTab.getStyleClass().add("tab_001");
 
-		titleLabel.getStyleClass().add("label_001");
-		surnameLabel.getStyleClass().add("label_001");
-		nameLabel.getStyleClass().add("label_001");
-		nameShortLabel.getStyleClass().add("label_001");
-		singlenessLabel.getStyleClass().add("label_001");
-		genderLabel.getStyleClass().add("label_001");
-		generalLabel.getStyleClass().add("labelStyle2");
-		treasuresLabel.getStyleClass().add("labelStyle2");
-		ministryLabel.getStyleClass().add("labelStyle2");
-		christiansLabel.getStyleClass().add("labelStyle2");
-		conductorLabel.getStyleClass().add("labelStyle2");
-		soundSystemLabel.getStyleClass().add("labelStyle1");
-		privilegeLabel.getStyleClass().add("labelStyle2");
-		prayStartLabel.getStyleClass().add("labelStyle1");
-		prayEndLabel.getStyleClass().add("labelStyle1");
-		soundSystemMicrophoneHandlerLabel.getStyleClass().add("labelStyle1");
-		soundSystemMixerLabel.getStyleClass().add("labelStyle1");
-		soundSystemPCLabel.getStyleClass().add("labelStyle1");
-		meetingLabel.getStyleClass().add("labelStyle2");
-		meetingMidweekLabel.getStyleClass().add("labelStyle2");
-		meetingWeekendLabel.getStyleClass().add("labelStyle2");
-		readerLabel.getStyleClass().add("labelStyle2");
-		publicSpeakerLabel.getStyleClass().add("labelStyle2");
-		attendantLabel.getStyleClass().add("labelStyle1");
-		smartphoneLabel.getStyleClass().add("labelStyle3");
-		emailLabel.getStyleClass().add("labelStyle3");
+		surnameLabel.getStyleClass().add("label_set_001");
+		nameLabel.getStyleClass().add("label_set_001");
+		nameShortLabel.getStyleClass().add("label_set_001");
+		singlenessLabel.getStyleClass().add("label_set_001");
+		genderLabel.getStyleClass().add("label_set_001");
+
+		generalLabel.getStyleClass().add("label_002");
+		treasuresLabel.getStyleClass().add("label_002");
+		ministryLabel.getStyleClass().add("label_002");
+		christiansLabel.getStyleClass().add("label_002");
+		conductorLabel.getStyleClass().add("label_002");
+		privilegeLabel.getStyleClass().add("label_002");
+		meetingLabel.getStyleClass().add("label_002");
+		meetingMidweekLabel.getStyleClass().add("label_002");
+		meetingWeekendLabel.getStyleClass().add("label_002");
+		readerLabel.getStyleClass().add("label_002");
+		publicSpeakerLabel.getStyleClass().add("label_002");
+		soundSystemLabel.getStyleClass().add("label_001");
+		prayStartLabel.getStyleClass().add("label_001");
+		prayEndLabel.getStyleClass().add("label_001");
+		soundSystemMicrophoneHandlerLabel.getStyleClass().add("label_001");
+		soundSystemMixerLabel.getStyleClass().add("label_001");
+		soundSystemPCLabel.getStyleClass().add("label_001");
+		attendantLabel.getStyleClass().add("label_001");
+		smartphoneLabel.getStyleClass().add("label_set_001");
+		emailLabel.getStyleClass().add("label_set_001");
 
 		surnameTextField.getStyleClass().add("text_field_001");
 		nameTextField.getStyleClass().add("text_field_001");
@@ -258,46 +259,46 @@ public class UserMenuCongrMemberEditor {
 		smartphoneTextField.getStyleClass().add("text_field_001");
 		emailTextField.getStyleClass().add("text_field_001");
 
-		genderMaleCheckBox.getStyleClass().add("checkBoxStyle1");
-		genderFemaleCheckBox.getStyleClass().add("checkBoxStyle1");
-		studentCheckBox.getStyleClass().add("checkBoxStyle1");
-		unbaptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
-		baptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
-		treasuresTalkCheckBox.getStyleClass().add("checkBoxStyle1");
-		diggingCheckBox.getStyleClass().add("checkBoxStyle1");
-		bibleReadingCheckBox.getStyleClass().add("checkBoxStyle1");
-		initialCallCheckBox.getStyleClass().add("checkBoxStyle1");
-		returnVisitCheckBox.getStyleClass().add("checkBoxStyle1");
-		bibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
-		talkCheckBox.getStyleClass().add("checkBoxStyle1");
-		christiansCheckBox.getStyleClass().add("checkBoxStyle1");
-		presidentMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
-		bibleStudyCongregationCheckBox.getStyleClass().add("checkBoxStyle1");
-		watchtowerStudyCheckBox.getStyleClass().add("checkBoxStyle1");
-		watchtowerSubstituteStudyCheckBox.getStyleClass().add("checkBoxStyle1");
-		microphoneHandlerMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
-		microphoneHandlerWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		soundSystemMixerMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
-		soundSystemMixerWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		soundSystemPCMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
-		soundSystemPCWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		prayStartMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
-		presidentWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		prayEndMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
-		prayEndWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		readerCongregationBibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
-		readerWatchtowerCheckBox.getStyleClass().add("checkBoxStyle1");
-		publicSpeakerInternCheckBox.getStyleClass().add("checkBoxStyle1");
-		publicSpeakerExternCheckBox.getStyleClass().add("checkBoxStyle1");
-		attendantMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
-		attendantWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		ministerialServantCheckBox.getStyleClass().add("checkBoxStyle1");
-		elderCheckBox.getStyleClass().add("checkBoxStyle1");
-		regularPioneerCheckBox.getStyleClass().add("checkBoxStyle1");
-		specialPioneerCheckBox.getStyleClass().add("checkBoxStyle1");
-		inactiveCheckBox.getStyleClass().add("checkBoxStyle1");
-		markedCheckBox.getStyleClass().add("checkBoxStyle1");
-		disfellowshippedCheckBox.getStyleClass().add("checkBoxStyle1");
+		genderMaleCheckBox.getStyleClass().add("check_box_001");
+		genderFemaleCheckBox.getStyleClass().add("check_box_001");
+		studentCheckBox.getStyleClass().add("check_box_001");
+		unbaptizedPublisherCheckBox.getStyleClass().add("check_box_001");
+		baptizedPublisherCheckBox.getStyleClass().add("check_box_001");
+		treasuresTalkCheckBox.getStyleClass().add("check_box_001");
+		diggingCheckBox.getStyleClass().add("check_box_001");
+		bibleReadingCheckBox.getStyleClass().add("check_box_001");
+		initialCallCheckBox.getStyleClass().add("check_box_001");
+		returnVisitCheckBox.getStyleClass().add("check_box_001");
+		bibleStudyCheckBox.getStyleClass().add("check_box_001");
+		talkCheckBox.getStyleClass().add("check_box_001");
+		christiansCheckBox.getStyleClass().add("check_box_001");
+		presidentMidweekCheckBox.getStyleClass().add("check_box_001");
+		bibleStudyCongregationCheckBox.getStyleClass().add("check_box_001");
+		watchtowerStudyCheckBox.getStyleClass().add("check_box_001");
+		watchtowerSubstituteStudyCheckBox.getStyleClass().add("check_box_001");
+		microphoneHandlerMidweekCheckBox.getStyleClass().add("check_box_001");
+		microphoneHandlerWeekendCheckBox.getStyleClass().add("check_box_001");
+		soundSystemMixerMidweekCheckBox.getStyleClass().add("check_box_001");
+		soundSystemMixerWeekendCheckBox.getStyleClass().add("check_box_001");
+		soundSystemPCMidweekCheckBox.getStyleClass().add("check_box_001");
+		soundSystemPCWeekendCheckBox.getStyleClass().add("check_box_001");
+		prayStartMidweekCheckBox.getStyleClass().add("check_box_001");
+		presidentWeekendCheckBox.getStyleClass().add("check_box_001");
+		prayEndMidweekCheckBox.getStyleClass().add("check_box_001");
+		prayEndWeekendCheckBox.getStyleClass().add("check_box_001");
+		readerCongregationBibleStudyCheckBox.getStyleClass().add("check_box_001");
+		readerWatchtowerCheckBox.getStyleClass().add("check_box_001");
+		publicSpeakerInternCheckBox.getStyleClass().add("check_box_001");
+		publicSpeakerExternCheckBox.getStyleClass().add("check_box_001");
+		attendantMidweekCheckBox.getStyleClass().add("check_box_001");
+		attendantWeekendCheckBox.getStyleClass().add("check_box_001");
+		ministerialServantCheckBox.getStyleClass().add("check_box_001");
+		elderCheckBox.getStyleClass().add("check_box_001");
+		regularPioneerCheckBox.getStyleClass().add("check_box_001");
+		specialPioneerCheckBox.getStyleClass().add("check_box_001");
+		inactiveCheckBox.getStyleClass().add("check_box_001");
+		markedCheckBox.getStyleClass().add("check_box_001");
+		disfellowshippedCheckBox.getStyleClass().add("check_box_001");
 
 		saveButton.getStyleClass().add("button_image_001");
 	}
@@ -560,12 +561,7 @@ public class UserMenuCongrMemberEditor {
 		this.language = settings.getLanguage();
 
 		memberPersonalTab.setText(language.getString("TEXT0016"));
-		memberPersonalTab.setGraphic(new ImageView(Meta.Resources.MEMBER_PERSONAL_INFO));
-
-		if (selectedMember != null)
-			titleLabel.setText(language.getString("TEXT0023"));
-		else
-			titleLabel.setText(language.getString("TEXT0017"));
+		memberPersonalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
 
 		surnameLabel.setText(language.getString("TEXT0013"));
 		nameLabel.setText(language.getString("TEXT0014"));
@@ -575,11 +571,11 @@ public class UserMenuCongrMemberEditor {
 		genderMaleCheckBox.setText(language.getString("TEXT0020"));
 		genderFemaleCheckBox.setText(language.getString("TEXT0021"));
 
-		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
 		saveButton.setText(language.getString("TEXT0022"));
 
 		memberAppointmentAndPrivilegeTab.setText(language.getString("TEXT0042"));
-		memberAppointmentAndPrivilegeTab.setGraphic(new ImageView(Meta.Resources.MEMBER_PRIVILEGES));
+		memberAppointmentAndPrivilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PRIVILEGES));
 
 		generalLabel.setText(language.getString("TEXT0043"));
 		studentCheckBox.setText(language.getString("TEXT0044"));
@@ -651,7 +647,7 @@ public class UserMenuCongrMemberEditor {
 		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
 
 		memberContactsTab.setText(language.getString("TEXT0106"));
-		memberContactsTab.setGraphic(new ImageView(Meta.Resources.MEMBER_CONTACTS));
+		memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_CONTACTS));
 
 		smartphoneLabel.setText(language.getString("TEXT0107"));
 		emailLabel.setText(language.getString("TEXT0108"));

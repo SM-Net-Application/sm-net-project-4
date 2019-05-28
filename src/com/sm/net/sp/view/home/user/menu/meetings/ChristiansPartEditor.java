@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ChristiansPartEditor extends UpdateDataAdapter {
@@ -128,7 +127,7 @@ public class ChristiansPartEditor extends UpdateDataAdapter {
 		materialLabel.setText(language.getString("TEXT0095"));
 		teacherLabel.setText(language.getString("TEXT0098"));
 
-		saveButton.setGraphic(new ImageView(Meta.Resources.SAVE));
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
 		saveButton.setText("");
 	}
 
