@@ -55,7 +55,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void objectInitialize() {
 
-		viewSupportPlannerBorderPane.getStyleClass().add("main_view_001");
+		viewSupportPlannerBorderPane.getStyleClass().add("main_color_001");
 
 		this.left = 0;
 		this.center = 0;

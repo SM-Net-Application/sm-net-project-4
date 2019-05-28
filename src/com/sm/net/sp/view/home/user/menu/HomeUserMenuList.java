@@ -29,7 +29,6 @@ public class HomeUserMenuList {
 	private Label menuLabel;
 	@FXML
 	private ListView<EnumHomeUserMenuList> menuListView;
-
 	@FXML
 	private Button menuButton;
 
@@ -53,10 +52,6 @@ public class HomeUserMenuList {
 
 	private void styleClasses() {
 
-		userImageView.setFitWidth(50);
-		userImageView.setFitHeight(50);
-		userImageView.setImage(Meta.Resources.MENU_SETTINGS_USER);
-
 		menuLabel.getStyleClass().add("label_001");
 		menuListView.getStyleClass().add("list_view_001");
 		menuButton.getStyleClass().add("button_image_001");
@@ -66,10 +61,14 @@ public class HomeUserMenuList {
 
 		this.language = settings.getLanguage();
 
+		userImageView.setFitWidth(50);
+		userImageView.setFitHeight(50);
+		userImageView.setImage(Meta.Resources.MENU_SETTINGS_USER);
+
 		menuLabel.setText(setMenuLabel());
 
 		menuButton.setText("");
-		menuButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_LOGOUT));
+		menuButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_LOGOUT));
 
 		buildMenuList();
 	}
@@ -191,7 +190,7 @@ public class HomeUserMenuList {
 
 			if (item != null) {
 				setText(language.getString(item.getName()));
-				setGraphic(new ImageView(item.getImage()));
+				setGraphic(Meta.Resources.imageForMenu(item.getImage()));
 				setGraphicTextGap(25);
 			}
 		}

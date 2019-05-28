@@ -10,15 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 
 public class SettingsList {
 
 	@FXML
+	private ImageView settingsImageView;
+	@FXML
 	private Label settingsLabel;
-
 	@FXML
 	private ListView<EnumSettingsList> settingsListView;
-
 	@FXML
 	private Button settingsButton;
 
@@ -42,6 +43,22 @@ public class SettingsList {
 		settingsLabel.getStyleClass().add("label_001");
 		settingsListView.getStyleClass().add("list_view_001");
 		settingsButton.getStyleClass().add("button_image_001");
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		settingsImageView.setFitWidth(50);
+		settingsImageView.setFitHeight(50);
+		settingsImageView.setImage(Meta.Resources.MENU_APP_SETTINGS);
+
+		settingsLabel.setText(language.getString("VIEW004MEN002"));
+
+		settingsButton.setText("");
+		settingsButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MENU_BACK));
+
+		settingsListView.getItems().addAll((EnumSettingsList.values()));
 	}
 
 	private void listeners() {
@@ -82,18 +99,6 @@ public class SettingsList {
 
 	private void cellFactorySettingsListView() {
 		settingsListView.setCellFactory(param -> new SettingsMenuItem(language));
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		settingsLabel.setText(language.getString("VIEW004MEN002"));
-
-		settingsButton.setText("");
-		settingsButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MENU_BACK));
-
-		settingsListView.getItems().addAll((EnumSettingsList.values()));
 	}
 
 	public Settings getSettings() {

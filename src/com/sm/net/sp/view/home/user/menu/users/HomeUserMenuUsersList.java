@@ -30,6 +30,8 @@ import javafx.stage.Stage;
 public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 	@FXML
+	private ImageView usersImageView;
+	@FXML
 	private Label userLabel;
 	@FXML
 	private TableView<User> userTableView;
@@ -80,12 +82,18 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	}
 
 	private void styleClasses() {
-		userLabel.getStyleClass().add("labelStyle1");
+
+		usersImageView.setFitWidth(50);
+		usersImageView.setFitHeight(50);
+		usersImageView.setImage(Meta.Resources.USER_MENU_USERS);
+
+		userLabel.getStyleClass().add("label_header_001");
+
 		userTableView.getStyleClass().add("tableViewStyle1");
 
-		userAddButton.getStyleClass().add("buttonStyle3");
-		userDeleteButton.getStyleClass().add("buttonStyle3");
-		userPrintButton.getStyleClass().add("buttonStyle3");
+		userAddButton.getStyleClass().add("button_image_001");
+		userDeleteButton.getStyleClass().add("button_image_001");
+		userPrintButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -94,6 +102,41 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		viewUpdate();
 
 		updateUsers();
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		userLabel.setText(language.getString("TEXT0001"));
+
+		userTableColumnID.setText(language.getString("TEXT0005"));
+		userTableColumnName.setText(language.getString("VIEW007LAB002"));
+		userTableColumnUsers.setText(language.getString("USERMENU001"));
+		userTableColumnCongregations.setText(language.getString("USERMENU002"));
+		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
+		userTableColumnMeetings.setText(language.getString("USERMENU004"));
+
+		userTableView.setEditable(true);
+		userTableColumnID.setMinWidth(50);
+		userTableColumnID.setMaxWidth(50);
+		userTableColumnID.setResizable(false);
+		userTableColumnName.setMinWidth(350);
+		userTableColumnName.setMaxWidth(350);
+		userTableColumnName.setResizable(false);
+		userTableColumnUsers.setEditable(true);
+		userTableColumnCongregations.setEditable(true);
+		userTableColumnServiceGroups.setEditable(true);
+		userTableColumnMeetings.setEditable(true);
+
+		userAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_USERS_ADD));
+		userAddButton.setText(null);
+
+		userDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_USERS_DEL));
+		userDeleteButton.setText(null);
+
+		userPrintButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.PRINT));
+		userPrintButton.setText(null);
 	}
 
 	@Override
@@ -161,10 +204,14 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				stage.getIcons().add(Meta.Resources.ICON);
 
 				stage.setResizable(false);
-				stage.setMinWidth(400);
-				stage.setMaxWidth(400);
-				stage.setMinHeight(300);
-				stage.setMaxHeight(300);
+				stage.setMinWidth(500);
+				stage.setMaxWidth(Double.MAX_VALUE);
+				stage.setWidth(500);
+				stage.setMinHeight(400);
+				stage.setMaxHeight(Double.MAX_VALUE);
+				stage.setHeight(400);
+				stage.setResizable(false);
+				stage.setMaximized(false);
 
 				stage.initModality(Modality.WINDOW_MODAL);
 				stage.initOwner(stageSupportPlannerView);
@@ -177,38 +224,6 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 			}
 
 		});
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		userLabel.setText(language.getString("TEXT0001"));
-		userTableColumnID.setText(language.getString("TEXT0005"));
-		userTableColumnName.setText(language.getString("VIEW007LAB002"));
-		userTableColumnUsers.setText(language.getString("USERMENU001"));
-		userTableColumnCongregations.setText(language.getString("USERMENU002"));
-		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
-		userTableColumnMeetings.setText(language.getString("USERMENU004"));
-
-		userTableView.setEditable(true);
-		userTableColumnID.setMinWidth(50);
-		userTableColumnID.setMaxWidth(50);
-		userTableColumnID.setResizable(false);
-		userTableColumnName.setMinWidth(350);
-		userTableColumnName.setMaxWidth(350);
-		userTableColumnName.setResizable(false);
-		userTableColumnUsers.setEditable(true);
-		userTableColumnCongregations.setEditable(true);
-		userTableColumnServiceGroups.setEditable(true);
-		userTableColumnMeetings.setEditable(true);
-
-		userAddButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_USERS_ADD));
-		userAddButton.setText(null);
-		userDeleteButton.setGraphic(new ImageView(Meta.Resources.USER_MENU_USERS_DEL));
-		userDeleteButton.setText(null);
-		userPrintButton.setGraphic(Meta.Resources.createButtonIcon(Meta.Resources.PRINT));
-		userPrintButton.setText(null);
 	}
 
 	@Override

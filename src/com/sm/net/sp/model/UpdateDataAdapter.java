@@ -38,21 +38,17 @@ public class UpdateDataAdapter implements UpdateData {
 
 	@Override
 	public void updateWeeks(ObservableList<Week> list) {
-
 	}
 
 	@Override
 	public void updateWeeks() {
-
 	}
 
 	@Override
 	public void checkInfo(boolean exists) {
-
 	}
 
 	@Override
 	public void updateInfo(Info info) {
-
 	}
 }

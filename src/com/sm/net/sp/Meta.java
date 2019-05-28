@@ -35,7 +35,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.0 (Beta)";
+		public static final String VERSION = "1.0 (beta)";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -149,13 +149,13 @@ public class Meta {
 		public static final Image USER_MENU_USERS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_users.png"));
 		public static final Image USER_MENU_CONGR = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_congr_20x20.png"));
+				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_congr.png"));
 		public static final Image USER_MENU_USERS_ADD = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/addUser_50x50.png"));
 		public static final Image USER_MENU_USERS_DEL = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/deleteUser_50x50.png"));
 		public static final Image SUPERUSER = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/superuser_50x50.png"));
+				SupportPlannerMain.class.getResourceAsStream("resources/superuser.png"));
 		public static final Image MEMBER = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/person_35x35.png"));
 		public static final Image MEMBER_ADD = new Image(
@@ -185,13 +185,13 @@ public class Meta {
 		public static final Image ARROW_FRONT = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/arrow_front2_50x50.png"));
 		public static final Image USER_MENU_SERVICEGROUPS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/bag_20x20.png"));
+				SupportPlannerMain.class.getResourceAsStream("resources/bag.png"));
 		public static final Image SERVICEGROUPS_ADD = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_add_50x50.png"));
 		public static final Image SERVICEGROUPS_DEL = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_del_50x50.png"));
 		public static final Image USER_MENU_MEETINGS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/meetings_20x20.png"));
+				SupportPlannerMain.class.getResourceAsStream("resources/meetings.png"));
 		public static final Image INFO = new Image(SupportPlannerMain.class.getResourceAsStream("resources/info.png"));
 		public static final Image CALENDAR = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/calendar.png"));
@@ -271,6 +271,17 @@ public class Meta {
 			sp.getChildren().add(imageView);
 
 			return sp;
+		}
+
+		public static ImageView imageForTab(Image image) {
+
+			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(40);
+			imageView.setFitHeight(40);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+
+			return imageView;
 		}
 	}
 }

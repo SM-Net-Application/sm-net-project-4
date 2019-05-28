@@ -247,13 +247,13 @@ public class Actions {
 	 * Insert Root user
 	 * 
 	 * @param url
-	 * @param username
-	 * @param password
+	 * @param usernameEnc
+	 * @param passwordEnc
 	 * @param settings
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void insertRootUser(String username, String password, Settings settings, Stage ownerStage) {
+	public static void insertRootUser(String usernameEnc, String passwordEnc, Settings settings, Stage ownerStage) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -290,7 +290,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.INSERT_ROOT_USER(username, password));
+						JSONRequest.INSERT_ROOT_USER(usernameEnc, passwordEnc));
 			}
 		};
 

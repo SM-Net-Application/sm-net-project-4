@@ -214,42 +214,26 @@ public class UserMenuCongrMemberEditor {
 
 	private void styleClasses() {
 
-		memberTabPane.getStyleClass().add("tabPaneStyle2");
-		memberPersonalTab.getStyleClass().add("tabStyle1");
-		titleLabel.getStyleClass().add("labelStyle2");
-		surnameLabel.getStyleClass().add("labelStyle1");
-		surnameTextField.getStyleClass().add("textFieldStyle1");
-		nameLabel.getStyleClass().add("labelStyle1");
-		nameTextField.getStyleClass().add("textFieldStyle1");
-		nameShortLabel.getStyleClass().add("labelStyle1");
-		nameShortTextField.getStyleClass().add("textFieldStyle1");
-		singlenessLabel.getStyleClass().add("labelStyle1");
-		singlenessTextField.getStyleClass().add("textFieldStyle1");
-		genderLabel.getStyleClass().add("labelStyle1");
-		genderMaleCheckBox.getStyleClass().add("checkBoxStyle1");
-		genderFemaleCheckBox.getStyleClass().add("checkBoxStyle1");
-		saveButton.getStyleClass().add("buttonStyle1");
+		memberTabPane.getStyleClass().add("tab_pane_002");
 
-		memberAppointmentAndPrivilegeTab.getStyleClass().add("tabStyle1");
+		memberPersonalTab.getStyleClass().add("tab_001");
+		memberAppointmentAndPrivilegeTab.getStyleClass().add("tab_001");
+		assignmentsTab.getStyleClass().add("tab_001");
+		privilegeTab.getStyleClass().add("tab_001");
+		appointmentTab.getStyleClass().add("tab_001");
+		onthersTab.getStyleClass().add("tab_001");
+		memberContactsTab.getStyleClass().add("tab_001");
+
+		titleLabel.getStyleClass().add("label_001");
+		surnameLabel.getStyleClass().add("label_001");
+		nameLabel.getStyleClass().add("label_001");
+		nameShortLabel.getStyleClass().add("label_001");
+		singlenessLabel.getStyleClass().add("label_001");
+		genderLabel.getStyleClass().add("label_001");
 		generalLabel.getStyleClass().add("labelStyle2");
-		studentCheckBox.getStyleClass().add("checkBoxStyle1");
-		unbaptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
-		baptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
-
-		assignmentsTab.getStyleClass().add("tabStyle1");
 		treasuresLabel.getStyleClass().add("labelStyle2");
 		ministryLabel.getStyleClass().add("labelStyle2");
 		christiansLabel.getStyleClass().add("labelStyle2");
-		treasuresTalkCheckBox.getStyleClass().add("checkBoxStyle1");
-		diggingCheckBox.getStyleClass().add("checkBoxStyle1");
-		bibleReadingCheckBox.getStyleClass().add("checkBoxStyle1");
-		initialCallCheckBox.getStyleClass().add("checkBoxStyle1");
-		returnVisitCheckBox.getStyleClass().add("checkBoxStyle1");
-		bibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
-		talkCheckBox.getStyleClass().add("checkBoxStyle1");
-		christiansCheckBox.getStyleClass().add("checkBoxStyle1");
-
-		privilegeTab.getStyleClass().add("tabStyle1");
 		conductorLabel.getStyleClass().add("labelStyle2");
 		soundSystemLabel.getStyleClass().add("labelStyle1");
 		privilegeLabel.getStyleClass().add("labelStyle2");
@@ -261,6 +245,32 @@ public class UserMenuCongrMemberEditor {
 		meetingLabel.getStyleClass().add("labelStyle2");
 		meetingMidweekLabel.getStyleClass().add("labelStyle2");
 		meetingWeekendLabel.getStyleClass().add("labelStyle2");
+		readerLabel.getStyleClass().add("labelStyle2");
+		publicSpeakerLabel.getStyleClass().add("labelStyle2");
+		attendantLabel.getStyleClass().add("labelStyle1");
+		smartphoneLabel.getStyleClass().add("labelStyle3");
+		emailLabel.getStyleClass().add("labelStyle3");
+
+		surnameTextField.getStyleClass().add("text_field_001");
+		nameTextField.getStyleClass().add("text_field_001");
+		nameShortTextField.getStyleClass().add("text_field_001");
+		singlenessTextField.getStyleClass().add("text_field_001");
+		smartphoneTextField.getStyleClass().add("text_field_001");
+		emailTextField.getStyleClass().add("text_field_001");
+
+		genderMaleCheckBox.getStyleClass().add("checkBoxStyle1");
+		genderFemaleCheckBox.getStyleClass().add("checkBoxStyle1");
+		studentCheckBox.getStyleClass().add("checkBoxStyle1");
+		unbaptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
+		baptizedPublisherCheckBox.getStyleClass().add("checkBoxStyle1");
+		treasuresTalkCheckBox.getStyleClass().add("checkBoxStyle1");
+		diggingCheckBox.getStyleClass().add("checkBoxStyle1");
+		bibleReadingCheckBox.getStyleClass().add("checkBoxStyle1");
+		initialCallCheckBox.getStyleClass().add("checkBoxStyle1");
+		returnVisitCheckBox.getStyleClass().add("checkBoxStyle1");
+		bibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
+		talkCheckBox.getStyleClass().add("checkBoxStyle1");
+		christiansCheckBox.getStyleClass().add("checkBoxStyle1");
 		presidentMidweekCheckBox.getStyleClass().add("checkBoxStyle1");
 		bibleStudyCongregationCheckBox.getStyleClass().add("checkBoxStyle1");
 		watchtowerStudyCheckBox.getStyleClass().add("checkBoxStyle1");
@@ -275,35 +285,21 @@ public class UserMenuCongrMemberEditor {
 		presidentWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
 		prayEndMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
 		prayEndWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-		readerLabel.getStyleClass().add("labelStyle2");
 		readerCongregationBibleStudyCheckBox.getStyleClass().add("checkBoxStyle1");
 		readerWatchtowerCheckBox.getStyleClass().add("checkBoxStyle1");
-		publicSpeakerLabel.getStyleClass().add("labelStyle2");
 		publicSpeakerInternCheckBox.getStyleClass().add("checkBoxStyle1");
 		publicSpeakerExternCheckBox.getStyleClass().add("checkBoxStyle1");
-		attendantLabel.getStyleClass().add("labelStyle1");
 		attendantMidweekCheckBox.getStyleClass().add("checkBoxStyle2");
 		attendantWeekendCheckBox.getStyleClass().add("checkBoxStyle2");
-
-		appointmentTab.getStyleClass().add("tabStyle1");
-
 		ministerialServantCheckBox.getStyleClass().add("checkBoxStyle1");
 		elderCheckBox.getStyleClass().add("checkBoxStyle1");
 		regularPioneerCheckBox.getStyleClass().add("checkBoxStyle1");
 		specialPioneerCheckBox.getStyleClass().add("checkBoxStyle1");
-
-		onthersTab.getStyleClass().add("tabStyle1");
-
 		inactiveCheckBox.getStyleClass().add("checkBoxStyle1");
 		markedCheckBox.getStyleClass().add("checkBoxStyle1");
 		disfellowshippedCheckBox.getStyleClass().add("checkBoxStyle1");
 
-		memberContactsTab.getStyleClass().add("tabStyle1");
-
-		smartphoneLabel.getStyleClass().add("labelStyle3");
-		smartphoneTextField.getStyleClass().add("textFieldStyle1");
-		emailLabel.getStyleClass().add("labelStyle3");
-		emailTextField.getStyleClass().add("textFieldStyle1");
+		saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {

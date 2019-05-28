@@ -82,7 +82,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
 
 		userSUButton.setText(language.getString("TEXT0008"));
-		userSUButton.setGraphic(new ImageView(Meta.Resources.SUPERUSER));
+		userSUButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SUPERUSER));
 	}
 
 	private void listeners() {
@@ -97,17 +97,12 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 
 	private void listenerDecryptionKeyPasswordField() {
 
-		decryptionKeyPasswordField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				try {
-					settings.setDatabaseKeyEncrypted(decryptKey());
-					settings.save();
-				} catch (IOException e) {
-				}
+		decryptionKeyPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			try {
+				settings.setDatabaseKeyEncrypted(decryptKey());
+				settings.save();
+			} catch (IOException e) {
 			}
-
 		});
 	}
 
@@ -138,11 +133,14 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 			stage.setTitle(Meta.Application.getFullTitle());
 			stage.getIcons().add(Meta.Resources.ICON);
 
+			stage.setMinWidth(500);
+			stage.setMaxWidth(Double.MAX_VALUE);
+			stage.setWidth(500);
+			stage.setMinHeight(500);
+			stage.setMaxHeight(Double.MAX_VALUE);
+			stage.setHeight(500);
+			stage.setMaximized(false);
 			stage.setResizable(false);
-			stage.setMinWidth(400);
-			stage.setMaxWidth(400);
-			stage.setMinHeight(400);
-			stage.setMaxHeight(400);
 
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.initOwner(ownerStage);

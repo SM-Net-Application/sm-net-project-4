@@ -36,6 +36,11 @@ import javafx.stage.Stage;
 public class UserMenuCongrList extends UpdateDataAdapter {
 
 	@FXML
+	private ImageView congrImageView;
+	@FXML
+	private Label congrHeaderLabel;
+
+	@FXML
 	private TabPane congrTabPane;
 	@FXML
 	private Tab generalTab;
@@ -48,26 +53,26 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private Label congrLabel;
 	@FXML
 	private TextField congrTextField;
-	@FXML
-	private Label overseer1Label;
-	@FXML
-	private Label overseer1NameLabel;
-	@FXML
-	private TextField overseer1NameTextField;
-	@FXML
-	private Label overseer1WifeLabel;
-	@FXML
-	private TextField overseer1WifeTextField;
-	@FXML
-	private Label overseer2Label;
-	@FXML
-	private Label overseer2NameLabel;
-	@FXML
-	private TextField overseer2NameTextField;
-	@FXML
-	private Label overseer2WifeLabel;
-	@FXML
-	private TextField overseer2WifeTextField;
+	// @FXML
+	// private Label overseer1Label;
+	// @FXML
+	// private Label overseer1NameLabel;
+	// @FXML
+	// private TextField overseer1NameTextField;
+	// @FXML
+	// private Label overseer1WifeLabel;
+	// @FXML
+	// private TextField overseer1WifeTextField;
+	// @FXML
+	// private Label overseer2Label;
+	// @FXML
+	// private Label overseer2NameLabel;
+	// @FXML
+	// private TextField overseer2NameTextField;
+	// @FXML
+	// private Label overseer2WifeLabel;
+	// @FXML
+	// private TextField overseer2WifeTextField;
 
 	@FXML
 	private TableView<Member> membersTableView;
@@ -114,10 +119,10 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private ObservableList<Family> familiesList;
 
 	private String bufferCongr;
-	private String bufferOverseer1;
-	private String bufferOverseer1Wife;
-	private String bufferOverseer2;
-	private String bufferOverseer2Wife;
+	// private String bufferOverseer1;
+	// private String bufferOverseer1Wife;
+	// private String bufferOverseer2;
+	// private String bufferOverseer2Wife;
 
 	@FXML
 	private void initialize() {
@@ -142,35 +147,38 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		congrTabPane.getStyleClass().add("tabPaneStyle1");
+		congrHeaderLabel.getStyleClass().add("label_header_001");
 
-		generalTab.getStyleClass().add("tabStyle1");
-		membersTab.getStyleClass().add("tabStyle1");
-		familyTab.getStyleClass().add("tabStyle1");
+		congrTabPane.getStyleClass().add("tab_pane_001");
+
+		generalTab.getStyleClass().add("tab_001");
+		membersTab.getStyleClass().add("tab_001");
+		familyTab.getStyleClass().add("tab_001");
+
 		membersTableView.getStyleClass().add("tableViewStyle1");
 		familiesTableView.getStyleClass().add("tableViewStyle1");
 
-		memberAddButton.getStyleClass().add("buttonStyle2");
-		memberDeleteButton.getStyleClass().add("buttonStyle2");
-		membersUpdateButton.getStyleClass().add("buttonStyle2");
+		memberAddButton.getStyleClass().add("button_image_001");
+		memberDeleteButton.getStyleClass().add("button_image_001");
+		membersUpdateButton.getStyleClass().add("button_image_001");
 
-		familyAddButton.getStyleClass().add("buttonStyle2");
-		familyDeleteButton.getStyleClass().add("buttonStyle2");
-		familiesUpdateButton.getStyleClass().add("buttonStyle2");
+		familyAddButton.getStyleClass().add("button_image_001");
+		familyDeleteButton.getStyleClass().add("button_image_001");
+		familiesUpdateButton.getStyleClass().add("button_image_001");
 
-		congrLabel.getStyleClass().add("labelStyle2");
-		congrTextField.getStyleClass().add("textFieldStyle1");
+		congrLabel.getStyleClass().add("label_set_001");
+		congrTextField.getStyleClass().add("text_field_001");
 
-		overseer1Label.getStyleClass().add("labelStyle2");
-		overseer1NameLabel.getStyleClass().add("labelStyle3");
-		overseer1NameTextField.getStyleClass().add("textFieldStyle1");
-		overseer1WifeLabel.getStyleClass().add("labelStyle3");
-		overseer1WifeTextField.getStyleClass().add("textFieldStyle1");
-		overseer2Label.getStyleClass().add("labelStyle2");
-		overseer2NameLabel.getStyleClass().add("labelStyle3");
-		overseer2NameTextField.getStyleClass().add("textFieldStyle1");
-		overseer2WifeLabel.getStyleClass().add("labelStyle3");
-		overseer2WifeTextField.getStyleClass().add("textFieldStyle1");
+		// overseer1Label.getStyleClass().add("labelStyle2");
+		// overseer1NameLabel.getStyleClass().add("labelStyle3");
+		// overseer1NameTextField.getStyleClass().add("textFieldStyle1");
+		// overseer1WifeLabel.getStyleClass().add("labelStyle3");
+		// overseer1WifeTextField.getStyleClass().add("textFieldStyle1");
+		// overseer2Label.getStyleClass().add("labelStyle2");
+		// overseer2NameLabel.getStyleClass().add("labelStyle3");
+		// overseer2NameTextField.getStyleClass().add("textFieldStyle1");
+		// overseer2WifeLabel.getStyleClass().add("labelStyle3");
+		// overseer2WifeTextField.getStyleClass().add("textFieldStyle1");
 	}
 
 	public void objectInitialize() {
@@ -181,6 +189,74 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		updateFamilies();
 	}
 
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		congrHeaderLabel.setText(language.getString("USERMENU002"));
+
+		congrImageView.setFitWidth(50);
+		congrImageView.setFitHeight(50);
+		congrImageView.setImage(Meta.Resources.USER_MENU_CONGR);
+
+		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
+
+		generalTab.setText(language.getString("TEXT0043"));
+		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
+		generalTab.setClosable(false);
+
+		membersTab.setText(language.getString("TEXT0011"));
+		membersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
+		membersTab.setClosable(false);
+
+		familyTab.setText(language.getString("TEXT0012"));
+		familyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
+		familyTab.setClosable(false);
+
+		memberIDTableColumn.setText(language.getString("TEXT0005"));
+		memberIDTableColumn.setMinWidth(50);
+		memberIDTableColumn.setMaxWidth(50);
+		memberIDTableColumn.setResizable(false);
+		memberSurnameTableColumn.setText(language.getString("TEXT0013"));
+		memberNameTableColumn.setText(language.getString("TEXT0014"));
+
+		memberAddButton.setText("");
+		memberAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.MEMBER_ADD));
+
+		memberDeleteButton.setText("");
+		memberDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.MEMBER_DEL));
+
+		membersUpdateButton.setText("");
+		membersUpdateButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.UPDATE));
+
+		familyIDTableColumn.setText(language.getString("TEXT0005"));
+		familyIDTableColumn.setMinWidth(50);
+		familyIDTableColumn.setMaxWidth(50);
+		familyIDTableColumn.setResizable(false);
+		familyNameTableColumn.setText(language.getString("TEXT0025"));
+		familyCountTableColumn.setText(language.getString("TEXT0026"));
+		familyStreetTableColumn.setText(language.getString("TEXT0027"));
+		familyNummerTableColumn.setText(language.getString("TEXT0028"));
+		familyPostCodeTableColumn.setText(language.getString("TEXT0029"));
+		familyCityTableColumn.setText(language.getString("TEXT0030"));
+
+		familyAddButton.setText("");
+		familyAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.FAMILY_ADD));
+		familyDeleteButton.setText("");
+		familyDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.FAMILY_DEL));
+		familiesUpdateButton.setText("");
+		familiesUpdateButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.UPDATE));
+
+		congrLabel.setText(language.getString("sp.congr.name"));
+
+		// overseer1Label.setText(language.getString("TEXT0131"));
+		// overseer1NameLabel.setText(language.getString("TEXT0037"));
+		// overseer1WifeLabel.setText(language.getString("TEXT0133"));
+		// overseer2Label.setText(language.getString("TEXT0132"));
+		// overseer2NameLabel.setText(language.getString("TEXT0037"));
+		// overseer2WifeLabel.setText(language.getString("TEXT0133"));
+	}
+
 	private void initInfo() {
 		Actions.getUserMenuCongrListInfo(settings, ownerStage, this);
 	}
@@ -189,11 +265,16 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	public void updateInfo(Info info) {
 		super.updateInfo(info);
 
-		setTextField(congrTextField, info.getCongr());
-		setTextField(overseer1NameTextField, info.getOverseer1());
-		setTextField(overseer1WifeTextField, info.getOverseer1wife());
-		setTextField(overseer2NameTextField, info.getOverseer2());
-		setTextField(overseer2WifeTextField, info.getOverseer2wife());
+		String congr = info.getCongr();
+		setTextField(congrTextField, congr);
+
+		// setTextField(overseer1NameTextField, info.getOverseer1());
+		// setTextField(overseer1WifeTextField, info.getOverseer1wife());
+		// setTextField(overseer2NameTextField, info.getOverseer2());
+		// setTextField(overseer2WifeTextField, info.getOverseer2wife());
+
+		if (!congr.isEmpty())
+			congrHeaderLabel.setText(language.getString("USERMENU002") + ": " + congr);
 	}
 
 	private void setTextField(TextField tf, String text) {
@@ -204,12 +285,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	}
 
 	private void listeners() {
+
 		listenerCongrTextField();
 
-		listenerOverseer1NameTextField();
-		listenerOverseer1WifeTextField();
-		listenerOverseer2NameTextField();
-		listenerOverseer2WifeTextField();
+		// listenerOverseer1NameTextField();
+		// listenerOverseer1WifeTextField();
+		// listenerOverseer2NameTextField();
+		// listenerOverseer2WifeTextField();
 
 		listenerMemberAddButton();
 		listenerMemberDeleteButton();
@@ -227,25 +309,29 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				.addListener((observable, oldValue, newValue) -> congrTextFieldFocused(newValue.booleanValue()));
 	}
 
-	private void listenerOverseer1NameTextField() {
-		overseer1NameTextField.focusedProperty().addListener(
-				(observable, oldValue, newValue) -> overseer1NameTextFieldFocused(newValue.booleanValue()));
-	}
-
-	private void listenerOverseer1WifeTextField() {
-		overseer1WifeTextField.focusedProperty().addListener(
-				(observable, oldValue, newValue) -> overseer1WifeTextFieldFocused(newValue.booleanValue()));
-	}
-
-	private void listenerOverseer2NameTextField() {
-		overseer2NameTextField.focusedProperty().addListener(
-				(observable, oldValue, newValue) -> overseer2NameTextFieldFocused(newValue.booleanValue()));
-	}
-
-	private void listenerOverseer2WifeTextField() {
-		overseer2WifeTextField.focusedProperty().addListener(
-				(observable, oldValue, newValue) -> overseer2WifeTextFieldFocused(newValue.booleanValue()));
-	}
+	// private void listenerOverseer1NameTextField() {
+	// overseer1NameTextField.focusedProperty().addListener(
+	// (observable, oldValue, newValue) ->
+	// overseer1NameTextFieldFocused(newValue.booleanValue()));
+	// }
+	//
+	// private void listenerOverseer1WifeTextField() {
+	// overseer1WifeTextField.focusedProperty().addListener(
+	// (observable, oldValue, newValue) ->
+	// overseer1WifeTextFieldFocused(newValue.booleanValue()));
+	// }
+	//
+	// private void listenerOverseer2NameTextField() {
+	// overseer2NameTextField.focusedProperty().addListener(
+	// (observable, oldValue, newValue) ->
+	// overseer2NameTextFieldFocused(newValue.booleanValue()));
+	// }
+	//
+	// private void listenerOverseer2WifeTextField() {
+	// overseer2WifeTextField.focusedProperty().addListener(
+	// (observable, oldValue, newValue) ->
+	// overseer2WifeTextFieldFocused(newValue.booleanValue()));
+	// }
 
 	private void congrTextFieldFocused(boolean focused) {
 		if (focused)
@@ -258,49 +344,53 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		}
 	}
 
-	private void overseer1NameTextFieldFocused(boolean focused) {
-		if (focused)
-			bufferOverseer1 = overseer1NameTextField.getText();
-		else {
-			String newText = overseer1NameTextField.getText();
-			if (!newText.equals(bufferOverseer1))
-				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1,
-						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
-		}
-	}
-
-	private void overseer1WifeTextFieldFocused(boolean focused) {
-		if (focused)
-			bufferOverseer1Wife = overseer1WifeTextField.getText();
-		else {
-			String newText = overseer1WifeTextField.getText();
-			if (!newText.equals(bufferOverseer1Wife))
-				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1WIFE,
-						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
-		}
-	}
-
-	private void overseer2NameTextFieldFocused(boolean focused) {
-		if (focused)
-			bufferOverseer2 = overseer2NameTextField.getText();
-		else {
-			String newText = overseer2NameTextField.getText();
-			if (!newText.equals(bufferOverseer2))
-				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2,
-						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
-		}
-	}
-
-	private void overseer2WifeTextFieldFocused(boolean focused) {
-		if (focused)
-			bufferOverseer2Wife = overseer2WifeTextField.getText();
-		else {
-			String newText = overseer2WifeTextField.getText();
-			if (!newText.equals(bufferOverseer2Wife))
-				Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2WIFE,
-						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
-		}
-	}
+	// private void overseer1NameTextFieldFocused(boolean focused) {
+	// if (focused)
+	// bufferOverseer1 = overseer1NameTextField.getText();
+	// else {
+	// String newText = overseer1NameTextField.getText();
+	// if (!newText.equals(bufferOverseer1))
+	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1,
+	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
+	// ownerStage);
+	// }
+	// }
+	//
+	// private void overseer1WifeTextFieldFocused(boolean focused) {
+	// if (focused)
+	// bufferOverseer1Wife = overseer1WifeTextField.getText();
+	// else {
+	// String newText = overseer1WifeTextField.getText();
+	// if (!newText.equals(bufferOverseer1Wife))
+	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1WIFE,
+	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
+	// ownerStage);
+	// }
+	// }
+	//
+	// private void overseer2NameTextFieldFocused(boolean focused) {
+	// if (focused)
+	// bufferOverseer2 = overseer2NameTextField.getText();
+	// else {
+	// String newText = overseer2NameTextField.getText();
+	// if (!newText.equals(bufferOverseer2))
+	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2,
+	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
+	// ownerStage);
+	// }
+	// }
+	//
+	// private void overseer2WifeTextFieldFocused(boolean focused) {
+	// if (focused)
+	// bufferOverseer2Wife = overseer2WifeTextField.getText();
+	// else {
+	// String newText = overseer2WifeTextField.getText();
+	// if (!newText.equals(bufferOverseer2Wife))
+	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2WIFE,
+	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
+	// ownerStage);
+	// }
+	// }
 
 	private void listenerMembersTableView() {
 		membersTableView.setRowFactory(param -> {
@@ -393,7 +483,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
 				newMemberTab.setClosable(true);
-				newMemberTab.getStyleClass().add("tabStyle1");
+				newMemberTab.getStyleClass().add("tab_001");
 				newMemberTab.setGraphic(new ImageView(Meta.Resources.PLUS));
 
 				ctrl.setCongrTabPane(congrTabPane);
@@ -531,63 +621,6 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			}
 
 		return false;
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
-
-		generalTab.setText(language.getString("TEXT0043"));
-		generalTab.setGraphic(Meta.Resources.createTabIcon(Meta.Resources.INFO));
-		generalTab.setClosable(false);
-		membersTab.setText(language.getString("TEXT0011"));
-		membersTab.setGraphic(new ImageView(Meta.Resources.MEMBER));
-		membersTab.setClosable(false);
-		familyTab.setText(language.getString("TEXT0012"));
-		familyTab.setGraphic(new ImageView(Meta.Resources.FAMILY));
-		familyTab.setClosable(false);
-
-		memberIDTableColumn.setText(language.getString("TEXT0005"));
-		memberIDTableColumn.setMinWidth(50);
-		memberIDTableColumn.setMaxWidth(50);
-		memberIDTableColumn.setResizable(false);
-		memberSurnameTableColumn.setText(language.getString("TEXT0013"));
-		memberNameTableColumn.setText(language.getString("TEXT0014"));
-
-		memberAddButton.setText("");
-		memberAddButton.setGraphic(new ImageView(Meta.Resources.MEMBER_ADD));
-		memberDeleteButton.setText("");
-		memberDeleteButton.setGraphic(new ImageView(Meta.Resources.MEMBER_DEL));
-		membersUpdateButton.setText("");
-		membersUpdateButton.setGraphic(new ImageView(Meta.Resources.UPDATE));
-
-		familyIDTableColumn.setText(language.getString("TEXT0005"));
-		familyIDTableColumn.setMinWidth(50);
-		familyIDTableColumn.setMaxWidth(50);
-		familyIDTableColumn.setResizable(false);
-		familyNameTableColumn.setText(language.getString("TEXT0025"));
-		familyCountTableColumn.setText(language.getString("TEXT0026"));
-		familyStreetTableColumn.setText(language.getString("TEXT0027"));
-		familyNummerTableColumn.setText(language.getString("TEXT0028"));
-		familyPostCodeTableColumn.setText(language.getString("TEXT0029"));
-		familyCityTableColumn.setText(language.getString("TEXT0030"));
-
-		familyAddButton.setText("");
-		familyAddButton.setGraphic(new ImageView(Meta.Resources.FAMILY_ADD));
-		familyDeleteButton.setText("");
-		familyDeleteButton.setGraphic(new ImageView(Meta.Resources.FAMILY_DEL));
-		familiesUpdateButton.setText("");
-		familiesUpdateButton.setGraphic(new ImageView(Meta.Resources.UPDATE));
-
-		congrLabel.setText(language.getString("USERMENU002"));
-		overseer1Label.setText(language.getString("TEXT0131"));
-		overseer1NameLabel.setText(language.getString("TEXT0037"));
-		overseer1WifeLabel.setText(language.getString("TEXT0133"));
-		overseer2Label.setText(language.getString("TEXT0132"));
-		overseer2NameLabel.setText(language.getString("TEXT0037"));
-		overseer2WifeLabel.setText(language.getString("TEXT0133"));
 	}
 
 	@Override

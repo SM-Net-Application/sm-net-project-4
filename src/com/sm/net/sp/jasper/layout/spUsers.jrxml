@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2019-05-28T10:42:17 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spUsers" pageWidth="421" pageHeight="297" orientation="Landscape" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8411141d-ad34-47ae-8cd5-758b3ddd913f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -60,7 +61,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="SansSerif" size="10"/>
+						<font fontName="SansSerif" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtusername}]]></textFieldExpression>
 				</textField>
@@ -98,7 +99,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="SansSerif" size="10"/>
+						<font fontName="SansSerif" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtpassword}]]></textFieldExpression>
 				</textField>
@@ -143,7 +144,7 @@
 			</band>
 		</groupHeader>
 	</group>
-	<group name="Config-Details-URL">
+	<group name="Config-Details-URL-Header">
 		<groupHeader>
 			<band height="15">
 				<rectangle>
@@ -152,26 +153,30 @@
 					</reportElement>
 				</rectangle>
 				<textField>
-					<reportElement x="20" y="0" width="130" height="15" uuid="15e7bfdd-a1d6-4fc3-8e9b-e8cd015c513e">
+					<reportElement x="20" y="0" width="360" height="15" uuid="15e7bfdd-a1d6-4fc3-8e9b-e8cd015c513e">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="SansSerif" size="10"/>
+						<font fontName="SansSerif" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txturl}]]></textFieldExpression>
 				</textField>
-				<line>
-					<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="1" height="15" uuid="cd814562-659b-4e8a-88cc-08cd4e9099ae">
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Config-Details-URL-Value">
+		<groupHeader>
+			<band height="15">
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="381" height="15" uuid="f7e1c625-c2ec-49e9-b114-18aa6c240331">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
-				</line>
+				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement x="170" y="0" width="211" height="15" uuid="2039b669-ac12-4e64-a16b-899fbd963d45">
+					<reportElement x="20" y="0" width="360" height="15" uuid="94c7d655-41e5-43db-9656-131b5b53ff4c">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
 						<font fontName="SansSerif" size="10"/>
@@ -195,7 +200,7 @@
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
 					<textElement>
-						<font fontName="SansSerif" size="10"/>
+						<font fontName="SansSerif" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{txtkey}]]></textFieldExpression>
 				</textField>

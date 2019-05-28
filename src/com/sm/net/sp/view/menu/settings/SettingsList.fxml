@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -16,8 +17,17 @@
          <children>
             <VBox HBox.hgrow="ALWAYS">
                <children>
-                  <HBox>
+                  <HBox maxHeight="75.0" minHeight="75.0" prefHeight="75.0">
                      <children>
+                        <StackPane>
+                           <children>
+                              <ImageView fx:id="settingsImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
                         <StackPane>
                            <children>
                               <Label fx:id="settingsLabel" maxHeight="1.7976931348623157E308" text="Label">
@@ -38,11 +48,20 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <ListView fx:id="settingsListView" VBox.vgrow="ALWAYS">
+                  <Separator>
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
-                  </ListView>
+                  </Separator>
+                  <StackPane VBox.vgrow="ALWAYS">
+                     <children>
+                        <ListView fx:id="settingsListView">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </ListView>
+                     </children>
+                  </StackPane>
                </children>
             </VBox>
             <Separator orientation="VERTICAL" />

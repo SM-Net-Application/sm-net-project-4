@@ -15,22 +15,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MenuUsersAdd implements MenuUsersAddCallback {
 
 	@FXML
+	private AnchorPane anchorPane;
+	@FXML
+	private ImageView newUserImageView;
+	@FXML
 	private Label titleLabel;
-
 	@FXML
 	private Label usernameLabel;
-
 	@FXML
 	private Label passwordLabel;
-
 	@FXML
 	private TextField usernameTextField;
-
 	@FXML
 	private PasswordField passwordField;
 
@@ -50,19 +52,39 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 
 	private void styleClasses() {
 
-		titleLabel.getStyleClass().add("labelStyle2");
-		usernameLabel.getStyleClass().add("labelStyle1");
-		passwordLabel.getStyleClass().add("labelStyle1");
+		anchorPane.getStyleClass().add("main_color_001");
 
-		usernameTextField.getStyleClass().add("textFieldStyle1");
-		passwordField.getStyleClass().add("textFieldStyle1");
+		titleLabel.getStyleClass().add("label_setting_name");
 
-		createUserButton.getStyleClass().add("buttonStyle1");
+		usernameLabel.getStyleClass().add("label_set_001");
+		passwordLabel.getStyleClass().add("label_set_001");
+
+		usernameTextField.getStyleClass().add("text_field_001");
+		passwordField.getStyleClass().add("text_field_001");
+
+		createUserButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		newUserImageView.setFitWidth(100);
+		newUserImageView.setFitHeight(100);
+		newUserImageView.setImage(Meta.Resources.USER_MENU_USERS);
+
+		titleLabel.setText(language.getString("TEXT0003"));
+
+		usernameLabel.setText(language.getString("VIEW007LAB002"));
+		passwordLabel.setText(language.getString("VIEW002LAB002"));
+
+		createUserButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		createUserButton.setText(language.getString("VIEW002BUT001"));
 	}
 
 	private void listeners() {
@@ -128,16 +150,6 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 		if (!Authenticator.isValid(pwd, ValidationType.VERY_STRONG))
 			check = false;
 		return check;
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		titleLabel.setText(language.getString("TEXT0003"));
-		usernameLabel.setText(language.getString("VIEW007LAB002"));
-		passwordLabel.setText(language.getString("VIEW002LAB002"));
-		createUserButton.setText(language.getString("VIEW002BUT001"));
 	}
 
 	public Settings getSettings() {
