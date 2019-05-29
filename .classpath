@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/json-20180813.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/sm-net-api"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/bcprov-jdk15on-1.52.jar"/>
@@ -24,5 +23,19 @@
 	<classpathentry kind="lib" path="lib/javax.inject-1.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-path-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-project-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-file-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-javafx-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-util-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-jw-wol-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-directory-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-auth-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-easy-html-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.9.jar"/>
+	<classpathentry kind="lib" path="lib/commons-validator-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
