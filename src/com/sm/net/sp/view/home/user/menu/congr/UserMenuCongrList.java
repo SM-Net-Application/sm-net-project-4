@@ -155,8 +155,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		membersTab.getStyleClass().add("tab_001");
 		familyTab.getStyleClass().add("tab_001");
 
-		membersTableView.getStyleClass().add("tableViewStyle1");
-		familiesTableView.getStyleClass().add("tableViewStyle1");
+		membersTableView.getStyleClass().add("table_view_001");
+		familiesTableView.getStyleClass().add("table_view_001");
 
 		memberAddButton.getStyleClass().add("button_image_001");
 		memberDeleteButton.getStyleClass().add("button_image_001");

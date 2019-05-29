@@ -19,10 +19,13 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MinistryPartEditor extends UpdateDataAdapter {
 
+	@FXML
+	private AnchorPane anchorPane;
 	@FXML
 	private Label typeLabel;
 	@FXML
@@ -88,33 +91,35 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		typeLabel.getStyleClass().add("labelStyle3");
-		wolTextLabel.getStyleClass().add("labelStyle3");
-		minLabel.getStyleClass().add("labelStyle3");
-		themeLabel.getStyleClass().add("labelStyle3");
-		materialLabel.getStyleClass().add("labelStyle3");
+		anchorPane.getStyleClass().add("main_color_001");
 
-		typeComboBox.getStyleClass().add("comboBoxStyle1");
-		wolTextTextField.getStyleClass().add("textFieldStyle1");
-		minTextField.getStyleClass().add("textFieldStyle1");
-		themeTextField.getStyleClass().add("textFieldStyle1");
-		materialTextField.getStyleClass().add("textFieldStyle1");
+		typeLabel.getStyleClass().add("label_set_001");
+		wolTextLabel.getStyleClass().add("label_set_001");
+		minLabel.getStyleClass().add("label_set_001");
+		themeLabel.getStyleClass().add("label_set_001");
+		materialLabel.getStyleClass().add("label_set_001");
 
-		hallsTabPane.getStyleClass().add("tabPaneStyle1");
-		hall1Tab.getStyleClass().add("tabStyle1");
-		hall2Tab.getStyleClass().add("tabStyle1");
+		typeComboBox.getStyleClass().add("combo_box_001");
+		wolTextTextField.getStyleClass().add("text_field_001");
+		minTextField.getStyleClass().add("text_field_002");
+		themeTextField.getStyleClass().add("text_field_001");
+		materialTextField.getStyleClass().add("text_field_001");
 
-		studentLabel.getStyleClass().add("labelStyle1");
-		studentsListView.getStyleClass().add("listViewStyle1");
-		assistantLabel.getStyleClass().add("labelStyle1");
-		assistantsListView.getStyleClass().add("listViewStyle1");
+		hallsTabPane.getStyleClass().add("tab_pane_002");
+		hall1Tab.getStyleClass().add("tab_001");
+		hall2Tab.getStyleClass().add("tab_001");
 
-		student2Label.getStyleClass().add("labelStyle1");
-		students2ListView.getStyleClass().add("listViewStyle1");
-		assistant2Label.getStyleClass().add("labelStyle1");
-		assistants2ListView.getStyleClass().add("listViewStyle1");
+		studentLabel.getStyleClass().add("label_001");
+		studentsListView.getStyleClass().add("list_view_001");
+		assistantLabel.getStyleClass().add("label_001");
+		assistantsListView.getStyleClass().add("list_view_001");
 
-		saveButton.getStyleClass().add("buttonStyle2");
+		student2Label.getStyleClass().add("label_001");
+		students2ListView.getStyleClass().add("list_view_001");
+		assistant2Label.getStyleClass().add("label_001");
+		assistants2ListView.getStyleClass().add("list_view_001");
+
+		saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -132,6 +137,31 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		selectMembers(this.assistantsListView, this.ministryPart.getAssistant());
 		selectMembers(this.students2ListView, this.ministryPart.getStudent2());
 		selectMembers(this.assistants2ListView, this.ministryPart.getAssistant2());
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		typeLabel.setText(language.getString("TEXT0091"));
+		wolTextLabel.setText(language.getString("TEXT0092"));
+		minLabel.setText(language.getString("TEXT0093"));
+		themeLabel.setText(language.getString("TEXT0094"));
+		materialLabel.setText(language.getString("TEXT0095"));
+
+		hall1Tab.setText(language.getString("TEXT0135"));
+		hall2Tab.setText(language.getString("TEXT0136"));
+
+		// studentLabel.setText(language.getString("TEXT0134") + " / " +
+		// language.getString("TEXT0044"));
+		// student2Label.setText(language.getString("TEXT0134") + " / " +
+		// language.getString("TEXT0044"));
+
+		assistantLabel.setText(language.getString("TEXT0038"));
+		assistant2Label.setText(language.getString("TEXT0038"));
+
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveButton.setText("");
 	}
 
 	private void listeners() {
@@ -205,31 +235,6 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		ministryTableView.refresh();
 
 		thisStage.close();
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		typeLabel.setText(language.getString("TEXT0091"));
-		wolTextLabel.setText(language.getString("TEXT0092"));
-		minLabel.setText(language.getString("TEXT0093"));
-		themeLabel.setText(language.getString("TEXT0094"));
-		materialLabel.setText(language.getString("TEXT0095"));
-
-		hall1Tab.setText(language.getString("TEXT0135"));
-		hall2Tab.setText(language.getString("TEXT0136"));
-
-		// studentLabel.setText(language.getString("TEXT0134") + " / " +
-		// language.getString("TEXT0044"));
-		// student2Label.setText(language.getString("TEXT0134") + " / " +
-		// language.getString("TEXT0044"));
-
-		assistantLabel.setText(language.getString("TEXT0038"));
-		assistant2Label.setText(language.getString("TEXT0038"));
-
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
-		saveButton.setText("");
 	}
 
 	private void initData() {

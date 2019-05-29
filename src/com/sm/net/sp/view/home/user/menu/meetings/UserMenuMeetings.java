@@ -143,7 +143,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		// generalTab.getStyleClass().add("tab_001");
 		calendarTab.getStyleClass().add("tab_001");
-		weekTableView.getStyleClass().add("tableViewStyle1");
+		weekTableView.getStyleClass().add("table_view_001");
 
 		// meetingLabel.getStyleClass().add("label_001");
 		// meetingMidweekLabel.getStyleClass().add("label_001");

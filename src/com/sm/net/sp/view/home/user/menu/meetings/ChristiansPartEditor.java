@@ -15,10 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ChristiansPartEditor extends UpdateDataAdapter {
 
+	@FXML
+	private AnchorPane anchorPane;
 	@FXML
 	private Label wolTextLabel;
 	@FXML
@@ -61,20 +64,22 @@ public class ChristiansPartEditor extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		wolTextLabel.getStyleClass().add("labelStyle3");
-		minLabel.getStyleClass().add("labelStyle3");
-		themeLabel.getStyleClass().add("labelStyle3");
-		materialLabel.getStyleClass().add("labelStyle3");
-		teacherLabel.getStyleClass().add("labelStyle1");
+		anchorPane.getStyleClass().add("main_color_001");
 
-		wolTextTextField.getStyleClass().add("textFieldStyle1");
-		minTextField.getStyleClass().add("textFieldStyle1");
-		themeTextField.getStyleClass().add("textFieldStyle1");
-		materialTextField.getStyleClass().add("textFieldStyle1");
+		wolTextLabel.getStyleClass().add("label_set_001");
+		minLabel.getStyleClass().add("label_set_001");
+		themeLabel.getStyleClass().add("label_set_001");
+		materialLabel.getStyleClass().add("label_set_001");
 
-		teachersListView.getStyleClass().add("listViewStyle1");
+		wolTextTextField.getStyleClass().add("text_field_001");
+		minTextField.getStyleClass().add("text_field_001");
+		themeTextField.getStyleClass().add("text_field_001");
+		materialTextField.getStyleClass().add("text_field_001");
 
-		saveButton.getStyleClass().add("buttonStyle2");
+		teacherLabel.getStyleClass().add("label_001");
+		teachersListView.getStyleClass().add("list_view_001");
+
+		saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {

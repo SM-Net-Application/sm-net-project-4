@@ -111,12 +111,11 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 		serGroupsFamiliesLabel.getStyleClass().add("label_001");
 
 		serGroupsNameTextField.getStyleClass().add("text_field_001");
-		serGroupsOverseerComboBox.getStyleClass().add("comboBoxStyle1");
-		serGroupsAssistantComboBox.getStyleClass().add("comboBoxStyle1");
+		serGroupsOverseerComboBox.getStyleClass().add("combo_box_001");
+		serGroupsAssistantComboBox.getStyleClass().add("combo_box_001");
 
-		familiesTableView.getStyleClass().add("tableViewStyle1");
-
-		serGroupsFamiliesTableView.getStyleClass().add("tableViewStyle1");
+		familiesTableView.getStyleClass().add("table_view_001");
+		serGroupsFamiliesTableView.getStyleClass().add("table_view_001");
 
 		serGroupsAddFamily.getStyleClass().add("button_image_001");
 		serGroupsRemoveFamily.getStyleClass().add("button_image_001");

@@ -11,49 +11,61 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.meetings.ChristiansPartEditor">
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.meetings.ChristiansPartEditor">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox>
                <children>
-                  <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                  <VBox>
                      <children>
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <Label fx:id="wolTextLabel" text="Testo WOL">
                                  <StackPane.margin>
-                                    <Insets left="5.0" />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
                               </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </StackPane>
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <Label fx:id="minLabel" text="Min">
                                  <StackPane.margin>
-                                    <Insets left="5.0" />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
                               </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </StackPane>
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <Label fx:id="themeLabel" text="Tema">
                                  <StackPane.margin>
-                                    <Insets left="5.0" />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
                               </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </StackPane>
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <Label fx:id="materialLabel" text="Materiale">
                                  <StackPane.margin>
-                                    <Insets left="5.0" />
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
                               </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </StackPane>
                      </children>
                   </VBox>
@@ -99,28 +111,46 @@
                   </VBox>
                </children>
             </HBox>
-            <Separator prefWidth="200.0">
+            <StackPane>
                <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin></Separator>
-            <HBox VBox.vgrow="ALWAYS">
+                  <Insets />
+               </VBox.margin>
                <children>
-                  <VBox HBox.hgrow="ALWAYS">
+                  <Separator>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Separator>
+               </children>
+            </StackPane>
+            <VBox VBox.vgrow="ALWAYS">
+               <children>
+                  <StackPane alignment="CENTER_LEFT">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                      <children>
-                        <Label fx:id="teacherLabel" maxHeight="1.7976931348623157E308" text="Insegnante">
-                           <VBox.margin>
+                        <Label fx:id="teacherLabel" text="Insegnante">
+                           <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
+                           </StackPane.margin>
                         </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
                         <ListView fx:id="teachersListView">
-                           <VBox.margin>
+                           <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
+                           </StackPane.margin>
                         </ListView>
                      </children>
-                  </VBox>
+                  </StackPane>
                </children>
-            </HBox>
+            </VBox>
             <StackPane alignment="CENTER_RIGHT">
                <children>
                   <Button fx:id="saveButton" mnemonicParsing="false" text="Button">

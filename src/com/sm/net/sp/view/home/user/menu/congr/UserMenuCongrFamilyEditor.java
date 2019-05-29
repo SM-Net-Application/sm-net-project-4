@@ -48,40 +48,28 @@ public class UserMenuCongrFamilyEditor {
 	private Label familyPhoneLabel;
 	@FXML
 	private TextField familyPhoneTextField;
-
 	@FXML
 	private Label membersLabel;
-
 	@FXML
 	private TableView<Member> membersTableView;
-
 	@FXML
 	private TableColumn<Member, Integer> memberIDTableColumn;
-
 	@FXML
 	private TableColumn<Member, String> memberSurnameTableColumn;
-
 	@FXML
 	private TableColumn<Member, String> memberNameTableColumn;
-
 	@FXML
 	private Button familyAddMember;
-
 	@FXML
 	private Button familyRemoveMember;
-
 	@FXML
 	private Label familyMembersLabel;
-
 	@FXML
 	private TableView<Member> familyMembersTableView;
-
 	@FXML
 	private TableColumn<Member, Integer> familyMemberIDTableColumn;
-
 	@FXML
 	private TableColumn<Member, String> familyMemberSurnameTableColumn;
-
 	@FXML
 	private TableColumn<Member, String> familyMemberNameTableColumn;
 
@@ -136,9 +124,8 @@ public class UserMenuCongrFamilyEditor {
 		familyCityTextField.getStyleClass().add("text_field_001");
 		familyPhoneTextField.getStyleClass().add("text_field_001");
 
-		membersTableView.getStyleClass().add("tableViewStyle1");
-
-		familyMembersTableView.getStyleClass().add("tableViewStyle1");
+		membersTableView.getStyleClass().add("table_view_001");
+		familyMembersTableView.getStyleClass().add("table_view_001");
 
 		familyAddMember.getStyleClass().add("button_image_001");
 		familyRemoveMember.getStyleClass().add("button_image_001");

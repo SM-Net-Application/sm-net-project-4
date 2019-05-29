@@ -3,6 +3,14 @@
 	-fx-background-color: #282828;
 }
 
+.scroll_pane_001 {
+	-fx-background-color: transparent;
+}
+
+.scroll_pane_001 .viewport {
+	-fx-background-color: transparent;
+}
+
 .label_software_name {
 	-fx-text-fill: #bbbbbb;
 	-fx-font-size: 25.0pt;
@@ -41,6 +49,17 @@
 	-fx-font-size: 12.0pt;
 }
 
+.check_box_001 .box {
+	-fx-background-color: #43494a;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+	-fx-border-color: #6b6b6b;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+}
+
+.check_box_001:selected .mark {
+	-fx-background-color: #000000;
+}
+
 .button_image_001 {
 	-fx-border-color: #5e6060;
 	-fx-border-radius: 10.0 10.0 10.0 10.0;
@@ -51,22 +70,132 @@
 }
 
 .button_image_001:hover {
-	-fx-border-color: #4b6eaf;
+	-fx-background-color: #4c5052;
 }
 
 .list_view_001 {
 	-fx-font-size: 12.0pt;
+	-fx-border-color: #5e6060;
+	-fx-focus-color: #5e6060;
+	-fx-background-color: #282828;
+}
+
+.list_view_001 .list-cell:odd {
+	-fx-background-color: #414547;
+	-fx-text-fill: #bbbbbb;
+}
+
+.list_view_001 .list-cell:even {
+	-fx-background-color: #3c3f41;
+	-fx-text-fill: #bbbbbb;
+}
+
+.list_view_001 .list-cell:selected {
+	-fx-background-color: #4b6eaf;
+	-fx-font-weight: bold;
+}
+
+.table_view_001 {
+	-fx-font-size: 12.0pt;
+	-fx-box-border: #5e6060;
+}
+
+.table_view_001 .placeholder {
+	-fx-background-color: #282828;
+}
+
+.table_view_001 .placeholder .label {
+	-fx-text-fill: #bbbbbb;
+}
+
+.table_view_001:focused {
+	-fx-background-color: #323232 ,-fx-box-border,-fx-control-inner-background;
+	-fx-background-insets: -1.4, 0.0, 1.0;
+	-fx-background-radius: 1.4, 0.0, 0.0;
+	-fx-padding: 1.0;
+}
+
+.table_view_001 .table-cell {
+	-fx-text-fill: #bbbbbb;
+	-fx-border-color: #5e6060;
+}
+
+.table_view_001 .column-header {
+	-fx-background-color: #464a4c;
+	-fx-border-color: #5e6060;
+}
+
+.table_view_001 .column-header-background .label {
+	-fx-text-fill: #bbbbbb;
+}
+
+.table_view_001 .table-row-cell .label {
+	-fx-text-fill: #bbbbbb;
+}
+
+.table_view_001 .table-row-cell:odd {
+	-fx-background-color: #414547;
+	-fx-text-fill: #bbbbbb;
+}
+
+.table_view_001 .table-row-cell:even {
+	-fx-background-color: #3c3f41;
+	-fx-text-fill: #bbbbbb;
+}
+
+.table_view_001 .table-row-cell:selected {
+	-fx-background-color: #4b6eaf;
 }
 
 .text_field_001 {
 	-fx-font-size: 12.0pt;
+	-fx-background-color: #45494a;
+	-fx-border-color: #646464;
+	-fx-text-fill: #bbbbbb;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
 }
+
 
 .text_field_002 {
 	-fx-font-size: 12.0pt;
 	-fx-min-width: 50.0pt;
 	-fx-max-width: 50.0pt;
 	-fx-alignment: center;
+	-fx-background-color: #45494a;
+	-fx-border-color: #646464;
+	-fx-text-fill: #bbbbbb;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+}
+
+.combo_box_001 {
+	-fx-font-size: 12.0pt;
+	-fx-max-width: 200.0pt;
+	-fx-background-color: #45494a;
+	-fx-border-color: #646464;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+}
+
+.combo_box_001 .list-cell {
+	-fx-background-color: #45494a;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+	-fx-text-fill: #bbbbbb;
+}
+
+.combo_box_001 .list-view {
+	-fx-background-color: #45494a;
+}
+
+.combo_box_001 .list-view .list-cell {
+	-fx-background-color: #45494a;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+	-fx-text-fill: #bbbbbb;
+}
+
+.combo_box_001 .list-view .list-cell:hover {
+	-fx-background-color: #4b6eaf;
 }
 
 .tab_pane_001 {
@@ -81,6 +210,10 @@
 	-fx-background-color: #3c3f41;
 }
 
+.tab_pane_001:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+	-fx-border-color: #3e86a0;
+}
+
 .tab_pane_002 {
 	-fx-background-color: #313335;
 	-fx-tab-min-height:50.0px;
@@ -91,6 +224,10 @@
 
 .tab_pane_002 .tab-header-background {
 	-fx-background-color: #3c3f41;
+}
+
+.tab_pane_002:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+	-fx-border-color: #3e86a0;
 }
 
 .tab_001 {
@@ -132,141 +269,3 @@
 .context-menu {
     -fx-background-color: #3c3f41;
 }
-
-.comboBoxStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-.comboBoxStyle2 {
-	-fx-font-size: 12.0pt;
-	-fx-min-width: 200.0pt;
-}
-
-.textFieldStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-.textFieldStyle2 {
-	-fx-font-size: 12.0pt;
-	-fx-min-width: 50.0pt;
-	-fx-max-width: 50.0pt;
-	-fx-alignment: center;
-}
-
-.textFieldStyle3 {
-	-fx-font-size: 12.0pt;
-	-fx-min-width: 200.0pt;
-}
-
-.listViewStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-.buttonStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-.buttonStyle2 {
-	-fx-font-size: 12.0pt;
-	-fx-background-color: transparent;
-}
-
-.buttonStyle3 {
-	-fx-font-size: 20.0pt;
-	-fx-background-color: transparent;
-}
-
-.labelStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-.labelStyle2 {
-	-fx-font-size: 14.0pt;
-	-fx-font-weight: bold;
-}
-
-.labelStyle3 {
-	-fx-font-size: 12.0pt;
-	-fx-min-height: 35.0pt; 
-}
-
-.menuBarStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-.listViewStyle1 {
-	-fx-selection-bar: #95aec9;
-	-fx-font-size: 14.0pt;
-}
-
-.anchorPaneStyle1 {
-	-fx-background-color: #8f8f8f;
-	-fx-border-color: #ebebeb;
-}
-
-.tableViewStyle1{
-	-fx-font-size: 12.0pt;
-}
-
-.tableColumnStyle1{
-	-fx-alignment: center;
-}
-
-.tabPaneStyle1{
-	-fx-tab-min-width:225.0px;
-	-fx-tab-min-height:60.0px;
-	-fx-tab-max-width:225.0px;
-	-fx-tab-max-height:60.0px;
-}
-
-.tabPaneStyle2{
-	-fx-tab-min-height:60.0px;
-	-fx-tab-max-height:60.0px;
-	-fx-padding: 20.0px;
-}
-
-.tabStyle1{
-	-fx-font-size: 12.0pt;
-}
-
-.checkBoxStyle1{
-	-fx-font-size: 12.0pt;
-}
-
-.checkBoxStyle2 {
-	-fx-font-size: 12.0pt;
-	-fx-min-height: 15.0pt; 
-}
-
-.radioButtonStyle1 {
-	-fx-font-size: 12.0pt;
-}
-
-/*.background {
-	-fx-background-color: linear-gradient(#004e99 0.0%, #007eff 100.0%);
-}
-
-.title {
-    -fx-text-fill: #eff0f1;
-	-fx-font-size: 14.0pt;
-}
-
-.button {
-	-fx-border-color:  #3f97cb;
-	-fx-background-color:  #fcfcfc;
-	-fx-text-fill:  #6e7275;
-	-fx-font-size: 12.0pt;
-}
-
-.next {
-	-fx-background-color: linear-gradient(#004e99 0.0%, #007eff 100.0%);
-	
-	-fx-border-color:  #3f97cb;
-	-fx-background-color:  #fcfcfc;
-	-fx-border-radius:  5.0 5.0 5.0 5.0;
-	-fx-text-fill:  #6e7275;
-
-	-fx-background-color:  #ebeced;
-	-fx-border-color:  #d1d7dd;
-	-fx-text-fill:  #6e7275;
-}*/

@@ -89,11 +89,16 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		userLabel.getStyleClass().add("label_header_001");
 
-		userTableView.getStyleClass().add("tableViewStyle1");
+		userTableView.getStyleClass().add("table_view_001");
 
 		userAddButton.getStyleClass().add("button_image_001");
 		userDeleteButton.getStyleClass().add("button_image_001");
 		userPrintButton.getStyleClass().add("button_image_001");
+
+		userTableColumnUsers.getStyleClass().add("check_box_001");
+		userTableColumnCongregations.getStyleClass().add("check_box_001");
+		userTableColumnServiceGroups.getStyleClass().add("check_box_001");
+		userTableColumnMeetings.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {

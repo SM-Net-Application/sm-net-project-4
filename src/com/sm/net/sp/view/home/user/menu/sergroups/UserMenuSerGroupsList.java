@@ -91,7 +91,7 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 		serGroupsTab.getStyleClass().add("tab_001");
 
-		serGroupsTableView.getStyleClass().add("tableViewStyle1");
+		serGroupsTableView.getStyleClass().add("table_view_001");
 
 		serGroupsAddButton.getStyleClass().add("button_image_001");
 		serGroupsDeleteButton.getStyleClass().add("button_image_001");

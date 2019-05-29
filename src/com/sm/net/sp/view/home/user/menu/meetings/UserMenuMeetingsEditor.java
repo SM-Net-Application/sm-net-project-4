@@ -32,6 +32,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -61,6 +62,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private Tab ministryTab;
 	@FXML
 	private Tab christiansTab;
+
+	@FXML
+	private ScrollPane treasuresScrollPane;
+	@FXML
+	private ScrollPane ministryScrollPane;
+	@FXML
+	private ScrollPane christiansScrollPane;
 
 	@FXML
 	private Label typeWeekLabel;
@@ -256,9 +264,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryTab.getStyleClass().add("tab_001");
 		christiansTab.getStyleClass().add("tab_001");
 
-		typeWeekLabel.getStyleClass().add("label_001");
+		treasuresScrollPane.getStyleClass().add("scroll_pane_001");
+		ministryScrollPane.getStyleClass().add("scroll_pane_001");
+		christiansScrollPane.getStyleClass().add("scroll_pane_001");
 
-		typeWeekListView.getStyleClass().add("listViewStyle1");
+		typeWeekLabel.getStyleClass().add("label_002");
+		typeWeekListView.getStyleClass().add("list_view_001");
 
 		generalLabel.getStyleClass().add("label_002");
 		treasuresLabel.getStyleClass().add("label_002");
@@ -269,8 +280,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		bibleChaptersLabel.getStyleClass().add("label_set_001");
 		openingCommentsLabel.getStyleClass().add("label_set_001");
 
-		presidentComboBox.getStyleClass().add("comboBoxStyle2");
-		pray1ComboBox.getStyleClass().add("comboBoxStyle2");
+		presidentComboBox.getStyleClass().add("combo_box_001");
+		pray1ComboBox.getStyleClass().add("combo_box_001");
 		song1TextField.getStyleClass().add("text_field_002");
 		bibleChaptersTextField.getStyleClass().add("text_field_001");
 
@@ -282,13 +293,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		talkMinTextField.getStyleClass().add("text_field_002");
 		talkMinLabel.getStyleClass().add("label_set_001");
 		talkTextTextField.getStyleClass().add("text_field_001");
-		talkComboBox.getStyleClass().add("comboBoxStyle2");
+		talkComboBox.getStyleClass().add("combo_box_001");
 
 		diggingLabel.getStyleClass().add("label_001");
 		diggingMinTextField.getStyleClass().add("text_field_002");
 		diggingMinLabel.getStyleClass().add("label_set_001");
 		diggingTextTextField.getStyleClass().add("text_field_001");
-		diggingComboBox.getStyleClass().add("comboBoxStyle2");
+		diggingComboBox.getStyleClass().add("combo_box_001");
 
 		bibleReadingLabel.getStyleClass().add("label_001");
 		bibleReadingMinTextField.getStyleClass().add("text_field_002");
@@ -296,43 +307,43 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		bibleReadingTextTextField.getStyleClass().add("text_field_001");
 		bibleReadingMaterialsTextField.getStyleClass().add("text_field_001");
 
-		bibleReadingComboBox.getStyleClass().add("comboBoxStyle2");
+		bibleReadingComboBox.getStyleClass().add("combo_box_001");
 
-		ministryTableView.getStyleClass().add("tableViewStyle1");
+		ministryTableView.getStyleClass().add("table_view_001");
 		ministryMinTableColumn.getStyleClass().add("tableColumnStyle1");
 
 		ministryPartAddButton.getStyleClass().add("button_image_001");
 		ministryPartDeleteButton.getStyleClass().add("button_image_001");
 
 		song2Label.getStyleClass().add("label_001");
-		song2TextField.getStyleClass().add("text_field_001");
+		song2TextField.getStyleClass().add("text_field_002");
 
-		christiansPartTableView.getStyleClass().add("tableViewStyle1");
+		christiansPartTableView.getStyleClass().add("table_view_001");
 		christiansPartMinTableColumn.getStyleClass().add("tableColumnStyle1");
 
 		christiansPartAddButton.getStyleClass().add("button_image_001");
 		christiansPartDeleteButton.getStyleClass().add("button_image_001");
 
-		congregationBibleStudyLabel.getStyleClass().add("label_001");
-		congregationBibleStudyMinTextField.getStyleClass().add("text_field_001");
+		congregationBibleStudyLabel.getStyleClass().add("label_002");
+		congregationBibleStudyMinTextField.getStyleClass().add("text_field_002");
 		congregationBibleStudyMinLabel.getStyleClass().add("label_001");
 		congregationBibleStudyTextTextField.getStyleClass().add("text_field_001");
 		congregationBibleStudyMaterialTextField.getStyleClass().add("text_field_001");
 
-		congregationBibleStudyComboBox.getStyleClass().add("comboBoxStyle2");
+		congregationBibleStudyComboBox.getStyleClass().add("combo_box_001");
 
-		endLabel.getStyleClass().add("label_001");
+		endLabel.getStyleClass().add("label_002");
 
-		reviewLabel.getStyleClass().add("label_001");
-		reviewMinTextField.getStyleClass().add("text_field_001");
+		reviewLabel.getStyleClass().add("label_set_001");
+		reviewMinTextField.getStyleClass().add("text_field_002");
 		reviewMinLabel.getStyleClass().add("label_001");
 		reviewTextTextField.getStyleClass().add("text_field_001");
 
-		song3Label.getStyleClass().add("label_001");
-		song3TextField.getStyleClass().add("text_field_001");
+		song3Label.getStyleClass().add("label_set_001");
+		song3TextField.getStyleClass().add("text_field_002");
 
-		pray2Label.getStyleClass().add("label_001");
-		pray2ComboBox.getStyleClass().add("comboBoxStyle2");
+		pray2Label.getStyleClass().add("label_set_001");
+		pray2ComboBox.getStyleClass().add("combo_box_001");
 
 		loadWeekFromWOLButton.getStyleClass().add("button_image_001");
 		saveWeekButton.getStyleClass().add("button_image_001");
