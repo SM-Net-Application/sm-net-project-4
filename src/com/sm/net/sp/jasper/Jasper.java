@@ -7,9 +7,12 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.sm.net.path.PathBuilder;
+import com.sm.net.project.Project;
+
 public class Jasper {
 
-	private static final String DEFAULT_FOLDER = "layout";
+	private static final String DEFAULT_FOLDER = "layout" + File.separatorChar + "default" + File.separatorChar;
 	private static final String DEFAULT_EXT = ".jrxml";
 	private static final String DEFAULT_IMAGE_EXT = ".png";
 
@@ -25,18 +28,8 @@ public class Jasper {
 		public static File getLayout(String name) {
 
 			String layoutPath = getLayoutPath(name);
-			URL resource = Jasper.class.getResource(layoutPath);
-
-			URI uri;
-			try {
-				uri = resource.toURI();
-				Path path = Paths.get(uri);
-				File file = path.toFile();
-				return file;
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
-			return null;
+			String concatFolder = PathBuilder.concatFolder(Project.currentWorkingDirectory(), layoutPath);
+			return new File(concatFolder + DEFAULT_EXT);
 		}
 
 		public static File getImage(String name) {
