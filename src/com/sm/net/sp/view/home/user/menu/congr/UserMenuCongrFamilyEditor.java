@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -49,6 +50,10 @@ public class UserMenuCongrFamilyEditor {
 	@FXML
 	private TextField familyPhoneTextField;
 	@FXML
+	private Label familyPrivilegeLabel;
+	@FXML
+	private CheckBox familyCleaningCheckBox;
+	@FXML
 	private Label membersLabel;
 	@FXML
 	private TableView<Member> membersTableView;
@@ -72,7 +77,6 @@ public class UserMenuCongrFamilyEditor {
 	private TableColumn<Member, String> familyMemberSurnameTableColumn;
 	@FXML
 	private TableColumn<Member, String> familyMemberNameTableColumn;
-
 	@FXML
 	private Button saveButton;
 
@@ -124,6 +128,9 @@ public class UserMenuCongrFamilyEditor {
 		familyCityTextField.getStyleClass().add("text_field_001");
 		familyPhoneTextField.getStyleClass().add("text_field_001");
 
+		familyPrivilegeLabel.getStyleClass().add("label_002");
+		familyCleaningCheckBox.getStyleClass().add("check_box_001");
+
 		membersTableView.getStyleClass().add("table_view_001");
 		familyMembersTableView.getStyleClass().add("table_view_001");
 
@@ -136,6 +143,43 @@ public class UserMenuCongrFamilyEditor {
 		initValue();
 		viewUpdate();
 		listeners();
+	}
+
+	private void viewUpdate() {
+
+		this.language = settings.getLanguage();
+
+		familyNameLabel.setText(language.getString("TEXT0025"));
+		familyStreetLabel.setText(language.getString("TEXT0027"));
+		familyNummerLabel.setText(language.getString("TEXT0028"));
+		familyPostCodeLabel.setText(language.getString("TEXT0029"));
+		familyCityLabel.setText(language.getString("TEXT0030"));
+		familyPhoneLabel.setText(language.getString("TEXT0109"));
+
+		familyPrivilegeLabel.setText(language.getString("TEXT0052"));
+		familyCleaningCheckBox.setText(language.getString("sp.congr.family.cleaning"));
+
+		membersLabel.setText(language.getString("TEXT0032"));
+		memberIDTableColumn.setText(language.getString("TEXT0005"));
+		memberIDTableColumn.setMinWidth(50);
+		memberIDTableColumn.setMaxWidth(50);
+		memberIDTableColumn.setResizable(false);
+		memberSurnameTableColumn.setText(language.getString("TEXT0013"));
+		memberNameTableColumn.setText(language.getString("TEXT0014"));
+		familyMembersLabel.setText(language.getString("TEXT0033"));
+		familyMemberIDTableColumn.setText(language.getString("TEXT0005"));
+		familyMemberIDTableColumn.setMinWidth(50);
+		familyMemberIDTableColumn.setMaxWidth(50);
+		familyMemberIDTableColumn.setResizable(false);
+		familyMemberSurnameTableColumn.setText(language.getString("TEXT0013"));
+		familyMemberNameTableColumn.setText(language.getString("TEXT0014"));
+
+		familyAddMember.setText("");
+		familyAddMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_FRONT));
+		familyRemoveMember.setText("");
+		familyRemoveMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_BACK));
+		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveButton.setText(language.getString("TEXT0022"));
 	}
 
 	private void initValue() {
@@ -151,6 +195,7 @@ public class UserMenuCongrFamilyEditor {
 			this.familyPostCodeTextField.setText(selectedFamily.getSpInf4Decrypted());
 			this.familyCityTextField.setText(selectedFamily.getSpInf5Decrypted());
 			this.familyPhoneTextField.setText(selectedFamily.getSpInf7Decrypted());
+			this.familyCleaningCheckBox.setSelected((selectedFamily.getSpInf8() == 1));
 		}
 	}
 
@@ -240,6 +285,7 @@ public class UserMenuCongrFamilyEditor {
 			String spInf4 = Crypt.encrypt(familyPostCodeTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf5 = Crypt.encrypt(familyCityTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf7 = Crypt.encrypt(familyPhoneTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf8 = !familyCleaningCheckBox.isSelected() ? "0" : "1";
 
 			String idToRemove = "";
 
@@ -254,26 +300,27 @@ public class UserMenuCongrFamilyEditor {
 					idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " + member.getSpMemberID();
 
 			if (selectedFamily != null)
-				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, idToRemove, idToSet);
+				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, idToRemove, idToSet);
 			else
-				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, idToRemove, idToSet);
+				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, spInf8, idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
 					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
 	}
 
 	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf6,
-			String spInf7, String idToRemove, String idToSet) {
+			String spInf7, String spInf8, String idToRemove, String idToSet) {
 
-		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, idToRemove, idToSet, settings,
-				ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
+		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, idToRemove, idToSet,
+				settings, ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 
 	private void editFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf7,
-			String idToRemove, String idToSet) {
+			String spInf8, String idToRemove, String idToSet) {
 
 		Actions.updateFamily(String.valueOf(selectedFamily.getSpFamID()), spInf1, spInf2, spInf3, spInf4, spInf5,
-				spInf7, idToRemove, idToSet, settings, ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
+				spInf7, spInf8, idToRemove, idToSet, settings, ownerStage, congrTabPane, newFamilyTab, familiesTab,
+				ownerCtrl);
 	}
 
 	private boolean checkFields() {
@@ -288,39 +335,6 @@ public class UserMenuCongrFamilyEditor {
 				status = false;
 
 		return status;
-	}
-
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
-
-		familyNameLabel.setText(language.getString("TEXT0025"));
-		familyStreetLabel.setText(language.getString("TEXT0027"));
-		familyNummerLabel.setText(language.getString("TEXT0028"));
-		familyPostCodeLabel.setText(language.getString("TEXT0029"));
-		familyCityLabel.setText(language.getString("TEXT0030"));
-		familyPhoneLabel.setText(language.getString("TEXT0109"));
-		membersLabel.setText(language.getString("TEXT0032"));
-		memberIDTableColumn.setText(language.getString("TEXT0005"));
-		memberIDTableColumn.setMinWidth(50);
-		memberIDTableColumn.setMaxWidth(50);
-		memberIDTableColumn.setResizable(false);
-		memberSurnameTableColumn.setText(language.getString("TEXT0013"));
-		memberNameTableColumn.setText(language.getString("TEXT0014"));
-		familyMembersLabel.setText(language.getString("TEXT0033"));
-		familyMemberIDTableColumn.setText(language.getString("TEXT0005"));
-		familyMemberIDTableColumn.setMinWidth(50);
-		familyMemberIDTableColumn.setMaxWidth(50);
-		familyMemberIDTableColumn.setResizable(false);
-		familyMemberSurnameTableColumn.setText(language.getString("TEXT0013"));
-		familyMemberNameTableColumn.setText(language.getString("TEXT0014"));
-
-		familyAddMember.setText("");
-		familyAddMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_FRONT));
-		familyRemoveMember.setText("");
-		familyRemoveMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
 	}
 
 	public Settings getSettings() {

@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -149,6 +151,33 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
                               </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="familyPrivilegeLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <Separator>
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <CheckBox fx:id="familyCleaningCheckBox" mnemonicParsing="false" text="CheckBox">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </CheckBox>
                            </children>
                         </StackPane>
                      </children>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-05-23T10:31:11 -->
+<!-- 2019-05-29T13:42:41 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -52,8 +52,11 @@
 	<field name="christiansSong3" class="java.lang.String"/>
 	<field name="christiansPray2" class="java.lang.String"/>
 	<field name="christiansPray2Name" class="java.lang.String"/>
+	<field name="weekType" class="java.lang.Integer"/>
+	<field name="weekTypeText" class="java.lang.String"/>
 	<detail>
 		<band height="146" splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="10" width="555" height="17" backcolor="#17365D" uuid="d0b1e002-5703-4978-a38f-d7c8d38f95e4">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -449,6 +452,7 @@
 			</textField>
 		</band>
 		<band height="5">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1]]></printWhenExpression>
 			<subreport>
 				<reportElement stretchType="ContainerHeight" x="0" y="0" width="555" height="5" uuid="4f641684-71e1-437d-bf30-275d44de17ae"/>
 				<dataSourceExpression><![CDATA[$F{jrDataSourceMinistryPart}]]></dataSourceExpression>
@@ -456,6 +460,7 @@
 			</subreport>
 		</band>
 		<band height="34">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="17" backcolor="#920000" uuid="8cc1e249-61bb-4f61-ade1-80ddcd17a90b">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -526,6 +531,7 @@
 			</line>
 		</band>
 		<band height="5">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1]]></printWhenExpression>
 			<subreport>
 				<reportElement stretchType="ContainerHeight" x="0" y="0" width="555" height="5" uuid="ff787ebd-5780-46f6-b921-31b3f947fecc"/>
 				<dataSourceExpression><![CDATA[$F{jrDataSourceChristiansPart}]]></dataSourceExpression>
@@ -533,6 +539,7 @@
 			</subreport>
 		</band>
 		<band height="51">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1]]></printWhenExpression>
 			<rectangle>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="29fdf044-2d33-4b5d-9e76-31cdc57b960f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -712,6 +719,46 @@
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{christiansPray2Name}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="277">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() != 1]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="10" width="555" height="17" backcolor="#17365D" uuid="460c0d4b-029f-4470-841c-5d84f975087a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="10" width="550" height="17" forecolor="#FFFFFF" uuid="e8c32e7f-d18c-4ec6-a8c1-9f0d1999a341">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{weekHeader}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="27" width="555" height="250" forecolor="#000000" backcolor="#FFFFFF" uuid="df13fab9-c2ee-4433-b11b-b9813ccf4599">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="">
+				<reportElement x="5" y="32" width="545" height="245" forecolor="#000000" uuid="457aca74-0757-41bb-9ab2-f235cb968fb6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="25" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{weekTypeText}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

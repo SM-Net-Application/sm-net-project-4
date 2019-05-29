@@ -56,6 +56,7 @@ public class Week {
 	private StringProperty spInf25;
 	private StringProperty spInf26;
 	private IntegerProperty spInf27;
+	private IntegerProperty spInf28;
 
 	private ObjectProperty<ObservableList<MinistryPart>> ministryPartList;
 	private ObjectProperty<ObservableList<ChristiansPart>> christiansPartList;
@@ -105,6 +106,7 @@ public class Week {
 		this.spInf25 = new SimpleStringProperty(jsonObject.getString("spInf25"));
 		this.spInf26 = new SimpleStringProperty(jsonObject.getString("spInf26"));
 		this.spInf27 = new SimpleIntegerProperty(jsonObject.getInt("spInf27"));
+		this.spInf28 = new SimpleIntegerProperty(jsonObject.getInt("spInf28"));
 
 		this.ministryPartList = new SimpleObjectProperty<ObservableList<MinistryPart>>(
 				getMinistryPartsList(jsonObject, language, settings, membersList));
@@ -187,6 +189,7 @@ public class Week {
 				this.setSpInf25(Crypt.decrypt(week.getSpInf25(), settings.getDatabaseSecretKey()));
 				this.setSpInf26(Crypt.decrypt(week.getSpInf26(), settings.getDatabaseSecretKey()));
 				this.setSpInf27(week.getSpInf27());
+				this.setSpInf28(week.getSpInf28());
 
 				this.weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 						new WeekTypeTranslated(WeekType.getFromOrdinal(week.getSpInf2()), language));
@@ -726,6 +729,21 @@ public class Week {
 			this.christiansPartList = new SimpleObjectProperty<ObservableList<ChristiansPart>>();
 
 		this.christiansPartListProperty().set(christiansPartList);
+	}
+
+	public final IntegerProperty spInf28Property() {
+		return this.spInf28;
+	}
+
+	public final int getSpInf28() {
+		return this.spInf28Property().get();
+	}
+
+	public final void setSpInf28(final int spInf28) {
+		if (this.spInf28Property() == null)
+			this.spInf28 = new SimpleIntegerProperty();
+
+		this.spInf28Property().set(spInf28);
 	}
 
 }

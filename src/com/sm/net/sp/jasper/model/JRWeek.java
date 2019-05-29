@@ -10,6 +10,7 @@ import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekType;
 
 import javafx.collections.ObservableList;
 import net.sf.jasperreports.engine.JRException;
@@ -19,6 +20,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class JRWeek {
 
+	private Integer weekType;
+	private String weekTypeText;
 	private String weekHeader;
 	private String treasuresHeader;
 	private String treasuresMinSong1;
@@ -65,6 +68,8 @@ public class JRWeek {
 
 	private void reset() {
 
+		this.weekType = null;
+		this.weekTypeText = "";
 		this.weekHeader = "";
 		this.treasuresHeader = "";
 		this.treasuresMinSong1 = "";
@@ -126,7 +131,14 @@ public class JRWeek {
 		jrWeek.setJasperReportMinistryPart(JasperCompileManager.compileReport(ministryPartReport));
 		jrWeek.setJasperReportChristiansPart(JasperCompileManager.compileReport(christiansPartReport));
 
-		jrWeek.setWeekHeader(checkWeekHeader(week, language));
+		int spInf2 = week.getSpInf2();
+		jrWeek.setWeekType(spInf2);
+
+		WeekType weekType = WeekType.getFromOrdinal(spInf2);
+		if (weekType != null)
+			jrWeek.setWeekTypeText(language.getString(weekType.getName()));
+
+		jrWeek.setWeekHeader(checkWeekHeader(week, spInf2, language));
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
 		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
@@ -214,7 +226,7 @@ public class JRWeek {
 		return null;
 	}
 
-	private static String checkWeekHeader(Week week, Language language) {
+	private static String checkWeekHeader(Week week, int spInf2, Language language) {
 
 		LocalDate from = week.getFrom();
 
@@ -226,7 +238,9 @@ public class JRWeek {
 		String keyMonth = "time.months." + dtfMonth.format(from);
 		String month = language.getString(keyMonth);
 
-		String keyWeek = language.getString("jasper.layout.meeting.weekheader");
+		String keyWeek = language.getString("jasper.layout.meeting.weekheader.with.bible");
+		if (spInf2 != 1)
+			keyWeek = language.getString("jasper.layout.meeting.weekheader");
 
 		return String.format(keyWeek, day, month.toUpperCase(), week.getSpInf6());
 	}
@@ -525,6 +539,22 @@ public class JRWeek {
 
 	public void setChristiansPray2Name(String christiansPray2Name) {
 		this.christiansPray2Name = christiansPray2Name;
+	}
+
+	public Integer getWeekType() {
+		return weekType;
+	}
+
+	public void setWeekType(Integer weekType) {
+		this.weekType = weekType;
+	}
+
+	public String getWeekTypeText() {
+		return weekTypeText;
+	}
+
+	public void setWeekTypeText(String weekTypeText) {
+		this.weekTypeText = weekTypeText;
 	}
 
 }

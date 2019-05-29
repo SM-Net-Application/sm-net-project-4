@@ -362,20 +362,59 @@
                                                                               </TextField>
                                                                            </children>
                                                                         </StackPane>
+                                                                        <HBox>
+                                                                           <children>
+                                                                              <VBox>
+                                                                                 <children>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <Label fx:id="bibleReadingStudent1Label" text="Label">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Label>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <Label fx:id="bibleReadingStudent2Label" text="Label">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Label>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                              <VBox HBox.hgrow="ALWAYS">
+                                                                                 <children>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <ComboBox fx:id="bibleReadingComboBox" maxWidth="1.7976931348623157E308">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </ComboBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <ComboBox fx:id="bibleReading2ComboBox" maxWidth="1.7976931348623157E308">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </ComboBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                           </children>
+                                                                        </HBox>
                                                                      </children>
                                                                      <StackPane.margin>
                                                                         <Insets />
                                                                      </StackPane.margin>
                                                                   </VBox>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane alignment="TOP_LEFT">
-                                                               <children>
-                                                                  <ComboBox fx:id="bibleReadingComboBox" maxWidth="1.7976931348623157E308">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </ComboBox>
                                                                </children>
                                                             </StackPane>
                                                          </children>

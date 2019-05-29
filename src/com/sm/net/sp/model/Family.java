@@ -32,6 +32,8 @@ public class Family {
 	private StringProperty spInf7Encrypted;
 	private StringProperty spInf7Decrypted;
 
+	private IntegerProperty spInf8;
+
 	public Family(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
@@ -59,6 +61,8 @@ public class Family {
 
 		this.spInf7Encrypted = new SimpleStringProperty(jsonObject.getString("spInf7"));
 		this.spInf7Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf7Encrypted.get(), secretKey));
+
+		this.spInf8 = new SimpleIntegerProperty(jsonObject.getInt("spInf8"));
 	}
 
 	public final IntegerProperty spFamIDProperty() {
@@ -239,6 +243,18 @@ public class Family {
 
 	public final void setSpInf7Decrypted(final String spInf7Decrypted) {
 		this.spInf7DecryptedProperty().set(spInf7Decrypted);
+	}
+
+	public final IntegerProperty spInf8Property() {
+		return this.spInf8;
+	}
+
+	public final int getSpInf8() {
+		return this.spInf8Property().get();
+	}
+
+	public final void setSpInf8(final int spInf8) {
+		this.spInf8Property().set(spInf8);
 	}
 
 }

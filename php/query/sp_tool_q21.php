@@ -12,7 +12,7 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 			$query = "SELECT spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5,";
 			$query .= "spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,";
 			$query .= "spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,";
-			$query .= "spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27";
+			$query .= "spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28";
 			$query .= " FROM sp_week";
 			$query .= " WHERE spInf1 BETWEEN";
 			$query .= " " . $jsonObj ["keyStart"];
@@ -57,6 +57,7 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 					$row ["spInf25"] = $resultRow ["spInf25"];
 					$row ["spInf26"] = $resultRow ["spInf26"];
 					$row ["spInf27"] = $resultRow ["spInf27"];
+					$row ["spInf28"] = $resultRow ["spInf28"];
 					
 					// Ho bisogno della WeekCode
 					$spInf1 = $resultRow ["spInf1"];

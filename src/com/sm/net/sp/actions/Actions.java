@@ -856,8 +856,8 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void insertFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String spInf6, String spInf7, String idToRemove, String idToSet, Settings settings, Stage ownerStage,
-			TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+			String spInf6, String spInf7, String spInf8, String idToRemove, String idToSet, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -899,7 +899,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.INSERT_FAMILY(spInf1, spInf2,
-						spInf3, spInf4, spInf5, spInf6, spInf7, idToRemove, idToSet));
+						spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, idToRemove, idToSet));
 			}
 		};
 
@@ -990,8 +990,8 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void updateFamily(String spFamID, String spInf1, String spInf2, String spInf3, String spInf4,
-			String spInf5, String spInf7, String idToRemove, String idToSet, Settings settings, Stage ownerStage,
-			TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+			String spInf5, String spInf7, String spInf8, String idToRemove, String idToSet, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1031,7 +1031,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_FAMILY(spFamID, spInf1,
-						spInf2, spInf3, spInf4, spInf5, spInf7, idToRemove, idToSet));
+						spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, idToRemove, idToSet));
 			}
 		};
 
@@ -1342,8 +1342,9 @@ public class Actions {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInfMinistryParts, String spInfChristiansParts,
-			Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInfMinistryParts,
+			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1386,7 +1387,7 @@ public class Actions {
 						JSONRequest.INSERT_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 								spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
-								spInfMinistryParts, spInfChristiansParts));
+								spInf28, spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 
@@ -1400,7 +1401,7 @@ public class Actions {
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
 			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
-			String spInf24, String spInf25, String spInf26, String spInf27, String spInfMinistryParts,
+			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInfMinistryParts,
 			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
 			UpdateData callback) {
 
@@ -1445,7 +1446,7 @@ public class Actions {
 						JSONRequest.UPDATE_WEEK(spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
 								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
 								spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26,
-								spInf27, spInfMinistryParts, spInfChristiansParts));
+								spInf27, spInf28, spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 

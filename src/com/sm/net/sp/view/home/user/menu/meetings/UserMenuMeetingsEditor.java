@@ -139,7 +139,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	@FXML
 	private TextField bibleReadingMaterialsTextField;
 	@FXML
+	private Label bibleReadingStudent1Label;
+	@FXML
 	private ComboBox<Member> bibleReadingComboBox;
+	@FXML
+	private Label bibleReadingStudent2Label;
+	@FXML
+	private ComboBox<Member> bibleReading2ComboBox;
 
 	@FXML
 	private TableView<MinistryPart> ministryTableView;
@@ -307,7 +313,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		bibleReadingTextTextField.getStyleClass().add("text_field_001");
 		bibleReadingMaterialsTextField.getStyleClass().add("text_field_001");
 
+		bibleReadingStudent1Label.getStyleClass().add("label_set_001");
 		bibleReadingComboBox.getStyleClass().add("combo_box_001");
+		bibleReadingStudent2Label.getStyleClass().add("label_set_001");
+		bibleReading2ComboBox.getStyleClass().add("combo_box_001");
 
 		ministryTableView.getStyleClass().add("table_view_001");
 		ministryMinTableColumn.getStyleClass().add("tableColumnStyle1");
@@ -379,6 +388,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		bibleReadingLabel.setText(language.getString("TEXT0047"));
 		bibleReadingMinLabel.setText(language.getString("TEXT0089"));
+		bibleReadingStudent1Label.setText(language.getString("TEXT0135"));
+		bibleReadingStudent2Label.setText(language.getString("TEXT0136"));
 
 		ministryTypeTableColumn.setText(language.getString("TEXT0091"));
 		ministryFulltextTableColumn.setText(language.getString("TEXT0092"));
@@ -571,6 +582,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		talkComboBox.setItems(talkList);
 		diggingComboBox.setItems(diggingList);
 		bibleReadingComboBox.setItems(bibleReadingList);
+		bibleReading2ComboBox.setItems(bibleReadingList);
 		congregationBibleStudyComboBox.setItems(congregationBibleStudyList);
 		pray2ComboBox.setItems(prayEndList);
 
@@ -623,6 +635,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		talkComboBox.getSelectionModel().selectFirst();
 		diggingComboBox.getSelectionModel().selectFirst();
 		bibleReadingComboBox.getSelectionModel().selectFirst();
+		bibleReading2ComboBox.getSelectionModel().selectFirst();
 		congregationBibleStudyComboBox.getSelectionModel().selectFirst();
 		pray2ComboBox.getSelectionModel().selectFirst();
 	}
@@ -707,6 +720,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				this.reviewTextTextField.setText(this.selectedWeek.getSpInf25());
 				this.song3TextField.setText(this.selectedWeek.getSpInf26());
 				setMemberComboBoxIndex(this.pray2ComboBox, this.selectedWeek.getSpInf27());
+				setMemberComboBoxIndex(this.bibleReading2ComboBox, this.selectedWeek.getSpInf28());
 
 				this.ministryPartList.addAll(this.selectedWeek.getMinistryPartList());
 				this.christiansPartList.addAll(this.selectedWeek.getChristiansPartList());
@@ -736,7 +750,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void saveWeek() {
 
-		// TODO: Save process
 		if (checkFields()) {
 
 			String spInf2 = String.valueOf(WeekType.STANDARD.getOrdinal());
@@ -774,6 +787,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			String spInf25 = Crypt.encrypt(reviewTextTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf26 = Crypt.encrypt(song3TextField.getText(), settings.getDatabaseSecretKey());
 			String spInf27 = String.valueOf(pray2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf28 = String
+					.valueOf(bibleReading2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
 
 			String spInfMinistryParts = getMinistryParts();
 			String spInfChristiansParts = getChristiansParts();
@@ -786,8 +801,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 				Actions.updateWeek(spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
-						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInfMinistryParts,
-						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28,
+						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
+						ownerCtrl);
 
 			} else {
 				// newWeek
@@ -796,7 +812,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
 						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
-						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInfMinistryParts,
+						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInfMinistryParts,
 						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
