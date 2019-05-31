@@ -902,8 +902,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void loadWeekFromWOLOnAction() {
 
-		// TODO: Usare Language
-
 		Alert alert = new AlertDesigner(language.getString("TEXT0137"), language.getString("TEXT0138"), ownerStage,
 				AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
 
@@ -965,9 +963,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 						song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
 
 					} else {
-						// TODO: Inserire il language
-						new AlertDesigner("Non sono riuscito a prendere le informazioni da internet", ownerStage,
-								AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+						new AlertDesigner(language.getString("sp.meetings.wol.error"), ownerStage, AlertType.ERROR,
+								Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
 					}
 				}
 			}

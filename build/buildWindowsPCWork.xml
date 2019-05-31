@@ -297,10 +297,19 @@
 			</fileset>
 		</copy>
 
+		<mkdir dir="dist/layouts" />
+
+		<copy todir="dist/layouts">
+			<fileset dir="${projectPath}\layouts">
+				<include name="**" />
+			</fileset>
+		</copy>
+
 		<fx:resources id="appRes">
 			<fx:fileset dir="dist" includes="sm-net-project-4.jar" />
 			<fx:fileset dir="dist" includes="libs/*" />
 			<fx:fileset dir="dist" includes="languages/**" />
+			<fx:fileset dir="dist" includes="layouts/**" />
 		</fx:resources>
 
 		<fx:application id="fxApplication" name="${applicationName}" mainClass="com.sm.net.sp.SupportPlannerMain" toolkit="fx" version="${applicationVersion}" />

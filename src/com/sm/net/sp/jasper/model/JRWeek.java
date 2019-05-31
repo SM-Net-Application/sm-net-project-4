@@ -184,6 +184,10 @@ public class JRWeek {
 		if (member != null)
 			jrWeek.setTreasuresBibleReadingName1(member.getNameStyle4());
 
+		member = getMemberFromList(membersList, week.getSpInf28());
+		if (member != null)
+			jrWeek.setTreasuresBibleReadingName2(member.getNameStyle4());
+
 		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
 
 		jrWeek.setChristiansMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
@@ -198,7 +202,6 @@ public class JRWeek {
 		if (member != null)
 			jrWeek.setChristiansBibleStudyName(member.getNameStyle4());
 
-		// TODO: Integrare il nome quando verranno gestiti i lettori
 		jrWeek.setChristiansBibleStudyReaderName("");
 
 		jrWeek.setChristiansReviewMin(

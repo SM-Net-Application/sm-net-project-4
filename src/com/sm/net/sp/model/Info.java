@@ -326,25 +326,7 @@ public class Info extends UpdateDataAdapter {
 
 		public static String getUserMenuMeetingsSelect() {
 
-			String select = "'" + DAYMIDWEEKMEETING + "'";
-			select += ", ";
-			select += "'" + DAYWEEKENDMEETING + "'";
-			select += ", ";
-			select += "'" + HOURMIDWEEKMEETING + "'";
-			select += ", ";
-			select += "'" + MINUTEMIDWEEKMEETING + "'";
-			select += ", ";
-			select += "'" + HOURWEEKENDMEETING + "'";
-			select += ", ";
-			select += "'" + MINUTEWEEKENDMEETING + "'";
-			select += ", ";
-			select += "'" + KINGDOMHALLLOCATIONSTREET + "'";
-			select += ", ";
-			select += "'" + KINGDOMHALLLOCATIONNUMBER + "'";
-			select += ", ";
-			select += "'" + KINGDOMHALLLOCATIONPOSTCODE + "'";
-			select += ", ";
-			select += "'" + KINGDOMHALLLOCATIONCITY + "'";
+			String select = "'" + CONGR + "'";
 
 			return select;
 		}

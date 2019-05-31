@@ -1775,8 +1775,8 @@ public class Actions {
 		taskThread.start();
 	}
 
-	public static void printWeek(ArrayList<Week> weeks, ObservableList<Member> membersList, Settings settings,
-			Stage ownerStage, Language language) {
+	public static void printWeek(ArrayList<Week> weeks, ObservableList<Member> membersList, String congregationName,
+			Settings settings, Stage ownerStage, Language language) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1817,8 +1817,9 @@ public class Actions {
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
 					Map<String, Object> parameters = new HashMap<String, Object>();
-					parameters.put("congregationName", "CONGREGAZIONE ALBSTADT-ITALIENISCH");
-					parameters.put("programmName", "PROGRAMMA ADUNANZA INFRASETTIMANALE");
+					parameters.put("congregationName",
+							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
+					parameters.put("programmName", language.getString("jasper.layout.meeting.programm"));
 					parameters.put("jrWeekReport", weekJasperReport);
 					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
 

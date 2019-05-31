@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
@@ -18,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -107,6 +106,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private Stage ownerStage;
 	private ObservableList<Week> calendar;
 	private ObservableList<Member> membersList;
+
+	private String congregationName;
 
 	// private ToggleGroup midweekToggleGroup;
 	// private ToggleGroup weekendToggleGroup;
@@ -225,7 +226,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private void initData() {
 		this.weekTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		// setRadioButtonGroup();
-		// loadGeneralInfo();
+		loadGeneralInfo();
 		loadCalendar();
 		updateMembers();
 		// updateWeeks();
@@ -253,38 +254,16 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	// sundayRadioButton.setUserData("7");
 	// }
 
-	// private void loadGeneralInfo() {
-	// Actions.getUserMenuMeetingsInfo(settings, ownerStage, this);
-	// }
+	private void loadGeneralInfo() {
+		Actions.getUserMenuMeetingsInfo(settings, ownerStage, this);
+	}
 
-	// @Override
-	// public void updateInfo(Info info) {
-	// super.updateInfo(info);
-	//
-	// String dayMidweekMeeting = info.getDayMidweekMeeting();
-	// if (dayMidweekMeeting != null) {
-	// switch (dayMidweekMeeting) {
-	// case "1":
-	// midweekToggleGroup.selectToggle(mondayRadioButton);
-	// break;
-	// case "2":
-	// midweekToggleGroup.selectToggle(tuesdayRadioButton);
-	// break;
-	// case "3":
-	// midweekToggleGroup.selectToggle(wednesdayRadioButton);
-	// break;
-	// case "4":
-	// midweekToggleGroup.selectToggle(thursdayRadioButton);
-	// break;
-	// case "5":
-	// midweekToggleGroup.selectToggle(fridayRadioButton);
-	// break;
-	//
-	// default:
-	// midweekToggleGroup.selectToggle(null);
-	// break;
-	// }
-	// }
+	@Override
+	public void updateInfo(Info info) {
+		super.updateInfo(info);
+
+		this.congregationName = info.getCongr();
+	}
 	//
 	// String dayWeekendMeeting = info.getDayWeekendMeeting();
 	// if (dayWeekendMeeting != null) {
@@ -445,10 +424,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 					printableWeeks.add(week);
 
 			if (printableWeeks.size() > 0)
-				Actions.printWeek(printableWeeks, membersList, settings, ownerStage, language);
-			else // TODO: Il messaggio deve essere preso dal language
-				new AlertDesigner("Nessuna settimana stampabile", ownerStage, AlertType.ERROR,
-						Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language);				
 		}
 	}
 
@@ -779,5 +755,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setMembersList(ObservableList<Member> membersList) {
 		this.membersList = membersList;
+	}
+
+	public String getCongregationName() {
+		return congregationName;
+	}
+
+	public void setCongregationName(String congregationName) {
+		this.congregationName = congregationName;
 	}
 }
