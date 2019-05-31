@@ -1734,7 +1734,7 @@ public class Actions {
 			@Override
 			protected Void call() throws Exception {
 
-				String reportPath = Jasper.Layouts.SP_USER_LAYOUT.getAbsolutePath();
+				String reportPath = Jasper.Layouts.SM_NET_USERS_USERS.getAbsolutePath();
 
 				Map<String, Object> parameters = new HashMap<String, Object>();
 				parameters.put("txtaccess", language.getString("jasper.layout.user.txtaccess"));
@@ -1744,7 +1744,7 @@ public class Actions {
 				parameters.put("txturl", language.getString("jasper.layout.user.txturl"));
 				parameters.put("txtkey", language.getString("jasper.layout.user.txtkey"));
 
-				parameters.put("image", Jasper.Layouts.SP_IMAGE_LAYOUT.getAbsolutePath());
+				parameters.put("image", Jasper.Layouts.SM_NET_USERS_LOGO.getAbsolutePath());
 				parameters.put("username", user.getUsername());
 				parameters.put("password", Crypt.decrypt(user.getPasswordEncrypted(), settings.getDatabaseSecretKey()));
 				parameters.put("url", settings.getDatabaseUrl());
@@ -1804,8 +1804,8 @@ public class Actions {
 
 				try {
 
-					String programmReportFile = Jasper.Layouts.SP_PROGRAMM_LAYOUT.getAbsolutePath();
-					String weekReportFile = Jasper.Layouts.SP_WEEK_LAYOUT.getAbsolutePath();
+					String programmReportFile = Jasper.Layouts.SM_NET_MEETINGS_PROGRAMM.getAbsolutePath();
+					String weekReportFile = Jasper.Layouts.SM_NET_MEETINGS_WEEK.getAbsolutePath();
 
 					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
 					JasperReport weekJasperReport = JasperCompileManager.compileReport(weekReportFile);

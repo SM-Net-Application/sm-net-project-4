@@ -114,8 +114,8 @@ public class JRWeek {
 
 		JRWeek jrWeek = new JRWeek();
 
-		String ministryPartReport = Jasper.Layouts.SP_MINISTRY_PART_ROW_LAYOUT.getAbsolutePath();
-		String christiansPartReport = Jasper.Layouts.SP_CHRISTIANS_PART_ROW_LAYOUT.getAbsolutePath();
+		String ministryPartReport = Jasper.Layouts.SM_NET_MEETINGS_MINISTRY_PART_ROW.getAbsolutePath();
+		String christiansPartReport = Jasper.Layouts.SM_NET_MEETINGS_CHRISTIANS_PART_ROW.getAbsolutePath();
 
 		ArrayList<JRMinistryPart> jrMinistryPart = new ArrayList<>();
 		for (MinistryPart ministryPart : week.getMinistryPartList())
