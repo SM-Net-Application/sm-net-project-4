@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -65,6 +66,8 @@ public class UserMenuCongrMemberEditor {
 
 	@FXML
 	private Tab assignmentsTab;
+	@FXML
+	private ScrollPane assignmentsScrollPane;
 
 	@FXML
 	private Label treasuresLabel;
@@ -91,6 +94,8 @@ public class UserMenuCongrMemberEditor {
 
 	@FXML
 	private Tab privilegeTab;
+	@FXML
+	private ScrollPane privilegeScrollPane;
 
 	@FXML
 	private Label conductorLabel;
@@ -213,6 +218,9 @@ public class UserMenuCongrMemberEditor {
 	}
 
 	private void styleClasses() {
+
+		assignmentsScrollPane.getStyleClass().add("scroll_pane_001");
+		privilegeScrollPane.getStyleClass().add("scroll_pane_001");
 
 		memberTabPane.getStyleClass().add("tab_pane_002");
 		memberInfoTabPane.getStyleClass().add("tab_pane_002");

@@ -1,6 +1,7 @@
 package com.sm.net.sp;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 
 import com.sm.net.file.Extensions;
@@ -194,13 +195,20 @@ public class Meta {
 				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_del_50x50.png"));
 		public static final Image USER_MENU_MEETINGS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/meetings.png"));
+		public static final InputStream IS_INFO = SupportPlannerMain.class.getResourceAsStream("resources/info.png");
 		public static final Image INFO = new Image(SupportPlannerMain.class.getResourceAsStream("resources/info.png"));
 		public static final Image CALENDAR = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/calendar.png"));
+		public static final InputStream IS_USER_MENU_MEETINGS_TREASURES = SupportPlannerMain.class
+				.getResourceAsStream("resources/treasures.png");
 		public static final Image USER_MENU_MEETINGS_TREASURES = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/treasures.png"));
+		public static final InputStream IS_USER_MENU_MEETINGS_MINISTRY = SupportPlannerMain.class
+				.getResourceAsStream("resources/ministry.png");
 		public static final Image USER_MENU_MEETINGS_MINISTRY = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/ministry.png"));
+		public static final InputStream IS_USER_MENU_MEETINGS_CHRISTIANS = SupportPlannerMain.class
+				.getResourceAsStream("resources/christians.png");
 		public static final Image USER_MENU_MEETINGS_CHRISTIANS = new Image(
 				SupportPlannerMain.class.getResourceAsStream("resources/christians.png"));
 		public static final Image USER_MENU_MEETINGS_MINISTRY_ADD = new Image(
@@ -256,6 +264,17 @@ public class Meta {
 		public static ImageView imageForTab(Image image) {
 
 			ImageView imageView = new ImageView(image);
+			imageView.setFitWidth(40);
+			imageView.setFitHeight(40);
+			imageView.setPreserveRatio(true);
+			imageView.setSmooth(true);
+
+			return imageView;
+		}
+
+		public static ImageView imageForTab(InputStream is) {
+
+			ImageView imageView = new ImageView(new Image(is, 40, 40, true, true));
 			imageView.setFitWidth(40);
 			imageView.setFitHeight(40);
 			imageView.setPreserveRatio(true);

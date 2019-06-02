@@ -3,7 +3,11 @@
 
 	<!-- Caricare nelle impostazioni dell'IDE (Eclipse) il classpath del progetto per far riconoscere l'icona -->
 
-	<property name="projectPath" value="U:\git\sm-net-project-4" />
+	<!-- PC-Work -->
+	<!-- <property name="projectPath" value="U:\git\sm-net-project-4" /> -->
+	<!-- PC-Home -->
+	<property name="projectPath" value="C:\Users\Salvatore\git\sm-net-project-4" />
+	
 	<property name="applicationVendor" value="SM-Net" />
 	<property name="applicationName" value="Support Planner" />
 	<property name="applicationVersion" value="1.0 (beta)" />

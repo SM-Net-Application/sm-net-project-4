@@ -214,6 +214,21 @@
 	-fx-border-color: #3e86a0;
 }
 
+.tab_pane_001 .tab-down-button 
+{
+	-fx-background-color: #313335;
+}
+
+.tab_pane_001 .context-menu {
+    -fx-background-color: #3c3f41;
+	-fx-text-fill: #bbbbbb;
+}
+
+.tab_pane_001 .context-menu .label {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 12.0pt;
+}
+
 .tab_pane_002 {
 	-fx-background-color: #313335;
 	-fx-tab-min-height:50.0px;

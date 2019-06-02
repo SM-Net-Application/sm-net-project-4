@@ -363,13 +363,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.language = settings.getLanguage();
 
 		generalTab.setText(language.getString("TEXT0043"));
-		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
+		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_INFO));
 		treasuresTab.setText(language.getString("TEXT0080"));
-		treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
+		treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_USER_MENU_MEETINGS_TREASURES));
 		ministryTab.setText(language.getString("TEXT0081"));
-		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
+		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_USER_MENU_MEETINGS_MINISTRY));
 		christiansTab.setText(language.getString("TEXT0082"));
-		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
+		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_USER_MENU_MEETINGS_CHRISTIANS));
 
 		typeWeekLabel.setText(language.getString("TEXT0122"));
 		generalLabel.setText(language.getString("TEXT0079"));
