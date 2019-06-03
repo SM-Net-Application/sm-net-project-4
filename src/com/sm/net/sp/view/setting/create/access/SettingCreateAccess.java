@@ -49,9 +49,9 @@ public class SettingCreateAccess {
 	}
 
 	private void styleClasses() {
-		
+
 		softwareNameLabel.getStyleClass().add("label_software_name");
-		
+
 		labelTitle.getStyleClass().add("label_header_001");
 		labelPassword.getStyleClass().add("label_set_001");
 		labelPasswordConfirm.getStyleClass().add("label_set_001");
@@ -84,14 +84,14 @@ public class SettingCreateAccess {
 		if (!status) {
 			new AlertDesigner(language.getStringWithNewLine("MEX001"), language.getStringWithNewLine("MEX002"),
 					supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 		} else {
 			String passwordConfirm = passwordFiedlPasswordConfirm.getText();
 			status = passwordConfirm.equals(password);
 			if (!status)
 				new AlertDesigner(language.getStringWithNewLine("MEX001"), language.getStringWithNewLine("MEX003"),
 						supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-						Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+						Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 		}
 		return status;
 	}
@@ -102,16 +102,15 @@ public class SettingCreateAccess {
 
 		logoImageView.setFitWidth(100);
 		logoImageView.setFitHeight(100);
-		logoImageView.setImage(Meta.Resources.ICON);
+		logoImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.ICON, 100, 100));
 
-		
 		labelTitle.setText(language.getString("VIEW002LAB001"));
 		labelPassword.setText(language.getString("VIEW002LAB002"));
 		labelPasswordConfirm.setText(language.getString("VIEW002LAB003"));
-		
+
 		buttonCreate.setText(language.getString("VIEW002BUT001"));
 		buttonCreate.setMinWidth(200);
-		buttonCreate.setGraphic(Meta.Resources.imageForButton(Meta.Resources.OK));
+		buttonCreate.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.OK));
 		buttonCreate.setDefaultButton(true);
 	}
 

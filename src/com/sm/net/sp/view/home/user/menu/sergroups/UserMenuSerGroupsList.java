@@ -112,7 +112,7 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 		serGroupImageView.setFitWidth(50);
 		serGroupImageView.setFitHeight(50);
-		serGroupImageView.setImage(Meta.Resources.USER_MENU_SERVICEGROUPS);
+		serGroupImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_SERVICEGROUPS, 50, 50));
 
 		serGroupsTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
 
@@ -131,11 +131,11 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		serGroupsMembersTableColumn.setText(language.getString("TEXT0011"));
 
 		serGroupsAddButton.setText("");
-		serGroupsAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SERVICEGROUPS_ADD));
+		serGroupsAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SERVICEGROUPS_ADD));
 		serGroupsDeleteButton.setText("");
-		serGroupsDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SERVICEGROUPS_DEL));
+		serGroupsDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SERVICEGROUPS_DEL));
 		serGroupsUpdateButton.setText("");
-		serGroupsUpdateButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.UPDATE));
+		serGroupsUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
 	}
 
 	private void listeners() {
@@ -175,7 +175,7 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 			SerGroup serGroup = serGroupsTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0074"), serGroup.getSpInf1Decrypted(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
 
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteSerGroup(String.valueOf(serGroup.getSpSerGrID()), settings, ownerStage, this);

@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="sm-net-project-4" default="do-deploy" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
 
-	<!-- Caricare nelle impostazioni dell'IDE (Eclipse) il classpath del progetto per far riconoscere l'icona -->
+	<!-- Caricare nel Classpath di ANT (livello progetto) il path del progetto Java -->
 
-	<!-- PC-Work -->
-	<!-- <property name="projectPath" value="U:\git\sm-net-project-4" /> -->
-	<!-- PC-Home -->
-	<property name="projectPath" value="C:\Users\Salvatore\git\sm-net-project-4" />
-	
+	<property name="projectPath" value="U:\git\sm-net-project-4" />
 	<property name="applicationVendor" value="SM-Net" />
 	<property name="applicationName" value="Support Planner" />
 	<property name="applicationVersion" value="1.0 (beta)" />
@@ -215,7 +211,6 @@
 		<mkdir dir="build/libs" />
 		<mkdir dir="build/classes" />
 
-		<!-- Copy project-libs references -->
 		<copy todir="build/libs">
 			<fileset dir="externalLibs">
 				<include name="sm-net-easy-html-1.0.jar" />
@@ -255,9 +250,6 @@
 			</fileset>
 		</copy>
 
-		<!-- Copy project references -->
-
-		<!-- Copy project sources itself -->
 		<copy todir="build/src">
 			<fileset dir="project/src">
 				<include name="**/*" />
@@ -272,7 +264,6 @@
 			</classpath>
 		</javac>
 
-		<!-- Copy over none Java-Files -->
 		<copy todir="build/classes">
 			<fileset dir="project/src">
 				<exclude name="**/*.java" />
@@ -309,11 +300,20 @@
 			</fileset>
 		</copy>
 
+		<mkdir dir="dist/resources" />
+
+		<copy todir="dist/resources">
+			<fileset dir="${projectPath}\resources">
+				<include name="**" />
+			</fileset>
+		</copy>
+
 		<fx:resources id="appRes">
 			<fx:fileset dir="dist" includes="sm-net-project-4.jar" />
 			<fx:fileset dir="dist" includes="libs/*" />
 			<fx:fileset dir="dist" includes="languages/**" />
 			<fx:fileset dir="dist" includes="layouts/**" />
+			<fx:fileset dir="dist" includes="resources/**" />
 		</fx:resources>
 
 		<fx:application id="fxApplication" name="${applicationName}" mainClass="com.sm.net.sp.SupportPlannerMain" toolkit="fx" version="${applicationVersion}" />
@@ -336,7 +336,6 @@
 
 
 		<mkdir dir="deploy" />
-		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
 		<fx:deploy verbose="true" embedJNLP="false" extension="false" includeDT="false" offlineAllowed="true" outdir="${basedir}/deploy" outfile="sm-net-project-4" nativeBundles="exe" updatemode="background">
 
 			<fx:platform basedir="${java.home}" />

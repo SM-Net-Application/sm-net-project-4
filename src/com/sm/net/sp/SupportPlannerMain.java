@@ -35,7 +35,7 @@ public class SupportPlannerMain extends Application {
 
 			stage.setScene(scene);
 			stage.setTitle(Meta.Application.getFullTitle());
-			stage.getIcons().add(Meta.Resources.ICON);
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 
 			SupportPlannerView ctrlViewSupportPlanner = (SupportPlannerView) fxmlLoader.getController();
 			ctrlViewSupportPlanner.setViewSupportPlannerStage(stage);

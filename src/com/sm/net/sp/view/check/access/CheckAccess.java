@@ -62,13 +62,13 @@ public class CheckAccess {
 
 		logoImageView.setFitWidth(100);
 		logoImageView.setFitHeight(100);
-		logoImageView.setImage(Meta.Resources.ICON);
+		logoImageView.setImage(Meta.Resources.getImageApplicationLogo());
 
 		passwordLabel.setText(language.getString("VIEW003LAB001"));
 
 		accessButton.setText(language.getString("VIEW003BUT001"));
 		accessButton.setMinWidth(200);
-		accessButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.OK));
+		accessButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.OK));
 		accessButton.setDefaultButton(true);
 		passwordPasswordField.setAlignment(Pos.CENTER);
 	}
@@ -88,7 +88,7 @@ public class CheckAccess {
 		else
 			new AlertDesigner(language.getStringWithNewLine("MEX001"),
 					ctrlViewSupportPlanner.getViewSupportPlannerStage(), AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 	}
 
 	private boolean checkFields() {

@@ -160,7 +160,7 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		assistantLabel.setText(language.getString("TEXT0038"));
 		assistant2Label.setText(language.getString("TEXT0038"));
 
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		saveButton.setText("");
 	}
 

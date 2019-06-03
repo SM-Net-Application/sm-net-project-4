@@ -82,7 +82,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			viewCheckAccess();
 		} catch (IOException e) {
 			new AlertDesigner(Meta.Application.getFullTitle() + " Error:", "No Valid Settings", viewSupportPlannerStage,
-					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 
 			System.exit(0);
 		}
@@ -106,8 +106,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			viewSettingCreateLanguage(languages);
 		else {
 			new AlertDesigner(Meta.Application.getFullTitle() + " Error:", "No Valid File Language",
-					viewSupportPlannerStage, AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON)
-							.show();
+					viewSupportPlannerStage, AlertType.ERROR, Meta.Application.getFullTitle(),
+					Meta.Resources.getImageApplicationIcon()).show();
 
 			System.exit(0);
 		}
@@ -426,7 +426,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		} catch (IOException e) {
 			new AlertDesigner(Meta.Application.getFullTitle() + " Error:", e.getMessage(), viewSupportPlannerStage,
-					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 		}
 	}
 

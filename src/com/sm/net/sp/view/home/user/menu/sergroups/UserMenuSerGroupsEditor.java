@@ -151,10 +151,10 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 		serGroupsFamiliesMembersTableColumn.setText(language.getString("TEXT0011"));
 
 		serGroupsAddFamily.setText("");
-		serGroupsAddFamily.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_FRONT));
+		serGroupsAddFamily.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_FRONT));
 		serGroupsRemoveFamily.setText("");
-		serGroupsRemoveFamily.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		serGroupsRemoveFamily.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_BACK));
+		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		saveButton.setText(language.getString("TEXT0022"));
 	}
 
@@ -335,7 +335,7 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 				newSerGroup(spInf1, spInf2, spInf3, idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 	}
 
 	private void newSerGroup(String spInf1, String spInf2, String spInf3, String idToRemove, String idToSet) {

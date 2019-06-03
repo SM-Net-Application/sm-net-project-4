@@ -63,7 +63,7 @@ public class HomeUserMenuList {
 
 		userImageView.setFitWidth(50);
 		userImageView.setFitHeight(50);
-		userImageView.setImage(Meta.Resources.MENU_SETTINGS_USER);
+		userImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_USER, 50, 50));
 
 		menuLabel.setText(setMenuLabel());
 
@@ -88,7 +88,7 @@ public class HomeUserMenuList {
 			alert.setHeaderText(this.language.getString("MEX009"));
 			alert.setContentText(null);
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(Meta.Resources.ICON);
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 			Optional<ButtonType> button = alert.showAndWait();
 			if (button != null)
 				if (button.get() == ButtonType.OK) {
@@ -190,7 +190,7 @@ public class HomeUserMenuList {
 
 			if (item != null) {
 				setText(language.getString(item.getName()));
-				setGraphic(Meta.Resources.imageForMenu(item.getImage()));
+				setGraphic(Meta.Resources.imageInStackPaneForMenu(item.getImageName()));
 				setGraphicTextGap(25);
 			}
 		}

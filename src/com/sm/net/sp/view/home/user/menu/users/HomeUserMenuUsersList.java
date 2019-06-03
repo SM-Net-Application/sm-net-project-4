@@ -85,7 +85,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		usersImageView.setFitWidth(50);
 		usersImageView.setFitHeight(50);
-		usersImageView.setImage(Meta.Resources.USER_MENU_USERS);
+		usersImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_USERS, 50, 50));
 
 		userLabel.getStyleClass().add("label_header_001");
 
@@ -134,13 +134,13 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnServiceGroups.setEditable(true);
 		userTableColumnMeetings.setEditable(true);
 
-		userAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_USERS_ADD));
+		userAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_USERS_ADD));
 		userAddButton.setText(null);
 
-		userDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_USERS_DEL));
+		userDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_USERS_DEL));
 		userDeleteButton.setText(null);
 
-		userPrintButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.PRINT));
+		userPrintButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
 		userPrintButton.setText(null);
 	}
 
@@ -176,7 +176,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 				Alert alert = new AlertDesigner(language.getString("TEXT0006"), selectedUser.getUsername(),
 						stageSupportPlannerView, AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
-						Meta.Resources.ICON);
+						Meta.Resources.getImageApplicationIcon());
 				if (alert.showAndWait().get() == ButtonType.OK)
 					Actions.deleteUser(String.valueOf(selectedUser.getUserID().get()), settings,
 							stageSupportPlannerView, this);
@@ -206,7 +206,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				Stage stage = new Stage();
 				stage.setScene(scene);
 				stage.setTitle(Meta.Application.getFullTitle());
-				stage.getIcons().add(Meta.Resources.ICON);
+				stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 
 				stage.setResizable(false);
 				stage.setMinWidth(500);

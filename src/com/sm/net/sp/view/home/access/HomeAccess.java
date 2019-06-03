@@ -44,7 +44,7 @@ public class HomeAccess {
 		this.language = settings.getLanguage();
 
 		accessButton.setText(language.getString("VIEW008BUT001"));
-		accessButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.HOME_ACCESS));
+		accessButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.HOME_ACCESS));
 		accessButton.setGraphicTextGap(25.0);
 	}
 
@@ -68,7 +68,7 @@ public class HomeAccess {
 				} else
 					new AlertDesigner(language.getStringWithNewLine("MEX004"),
 							supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 
 			}
 		});

@@ -46,10 +46,10 @@ public class SupportPlannerMenu {
 		this.language = settings.getLanguage();
 
 		configMenuApp.setText(language.getString("VIEW004MEN001"));
-		configMenuApp.setGraphic(Meta.Resources.imageForMenu(Meta.Resources.MENU_APP));
+		configMenuApp.setGraphic(Meta.Resources.imageInStackPaneForMenu(Meta.Resources.MENU_APP));
 
 		configSettingsMenuItem.setText(language.getString("VIEW004MEN002"));
-		configSettingsMenuItem.setGraphic(Meta.Resources.imageForMenu(Meta.Resources.MENU_APP_SETTINGS));
+		configSettingsMenuItem.setGraphic(Meta.Resources.imageInStackPaneForMenu(Meta.Resources.MENU_APP_SETTINGS));
 		configSettingsMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
 	}
 

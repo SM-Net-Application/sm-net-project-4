@@ -2,20 +2,19 @@ package com.sm.net.sp.view.home.user.menu;
 
 import com.sm.net.sp.Meta;
 
-import javafx.scene.image.Image;
-
 public enum EnumHomeUserMenuList {
 
-	USERS("USERMENU001", Meta.Resources.USER_MENU_USERS), CONGREGATION("USERMENU002",
-			Meta.Resources.USER_MENU_CONGR), SERVICEGROUPS("USERMENU003",
-					Meta.Resources.USER_MENU_SERVICEGROUPS), MEETINGS("USERMENU004", Meta.Resources.USER_MENU_MEETINGS);
+	USERS("USERMENU001", Meta.Resources.USER_MENU_USERS),
+	CONGREGATION("USERMENU002", Meta.Resources.USER_MENU_CONGR),
+	SERVICEGROUPS("USERMENU003", Meta.Resources.USER_MENU_SERVICEGROUPS),
+	MEETINGS("USERMENU004", Meta.Resources.USER_MENU_MEETINGS);
 
 	private String name;
-	private Image image;
+	private String imageName;
 
-	private EnumHomeUserMenuList(String name, Image image) {
+	private EnumHomeUserMenuList(String name, String imageName) {
 		this.name = name;
-		this.image = image;
+		this.imageName = imageName;
 	}
 
 	public String getName() {
@@ -26,11 +25,11 @@ public enum EnumHomeUserMenuList {
 		this.name = name;
 	}
 
-	public Image getImage() {
-		return image;
+	public String getImageName() {
+		return imageName;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
+	public void setImage(String imageName) {
+		this.imageName = imageName;
 	}
 }

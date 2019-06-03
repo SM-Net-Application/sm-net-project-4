@@ -473,7 +473,7 @@ public class UserMenuCongrMemberEditor {
 						spInf43, spInf44, spInf45, spInf46);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 	}
 
 	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -579,7 +579,7 @@ public class UserMenuCongrMemberEditor {
 		genderMaleCheckBox.setText(language.getString("TEXT0020"));
 		genderFemaleCheckBox.setText(language.getString("TEXT0021"));
 
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		saveButton.setText(language.getString("TEXT0022"));
 
 		memberAppointmentAndPrivilegeTab.setText(language.getString("TEXT0042"));

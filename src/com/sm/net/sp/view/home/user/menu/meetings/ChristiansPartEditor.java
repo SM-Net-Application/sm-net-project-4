@@ -132,7 +132,7 @@ public class ChristiansPartEditor extends UpdateDataAdapter {
 		materialLabel.setText(language.getString("TEXT0095"));
 		teacherLabel.setText(language.getString("TEXT0098"));
 
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		saveButton.setText("");
 	}
 

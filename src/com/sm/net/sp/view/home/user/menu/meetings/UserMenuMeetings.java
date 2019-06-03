@@ -187,7 +187,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		headerImageView.setFitWidth(50);
 		headerImageView.setFitHeight(50);
-		headerImageView.setImage(Meta.Resources.USER_MENU_MEETINGS);
+		headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_MEETINGS, 50, 50));
 
 		headerLabel.setText(language.getString("USERMENU004"));
 
@@ -219,7 +219,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		// kingdomHallPostcodeLabel.setText(language.getString("TEXT0029"));
 		// kingdomHallCityLabel.setText(language.getString("TEXT0030"));
 
-		printButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.PRINT));
+		printButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
 		printButton.setText(null);
 	}
 
@@ -424,7 +424,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 					printableWeeks.add(week);
 
 			if (printableWeeks.size() > 0)
-				Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language);				
+				Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language);
 		}
 	}
 

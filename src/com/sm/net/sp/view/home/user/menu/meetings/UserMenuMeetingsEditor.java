@@ -363,13 +363,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.language = settings.getLanguage();
 
 		generalTab.setText(language.getString("TEXT0043"));
-		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_INFO));
+		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
 		treasuresTab.setText(language.getString("TEXT0080"));
-		treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_USER_MENU_MEETINGS_TREASURES));
+		treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
 		ministryTab.setText(language.getString("TEXT0081"));
-		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_USER_MENU_MEETINGS_MINISTRY));
+		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
 		christiansTab.setText(language.getString("TEXT0082"));
-		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.IS_USER_MENU_MEETINGS_CHRISTIANS));
+		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
 
 		typeWeekLabel.setText(language.getString("TEXT0122"));
 		generalLabel.setText(language.getString("TEXT0079"));
@@ -402,10 +402,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryMember4TableColumn.setText(language.getString("TEXT0038"));
 
 		ministryPartAddButton.setText(null);
-		ministryPartAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
+		ministryPartAddButton
+				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
 		ministryPartDeleteButton.setText(null);
 		ministryPartDeleteButton
-				.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
+				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
 
 		song2Label.setText(language.getString("TEXT0099"));
 
@@ -417,10 +418,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		christiansPartAddButton.setText(null);
 		christiansPartAddButton
-				.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
+				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
 		christiansPartDeleteButton.setText(null);
 		christiansPartDeleteButton
-				.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
+				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
 
 		congregationBibleStudyLabel.setText(language.getString("TEXT0061"));
 		congregationBibleStudyMinLabel.setText(language.getString("TEXT0089"));
@@ -432,9 +433,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		pray2Label.setText(language.getString("TEXT0102"));
 
 		loadWeekFromWOLButton.setText(null);
-		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
+		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
 		saveWeekButton.setText(null);
-		saveWeekButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 	}
 
 	private void cellValueFactory() {
@@ -903,7 +904,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private void loadWeekFromWOLOnAction() {
 
 		Alert alert = new AlertDesigner(language.getString("TEXT0137"), language.getString("TEXT0138"), ownerStage,
-				AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+				AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
 
 		if (alert.showAndWait().get() == ButtonType.OK) {
 			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
@@ -964,7 +965,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 					} else {
 						new AlertDesigner(language.getString("sp.meetings.wol.error"), ownerStage, AlertType.ERROR,
-								Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+								Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+										.showAndWait();
 					}
 				}
 			}
@@ -992,7 +994,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			MinistryPart ministryPart = ministryTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0097"), ministryPart.printMinistryPart(language),
-					ownerStage, AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+					ownerStage, AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
+					Meta.Resources.getImageApplicationIcon());
 
 			if (alert.showAndWait().get() == ButtonType.OK) {
 				int index = ministryTableView.getSelectionModel().getSelectedIndex();
@@ -1026,7 +1029,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.setTitle(Meta.Application.getFullTitle());
-			stage.getIcons().add(Meta.Resources.ICON);
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 
 			stage.setResizable(false);
 
@@ -1071,7 +1074,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0097"),
 					christiansPart.printChristiansPart(language), ownerStage, AlertType.CONFIRMATION,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON);
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
 
 			if (alert.showAndWait().get() == ButtonType.OK) {
 				int index = christiansPartTableView.getSelectionModel().getSelectedIndex();
@@ -1105,7 +1108,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.setTitle(Meta.Application.getFullTitle());
-			stage.getIcons().add(Meta.Resources.ICON);
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 
 			stage.setResizable(false);
 

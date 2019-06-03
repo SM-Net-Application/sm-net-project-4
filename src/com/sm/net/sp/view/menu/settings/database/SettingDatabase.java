@@ -74,7 +74,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 
 		databaseImageView.setFitWidth(100);
 		databaseImageView.setFitHeight(100);
-		databaseImageView.setImage(Meta.Resources.MENU_SETTINGS_DB);
+		databaseImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_DB, 100, 100));
 
 		titleLabel.setText(language.getString("VIEW005LAB001"));
 
@@ -82,7 +82,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
 
 		userSUButton.setText(language.getString("TEXT0008"));
-		userSUButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SUPERUSER));
+		userSUButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER));
 	}
 
 	private void listeners() {
@@ -109,7 +109,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 	@Override
 	public void usernameExists() {
 		new AlertDesigner(settings.getLanguage().getString("TEXT0009"), ownerStage, AlertType.ERROR,
-				Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.setTitle(Meta.Application.getFullTitle());
-			stage.getIcons().add(Meta.Resources.ICON);
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 
 			stage.setMinWidth(500);
 			stage.setMaxWidth(Double.MAX_VALUE);

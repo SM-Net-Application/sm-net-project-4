@@ -81,7 +81,7 @@ public class SettingDatabaseAddSuperuser {
 
 		superuserImageView.setFitWidth(100);
 		superuserImageView.setFitHeight(100);
-		superuserImageView.setImage(Meta.Resources.SUPERUSER);
+		superuserImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.SUPERUSER, 100, 100));
 
 		superuserLabel.setText(language.getString("TEXT0008"));
 
@@ -91,7 +91,7 @@ public class SettingDatabaseAddSuperuser {
 
 		createButton.setMinWidth(200);
 		createButton.setText(language.getString("VIEW002BUT001"));
-		createButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		createButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 	}
 
 	private void listeners() {
@@ -124,7 +124,8 @@ public class SettingDatabaseAddSuperuser {
 			}
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), language.getStringWithNewLine("MEX002"),
-					thisStage, AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					thisStage, AlertType.ERROR, Meta.Application.getFullTitle(),
+					Meta.Resources.getImageApplicationIcon()).show();
 	}
 
 	protected boolean checkFields(String user, String password, String key) {

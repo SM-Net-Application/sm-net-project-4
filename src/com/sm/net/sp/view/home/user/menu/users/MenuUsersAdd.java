@@ -76,14 +76,14 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 
 		newUserImageView.setFitWidth(100);
 		newUserImageView.setFitHeight(100);
-		newUserImageView.setImage(Meta.Resources.USER_MENU_USERS);
+		newUserImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_USERS, 100, 100));
 
 		titleLabel.setText(language.getString("TEXT0003"));
 
 		usernameLabel.setText(language.getString("VIEW007LAB002"));
 		passwordLabel.setText(language.getString("VIEW002LAB002"));
 
-		createUserButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		createUserButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		createUserButton.setText(language.getString("VIEW002BUT001"));
 	}
 
@@ -107,7 +107,8 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 
 			} else
 				new AlertDesigner(language.getStringWithNewLine("TEXT0004"), language.getStringWithNewLine("MEX002"),
-						thisStage, AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+						thisStage, AlertType.ERROR, Meta.Application.getFullTitle(),
+						Meta.Resources.getImageApplicationIcon()).show();
 		});
 	}
 
@@ -115,7 +116,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	public void usernameExists() {
 
 		new AlertDesigner(settings.getLanguage().getString("TEXT0007"), ownerStage, AlertType.ERROR,
-				Meta.Application.getFullTitle(), Meta.Resources.ICON).showAndWait();
+				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
 	}
 
 	@Override

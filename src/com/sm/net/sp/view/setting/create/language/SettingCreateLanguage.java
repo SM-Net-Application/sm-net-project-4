@@ -48,10 +48,10 @@ public class SettingCreateLanguage {
 
 		logoImageView.setFitWidth(100);
 		logoImageView.setFitHeight(100);
-		logoImageView.setImage(Meta.Resources.ICON);
+		logoImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.ICON, 100, 100));
 
 		buttonNext.setMinWidth(200);
-		buttonNext.setGraphic(Meta.Resources.imageForButton(Meta.Resources.OK));
+		buttonNext.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.OK));
 
 		listeners();
 		dataListViewLang();

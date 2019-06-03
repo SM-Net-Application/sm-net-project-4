@@ -61,7 +61,7 @@ public class SettingUser {
 
 		userImageView.setFitWidth(100);
 		userImageView.setFitHeight(100);
-		userImageView.setImage(Meta.Resources.MENU_SETTINGS_USER);
+		userImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_USER, 100, 100));
 
 		titleLabel.setText(language.getString("VIEW007LAB001"));
 		usernameLabel.setText(language.getString("VIEW007LAB002"));

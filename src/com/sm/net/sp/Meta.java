@@ -1,7 +1,6 @@
 package com.sm.net.sp;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 
 import com.sm.net.file.Extensions;
@@ -129,156 +128,114 @@ public class Meta {
 
 	public static class Resources {
 
-		public static final Image ICON = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/iconSP.png"));
-		public static final Image PRINT = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/print.png"));
-		public static final Image MENU_APP = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/menu_app.png"));
-		public static final Image MENU_APP_SETTINGS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/menu_app_settings.png"));
-		public static final Image MENU_SETTINGS_DB = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/menu_settings_db.png"));
-		public static final Image MENU_SETTINGS_USER = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/menu_settings_user.png"));
-		public static final Image MENU_BACK = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/menu_back.png"));
-		public static final Image HOME_ACCESS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/home_access.png"));
-		public static final Image USER_MENU_LOGOUT = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/logout.png"));
-		public static final Image USER_MENU_USERS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_users.png"));
-		public static final Image USER_MENU_CONGR = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/user_menu_congr.png"));
-		public static final Image USER_MENU_USERS_ADD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/addUser_50x50.png"));
-		public static final Image USER_MENU_USERS_DEL = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/deleteUser_50x50.png"));
-		public static final Image SUPERUSER = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/superuser.png"));
-		public static final Image MEMBER = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/person_35x35.png"));
-		public static final Image MEMBER_ADD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/person_add_50x50.png"));
-		public static final Image MEMBER_DEL = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/person_delete_50x50.png"));
-		public static final Image FAMILY = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/family2_35x35.png"));
-		public static final Image FAMILY_ADD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/family2_add_50x50.png"));
-		public static final Image FAMILY_DEL = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/family2_delete_50x50.png"));
-		public static final Image PLUS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/plus_35x35.png"));
-		public static final Image MEMBER_PERSONAL_INFO = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/personal_info_45x35.png"));
-		public static final Image MEMBER_PRIVILEGES = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/privilege2_45x35.png"));
-		public static final Image MEMBER_CONTACTS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/contacts_45x35.png"));
-		public static final Image SAVE = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/save_50x50.png"));
-		public static final Image UPDATE = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/update.png"));
-		public static final Image ARROW_BACK = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/arrow_back2_50x50.png"));
-		public static final Image ARROW_FRONT = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/arrow_front2_50x50.png"));
-		public static final Image USER_MENU_SERVICEGROUPS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/bag.png"));
-		public static final Image SERVICEGROUPS_GROUP = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/group.png"));
-		public static final Image SERVICEGROUPS_ADD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_add_50x50.png"));
-		public static final Image SERVICEGROUPS_DEL = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/sergroup_del_50x50.png"));
-		public static final Image USER_MENU_MEETINGS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/meetings.png"));
-		public static final InputStream IS_INFO = SupportPlannerMain.class.getResourceAsStream("resources/info.png");
-		public static final Image INFO = new Image(SupportPlannerMain.class.getResourceAsStream("resources/info.png"));
-		public static final Image CALENDAR = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/calendar.png"));
-		public static final InputStream IS_USER_MENU_MEETINGS_TREASURES = SupportPlannerMain.class
-				.getResourceAsStream("resources/treasures.png");
-		public static final Image USER_MENU_MEETINGS_TREASURES = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/treasures.png"));
-		public static final InputStream IS_USER_MENU_MEETINGS_MINISTRY = SupportPlannerMain.class
-				.getResourceAsStream("resources/ministry.png");
-		public static final Image USER_MENU_MEETINGS_MINISTRY = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/ministry.png"));
-		public static final InputStream IS_USER_MENU_MEETINGS_CHRISTIANS = SupportPlannerMain.class
-				.getResourceAsStream("resources/christians.png");
-		public static final Image USER_MENU_MEETINGS_CHRISTIANS = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/christians.png"));
-		public static final Image USER_MENU_MEETINGS_MINISTRY_ADD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/ministry_add.png"));
-		public static final Image USER_MENU_MEETINGS_MINISTRY_DELETE = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/ministry_delete.png"));
-		public static final Image USER_MENU_MEETINGS_CHRISTIANS_ADD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/christians_add.png"));
-		public static final Image USER_MENU_MEETINGS_CHRISTIANS_DELETE = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/christians_delete.png"));
-		public static final Image USER_MENU_MEETINGS_WOL_LOAD = new Image(
-				SupportPlannerMain.class.getResourceAsStream("resources/wol_load.png"));
-		public static final Image OK = new Image(SupportPlannerMain.class.getResourceAsStream("resources/ok.png"));
+		private static final String RESOURCES = "resources";
 
-		public static ImageView imageForButton(Image image) {
+		public static final String ICON = "iconSP.png";
+		public static final String PRINT = "print.png";
+		public static final String MENU_APP = "menu_app.png";
+		public static final String MENU_APP_SETTINGS = "menu_app_settings.png";
+		public static final String MENU_SETTINGS_DB = "menu_settings_db.png";
+		public static final String MENU_SETTINGS_USER = "menu_settings_user.png";
+		public static final String MENU_BACK = "menu_back.png";
+		public static final String HOME_ACCESS = "home_access.png";
+		public static final String USER_MENU_LOGOUT = "logout.png";
+		public static final String USER_MENU_USERS = "user_menu_users.png";
+		public static final String USER_MENU_CONGR = "user_menu_congr.png";
+		public static final String USER_MENU_USERS_ADD = "addUser_50x50.png";
+		public static final String USER_MENU_USERS_DEL = "deleteUser_50x50.png";
+		public static final String SUPERUSER = "superuser.png";
+		public static final String MEMBER = "person_35x35.png";
+		public static final String MEMBER_ADD = "person_add_50x50.png";
+		public static final String MEMBER_DEL = "person_delete_50x50.png";
+		public static final String FAMILY = "family2_35x35.png";
+		public static final String FAMILY_ADD = "family2_add_50x50.png";
+		public static final String FAMILY_DEL = "family2_delete_50x50.png";
+		public static final String PLUS = "plus_35x35.png";
+		public static final String MEMBER_PERSONAL_INFO = "personal_info_45x35.png";
+		public static final String MEMBER_PRIVILEGES = "privilege2_45x35.png";
+		public static final String MEMBER_CONTACTS = "contacts_45x35.png";
+		public static final String SAVE = "save_50x50.png";
+		public static final String UPDATE = "update.png";
+		public static final String ARROW_BACK = "arrow_back2_50x50.png";
+		public static final String ARROW_FRONT = "arrow_front2_50x50.png";
+		public static final String USER_MENU_SERVICEGROUPS = "bag.png";
+		public static final String SERVICEGROUPS_GROUP = "group.png";
+		public static final String SERVICEGROUPS_ADD = "sergroup_add_50x50.png";
+		public static final String SERVICEGROUPS_DEL = "sergroup_del_50x50.png";
+		public static final String USER_MENU_MEETINGS = "meetings.png";
+		public static final String INFO = "info.png";
+		public static final String CALENDAR = "calendar.png";
+		public static final String USER_MENU_MEETINGS_TREASURES = "treasures.png";
+		public static final String USER_MENU_MEETINGS_MINISTRY = "ministry.png";
+		public static final String USER_MENU_MEETINGS_CHRISTIANS = "christians.png";
+		public static final String USER_MENU_MEETINGS_MINISTRY_ADD = "ministry_add.png";
+		public static final String USER_MENU_MEETINGS_MINISTRY_DELETE = "ministry_delete.png";
+		public static final String USER_MENU_MEETINGS_CHRISTIANS_ADD = "christians_add.png";
+		public static final String USER_MENU_MEETINGS_CHRISTIANS_DELETE = "christians_delete.png";
+		public static final String USER_MENU_MEETINGS_WOL_LOAD = "wol_load.png";
+		public static final String OK = "ok.png";
 
+		public static Image getImageFromResources(String imageName, double width, double height) {
+
+			String absoulutePath = PathBuilder.concatFolder(Project.currentWorkingDirectory(), RESOURCES);
+			absoulutePath = PathBuilder.concatFolder(absoulutePath, imageName);
+			File file = new File(absoulutePath);
+
+			if (file.exists())
+				return new Image(file.toURI().toString(), width, height, true, true);
+
+			return null;
+		}
+
+		public static Image getImageApplicationIcon() {
+			return getImageFromResources(Meta.Resources.ICON, 48, 48);
+		}
+
+		public static Image getImageApplicationLogo() {
+			return getImageLogo(Meta.Resources.ICON, 100, 100);
+		}
+
+		public static Image getImageLogo(String imageName, double width, double height) {
+			return getImageFromResources(imageName, width, height);
+		}
+
+		public static ImageView imageViewForButton(String imageName) {
+
+			Image image = getImageFromResources(imageName, 40, 40);
 			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(40);
-			imageView.setFitHeight(40);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
 
 			return imageView;
 		}
 
-		public static ImageView imageForButtonSmall(Image image) {
+		public static ImageView imageForButtonSmall(String imageName) {
 
+			Image image = getImageFromResources(imageName, 25, 25);
 			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(25);
-			imageView.setFitHeight(25);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
 
 			return imageView;
 		}
 
-		public static StackPane imageForMenu(Image image) {
+		public static Image imageForMenu(String imageName) {
+			return getImageFromResources(imageName, 25, 25);
+		}
+
+		public static StackPane imageInStackPaneForMenu(String imageName) {
 
 			StackPane sp = new StackPane();
 			sp.setPadding(new Insets(0.0, 10.0, 0.0, 0.0));
 
+			Image image = getImageFromResources(imageName, 25, 25);
 			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(25);
-			imageView.setFitHeight(25);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
 
 			sp.getChildren().add(imageView);
 
 			return sp;
 		}
 
-		public static ImageView imageForTab(Image image) {
+		public static ImageView imageForTab(String imageName) {
 
+			Image image = getImageFromResources(imageName, 40, 40);
 			ImageView imageView = new ImageView(image);
-			imageView.setFitWidth(40);
-			imageView.setFitHeight(40);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
-
-			return imageView;
-		}
-
-		public static ImageView imageForTab(InputStream is) {
-
-			ImageView imageView = new ImageView(new Image(is, 40, 40, true, true));
-			imageView.setFitWidth(40);
-			imageView.setFitHeight(40);
-			imageView.setPreserveRatio(true);
-			imageView.setSmooth(true);
 
 			return imageView;
 		}

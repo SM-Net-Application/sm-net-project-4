@@ -197,7 +197,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		congrImageView.setFitWidth(50);
 		congrImageView.setFitHeight(50);
-		congrImageView.setImage(Meta.Resources.USER_MENU_CONGR);
+		congrImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_CONGR, 50, 50));
 
 		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
 
@@ -221,13 +221,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		memberNameTableColumn.setText(language.getString("TEXT0014"));
 
 		memberAddButton.setText("");
-		memberAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.MEMBER_ADD));
+		memberAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.MEMBER_ADD));
 
 		memberDeleteButton.setText("");
-		memberDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.MEMBER_DEL));
+		memberDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.MEMBER_DEL));
 
 		membersUpdateButton.setText("");
-		membersUpdateButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.UPDATE));
+		membersUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
 
 		familyIDTableColumn.setText(language.getString("TEXT0005"));
 		familyIDTableColumn.setMinWidth(50);
@@ -241,11 +241,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familyCityTableColumn.setText(language.getString("TEXT0030"));
 
 		familyAddButton.setText("");
-		familyAddButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.FAMILY_ADD));
+		familyAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.FAMILY_ADD));
 		familyDeleteButton.setText("");
-		familyDeleteButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.FAMILY_DEL));
+		familyDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.FAMILY_DEL));
 		familiesUpdateButton.setText("");
-		familiesUpdateButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.UPDATE));
+		familiesUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
 
 		congrLabel.setText(language.getString("sp.congr.name"));
 
@@ -445,7 +445,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			Member member = membersTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0024"), member.getNameStyle1(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteMember(String.valueOf(member.getSpMemberID()), settings, ownerStage, this);
 		}
@@ -459,7 +459,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			Family family = familiesTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0034"), family.getSpInf1Decrypted(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.ICON);
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteFamily(String.valueOf(family.getSpFamID()), settings, ownerStage, this);
 		}

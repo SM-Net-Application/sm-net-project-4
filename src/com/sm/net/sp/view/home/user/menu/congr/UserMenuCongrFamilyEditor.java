@@ -175,10 +175,10 @@ public class UserMenuCongrFamilyEditor {
 		familyMemberNameTableColumn.setText(language.getString("TEXT0014"));
 
 		familyAddMember.setText("");
-		familyAddMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_FRONT));
+		familyAddMember.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_FRONT));
 		familyRemoveMember.setText("");
-		familyRemoveMember.setGraphic(Meta.Resources.imageForButton(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(Meta.Resources.imageForButton(Meta.Resources.SAVE));
+		familyRemoveMember.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_BACK));
+		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		saveButton.setText(language.getString("TEXT0022"));
 	}
 
@@ -305,7 +305,7 @@ public class UserMenuCongrFamilyEditor {
 				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, spInf8, idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.ICON).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
 	}
 
 	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf6,

@@ -51,7 +51,7 @@ public class SettingsList {
 
 		settingsImageView.setFitWidth(50);
 		settingsImageView.setFitHeight(50);
-		settingsImageView.setImage(Meta.Resources.MENU_APP_SETTINGS);
+		settingsImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_APP_SETTINGS, 50, 50));
 
 		settingsLabel.setText(language.getString("VIEW004MEN002"));
 
@@ -132,7 +132,7 @@ public class SettingsList {
 
 			if (item != null) {
 				setText(language.getString(item.getName()));
-				setGraphic(Meta.Resources.imageForButtonSmall(item.getImage()));
+				setGraphic(Meta.Resources.imageForButtonSmall(item.getImageName()));
 				setGraphicTextGap(25);
 			}
 		}
