@@ -589,7 +589,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		selectFirst();
 
-		// updateMembers();
 		updateLists();
 		loadSelectedWeek();
 	}
@@ -607,20 +606,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			}
 		}
 	}
-
-	// @Override
-	// public void updateMembers() {
-	// super.updateMembers();
-	// Actions.getAllMembers(settings, ownerStage, this);
-	// }
-	//
-	// @Override
-	// public void updateMembers(ObservableList<Member> list) {
-	// super.updateMembers(list);
-	// memberList = list;
-	// updateLists();
-	// loadSelectedWeek();
-	// }
 
 	private void updateLists() {
 		resetLists();
@@ -659,6 +644,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			if (member.getSpInf35() == 1)
 				this.prayEndList.add(member);
 		}
+
+		orderLists();
+	}
+
+	private void orderLists() {
+
+		this.presidentList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.prayStartList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.talkList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.diggingList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.bibleReadingList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.congregationBibleStudyList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.prayEndList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 	}
 
 	private void addEmptyMember() {
