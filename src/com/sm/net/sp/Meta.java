@@ -118,6 +118,8 @@ public class Meta {
 				.getResource("UserMenuCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
 				.getResource("UserMenuMeetingsEditor.fxml");
+		public static final URL HOME_USER_MENU_MEETINGS_CIRCUITOVERSEER = UserMenuMeetings.class
+				.getResource("UserMenuMeetingCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_CIRCUITOVERSEER_EDITOR = UserMenuCircuitOverseer.class
 				.getResource("UserMenuCircuitOverseerEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_MINISTRY_PART_EDITOR = UserMenuMeetings.class

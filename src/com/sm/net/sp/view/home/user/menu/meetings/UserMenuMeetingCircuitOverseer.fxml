@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetingCircuitOverseer">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox>
+               <children>
+                  <StackPane alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="overseerLabel" text="overseer">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane>
+                     <children>
+                        <Separator>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Separator>
+                     </children>
+                  </StackPane>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="overseerNameLabel" text="name">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="overseerShortNameLabel" text="shortname">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="overseerSurnameLabel" text="surname">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="overseerNameTextField">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="overseerShortNameTextField" maxWidth="1.7976931348623157E308">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="overseerSurnameTextField" maxWidth="1.7976931348623157E308">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <StackPane>
+               <children>
+                  <Separator>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Separator>
+               </children>
+            </StackPane>
+            <VBox>
+               <children>
+                  <StackPane alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="talk1Label" text="first talk">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane>
+                     <children>
+                        <Separator>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Separator>
+                     </children>
+                  </StackPane>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="talk1SongLabel" text="song">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="talk1MinLabel" text="min">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="talk1ThemeLabel" text="theme">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="talk1SongTextField">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="talk1MinTextField" maxWidth="1.7976931348623157E308">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="talk1ThemeTextField" maxWidth="1.7976931348623157E308">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -15,11 +15,13 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,6 +43,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -237,6 +240,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private Week selectedWeek;
 	private TabPane ownerTabPane;
 	private Tab thisTab;
+
+	private Tab circuitOverseerTab;
 
 	private ObservableList<MinistryTypeTranslated> ministryTypeTranslatedList;
 	private ObservableList<MinistryPart> ministryPartList;
@@ -690,6 +695,20 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 					WeekTypeTranslated weekTypeTranslated = typeWeekListView.getItems().get(i);
 					if (weekTypeTranslated.getOrdinal() == this.selectedWeek.getSpInf2()) {
 						typeWeekListView.getSelectionModel().select(i);
+
+						switch (weekTypeTranslated.getType()) {
+						case CIRCUIT_OVERSEERS_VISIT:
+
+							WeekOverseer weekOverseer = this.selectedWeek.getWeekOverseer();
+							if (weekOverseer != null)
+								addCircuitOverseerTab(weekOverseer, false);
+
+							break;
+
+						default:
+							break;
+						}
+
 						break;
 					}
 				}
@@ -730,6 +749,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	}
 
 	private void listeners() {
+
+		listenerTypeWeekListView();
+
 		listenerMinistryTableView();
 		listenerMinistryPartAddButton();
 		listenerMinistryPartDeleteButton();
@@ -741,6 +763,82 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		listenerLoadWeekFromWOLButton();
 
 		listenerSaveWeekButton();
+	}
+
+	private void listenerTypeWeekListView() {
+		this.typeWeekListView.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> checkAdditionalInfo(oldValue, newValue));
+	}
+
+	private void checkAdditionalInfo(WeekTypeTranslated oldValue, WeekTypeTranslated newValue) {
+
+		switch (newValue.getType()) {
+		case CIRCUIT_OVERSEERS_VISIT:
+
+			if (this.selectedWeek != null) {
+
+				WeekOverseer weekOverseer = this.selectedWeek.getWeekOverseer();
+				if (weekOverseer != null)
+					addCircuitOverseerTab(weekOverseer, true);
+				else
+					Platform.runLater(() -> this.typeWeekListView.getSelectionModel().select(oldValue));
+			}
+
+			break;
+
+		default:
+
+			switch (oldValue.getType()) {
+			case CIRCUIT_OVERSEERS_VISIT:
+				removeCircuitOverseerTab();
+				break;
+
+			default:
+				break;
+			}
+
+			break;
+		}
+
+	}
+
+	private void addCircuitOverseerTab(WeekOverseer weekOverseer, boolean selectTab) {
+
+		try
+
+		{
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_MEETINGS_CIRCUITOVERSEER);
+			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+			this.circuitOverseerTab = new Tab(this.language.getString("TEXT0037"), layout);
+			this.circuitOverseerTab.getStyleClass().add("tab_001");
+			this.circuitOverseerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_CIRCUITOVERSEER));
+			this.tabPane.getTabs().add(this.circuitOverseerTab);
+
+			if (selectTab)
+				this.tabPane.getSelectionModel().select(this.circuitOverseerTab);
+
+			UserMenuMeetingCircuitOverseer ctrl = (UserMenuMeetingCircuitOverseer) fxmlLoader.getController();
+			ctrl.setSettings(this.settings);
+			ctrl.setOwnerStage(ownerStage);
+			ctrl.setOwnerCtrl(this);
+			ctrl.setSelectedWeek(weekOverseer);
+			ctrl.setOwnerTabPane(tabPane);
+			ctrl.setThisTab(this.circuitOverseerTab);
+			ctrl.objectInitialize();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void removeCircuitOverseerTab() {
+
+		this.tabPane.getTabs().remove(this.circuitOverseerTab);
+		this.circuitOverseerTab = null;
 	}
 
 	private void listenerSaveWeekButton() {

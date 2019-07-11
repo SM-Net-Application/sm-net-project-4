@@ -9,15 +9,24 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "SELECT spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5,";
-			$query .= "spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,";
-			$query .= "spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,";
-			$query .= "spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28";
+			$query = "SELECT sp_week.spWeekID, sp_week.spInf1, sp_week.spInf2, sp_week.spInf3, sp_week.spInf4,";
+			$query .= " sp_week.spInf5, sp_week.spInf6, sp_week.spInf7, sp_week.spInf8, sp_week.spInf9, sp_week.spInf10,";
+			$query .= " sp_week.spInf11, sp_week.spInf12, sp_week.spInf13, sp_week.spInf14, sp_week.spInf15, sp_week.spInf16,";
+			$query .= " sp_week.spInf17, sp_week.spInf18, sp_week.spInf19, sp_week.spInf20, sp_week.spInf21, sp_week.spInf22,";
+			$query .= " sp_week.spInf23, sp_week.spInf24, sp_week.spInf25, sp_week.spInf26, sp_week.spInf27, sp_week.spInf28,";
+			$query .= " sp_week_ov.spWeekOvID, sp_week_ov.spInf1 as spInf1_ov, sp_week_ov.spInf2 as spInf2_ov, sp_week_ov.spInf3 as spInf3_ov,";
+			$query .= " sp_week_ov.spInf4 as spInf4_ov, sp_week_ov.spInf5 as spInf5_ov, sp_week_ov.spInf6 as spInf6_ov,";
+			$query .= " sp_week_ov.spInf7 as spInf7_ov, sp_week_ov.spInf8 as spInf8_ov, sp_week_ov.spInf9 as spInf9_ov,";
+			$query .= " sp_week_ov.spInf10 as spInf10_ov, sp_week_ov.spInf11 as spInf11_ov, sp_week_ov.spInf12 as spInf12_ov,";
+			$query .= " sp_week_ov.spInf13 as spInf13_ov, sp_week_ov.spInf14 as spInf14_ov, sp_week_ov.spInf15 as spInf15_ov";
 			$query .= " FROM sp_week";
-			$query .= " WHERE spInf1 BETWEEN";
+			$query .= " LEFT JOIN sp_week_ov";
+			$query .= " ON sp_week.spInf1 = sp_week_ov.spInf1";
+			$query .= " WHERE sp_week.spInf1 BETWEEN";
 			$query .= " " . $jsonObj ["keyStart"];
 			$query .= " AND";
 			$query .= " " . $jsonObj ["keyEnd"];
+			$query .= " ORDER BY sp_week.spInf1";
 			
 			$result = mysqli_query ( $database, $query );
 			
@@ -58,6 +67,24 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 					$row ["spInf26"] = $resultRow ["spInf26"];
 					$row ["spInf27"] = $resultRow ["spInf27"];
 					$row ["spInf28"] = $resultRow ["spInf28"];
+					
+					// Circuit Overseer
+					$row ["spWeekOvID"] = $resultRow ["spWeekOvID"];
+					$row ["spInf1_ov"] = $resultRow ["spInf1_ov"];
+					$row ["spInf2_ov"] = $resultRow ["spInf2_ov"];
+					$row ["spInf3_ov"] = $resultRow ["spInf3_ov"];
+					$row ["spInf4_ov"] = $resultRow ["spInf4_ov"];
+					$row ["spInf5_ov"] = $resultRow ["spInf5_ov"];
+					$row ["spInf6_ov"] = $resultRow ["spInf6_ov"];
+					$row ["spInf7_ov"] = $resultRow ["spInf7_ov"];
+					$row ["spInf8_ov"] = $resultRow ["spInf8_ov"];
+					$row ["spInf9_ov"] = $resultRow ["spInf9_ov"];
+					$row ["spInf10_ov"] = $resultRow ["spInf10_ov"];
+					$row ["spInf11_ov"] = $resultRow ["spInf11_ov"];
+					$row ["spInf12_ov"] = $resultRow ["spInf12_ov"];
+					$row ["spInf13_ov"] = $resultRow ["spInf13_ov"];
+					$row ["spInf14_ov"] = $resultRow ["spInf14_ov"];
+					$row ["spInf15_ov"] = $resultRow ["spInf15_ov"];
 					
 					// Ho bisogno della WeekCode
 					$spInf1 = $resultRow ["spInf1"];

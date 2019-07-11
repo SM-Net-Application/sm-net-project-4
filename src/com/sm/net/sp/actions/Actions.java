@@ -1507,7 +1507,7 @@ public class Actions {
 							JSONArray jsonArray = jsonObject.getJSONArray("result");
 							for (Object object : jsonArray) {
 								JSONObject json = (JSONObject) object;
-								list.add(new WeekOverseer(json, settings.getLanguage(), settings));
+								list.add(new WeekOverseer(json, settings.getLanguage(), settings, false));
 							}
 
 							callback.updateWeeksOverseer(list);

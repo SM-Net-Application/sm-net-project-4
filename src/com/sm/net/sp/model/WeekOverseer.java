@@ -55,24 +55,41 @@ public class WeekOverseer {
 		visitNumber = new SimpleStringProperty("");
 	}
 
-	public WeekOverseer(JSONObject jsonObject, Language language, Settings settings) {
+	public WeekOverseer(JSONObject jsonObject, Language language, Settings settings, boolean forMeeting) {
+
+		String suffix = "";
+		if (forMeeting)
+			suffix = "_ov";
 
 		this.spWeekOvID = new SimpleIntegerProperty(jsonObject.getInt("spWeekOvID"));
-		this.spInf1 = new SimpleIntegerProperty(jsonObject.getInt("spInf1"));
-		this.spInf2 = new SimpleIntegerProperty(jsonObject.getInt("spInf2"));
-		this.spInf3 = new SimpleStringProperty(jsonObject.getString("spInf3"));
-		this.spInf4 = new SimpleStringProperty(jsonObject.getString("spInf4"));
-		this.spInf5 = new SimpleStringProperty(jsonObject.getString("spInf5"));
-		this.spInf6 = new SimpleStringProperty(jsonObject.getString("spInf6"));
-		this.spInf7 = new SimpleStringProperty(jsonObject.getString("spInf7"));
-		this.spInf8 = new SimpleStringProperty(jsonObject.getString("spInf8"));
-		this.spInf9 = new SimpleStringProperty(jsonObject.getString("spInf9"));
-		this.spInf10 = new SimpleStringProperty(jsonObject.getString("spInf10"));
-		this.spInf11 = new SimpleStringProperty(jsonObject.getString("spInf11"));
-		this.spInf12 = new SimpleStringProperty(jsonObject.getString("spInf12"));
-		this.spInf13 = new SimpleStringProperty(jsonObject.getString("spInf13"));
-		this.spInf14 = new SimpleStringProperty(jsonObject.getString("spInf14"));
-		this.spInf15 = new SimpleStringProperty(jsonObject.getString("spInf15"));
+		this.spInf1 = new SimpleIntegerProperty(jsonObject.getInt("spInf1" + suffix));
+		this.spInf2 = new SimpleIntegerProperty(jsonObject.getInt("spInf2" + suffix));
+		this.spInf3 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf3" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf4 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf4" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf5 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf5" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf6 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf6" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf7 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf7" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf8 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf8" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf9 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf9" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf10 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf10" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf11 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf11" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf12 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf12" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf13 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf13" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf14 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf14" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf15 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf15" + suffix), settings.getDatabaseSecretKey()));
 
 		this.setVisitNumber(String.valueOf(this.getSpInf2()));
 		this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
@@ -112,7 +129,7 @@ public class WeekOverseer {
 
 				this.setVisitNumber(String.valueOf(this.getSpInf2()));
 				this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
-				
+
 				break;
 			}
 	}

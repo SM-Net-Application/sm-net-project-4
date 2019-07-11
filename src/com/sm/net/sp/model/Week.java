@@ -63,6 +63,8 @@ public class Week {
 
 	private ObjectProperty<WeekTypeTranslated> weekTypeTranslated;
 
+	private WeekOverseer weekOverseer;
+
 	public Week(LocalDate day, Language language) {
 		super();
 
@@ -116,6 +118,10 @@ public class Week {
 
 		weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 				new WeekTypeTranslated(WeekType.EMPTY, language));
+
+		String spWeekOvID = jsonObject.getString("spWeekOvID");
+		if (!spWeekOvID.isEmpty())
+			weekOverseer = new WeekOverseer(jsonObject, language, settings, true);
 	}
 
 	private ObservableList<MinistryPart> getMinistryPartsList(JSONObject jsonObject, Language language,
@@ -196,6 +202,8 @@ public class Week {
 
 				this.setMinistryPartList(week.getMinistryPartList());
 				this.setChristiansPartList(week.getChristiansPartList());
+
+				this.weekOverseer = week.getWeekOverseer();
 
 				break;
 			}
@@ -744,6 +752,14 @@ public class Week {
 			this.spInf28 = new SimpleIntegerProperty();
 
 		this.spInf28Property().set(spInf28);
+	}
+
+	public WeekOverseer getWeekOverseer() {
+		return weekOverseer;
+	}
+
+	public void setWeekOverseer(WeekOverseer weekOverseer) {
+		this.weekOverseer = weekOverseer;
 	}
 
 }
