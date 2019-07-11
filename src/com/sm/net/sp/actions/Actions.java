@@ -20,6 +20,7 @@ import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
@@ -222,7 +223,8 @@ public class Actions {
 							ownerStage.close();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -277,7 +279,8 @@ public class Actions {
 							ownerStage.close();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -331,7 +334,8 @@ public class Actions {
 					if (result != null)
 						if (!result.booleanValue())
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -385,7 +389,8 @@ public class Actions {
 							callback.updateUsers();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -453,7 +458,8 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -516,7 +522,8 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -575,7 +582,8 @@ public class Actions {
 							Actions.getAllMembers(settings, ownerStage, callback);
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -700,7 +708,8 @@ public class Actions {
 							Actions.getAllMembers(settings, ownerStage, callback);
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -760,7 +769,8 @@ public class Actions {
 							callback.updateMembers();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -816,7 +826,8 @@ public class Actions {
 							ownerCtrl.updateFamilies();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -886,7 +897,8 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1018,7 +1030,8 @@ public class Actions {
 							ownerCtrl.updateFamilies();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1083,7 +1096,8 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1147,7 +1161,8 @@ public class Actions {
 							callback.updateSerGroups();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1249,7 +1264,8 @@ public class Actions {
 							ownerCtrl.updateSerGroups();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1371,7 +1387,8 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1430,7 +1447,8 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -1451,6 +1469,185 @@ public class Actions {
 								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
 								spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26,
 								spInf27, spInf28, spInfMinistryParts, spInfChristiansParts));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Get All Circuit Overseer Week
+	 * 
+	 * @param weekStart
+	 * @param weekEnd
+	 */
+	public static void getAllCircuitOverseerWeeks(WeekOverseer weekStart, WeekOverseer weekEnd, Settings settings,
+			Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							ObservableList<WeekOverseer> list = FXCollections.observableArrayList();
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								list.add(new WeekOverseer(json, settings.getLanguage(), settings));
+							}
+
+							callback.updateWeeksOverseer(list);
+
+						} else {
+							callback.updateWeeks(null);
+						}
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_ALL_CIRCUITOVERSEER_WEEKS(weekStart, weekEnd));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Insert Circuit Overseer Week
+	 */
+	public static void insertOverseerWeek(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
+			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
+			String spInf13, String spInf14, String spInf15, Settings settings, Stage ownerStage, TabPane tabPane,
+			Tab newTab, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							tabPane.getTabs().remove(newTab);
+							callback.updateWeeksOverseer();
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.INSERT_CIRCUITOVERSEER_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
+								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	/**
+	 * Update Circuit Overseer Week
+	 */
+	public static void updateOverseerWeek(String spWeekOvID, String spInf1, String spInf2, String spInf3, String spInf4,
+			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
+			String spInf12, String spInf13, String spInf14, String spInf15, Settings settings, Stage ownerStage,
+			TabPane tabPane, Tab newTab, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							tabPane.getTabs().remove(newTab);
+							callback.updateWeeksOverseer();
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.UPDATE_OVERSEER_WEEK(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6,
+								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15));
 			}
 		};
 
@@ -1530,7 +1727,8 @@ public class Actions {
 					if (result != null)
 						if (!result.booleanValue())
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 
 				});
 				setOnCancelled(value -> {
@@ -1577,7 +1775,8 @@ public class Actions {
 					if (result != null)
 						if (!result.booleanValue())
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
+											.showAndWait();
 
 				});
 				setOnCancelled(value -> {

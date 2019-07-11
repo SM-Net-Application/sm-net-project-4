@@ -23,19 +23,19 @@
 	<classpathentry kind="lib" path="lib/javax.inject-1.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-path-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-project-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-file-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-javafx-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-util-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-jw-wol-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-directory-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-auth-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-easy-html-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.11.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient-4.5.5.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-4.4.9.jar"/>
 	<classpathentry kind="lib" path="lib/commons-validator-1.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-auth-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-directory-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-easy-html-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-file-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-javafx-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-jw-wol-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-path-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-project-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sm-net-util-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

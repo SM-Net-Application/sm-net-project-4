@@ -51,4 +51,12 @@ public class UpdateDataAdapter implements UpdateData {
 	@Override
 	public void updateInfo(Info info) {
 	}
+
+	@Override
+	public void updateWeeksOverseer(ObservableList<WeekOverseer> list) {
+	}
+
+	@Override
+	public void updateWeeksOverseer() {
+	}
 }

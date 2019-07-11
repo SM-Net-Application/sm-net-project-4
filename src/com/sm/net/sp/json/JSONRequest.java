@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.util.enumeration.JSONStatus;
 
 /**
@@ -413,6 +414,63 @@ public class JSONRequest {
 		jsonObj.put("spInf28", spInf28);
 		jsonObj.put("spInfMP", spInfMinistryParts);
 		jsonObj.put("spInfCP", spInfChristiansParts);
+
+		return jsonObj;
+	}
+
+	public static JSONObject GET_ALL_CIRCUITOVERSEER_WEEKS(WeekOverseer weekStart, WeekOverseer weekEnd) {
+		JSONObject jsonObj = create(Integer.valueOf(28));
+		jsonObj.put("keyStart", weekStart.getKey());
+		jsonObj.put("keyEnd", weekEnd.getKey());
+		return jsonObj;
+	}
+
+	public static JSONObject INSERT_CIRCUITOVERSEER_WEEK(String spInf1, String spInf2, String spInf3, String spInf4,
+			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
+			String spInf12, String spInf13, String spInf14, String spInf15) {
+
+		JSONObject jsonObj = create(Integer.valueOf(29));
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("spInf6", spInf6);
+		jsonObj.put("spInf7", spInf7);
+		jsonObj.put("spInf8", spInf8);
+		jsonObj.put("spInf9", spInf9);
+		jsonObj.put("spInf10", spInf10);
+		jsonObj.put("spInf11", spInf11);
+		jsonObj.put("spInf12", spInf12);
+		jsonObj.put("spInf13", spInf13);
+		jsonObj.put("spInf14", spInf14);
+		jsonObj.put("spInf15", spInf15);
+
+		return jsonObj;
+	}
+
+	public static JSONObject UPDATE_OVERSEER_WEEK(String spWeekOvID, String spInf1, String spInf2, String spInf3,
+			String spInf4, String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10,
+			String spInf11, String spInf12, String spInf13, String spInf14, String spInf15) {
+
+		JSONObject jsonObj = create(Integer.valueOf(30));
+
+		jsonObj.put("spWeekOvID", spWeekOvID);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("spInf6", spInf6);
+		jsonObj.put("spInf7", spInf7);
+		jsonObj.put("spInf8", spInf8);
+		jsonObj.put("spInf9", spInf9);
+		jsonObj.put("spInf10", spInf10);
+		jsonObj.put("spInf11", spInf11);
+		jsonObj.put("spInf12", spInf12);
+		jsonObj.put("spInf13", spInf13);
+		jsonObj.put("spInf14", spInf14);
+		jsonObj.put("spInf15", spInf15);
 
 		return jsonObj;
 	}

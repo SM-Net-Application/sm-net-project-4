@@ -27,4 +27,8 @@ public interface UpdateData {
 	public abstract void checkInfo(boolean exists);
 
 	public abstract void updateInfo(Info info);
+
+	public abstract void updateWeeksOverseer(ObservableList<WeekOverseer> list);
+
+	public abstract void updateWeeksOverseer();
 }

@@ -11,6 +11,7 @@ import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
+import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
@@ -113,8 +114,12 @@ public class Meta {
 		public static final URL HOME_USER_MENU_SERGROUPS_EDITOR = UserMenuSerGroupsList.class
 				.getResource("UserMenuSerGroupsEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS = UserMenuMeetings.class.getResource("UserMenuMeetings.fxml");
+		public static final URL HOME_USER_MENU_CIRCUITOVERSEER = UserMenuCircuitOverseer.class
+				.getResource("UserMenuCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
 				.getResource("UserMenuMeetingsEditor.fxml");
+		public static final URL HOME_USER_MENU_CIRCUITOVERSEER_EDITOR = UserMenuCircuitOverseer.class
+				.getResource("UserMenuCircuitOverseerEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_MINISTRY_PART_EDITOR = UserMenuMeetings.class
 				.getResource("MinistryPartEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_CHRISTIANS_PART_EDITOR = UserMenuMeetings.class
@@ -163,8 +168,10 @@ public class Meta {
 		public static final String SERVICEGROUPS_ADD = "sergroup_add_50x50.png";
 		public static final String SERVICEGROUPS_DEL = "sergroup_del_50x50.png";
 		public static final String USER_MENU_MEETINGS = "meetings.png";
+		public static final String USER_MENU_CIRCUITOVERSEER = "overseer.png";
 		public static final String INFO = "info.png";
 		public static final String CALENDAR = "calendar.png";
+		public static final String TALKS = "talks.png";
 		public static final String USER_MENU_MEETINGS_TREASURES = "treasures.png";
 		public static final String USER_MENU_MEETINGS_MINISTRY = "ministry.png";
 		public static final String USER_MENU_MEETINGS_CHRISTIANS = "christians.png";
