@@ -9,6 +9,7 @@ import com.sm.net.project.Project;
 import com.sm.net.sp.view.SupportPlannerMenu;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.check.access.CheckAccess;
+import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
@@ -126,6 +127,7 @@ public class Meta {
 				.getResource("MinistryPartEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_CHRISTIANS_PART_EDITOR = UserMenuMeetings.class
 				.getResource("ChristiansPartEditor.fxml");
+		public static final URL HISTORY = History.class.getResource("History.fxml");
 	}
 
 	public static class Themes {
@@ -183,6 +185,12 @@ public class Meta {
 		public static final String USER_MENU_MEETINGS_CHRISTIANS_DELETE = "christians_delete.png";
 		public static final String USER_MENU_MEETINGS_WOL_LOAD = "wol_load.png";
 		public static final String OK = "ok.png";
+		public static final String HISTORY = "history.png";
+		public static final String SEARCH = "search.png";
+		public static final String FUTURE = "future.png";
+		public static final String PAST = "past.png";
+		public static final String PRESENT = "present.png";
+		public static final String NOTHING = "nothing.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 
@@ -226,6 +234,10 @@ public class Meta {
 
 		public static Image imageForMenu(String imageName) {
 			return getImageFromResources(imageName, 25, 25);
+		}
+
+		public static Image imageForWindowsIcon(String imageName) {
+			return getImageFromResources(imageName, 48, 48);
 		}
 
 		public static StackPane imageInStackPaneForMenu(String imageName) {

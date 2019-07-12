@@ -105,6 +105,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 	private ObservableList<Week> calendar;
+	private ObservableList<Week> databaseWeeks;
 	private ObservableList<Member> membersList;
 
 	private String congregationName;
@@ -380,7 +381,9 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	public void updateWeeks(ObservableList<Week> list) {
 		super.updateWeeks(list);
 
+		this.databaseWeeks = null;
 		if (list != null) {
+			this.databaseWeeks = list;
 			for (Week week : this.calendar)
 				week.updateOnlineWeekInfo(list, this.language, this.settings);
 
@@ -685,6 +688,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedWeek(week);
+				ctrl.setDatabaseWeeks(this.databaseWeeks);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -763,5 +767,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setCongregationName(String congregationName) {
 		this.congregationName = congregationName;
+	}
+
+	public ObservableList<Week> getDatabaseWeeks() {
+		return databaseWeeks;
+	}
+
+	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
+		this.databaseWeeks = databaseWeeks;
 	}
 }

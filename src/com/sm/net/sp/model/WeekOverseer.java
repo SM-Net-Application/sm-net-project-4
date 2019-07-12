@@ -113,20 +113,35 @@ public class WeekOverseer {
 				this.setSpWeekOvID(week.getSpWeekOvID());
 				this.setSpInf1(week.getSpInf1());
 				this.setSpInf2(week.getSpInf2());
-				this.setSpInf3(Crypt.decrypt(week.getSpInf3(), settings.getDatabaseSecretKey()));
-				this.setSpInf4(Crypt.decrypt(week.getSpInf4(), settings.getDatabaseSecretKey()));
-				this.setSpInf5(Crypt.decrypt(week.getSpInf5(), settings.getDatabaseSecretKey()));
-				this.setSpInf6(Crypt.decrypt(week.getSpInf6(), settings.getDatabaseSecretKey()));
-				this.setSpInf7(Crypt.decrypt(week.getSpInf7(), settings.getDatabaseSecretKey()));
-				this.setSpInf8(Crypt.decrypt(week.getSpInf8(), settings.getDatabaseSecretKey()));
-				this.setSpInf9(Crypt.decrypt(week.getSpInf9(), settings.getDatabaseSecretKey()));
-				this.setSpInf10(Crypt.decrypt(week.getSpInf10(), settings.getDatabaseSecretKey()));
-				this.setSpInf11(Crypt.decrypt(week.getSpInf11(), settings.getDatabaseSecretKey()));
-				this.setSpInf12(Crypt.decrypt(week.getSpInf12(), settings.getDatabaseSecretKey()));
-				this.setSpInf13(Crypt.decrypt(week.getSpInf13(), settings.getDatabaseSecretKey()));
-				this.setSpInf14(Crypt.decrypt(week.getSpInf14(), settings.getDatabaseSecretKey()));
-				this.setSpInf15(Crypt.decrypt(week.getSpInf15(), settings.getDatabaseSecretKey()));
+				
+				this.setSpInf3(week.getSpInf3());
+				this.setSpInf4(week.getSpInf4());
+				this.setSpInf5(week.getSpInf5());
+				this.setSpInf6(week.getSpInf6());
+				this.setSpInf7(week.getSpInf7());
+				this.setSpInf8(week.getSpInf8());
+				this.setSpInf9(week.getSpInf9());
+				this.setSpInf10(week.getSpInf10());
+				this.setSpInf11(week.getSpInf11());
+				this.setSpInf12(week.getSpInf12());
+				this.setSpInf13(week.getSpInf13());
+				this.setSpInf14(week.getSpInf14());
+				this.setSpInf15(week.getSpInf15());
 
+//				this.setSpInf3(Crypt.decrypt(week.getSpInf3(), settings.getDatabaseSecretKey()));
+//				this.setSpInf4(Crypt.decrypt(week.getSpInf4(), settings.getDatabaseSecretKey()));
+//				this.setSpInf5(Crypt.decrypt(week.getSpInf5(), settings.getDatabaseSecretKey()));
+//				this.setSpInf6(Crypt.decrypt(week.getSpInf6(), settings.getDatabaseSecretKey()));
+//				this.setSpInf7(Crypt.decrypt(week.getSpInf7(), settings.getDatabaseSecretKey()));
+//				this.setSpInf8(Crypt.decrypt(week.getSpInf8(), settings.getDatabaseSecretKey()));
+//				this.setSpInf9(Crypt.decrypt(week.getSpInf9(), settings.getDatabaseSecretKey()));
+//				this.setSpInf10(Crypt.decrypt(week.getSpInf10(), settings.getDatabaseSecretKey()));
+//				this.setSpInf11(Crypt.decrypt(week.getSpInf11(), settings.getDatabaseSecretKey()));
+//				this.setSpInf12(Crypt.decrypt(week.getSpInf12(), settings.getDatabaseSecretKey()));
+//				this.setSpInf13(Crypt.decrypt(week.getSpInf13(), settings.getDatabaseSecretKey()));
+//				this.setSpInf14(Crypt.decrypt(week.getSpInf14(), settings.getDatabaseSecretKey()));
+//				this.setSpInf15(Crypt.decrypt(week.getSpInf15(), settings.getDatabaseSecretKey()));
+				
 				this.setVisitNumber(String.valueOf(this.getSpInf2()));
 				this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
 

@@ -13,12 +13,14 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
+import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.history.History;
 import com.sm.net.util.Crypt;
 
 import javafx.application.Platform;
@@ -32,8 +34,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -44,6 +48,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -256,6 +261,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<Member> bibleReadingList;
 	private ObservableList<Member> congregationBibleStudyList;
 	private ObservableList<Member> prayEndList;
+
+	private ObservableList<Week> databaseWeeks;
 
 	@FXML
 	private void initialize() {
@@ -548,8 +555,74 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public void objectInitialize() {
 		viewUpdate();
+		contextMenu();
 		initData();
 		listeners();
+	}
+
+	private void contextMenu() {
+
+		presidentComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRESIDENT_MIDWEEK));
+		pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY1_MIDWEEK));
+		talkComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.TALK_MIDWEEK));
+		diggingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.DIGGING_MIDWEEK));
+		congregationBibleStudyComboBox
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_MIDWEEK));
+		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY2_MIDWEEK));
+	}
+
+	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
+
+		String menuItemText = String.format(language.getString("sp.meetings.history"),
+				privilege.getTranslatedName(language));
+
+		StackPane graphic = Meta.Resources.imageInStackPaneForMenu(Meta.Resources.SEARCH);
+
+		MenuItem menuItem = new MenuItem(menuItemText, graphic);
+		menuItem.getStyleClass().add("menu_item_001");
+		menuItem.setOnAction(event -> openHistory(privilege, menuItemText));
+
+		ContextMenu contextMenu = new ContextMenu(menuItem);
+
+		return contextMenu;
+	}
+
+	private void openHistory(Privileges privilege, String title) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.HISTORY);
+			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+			Scene scene = new Scene(layout);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(ownerStage);
+			stage.setTitle(title);
+			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
+
+			stage.setMinWidth(1000);
+			stage.setMinHeight(500);
+
+			History ctrl = (History) fxmlLoader.getController();
+			ctrl.setLayout(layout);
+			ctrl.setPrivilege(privilege);
+			ctrl.setMembers(memberList);
+			ctrl.setLanguage(language);
+			ctrl.setDatabaseWeeks(this.databaseWeeks);
+			ctrl.setSelectedWeek(this.selectedWeek);
+			ctrl.objectInitialize();
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void initData() {
@@ -783,20 +856,18 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				else
 					Platform.runLater(() -> this.typeWeekListView.getSelectionModel().select(oldValue));
 			}
-
 			break;
 
 		default:
 
 			switch (oldValue.getType()) {
 			case CIRCUIT_OVERSEERS_VISIT:
+
 				removeCircuitOverseerTab();
 				break;
-
 			default:
 				break;
 			}
-
 			break;
 		}
 
@@ -1315,4 +1386,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.memberList = memberList;
 	}
 
+	public ObservableList<Week> getDatabaseWeeks() {
+		return databaseWeeks;
+	}
+
+	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
+		this.databaseWeeks = databaseWeeks;
+	}
 }
