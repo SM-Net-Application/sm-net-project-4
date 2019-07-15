@@ -48,6 +48,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnMeetings;
 	@FXML
+	private TableColumn<User, Boolean> userTableColumnOverseer;
+	@FXML
 	private Button userAddButton;
 	@FXML
 	private Button userDeleteButton;
@@ -70,6 +72,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnCongregations.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnCongregations));
 		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
 		userTableColumnMeetings.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMeetings));
+		userTableColumnOverseer.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnOverseer));
 	}
 
 	private void tableColumnsCellValueFactory() {
@@ -79,6 +82,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnCongregations.setCellValueFactory(cellData -> cellData.getValue().spInf2Property());
 		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().spInf3Property());
 		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().spInf4Property());
+		userTableColumnOverseer.setCellValueFactory(cellData -> cellData.getValue().spInf5Property());
 	}
 
 	private void styleClasses() {
@@ -99,6 +103,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnCongregations.getStyleClass().add("check_box_001");
 		userTableColumnServiceGroups.getStyleClass().add("check_box_001");
 		userTableColumnMeetings.getStyleClass().add("check_box_001");
+		userTableColumnOverseer.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -121,6 +126,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnCongregations.setText(language.getString("USERMENU002"));
 		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
 		userTableColumnMeetings.setText(language.getString("USERMENU004"));
+		userTableColumnOverseer.setText(language.getString("USERMENU005"));
 
 		userTableView.setEditable(true);
 		userTableColumnID.setMinWidth(50);

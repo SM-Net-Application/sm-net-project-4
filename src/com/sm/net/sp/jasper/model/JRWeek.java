@@ -10,6 +10,7 @@ import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 
 import javafx.collections.ObservableList;
@@ -55,6 +56,12 @@ public class JRWeek {
 	private String christiansSong3;
 	private String christiansPray2;
 	private String christiansPray2Name;
+
+	private String overseerHeader;
+	private String overseerMinTalk1;
+	private String overseerThemeTalk1;
+	private String overseerName;
+	private String overseerSongTalk1;
 
 	private JasperReport jasperReportMinistryPart;
 	private JasperReport jasperReportChristiansPart;
@@ -103,14 +110,21 @@ public class JRWeek {
 		this.christiansSong3 = "";
 		this.christiansPray2 = "";
 		this.christiansPray2Name = "";
+
+		this.overseerHeader = "";
+		this.overseerMinTalk1 = "";
+		this.overseerThemeTalk1 = "";
+		this.overseerName = "";
+		this.overseerSongTalk1 = "";
+
 		this.jasperReportMinistryPart = null;
 		this.jasperReportChristiansPart = null;
 		this.jrDataSourceMinistryPart = null;
 		this.jrDataSourceChristiansPart = null;
 	}
 
-	public static JRWeek newObject(Week week, ObservableList<Member> membersList, Language language)
-			throws JRException {
+	public static JRWeek newObject(Week week, ObservableList<Member> membersList, Language language,
+			boolean extendedName) throws JRException {
 
 		JRWeek jrWeek = new JRWeek();
 
@@ -119,13 +133,13 @@ public class JRWeek {
 
 		ArrayList<JRMinistryPart> jrMinistryPart = new ArrayList<>();
 		for (MinistryPart ministryPart : week.getMinistryPartList())
-			jrMinistryPart.add(JRMinistryPart.newObject(ministryPart, language));
+			jrMinistryPart.add(JRMinistryPart.newObject(ministryPart, language, extendedName));
 
 		jrWeek.setJrDataSourceMinistryPart(new JRBeanCollectionDataSource(jrMinistryPart));
 
 		ArrayList<JRChristiansPart> jrChristiansPart = new ArrayList<>();
 		for (ChristiansPart christiansPart : week.getChristiansPartList())
-			jrChristiansPart.add(JRChristiansPart.newObject(christiansPart, language));
+			jrChristiansPart.add(JRChristiansPart.newObject(christiansPart, language, extendedName));
 
 		jrWeek.setJrDataSourceChristiansPart(new JRBeanCollectionDataSource(jrChristiansPart));
 		jrWeek.setJasperReportMinistryPart(JasperCompileManager.compileReport(ministryPartReport));
@@ -138,6 +152,33 @@ public class JRWeek {
 		if (weekType != null)
 			jrWeek.setWeekTypeText(language.getString(weekType.getName()));
 
+		// Circuit overseer
+		if (spInf2 == 4) {
+			WeekOverseer weekOverseer = week.getWeekOverseer();
+			if (weekOverseer != null) {
+				String overseerName = weekOverseer.getSpInf3();
+				String overseerShortName = weekOverseer.getSpInf4();
+				String overseerSurname = weekOverseer.getSpInf5();
+				String overseerSongTalk1 = weekOverseer.getSpInf8();
+				String overseerMinTalk1 = weekOverseer.getSpInf9();
+				String overseerThemeTalk1 = weekOverseer.getSpInf10();
+
+				jrWeek.setOverseerHeader(language.getString("TEXT0131").toUpperCase());
+
+				jrWeek.setOverseerMinTalk1(
+						String.format(language.getString("jasper.layout.meeting.min"), overseerMinTalk1));
+				jrWeek.setOverseerThemeTalk1(overseerThemeTalk1);
+
+				if (extendedName)
+					jrWeek.setOverseerName(overseerSurname + " " + overseerName);
+				else
+					jrWeek.setOverseerName(overseerSurname + " " + overseerShortName);
+
+				jrWeek.setOverseerSongTalk1(
+						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk1));
+			}
+		}
+
 		jrWeek.setWeekHeader(checkWeekHeader(week, spInf2, language));
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
@@ -148,7 +189,10 @@ public class JRWeek {
 
 		Member member = getMemberFromList(membersList, week.getSpInf4());
 		if (member != null)
-			jrWeek.setTreasuresPray1Name(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setTreasuresPray1Name(member.getNameStyle3());
+			else
+				jrWeek.setTreasuresPray1Name(member.getNameStyle4());
 
 		jrWeek.setTreasuresOpeningCommentsMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf7()));
@@ -156,15 +200,22 @@ public class JRWeek {
 		jrWeek.setTreasuresOpeningCommentsText(week.getSpInf8());
 
 		member = getMemberFromList(membersList, week.getSpInf3());
-		if (member != null)
-			jrWeek.setTreasuresPresident(member.getNameStyle4());
+		if (member != null) {
+			if (extendedName)
+				jrWeek.setTreasuresPresident(member.getNameStyle3());
+			else
+				jrWeek.setTreasuresPresident(member.getNameStyle4());
+		}
 
 		jrWeek.setTreasuresTalkMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf9()));
 		jrWeek.setTreasuresTalkTheme(week.getSpInf10());
 
 		member = getMemberFromList(membersList, week.getSpInf11());
 		if (member != null)
-			jrWeek.setTreasuresTalkName(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setTreasuresTalkName(member.getNameStyle3());
+			else
+				jrWeek.setTreasuresTalkName(member.getNameStyle4());
 
 		jrWeek.setTreasuresDiggingMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf12()));
@@ -172,7 +223,10 @@ public class JRWeek {
 
 		member = getMemberFromList(membersList, week.getSpInf14());
 		if (member != null)
-			jrWeek.setTreasuresDiggingName(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setTreasuresDiggingName(member.getNameStyle3());
+			else
+				jrWeek.setTreasuresDiggingName(member.getNameStyle4());
 
 		jrWeek.setTreasuresBibleReadingMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf15()));
@@ -182,11 +236,17 @@ public class JRWeek {
 
 		member = getMemberFromList(membersList, week.getSpInf18());
 		if (member != null)
-			jrWeek.setTreasuresBibleReadingName1(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setTreasuresBibleReadingName1(member.getNameStyle3());
+			else
+				jrWeek.setTreasuresBibleReadingName1(member.getNameStyle4());
 
 		member = getMemberFromList(membersList, week.getSpInf28());
 		if (member != null)
-			jrWeek.setTreasuresBibleReadingName2(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setTreasuresBibleReadingName2(member.getNameStyle3());
+			else
+				jrWeek.setTreasuresBibleReadingName2(member.getNameStyle4());
 
 		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
 
@@ -200,7 +260,10 @@ public class JRWeek {
 
 		member = getMemberFromList(membersList, week.getSpInf23());
 		if (member != null)
-			jrWeek.setChristiansBibleStudyName(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setChristiansBibleStudyName(member.getNameStyle3());
+			else
+				jrWeek.setChristiansBibleStudyName(member.getNameStyle4());
 
 		jrWeek.setChristiansBibleStudyReaderName("");
 
@@ -215,7 +278,10 @@ public class JRWeek {
 
 		member = getMemberFromList(membersList, week.getSpInf27());
 		if (member != null)
-			jrWeek.setChristiansPray2Name(member.getNameStyle4());
+			if (extendedName)
+				jrWeek.setChristiansPray2Name(member.getNameStyle3());
+			else
+				jrWeek.setChristiansPray2Name(member.getNameStyle4());
 
 		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
@@ -558,6 +624,46 @@ public class JRWeek {
 
 	public void setWeekTypeText(String weekTypeText) {
 		this.weekTypeText = weekTypeText;
+	}
+
+	public String getOverseerMinTalk1() {
+		return overseerMinTalk1;
+	}
+
+	public void setOverseerMinTalk1(String overseerMinTalk1) {
+		this.overseerMinTalk1 = overseerMinTalk1;
+	}
+
+	public String getOverseerThemeTalk1() {
+		return overseerThemeTalk1;
+	}
+
+	public void setOverseerThemeTalk1(String overseerThemeTalk1) {
+		this.overseerThemeTalk1 = overseerThemeTalk1;
+	}
+
+	public String getOverseerName() {
+		return overseerName;
+	}
+
+	public void setOverseerName(String overseerName) {
+		this.overseerName = overseerName;
+	}
+
+	public String getOverseerSongTalk1() {
+		return overseerSongTalk1;
+	}
+
+	public void setOverseerSongTalk1(String overseerSongTalk1) {
+		this.overseerSongTalk1 = overseerSongTalk1;
+	}
+
+	public String getOverseerHeader() {
+		return overseerHeader;
+	}
+
+	public void setOverseerHeader(String overseerHeader) {
+		this.overseerHeader = overseerHeader;
 	}
 
 }

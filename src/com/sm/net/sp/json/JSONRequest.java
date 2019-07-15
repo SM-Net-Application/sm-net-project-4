@@ -60,7 +60,7 @@ public class JSONRequest {
 	}
 
 	public static JSONObject UPDATE_USER_RULES(String spUserID, String spInf1, String spInf2, String spInf3,
-			String spInf4) {
+			String spInf4, String spInf5) {
 
 		JSONObject jsonObj = create(Integer.valueOf(5));
 		jsonObj.put("spUserID", spUserID);
@@ -68,6 +68,7 @@ public class JSONRequest {
 		jsonObj.put("spInf2", spInf2);
 		jsonObj.put("spInf3", spInf3);
 		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
 		return jsonObj;
 	}
 

@@ -28,6 +28,7 @@ public class User {
 	private BooleanProperty spInf2;
 	private BooleanProperty spInf3;
 	private BooleanProperty spInf4;
+	private BooleanProperty spInf5;
 
 	private StringProperty passwordEncrypted;
 
@@ -44,13 +45,14 @@ public class User {
 		this.spInf2.addListener(listenerUpdateRules(settings, ownerStage, callback));
 		this.spInf3.addListener(listenerUpdateRules(settings, ownerStage, callback));
 		this.spInf4.addListener(listenerUpdateRules(settings, ownerStage, callback));
+		this.spInf5.addListener(listenerUpdateRules(settings, ownerStage, callback));
 	}
 
 	private ChangeListener<? super Boolean> listenerUpdateRules(Settings settings, Stage ownerStage,
 			UpdateData callback) {
 
 		return (observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(), getSpRole(spInf1.get()),
-				getSpRole(spInf2.get()), getSpRole(spInf3.get()), getSpRole(spInf4.get()), settings, ownerStage,
+				getSpRole(spInf2.get()), getSpRole(spInf3.get()), getSpRole(spInf4.get()), getSpRole(spInf5.get()), settings, ownerStage,
 				callback);
 	}
 
@@ -65,6 +67,7 @@ public class User {
 		this.spInf2 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf2")));
 		this.spInf3 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf3")));
 		this.spInf4 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf4")));
+		this.spInf5 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf5")));
 
 		this.passwordEncrypted = new SimpleStringProperty(jsonObject.getString("spUserPassword"));
 	}
@@ -183,6 +186,18 @@ public class User {
 
 	public final void setPasswordEncrypted(final String passwordEncrypted) {
 		this.passwordEncryptedProperty().set(passwordEncrypted);
+	}
+
+	public final BooleanProperty spInf5Property() {
+		return this.spInf5;
+	}
+
+	public final boolean isSpInf5() {
+		return this.spInf5Property().get();
+	}
+
+	public final void setSpInf5(final boolean spInf5) {
+		this.spInf5Property().set(spInf5);
 	}
 
 }

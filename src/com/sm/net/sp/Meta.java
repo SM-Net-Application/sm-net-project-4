@@ -232,6 +232,10 @@ public class Meta {
 			return imageView;
 		}
 
+		public static Image imageForImage(String imageName) {
+			return getImageFromResources(imageName, 50, 50);
+		}
+
 		public static Image imageForMenu(String imageName) {
 			return getImageFromResources(imageName, 25, 25);
 		}

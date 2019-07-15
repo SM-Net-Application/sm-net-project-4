@@ -7,6 +7,7 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MemberHistory;
+import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
 
@@ -41,17 +42,18 @@ public class History {
 	private TableColumn<MemberHistory, ImageView> memberLastDateStatusTableColumn;
 
 	@FXML
-	private TableView<MemberHistory> privilegesTableView;
+	private TableView<PrivilegeHistory> privilegesTableView;
 	@FXML
-	private TableColumn<MemberHistory, String> privilegesDateTableColumn;
+	private TableColumn<PrivilegeHistory, String> privilegesDateTableColumn;
 	@FXML
-	private TableColumn<MemberHistory, ImageView> privilegesStatusTableColumn;
+	private TableColumn<PrivilegeHistory, ImageView> privilegesStatusTableColumn;
 	@FXML
-	private TableColumn<MemberHistory, String> privilegesNameTableColumn;
+	private TableColumn<PrivilegeHistory, String> privilegesNameTableColumn;
 
 	private Language language;
 	private ObservableList<Member> members;
 	private ObservableList<MemberHistory> membersPrivilege;
+	private ObservableList<PrivilegeHistory> memberPrivilegeHistory;
 	private Privileges privilege;
 	private ObservableList<Week> databaseWeeks;
 	private Week selectedWeek;
@@ -83,6 +85,15 @@ public class History {
 
 		memberLastDateStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
 				Meta.Resources.imageForTab(cellData.getValue().getStatus())));
+
+		privilegesDateTableColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
+
+		privilegesStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
+				Meta.Resources.imageForTab(cellData.getValue().getStatus())));
+
+		privilegesNameTableColumn.setCellValueFactory(
+				cellData -> new SimpleStringProperty(cellData.getValue().getPrivilege().getTranslatedName(language)));
 	}
 
 	public void objectInitialize() {
@@ -106,8 +117,58 @@ public class History {
 			MemberHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
 			this.brotherLabel.setText(String.format(language.getString("sp.history.brotherselected"),
 					member.getMember().getNameStyle1()));
+
+			checkPrivilegeMember(member);
+
 		} else
 			brotherLabel.setText(language.getString("sp.history.select"));
+	}
+
+	private void checkPrivilegeMember(MemberHistory member) {
+
+		this.memberPrivilegeHistory = FXCollections.observableArrayList();
+
+		int memberID = member.getMember().getSpMemberID();
+		for (Week week : databaseWeeks) {
+
+			if (memberID == week.getSpInf3())
+				checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
+
+			if (memberID == week.getSpInf4())
+				checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
+
+			if (memberID == week.getSpInf11())
+				checkPrivilege(Privileges.TALK_MIDWEEK, week);
+
+			if (memberID == week.getSpInf14())
+				checkPrivilege(Privileges.DIGGING_MIDWEEK, week);
+
+			if (memberID == week.getSpInf23())
+				checkPrivilege(Privileges.CONGRBIBLESTUDY_MIDWEEK, week);
+
+			if (memberID == week.getSpInf27())
+				checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+		}
+
+		this.privilegesTableView.setItems(memberPrivilegeHistory);
+	}
+
+	private void checkPrivilege(Privileges privilege, Week week) {
+
+		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
+		if (checkPrivilegeHistory != null)
+			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
+		else
+			this.memberPrivilegeHistory.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
+	}
+
+	private PrivilegeHistory privilegeHistoryContains(Privileges privilege) {
+
+		for (PrivilegeHistory ph : this.memberPrivilegeHistory)
+			if (ph.getPrivilege() == privilege)
+				return ph;
+
+		return null;
 	}
 
 	private void setLastDates() {
@@ -148,8 +209,8 @@ public class History {
 		memberLastDateStatusTableColumn.setMaxWidth(50);
 
 		privilegesDateTableColumn.setText(language.getString("sp.history.date"));
-		privilegesDateTableColumn.setMinWidth(250);
-		privilegesDateTableColumn.setMaxWidth(250);
+		privilegesDateTableColumn.setMinWidth(100);
+		privilegesDateTableColumn.setMaxWidth(100);
 		privilegesStatusTableColumn.setText("");
 		privilegesStatusTableColumn.setMinWidth(50);
 		privilegesStatusTableColumn.setMaxWidth(50);

@@ -19,7 +19,7 @@ public class JRChristiansPart {
 		this.teacher = teacher;
 	}
 
-	public static JRChristiansPart newObject(ChristiansPart christiansPart, Language language) {
+	public static JRChristiansPart newObject(ChristiansPart christiansPart, Language language, boolean extendedName) {
 
 		String min = String.format(language.getString("jasper.layout.meeting.min"),
 				String.valueOf(christiansPart.getMin()));
@@ -31,7 +31,12 @@ public class JRChristiansPart {
 		String teacherName = "";
 		Member teacher = christiansPart.getTeacher();
 		if (teacher != null) {
-			teacherName = teacher.getNameStyle4();
+
+			if (extendedName)
+				teacherName = teacher.getNameStyle3();
+			else
+				teacherName = teacher.getNameStyle4();
+
 			if (teacherName.trim().equals(language.getString("TEXT0096")))
 				teacherName = "";
 		}

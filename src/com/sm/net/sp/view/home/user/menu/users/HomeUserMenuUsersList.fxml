@@ -53,6 +53,7 @@
                         <TableColumn fx:id="userTableColumnCongregations" prefWidth="75.0" text="congr" />
                         <TableColumn fx:id="userTableColumnServiceGroups" prefWidth="75.0" text="sergr" />
                         <TableColumn fx:id="userTableColumnMeetings" prefWidth="75.0" text="meeting" />
+                        <TableColumn fx:id="userTableColumnOverseer" prefWidth="75.0" text="overseer" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

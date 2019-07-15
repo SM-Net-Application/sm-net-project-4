@@ -1,6 +1,6 @@
 <?php
 // Update user rules
-if (isset ( $jsonObj ["spUserID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] )) {
+if (isset ( $jsonObj ["spUserID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] )) {
 	if (! empty ( $jsonObj ["spUserID"] )) {
 		require_once __DIR__ . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
@@ -13,7 +13,8 @@ if (isset ( $jsonObj ["spUserID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( 
 			$query .= " spInf1=" . $jsonObj ["spInf1"] . ", ";
 			$query .= " spInf2=" . $jsonObj ["spInf2"] . ", ";
 			$query .= " spInf3=" . $jsonObj ["spInf3"] . ", ";
-			$query .= " spInf4=" . $jsonObj ["spInf4"];
+			$query .= " spInf4=" . $jsonObj ["spInf4"] . ", ";
+			$query .= " spInf5=" . $jsonObj ["spInf5"];
 			$query .= " WHERE spUserID=" . $jsonObj ["spUserID"];
 			
 			if ($database->query ( $query ) === TRUE) {

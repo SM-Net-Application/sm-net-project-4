@@ -576,11 +576,14 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		String menuItemText = String.format(language.getString("sp.meetings.history"),
 				privilege.getTranslatedName(language));
 
+		String historyTitle = String.format(language.getString("sp.history.title"), menuItemText,
+				this.selectedWeek.getFrom().toString());
+
 		StackPane graphic = Meta.Resources.imageInStackPaneForMenu(Meta.Resources.SEARCH);
 
 		MenuItem menuItem = new MenuItem(menuItemText, graphic);
 		menuItem.getStyleClass().add("menu_item_001");
-		menuItem.setOnAction(event -> openHistory(privilege, menuItemText));
+		menuItem.setOnAction(event -> openHistory(privilege, historyTitle));
 
 		ContextMenu contextMenu = new ContextMenu(menuItem);
 

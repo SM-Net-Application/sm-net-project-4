@@ -3,6 +3,32 @@
 	-fx-background-color: #282828;
 }
 
+.alert_001 {
+	-fx-background-color: #282828;
+}
+
+.alert_001 .label {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 12.0pt;
+}
+
+.dialog_001 {
+	-fx-background-color: #282828;
+}
+
+.dialog_001 .button {
+	-fx-border-color: #5e6060;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+	-fx-background-color: #3c3f41;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 14.0pt;
+}
+
+.dialog_001 .button:hover {
+	-fx-background-color: #4c5052;
+}
+
 .scroll_pane_001 {
 	-fx-background-color: transparent;
 }

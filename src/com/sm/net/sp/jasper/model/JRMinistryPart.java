@@ -24,7 +24,7 @@ public class JRMinistryPart {
 		this.student2 = student2;
 	}
 
-	public static JRMinistryPart newObject(MinistryPart ministryPart, Language language) {
+	public static JRMinistryPart newObject(MinistryPart ministryPart, Language language, boolean extendedName) {
 
 		Integer partType = Integer.valueOf(ministryPart.getMinistryTypeTranslated().getOrdinal());
 
@@ -38,7 +38,12 @@ public class JRMinistryPart {
 		String student1Name = "";
 		Member student1 = ministryPart.getStudent();
 		if (student1 != null) {
-			student1Name = student1.getNameStyle4();
+
+			if (extendedName)
+				student1Name = student1.getNameStyle3();
+			else
+				student1Name = student1.getNameStyle4();
+
 			if (student1Name.trim().equals(language.getString("TEXT0096")))
 				student1Name = "";
 		}
@@ -46,7 +51,12 @@ public class JRMinistryPart {
 		String assistant1Name = "";
 		Member assistant1 = ministryPart.getAssistant();
 		if (assistant1 != null) {
-			assistant1Name = assistant1.getNameStyle4();
+
+			if (extendedName)
+				assistant1Name = assistant1.getNameStyle3();
+			else
+				assistant1Name = assistant1.getNameStyle4();
+
 			if (assistant1Name.trim().equals(language.getString("TEXT0096")))
 				assistant1Name = "";
 		}
@@ -57,7 +67,12 @@ public class JRMinistryPart {
 		String student2Name = "";
 		Member student2 = ministryPart.getStudent2();
 		if (student2 != null) {
-			student2Name = student2.getNameStyle4();
+
+			if (extendedName)
+				student2Name = student2.getNameStyle3();
+			else
+				student2Name = student2.getNameStyle4();
+
 			if (student2Name.trim().equals(language.getString("TEXT0096")))
 				student2Name = "";
 		}
@@ -65,7 +80,12 @@ public class JRMinistryPart {
 		String assistant2Name = "";
 		Member assistant2 = ministryPart.getAssistant2();
 		if (assistant2 != null) {
-			assistant2Name = assistant2.getNameStyle4();
+
+			if (extendedName)
+				assistant2Name = assistant2.getNameStyle3();
+			else
+				assistant2Name = assistant2.getNameStyle4();
+
 			if (assistant2Name.trim().equals(language.getString("TEXT0096")))
 				assistant2Name = "";
 		}

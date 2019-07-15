@@ -36,6 +36,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
@@ -310,13 +311,14 @@ public class Actions {
 	 * Update User Rules
 	 * 
 	 * @param spUserID
+	 * @param string
 	 * @param spRoleAdmin
 	 * @param settings
 	 * @param ownerStage
 	 * @param callback
 	 */
 	public static void updateUserRules(String spUserID, String spInf1, String spInf2, String spInf3, String spInf4,
-			Settings settings, Stage ownerStage, UpdateData callback) {
+			String spInf5, Settings settings, Stage ownerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -352,7 +354,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.UPDATE_USER_RULES(spUserID, spInf1, spInf2, spInf3, spInf4));
+						JSONRequest.UPDATE_USER_RULES(spUserID, spInf1, spInf2, spInf3, spInf4, spInf5));
 			}
 		};
 
@@ -1979,7 +1981,7 @@ public class Actions {
 	}
 
 	public static void printWeek(ArrayList<Week> weeks, ObservableList<Member> membersList, String congregationName,
-			Settings settings, Stage ownerStage, Language language) {
+			Settings settings, Stage ownerStage, Language language, boolean extendedName) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -2015,14 +2017,14 @@ public class Actions {
 
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
 					for (Week week : weeks)
-						jrWeeks.add(JRWeek.newObject(week, membersList, language));
+						jrWeeks.add(JRWeek.newObject(week, membersList, language, extendedName));
 
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
 					Map<String, Object> parameters = new HashMap<String, Object>();
 					parameters.put("congregationName",
 							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
-					parameters.put("programmName", language.getString("jasper.layout.meeting.programm"));
+					parameters.put("programmName", language.getString("jasper.layout.meeting.programm").toUpperCase());
 					parameters.put("jrWeekReport", weekJasperReport);
 					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
 
@@ -2059,6 +2061,11 @@ public class Actions {
 	private static Alert createWaitAlert(Settings settings, String title, String contentText, Stage stageOwner) {
 
 		Alert waitAlert = new Alert(AlertType.NONE);
+
+		DialogPane dialogPane = waitAlert.getDialogPane();
+		dialogPane.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+		dialogPane.getStyleClass().add("alert_001");
+
 		waitAlert.setResult(ButtonType.OK);
 
 		waitAlert.setTitle(title);

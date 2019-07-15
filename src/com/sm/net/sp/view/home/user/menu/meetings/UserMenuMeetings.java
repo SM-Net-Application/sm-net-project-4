@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.sm.net.util.DateUtil;
 
 import javafx.collections.FXCollections;
@@ -426,8 +428,31 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				if (week.spWeekIDProperty() != null)
 					printableWeeks.add(week);
 
-			if (printableWeeks.size() > 0)
-				Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language);
+			if (printableWeeks.size() > 0) {
+
+				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
+
+				if (selectedLayout != null) {
+
+					switch (selectedLayout) {
+
+					case MEETING_MIDWEEK_NAME_EXTENDED:
+						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
+								true);
+						break;
+
+					case MEETING_MIDWEEK_NAME_SHORT:
+						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
+								false);
+						break;
+
+					default:
+						break;
+					}
+
+				}
+			}
 		}
 	}
 

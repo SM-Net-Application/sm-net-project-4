@@ -22,10 +22,10 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 			$query .= " FROM sp_week";
 			$query .= " LEFT JOIN sp_week_ov";
 			$query .= " ON sp_week.spInf1 = sp_week_ov.spInf1";
-			$query .= " WHERE sp_week.spInf1 BETWEEN";
-			$query .= " " . $jsonObj ["keyStart"];
-			$query .= " AND";
-			$query .= " " . $jsonObj ["keyEnd"];
+			//$query .= " WHERE sp_week.spInf1 BETWEEN";
+			//$query .= " " . $jsonObj ["keyStart"];
+			//$query .= " AND";
+			//$query .= " " . $jsonObj ["keyEnd"];
 			$query .= " ORDER BY sp_week.spInf1";
 			
 			$result = mysqli_query ( $database, $query );
