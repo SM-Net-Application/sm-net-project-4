@@ -6,7 +6,7 @@
 	<property name="projectPath" value="U:\git\sm-net-project-4" />
 	<property name="applicationVendor" value="SM-Net" />
 	<property name="applicationName" value="Support Planner" />
-	<property name="applicationVersion" value="1.0 (beta 3)" />
+	<property name="applicationVersion" value="1.0 (beta 4)" />
 
 	<target name="init-fx-tasks">
 		<path id="fxant">
@@ -47,7 +47,7 @@
 		</copy>
 		<copy todir="externalLibs">
 			<fileset dir="${projectPath}\lib">
-				<filename name="sm-net-javafx-1.0.jar" />
+				<filename name="sm-net-javafx-1.1.jar" />
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
@@ -228,7 +228,7 @@
 				<include name="ecj-4.4.2.jar" />
 				<include name="jackson-annotations-2.9.8.jar" />
 				<include name="sm-net-util-1.0.jar" />
-				<include name="sm-net-javafx-1.0.jar" />
+				<include name="sm-net-javafx-1.1.jar" />
 				<include name="sm-net-project-1.0.jar" />
 				<include name="castor-xml-1.4.1.jar" />
 				<include name="jackson-core-2.9.8.jar" />
