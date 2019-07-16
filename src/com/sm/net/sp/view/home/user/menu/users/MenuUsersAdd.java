@@ -108,7 +108,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 			} else
 				new AlertDesigner(language.getStringWithNewLine("TEXT0004"), language.getStringWithNewLine("MEX002"),
 						thisStage, AlertType.ERROR, Meta.Application.getFullTitle(),
-						Meta.Resources.getImageApplicationIcon()).show();
+						Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 		});
 	}
 
@@ -116,7 +116,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	public void usernameExists() {
 
 		new AlertDesigner(settings.getLanguage().getString("TEXT0007"), ownerStage, AlertType.ERROR,
-				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 	}
 
 	@Override

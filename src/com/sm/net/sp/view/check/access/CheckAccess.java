@@ -88,7 +88,7 @@ public class CheckAccess {
 		else
 			new AlertDesigner(language.getStringWithNewLine("MEX001"),
 					ctrlViewSupportPlanner.getViewSupportPlannerStage(), AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private boolean checkFields() {

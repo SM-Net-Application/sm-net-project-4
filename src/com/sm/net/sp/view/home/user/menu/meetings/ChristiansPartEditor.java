@@ -151,7 +151,7 @@ public class ChristiansPartEditor extends UpdateDataAdapter {
 	private void updateTeachersListView() {
 
 		for (Member member : membersList)
-			if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
+			if (member.getSpInf32() == 1)
 				validMembersList.add(member);
 
 		setListView(validMembersList);

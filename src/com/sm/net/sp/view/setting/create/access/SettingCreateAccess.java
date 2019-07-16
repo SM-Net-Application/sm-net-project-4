@@ -84,14 +84,14 @@ public class SettingCreateAccess {
 		if (!status) {
 			new AlertDesigner(language.getStringWithNewLine("MEX001"), language.getStringWithNewLine("MEX002"),
 					supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 		} else {
 			String passwordConfirm = passwordFiedlPasswordConfirm.getText();
 			status = passwordConfirm.equals(password);
 			if (!status)
 				new AlertDesigner(language.getStringWithNewLine("MEX001"), language.getStringWithNewLine("MEX003"),
 						supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-						Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
+						Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 		}
 		return status;
 	}

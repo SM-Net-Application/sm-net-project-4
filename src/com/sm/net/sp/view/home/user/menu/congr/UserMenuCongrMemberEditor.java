@@ -473,7 +473,7 @@ public class UserMenuCongrMemberEditor {
 						spInf43, spInf44, spInf45, spInf46);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,

@@ -335,7 +335,7 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 				newSerGroup(spInf1, spInf2, spInf3, idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private void newSerGroup(String spInf1, String spInf2, String spInf3, String idToRemove, String idToSet) {

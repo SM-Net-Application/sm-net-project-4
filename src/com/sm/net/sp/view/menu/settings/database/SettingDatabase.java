@@ -109,7 +109,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 	@Override
 	public void usernameExists() {
 		new AlertDesigner(settings.getLanguage().getString("TEXT0009"), ownerStage, AlertType.ERROR,
-				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).showAndWait();
+				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 	}
 
 	@Override

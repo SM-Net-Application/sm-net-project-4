@@ -78,6 +78,13 @@ public class MemberHistory {
 			if (this.member.getSpMemberID() == week.getSpInf27())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
+		case CHRISTIAN_LIFE:
+			ObservableList<ChristiansPart> christiansPartList = week.getChristiansPartList();
+			for (ChristiansPart christiansPart : christiansPartList) {
+				if (this.member.getSpMemberID() == christiansPart.getTeacher().getSpMemberID())
+					from = checkLastDate(from, week.getSpInf1());
+			}
+			break;
 		}
 
 		if (from != null)

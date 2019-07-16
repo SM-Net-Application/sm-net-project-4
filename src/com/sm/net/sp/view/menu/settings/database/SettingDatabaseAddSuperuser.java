@@ -125,7 +125,7 @@ public class SettingDatabaseAddSuperuser {
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), language.getStringWithNewLine("MEX002"),
 					thisStage, AlertType.ERROR, Meta.Application.getFullTitle(),
-					Meta.Resources.getImageApplicationIcon()).show();
+					Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	protected boolean checkFields(String user, String password, String key) {

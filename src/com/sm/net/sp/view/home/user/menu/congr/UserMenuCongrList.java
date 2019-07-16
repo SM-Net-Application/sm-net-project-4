@@ -445,7 +445,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			Member member = membersTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0024"), member.getNameStyle1(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteMember(String.valueOf(member.getSpMemberID()), settings, ownerStage, this);
 		}
@@ -459,7 +459,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			Family family = familiesTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0034"), family.getSpInf1Decrypted(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteFamily(String.valueOf(family.getSpFamID()), settings, ownerStage, this);
 		}

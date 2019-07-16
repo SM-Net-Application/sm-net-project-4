@@ -68,7 +68,7 @@ public class HomeAccess {
 				} else
 					new AlertDesigner(language.getStringWithNewLine("MEX004"),
 							supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon()).show();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 
 			}
 		});

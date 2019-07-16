@@ -7,9 +7,22 @@
 	-fx-background-color: #282828;
 }
 
+.alert_001 .header-panel {
+	-fx-background-color: #45494a;
+}
+
 .alert_001 .label {
 	-fx-text-fill: #bbbbbb;
 	-fx-font-size: 12.0pt;
+}
+
+.alert_001 .button {
+	-fx-border-color: #5e6060;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+	-fx-background-color: #3c3f41;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 14.0pt;
 }
 
 .dialog_001 {

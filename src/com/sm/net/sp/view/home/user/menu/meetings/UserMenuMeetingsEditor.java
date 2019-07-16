@@ -569,6 +569,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		congregationBibleStudyComboBox
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_MIDWEEK));
 		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY2_MIDWEEK));
+		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CHRISTIAN_LIFE));
 	}
 
 	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
@@ -608,7 +609,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			stage.setTitle(title);
 			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
 
-			stage.setMinWidth(1000);
+			stage.setMinWidth(1050);
 			stage.setMinHeight(500);
 
 			History ctrl = (History) fxmlLoader.getController();
@@ -1074,7 +1075,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private void loadWeekFromWOLOnAction() {
 
 		Alert alert = new AlertDesigner(language.getString("TEXT0137"), language.getString("TEXT0138"), ownerStage,
-				AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
+				AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+				Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 
 		if (alert.showAndWait().get() == ButtonType.OK) {
 			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
@@ -1135,8 +1137,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 					} else {
 						new AlertDesigner(language.getString("sp.meetings.wol.error"), ownerStage, AlertType.ERROR,
-								Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon())
-										.showAndWait();
+								Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+								Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					}
 				}
 			}
@@ -1165,7 +1167,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0097"), ministryPart.printMinistryPart(language),
 					ownerStage, AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
-					Meta.Resources.getImageApplicationIcon());
+					Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 
 			if (alert.showAndWait().get() == ButtonType.OK) {
 				int index = ministryTableView.getSelectionModel().getSelectedIndex();
@@ -1244,7 +1246,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0097"),
 					christiansPart.printChristiansPart(language), ownerStage, AlertType.CONFIRMATION,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon());
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 
 			if (alert.showAndWait().get() == ButtonType.OK) {
 				int index = christiansPartTableView.getSelectionModel().getSelectedIndex();

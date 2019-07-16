@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -83,11 +84,16 @@ public class HomeUserMenuList {
 		menuButton.setOnAction(value -> {
 
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+			DialogPane dialogPane = alert.getDialogPane();
+			dialogPane.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+			dialogPane.getStyleClass().add("alert_001");
+
 			alert.initOwner(stageSupportPlannerView);
 			alert.setTitle(Meta.Application.getFullTitle());
-			alert.setHeaderText(this.language.getString("MEX009"));
-			alert.setContentText(null);
-			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+			alert.setHeaderText("Logout");
+			alert.setContentText(this.language.getString("MEX009"));
+			Stage stage = (Stage) dialogPane.getScene().getWindow();
 			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 			Optional<ButtonType> button = alert.showAndWait();
 			if (button != null)

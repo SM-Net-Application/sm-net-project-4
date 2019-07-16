@@ -182,7 +182,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 				Alert alert = new AlertDesigner(language.getString("TEXT0006"), selectedUser.getUsername(),
 						stageSupportPlannerView, AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
-						Meta.Resources.getImageApplicationIcon());
+						Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 				if (alert.showAndWait().get() == ButtonType.OK)
 					Actions.deleteUser(String.valueOf(selectedUser.getUserID().get()), settings,
 							stageSupportPlannerView, this);

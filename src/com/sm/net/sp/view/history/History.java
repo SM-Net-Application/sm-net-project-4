@@ -128,28 +128,34 @@ public class History {
 
 		this.memberPrivilegeHistory = FXCollections.observableArrayList();
 
-		int memberID = member.getMember().getSpMemberID();
-		for (Week week : databaseWeeks) {
+		if (selectedWeek.spInf1Property() != null) {
 
-			if (memberID == week.getSpInf3())
-				checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
+			int memberID = member.getMember().getSpMemberID();
+			for (Week week : databaseWeeks) {
 
-			if (memberID == week.getSpInf4())
-				checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
+				if (memberID == week.getSpInf3())
+					checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
 
-			if (memberID == week.getSpInf11())
-				checkPrivilege(Privileges.TALK_MIDWEEK, week);
+				if (memberID == week.getSpInf4())
+					checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
 
-			if (memberID == week.getSpInf14())
-				checkPrivilege(Privileges.DIGGING_MIDWEEK, week);
+				if (memberID == week.getSpInf11())
+					checkPrivilege(Privileges.TALK_MIDWEEK, week);
 
-			if (memberID == week.getSpInf23())
-				checkPrivilege(Privileges.CONGRBIBLESTUDY_MIDWEEK, week);
+				if (memberID == week.getSpInf14())
+					checkPrivilege(Privileges.DIGGING_MIDWEEK, week);
 
-			if (memberID == week.getSpInf27())
-				checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
-		}
+				if (memberID == week.getSpInf23())
+					checkPrivilege(Privileges.CONGRBIBLESTUDY_MIDWEEK, week);
 
+				if (memberID == week.getSpInf27())
+					checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+			}
+
+		} else
+			this.brotherLabel.setText(language.getString("sp.history.weeknotsaved"));
+
+		memberPrivilegeHistory.sort((o1, o2) -> o1.getLastDate().compareTo(o2.getLastDate()));
 		this.privilegesTableView.setItems(memberPrivilegeHistory);
 	}
 
@@ -159,7 +165,8 @@ public class History {
 		if (checkPrivilegeHistory != null)
 			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
 		else
-			this.memberPrivilegeHistory.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
+			this.memberPrivilegeHistory
+					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
 	}
 
 	private PrivilegeHistory privilegeHistoryContains(Privileges privilege) {
@@ -249,6 +256,10 @@ public class History {
 			break;
 		case PRAY2_MIDWEEK:
 			if (member.getSpInf35() == 1)
+				addMember(member);
+			break;
+		case CHRISTIAN_LIFE:
+			if (member.getSpInf32() == 1)
 				addMember(member);
 			break;
 		}
