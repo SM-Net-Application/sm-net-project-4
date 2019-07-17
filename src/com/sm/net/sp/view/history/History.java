@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MemberHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
@@ -150,6 +151,12 @@ public class History {
 
 				if (memberID == week.getSpInf27())
 					checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+
+				for (ChristiansPart cp : week.getChristiansPartList())
+					if (memberID == cp.getTeacher().getSpMemberID()) {
+						checkPrivilege(Privileges.CHRISTIAN_LIFE, week);
+						break;
+					}
 			}
 
 		} else
