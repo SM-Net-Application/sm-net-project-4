@@ -186,6 +186,14 @@
 	-fx-background-color: #4b6eaf;
 }
 
+.table_column_001 {
+	-fx-alignment: center-left;
+}
+
+.table_column_002 {
+	-fx-alignment: center;
+}
+
 .text_field_001 {
 	-fx-font-size: 12.0pt;
 	-fx-background-color: #45494a;
@@ -295,6 +303,36 @@
 
 .tab_001:selected {
 	-fx-background-color: #3e86a0;
+}
+
+.tree_view_001 {
+	-fx-font-size: 12.0pt;
+	-fx-border-color: #5e6060;
+	-fx-focus-color: #5e6060;
+	-fx-background-color: #282828;
+}
+
+.tree_view_001 .tree-cell:odd {
+	-fx-background-color: #414547;
+	-fx-text-fill: #bbbbbb;
+}
+
+.tree_view_001 .tree-cell:even {
+	-fx-background-color: #3c3f41;
+	-fx-text-fill: #bbbbbb;
+}
+
+.tree_view_001 .tree-cell:selected {
+	-fx-background-color: #4b6eaf;
+	-fx-font-weight: bold;
+}
+
+.tree_view_001 .tree-cell .tree-disclosure-node .arrow  {
+    -fx-background-color: #cfcfcf;
+}
+
+.tree_view_001 .tree-cell:expanded .tree-disclosure-node .arrow {
+    -fx-background-color: #cfcfcf;
 }
 
 .menu_bar_001 {

@@ -6,7 +6,7 @@
 	<property name="projectPath" value="U:\git\sm-net-project-4" />
 	<property name="applicationVendor" value="SM-Net" />
 	<property name="applicationName" value="Support Planner" />
-	<property name="applicationVersion" value="1.0 (beta 4)" />
+	<property name="applicationVersion" value="1.0 (beta 5)" />
 
 	<target name="init-fx-tasks">
 		<path id="fxant">
@@ -284,6 +284,8 @@
 			</fileset>
 		</copy>
 
+		<delete file="dist/libs/sm-net-javafx-1.0.jar"/>
+		
 		<mkdir dir="dist/languages" />
 
 		<copy todir="dist/languages">
