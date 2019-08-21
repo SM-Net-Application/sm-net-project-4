@@ -102,7 +102,7 @@ public class JSONRequest {
 			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
 			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
 			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
-			String spInf43, String spInf44, String spInf45, String spInf46) {
+			String spInf43, String spInf44, String spInf45, String spInf46, String spInf47) {
 
 		JSONObject jsonObj = create(Integer.valueOf(10));
 		jsonObj.put("spInf1", spInf1);
@@ -151,6 +151,7 @@ public class JSONRequest {
 		jsonObj.put("spInf44", spInf44);
 		jsonObj.put("spInf45", spInf45);
 		jsonObj.put("spInf46", spInf46);
+		jsonObj.put("spInf47", spInf47);
 
 		return jsonObj;
 	}
@@ -162,7 +163,7 @@ public class JSONRequest {
 			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29,
 			String spInf30, String spInf31, String spInf32, String spInf33, String spInf34, String spInf35,
 			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, String spInf41,
-			String spInf42, String spInf43, String spInf44, String spInf45, String spInf46) {
+			String spInf42, String spInf43, String spInf44, String spInf45, String spInf46, String spInf47) {
 
 		JSONObject jsonObj = create(Integer.valueOf(11));
 		jsonObj.put("spMemberID", spMemberID);
@@ -211,6 +212,7 @@ public class JSONRequest {
 		jsonObj.put("spInf44", spInf44);
 		jsonObj.put("spInf45", spInf45);
 		jsonObj.put("spInf46", spInf46);
+		jsonObj.put("spInf47", spInf47);
 
 		return jsonObj;
 	}

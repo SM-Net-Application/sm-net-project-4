@@ -23,6 +23,7 @@ import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
+import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
@@ -83,7 +84,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			viewCheckAccess();
 		} catch (IOException e) {
 			new AlertDesigner(Meta.Application.getFullTitle() + " Error:", "No Valid Settings", viewSupportPlannerStage,
-					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 
 			System.exit(0);
 		}
@@ -435,7 +437,33 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			}
 		}
 	}
-	
+
+	public void viewHomeUserMenuMonitor() {
+
+		if (this.center != 9) {
+
+			this.center = 9;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_MONITOR);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				UserMenuMonitor ctrl = (UserMenuMonitor) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());
@@ -453,7 +481,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		} catch (IOException e) {
 			new AlertDesigner(Meta.Application.getFullTitle() + " Error:", e.getMessage(), viewSupportPlannerStage,
-					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+					AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 		}
 	}
 
@@ -577,5 +606,4 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 }

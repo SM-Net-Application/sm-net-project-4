@@ -11,7 +11,7 @@ if (! $database) {
 	$query .= ", spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20";
 	$query .= ", spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31";
 	$query .= ", spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42";
-	$query .= ", spInf43, spInf44, spInf45, spInf46";
+	$query .= ", spInf43, spInf44, spInf45, spInf46, spInf47";
 	$query .= " FROM sp_members";
 	$result = mysqli_query ( $database, $query );
 	
@@ -68,6 +68,7 @@ if (! $database) {
 			$row ["spInf44"] = $resultRow ["spInf44"];
 			$row ["spInf45"] = $resultRow ["spInf45"];
 			$row ["spInf46"] = $resultRow ["spInf46"];
+			$row ["spInf47"] = $resultRow ["spInf47"];
 			
 			array_push ( $response ["result"], $row );
 		}

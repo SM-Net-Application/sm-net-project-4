@@ -25,6 +25,7 @@ public class Settings {
 	private String databaseKeyEncrypted;
 	private String username;
 	private String userPasswordEncrypted;
+	private String userPasswordMonitorEncrypted;
 
 	public Settings(SettingsConf settingsConf) {
 		super();
@@ -37,6 +38,7 @@ public class Settings {
 		this.databaseKeyEncrypted = "";
 		this.username = "";
 		this.userPasswordEncrypted = "";
+		this.userPasswordMonitorEncrypted = "";
 	}
 
 	public void save() throws IOException {
@@ -48,6 +50,7 @@ public class Settings {
 		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, databaseKeyEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, username);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, userPasswordEncrypted);
+		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERMONITOR, userPasswordMonitorEncrypted);
 		ini.store();
 	}
 
@@ -64,6 +67,10 @@ public class Settings {
 
 		this.username = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, String.class);
 		this.userPasswordEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, String.class);
+		this.userPasswordMonitorEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERMONITOR,
+				String.class);
+		if (this.userPasswordMonitorEncrypted == null)
+			this.userPasswordMonitorEncrypted = "";
 	}
 
 	private Language languageLoad() throws FileNotFoundException, IOException {
@@ -183,5 +190,13 @@ public class Settings {
 
 	public void setUserPasswordEncrypted(String userPasswordEncrypted) {
 		this.userPasswordEncrypted = userPasswordEncrypted;
+	}
+
+	public String getUserPasswordMonitorEncrypted() {
+		return userPasswordMonitorEncrypted;
+	}
+
+	public void setUserPasswordMonitorEncrypted(String userPasswordMonitorEncrypted) {
+		this.userPasswordMonitorEncrypted = userPasswordMonitorEncrypted;
 	}
 }

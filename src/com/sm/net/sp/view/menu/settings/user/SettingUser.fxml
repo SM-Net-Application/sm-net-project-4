@@ -64,6 +64,15 @@
                               </Label>
                            </children>
                         </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="passwordMonitorLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                   <VBox HBox.hgrow="ALWAYS">
@@ -80,6 +89,15 @@
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <PasswordField fx:id="passwordField" maxWidth="1.7976931348623157E308">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </PasswordField>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <PasswordField fx:id="passwordMonitorPasswordField" maxWidth="1.7976931348623157E308">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>

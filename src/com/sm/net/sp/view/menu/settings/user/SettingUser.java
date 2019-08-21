@@ -31,6 +31,10 @@ public class SettingUser {
 	private TextField usernameTextField;
 	@FXML
 	private PasswordField passwordField;
+	@FXML
+	private Label passwordMonitorLabel;
+	@FXML
+	private PasswordField passwordMonitorPasswordField;
 
 	private Settings settings;
 	private Language language;
@@ -53,6 +57,8 @@ public class SettingUser {
 		passwordLabel.getStyleClass().add("label_set_001");
 		usernameTextField.getStyleClass().add("text_field_001");
 		passwordField.getStyleClass().add("text_field_001");
+		passwordMonitorLabel.getStyleClass().add("label_set_001");
+		passwordMonitorPasswordField.getStyleClass().add("text_field_001");
 	}
 
 	private void viewUpdate() {
@@ -66,11 +72,14 @@ public class SettingUser {
 		titleLabel.setText(language.getString("VIEW007LAB001"));
 		usernameLabel.setText(language.getString("VIEW007LAB002"));
 		passwordLabel.setText(language.getString("VIEW002LAB002"));
+
+		passwordMonitorLabel.setText(language.getString("sp.settings.passwordmonitor"));
 	}
 
 	private void listeners() {
 		listenerUsernameTextField();
 		listenerPasswordField();
+		listenerPasswordMonitorField();
 	}
 
 	private void listenerUsernameTextField() {
@@ -106,6 +115,23 @@ public class SettingUser {
 
 	}
 
+	private void listenerPasswordMonitorField() {
+
+		passwordMonitorPasswordField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+				try {
+					settings.setUserPasswordMonitorEncrypted(decryptPasswordMonitor());
+					settings.save();
+				} catch (IOException e) {
+				}
+			}
+		});
+
+	}
+
 	private String decryptPassword() {
 
 		SecretKey applicationKey = settings.getApplicationKey();
@@ -115,13 +141,25 @@ public class SettingUser {
 		return "";
 	}
 
+	private String decryptPasswordMonitor() {
+
+		SecretKey applicationKey = settings.getApplicationKey();
+		if (applicationKey != null)
+			return Crypt.encrypt(passwordMonitorPasswordField.getText(), applicationKey);
+
+		return "";
+	}
+
 	private void loadSettings() {
 
 		usernameTextField.setText(settings.getUsername());
 
 		SecretKey applicationKey = settings.getApplicationKey();
-		if (applicationKey != null)
+		if (applicationKey != null) {
 			passwordField.setText(Crypt.decrypt(settings.getUserPasswordEncrypted(), applicationKey));
+			passwordMonitorPasswordField
+					.setText(Crypt.decrypt(settings.getUserPasswordMonitorEncrypted(), applicationKey));
+		}
 	}
 
 	public Settings getSettings() {

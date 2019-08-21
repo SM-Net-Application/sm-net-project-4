@@ -89,23 +89,25 @@ public class Actions {
 							} else
 								new AlertDesigner(settings.getLanguage().getString("MEX006"), viewSupportPlannerStage,
 										AlertType.ERROR, Meta.Application.getFullTitle(),
-										Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+										Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
+										"alert_001").showAndWait();
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), viewSupportPlannerStage,
 									AlertType.ERROR, Meta.Application.getFullTitle(),
-									Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+									Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
+									"alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), viewSupportPlannerStage,
-							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-									.showAndWait();
+							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), viewSupportPlannerStage,
-							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-									.showAndWait();
+							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -170,13 +172,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), viewSupportPlannerStage,
-							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-									.showAndWait();
+							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), viewSupportPlannerStage,
-							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-									.showAndWait();
+							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -224,17 +226,19 @@ public class Actions {
 							ownerStage.close();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -280,17 +284,19 @@ public class Actions {
 							ownerStage.close();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -336,17 +342,19 @@ public class Actions {
 					if (result != null)
 						if (!result.booleanValue())
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -391,17 +399,19 @@ public class Actions {
 							callback.updateUsers();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -460,17 +470,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -524,17 +536,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -561,8 +575,8 @@ public class Actions {
 			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
 			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
 			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
-			String spInf43, String spInf44, String spInf45, String spInf46, Settings settings, Stage ownerStage,
-			TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
+			String spInf43, String spInf44, String spInf45, String spInf46, String spInf47, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -584,17 +598,19 @@ public class Actions {
 							Actions.getAllMembers(settings, ownerStage, callback);
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -607,7 +623,7 @@ public class Actions {
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
 								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
 								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
-								spInf46));
+								spInf46, spInf47));
 			}
 		};
 
@@ -657,11 +673,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -687,8 +705,8 @@ public class Actions {
 			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
 			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
 			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
-			String spInf43, String spInf44, String spInf45, String spInf46, Settings settings, Stage ownerStage,
-			TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
+			String spInf43, String spInf44, String spInf45, String spInf46, String spInf47, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -710,17 +728,19 @@ public class Actions {
 							Actions.getAllMembers(settings, ownerStage, callback);
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -733,7 +753,7 @@ public class Actions {
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
 								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
 								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
-								spInf46));
+								spInf46, spInf47));
 			}
 		};
 
@@ -771,17 +791,19 @@ public class Actions {
 							callback.updateMembers();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -828,17 +850,19 @@ public class Actions {
 							ownerCtrl.updateFamilies();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -899,17 +923,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -968,11 +994,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1032,17 +1060,19 @@ public class Actions {
 							ownerCtrl.updateFamilies();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1098,17 +1128,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1163,17 +1195,19 @@ public class Actions {
 							callback.updateSerGroups();
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1222,11 +1256,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1266,17 +1302,19 @@ public class Actions {
 							ownerCtrl.updateSerGroups();
 						else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1338,11 +1376,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1389,17 +1429,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1449,17 +1491,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1521,11 +1565,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1572,17 +1618,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1630,17 +1678,19 @@ public class Actions {
 
 						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1687,11 +1737,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1729,18 +1781,20 @@ public class Actions {
 					if (result != null)
 						if (!result.booleanValue())
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1777,18 +1831,20 @@ public class Actions {
 					if (result != null)
 						if (!result.booleanValue())
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001")
-											.showAndWait();
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1837,11 +1893,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1891,11 +1949,13 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1926,12 +1986,14 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}
@@ -1994,12 +2056,14 @@ public class Actions {
 				setOnCancelled(value -> {
 					waitAlert.close();
 					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 				});
 
 				setOnFailed(value -> {
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 					waitAlert.close();
 				});
 			}

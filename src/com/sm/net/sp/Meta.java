@@ -15,6 +15,7 @@ import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
+import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
@@ -66,6 +67,7 @@ public class Meta {
 		public static final String SECTION_USER = "user";
 		public static final String KEY_USERNAME = "username";
 		public static final String KEY_USERPASS = "userpassword";
+		public static final String KEY_USERMONITOR = "usermonitor";
 
 		public static File getFile() {
 
@@ -117,6 +119,7 @@ public class Meta {
 		public static final URL HOME_USER_MENU_MEETINGS = UserMenuMeetings.class.getResource("UserMenuMeetings.fxml");
 		public static final URL HOME_USER_MENU_CIRCUITOVERSEER = UserMenuCircuitOverseer.class
 				.getResource("UserMenuCircuitOverseer.fxml");
+		public static final URL HOME_USER_MENU_MONITOR = UserMenuMonitor.class.getResource("UserMenuMonitor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
 				.getResource("UserMenuMeetingsEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_CIRCUITOVERSEER = UserMenuMeetings.class
@@ -173,6 +176,7 @@ public class Meta {
 		public static final String SERVICEGROUPS_DEL = "sergroup_del_50x50.png";
 		public static final String USER_MENU_MEETINGS = "meetings.png";
 		public static final String USER_MENU_CIRCUITOVERSEER = "overseer.png";
+		public static final String USER_MENU_MONITOR = "monitor.png";
 		public static final String INFO = "info.png";
 		public static final String CALENDAR = "calendar.png";
 		public static final String TALKS = "talks.png";

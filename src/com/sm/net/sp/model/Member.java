@@ -68,6 +68,7 @@ public class Member {
 	private IntegerProperty spInf44;
 	private IntegerProperty spInf45;
 	private IntegerProperty spInf46;
+	private StringProperty spInf47;
 
 	public Member() {
 		super();
@@ -133,6 +134,7 @@ public class Member {
 		this.spInf44 = new SimpleIntegerProperty(jsonObject.getInt("spInf44"));
 		this.spInf45 = new SimpleIntegerProperty(jsonObject.getInt("spInf45"));
 		this.spInf46 = new SimpleIntegerProperty(jsonObject.getInt("spInf46"));
+		this.spInf47 = new SimpleStringProperty(jsonObject.getString("spInf47"));
 	}
 
 	public static Member emptyMember(Language language) {
@@ -192,6 +194,7 @@ public class Member {
 		member.spInf44 = new SimpleIntegerProperty(1);
 		member.spInf45 = new SimpleIntegerProperty(1);
 		member.spInf46 = new SimpleIntegerProperty(1);
+		member.spInf47 = new SimpleStringProperty("");
 		return member;
 	}
 
@@ -863,6 +866,18 @@ public class Member {
 
 	public final void setSpInf46(final int spInf46) {
 		this.spInf46Property().set(spInf46);
+	}
+
+	public final StringProperty spInf47Property() {
+		return this.spInf47;
+	}
+
+	public final String getSpInf47() {
+		return this.spInf47Property().get();
+	}
+
+	public final void setSpInf47(final String spInf47) {
+		this.spInf47Property().set(spInf47);
 	}
 
 }

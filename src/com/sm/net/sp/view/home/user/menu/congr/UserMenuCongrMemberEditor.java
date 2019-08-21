@@ -201,6 +201,11 @@ public class UserMenuCongrMemberEditor {
 	private TextField emailTextField;
 
 	@FXML
+	private Label monitorLabel;
+	@FXML
+	private TextField monitorTextField;
+
+	@FXML
 	private Button saveButton;
 
 	private Settings settings;
@@ -259,6 +264,7 @@ public class UserMenuCongrMemberEditor {
 		attendantLabel.getStyleClass().add("label_001");
 		smartphoneLabel.getStyleClass().add("label_set_001");
 		emailLabel.getStyleClass().add("label_set_001");
+		monitorLabel.getStyleClass().add("label_set_001");
 
 		surnameTextField.getStyleClass().add("text_field_001");
 		nameTextField.getStyleClass().add("text_field_001");
@@ -266,6 +272,7 @@ public class UserMenuCongrMemberEditor {
 		singlenessTextField.getStyleClass().add("text_field_001");
 		smartphoneTextField.getStyleClass().add("text_field_001");
 		emailTextField.getStyleClass().add("text_field_001");
+		monitorTextField.getStyleClass().add("text_field_001");
 
 		genderMaleCheckBox.getStyleClass().add("check_box_001");
 		genderFemaleCheckBox.getStyleClass().add("check_box_001");
@@ -327,6 +334,7 @@ public class UserMenuCongrMemberEditor {
 			singlenessTextField.setText(selectedMember.getSpInf39Decrypted());
 			smartphoneTextField.setText(selectedMember.getSpInf40Decrypted());
 			emailTextField.setText(selectedMember.getSpInf41Decrypted());
+			monitorTextField.setText(selectedMember.getSpInf47());
 
 			if (selectedMember.getSpInf4() == 0)
 				genderMaleCheckBox.setSelected(true);
@@ -458,22 +466,24 @@ public class UserMenuCongrMemberEditor {
 			String spInf44 = !this.watchtowerSubstituteStudyCheckBox.isSelected() ? "0" : "1";
 			String spInf45 = !this.publicSpeakerInternCheckBox.isSelected() ? "0" : "1";
 			String spInf46 = !this.publicSpeakerExternCheckBox.isSelected() ? "0" : "1";
+			String spInf47 = monitorTextField.getText();
 
 			if (selectedMember != null)
 				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-						spInf43, spInf44, spInf45, spInf46);
+						spInf43, spInf44, spInf45, spInf46, spInf47);
 			else
 				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-						spInf43, spInf44, spInf45, spInf46);
+						spInf43, spInf44, spInf45, spInf46, spInf47);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -483,13 +493,13 @@ public class UserMenuCongrMemberEditor {
 			String spInf26, String spInf27, String spInf28, String spInf29, String spInf30, String spInf31,
 			String spInf32, String spInf33, String spInf34, String spInf35, String spInf36, String spInf37,
 			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
-			String spInf44, String spInf45, String spInf46) {
+			String spInf44, String spInf45, String spInf46, String spInf47) {
 
 		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", spInf6, spInf7, spInf8, spInf9, spInf10, spInf11,
 				spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 				spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33,
 				spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
-				spInf45, spInf46, settings, ownerStage, congrTabPane, newMemberTab, membersTab, ownerCtrl);
+				spInf45, spInf46, spInf47, settings, ownerStage, congrTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -499,14 +509,14 @@ public class UserMenuCongrMemberEditor {
 			String spInf26, String spInf27, String spInf28, String spInf29, String spInf30, String spInf31,
 			String spInf32, String spInf33, String spInf34, String spInf35, String spInf36, String spInf37,
 			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
-			String spInf44, String spInf45, String spInf46) {
+			String spInf44, String spInf45, String spInf46, String spInf47) {
 
 		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, spInf6,
 				spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 				spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
 				spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
-				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, settings, ownerStage, congrTabPane, newMemberTab,
-				membersTab, ownerCtrl);
+				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, settings, ownerStage, congrTabPane,
+				newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
@@ -659,6 +669,8 @@ public class UserMenuCongrMemberEditor {
 
 		smartphoneLabel.setText(language.getString("TEXT0107"));
 		emailLabel.setText(language.getString("TEXT0108"));
+
+		monitorLabel.setText(language.getString("sp.congr.member.monitorpass"));
 	}
 
 	public Settings getSettings() {

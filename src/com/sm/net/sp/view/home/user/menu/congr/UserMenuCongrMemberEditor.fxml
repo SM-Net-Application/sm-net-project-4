@@ -912,6 +912,15 @@
                                                       </Label>
                                                    </children>
                                                 </StackPane>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="monitorLabel" text="Label">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
                                              </children>
                                           </VBox>
                                           <VBox HBox.hgrow="ALWAYS">
@@ -928,6 +937,15 @@
                                                 <StackPane>
                                                    <children>
                                                       <TextField fx:id="emailTextField" maxWidth="1.7976931348623157E308">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <TextField fx:id="monitorTextField" maxWidth="1.7976931348623157E308">
                                                          <StackPane.margin>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
