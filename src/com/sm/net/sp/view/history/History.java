@@ -269,6 +269,8 @@ public class History {
 			if (member.getSpInf32() == 1)
 				addMember(member);
 			break;
+		default:
+			break;
 		}
 	}
 

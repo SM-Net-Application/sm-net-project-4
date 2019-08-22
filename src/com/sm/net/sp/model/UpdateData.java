@@ -31,8 +31,8 @@ public interface UpdateData {
 	public abstract void updateWeeksOverseer(ObservableList<WeekOverseer> list);
 
 	public abstract void updateWeeksOverseer();
-	
-	public abstract void updateActivities(ObservableList<String> list);
+
+	public abstract void updateActivities(ObservableList<Activities> list);
 
 	public abstract void updateActivities();
 }

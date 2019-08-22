@@ -85,6 +85,8 @@ public class MemberHistory {
 					from = checkLastDate(from, week.getSpInf1());
 			}
 			break;
+		default:
+			break;
 		}
 
 		if (from != null)

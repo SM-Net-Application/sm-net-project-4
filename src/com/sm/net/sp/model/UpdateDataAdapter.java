@@ -61,12 +61,12 @@ public class UpdateDataAdapter implements UpdateData {
 	}
 
 	@Override
-	public void updateActivities(ObservableList<String> list) {
-		
+	public void updateActivities(ObservableList<Activities> list) {
+
 	}
 
 	@Override
 	public void updateActivities() {
-		
+
 	}
 }

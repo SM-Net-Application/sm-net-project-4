@@ -13,6 +13,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.jasper.Jasper;
 import com.sm.net.sp.jasper.model.JRWeek;
 import com.sm.net.sp.json.JSONRequest;
+import com.sm.net.sp.model.Activities;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
@@ -1995,28 +1996,12 @@ public class Actions {
 					waitAlert.close();
 
 					JSONObject jsonObject = getValue();
-					// System.out.println(password);
-					// System.out.println(weekcode);
-					// System.out.println(jsonObject.toString());
 					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
 
 					if (result != null)
 						if (result.booleanValue()) {
-
-							ObservableList<String> list = FXCollections.observableArrayList();
-
-							// TODO: Elaborare il risultato ottenuto
-
-							// JSONArray jsonArray =
-							// jsonObject.getJSONArray("result");
-							// for (Object object : jsonArray) {
-							// JSONObject json = (JSONObject) object;
-							// list.add(new Week(json, settings.getLanguage(),
-							// settings, membersList));
-							// }
-
+							ObservableList<Activities> list = Activities.parseJSONResult(jsonObject);
 							callback.updateActivities(list);
-
 						} else
 							callback.updateActivities(null);
 				});

@@ -5,11 +5,14 @@ import java.time.LocalDate;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Activities;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,13 +36,13 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 	@FXML
 	private Button passwordButton;
 	@FXML
-	private TableView<String> activityTableView;
+	private TableView<Activities> activityTableView;
 	@FXML
-	private TableColumn<String, String> dateTableColumn;
+	private TableColumn<Activities, String> dateTableColumn;
 	@FXML
-	private TableColumn<String, String> imageTableColumn;
+	private TableColumn<Activities, ImageView> imageTableColumn;
 	@FXML
-	private TableColumn<String, String> activityTableColumn;
+	private TableColumn<Activities, String> activityTableColumn;
 
 	private Settings settings;
 	private Language language;
@@ -48,7 +51,20 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 	@FXML
 	private void initialize() {
 		styleClasses();
+		cellValueFactory();
 		listeners();
+	}
+
+	private void cellValueFactory() {
+
+		dateTableColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
+
+		imageTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
+				Meta.Resources.imageForButtonSmall(cellData.getValue().getPrivilege().getImageName())));
+
+		activityTableColumn.setCellValueFactory(
+				cellData -> new SimpleStringProperty(language.getString(cellData.getValue().getPrivilege().getName())));
 	}
 
 	public void objectInitialize() {
@@ -70,6 +86,9 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 		passwordButton.getStyleClass().add("button_image_001");
 
 		activityTableView.getStyleClass().add("table_view_001");
+
+		dateTableColumn.getStyleClass().add("table_column_002");
+		imageTableColumn.getStyleClass().add("table_column_002");
 	}
 
 	private void viewUpdate() {
@@ -85,6 +104,16 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 
 		passwordButton.setText("");
 		passwordButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
+
+		dateTableColumn.setMinWidth(150);
+		dateTableColumn.setMaxWidth(150);
+		dateTableColumn.setText(language.getString("sp.monitor.table.data"));
+
+		imageTableColumn.setMinWidth(100);
+		imageTableColumn.setMaxWidth(100);
+		imageTableColumn.setText("");
+
+		activityTableColumn.setText(language.getString("sp.monitor.table.activity"));
 	}
 
 	private void loadPassword() {
@@ -111,8 +140,10 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 	}
 
 	@Override
-	public void updateActivities(ObservableList<String> list) {
+	public void updateActivities(ObservableList<Activities> list) {
 		super.updateActivities(list);
+
+		this.activityTableView.setItems(list);
 	}
 
 	public Settings getSettings() {
