@@ -1,10 +1,16 @@
 package com.sm.net.sp.view.home.user.menu.monitor;
 
+import java.time.LocalDate;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.UpdateDataAdapter;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class UserMenuMonitor {
+public class UserMenuMonitor extends UpdateDataAdapter {
 
 	@FXML
 	private Label titleLabel;
@@ -48,7 +54,7 @@ public class UserMenuMonitor {
 	public void objectInitialize() {
 		viewUpdate();
 		loadPassword();
-		loadActivities();
+		updateActivities();
 	}
 
 	private void listeners() {
@@ -92,16 +98,21 @@ public class UserMenuMonitor {
 	}
 
 	private void listenerPasswordButton() {
-		this.passwordButton.setOnAction(event -> loadActivities());
+		this.passwordButton.setOnAction(event -> updateActivities());
 	}
 
-	private void loadActivities() {
+	@Override
+	public void updateActivities() {
+		super.updateActivities();
 
 		String password = this.passwordTextField.getText();
-		if (!password.trim().isEmpty()) {
+		if (!password.trim().isEmpty())
+			Actions.getAllActivities(password, Week.buildKey(LocalDate.now()), this.settings, this.ownerStage, this);
+	}
 
-			// TODO: Prendere le info sul componente e le attività
-		}
+	@Override
+	public void updateActivities(ObservableList<String> list) {
+		super.updateActivities(list);
 	}
 
 	public Settings getSettings() {

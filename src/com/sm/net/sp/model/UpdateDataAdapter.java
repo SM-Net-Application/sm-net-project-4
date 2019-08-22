@@ -59,4 +59,14 @@ public class UpdateDataAdapter implements UpdateData {
 	@Override
 	public void updateWeeksOverseer() {
 	}
+
+	@Override
+	public void updateActivities(ObservableList<String> list) {
+		
+	}
+
+	@Override
+	public void updateActivities() {
+		
+	}
 }

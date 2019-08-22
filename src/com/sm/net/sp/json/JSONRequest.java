@@ -478,6 +478,16 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject GET_ALL_ACTIVITIES(String password, String weekcode) {
+
+		JSONObject jsonObj = create(Integer.valueOf(31));
+
+		jsonObj.put("password", password);
+		jsonObj.put("weekcode", weekcode);
+
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {

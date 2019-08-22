@@ -1973,6 +1973,80 @@ public class Actions {
 
 	}
 
+	/**
+	 * Get All Week Type
+	 * 
+	 * @param string
+	 * 
+	 * @param weekStart
+	 * @param weekEnd
+	 */
+	public static void getAllActivities(String password, String weekcode, Settings settings, Stage ownerStage,
+			UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					// System.out.println(password);
+					// System.out.println(weekcode);
+					// System.out.println(jsonObject.toString());
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							ObservableList<String> list = FXCollections.observableArrayList();
+
+							// TODO: Elaborare il risultato ottenuto
+
+							// JSONArray jsonArray =
+							// jsonObject.getJSONArray("result");
+							// for (Object object : jsonArray) {
+							// JSONObject json = (JSONObject) object;
+							// list.add(new Week(json, settings.getLanguage(),
+							// settings, membersList));
+							// }
+
+							callback.updateActivities(list);
+
+						} else
+							callback.updateActivities(null);
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_ALL_ACTIVITIES(password, weekcode));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
 	public static void printUser(User user, Settings settings, Stage ownerStage, Language language) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
