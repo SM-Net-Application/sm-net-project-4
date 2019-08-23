@@ -8,6 +8,7 @@ $memberID = "";
 $weeks = array ();
 $ministry = array ();
 $christians = array ();
+$activities = array ();
 
 if (isset ( $_GET ["lang"] )) {
 	if (! empty ( $_GET ["lang"] )) {
@@ -137,16 +138,66 @@ if (file_exists ( "languages/" . $langIni )) {
 				$result_ministry->close ();
 				$result_christians->close ();
 				mysqli_close ( $database );
+				
+				foreach ( $weeks as $week ) {
+					
+					$row_weekcode = $week ['spInf1'];
+					
+					$year = substr ( $row_weekcode, 0, 4 );
+					$weeknr = substr ( $row_weekcode, 4, 2 );
+					$date = date ( "Y-m-d", strtotime ( $year . "W" . $weeknr . "1" ) );
+					
+					if ($memberID == $week ["spInf3"]) {
+						add_activity ( $date, $language ['PRESIDENT_MIDWEEK'], $language ['PRESIDENT_MIDWEEK_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf4"]) {
+						add_activity ( $date, $language ['PRAY1_MIDWEEK'], $language ['PRAY1_MIDWEEK_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf11"]) {
+						add_activity ( $date, $language ['TALK_MIDWEEK'], $language ['TALK_MIDWEEK_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf14"]) {
+						add_activity ( $date, $language ['DIGGING_MIDWEEK'], $language ['DIGGING_MIDWEEK_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf18"]) {
+						add_activity ( $date, $language ['BIBLE_READING_A'], $language ['BIBLE_READING_A_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf23"]) {
+						add_activity ( $date, $language ['CONGRBIBLESTUDY_MIDWEEK'], $language ['CONGRBIBLESTUDY_MIDWEEK_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf27"]) {
+						add_activity ( $date, $language ['PRAY2_MIDWEEK'], $language ['PRAY2_MIDWEEK_ICON'] );
+					}
+					
+					if ($memberID == $week ["spInf28"]) {
+						add_activity ( $date, $language ['BIBLE_READING_B'], $language ['BIBLE_READING_B_ICON'] );
+					}
+				}
 			}
 		}
 	}
+}
+function add_activity($date, $activity_name, $activity_icon) {
+	$activity_array = array ();
+	
+	$activity_array ['date'] = $date;
+	$activity_array ['name'] = $activity_name;
+	$activity_array ['icon'] = $activity_icon;
+	
+	array_push ( $activities, $activity_array );
 }
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>SM-Net: SupportPlanner 1.0 - Monitor</title>
+<title>SM-Net: SupportPlanner - Monitor</title>
 </head>
 <body>
 
@@ -156,6 +207,13 @@ if (file_exists ( "languages/" . $langIni )) {
 			<p><?php echo $language['error1']?></p>
 		<?php } else { ?>
 		
+			<?php if ( empty ( $memberID)) { ?>
+				<p><?php echo $language['error1']?></p>
+			<?php } else { ?>
+		
+		
+		
+			<?php } ?>
 		<?php } ?>
 		
 	<?php } ?>
