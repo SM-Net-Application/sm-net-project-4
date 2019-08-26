@@ -160,6 +160,8 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.MEETINGS);
 			if (this.user.isSpInf5())
 				menuListView.getItems().add(EnumHomeUserMenuList.CIRCUITOVERSEERS);
+			
+			menuListView.getItems().add(EnumHomeUserMenuList.MONITOR);
 		}
 	}
 
