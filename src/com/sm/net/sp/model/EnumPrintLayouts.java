@@ -4,8 +4,11 @@ import com.sm.net.project.Language;
 
 public enum EnumPrintLayouts {
 
-	MEETING_MIDWEEK_NAME_EXTENDED("sp.printlayout.midweek.ext"), MEETING_MIDWEEK_NAME_SHORT(
-			"sp.printlayout.midweek.short");
+	MEETING_MIDWEEK_NAME_EXTENDED("sp.printlayout.midweek.ext"),
+
+	MEETING_MIDWEEK_NAME_SHORT("sp.printlayout.midweek.short"),
+
+	NATURAL_DISASTER_LIST("sp.printlayout.naturaldisaster");
 
 	private String key;
 

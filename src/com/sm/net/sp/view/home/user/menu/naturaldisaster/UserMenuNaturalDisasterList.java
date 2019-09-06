@@ -5,10 +5,12 @@ import java.io.IOException;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.printlayout.PrintLayout;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -186,41 +188,22 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 
 	private void print() {
 
-//		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
-//
-//			ArrayList<Week> printableWeeks = new ArrayList<>();
-//
-//			ObservableList<Week> weeks = this.weekTableView.getSelectionModel().getSelectedItems();
-//			for (Week week : weeks)
-//				if (week.spWeekIDProperty() != null)
-//					printableWeeks.add(week);
-//
-//			if (printableWeeks.size() > 0) {
-//
-//				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
-//						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
-//
-//				if (selectedLayout != null) {
-//
-//					switch (selectedLayout) {
-//
-//					case MEETING_MIDWEEK_NAME_EXTENDED:
-//						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-//								true);
-//						break;
-//
-//					case MEETING_MIDWEEK_NAME_SHORT:
-//						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-//								false);
-//						break;
-//
-//					default:
-//						break;
-//					}
-//
-//				}
-//			}
-//		}
+		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+				EnumPrintLayouts.NATURAL_DISASTER_LIST);
+
+		if (selectedLayout != null) {
+
+			switch (selectedLayout) {
+
+			case NATURAL_DISASTER_LIST:
+//				Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language, true);
+				break;
+
+			default:
+				break;
+			}
+
+		}
 	}
 
 	private void listenerMembersTableView() {
