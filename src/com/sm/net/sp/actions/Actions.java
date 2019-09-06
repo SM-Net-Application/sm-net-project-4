@@ -25,6 +25,7 @@ import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAddCallback;
 import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
 import com.sm.net.util.Crypt;
@@ -2172,6 +2173,113 @@ public class Actions {
 		taskThread.start();
 	}
 
+	public static void updateMemberNaturalDisaster(String spMemberID, String spInf40, String spInf41, Settings settings,
+			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab,
+			UserMenuNaturalDisasterList callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+							congrTabPane.getTabs().remove(newMemberTab);
+							congrTabPane.getSelectionModel().select(membersTab);
+							Actions.getAllMembers(settings, ownerStage, callback);
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.UPDATE_MEMBER_NATURAL_DISASTER(spMemberID, spInf40, spInf41));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	public static void updateFamilyNaturalDisaster(String spFamID, String spInf1, String spInf2, String spInf3,
+			String spInf4, String spInf5, String spInf7, Settings settings, Stage ownerStage, TabPane congrTabPane,
+			Tab newFamilyTab, Tab familiesTab, UserMenuNaturalDisasterList ownerCtrl) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+							congrTabPane.getTabs().remove(newFamilyTab);
+							congrTabPane.getSelectionModel().select(familiesTab);
+							ownerCtrl.updateFamilies();
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest
+						.UPDATE_FAMILY_NATURAL_DISASTER(spFamID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf7));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
 	/**
 	 * Create Alert Window
 	 * 
@@ -2197,4 +2305,5 @@ public class Actions {
 
 		return waitAlert;
 	}
+
 }

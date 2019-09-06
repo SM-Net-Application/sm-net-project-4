@@ -5,11 +5,18 @@ import com.sm.net.sp.Meta;
 public enum EnumHomeUserMenuList {
 
 	USERS("USERMENU001", Meta.Resources.USER_MENU_USERS),
+
 	CONGREGATION("USERMENU002", Meta.Resources.USER_MENU_CONGR),
+
 	SERVICEGROUPS("USERMENU003", Meta.Resources.USER_MENU_SERVICEGROUPS),
+
 	MEETINGS("USERMENU004", Meta.Resources.USER_MENU_MEETINGS),
+
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
-	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR);
+
+	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR),
+
+	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER);
 
 	private String name;
 	private String imageName;

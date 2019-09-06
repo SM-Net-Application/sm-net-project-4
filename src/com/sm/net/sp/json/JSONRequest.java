@@ -488,6 +488,33 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject UPDATE_MEMBER_NATURAL_DISASTER(String spMemberID, String spInf40, String spInf41) {
+
+		JSONObject jsonObj = create(Integer.valueOf(32));
+
+		jsonObj.put("spMemberID", spMemberID);
+		jsonObj.put("spInf40", spInf40);
+		jsonObj.put("spInf41", spInf41);
+
+		return jsonObj;
+	}
+
+	public static JSONObject UPDATE_FAMILY_NATURAL_DISASTER(String spFamID, String spInf1, String spInf2, String spInf3,
+			String spInf4, String spInf5, String spInf7) {
+
+		JSONObject jsonObj = create(Integer.valueOf(33));
+
+		jsonObj.put("spFamID", spFamID);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("spInf7", spInf7);
+
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {

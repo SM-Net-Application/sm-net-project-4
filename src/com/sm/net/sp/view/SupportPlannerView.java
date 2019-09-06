@@ -24,6 +24,7 @@ import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
+import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
@@ -464,6 +465,33 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 	}
 
+	public void viewHomeUserMenuNaturalDisaster() {
+
+		if (this.center != 10) {
+
+			this.center = 10;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_NATURALDISASTER);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				UserMenuNaturalDisasterList ctrl = (UserMenuNaturalDisasterList) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());
@@ -606,4 +634,5 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 }

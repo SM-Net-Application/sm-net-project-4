@@ -16,6 +16,7 @@ import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
+import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
@@ -38,7 +39,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.0 (beta 5)";
+		public static final String VERSION = "1.0 (beta 6)";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -120,6 +121,12 @@ public class Meta {
 		public static final URL HOME_USER_MENU_CIRCUITOVERSEER = UserMenuCircuitOverseer.class
 				.getResource("UserMenuCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_MONITOR = UserMenuMonitor.class.getResource("UserMenuMonitor.fxml");
+		public static final URL HOME_USER_MENU_NATURALDISASTER = UserMenuNaturalDisasterList.class
+				.getResource("UserMenuNaturalDisasterList.fxml");
+		public static final URL HOME_USER_MENU_NATURALDISASTER_MEMBER_EDITOR = UserMenuNaturalDisasterList.class
+				.getResource("UserMenuNaturalDisasterMemberEditor.fxml");
+		public static final URL HOME_USER_MENU_NATURALDISASTER_FAMILY_EDITOR = UserMenuNaturalDisasterList.class
+				.getResource("UserMenuNaturalDisasterFamilyEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
 				.getResource("UserMenuMeetingsEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_CIRCUITOVERSEER = UserMenuMeetings.class
@@ -177,6 +184,7 @@ public class Meta {
 		public static final String USER_MENU_MEETINGS = "meetings.png";
 		public static final String USER_MENU_CIRCUITOVERSEER = "overseer.png";
 		public static final String USER_MENU_MONITOR = "monitor.png";
+		public static final String USER_MENU_NATURALDISASTER = "naturaldis.png";
 		public static final String INFO = "info.png";
 		public static final String CALENDAR = "calendar.png";
 		public static final String TALKS = "talks.png";
