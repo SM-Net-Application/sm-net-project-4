@@ -14,9 +14,9 @@ public enum EnumHomeUserMenuList {
 
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
 
-	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR),
+	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER),
 
-	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER);
+	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR);
 
 	private String name;
 	private String imageName;

@@ -74,7 +74,9 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	private TableColumn<Family, String> familyPhoneTableColumn;
 
 	@FXML
-	private Button printButton;
+	private Button printButton1;
+	@FXML
+	private Button printButton2;
 
 	private Settings settings;
 	private Language language;
@@ -119,7 +121,8 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		membersTableView.getStyleClass().add("table_view_001");
 		familiesTableView.getStyleClass().add("table_view_001");
 
-		printButton.getStyleClass().add("button_image_001");
+		printButton1.getStyleClass().add("button_image_001");
+		printButton2.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -170,8 +173,11 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		familyCityTableColumn.setText(language.getString("TEXT0030"));
 		familyPhoneTableColumn.setText(language.getString("TEXT0109"));
 
-		printButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		printButton.setText(null);
+		printButton1.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
+		printButton1.setText(null);
+
+		printButton2.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
+		printButton2.setText(null);
 	}
 
 	private void listeners() {
@@ -183,7 +189,8 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	}
 
 	private void listenerPrintButton() {
-		this.printButton.setOnAction(event -> print());
+		this.printButton1.setOnAction(event -> print());
+		this.printButton2.setOnAction(event -> print());
 	}
 
 	private void print() {
@@ -196,7 +203,8 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 			switch (selectedLayout) {
 
 			case NATURAL_DISASTER_LIST:
-//				Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language, true);
+				Actions.printNaturalDisaster(this.membersList, this.familiesList, "congregationName", settings,
+						ownerStage, language);
 				break;
 
 			default:

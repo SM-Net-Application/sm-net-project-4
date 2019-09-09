@@ -11,6 +11,7 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.jasper.Jasper;
+import com.sm.net.sp.jasper.model.JRNaturalDisasterFamily;
 import com.sm.net.sp.jasper.model.JRWeek;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Activities;
@@ -2280,6 +2281,78 @@ public class Actions {
 		taskThread.start();
 	}
 
+	public static void printNaturalDisaster(ObservableList<Member> membersList, ObservableList<Family> familiesList,
+			String congregationName, Settings settings, Stage ownerStage, Language language) {
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<Void> task = new Task<Void>() {
+
+			{
+				setOnSucceeded(value -> waitAlert.close());
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected Void call() throws Exception {
+
+				try {
+
+					String programmReportFile = Jasper.Layouts.SM_NET_NATURAL_DISASTER.getAbsolutePath();
+
+					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
+
+					ArrayList<JRNaturalDisasterFamily> jrFamilies = new ArrayList<>();
+
+					for (Family family : familiesList)
+						jrFamilies.add(new JRNaturalDisasterFamily(family, membersList));
+
+					JRBeanCollectionDataSource jrFamiliesDataSource = new JRBeanCollectionDataSource(jrFamilies);
+
+					Map<String, Object> parameters = new HashMap<String, Object>();
+					parameters.put("congregationName",
+							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
+					parameters.put("programmName",
+							language.getString("jasper.layout.naturaldisaster.programm").toUpperCase());
+
+//					parameters.put("jrWeekReport", weekJasperReport);
+//					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
+//					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
+//							new JREmptyDataSource());
+					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
+							jrFamiliesDataSource);
+
+					JasperViewer jv = new JasperViewer(jasperPrint, false);
+					jv.setTitle(Meta.Application.getFullTitle());
+					jv.setIconImage(SwingFXUtils.fromFXImage(Meta.Resources.getImageApplicationIcon(), null));
+					jv.setVisible(true);
+
+				} catch (JRException e) {
+					System.out.println(e.getMessage());
+				}
+
+				return null;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
 	/**
 	 * Create Alert Window
 	 * 
@@ -2305,5 +2378,4 @@ public class Actions {
 
 		return waitAlert;
 	}
-
 }
