@@ -2312,28 +2312,36 @@ public class Actions {
 				try {
 
 					String programmReportFile = Jasper.Layouts.SM_NET_NATURAL_DISASTER.getAbsolutePath();
+					String familyReportFile = Jasper.Layouts.SM_NET_NATURAL_DISASTER_FAMILY.getAbsolutePath();
+					String memberReportFile = Jasper.Layouts.SM_NET_NATURAL_DISASTER_MEMBER.getAbsolutePath();
 
 					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
+					JasperReport familyJasperReport = JasperCompileManager.compileReport(familyReportFile);
+					JasperReport memberJasperReport = JasperCompileManager.compileReport(memberReportFile);
 
 					ArrayList<JRNaturalDisasterFamily> jrFamilies = new ArrayList<>();
 
 					for (Family family : familiesList)
-						jrFamilies.add(new JRNaturalDisasterFamily(family, membersList));
+						jrFamilies.add(new JRNaturalDisasterFamily(family, memberJasperReport, membersList));
 
 					JRBeanCollectionDataSource jrFamiliesDataSource = new JRBeanCollectionDataSource(jrFamilies);
 
 					Map<String, Object> parameters = new HashMap<String, Object>();
+					parameters.put("txtSurname", language.getString("jasper.layout.naturaldisaster.surname"));
+					parameters.put("txtFirstName", language.getString("jasper.layout.naturaldisaster.firstname"));
+					parameters.put("txtSurnameWife", language.getString("jasper.layout.naturaldisaster.surnamewife"));
+					parameters.put("txtMobile", language.getString("jasper.layout.naturaldisaster.mobile"));
+					parameters.put("txtMail", language.getString("jasper.layout.naturaldisaster.mail"));
 					parameters.put("congregationName",
 							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
 					parameters.put("programmName",
 							language.getString("jasper.layout.naturaldisaster.programm").toUpperCase());
 
-//					parameters.put("jrWeekReport", weekJasperReport);
-//					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
-//					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
-//							new JREmptyDataSource());
+					parameters.put("familyJasperReport", familyJasperReport);
+					parameters.put("jrFamiliesDataSource", jrFamiliesDataSource);
+
 					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
-							jrFamiliesDataSource);
+							new JREmptyDataSource());
 
 					JasperViewer jv = new JasperViewer(jasperPrint, false);
 					jv.setTitle(Meta.Application.getFullTitle());

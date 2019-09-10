@@ -25,6 +25,8 @@ public class Jasper {
 	public static final String FILE_MEETINGS_WEEK = "spMeetingWeek";
 	public static final String FILE_MEETINGS_PROGRAMM = "spMeetingProgramm";
 	public static final String FILE_NATURAL_DISASTER = "spNaturalDisaster";
+	public static final String FILE_NATURAL_DISASTER_FAMILY = "spNaturalDisasterFamilyRow";
+	public static final String FILE_NATURAL_DISASTER_MEMBER = "spNaturalDisasterMemberRow";
 
 	public static class Layouts {
 
@@ -46,6 +48,10 @@ public class Jasper {
 
 		public static final File SM_NET_NATURAL_DISASTER = getLayout(TYPE_SM_NET, LAYOUT_NATURALDISASTER,
 				FILE_NATURAL_DISASTER);
+		public static final File SM_NET_NATURAL_DISASTER_FAMILY = getLayout(TYPE_SM_NET, LAYOUT_NATURALDISASTER,
+				FILE_NATURAL_DISASTER_FAMILY);
+		public static final File SM_NET_NATURAL_DISASTER_MEMBER = getLayout(TYPE_SM_NET, LAYOUT_NATURALDISASTER,
+				FILE_NATURAL_DISASTER_MEMBER);
 
 		public static File getLayout(String layoutType, String layoutName, String layoutFileName) {
 

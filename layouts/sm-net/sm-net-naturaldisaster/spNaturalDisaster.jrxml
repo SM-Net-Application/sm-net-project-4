@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-07-15T09:42:18 -->
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingProgramm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="congregationName" class="java.lang.String"/>
 	<parameter name="programmName" class="java.lang.String"/>
-	<parameter name="jrWeekReport" class="net.sf.jasperreports.engine.JasperReport"/>
-	<parameter name="jrWeeksDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="familyJasperReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="jrFamiliesDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="txtSurname" class="java.lang.String"/>
+	<parameter name="txtFirstName" class="java.lang.String"/>
+	<parameter name="txtSurnameWife" class="java.lang.String"/>
+	<parameter name="txtMobile" class="java.lang.String"/>
+	<parameter name="txtMail" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<group name="weeks">
+	<group name="families">
 		<groupHeader>
 			<band height="25">
 				<subreport overflowType="Stretch">
@@ -19,8 +23,8 @@
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
-					<dataSourceExpression><![CDATA[$P{jrWeeksDataSource}]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{jrWeekReport}]]></subreportExpression>
+					<dataSourceExpression><![CDATA[$P{jrFamiliesDataSource}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{familyJasperReport}]]></subreportExpression>
 				</subreport>
 			</band>
 		</groupHeader>
@@ -60,4 +64,76 @@
 			</textField>
 		</band>
 	</pageHeader>
+	<columnHeader>
+		<band height="27">
+			<rectangle>
+				<reportElement stretchType="ElementGroupHeight" x="0" y="10" width="555" height="17" uuid="136d2e8f-a63d-41de-84a6-389791533074">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="10" width="75" height="17" uuid="d84597ba-4ff0-40a9-a8af-75a5716ed137">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtSurname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="85" y="10" width="75" height="17" uuid="a418bdb0-04a8-46e7-a249-4e071ef559c6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtFirstName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="165" y="10" width="75" height="17" uuid="e92da6f7-d6cc-4ebc-9e33-fe5733b7d762">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement markup="html">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtSurnameWife}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="245" y="10" width="75" height="17" uuid="9df5ecfc-71dd-411d-9b06-d796084fa8ec">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtMobile}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="325" y="10" width="75" height="17" uuid="be9a1be9-9e6f-401a-87a7-f0ec0eb3e361">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{txtMail}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
 </jasperReport>

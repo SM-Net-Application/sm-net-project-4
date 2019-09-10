@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingMinistryPartRow" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="street" class="java.lang.String"/>
+	<field name="number" class="java.lang.String"/>
+	<field name="zipCode" class="java.lang.String"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="telephone" class="java.lang.String"/>
+	<field name="jrMembersDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="memberJasperReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<detail>
+		<band height="17" splitType="Prevent">
+			<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 != 0)]]></printWhenExpression>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="09a1f023-2151-43df-831a-6f3a2d19494d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="17" uuid="2a9895c3-b7d6-4537-a505-b98b2e2c87cb">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[$F{jrMembersDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{memberJasperReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="17" splitType="Prevent">
+			<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0)]]></printWhenExpression>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#BBBBBB" uuid="f61e4592-2c88-46dd-89ce-11323df60cbf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="17" uuid="5bde9856-75c2-4823-8ec1-e3c289061e36">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[$F{jrMembersDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$F{memberJasperReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -6,20 +6,24 @@ import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 
 import javafx.collections.ObservableList;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class JRNaturalDisasterFamily {
 
 	private ArrayList<JRNaturalDisasterMember> members;
 	private JRBeanCollectionDataSource jrMembersDataSource;
+	private JasperReport memberJasperReport;
 	private String street;
 	private String number;
 	private String zipCode;
 	private String city;
 	private String telephone;
 
-	public JRNaturalDisasterFamily(Family family, ObservableList<Member> membersList) {
+	public JRNaturalDisasterFamily(Family family, JasperReport memberJasperReport, ObservableList<Member> membersList) {
 
+		this.members = new ArrayList<>();
+		this.memberJasperReport = memberJasperReport;
 		this.street = family.getSpInf2Decrypted();
 		this.number = family.getSpInf3Decrypted();
 		this.zipCode = family.getSpInf4Decrypted();
@@ -92,5 +96,13 @@ public class JRNaturalDisasterFamily {
 
 	public void setJrMembersDataSource(JRBeanCollectionDataSource jrMembersDataSource) {
 		this.jrMembersDataSource = jrMembersDataSource;
+	}
+
+	public JasperReport getMemberJasperReport() {
+		return memberJasperReport;
+	}
+
+	public void setMemberJasperReport(JasperReport memberJasperReport) {
+		this.memberJasperReport = memberJasperReport;
 	}
 }
