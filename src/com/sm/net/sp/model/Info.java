@@ -330,6 +330,13 @@ public class Info extends UpdateDataAdapter {
 
 			return select;
 		}
+
+		public static String getUserMenuNaturalDisasterSelect() {
+
+			String select = "'" + CONGR + "'";
+
+			return select;
+		}
 	}
 
 	public enum EnumActions {

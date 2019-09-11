@@ -22,10 +22,11 @@
 	<detail>
 		<band height="17">
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="5" y="0" width="50" height="17" uuid="bc5c8aa4-ca2a-47cd-9b2a-6c0e3b7e7cf8">
+				<reportElement stretchType="RelativeToBandHeight" x="5" y="0" width="75" height="17" uuid="bc5c8aa4-ca2a-47cd-9b2a-6c0e3b7e7cf8">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10"/>
@@ -33,10 +34,11 @@
 				<textFieldExpression><![CDATA[$F{surname}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="60" y="0" width="50" height="17" uuid="c0e15c77-76b2-4ef4-983e-e2f79f934c20">
+				<reportElement stretchType="RelativeToBandHeight" x="85" y="0" width="75" height="17" uuid="c0e15c77-76b2-4ef4-983e-e2f79f934c20">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10"/>
@@ -44,10 +46,10 @@
 				<textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="115" y="0" width="50" height="17" uuid="0afdce9b-710f-41e3-b271-ca4e828c2be4">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement stretchType="RelativeToBandHeight" x="168" y="0" width="75" height="17" uuid="0afdce9b-710f-41e3-b271-ca4e828c2be4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="10"/>
@@ -55,10 +57,10 @@
 				<textFieldExpression><![CDATA[$F{surnameWife}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="170" y="0" width="50" height="17" uuid="5e325968-5b1f-44f1-a326-89cc52620b6c">
+				<reportElement stretchType="RelativeToBandHeight" x="248" y="0" width="99" height="17" uuid="5e325968-5b1f-44f1-a326-89cc52620b6c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
@@ -66,24 +68,17 @@
 				<textFieldExpression><![CDATA[$F{mobile}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement stretchType="RelativeToBandHeight" x="225" y="0" width="50" height="17" uuid="4a387440-721a-404a-aef1-baf99013ea0a">
+				<reportElement stretchType="RelativeToBandHeight" x="352" y="0" width="99" height="17" uuid="4a387440-721a-404a-aef1-baf99013ea0a">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mail}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="16" width="555" height="1" uuid="e8e91c78-7fa1-4203-b9f7-c755a66dd856">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-			</line>
 		</band>
 	</detail>
 </jasperReport>

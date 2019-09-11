@@ -19,6 +19,7 @@ public class JRNaturalDisasterFamily {
 	private String zipCode;
 	private String city;
 	private String telephone;
+	private String address;
 
 	public JRNaturalDisasterFamily(Family family, JasperReport memberJasperReport, ObservableList<Member> membersList) {
 
@@ -30,7 +31,34 @@ public class JRNaturalDisasterFamily {
 		this.city = family.getSpInf5Decrypted();
 		this.telephone = family.getSpInf7Decrypted();
 
+		buildAddress();
 		buildMemberList(family.getSpFamID(), membersList);
+	}
+
+	private void buildAddress() {
+
+		this.address = "";
+
+		if (!this.street.isEmpty())
+			this.address += this.street;
+
+		if (!this.number.isEmpty())
+			this.address += " " + this.number;
+
+		if (!this.address.isEmpty() && (!this.zipCode.isEmpty() || !this.city.isEmpty()))
+			this.address += "<br>";
+
+		if (!this.zipCode.isEmpty())
+			this.address += this.zipCode;
+
+		if (!this.city.isEmpty())
+			this.address += " " + this.city;
+
+		if (!this.address.isEmpty() && !this.telephone.isEmpty())
+			this.address += "<br>";
+
+		if (!this.telephone.isEmpty())
+			this.address += this.telephone;
 	}
 
 	private void buildMemberList(int spFamID, ObservableList<Member> membersList) {
@@ -104,5 +132,13 @@ public class JRNaturalDisasterFamily {
 
 	public void setMemberJasperReport(JasperReport memberJasperReport) {
 		this.memberJasperReport = memberJasperReport;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

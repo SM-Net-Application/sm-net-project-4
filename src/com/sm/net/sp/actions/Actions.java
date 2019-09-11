@@ -1976,6 +1976,63 @@ public class Actions {
 
 	}
 
+	public static void getUserMenuNaturalDisasterInfo(Settings settings, Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							Info info = new Info();
+
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								info.setInfo(settings, json);
+							}
+
+							callback.updateInfo(info);
+						}
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_INFO(Info.KEYS.getUserMenuNaturalDisasterSelect()));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
 	/**
 	 * Get All Week Type
 	 * 
@@ -2332,6 +2389,7 @@ public class Actions {
 					parameters.put("txtSurnameWife", language.getString("jasper.layout.naturaldisaster.surnamewife"));
 					parameters.put("txtMobile", language.getString("jasper.layout.naturaldisaster.mobile"));
 					parameters.put("txtMail", language.getString("jasper.layout.naturaldisaster.mail"));
+					parameters.put("txtAddress", language.getString("jasper.layout.naturaldisaster.address"));
 					parameters.put("congregationName",
 							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
 					parameters.put("programmName",

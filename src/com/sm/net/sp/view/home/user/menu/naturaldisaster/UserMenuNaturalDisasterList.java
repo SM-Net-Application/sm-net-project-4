@@ -7,6 +7,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
@@ -78,6 +79,8 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	@FXML
 	private Button printButton2;
 
+	private String congregationName;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -128,6 +131,7 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
+		loadGeneralInfo();
 		updateMembers();
 		updateFamilies();
 	}
@@ -188,6 +192,17 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		listenerPrintButton();
 	}
 
+	private void loadGeneralInfo() {
+		Actions.getUserMenuNaturalDisasterInfo(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateInfo(Info info) {
+		super.updateInfo(info);
+
+		this.congregationName = info.getCongr();
+	}
+
 	private void listenerPrintButton() {
 		this.printButton1.setOnAction(event -> print());
 		this.printButton2.setOnAction(event -> print());
@@ -203,7 +218,7 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 			switch (selectedLayout) {
 
 			case NATURAL_DISASTER_LIST:
-				Actions.printNaturalDisaster(this.membersList, this.familiesList, "congregationName", settings,
+				Actions.printNaturalDisaster(this.membersList, this.familiesList, this.congregationName, settings,
 						ownerStage, language);
 				break;
 
@@ -373,5 +388,13 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 
 	public void setMembersList(ObservableList<Member> membersList) {
 		this.membersList = membersList;
+	}
+
+	public String getCongregationName() {
+		return congregationName;
+	}
+
+	public void setCongregationName(String congregationName) {
+		this.congregationName = congregationName;
 	}
 }
