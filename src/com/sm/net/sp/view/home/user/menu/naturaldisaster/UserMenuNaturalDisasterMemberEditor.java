@@ -109,7 +109,7 @@ public class UserMenuNaturalDisasterMemberEditor {
 		saveButton.setText(language.getString("TEXT0022"));
 
 		memberContactsTab.setText(language.getString("TEXT0106"));
-		memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_CONTACTS));
+		memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
 
 		smartphoneLabel.setText(language.getString("TEXT0107"));
 		emailLabel.setText(language.getString("TEXT0108"));

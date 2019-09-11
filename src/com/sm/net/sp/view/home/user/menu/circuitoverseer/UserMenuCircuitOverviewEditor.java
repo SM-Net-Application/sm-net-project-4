@@ -28,10 +28,14 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	@FXML
 	private Tab generalTab;
 	@FXML
+	private Tab contactsTab;
+	@FXML
 	private Tab talksTab;
 
 	@FXML
 	private ScrollPane generalScrollPane;
+	@FXML
+	private ScrollPane contactsScrollPane;
 	@FXML
 	private ScrollPane talksScrollPane;
 
@@ -73,6 +77,18 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	private Label talk3MinLabel;
 	@FXML
 	private Label talk3ThemeLabel;
+	@FXML
+	private Label phoneOverseerLabel;
+	@FXML
+	private Label mailOverseerLabel;
+	@FXML
+	private Label phoneWifeLabel;
+	@FXML
+	private Label mailWifeLabel;
+	@FXML
+	private Label overseerContactsLabel;
+	@FXML
+	private Label wifeContactsLabel;
 
 	@FXML
 	private TextField visitNumberTextField;
@@ -102,6 +118,14 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	private TextField talk3MinTextField;
 	@FXML
 	private TextField talk3ThemeTextField;
+	@FXML
+	private TextField phoneOverseerTextField;
+	@FXML
+	private TextField mailOverseerTextField;
+	@FXML
+	private TextField phoneWifeTextField;
+	@FXML
+	private TextField mailWifeTextField;
 
 	private Settings settings;
 	private Language language;
@@ -121,9 +145,11 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		tabPane.getStyleClass().add("tab_pane_002");
 
 		generalTab.getStyleClass().add("tab_001");
+		contactsTab.getStyleClass().add("tab_001");
 		talksTab.getStyleClass().add("tab_001");
 
 		generalScrollPane.getStyleClass().add("scroll_pane_001");
+		contactsScrollPane.getStyleClass().add("scroll_pane_001");
 		talksScrollPane.getStyleClass().add("scroll_pane_001");
 
 		overseerLabel.getStyleClass().add("label_002");
@@ -131,6 +157,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		talk1Label.getStyleClass().add("label_002");
 		talk2Label.getStyleClass().add("label_002");
 		talk3Label.getStyleClass().add("label_002");
+		overseerContactsLabel.getStyleClass().add("label_002");
+		wifeContactsLabel.getStyleClass().add("label_002");
 
 		visitNumberLabel.getStyleClass().add("label_set_001");
 		overseerNameLabel.getStyleClass().add("label_set_001");
@@ -146,6 +174,11 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		talk2ThemeLabel.getStyleClass().add("label_set_001");
 		talk3MinLabel.getStyleClass().add("label_set_001");
 		talk3ThemeLabel.getStyleClass().add("label_set_001");
+		talk3ThemeLabel.getStyleClass().add("label_set_001");
+		phoneOverseerLabel.getStyleClass().add("label_set_001");
+		mailOverseerLabel.getStyleClass().add("label_set_001");
+		phoneWifeLabel.getStyleClass().add("label_set_001");
+		mailWifeLabel.getStyleClass().add("label_set_001");
 
 		visitNumberTextField.getStyleClass().add("text_field_002");
 		talk1SongTextField.getStyleClass().add("text_field_002");
@@ -162,6 +195,10 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		talk1ThemeTextField.getStyleClass().add("text_field_001");
 		talk2ThemeTextField.getStyleClass().add("text_field_001");
 		talk3ThemeTextField.getStyleClass().add("text_field_001");
+		phoneOverseerTextField.getStyleClass().add("text_field_001");
+		mailOverseerTextField.getStyleClass().add("text_field_001");
+		phoneWifeTextField.getStyleClass().add("text_field_001");
+		mailWifeTextField.getStyleClass().add("text_field_001");
 
 		saveWeekButton.getStyleClass().add("button_image_001");
 	}
@@ -172,6 +209,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 		generalTab.setText(language.getString("TEXT0016"));
 		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
+		contactsTab.setText(language.getString("TEXT0106"));
+		contactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
 		talksTab.setText(language.getString("TEXT0140"));
 		talksTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.TALKS));
 
@@ -194,6 +233,13 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		talk2ThemeLabel.setText(language.getString("TEXT0094"));
 		talk3MinLabel.setText(language.getString("TEXT0093"));
 		talk3ThemeLabel.setText(language.getString("TEXT0094"));
+
+		phoneOverseerLabel.setText(language.getString("TEXT0094"));
+		mailOverseerLabel.setText(language.getString("TEXT0094"));
+		phoneWifeLabel.setText(language.getString("TEXT0094"));
+		mailWifeLabel.setText(language.getString("TEXT0094"));
+		overseerContactsLabel.setText(language.getString("TEXT0094"));
+		wifeContactsLabel.setText(language.getString("TEXT0094"));
 
 		saveWeekButton.setText(null);
 		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));

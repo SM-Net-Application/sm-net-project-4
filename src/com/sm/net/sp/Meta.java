@@ -172,7 +172,7 @@ public class Meta {
 		public static final String PLUS = "plus_35x35.png";
 		public static final String MEMBER_PERSONAL_INFO = "personal_info_45x35.png";
 		public static final String MEMBER_PRIVILEGES = "privilege2_45x35.png";
-		public static final String MEMBER_CONTACTS = "contacts_45x35.png";
+		public static final String CONTACTS = "contacts_45x35.png";
 		public static final String SAVE = "save_50x50.png";
 		public static final String UPDATE = "update.png";
 		public static final String ARROW_BACK = "arrow_back2_50x50.png";

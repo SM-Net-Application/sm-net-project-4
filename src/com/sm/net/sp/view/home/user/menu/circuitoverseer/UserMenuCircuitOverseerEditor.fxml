@@ -220,6 +220,171 @@
                         </AnchorPane>
                   </content>
                 </Tab>
+                  <Tab fx:id="contactsTab" text="contacts">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <ScrollPane fx:id="contactsScrollPane" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox>
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="overseerContactsLabel" text="overseer">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <Separator>
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Separator>
+                                                   </children>
+                                                </StackPane>
+                                                <HBox>
+                                                   <children>
+                                                      <VBox>
+                                                         <children>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Label fx:id="phoneOverseerLabel" text="phone">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Label fx:id="mailOverseerLabel" text="mail">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <TextField fx:id="phoneOverseerTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <TextField fx:id="mailOverseerTextField" maxWidth="1.7976931348623157E308">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <StackPane>
+                                             <children>
+                                                <Separator prefWidth="200.0">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
+                                          <VBox>
+                                             <children>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="wifeContactsLabel" text="wife">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <Separator>
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Separator>
+                                                   </children>
+                                                </StackPane>
+                                                <HBox>
+                                                   <children>
+                                                      <VBox>
+                                                         <children>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Label fx:id="phoneWifeLabel" text="phone">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Label fx:id="mailWifeLabel" text="mail">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <TextField fx:id="phoneWifeTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <TextField fx:id="mailWifeTextField" maxWidth="1.7976931348623157E308">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
                   <Tab fx:id="talksTab" text="talks">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0">
@@ -500,6 +665,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
+                  
               </tabs>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
