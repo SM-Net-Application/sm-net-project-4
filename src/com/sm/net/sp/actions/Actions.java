@@ -1597,8 +1597,8 @@ public class Actions {
 	 */
 	public static void insertOverseerWeek(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
-			String spInf13, String spInf14, String spInf15, Settings settings, Stage ownerStage, TabPane tabPane,
-			Tab newTab, UpdateData callback) {
+			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
+			String spInf19, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1642,7 +1642,8 @@ public class Actions {
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.INSERT_CIRCUITOVERSEER_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
-								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15));
+								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
+								spInf18, spInf19));
 			}
 		};
 
@@ -1657,8 +1658,9 @@ public class Actions {
 	 */
 	public static void updateOverseerWeek(String spWeekOvID, String spInf1, String spInf2, String spInf3, String spInf4,
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
-			String spInf12, String spInf13, String spInf14, String spInf15, Settings settings, Stage ownerStage,
-			TabPane tabPane, Tab newTab, UpdateData callback) {
+			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
+			String spInf18, String spInf19, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1702,7 +1704,8 @@ public class Actions {
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.UPDATE_OVERSEER_WEEK(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6,
-								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15));
+								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16,
+								spInf17, spInf18, spInf19));
 			}
 		};
 

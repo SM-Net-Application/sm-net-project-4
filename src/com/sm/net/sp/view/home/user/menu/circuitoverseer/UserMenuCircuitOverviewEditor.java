@@ -234,12 +234,12 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		talk3MinLabel.setText(language.getString("TEXT0093"));
 		talk3ThemeLabel.setText(language.getString("TEXT0094"));
 
-		phoneOverseerLabel.setText(language.getString("TEXT0094"));
-		mailOverseerLabel.setText(language.getString("TEXT0094"));
-		phoneWifeLabel.setText(language.getString("TEXT0094"));
-		mailWifeLabel.setText(language.getString("TEXT0094"));
-		overseerContactsLabel.setText(language.getString("TEXT0094"));
-		wifeContactsLabel.setText(language.getString("TEXT0094"));
+		phoneOverseerLabel.setText(language.getString("sp.overseer.phone"));
+		mailOverseerLabel.setText(language.getString("sp.overseer.mail"));
+		phoneWifeLabel.setText(language.getString("sp.overseer.phone"));
+		mailWifeLabel.setText(language.getString("sp.overseer.mail"));
+		overseerContactsLabel.setText(language.getString("sp.overseer.overseer"));
+		wifeContactsLabel.setText(language.getString("sp.overseer.wife"));
 
 		saveWeekButton.setText(null);
 		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
@@ -304,6 +304,11 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 			String spInf14 = Crypt.encrypt(talk3MinTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf15 = Crypt.encrypt(talk3ThemeTextField.getText(), settings.getDatabaseSecretKey());
 
+			String spInf16 = Crypt.encrypt(phoneOverseerTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf17 = Crypt.encrypt(mailOverseerTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf18 = Crypt.encrypt(phoneWifeTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf19 = Crypt.encrypt(mailWifeTextField.getText(), settings.getDatabaseSecretKey());
+
 			if (this.selectedWeek.spWeekOvIDProperty() != null) {
 				// editWeek
 
@@ -311,8 +316,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 				String spInf1 = String.valueOf(selectedWeek.getSpInf1());
 
 				Actions.updateOverseerWeek(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
-						spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, settings, ownerStage,
-						ownerTabPane, thisTab, ownerCtrl);
+						spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
+						spInf19, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 
 			} else {
 				// newWeek
@@ -320,8 +325,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
 
 				Actions.insertOverseerWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
-						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, settings, ownerStage, ownerTabPane,
-						thisTab, ownerCtrl);
+						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
+						settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
 	}
