@@ -431,7 +431,7 @@ public class JSONRequest {
 	public static JSONObject INSERT_CIRCUITOVERSEER_WEEK(String spInf1, String spInf2, String spInf3, String spInf4,
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
-			String spInf18, String spInf19) {
+			String spInf18, String spInf19, String spInf20) {
 
 		JSONObject jsonObj = create(Integer.valueOf(29));
 		jsonObj.put("spInf1", spInf1);
@@ -453,6 +453,7 @@ public class JSONRequest {
 		jsonObj.put("spInf17", spInf17);
 		jsonObj.put("spInf18", spInf18);
 		jsonObj.put("spInf19", spInf19);
+		jsonObj.put("spInf20", spInf20);
 
 		return jsonObj;
 	}
@@ -460,7 +461,7 @@ public class JSONRequest {
 	public static JSONObject UPDATE_OVERSEER_WEEK(String spWeekOvID, String spInf1, String spInf2, String spInf3,
 			String spInf4, String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10,
 			String spInf11, String spInf12, String spInf13, String spInf14, String spInf15, String spInf16,
-			String spInf17, String spInf18, String spInf19) {
+			String spInf17, String spInf18, String spInf19, String spInf20) {
 
 		JSONObject jsonObj = create(Integer.valueOf(30));
 
@@ -484,6 +485,7 @@ public class JSONRequest {
 		jsonObj.put("spInf17", spInf17);
 		jsonObj.put("spInf18", spInf18);
 		jsonObj.put("spInf19", spInf19);
+		jsonObj.put("spInf20", spInf20);
 
 		return jsonObj;
 	}
@@ -525,6 +527,13 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject GET_LAST_CIRCUITOVERSEER_WEEKS() {
+
+		JSONObject jsonObj = create(Integer.valueOf(34));
+
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -547,7 +556,7 @@ public class JSONRequest {
 			status = true;
 			break;
 		default:
-			// System.out.println(jsonStatus.getText());
+			System.out.println(jsonStatus.getText());
 			break;
 		}
 		return status;

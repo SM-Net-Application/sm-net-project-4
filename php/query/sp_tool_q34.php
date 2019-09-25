@@ -1,7 +1,5 @@
 <?php
-// Get all circuit overseer weeks
-if (isset($jsonObj["keyStart"]) && isset($jsonObj["keyEnd"])) {
-    if (! empty($jsonObj["keyStart"]) && ! empty($jsonObj["keyEnd"])) {
+// Get last circuit overseer weeks
         require_once __DIR__ . '/config.php';
         $database = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
         mysqli_set_charset($conn, 'utf8');
@@ -14,11 +12,10 @@ if (isset($jsonObj["keyStart"]) && isset($jsonObj["keyEnd"])) {
             $query .= "spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,";
             $query .= "spInf20";
             $query .= " FROM sp_week_ov";
-            $query .= " WHERE spInf1 BETWEEN";
-            $query .= " " . $jsonObj["keyStart"];
-            $query .= " AND";
-            $query .= " " . $jsonObj["keyEnd"];
-
+            $query .= " WHERE spInf20 = 0";
+            $query .= " ORDER BY spInf1 DESC";
+            $query .= " LIMIT 1";
+            
             $result = mysqli_query($database, $query);
 
             if (mysqli_num_rows($result) > 0) {
@@ -60,9 +57,3 @@ if (isset($jsonObj["keyStart"]) && isset($jsonObj["keyEnd"])) {
             $result->close();
             mysqli_close($database);
         }
-    } else {
-        $response["status"] = 6;
-    }
-} else {
-    $response["status"] = 6;
-}

@@ -1592,13 +1592,73 @@ public class Actions {
 
 	}
 
+	public static void getLastCircuitOverseerWeeks(Settings settings, Stage ownerStage, UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							ObservableList<WeekOverseer> list = FXCollections.observableArrayList();
+							JSONArray jsonArray = jsonObject.getJSONArray("result");
+							for (Object object : jsonArray) {
+								JSONObject json = (JSONObject) object;
+								list.add(new WeekOverseer(json, settings.getLanguage(), settings, false));
+							}
+
+							callback.updateWeeksOverseer(list);
+
+						} else {
+							callback.updateWeeks(null);
+						}
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.GET_LAST_CIRCUITOVERSEER_WEEKS());
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
 	/**
 	 * Insert Circuit Overseer Week
+	 * 
+	 * @param spInf20
 	 */
 	public static void insertOverseerWeek(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
-			String spInf19, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
+			String spInf19, String spInf20, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1643,7 +1703,7 @@ public class Actions {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.INSERT_CIRCUITOVERSEER_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
 								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
-								spInf18, spInf19));
+								spInf18, spInf19, spInf20));
 			}
 		};
 
@@ -1659,8 +1719,8 @@ public class Actions {
 	public static void updateOverseerWeek(String spWeekOvID, String spInf1, String spInf2, String spInf3, String spInf4,
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
-			String spInf18, String spInf19, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
-			UpdateData callback) {
+			String spInf18, String spInf19, String spInf20, Settings settings, Stage ownerStage, TabPane tabPane,
+			Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1705,7 +1765,7 @@ public class Actions {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.UPDATE_OVERSEER_WEEK(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6,
 								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16,
-								spInf17, spInf18, spInf19));
+								spInf17, spInf18, spInf19, spInf20));
 			}
 		};
 
@@ -2341,8 +2401,9 @@ public class Actions {
 		taskThread.start();
 	}
 
-	public static void printNaturalDisaster(ObservableList<Member> membersList, ObservableList<Family> familiesList,
-			String congregationName, Settings settings, Stage ownerStage, Language language) {
+	public static void printNaturalDisaster(String overseerName, String overseerPhone, String overseerMail,
+			ObservableList<Member> membersList, ObservableList<Family> familiesList, String congregationName,
+			Settings settings, Stage ownerStage, Language language) {
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
 
@@ -2393,8 +2454,17 @@ public class Actions {
 					parameters.put("txtMobile", language.getString("jasper.layout.naturaldisaster.mobile"));
 					parameters.put("txtMail", language.getString("jasper.layout.naturaldisaster.mail"));
 					parameters.put("txtAddress", language.getString("jasper.layout.naturaldisaster.address"));
+
 					parameters.put("congregationName",
 							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
+
+					parameters.put("txtOverseerName", language.getString("jasper.layout.naturaldisaster.overseer"));
+					parameters.put("txtOverseerPhone", language.getString("jasper.layout.naturaldisaster.mobile"));
+					parameters.put("txtOverseerMail", language.getString("jasper.layout.naturaldisaster.mail"));
+					parameters.put("overseerName", overseerName);
+					parameters.put("overseerPhone", overseerPhone);
+					parameters.put("overseerMail", overseerMail);
+
 					parameters.put("programmName",
 							language.getString("jasper.layout.naturaldisaster.programm").toUpperCase());
 

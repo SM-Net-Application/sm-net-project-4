@@ -105,6 +105,9 @@ if (! empty($jsonObjPar)) {
                 case 33:
                     include 'query/sp_tool_q33.php';
                     break;
+                case 34:
+                    include 'query/sp_tool_q34.php';
+                    break;
             }
         } else {
             $response["status"] = 3;

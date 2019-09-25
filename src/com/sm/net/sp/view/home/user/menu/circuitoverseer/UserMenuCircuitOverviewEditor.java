@@ -11,6 +11,7 @@ import com.sm.net.util.Crypt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -126,6 +127,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	private TextField phoneWifeTextField;
 	@FXML
 	private TextField mailWifeTextField;
+	@FXML
+	private CheckBox substituteCheckBox;
 
 	private Settings settings;
 	private Language language;
@@ -200,6 +203,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		phoneWifeTextField.getStyleClass().add("text_field_001");
 		mailWifeTextField.getStyleClass().add("text_field_001");
 
+		substituteCheckBox.getStyleClass().add("check_box_001");
+
 		saveWeekButton.getStyleClass().add("button_image_001");
 	}
 
@@ -241,6 +246,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		overseerContactsLabel.setText(language.getString("sp.overseer.overseer"));
 		wifeContactsLabel.setText(language.getString("sp.overseer.wife"));
 
+		substituteCheckBox.setText(language.getString("sp.overseer.substitute"));
+
 		saveWeekButton.setText(null);
 		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 	}
@@ -274,6 +281,13 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 				this.talk2ThemeTextField.setText(this.selectedWeek.getSpInf13());
 				this.talk3MinTextField.setText(this.selectedWeek.getSpInf14());
 				this.talk3ThemeTextField.setText(this.selectedWeek.getSpInf15());
+
+				this.phoneOverseerTextField.setText(this.selectedWeek.getSpInf16());
+				this.mailOverseerTextField.setText(this.selectedWeek.getSpInf17());
+				this.phoneWifeTextField.setText(this.selectedWeek.getSpInf18());
+				this.mailWifeTextField.setText(this.selectedWeek.getSpInf19());
+
+				this.substituteCheckBox.setSelected((this.selectedWeek.getSpInf20() == 1));
 			}
 	}
 
@@ -309,6 +323,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 			String spInf18 = Crypt.encrypt(phoneWifeTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf19 = Crypt.encrypt(mailWifeTextField.getText(), settings.getDatabaseSecretKey());
 
+			String spInf20 = !this.substituteCheckBox.isSelected() ? "0" : "1";
+
 			if (this.selectedWeek.spWeekOvIDProperty() != null) {
 				// editWeek
 
@@ -317,7 +333,7 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 				Actions.updateOverseerWeek(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
 						spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
-						spInf19, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf19, spInf20, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 
 			} else {
 				// newWeek
@@ -326,7 +342,7 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 				Actions.insertOverseerWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
-						settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf20, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
 	}

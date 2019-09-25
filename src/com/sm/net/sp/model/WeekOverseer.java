@@ -45,6 +45,12 @@ public class WeekOverseer {
 	private StringProperty spInf14;
 	private StringProperty spInf15;
 
+	private StringProperty spInf16;
+	private StringProperty spInf17;
+	private StringProperty spInf18;
+	private StringProperty spInf19;
+	private IntegerProperty spInf20;
+
 	public WeekOverseer(LocalDate day, Language language) {
 		super();
 
@@ -90,6 +96,15 @@ public class WeekOverseer {
 				Crypt.decrypt(jsonObject.getString("spInf14" + suffix), settings.getDatabaseSecretKey()));
 		this.spInf15 = new SimpleStringProperty(
 				Crypt.decrypt(jsonObject.getString("spInf15" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf16 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf16" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf17 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf17" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf18 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf18" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf19 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf19" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf20 = new SimpleIntegerProperty(jsonObject.getInt("spInf20" + suffix));
 
 		this.setVisitNumber(String.valueOf(this.getSpInf2()));
 		this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
@@ -113,7 +128,7 @@ public class WeekOverseer {
 				this.setSpWeekOvID(week.getSpWeekOvID());
 				this.setSpInf1(week.getSpInf1());
 				this.setSpInf2(week.getSpInf2());
-				
+
 				this.setSpInf3(week.getSpInf3());
 				this.setSpInf4(week.getSpInf4());
 				this.setSpInf5(week.getSpInf5());
@@ -128,20 +143,12 @@ public class WeekOverseer {
 				this.setSpInf14(week.getSpInf14());
 				this.setSpInf15(week.getSpInf15());
 
-//				this.setSpInf3(Crypt.decrypt(week.getSpInf3(), settings.getDatabaseSecretKey()));
-//				this.setSpInf4(Crypt.decrypt(week.getSpInf4(), settings.getDatabaseSecretKey()));
-//				this.setSpInf5(Crypt.decrypt(week.getSpInf5(), settings.getDatabaseSecretKey()));
-//				this.setSpInf6(Crypt.decrypt(week.getSpInf6(), settings.getDatabaseSecretKey()));
-//				this.setSpInf7(Crypt.decrypt(week.getSpInf7(), settings.getDatabaseSecretKey()));
-//				this.setSpInf8(Crypt.decrypt(week.getSpInf8(), settings.getDatabaseSecretKey()));
-//				this.setSpInf9(Crypt.decrypt(week.getSpInf9(), settings.getDatabaseSecretKey()));
-//				this.setSpInf10(Crypt.decrypt(week.getSpInf10(), settings.getDatabaseSecretKey()));
-//				this.setSpInf11(Crypt.decrypt(week.getSpInf11(), settings.getDatabaseSecretKey()));
-//				this.setSpInf12(Crypt.decrypt(week.getSpInf12(), settings.getDatabaseSecretKey()));
-//				this.setSpInf13(Crypt.decrypt(week.getSpInf13(), settings.getDatabaseSecretKey()));
-//				this.setSpInf14(Crypt.decrypt(week.getSpInf14(), settings.getDatabaseSecretKey()));
-//				this.setSpInf15(Crypt.decrypt(week.getSpInf15(), settings.getDatabaseSecretKey()));
-				
+				this.setSpInf16(week.getSpInf16());
+				this.setSpInf17(week.getSpInf17());
+				this.setSpInf18(week.getSpInf18());
+				this.setSpInf19(week.getSpInf19());
+				this.setSpInf20(week.getSpInf20());
+
 				this.setVisitNumber(String.valueOf(this.getSpInf2()));
 				this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
 
@@ -455,6 +462,81 @@ public class WeekOverseer {
 			this.spInf15 = new SimpleStringProperty();
 
 		this.spInf15Property().set(spInf15);
+	}
+
+	public final StringProperty spInf16Property() {
+		return this.spInf16;
+	}
+
+	public final String getSpInf16() {
+		return this.spInf16Property().get();
+	}
+
+	public final void setSpInf16(final String spInf16) {
+		if (this.spInf16Property() == null)
+			this.spInf16 = new SimpleStringProperty();
+
+		this.spInf16Property().set(spInf16);
+	}
+
+	public final StringProperty spInf17Property() {
+		return this.spInf17;
+	}
+
+	public final String getSpInf17() {
+		return this.spInf17Property().get();
+	}
+
+	public final void setSpInf17(final String spInf17) {
+		if (this.spInf17Property() == null)
+			this.spInf17 = new SimpleStringProperty();
+
+		this.spInf17Property().set(spInf17);
+	}
+
+	public final StringProperty spInf18Property() {
+		return this.spInf18;
+	}
+
+	public final String getSpInf18() {
+		return this.spInf18Property().get();
+	}
+
+	public final void setSpInf18(final String spInf18) {
+		if (this.spInf18Property() == null)
+			this.spInf18 = new SimpleStringProperty();
+
+		this.spInf18Property().set(spInf18);
+	}
+
+	public final StringProperty spInf19Property() {
+		return this.spInf19;
+	}
+
+	public final String getSpInf19() {
+		return this.spInf19Property().get();
+	}
+
+	public final void setSpInf19(final String spInf19) {
+		if (this.spInf19Property() == null)
+			this.spInf19 = new SimpleStringProperty();
+
+		this.spInf19Property().set(spInf19);
+	}
+
+	public final IntegerProperty spInf20Property() {
+		return this.spInf20;
+	}
+
+	public final int getSpInf20() {
+		return this.spInf20Property().get();
+	}
+
+	public final void setSpInf20(final int spInf20) {
+		if (this.spInf20Property() == null)
+			this.spInf20 = new SimpleIntegerProperty();
+
+		this.spInf20Property().set(spInf20);
 	}
 
 	public final StringProperty visitNumberProperty() {
