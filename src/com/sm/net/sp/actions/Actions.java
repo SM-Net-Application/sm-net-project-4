@@ -1,6 +1,8 @@
 package com.sm.net.sp.actions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -327,7 +329,7 @@ public class Actions {
 	 * @param callback
 	 */
 	public static void updateUserRules(String spUserID, String spInf1, String spInf2, String spInf3, String spInf4,
-			String spInf5, Settings settings, Stage ownerStage, UpdateData callback) {
+			String spInf5, String spInf6, String spInf7, Settings settings, Stage ownerStage, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -364,8 +366,8 @@ public class Actions {
 
 			@Override
 			protected JSONObject call() throws Exception {
-				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.UPDATE_USER_RULES(spUserID, spInf1, spInf2, spInf3, spInf4, spInf5));
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_USER_RULES(spUserID,
+						spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7));
 			}
 		};
 
@@ -2404,6 +2406,7 @@ public class Actions {
 	public static void printNaturalDisaster(String overseerName, String overseerPhone, String overseerMail,
 			ObservableList<Member> membersList, ObservableList<Family> familiesList, String congregationName,
 			Settings settings, Stage ownerStage, Language language) {
+
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
 
@@ -2461,6 +2464,15 @@ public class Actions {
 					parameters.put("txtOverseerName", language.getString("jasper.layout.naturaldisaster.overseer"));
 					parameters.put("txtOverseerPhone", language.getString("jasper.layout.naturaldisaster.mobile"));
 					parameters.put("txtOverseerMail", language.getString("jasper.layout.naturaldisaster.mail"));
+					parameters.put("txtDate", language.getString("jasper.layout.naturaldisaster.date"));
+					parameters.put("txtPage", language.getString("jasper.layout.naturaldisaster.page"));
+					parameters.put("txtOf", language.getString("jasper.layout.naturaldisaster.of"));
+
+					SimpleDateFormat sdf = new SimpleDateFormat(
+							language.getString("jasper.layout.naturaldisaster.datepattern"));
+					String date = sdf.format(new Date());
+
+					parameters.put("date", date);
 					parameters.put("overseerName", overseerName);
 					parameters.put("overseerPhone", overseerPhone);
 					parameters.put("overseerMail", overseerMail);
@@ -2470,6 +2482,70 @@ public class Actions {
 
 					parameters.put("familyJasperReport", familyJasperReport);
 					parameters.put("jrFamiliesDataSource", jrFamiliesDataSource);
+
+					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
+							new JREmptyDataSource());
+
+					JasperViewer jv = new JasperViewer(jasperPrint, false);
+					jv.setTitle(Meta.Application.getFullTitle());
+					jv.setIconImage(SwingFXUtils.fromFXImage(Meta.Resources.getImageApplicationIcon(), null));
+					jv.setVisible(true);
+
+				} catch (JRException e) {
+					System.out.println(e.getMessage());
+				}
+
+				return null;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	public static void printMonitorPassword(String memberName, String monitorPassword, String link, Settings settings,
+			Stage ownerStage, Language language) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<Void> task = new Task<Void>() {
+
+			{
+				setOnSucceeded(value -> waitAlert.close());
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected Void call() throws Exception {
+
+				try {
+
+					String programmReportFile = Jasper.Layouts.SM_NET_MONITOR.getAbsolutePath();
+
+					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
+
+					Map<String, Object> parameters = new HashMap<String, Object>();
+					parameters.put("image", Jasper.Layouts.SM_NET_USERS_LOGO.getAbsolutePath());
+					parameters.put("memberName", memberName);
+					parameters.put("password", monitorPassword);
+					parameters.put("txtlink", language.getString("jasper.layout.monitor.link"));
+					parameters.put("link", link);
+					parameters.put("txtpassword", language.getString("jasper.layout.monitor.password"));
 
 					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
 							new JREmptyDataSource());
@@ -2517,4 +2593,5 @@ public class Actions {
 
 		return waitAlert;
 	}
+
 }

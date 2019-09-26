@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spUsers" pageWidth="421" pageHeight="297" orientation="Landscape" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8411141d-ad34-47ae-8cd5-758b3ddd913f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="memberName" class="java.lang.String"/>
+	<parameter name="password" class="java.lang.String"/>
+	<parameter name="txtlink" class="java.lang.String"/>
+	<parameter name="link" class="java.lang.String"/>
+	<parameter name="txtpassword" class="java.lang.String"/>
+	<parameter name="image" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<group name="Access">
+		<groupHeader>
+			<band height="50">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<rectangle>
+					<reportElement x="0" y="20" width="381" height="30" uuid="32eeec31-a079-47e8-8fd6-47e91158641a">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="20" width="381" height="30" uuid="5c1410a7-ac35-471e-a35e-c69b08d2ad03">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font fontName="SansSerif" size="22"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{memberName}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Access-Details-Password">
+		<groupHeader>
+			<band height="15">
+				<rectangle>
+					<reportElement x="0" y="0" width="381" height="15" uuid="d7e07139-a94b-43df-8a5a-01b373411dd1">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+				</rectangle>
+				<textField pattern="">
+					<reportElement x="20" y="0" width="130" height="15" uuid="7cc06c5a-5bf1-4630-b1a1-3d2852a91555">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{txtpassword}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="150" y="0" width="1" height="15" uuid="fdc3d5c3-b3f6-4d58-ab1f-a2da9c7cecea">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</line>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="170" y="0" width="211" height="15" uuid="88a58f07-07c1-448b-b296-747504e45f76">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{password}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Config">
+		<groupHeader>
+			<band height="50">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<rectangle>
+					<reportElement x="0" y="20" width="381" height="30" uuid="c662147c-e450-4c94-bedd-2a77fef90763">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="20" width="381" height="30" uuid="50eaba35-8ea6-495b-96c7-5f13f93563d1">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font fontName="SansSerif" size="22"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{txtlink}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Config-Details-URL-Header">
+		<groupHeader>
+			<band height="20">
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="381" height="20" uuid="88234f97-04f1-44b2-862f-92bf54a49e60">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+				</rectangle>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="5" y="2" width="370" height="15" uuid="15e7bfdd-a1d6-4fc3-8e9b-e8cd015c513e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<a href=\""+$P{link}+"\">"+$P{link}+"</a>"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="80" y="0" width="301" height="60" uuid="851474fc-cb8f-4efe-8ea8-204a0780d28a">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="40"/>
+				</textElement>
+				<text><![CDATA[Support Planner]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="5" width="50" height="50" uuid="0e971e27-35e9-4cf8-bbc8-e798b7515231"/>
+				<imageExpression><![CDATA[$P{image}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="15">
+			<staticText>
+				<reportElement x="0" y="0" width="381" height="15" uuid="f235ed90-91cf-4624-b1f5-0ef70eff103b">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Developed by SM-Net]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -34,7 +34,17 @@ public class MemberHistory {
 	}
 
 	public void checkLastDate(ObservableList<Week> databaseWeeks) {
-		databaseWeeks.forEach(week -> checkWeek(week));
+
+		databaseWeeks.forEach(week -> checkDatabaseWeek(week, this.selectedWeek));
+		updateStatus(this.selectedWeek);
+	}
+
+	public void checkEditorLastDate(Week editorWeek) {
+		checkWeek(editorWeek);
+		updateStatus(this.selectedWeek);
+	}
+
+	private void updateStatus(Week selectedWeek) {
 
 		if (this.lastDate != null) {
 
@@ -49,9 +59,18 @@ public class MemberHistory {
 		}
 	}
 
+	private void checkDatabaseWeek(Week week, Week selectedWeek) {
+
+		if (selectedWeek.spInf1Property() != null)
+			if (week.getSpInf1() != selectedWeek.getSpInf1())
+				checkWeek(week);
+	}
+
 	private void checkWeek(Week week) {
 
 		LocalDate from = null;
+
+		// TODO: Lato member Pray sistemare
 
 		switch (this.privilege) {
 		case PRESIDENT_MIDWEEK:
@@ -59,9 +78,19 @@ public class MemberHistory {
 				from = checkLastDate(from, week.getSpInf1());
 			break;
 		case PRAY1_MIDWEEK:
-			if (this.member.getSpMemberID() == week.getSpInf4())
+		case PRAY2_MIDWEEK:
+			if (this.member.getSpMemberID() == week.getSpInf4() || this.member.getSpMemberID() == week.getSpInf27())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
+//		case PRAY1_MIDWEEK:
+//			if (this.member.getSpMemberID() == week.getSpInf4())
+//				from = checkLastDate(from, week.getSpInf1());
+//			break;
+//		case PRAY2_MIDWEEK:
+//			if (this.member.getSpMemberID() == week.getSpInf27())
+//				from = checkLastDate(from, week.getSpInf1());
+//			break;
+
 		case TALK_MIDWEEK:
 			if (this.member.getSpMemberID() == week.getSpInf11())
 				from = checkLastDate(from, week.getSpInf1());
@@ -72,10 +101,6 @@ public class MemberHistory {
 			break;
 		case CONGRBIBLESTUDY_MIDWEEK:
 			if (this.member.getSpMemberID() == week.getSpInf23())
-				from = checkLastDate(from, week.getSpInf1());
-			break;
-		case PRAY2_MIDWEEK:
-			if (this.member.getSpMemberID() == week.getSpInf27())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
 		case CHRISTIAN_LIFE:
@@ -168,4 +193,5 @@ public class MemberHistory {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 }

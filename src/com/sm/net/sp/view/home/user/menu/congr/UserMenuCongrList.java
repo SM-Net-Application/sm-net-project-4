@@ -6,12 +6,14 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Info.EnumActions;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.sm.net.util.Crypt;
 
 import javafx.collections.ObservableList;
@@ -53,26 +55,6 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private Label congrLabel;
 	@FXML
 	private TextField congrTextField;
-	// @FXML
-	// private Label overseer1Label;
-	// @FXML
-	// private Label overseer1NameLabel;
-	// @FXML
-	// private TextField overseer1NameTextField;
-	// @FXML
-	// private Label overseer1WifeLabel;
-	// @FXML
-	// private TextField overseer1WifeTextField;
-	// @FXML
-	// private Label overseer2Label;
-	// @FXML
-	// private Label overseer2NameLabel;
-	// @FXML
-	// private TextField overseer2NameTextField;
-	// @FXML
-	// private Label overseer2WifeLabel;
-	// @FXML
-	// private TextField overseer2WifeTextField;
 
 	@FXML
 	private TableView<Member> membersTableView;
@@ -110,6 +92,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private Button familyDeleteButton;
 	@FXML
 	private Button familiesUpdateButton;
+
+	@FXML
+	private Button memberMonitorPrintButton;
 
 	private Settings settings;
 	private Language language;
@@ -168,6 +153,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		congrLabel.getStyleClass().add("label_set_001");
 		congrTextField.getStyleClass().add("text_field_001");
+
+		memberMonitorPrintButton.getStyleClass().add("button_image_001");
 
 		// overseer1Label.getStyleClass().add("labelStyle2");
 		// overseer1NameLabel.getStyleClass().add("labelStyle3");
@@ -249,12 +236,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		congrLabel.setText(language.getString("sp.congr.name"));
 
-		// overseer1Label.setText(language.getString("TEXT0131"));
-		// overseer1NameLabel.setText(language.getString("TEXT0037"));
-		// overseer1WifeLabel.setText(language.getString("TEXT0133"));
-		// overseer2Label.setText(language.getString("TEXT0132"));
-		// overseer2NameLabel.setText(language.getString("TEXT0037"));
-		// overseer2WifeLabel.setText(language.getString("TEXT0133"));
+		memberMonitorPrintButton.setText("");
+		memberMonitorPrintButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
 	}
 
 	private void initInfo() {
@@ -288,11 +271,6 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		listenerCongrTextField();
 
-		// listenerOverseer1NameTextField();
-		// listenerOverseer1WifeTextField();
-		// listenerOverseer2NameTextField();
-		// listenerOverseer2WifeTextField();
-
 		listenerMemberAddButton();
 		listenerMemberDeleteButton();
 		listenerMembersUpdateButton();
@@ -302,6 +280,12 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		listenerFamilyDeleteButton();
 		listenerFamilyUpdateButton();
 		listenerFamiliesTableView();
+
+		listenerMemberMonitorPrintButton();
+	}
+
+	private void listenerMemberMonitorPrintButton() {
+		this.memberMonitorPrintButton.setOnAction(event -> print());
 	}
 
 	private void listenerCongrTextField() {
@@ -445,7 +429,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			Member member = membersTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0024"), member.getNameStyle1(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteMember(String.valueOf(member.getSpMemberID()), settings, ownerStage, this);
 		}
@@ -459,7 +444,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			Family family = familiesTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0034"), family.getSpInf1Decrypted(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteFamily(String.valueOf(family.getSpFamID()), settings, ownerStage, this);
 		}
@@ -649,6 +635,46 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
 
 		familiesTableView.setItems(familiesList);
+	}
+
+	private void print() {
+
+		if (membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			Member member = membersTableView.getSelectionModel().getSelectedItem();
+			String spInf47 = member.getSpInf47();
+			if (!spInf47.isEmpty()) {
+
+				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+						EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
+
+				if (selectedLayout != null) {
+
+					switch (selectedLayout) {
+
+					case MEMBER_PASSWORD_MONITOR:
+
+						String dbUrl = this.settings.getDatabaseUrl();
+						int indexOf = dbUrl.indexOf("exchange.php");
+						if (indexOf > -1) {
+
+							String memberName = member.getNameStyle1();
+
+							String subDbUrl = dbUrl.substring(0, indexOf);
+							String link = subDbUrl + "monitor/index.php?pwmon=%s&amp;lang=%s";
+							link = String.format(link, spInf47, this.language.getString("sp.monitor.language"));
+
+							Actions.printMonitorPassword(memberName, spInf47, link, settings, ownerStage, language);
+						}
+
+						break;
+
+					default:
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	public Settings getSettings() {

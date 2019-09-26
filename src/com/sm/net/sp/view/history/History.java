@@ -11,17 +11,21 @@ import com.sm.net.sp.model.MemberHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetingsEditor;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class History {
 
@@ -51,6 +55,9 @@ public class History {
 	@FXML
 	private TableColumn<PrivilegeHistory, String> privilegesNameTableColumn;
 
+	@FXML
+	private Button selectButton;
+
 	private Language language;
 	private ObservableList<Member> members;
 	private ObservableList<MemberHistory> membersPrivilege;
@@ -58,6 +65,9 @@ public class History {
 	private Privileges privilege;
 	private ObservableList<Week> databaseWeeks;
 	private Week selectedWeek;
+	private Week editorWeek;
+	private UserMenuMeetingsEditor editor;
+	private Stage thisStage;
 
 	@FXML
 	private void initialize() {
@@ -66,7 +76,6 @@ public class History {
 	}
 
 	private void styleClasses() {
-
 		layout.getStyleClass().add("main_color_001");
 
 		titleLabel.getStyleClass().add("label_002");
@@ -74,6 +83,8 @@ public class History {
 
 		membersTableView.getStyleClass().add("table_view_001");
 		privilegesTableView.getStyleClass().add("table_view_001");
+
+		selectButton.getStyleClass().add("button_image_001");
 	}
 
 	private void cellValueFactory() {
@@ -107,10 +118,34 @@ public class History {
 
 	private void listeners() {
 		listenerMembersTableView();
+		listenerSelectButton();
+	}
+
+	private void listenerSelectButton() {
+		selectButton.setOnAction(event -> selectMember());
+	}
+
+	private void selectMember() {
+
+		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			MemberHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
+			int memberID = member.getMember().getSpMemberID();
+			this.editor.updateSelectedComboBox(this.privilege, memberID);
+			this.thisStage.close();
+		}
 	}
 
 	private void listenerMembersTableView() {
 		membersTableView.getSelectionModel().selectedIndexProperty().addListener((ob, o, n) -> changeMember(n));
+		membersTableView.setRowFactory(param -> {
+			TableRow<MemberHistory> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty()))
+					selectMember();
+			});
+			return row;
+		});
 	}
 
 	private void changeMember(Number n) {
@@ -132,38 +167,57 @@ public class History {
 		if (selectedWeek.spInf1Property() != null) {
 
 			int memberID = member.getMember().getSpMemberID();
-			for (Week week : databaseWeeks) {
-
-				if (memberID == week.getSpInf3())
-					checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
-
-				if (memberID == week.getSpInf4())
-					checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
-
-				if (memberID == week.getSpInf11())
-					checkPrivilege(Privileges.TALK_MIDWEEK, week);
-
-				if (memberID == week.getSpInf14())
-					checkPrivilege(Privileges.DIGGING_MIDWEEK, week);
-
-				if (memberID == week.getSpInf23())
-					checkPrivilege(Privileges.CONGRBIBLESTUDY_MIDWEEK, week);
-
-				if (memberID == week.getSpInf27())
-					checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
-
-				for (ChristiansPart cp : week.getChristiansPartList())
-					if (memberID == cp.getTeacher().getSpMemberID()) {
-						checkPrivilege(Privileges.CHRISTIAN_LIFE, week);
-						break;
-					}
-			}
+			checkPrivilegeMemberDatabaseWeek(memberID);
+			checkPrivilegeMemberWeek(memberID, this.editorWeek);
 
 		} else
 			this.brotherLabel.setText(language.getString("sp.history.weeknotsaved"));
 
 		memberPrivilegeHistory.sort((o1, o2) -> o1.getLastDate().compareTo(o2.getLastDate()));
 		this.privilegesTableView.setItems(memberPrivilegeHistory);
+	}
+
+	private void checkPrivilegeMemberDatabaseWeek(int memberID) {
+
+		for (Week week : databaseWeeks)
+			if (week.getSpInf1() != this.selectedWeek.getSpInf1())
+				checkPrivilegeMemberWeek(memberID, week);
+	}
+
+	private void checkPrivilegeMemberWeek(int memberID, Week week) {
+
+		if (memberID == week.getSpInf3())
+			checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
+
+		if (memberID == week.getSpInf4() || memberID == week.getSpInf27()) {
+			// checkPrivilege(Privileges.PRAY, week);
+
+			if (memberID == week.getSpInf4())
+				checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
+			else if (memberID == week.getSpInf27())
+				checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+		}
+
+//		if (memberID == week.getSpInf4())
+//			checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
+
+//		if (memberID == week.getSpInf27())
+//			checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+
+		if (memberID == week.getSpInf11())
+			checkPrivilege(Privileges.TALK_MIDWEEK, week);
+
+		if (memberID == week.getSpInf14())
+			checkPrivilege(Privileges.DIGGING_MIDWEEK, week);
+
+		if (memberID == week.getSpInf23())
+			checkPrivilege(Privileges.CONGRBIBLESTUDY_MIDWEEK, week);
+
+		for (ChristiansPart cp : week.getChristiansPartList())
+			if (memberID == cp.getTeacher().getSpMemberID()) {
+				checkPrivilege(Privileges.CHRISTIAN_LIFE, week);
+				break;
+			}
 	}
 
 	private void checkPrivilege(Privileges privilege, Week week) {
@@ -188,6 +242,8 @@ public class History {
 	private void setLastDates() {
 
 		membersPrivilege.forEach(mh -> mh.checkLastDate(this.databaseWeeks));
+		membersPrivilege.forEach(mh -> mh.checkEditorLastDate(this.editorWeek));
+
 		membersPrivilege.sort(new Comparator<MemberHistory>() {
 
 			@Override
@@ -229,6 +285,9 @@ public class History {
 		privilegesStatusTableColumn.setMinWidth(50);
 		privilegesStatusTableColumn.setMaxWidth(50);
 		privilegesNameTableColumn.setText(language.getString("sp.history.privilege"));
+
+		selectButton.setText(null);
+		selectButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.OK));
 	}
 
 	private void createMembersPrivilegeList() {
@@ -324,5 +383,29 @@ public class History {
 
 	public void setSelectedWeek(Week selectedWeek) {
 		this.selectedWeek = selectedWeek;
+	}
+
+	public Week getEditorWeek() {
+		return editorWeek;
+	}
+
+	public void setEditorWeek(Week editorWeek) {
+		this.editorWeek = editorWeek;
+	}
+
+	public UserMenuMeetingsEditor getEditor() {
+		return editor;
+	}
+
+	public void setEditor(UserMenuMeetingsEditor editor) {
+		this.editor = editor;
+	}
+
+	public Stage getThisStage() {
+		return thisStage;
+	}
+
+	public void setThisStage(Stage thisStage) {
+		this.thisStage = thisStage;
 	}
 }

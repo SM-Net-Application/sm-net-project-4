@@ -9,7 +9,7 @@ if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "SELECT spUserID, spUserSU, spUserName, spUserPassword, spInf1, spInf2, spInf3, spInf4, spInf5 FROM sp_users WHERE";
+			$query = "SELECT spUserID, spUserSU, spUserName, spUserPassword, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7 FROM sp_users WHERE";
 			$query .= " ";
 			$query .= "spUserName='" . $jsonObj ["user"] . "'";
 			$query .= " AND ";
@@ -32,6 +32,8 @@ if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
 					$row ["spInf3"] = $resultRow ["spInf3"];
 					$row ["spInf4"] = $resultRow ["spInf4"];
 					$row ["spInf5"] = $resultRow ["spInf5"];
+                    $row ["spInf6"] = $resultRow ["spInf6"];
+                    $row ["spInf7"] = $resultRow ["spInf7"];
 					array_push ( $response ["result"], $row );
 				}
 			} else {

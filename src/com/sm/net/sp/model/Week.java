@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetingsEditor;
 import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 
@@ -124,6 +125,10 @@ public class Week {
 			weekOverseer = new WeekOverseer(jsonObject, language, settings, true);
 	}
 
+	public Week(Week editorMeetingSelectedWeek) {
+		this.spInf1 = new SimpleIntegerProperty(editorMeetingSelectedWeek.getSpInf1());
+	}
+
 	private ObservableList<MinistryPart> getMinistryPartsList(JSONObject jsonObject, Language language,
 			Settings settings, ObservableList<Member> membersList) {
 
@@ -207,6 +212,31 @@ public class Week {
 
 				break;
 			}
+	}
+
+	public static Week buildMeetingEditorWeek(UserMenuMeetingsEditor editorMeeting) {
+
+		Week editorMeetingSelectedWeek = editorMeeting.getSelectedWeek();
+		Week week = null;
+
+		if (editorMeetingSelectedWeek.spInf1Property() != null)
+			week = new Week(editorMeetingSelectedWeek);
+		else {
+			week = new Week(editorMeetingSelectedWeek.getFrom(), editorMeeting.getLanguage());
+			week.setSpInf1(Integer.valueOf(week.getKey()));
+		}
+
+		week.setSpInf3(editorMeeting.getPresidentComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf4(editorMeeting.getPray1ComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf11(editorMeeting.getTalkComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf14(editorMeeting.getDiggingComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf23(editorMeeting.getCongregationBibleStudyComboBox().getSelectionModel().getSelectedItem()
+				.getSpMemberID());
+		week.setSpInf27(editorMeeting.getPray2ComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setChristiansPartList(editorMeeting.getChristiansPartList());
+
+		return week;
 	}
 
 	@Override
@@ -761,5 +791,4 @@ public class Week {
 	public void setWeekOverseer(WeekOverseer weekOverseer) {
 		this.weekOverseer = weekOverseer;
 	}
-
 }

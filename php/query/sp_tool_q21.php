@@ -18,7 +18,9 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 			$query .= " sp_week_ov.spInf4 as spInf4_ov, sp_week_ov.spInf5 as spInf5_ov, sp_week_ov.spInf6 as spInf6_ov,";
 			$query .= " sp_week_ov.spInf7 as spInf7_ov, sp_week_ov.spInf8 as spInf8_ov, sp_week_ov.spInf9 as spInf9_ov,";
 			$query .= " sp_week_ov.spInf10 as spInf10_ov, sp_week_ov.spInf11 as spInf11_ov, sp_week_ov.spInf12 as spInf12_ov,";
-			$query .= " sp_week_ov.spInf13 as spInf13_ov, sp_week_ov.spInf14 as spInf14_ov, sp_week_ov.spInf15 as spInf15_ov";
+			$query .= " sp_week_ov.spInf13 as spInf13_ov, sp_week_ov.spInf14 as spInf14_ov, sp_week_ov.spInf15 as spInf15_ov,";
+            $query .= " sp_week_ov.spInf16 as spInf16_ov, sp_week_ov.spInf17 as spInf17_ov, sp_week_ov.spInf18 as spInf18_ov,";
+            $query .= " sp_week_ov.spInf19 as spInf19_ov, sp_week_ov.spInf20 as spInf20_ov";
 			$query .= " FROM sp_week";
 			$query .= " LEFT JOIN sp_week_ov";
 			$query .= " ON sp_week.spInf1 = sp_week_ov.spInf1";
@@ -85,6 +87,11 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 					$row ["spInf13_ov"] = $resultRow ["spInf13_ov"];
 					$row ["spInf14_ov"] = $resultRow ["spInf14_ov"];
 					$row ["spInf15_ov"] = $resultRow ["spInf15_ov"];
+                    $row ["spInf16_ov"] = $resultRow ["spInf16_ov"];
+                    $row ["spInf17_ov"] = $resultRow ["spInf17_ov"];
+                    $row ["spInf18_ov"] = $resultRow ["spInf18_ov"];
+                    $row ["spInf19_ov"] = $resultRow ["spInf19_ov"];
+                    $row ["spInf20_ov"] = $resultRow ["spInf20_ov"];
 					
 					// Ho bisogno della WeekCode
 					$spInf1 = $resultRow ["spInf1"];

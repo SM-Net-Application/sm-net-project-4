@@ -47,6 +47,8 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -562,13 +564,17 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void contextMenu() {
 
+		// TODO: Settare il privilegio
+
 		presidentComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRESIDENT_MIDWEEK));
 		pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY1_MIDWEEK));
+		// pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY));
 		talkComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.TALK_MIDWEEK));
 		diggingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.DIGGING_MIDWEEK));
 		congregationBibleStudyComboBox
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_MIDWEEK));
 		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY2_MIDWEEK));
+		// pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY));
 		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CHRISTIAN_LIFE));
 	}
 
@@ -619,6 +625,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			ctrl.setLanguage(language);
 			ctrl.setDatabaseWeeks(this.databaseWeeks);
 			ctrl.setSelectedWeek(this.selectedWeek);
+			ctrl.setEditorWeek(Week.buildMeetingEditorWeek(this));
+			ctrl.setEditor(this);
+			ctrl.setThisStage(stage);
+
 			ctrl.objectInitialize();
 
 			stage.show();
@@ -827,6 +837,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void listeners() {
 
+		listenerDisableMouseSecondary();
+
 		listenerTypeWeekListView();
 
 		listenerMinistryTableView();
@@ -840,6 +852,21 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		listenerLoadWeekFromWOLButton();
 
 		listenerSaveWeekButton();
+	}
+
+	private void listenerDisableMouseSecondary() {
+
+		presidentComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		pray1ComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		talkComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		diggingComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		congregationBibleStudyComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		pray2ComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+	}
+
+	private void disableMouseSecondary(MouseEvent event) {
+		if (event.getButton() == MouseButton.SECONDARY)
+			event.consume();
 	}
 
 	private void listenerTypeWeekListView() {
@@ -1304,6 +1331,52 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		}
 	}
 
+	public void updateSelectedComboBox(Privileges privilege, int memberID) {
+
+		switch (privilege) {
+		case PRESIDENT_MIDWEEK:
+			updateComboBox(this.presidentComboBox, memberID);
+			break;
+		case PRAY1_MIDWEEK:
+			updateComboBox(this.pray1ComboBox, memberID);
+			break;
+		case TALK_MIDWEEK:
+			updateComboBox(this.talkComboBox, memberID);
+			break;
+		case DIGGING_MIDWEEK:
+			updateComboBox(this.diggingComboBox, memberID);
+			break;
+		case BIBLE_READING_A:
+			updateComboBox(this.bibleReadingComboBox, memberID);
+			break;
+		case BIBLE_READING_B:
+			updateComboBox(this.bibleReading2ComboBox, memberID);
+			break;
+		case CONGRBIBLESTUDY_MIDWEEK:
+			updateComboBox(this.congregationBibleStudyComboBox, memberID);
+			break;
+		case PRAY2_MIDWEEK:
+			updateComboBox(this.pray2ComboBox, memberID);
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void updateComboBox(ComboBox<Member> cb, int memberID) {
+
+		int index = -1;
+
+		for (int i = 0; i < cb.getItems().size(); i++) {
+			if (cb.getItems().get(i).getSpMemberID() == memberID) {
+				index = i;
+				break;
+			}
+		}
+
+		cb.getSelectionModel().select(index);
+	}
+
 	public Settings getSettings() {
 		return settings;
 	}
@@ -1398,5 +1471,69 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
 		this.databaseWeeks = databaseWeeks;
+	}
+
+	public ComboBox<Member> getPresidentComboBox() {
+		return presidentComboBox;
+	}
+
+	public void setPresidentComboBox(ComboBox<Member> presidentComboBox) {
+		this.presidentComboBox = presidentComboBox;
+	}
+
+	public ComboBox<Member> getPray1ComboBox() {
+		return pray1ComboBox;
+	}
+
+	public void setPray1ComboBox(ComboBox<Member> pray1ComboBox) {
+		this.pray1ComboBox = pray1ComboBox;
+	}
+
+	public ComboBox<Member> getTalkComboBox() {
+		return talkComboBox;
+	}
+
+	public void setTalkComboBox(ComboBox<Member> talkComboBox) {
+		this.talkComboBox = talkComboBox;
+	}
+
+	public ComboBox<Member> getDiggingComboBox() {
+		return diggingComboBox;
+	}
+
+	public void setDiggingComboBox(ComboBox<Member> diggingComboBox) {
+		this.diggingComboBox = diggingComboBox;
+	}
+
+	public ComboBox<Member> getBibleReadingComboBox() {
+		return bibleReadingComboBox;
+	}
+
+	public void setBibleReadingComboBox(ComboBox<Member> bibleReadingComboBox) {
+		this.bibleReadingComboBox = bibleReadingComboBox;
+	}
+
+	public ComboBox<Member> getBibleReading2ComboBox() {
+		return bibleReading2ComboBox;
+	}
+
+	public void setBibleReading2ComboBox(ComboBox<Member> bibleReading2ComboBox) {
+		this.bibleReading2ComboBox = bibleReading2ComboBox;
+	}
+
+	public ComboBox<Member> getCongregationBibleStudyComboBox() {
+		return congregationBibleStudyComboBox;
+	}
+
+	public void setCongregationBibleStudyComboBox(ComboBox<Member> congregationBibleStudyComboBox) {
+		this.congregationBibleStudyComboBox = congregationBibleStudyComboBox;
+	}
+
+	public ComboBox<Member> getPray2ComboBox() {
+		return pray2ComboBox;
+	}
+
+	public void setPray2ComboBox(ComboBox<Member> pray2ComboBox) {
+		this.pray2ComboBox = pray2ComboBox;
 	}
 }

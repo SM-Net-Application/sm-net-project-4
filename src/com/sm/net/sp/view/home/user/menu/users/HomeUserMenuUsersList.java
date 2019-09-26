@@ -50,6 +50,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnOverseer;
 	@FXML
+	private TableColumn<User, Boolean> userTableColumnNaturalDisaster;
+	@FXML
+	private TableColumn<User, Boolean> userTableColumnMonitor;
+	@FXML
 	private Button userAddButton;
 	@FXML
 	private Button userDeleteButton;
@@ -73,6 +77,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
 		userTableColumnMeetings.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMeetings));
 		userTableColumnOverseer.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnOverseer));
+		userTableColumnNaturalDisaster.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnNaturalDisaster));
+		userTableColumnMonitor.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMonitor));
 	}
 
 	private void tableColumnsCellValueFactory() {
@@ -83,6 +89,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().spInf3Property());
 		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().spInf4Property());
 		userTableColumnOverseer.setCellValueFactory(cellData -> cellData.getValue().spInf5Property());
+		userTableColumnNaturalDisaster.setCellValueFactory(cellData -> cellData.getValue().spInf6Property());
+		userTableColumnMonitor.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
 	}
 
 	private void styleClasses() {
@@ -104,6 +112,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnServiceGroups.getStyleClass().add("check_box_001");
 		userTableColumnMeetings.getStyleClass().add("check_box_001");
 		userTableColumnOverseer.getStyleClass().add("check_box_001");
+		userTableColumnNaturalDisaster.getStyleClass().add("check_box_001");
+		userTableColumnMonitor.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -127,6 +137,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
 		userTableColumnMeetings.setText(language.getString("USERMENU004"));
 		userTableColumnOverseer.setText(language.getString("USERMENU005"));
+		userTableColumnNaturalDisaster.setText(language.getString("sp.menu.naturaldisaster"));
+		userTableColumnMonitor.setText(language.getString("sp.menu.monitor"));
 
 		userTableView.setEditable(true);
 		userTableColumnID.setMinWidth(50);
@@ -139,6 +151,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnCongregations.setEditable(true);
 		userTableColumnServiceGroups.setEditable(true);
 		userTableColumnMeetings.setEditable(true);
+		userTableColumnNaturalDisaster.setEditable(true);
+		userTableColumnMonitor.setEditable(true);
 
 		userAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_USERS_ADD));
 		userAddButton.setText(null);

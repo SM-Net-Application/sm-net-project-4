@@ -29,6 +29,8 @@ public class User {
 	private BooleanProperty spInf3;
 	private BooleanProperty spInf4;
 	private BooleanProperty spInf5;
+	private BooleanProperty spInf6;
+	private BooleanProperty spInf7;
 
 	private StringProperty passwordEncrypted;
 
@@ -46,14 +48,16 @@ public class User {
 		this.spInf3.addListener(listenerUpdateRules(settings, ownerStage, callback));
 		this.spInf4.addListener(listenerUpdateRules(settings, ownerStage, callback));
 		this.spInf5.addListener(listenerUpdateRules(settings, ownerStage, callback));
+		this.spInf6.addListener(listenerUpdateRules(settings, ownerStage, callback));
+		this.spInf7.addListener(listenerUpdateRules(settings, ownerStage, callback));
 	}
 
 	private ChangeListener<? super Boolean> listenerUpdateRules(Settings settings, Stage ownerStage,
 			UpdateData callback) {
 
 		return (observable, oldValue, newValue) -> Actions.updateUserRules(getSpUserID(), getSpRole(spInf1.get()),
-				getSpRole(spInf2.get()), getSpRole(spInf3.get()), getSpRole(spInf4.get()), getSpRole(spInf5.get()), settings, ownerStage,
-				callback);
+				getSpRole(spInf2.get()), getSpRole(spInf3.get()), getSpRole(spInf4.get()), getSpRole(spInf5.get()),
+				getSpRole(spInf6.get()), getSpRole(spInf7.get()), settings, ownerStage, callback);
 	}
 
 	private void defaultCostructor(JSONObject jsonObject, SecretKey secretKey) {
@@ -68,6 +72,8 @@ public class User {
 		this.spInf3 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf3")));
 		this.spInf4 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf4")));
 		this.spInf5 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf5")));
+		this.spInf6 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf6")));
+		this.spInf7 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf7")));
 
 		this.passwordEncrypted = new SimpleStringProperty(jsonObject.getString("spUserPassword"));
 	}
@@ -200,4 +206,27 @@ public class User {
 		this.spInf5Property().set(spInf5);
 	}
 
+	public final BooleanProperty spInf6Property() {
+		return this.spInf6;
+	}
+
+	public final boolean isSpInf6() {
+		return this.spInf6Property().get();
+	}
+
+	public final void setSpInf6(final boolean spInf6) {
+		this.spInf6Property().set(spInf6);
+	}
+
+	public final BooleanProperty spInf7Property() {
+		return this.spInf7;
+	}
+
+	public final boolean isSpInf7() {
+		return this.spInf7Property().get();
+	}
+
+	public final void setSpInf7(final boolean spInf7) {
+		this.spInf7Property().set(spInf7);
+	}
 }

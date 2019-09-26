@@ -8,7 +8,9 @@ public enum EnumPrintLayouts {
 
 	MEETING_MIDWEEK_NAME_SHORT("sp.printlayout.midweek.short"),
 
-	NATURAL_DISASTER_LIST("sp.printlayout.naturaldisaster");
+	NATURAL_DISASTER_LIST("sp.printlayout.naturaldisaster"),
+
+	MEMBER_PASSWORD_MONITOR("sp.printlayout.passwordmonitor");
 
 	private String key;
 

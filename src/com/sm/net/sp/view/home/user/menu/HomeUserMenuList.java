@@ -160,11 +160,10 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.MEETINGS);
 			if (this.user.isSpInf5())
 				menuListView.getItems().add(EnumHomeUserMenuList.CIRCUITOVERSEERS);
-			// TODO
-//			if (this.user.isSpInf6())
-//				menuListView.getItems().add(EnumHomeUserMenuList.NATURAL_DISASTER);
-
-			menuListView.getItems().add(EnumHomeUserMenuList.MONITOR);
+			if (this.user.isSpInf6())
+				menuListView.getItems().add(EnumHomeUserMenuList.NATURAL_DISASTER);
+			if (this.user.isSpInf7())
+				menuListView.getItems().add(EnumHomeUserMenuList.MONITOR);
 		}
 	}
 

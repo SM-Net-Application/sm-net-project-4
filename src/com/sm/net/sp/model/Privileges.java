@@ -6,15 +6,17 @@ public enum Privileges {
 
 	PRESIDENT_MIDWEEK("TEXT0134", "talk.png"),
 
+	PRAY("sp.privileges.pray", "talk.png"),
+	
 	PRAY1_MIDWEEK("TEXT0084", "talk.png"),
+	
+	PRAY2_MIDWEEK("TEXT0102", "talk.png"),
 
 	TALK_MIDWEEK("TEXT0051", "talk.png"),
 
 	DIGGING_MIDWEEK("TEXT0088", "talk.png"),
 
 	CONGRBIBLESTUDY_MIDWEEK("TEXT0061", "talk.png"),
-
-	PRAY2_MIDWEEK("TEXT0102", "talk.png"),
 
 	CHRISTIAN_LIFE("TEXT0082", "talk.png"),
 
