@@ -22,6 +22,7 @@
 	<field name="address" class="java.lang.String"/>
 	<field name="jrMembersDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<field name="memberJasperReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<field name="parameters" class="java.util.Map"/>
 	<detail>
 		<band height="17" splitType="Prevent">
 			<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 != 0)]]></printWhenExpression>
@@ -34,17 +35,18 @@
 				</graphicElement>
 			</rectangle>
 			<subreport>
-				<reportElement x="0" y="0" width="451" height="17" uuid="2a9895c3-b7d6-4537-a505-b98b2e2c87cb">
+				<reportElement x="0" y="0" width="415" height="17" uuid="2a9895c3-b7d6-4537-a505-b98b2e2c87cb">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
+				<parametersMapExpression><![CDATA[$F{parameters}]]></parametersMapExpression>
 				<dataSourceExpression><![CDATA[$F{jrMembersDataSource}]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$F{memberJasperReport}]]></subreportExpression>
 			</subreport>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="ElementGroupBottom" x="456" y="0" width="99" height="17" uuid="d3740129-4ef1-4c83-a986-2b86222913b4">
+				<reportElement stretchType="ElementGroupBottom" x="420" y="0" width="130" height="17" uuid="d3740129-4ef1-4c83-a986-2b86222913b4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -65,17 +67,18 @@
 				</graphicElement>
 			</rectangle>
 			<subreport>
-				<reportElement x="0" y="0" width="451" height="17" uuid="5bde9856-75c2-4823-8ec1-e3c289061e36">
+				<reportElement x="0" y="0" width="415" height="17" uuid="5bde9856-75c2-4823-8ec1-e3c289061e36">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
+				<parametersMapExpression><![CDATA[$F{parameters}]]></parametersMapExpression>
 				<dataSourceExpression><![CDATA[$F{jrMembersDataSource}]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$F{memberJasperReport}]]></subreportExpression>
 			</subreport>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="ElementGroupBottom" x="456" y="0" width="99" height="17" uuid="c2350a9a-d24a-47fa-a787-4ca3e8d95434">
+				<reportElement stretchType="ElementGroupBottom" x="420" y="0" width="130" height="17" uuid="c2350a9a-d24a-47fa-a787-4ca3e8d95434">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>

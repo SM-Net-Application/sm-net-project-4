@@ -1,6 +1,8 @@
 package com.sm.net.sp.jasper.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
@@ -20,6 +22,7 @@ public class JRNaturalDisasterFamily {
 	private String city;
 	private String telephone;
 	private String address;
+	private Map<String, Object> parameters;
 
 	public JRNaturalDisasterFamily(Family family, JasperReport memberJasperReport, ObservableList<Member> membersList) {
 
@@ -33,6 +36,12 @@ public class JRNaturalDisasterFamily {
 
 		buildAddress();
 		buildMemberList(family.getSpFamID(), membersList);
+		buildParameters();
+	}
+
+	private void buildParameters() {
+		this.parameters = new HashMap<String, Object>();
+		parameters.put("totalMembers", this.members.size());
 	}
 
 	private void buildAddress() {
@@ -140,5 +149,13 @@ public class JRNaturalDisasterFamily {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Map<String, Object> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(Map<String, Object> parameters) {
+		this.parameters = parameters;
 	}
 }

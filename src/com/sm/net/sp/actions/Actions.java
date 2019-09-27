@@ -2445,8 +2445,10 @@ public class Actions {
 
 					ArrayList<JRNaturalDisasterFamily> jrFamilies = new ArrayList<>();
 
-					for (Family family : familiesList)
-						jrFamilies.add(new JRNaturalDisasterFamily(family, memberJasperReport, membersList));
+					for (Family family : familiesList) {
+						JRNaturalDisasterFamily jrFamily = new JRNaturalDisasterFamily(family, memberJasperReport, membersList);
+						jrFamilies.add(jrFamily);
+					}
 
 					JRBeanCollectionDataSource jrFamiliesDataSource = new JRBeanCollectionDataSource(jrFamilies);
 

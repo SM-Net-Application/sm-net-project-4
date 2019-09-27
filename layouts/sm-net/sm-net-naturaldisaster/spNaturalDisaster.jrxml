@@ -123,7 +123,7 @@
 				<textFieldExpression><![CDATA[$P{txtSurnameWife}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="ElementGroupHeight" x="248" y="90" width="99" height="17" uuid="9df5ecfc-71dd-411d-9b06-d796084fa8ec">
+				<reportElement stretchType="ElementGroupHeight" x="248" y="90" width="170" height="17" uuid="9df5ecfc-71dd-411d-9b06-d796084fa8ec">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -132,28 +132,16 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{txtMobile}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{txtMobile}+" / "+$P{txtMail}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="ElementGroupHeight" x="352" y="90" width="99" height="17" uuid="be9a1be9-9e6f-401a-87a7-f0ec0eb3e361">
+				<reportElement stretchType="ElementGroupHeight" x="420" y="90" width="130" height="17" uuid="27d1e46c-cd46-41c8-adb3-6e991027a121">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{txtMail}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="ElementGroupHeight" x="456" y="90" width="99" height="17" uuid="27d1e46c-cd46-41c8-adb3-6e991027a121">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{txtAddress}]]></textFieldExpression>
