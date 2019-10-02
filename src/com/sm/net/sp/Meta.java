@@ -39,7 +39,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.0 (beta 6)";
+		public static final String VERSION = "1.0 (beta 7)";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -186,6 +186,7 @@ public class Meta {
 		public static final String USER_MENU_MONITOR = "monitor.png";
 		public static final String USER_MENU_NATURALDISASTER = "naturaldis.png";
 		public static final String INFO = "info.png";
+		public static final String WOL = "wol.png";
 		public static final String CALENDAR = "calendar.png";
 		public static final String TALKS = "talks.png";
 		public static final String USER_MENU_MEETINGS_TREASURES = "treasures.png";

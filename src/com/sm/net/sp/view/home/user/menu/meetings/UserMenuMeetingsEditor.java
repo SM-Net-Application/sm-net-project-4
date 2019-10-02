@@ -72,6 +72,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private Tab ministryTab;
 	@FXML
 	private Tab christiansTab;
+	@FXML
+	private Tab watchtowerTab;
 
 	@FXML
 	private ScrollPane treasuresScrollPane;
@@ -79,6 +81,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ScrollPane ministryScrollPane;
 	@FXML
 	private ScrollPane christiansScrollPane;
+	@FXML
+	private ScrollPane watchtowerScrollPane;
 
 	@FXML
 	private Label typeWeekLabel;
@@ -240,6 +244,52 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	@FXML
 	private ComboBox<Member> pray2ComboBox;
 
+	@FXML
+	private Label publicTalkLabel;
+	@FXML
+	private Label presidentPublicMeetingLabel;
+	@FXML
+	private ComboBox<Member> presidentPublicMeetingComboBox;
+	@FXML
+	private Label publicTalkSongLabel;
+	@FXML
+	private TextField publicTalkSongTextField;
+	@FXML
+	private Label publicTalkThemeLabel;
+	@FXML
+	private TextField publicTalkThemeTextField;
+	@FXML
+	private Label publicTalkTalkerLabel;
+	@FXML
+	private TextField publicTalkTalkerTextField;
+
+	@FXML
+	private Label watchtowerStudyLabel;
+	@FXML
+	private Label watchtowerStudySong2Label;
+	@FXML
+	private TextField watchtowerStudySong2TextField;
+	@FXML
+	private Label watchtowerStudyThemeLabel;
+	@FXML
+	private TextField watchtowerStudyThemeTextField;
+	@FXML
+	private Label watchtowerStudyConductorLabel;
+	@FXML
+	private ComboBox<Member> watchtowerStudyConductorComboBox;
+	@FXML
+	private Label watchtowerStudyReaderLabel;
+	@FXML
+	private ComboBox<Member> watchtowerStudyReaderComboBox;
+	@FXML
+	private Label watchtowerStudySong3Label;
+	@FXML
+	private TextField watchtowerStudySong3TextField;
+	@FXML
+	private Label watchtowerStudyPray2Label;
+	@FXML
+	private ComboBox<Member> watchtowerStudyPray2ComboBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -283,10 +333,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		treasuresTab.getStyleClass().add("tab_001");
 		ministryTab.getStyleClass().add("tab_001");
 		christiansTab.getStyleClass().add("tab_001");
+		watchtowerTab.getStyleClass().add("tab_001");
 
 		treasuresScrollPane.getStyleClass().add("scroll_pane_001");
 		ministryScrollPane.getStyleClass().add("scroll_pane_001");
 		christiansScrollPane.getStyleClass().add("scroll_pane_001");
+		watchtowerScrollPane.getStyleClass().add("scroll_pane_001");
 
 		typeWeekLabel.getStyleClass().add("label_002");
 		typeWeekListView.getStyleClass().add("list_view_001");
@@ -368,6 +420,31 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		pray2Label.getStyleClass().add("label_set_001");
 		pray2ComboBox.getStyleClass().add("combo_box_001");
 
+		publicTalkLabel.getStyleClass().add("label_002");
+
+		presidentPublicMeetingLabel.getStyleClass().add("label_set_001");
+		publicTalkSongLabel.getStyleClass().add("label_set_001");
+		publicTalkThemeLabel.getStyleClass().add("label_set_001");
+		publicTalkTalkerLabel.getStyleClass().add("label_set_001");
+		presidentPublicMeetingComboBox.getStyleClass().add("combo_box_001");
+		publicTalkSongTextField.getStyleClass().add("text_field_002");
+		publicTalkThemeTextField.getStyleClass().add("text_field_001");
+		publicTalkTalkerTextField.getStyleClass().add("text_field_001");
+
+		watchtowerStudyLabel.getStyleClass().add("label_002");
+		watchtowerStudySong2Label.getStyleClass().add("label_set_001");
+		watchtowerStudyThemeLabel.getStyleClass().add("label_set_001");
+		watchtowerStudyConductorLabel.getStyleClass().add("label_set_001");
+		watchtowerStudyReaderLabel.getStyleClass().add("label_set_001");
+		watchtowerStudySong3Label.getStyleClass().add("label_set_001");
+		watchtowerStudyPray2Label.getStyleClass().add("label_set_001");
+		watchtowerStudySong2TextField.getStyleClass().add("text_field_002");
+		watchtowerStudyThemeTextField.getStyleClass().add("text_field_001");
+		watchtowerStudySong3TextField.getStyleClass().add("text_field_002");
+		watchtowerStudyConductorComboBox.getStyleClass().add("combo_box_001");
+		watchtowerStudyReaderComboBox.getStyleClass().add("combo_box_001");
+		watchtowerStudyPray2ComboBox.getStyleClass().add("combo_box_001");
+
 		loadWeekFromWOLButton.getStyleClass().add("button_image_001");
 		saveWeekButton.getStyleClass().add("button_image_001");
 	}
@@ -384,6 +461,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
 		christiansTab.setText(language.getString("TEXT0082"));
 		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
+		watchtowerTab.setText(language.getString("sp.meetings.publicmeeting"));
+		watchtowerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.WOL));
 
 		typeWeekLabel.setText(language.getString("TEXT0122"));
 		generalLabel.setText(language.getString("TEXT0079"));
