@@ -262,6 +262,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private Label publicTalkTalkerLabel;
 	@FXML
 	private TextField publicTalkTalkerTextField;
+	@FXML
+	private Label publicTalkTalkerCongrLabel;
+	@FXML
+	private TextField publicTalkTalkerCongrTextField;
 
 	@FXML
 	private Label watchtowerStudyLabel;
@@ -290,6 +294,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	@FXML
 	private ComboBox<Member> watchtowerStudyPray2ComboBox;
 
+	@FXML
+	private Label congregationBibleStudyReaderLabel;
+	@FXML
+	private ComboBox<Member> congregationBibleStudyReaderComboBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -313,6 +322,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<Member> bibleReadingList;
 	private ObservableList<Member> congregationBibleStudyList;
 	private ObservableList<Member> prayEndList;
+
+	private ObservableList<Member> presidentPublicMeetingList;
+	private ObservableList<Member> watchtowerStudyList;
+	private ObservableList<Member> watchtowerReaderList;
+	private ObservableList<Member> prayEndPublicMeetingList;
+
+	private ObservableList<Member> congregationBibleStudyReaderList;
 
 	private ObservableList<Week> databaseWeeks;
 
@@ -430,6 +446,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		publicTalkSongTextField.getStyleClass().add("text_field_002");
 		publicTalkThemeTextField.getStyleClass().add("text_field_001");
 		publicTalkTalkerTextField.getStyleClass().add("text_field_001");
+		publicTalkTalkerCongrLabel.getStyleClass().add("label_set_001");
+		publicTalkTalkerCongrTextField.getStyleClass().add("text_field_001");
 
 		watchtowerStudyLabel.getStyleClass().add("label_002");
 		watchtowerStudySong2Label.getStyleClass().add("label_set_001");
@@ -444,6 +462,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		watchtowerStudyConductorComboBox.getStyleClass().add("combo_box_001");
 		watchtowerStudyReaderComboBox.getStyleClass().add("combo_box_001");
 		watchtowerStudyPray2ComboBox.getStyleClass().add("combo_box_001");
+
+		congregationBibleStudyReaderLabel.getStyleClass().add("label_001");
+		congregationBibleStudyReaderComboBox.getStyleClass().add("combo_box_001");
 
 		loadWeekFromWOLButton.getStyleClass().add("button_image_001");
 		saveWeekButton.getStyleClass().add("button_image_001");
@@ -524,6 +545,21 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		reviewMinLabel.setText(language.getString("TEXT0089"));
 		song3Label.setText(language.getString("TEXT0100"));
 		pray2Label.setText(language.getString("TEXT0102"));
+
+		publicTalkLabel.setText(language.getString("sp.meetings.publictalk"));
+		presidentPublicMeetingLabel.setText(language.getString("sp.meetings.presidentpublicmeeting"));
+		publicTalkSongLabel.setText(language.getString("sp.meetings.song1publicmeeting"));
+		publicTalkThemeLabel.setText(language.getString("sp.meetings.publictalktheme"));
+		publicTalkTalkerLabel.setText(language.getString("sp.meetings.publictalktalker"));
+		publicTalkTalkerCongrLabel.setText(language.getString("sp.meetings.publictalktalkercongr"));
+		watchtowerStudyLabel.setText(language.getString("sp.meetings.watchtowerstudy"));
+		watchtowerStudySong2Label.setText(language.getString("sp.meetings.song2publicmeeting"));
+		watchtowerStudyThemeLabel.setText(language.getString("sp.meetings.watchtowerstudytheme"));
+		watchtowerStudyConductorLabel.setText(language.getString("sp.meetings.watchtowerstudyconductor"));
+		watchtowerStudyReaderLabel.setText(language.getString("sp.meetings.watchtowerstudyreader"));
+		watchtowerStudySong3Label.setText(language.getString("sp.meetings.song3publicmeeting"));
+		watchtowerStudyPray2Label.setText(language.getString("sp.meetings.watchtowerstudypray2"));
+		congregationBibleStudyReaderLabel.setText(language.getString("sp.meetings.congregationbiblestudyreader"));
 
 		loadWeekFromWOLButton.setText(null);
 		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
@@ -643,17 +679,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void contextMenu() {
 
-		// TODO: Settare il privilegio
-
 		presidentComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRESIDENT_MIDWEEK));
 		pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY1_MIDWEEK));
-		// pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY));
 		talkComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.TALK_MIDWEEK));
 		diggingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.DIGGING_MIDWEEK));
 		congregationBibleStudyComboBox
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_MIDWEEK));
 		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY2_MIDWEEK));
-		// pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY));
 		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CHRISTIAN_LIFE));
 	}
 
@@ -747,6 +779,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		congregationBibleStudyList = FXCollections.observableArrayList();
 		prayEndList = FXCollections.observableArrayList();
 
+		presidentPublicMeetingList = FXCollections.observableArrayList();
+		watchtowerStudyList = FXCollections.observableArrayList();
+		watchtowerReaderList = FXCollections.observableArrayList();
+		prayEndPublicMeetingList = FXCollections.observableArrayList();
+
+		congregationBibleStudyReaderList = FXCollections.observableArrayList();
+
 		addEmptyMember();
 
 		presidentComboBox.setItems(presidentList);
@@ -757,6 +796,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		bibleReading2ComboBox.setItems(bibleReadingList);
 		congregationBibleStudyComboBox.setItems(congregationBibleStudyList);
 		pray2ComboBox.setItems(prayEndList);
+
+		presidentPublicMeetingComboBox.setItems(presidentPublicMeetingList);
+		watchtowerStudyConductorComboBox.setItems(watchtowerStudyList);
+		watchtowerStudyReaderComboBox.setItems(watchtowerReaderList);
+		watchtowerStudyPray2ComboBox.setItems(prayEndPublicMeetingList);
+
+		congregationBibleStudyReaderComboBox.setItems(congregationBibleStudyReaderList);
 
 		selectFirst();
 
@@ -795,6 +841,28 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		bibleReading2ComboBox.getSelectionModel().selectFirst();
 		congregationBibleStudyComboBox.getSelectionModel().selectFirst();
 		pray2ComboBox.getSelectionModel().selectFirst();
+
+		presidentPublicMeetingComboBox.getSelectionModel().selectFirst();
+
+		if (!(watchtowerStudyConductorComboBox.getSelectionModel().getSelectedIndex() > -1)) {
+			int watchtowerStudyConductorIndex = -1;
+			for (int i = 0; i < watchtowerStudyList.size(); i++) {
+				Member member = watchtowerStudyList.get(i);
+				if (member.getSpInf43() == 1) {
+					watchtowerStudyConductorIndex = i;
+					break;
+				}
+			}
+
+			if (watchtowerStudyConductorIndex == -1)
+				watchtowerStudyConductorComboBox.getSelectionModel().selectFirst();
+			else
+				watchtowerStudyConductorComboBox.getSelectionModel().select(watchtowerStudyConductorIndex);
+		}
+		watchtowerStudyReaderComboBox.getSelectionModel().selectFirst();
+		watchtowerStudyPray2ComboBox.getSelectionModel().selectFirst();
+
+		congregationBibleStudyReaderComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void setLists() {
@@ -814,6 +882,17 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				this.congregationBibleStudyList.add(member);
 			if (member.getSpInf35() == 1)
 				this.prayEndList.add(member);
+
+			if (member.getSpInf36() == 1)
+				this.presidentPublicMeetingList.add(member);
+			if (member.getSpInf43() == 1 || member.getSpInf44() == 1)
+				this.watchtowerStudyList.add(member);
+			if (member.getSpInf27() == 1)
+				this.watchtowerReaderList.add(member);
+			if (member.getSpInf37() == 1)
+				this.prayEndPublicMeetingList.add(member);
+			if (member.getSpInf26() == 1)
+				this.congregationBibleStudyReaderList.add(member);
 		}
 
 		orderLists();
@@ -828,6 +907,20 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.bibleReadingList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 		this.congregationBibleStudyList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 		this.prayEndList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+
+		this.presidentPublicMeetingList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.watchtowerReaderList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.prayEndPublicMeetingList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+
+		this.congregationBibleStudyReaderList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+
+		this.watchtowerStudyList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		// First the conductor, then the substitutes
+//		this.watchtowerStudyList.sort((o1, o2) -> {
+//			if (o1.getSpInf43() == 1)
+//				return -1;
+//			return 1;
+//		});
 	}
 
 	private void addEmptyMember() {
@@ -838,6 +931,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.bibleReadingList.add(Member.emptyMember(language));
 		this.congregationBibleStudyList.add(Member.emptyMember(language));
 		this.prayEndList.add(Member.emptyMember(language));
+
+		this.presidentPublicMeetingList.add(Member.emptyMember(language));
+		this.watchtowerStudyList.add(Member.emptyMember(language));
+		this.watchtowerReaderList.add(Member.emptyMember(language));
+		this.prayEndPublicMeetingList.add(Member.emptyMember(language));
+
+		this.congregationBibleStudyReaderList.add(Member.emptyMember(language));
 	}
 
 	private void resetLists() {
@@ -848,6 +948,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.bibleReadingList.clear();
 		this.congregationBibleStudyList.clear();
 		this.prayEndList.clear();
+
+		this.presidentPublicMeetingList.clear();
+		this.watchtowerStudyList.clear();
+		this.watchtowerReaderList.clear();
+		this.prayEndPublicMeetingList.clear();
+
+		this.congregationBibleStudyReaderList.clear();
 	}
 
 	private void loadSelectedWeek() {

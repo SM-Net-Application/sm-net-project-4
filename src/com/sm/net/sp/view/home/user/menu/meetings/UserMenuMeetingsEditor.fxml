@@ -601,32 +601,29 @@
                                                             </Label>
                                                          </children>
                                                       </StackPane>
-                                                      <HBox>
+                                                      <VBox>
                                                          <children>
-                                                            <StackPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                                                            <HBox>
                                                                <children>
-                                                                  <TextField fx:id="congregationBibleStudyMinTextField">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </TextField>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane alignment="TOP_CENTER">
-                                                               <children>
-                                                                  <Label fx:id="congregationBibleStudyMinLabel" text="Min.">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </Label>
-                                                               </children>
-                                                            </StackPane>
-                                                            <VBox HBox.hgrow="ALWAYS">
-                                                               <children>
+                                                                  <StackPane alignment="TOP_CENTER">
+                                                                     <children>
+                                                                        <TextField fx:id="congregationBibleStudyMinTextField">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </TextField>
+                                                                     </children>
+                                                                  </StackPane>
+                                                                  <StackPane alignment="TOP_CENTER">
+                                                                     <children>
+                                                                        <Label fx:id="congregationBibleStudyMinLabel" alignment="CENTER" text="min">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </StackPane>
                                                                   <StackPane>
-                                                                     <VBox.margin>
-                                                                        <Insets />
-                                                                     </VBox.margin>
                                                                      <children>
                                                                         <TextField fx:id="congregationBibleStudyTextTextField" maxWidth="1.7976931348623157E308">
                                                                            <StackPane.margin>
@@ -636,9 +633,6 @@
                                                                      </children>
                                                                   </StackPane>
                                                                   <StackPane>
-                                                                     <VBox.margin>
-                                                                        <Insets />
-                                                                     </VBox.margin>
                                                                      <children>
                                                                         <TextField fx:id="congregationBibleStudyMaterialTextField" maxWidth="1.7976931348623157E308">
                                                                            <StackPane.margin>
@@ -648,18 +642,61 @@
                                                                      </children>
                                                                   </StackPane>
                                                                </children>
-                                                            </VBox>
-                                                            <StackPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                                                            </HBox>
+                                                            <HBox>
                                                                <children>
-                                                                  <ComboBox fx:id="congregationBibleStudyComboBox" maxWidth="1.7976931348623157E308">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </ComboBox>
+                                                                  <HBox HBox.hgrow="ALWAYS">
+                                                                     <children>
+                                                                        <VBox>
+                                                                           <children>
+                                                                              <StackPane alignment="CENTER_LEFT">
+                                                                                 <children>
+                                                                                    <Label text="conduttore">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </Label>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
+                                                                                 <children>
+                                                                                    <Label fx:id="congregationBibleStudyReaderLabel" maxHeight="1.7976931348623157E308" text="lettore">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </Label>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <StackPane alignment="TOP_CENTER">
+                                                                                 <children>
+                                                                                    <ComboBox fx:id="congregationBibleStudyComboBox" maxWidth="1.7976931348623157E308">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </ComboBox>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
+                                                                                 <children>
+                                                                                    <ComboBox fx:id="congregationBibleStudyReaderComboBox" maxWidth="1.7976931348623157E308">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </ComboBox>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </HBox>
                                                                </children>
-                                                            </StackPane>
+                                                            </HBox>
                                                          </children>
-                                                      </HBox>
+                                                      </VBox>
                                                    </children>
                                                 </VBox>
                                                 <StackPane>
@@ -810,7 +847,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0">
                            <children>
-                              <ScrollPane fx:id="watchtowerScrollPane" fitToHeight="true" fitToWidth="true" prefHeight="605.0" prefWidth="976.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ScrollPane fx:id="watchtowerScrollPane" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
                                     <VBox>
                                        <children>
@@ -836,7 +873,7 @@
                                                             </Separator>
                                                          </children>
                                                       </StackPane>
-                                                      <HBox>
+                                                      <HBox maxWidth="1.7976931348623157E308">
                                                          <children>
                                                             <VBox>
                                                                <children>
@@ -876,11 +913,20 @@
                                                                         </Label>
                                                                      </children>
                                                                   </StackPane>
+                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                     <children>
+                                                                        <Label fx:id="publicTalkTalkerCongrLabel" text="congr_or">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </StackPane>
                                                                </children>
                                                             </VBox>
                                                             <VBox HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <StackPane alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                                                      <children>
                                                                         <ComboBox fx:id="presidentPublicMeetingComboBox" maxWidth="1.7976931348623157E308">
                                                                            <StackPane.margin>
@@ -910,6 +956,15 @@
                                                                   <StackPane alignment="CENTER_LEFT">
                                                                      <children>
                                                                         <TextField fx:id="publicTalkTalkerTextField">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </TextField>
+                                                                     </children>
+                                                                  </StackPane>
+                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                     <children>
+                                                                        <TextField fx:id="publicTalkTalkerCongrTextField">
                                                                            <StackPane.margin>
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
@@ -1027,7 +1082,7 @@
                                                                         </TextField>
                                                                      </children>
                                                                   </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                                                      <children>
                                                                         <ComboBox fx:id="watchtowerStudyConductorComboBox" maxWidth="1.7976931348623157E308">
                                                                            <StackPane.margin>
@@ -1036,7 +1091,7 @@
                                                                         </ComboBox>
                                                                      </children>
                                                                   </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                                                      <children>
                                                                         <ComboBox fx:id="watchtowerStudyReaderComboBox" maxWidth="1.7976931348623157E308">
                                                                            <StackPane.margin>
@@ -1045,7 +1100,7 @@
                                                                         </ComboBox>
                                                                      </children>
                                                                   </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                                                                  <StackPane alignment="CENTER_LEFT">
                                                                      <children>
                                                                         <TextField fx:id="watchtowerStudySong3TextField">
                                                                            <StackPane.margin>
@@ -1054,7 +1109,7 @@
                                                                         </TextField>
                                                                      </children>
                                                                   </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                                                      <children>
                                                                         <ComboBox fx:id="watchtowerStudyPray2ComboBox" maxWidth="1.7976931348623157E308">
                                                                            <StackPane.margin>

@@ -75,7 +75,7 @@
 .label_set_001 {
 	-fx-text-fill: #bbbbbb;
 	-fx-font-size: 12.0pt;
-	-fx-min-height: 27.5pt; 
+	-fx-min-height: 29pt; 
 }
 
 .label_002 {
@@ -233,6 +233,7 @@
 
 .combo_box_001 .list-view {
 	-fx-background-color: #45494a;
+	-fx-pref-width: 200.0px;
 }
 
 .combo_box_001 .list-view .list-cell {
