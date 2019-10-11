@@ -295,6 +295,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ComboBox<Member> watchtowerStudyPray2ComboBox;
 
 	@FXML
+	private Label congregationBibleStudyConductorLabel;
+	@FXML
 	private Label congregationBibleStudyReaderLabel;
 	@FXML
 	private ComboBox<Member> congregationBibleStudyReaderComboBox;
@@ -463,6 +465,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		watchtowerStudyReaderComboBox.getStyleClass().add("combo_box_001");
 		watchtowerStudyPray2ComboBox.getStyleClass().add("combo_box_001");
 
+		congregationBibleStudyConductorLabel.getStyleClass().add("label_set_001");
 		congregationBibleStudyReaderLabel.getStyleClass().add("label_001");
 		congregationBibleStudyReaderComboBox.getStyleClass().add("combo_box_001");
 
@@ -559,6 +562,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		watchtowerStudyReaderLabel.setText(language.getString("sp.meetings.watchtowerstudyreader"));
 		watchtowerStudySong3Label.setText(language.getString("sp.meetings.song3publicmeeting"));
 		watchtowerStudyPray2Label.setText(language.getString("sp.meetings.watchtowerstudypray2"));
+		congregationBibleStudyConductorLabel.setText(language.getString("sp.meetings.congregationbiblestudyconductor"));
 		congregationBibleStudyReaderLabel.setText(language.getString("sp.meetings.congregationbiblestudyreader"));
 
 		loadWeekFromWOLButton.setText(null);
@@ -687,6 +691,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_MIDWEEK));
 		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY2_MIDWEEK));
 		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CHRISTIAN_LIFE));
+		congregationBibleStudyReaderComboBox
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_READER_MIDWEEK));
+		presidentPublicMeetingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRESIDENT_WEEKEND));
+		watchtowerStudyConductorComboBox
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONDUCTOR_WATCHTOWER));
+		watchtowerStudyReaderComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WATCHTOWER_READER));
+		watchtowerStudyPray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY_END_WEEKEND));
 	}
 
 	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
@@ -915,12 +926,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		this.congregationBibleStudyReaderList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 
 		this.watchtowerStudyList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
-		// First the conductor, then the substitutes
-//		this.watchtowerStudyList.sort((o1, o2) -> {
-//			if (o1.getSpInf43() == 1)
-//				return -1;
-//			return 1;
-//		});
 	}
 
 	private void addEmptyMember() {
@@ -1013,6 +1018,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 				setMemberComboBoxIndex(this.pray2ComboBox, this.selectedWeek.getSpInf27());
 				setMemberComboBoxIndex(this.bibleReading2ComboBox, this.selectedWeek.getSpInf28());
 
+				setMemberComboBoxIndex(this.congregationBibleStudyReaderComboBox, this.selectedWeek.getSpInf29());
+				setMemberComboBoxIndex(this.presidentPublicMeetingComboBox, this.selectedWeek.getSpInf30());
+				this.publicTalkSongTextField.setText(this.selectedWeek.getSpInf31());
+				this.publicTalkThemeTextField.setText(this.selectedWeek.getSpInf32());
+				this.publicTalkTalkerTextField.setText(this.selectedWeek.getSpInf33());
+				this.publicTalkTalkerCongrTextField.setText(this.selectedWeek.getSpInf34());
+				this.watchtowerStudySong2TextField.setText(this.selectedWeek.getSpInf35());
+				this.watchtowerStudyThemeTextField.setText(this.selectedWeek.getSpInf36());
+				setMemberComboBoxIndex(this.watchtowerStudyConductorComboBox, this.selectedWeek.getSpInf37());
+				setMemberComboBoxIndex(this.watchtowerStudyReaderComboBox, this.selectedWeek.getSpInf38());
+				this.watchtowerStudySong3TextField.setText(this.selectedWeek.getSpInf39());
+				setMemberComboBoxIndex(this.watchtowerStudyPray2ComboBox, this.selectedWeek.getSpInf40());
+
 				this.ministryPartList.addAll(this.selectedWeek.getMinistryPartList());
 				this.christiansPartList.addAll(this.selectedWeek.getChristiansPartList());
 
@@ -1048,6 +1066,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		diggingComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
 		congregationBibleStudyComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
 		pray2ComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		congregationBibleStudyReaderComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED,
+				event -> disableMouseSecondary(event));
+		presidentPublicMeetingComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		watchtowerStudyConductorComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED,
+				event -> disableMouseSecondary(event));
+		watchtowerStudyReaderComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+		watchtowerStudyPray2ComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
 	}
 
 	private void disableMouseSecondary(MouseEvent event) {
@@ -1175,6 +1200,28 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			String spInf28 = String
 					.valueOf(bibleReading2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
 
+			String spInf29 = String.valueOf(
+					this.congregationBibleStudyReaderComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf30 = String
+					.valueOf(this.presidentPublicMeetingComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf31 = Crypt.encrypt(this.publicTalkSongTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf32 = Crypt.encrypt(this.publicTalkThemeTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf33 = Crypt.encrypt(this.publicTalkTalkerTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf34 = Crypt.encrypt(this.publicTalkTalkerCongrTextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf35 = Crypt.encrypt(this.watchtowerStudySong2TextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf36 = Crypt.encrypt(this.watchtowerStudyThemeTextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf37 = String.valueOf(
+					this.watchtowerStudyConductorComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf38 = String
+					.valueOf(this.watchtowerStudyReaderComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+			String spInf39 = Crypt.encrypt(this.watchtowerStudySong3TextField.getText(),
+					settings.getDatabaseSecretKey());
+			String spInf40 = String
+					.valueOf(this.watchtowerStudyPray2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
+
 			String spInfMinistryParts = getMinistryParts();
 			String spInfChristiansParts = getChristiansParts();
 
@@ -1186,8 +1233,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 				Actions.updateWeek(spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
-						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28,
-						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
+						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
+						spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39,
+						spInf40, spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
 						ownerCtrl);
 
 			} else {
@@ -1197,8 +1245,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
 						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
-						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInfMinistryParts,
-						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
+						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
+						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
+						ownerCtrl);
 			}
 		}
 	}
@@ -1721,5 +1771,25 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public void setPray2ComboBox(ComboBox<Member> pray2ComboBox) {
 		this.pray2ComboBox = pray2ComboBox;
+	}
+
+	public ComboBox<Member> getPresidentPublicMeetingComboBox() {
+		return presidentPublicMeetingComboBox;
+	}
+
+	public ComboBox<Member> getWatchtowerStudyConductorComboBox() {
+		return watchtowerStudyConductorComboBox;
+	}
+
+	public ComboBox<Member> getWatchtowerStudyReaderComboBox() {
+		return watchtowerStudyReaderComboBox;
+	}
+
+	public ComboBox<Member> getWatchtowerStudyPray2ComboBox() {
+		return watchtowerStudyPray2ComboBox;
+	}
+
+	public ComboBox<Member> getCongregationBibleStudyReaderComboBox() {
+		return congregationBibleStudyReaderComboBox;
 	}
 }

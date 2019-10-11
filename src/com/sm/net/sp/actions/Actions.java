@@ -1409,7 +1409,9 @@ public class Actions {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInfMinistryParts,
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
+			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
+			String spInf37, String spInf38, String spInf39, String spInf40, String spInfMinistryParts,
 			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
 			UpdateData callback) {
 
@@ -1457,7 +1459,8 @@ public class Actions {
 						JSONRequest.INSERT_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 								spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
-								spInf28, spInfMinistryParts, spInfChristiansParts));
+								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
+								spInf37, spInf38, spInf39, spInf40, spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 
@@ -1471,7 +1474,9 @@ public class Actions {
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
 			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
-			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInfMinistryParts,
+			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29,
+			String spInf30, String spInf31, String spInf32, String spInf33, String spInf34, String spInf35,
+			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, String spInfMinistryParts,
 			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
 			UpdateData callback) {
 
@@ -1519,7 +1524,8 @@ public class Actions {
 						JSONRequest.UPDATE_WEEK(spWeekID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
 								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
 								spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26,
-								spInf27, spInf28, spInfMinistryParts, spInfChristiansParts));
+								spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35,
+								spInf36, spInf37, spInf38, spInf39, spInf40, spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 
@@ -2446,7 +2452,8 @@ public class Actions {
 					ArrayList<JRNaturalDisasterFamily> jrFamilies = new ArrayList<>();
 
 					for (Family family : familiesList) {
-						JRNaturalDisasterFamily jrFamily = new JRNaturalDisasterFamily(family, memberJasperReport, membersList);
+						JRNaturalDisasterFamily jrFamily = new JRNaturalDisasterFamily(family, memberJasperReport,
+								membersList);
 						jrFamilies.add(jrFamily);
 					}
 

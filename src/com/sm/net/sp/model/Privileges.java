@@ -7,9 +7,9 @@ public enum Privileges {
 	PRESIDENT_MIDWEEK("TEXT0134", "talk.png"),
 
 	PRAY("sp.privileges.pray", "talk.png"),
-	
+
 	PRAY1_MIDWEEK("TEXT0084", "talk.png"),
-	
+
 	PRAY2_MIDWEEK("TEXT0102", "talk.png"),
 
 	TALK_MIDWEEK("TEXT0051", "talk.png"),
@@ -30,7 +30,17 @@ public enum Privileges {
 
 	MINISTRY_STUDENT_2("sp.privileges.task.b", "ministry_monitor.png"),
 
-	MINISTRY_ASSISTANT_2("sp.privileges.taskassistent.b", "ministry_monitor.png");
+	MINISTRY_ASSISTANT_2("sp.privileges.taskassistent.b", "ministry_monitor.png"),
+
+	CONGRBIBLESTUDY_READER_MIDWEEK("sp.privileges.congregationbiblestudy.reader", "talk.png"),
+
+	WATCHTOWER_READER("sp.privileges.watchtower.reader", "talk.png"),
+
+	PRESIDENT_WEEKEND("sp.privileges.publicmeeting.president", "talk.png"),
+
+	CONDUCTOR_WATCHTOWER("sp.privileges.watchtower.conductor", "talk.png"),
+
+	PRAY_END_WEEKEND("sp.privileges.publicmeeting.prayend", "talk.png");
 
 	private String name;
 	private String imageName;

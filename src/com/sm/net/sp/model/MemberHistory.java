@@ -70,8 +70,6 @@ public class MemberHistory {
 
 		LocalDate from = null;
 
-		// TODO: Lato member Pray sistemare
-
 		switch (this.privilege) {
 		case PRESIDENT_MIDWEEK:
 			if (this.member.getSpMemberID() == week.getSpInf3())
@@ -79,18 +77,16 @@ public class MemberHistory {
 			break;
 		case PRAY1_MIDWEEK:
 		case PRAY2_MIDWEEK:
-			if (this.member.getSpMemberID() == week.getSpInf4() || this.member.getSpMemberID() == week.getSpInf27())
+		case PRAY_END_WEEKEND:
+			if (this.member.getSpMemberID() == week.getSpInf4() || this.member.getSpMemberID() == week.getSpInf27()
+					|| this.member.getSpMemberID() == week.getSpInf40())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-//		case PRAY1_MIDWEEK:
-//			if (this.member.getSpMemberID() == week.getSpInf4())
-//				from = checkLastDate(from, week.getSpInf1());
-//			break;
-//		case PRAY2_MIDWEEK:
-//			if (this.member.getSpMemberID() == week.getSpInf27())
-//				from = checkLastDate(from, week.getSpInf1());
-//			break;
-
+		case CONGRBIBLESTUDY_READER_MIDWEEK:
+		case WATCHTOWER_READER:
+			if (this.member.getSpMemberID() == week.getSpInf29() || this.member.getSpMemberID() == week.getSpInf38())
+				from = checkLastDate(from, week.getSpInf1());
+			break;
 		case TALK_MIDWEEK:
 			if (this.member.getSpMemberID() == week.getSpInf11())
 				from = checkLastDate(from, week.getSpInf1());
@@ -109,6 +105,14 @@ public class MemberHistory {
 				if (this.member.getSpMemberID() == christiansPart.getTeacher().getSpMemberID())
 					from = checkLastDate(from, week.getSpInf1());
 			}
+			break;
+		case PRESIDENT_WEEKEND:
+			if (this.member.getSpMemberID() == week.getSpInf30())
+				from = checkLastDate(from, week.getSpInf1());
+			break;
+		case CONDUCTOR_WATCHTOWER:
+			if (this.member.getSpMemberID() == week.getSpInf37())
+				from = checkLastDate(from, week.getSpInf1());
 			break;
 		default:
 			break;

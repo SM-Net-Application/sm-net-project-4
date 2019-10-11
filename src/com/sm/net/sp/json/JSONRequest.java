@@ -341,7 +341,9 @@ public class JSONRequest {
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
 			String spInf19, String spInf20, String spInf21, String spInf22, String spInf23, String spInf24,
-			String spInf25, String spInf26, String spInf27, String spInf28, String spInfMinistryParts,
+			String spInf25, String spInf26, String spInf27, String spInf28, String spInf29, String spInf30,
+			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
+			String spInf37, String spInf38, String spInf39, String spInf40, String spInfMinistryParts,
 			String spInfChristiansParts) {
 
 		JSONObject jsonObj = create(Integer.valueOf(26));
@@ -373,6 +375,20 @@ public class JSONRequest {
 		jsonObj.put("spInf26", spInf26);
 		jsonObj.put("spInf27", spInf27);
 		jsonObj.put("spInf28", spInf28);
+
+		jsonObj.put("spInf29", spInf29);
+		jsonObj.put("spInf30", spInf30);
+		jsonObj.put("spInf31", spInf31);
+		jsonObj.put("spInf32", spInf32);
+		jsonObj.put("spInf33", spInf33);
+		jsonObj.put("spInf34", spInf34);
+		jsonObj.put("spInf35", spInf35);
+		jsonObj.put("spInf36", spInf36);
+		jsonObj.put("spInf37", spInf37);
+		jsonObj.put("spInf38", spInf38);
+		jsonObj.put("spInf39", spInf39);
+		jsonObj.put("spInf40", spInf40);
+
 		jsonObj.put("spInfMP", spInfMinistryParts);
 		jsonObj.put("spInfCP", spInfChristiansParts);
 
@@ -383,7 +399,9 @@ public class JSONRequest {
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
 			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
-			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInfMinistryParts,
+			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29,
+			String spInf30, String spInf31, String spInf32, String spInf33, String spInf34, String spInf35,
+			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, String spInfMinistryParts,
 			String spInfChristiansParts) {
 
 		JSONObject jsonObj = create(Integer.valueOf(27));
@@ -417,6 +435,20 @@ public class JSONRequest {
 		jsonObj.put("spInf26", spInf26);
 		jsonObj.put("spInf27", spInf27);
 		jsonObj.put("spInf28", spInf28);
+
+		jsonObj.put("spInf29", spInf29);
+		jsonObj.put("spInf30", spInf30);
+		jsonObj.put("spInf31", spInf31);
+		jsonObj.put("spInf32", spInf32);
+		jsonObj.put("spInf33", spInf33);
+		jsonObj.put("spInf34", spInf34);
+		jsonObj.put("spInf35", spInf35);
+		jsonObj.put("spInf36", spInf36);
+		jsonObj.put("spInf37", spInf37);
+		jsonObj.put("spInf38", spInf38);
+		jsonObj.put("spInf39", spInf39);
+		jsonObj.put("spInf40", spInf40);
+
 		jsonObj.put("spInfMP", spInfMinistryParts);
 		jsonObj.put("spInfCP", spInfChristiansParts);
 

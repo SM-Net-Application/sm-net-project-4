@@ -189,20 +189,29 @@ public class History {
 		if (memberID == week.getSpInf3())
 			checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
 
-		if (memberID == week.getSpInf4() || memberID == week.getSpInf27()) {
-			// checkPrivilege(Privileges.PRAY, week);
+		if (memberID == week.getSpInf4() || memberID == week.getSpInf27() || memberID == week.getSpInf40()) {
 
 			if (memberID == week.getSpInf4())
 				checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
 			else if (memberID == week.getSpInf27())
 				checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+			else if (memberID == week.getSpInf40())
+				checkPrivilege(Privileges.PRAY_END_WEEKEND, week);
 		}
 
-//		if (memberID == week.getSpInf4())
-//			checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
+		if (memberID == week.getSpInf29() || memberID == week.getSpInf38()) {
 
-//		if (memberID == week.getSpInf27())
-//			checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+			if (memberID == week.getSpInf29())
+				checkPrivilege(Privileges.CONGRBIBLESTUDY_READER_MIDWEEK, week);
+			else if (memberID == week.getSpInf38())
+				checkPrivilege(Privileges.WATCHTOWER_READER, week);
+		}
+
+		if (memberID == week.getSpInf30())
+			checkPrivilege(Privileges.PRESIDENT_WEEKEND, week);
+
+		if (memberID == week.getSpInf37())
+			checkPrivilege(Privileges.CONDUCTOR_WATCHTOWER, week);
 
 		if (memberID == week.getSpInf11())
 			checkPrivilege(Privileges.TALK_MIDWEEK, week);
@@ -300,12 +309,12 @@ public class History {
 	private void checkMemberPrivilege(Member member) {
 
 		switch (this.privilege) {
-		case PRESIDENT_MIDWEEK:
-			if (member.getSpInf33() == 1)
+		case CONGRBIBLESTUDY_READER_MIDWEEK:
+			if (member.getSpInf26() == 1)
 				addMember(member);
 			break;
-		case PRAY1_MIDWEEK:
-			if (member.getSpInf34() == 1)
+		case WATCHTOWER_READER:
+			if (member.getSpInf27() == 1)
 				addMember(member);
 			break;
 		case TALK_MIDWEEK:
@@ -316,16 +325,36 @@ public class History {
 			if (member.getSpInf31() == 1)
 				addMember(member);
 			break;
-		case CONGRBIBLESTUDY_MIDWEEK:
-			if (member.getSpInf42() == 1)
+		case CHRISTIAN_LIFE:
+			if (member.getSpInf32() == 1)
+				addMember(member);
+			break;
+		case PRESIDENT_MIDWEEK:
+			if (member.getSpInf33() == 1)
+				addMember(member);
+			break;
+		case PRAY1_MIDWEEK:
+			if (member.getSpInf34() == 1)
 				addMember(member);
 			break;
 		case PRAY2_MIDWEEK:
 			if (member.getSpInf35() == 1)
 				addMember(member);
 			break;
-		case CHRISTIAN_LIFE:
-			if (member.getSpInf32() == 1)
+		case PRESIDENT_WEEKEND:
+			if (member.getSpInf36() == 1)
+				addMember(member);
+			break;
+		case PRAY_END_WEEKEND:
+			if (member.getSpInf37() == 1)
+				addMember(member);
+			break;
+		case CONGRBIBLESTUDY_MIDWEEK:
+			if (member.getSpInf42() == 1)
+				addMember(member);
+			break;
+		case CONDUCTOR_WATCHTOWER:
+			if (member.getSpInf43() == 1 || member.getSpInf44() == 1)
 				addMember(member);
 			break;
 		default:
