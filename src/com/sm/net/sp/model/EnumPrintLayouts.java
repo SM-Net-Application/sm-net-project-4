@@ -8,6 +8,10 @@ public enum EnumPrintLayouts {
 
 	MEETING_MIDWEEK_NAME_SHORT("sp.printlayout.midweek.short"),
 
+	MEETING_COMPLETE_NAME_EXTENDED("sp.printlayout.meeting.completeext"),
+	
+	MEETING_COMPLETE_NAME_SHORT("sp.printlayout.meeting.completeshort"),
+	
 	NATURAL_DISASTER_LIST("sp.printlayout.naturaldisaster"),
 
 	MEMBER_PASSWORD_MONITOR("sp.printlayout.passwordmonitor");

@@ -71,46 +71,46 @@ public class MemberHistory {
 		LocalDate from = null;
 
 		switch (this.privilege) {
-		case PRESIDENT_MIDWEEK:
+		case MIDWEEK_PRESIDENT:
 			if (this.member.getSpMemberID() == week.getSpInf3())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case PRAY1_MIDWEEK:
-		case PRAY2_MIDWEEK:
-		case PRAY_END_WEEKEND:
+		case MIDWEEK_PRAY_START:
+		case MIDWEEK_PRAY_END:
+		case WEEKEND_PRAY_END:
 			if (this.member.getSpMemberID() == week.getSpInf4() || this.member.getSpMemberID() == week.getSpInf27()
 					|| this.member.getSpMemberID() == week.getSpInf40())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case CONGRBIBLESTUDY_READER_MIDWEEK:
-		case WATCHTOWER_READER:
+		case MIDWEEK_CONGRBIBLESTUDY_READER:
+		case WEEKEND_WATCHTOWER_READER:
 			if (this.member.getSpMemberID() == week.getSpInf29() || this.member.getSpMemberID() == week.getSpInf38())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case TALK_MIDWEEK:
+		case MIDWEEK_TALK:
 			if (this.member.getSpMemberID() == week.getSpInf11())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case DIGGING_MIDWEEK:
+		case MIDWEEK_DIGGING:
 			if (this.member.getSpMemberID() == week.getSpInf14())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case CONGRBIBLESTUDY_MIDWEEK:
+		case MIDWEEK_CONGRBIBLESTUDY:
 			if (this.member.getSpMemberID() == week.getSpInf23())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case CHRISTIAN_LIFE:
+		case MIDWEEK_CHRISTIAN_LIFE:
 			ObservableList<ChristiansPart> christiansPartList = week.getChristiansPartList();
 			for (ChristiansPart christiansPart : christiansPartList) {
 				if (this.member.getSpMemberID() == christiansPart.getTeacher().getSpMemberID())
 					from = checkLastDate(from, week.getSpInf1());
 			}
 			break;
-		case PRESIDENT_WEEKEND:
+		case WEEKEND_PRESIDENT:
 			if (this.member.getSpMemberID() == week.getSpInf30())
 				from = checkLastDate(from, week.getSpInf1());
 			break;
-		case CONDUCTOR_WATCHTOWER:
+		case WEEKEND_WATCHTOWER:
 			if (this.member.getSpMemberID() == week.getSpInf37())
 				from = checkLastDate(from, week.getSpInf1());
 			break;

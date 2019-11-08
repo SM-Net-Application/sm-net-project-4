@@ -246,12 +246,23 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 			if (printableWeeks.size() > 0) {
 
 				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT,
 						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
 
 				if (selectedLayout != null) {
 
 					switch (selectedLayout) {
 
+					case MEETING_COMPLETE_NAME_EXTENDED:
+						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage, language,
+								true);
+						break;
+					
+					case MEETING_COMPLETE_NAME_SHORT:
+						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage, language,
+								false);
+						break;
+					
 					case MEETING_MIDWEEK_NAME_EXTENDED:
 						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
 								true);

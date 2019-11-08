@@ -2270,7 +2270,7 @@ public class Actions {
 
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
 					for (Week week : weeks)
-						jrWeeks.add(JRWeek.newObject(week, membersList, language, extendedName));
+						jrWeeks.add(JRWeek.newObject(week, membersList, language, extendedName, false));
 
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
@@ -2278,6 +2278,78 @@ public class Actions {
 					parameters.put("congregationName",
 							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
 					parameters.put("programmName", language.getString("jasper.layout.meeting.programm").toUpperCase());
+					parameters.put("jrWeekReport", weekJasperReport);
+					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
+
+					JasperPrint jasperPrint = JasperFillManager.fillReport(programmJasperReport, parameters,
+							new JREmptyDataSource());
+
+					JasperViewer jv = new JasperViewer(jasperPrint, false);
+					jv.setTitle(Meta.Application.getFullTitle());
+					jv.setIconImage(SwingFXUtils.fromFXImage(Meta.Resources.getImageApplicationIcon(), null));
+					jv.setVisible(true);
+
+				} catch (JRException e) {
+					System.out.println(e.getMessage());
+				}
+
+				return null;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
+	public static void printWeekComplete(ArrayList<Week> weeks, ObservableList<Member> membersList,
+			String congregationName, Settings settings, Stage ownerStage, Language language, boolean extendedName) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<Void> task = new Task<Void>() {
+
+			{
+				setOnSucceeded(value -> waitAlert.close());
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected Void call() throws Exception {
+
+				try {
+
+					String programmReportFile = Jasper.Layouts.SM_NET_MEETINGS_PROGRAMM.getAbsolutePath();
+					String weekReportFile = Jasper.Layouts.SM_NET_MEETINGS_WEEK_COMPLETE.getAbsolutePath();
+
+					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
+					JasperReport weekJasperReport = JasperCompileManager.compileReport(weekReportFile);
+
+					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
+					for (Week week : weeks)
+						jrWeeks.add(JRWeek.newObject(week, membersList, language, extendedName, true));
+
+					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
+
+					Map<String, Object> parameters = new HashMap<String, Object>();
+					parameters.put("congregationName",
+							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
+					parameters.put("programmName",
+							language.getString("jasper.layout.meeting.programmcomplete").toUpperCase());
 					parameters.put("jrWeekReport", weekJasperReport);
 					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
 

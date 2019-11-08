@@ -187,44 +187,44 @@ public class History {
 	private void checkPrivilegeMemberWeek(int memberID, Week week) {
 
 		if (memberID == week.getSpInf3())
-			checkPrivilege(Privileges.PRESIDENT_MIDWEEK, week);
+			checkPrivilege(Privileges.MIDWEEK_PRESIDENT, week);
 
 		if (memberID == week.getSpInf4() || memberID == week.getSpInf27() || memberID == week.getSpInf40()) {
 
 			if (memberID == week.getSpInf4())
-				checkPrivilege(Privileges.PRAY1_MIDWEEK, week);
+				checkPrivilege(Privileges.MIDWEEK_PRAY_START, week);
 			else if (memberID == week.getSpInf27())
-				checkPrivilege(Privileges.PRAY2_MIDWEEK, week);
+				checkPrivilege(Privileges.MIDWEEK_PRAY_END, week);
 			else if (memberID == week.getSpInf40())
-				checkPrivilege(Privileges.PRAY_END_WEEKEND, week);
+				checkPrivilege(Privileges.WEEKEND_PRAY_END, week);
 		}
 
 		if (memberID == week.getSpInf29() || memberID == week.getSpInf38()) {
 
 			if (memberID == week.getSpInf29())
-				checkPrivilege(Privileges.CONGRBIBLESTUDY_READER_MIDWEEK, week);
+				checkPrivilege(Privileges.MIDWEEK_CONGRBIBLESTUDY_READER, week);
 			else if (memberID == week.getSpInf38())
-				checkPrivilege(Privileges.WATCHTOWER_READER, week);
+				checkPrivilege(Privileges.WEEKEND_WATCHTOWER_READER, week);
 		}
 
 		if (memberID == week.getSpInf30())
-			checkPrivilege(Privileges.PRESIDENT_WEEKEND, week);
+			checkPrivilege(Privileges.WEEKEND_PRESIDENT, week);
 
 		if (memberID == week.getSpInf37())
-			checkPrivilege(Privileges.CONDUCTOR_WATCHTOWER, week);
+			checkPrivilege(Privileges.WEEKEND_WATCHTOWER, week);
 
 		if (memberID == week.getSpInf11())
-			checkPrivilege(Privileges.TALK_MIDWEEK, week);
+			checkPrivilege(Privileges.MIDWEEK_TALK, week);
 
 		if (memberID == week.getSpInf14())
-			checkPrivilege(Privileges.DIGGING_MIDWEEK, week);
+			checkPrivilege(Privileges.MIDWEEK_DIGGING, week);
 
 		if (memberID == week.getSpInf23())
-			checkPrivilege(Privileges.CONGRBIBLESTUDY_MIDWEEK, week);
+			checkPrivilege(Privileges.MIDWEEK_CONGRBIBLESTUDY, week);
 
 		for (ChristiansPart cp : week.getChristiansPartList())
 			if (memberID == cp.getTeacher().getSpMemberID()) {
-				checkPrivilege(Privileges.CHRISTIAN_LIFE, week);
+				checkPrivilege(Privileges.MIDWEEK_CHRISTIAN_LIFE, week);
 				break;
 			}
 	}
@@ -309,51 +309,51 @@ public class History {
 	private void checkMemberPrivilege(Member member) {
 
 		switch (this.privilege) {
-		case CONGRBIBLESTUDY_READER_MIDWEEK:
+		case MIDWEEK_CONGRBIBLESTUDY_READER:
 			if (member.getSpInf26() == 1)
 				addMember(member);
 			break;
-		case WATCHTOWER_READER:
+		case WEEKEND_WATCHTOWER_READER:
 			if (member.getSpInf27() == 1)
 				addMember(member);
 			break;
-		case TALK_MIDWEEK:
+		case MIDWEEK_TALK:
 			if (member.getSpInf30() == 1)
 				addMember(member);
 			break;
-		case DIGGING_MIDWEEK:
+		case MIDWEEK_DIGGING:
 			if (member.getSpInf31() == 1)
 				addMember(member);
 			break;
-		case CHRISTIAN_LIFE:
+		case MIDWEEK_CHRISTIAN_LIFE:
 			if (member.getSpInf32() == 1)
 				addMember(member);
 			break;
-		case PRESIDENT_MIDWEEK:
+		case MIDWEEK_PRESIDENT:
 			if (member.getSpInf33() == 1)
 				addMember(member);
 			break;
-		case PRAY1_MIDWEEK:
+		case MIDWEEK_PRAY_START:
 			if (member.getSpInf34() == 1)
 				addMember(member);
 			break;
-		case PRAY2_MIDWEEK:
+		case MIDWEEK_PRAY_END:
 			if (member.getSpInf35() == 1)
 				addMember(member);
 			break;
-		case PRESIDENT_WEEKEND:
+		case WEEKEND_PRESIDENT:
 			if (member.getSpInf36() == 1)
 				addMember(member);
 			break;
-		case PRAY_END_WEEKEND:
+		case WEEKEND_PRAY_END:
 			if (member.getSpInf37() == 1)
 				addMember(member);
 			break;
-		case CONGRBIBLESTUDY_MIDWEEK:
+		case MIDWEEK_CONGRBIBLESTUDY:
 			if (member.getSpInf42() == 1)
 				addMember(member);
 			break;
-		case CONDUCTOR_WATCHTOWER:
+		case WEEKEND_WATCHTOWER:
 			if (member.getSpInf43() == 1 || member.getSpInf44() == 1)
 				addMember(member);
 			break;

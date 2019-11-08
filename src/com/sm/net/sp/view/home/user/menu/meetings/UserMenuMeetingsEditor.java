@@ -683,21 +683,21 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void contextMenu() {
 
-		presidentComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRESIDENT_MIDWEEK));
-		pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY1_MIDWEEK));
-		talkComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.TALK_MIDWEEK));
-		diggingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.DIGGING_MIDWEEK));
+		presidentComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_PRESIDENT));
+		pray1ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_PRAY_START));
+		talkComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_TALK));
+		diggingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_DIGGING));
 		congregationBibleStudyComboBox
-				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_MIDWEEK));
-		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY2_MIDWEEK));
-		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CHRISTIAN_LIFE));
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CONGRBIBLESTUDY));
+		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_PRAY_END));
+		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CHRISTIAN_LIFE));
 		congregationBibleStudyReaderComboBox
-				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONGRBIBLESTUDY_READER_MIDWEEK));
-		presidentPublicMeetingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRESIDENT_WEEKEND));
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CONGRBIBLESTUDY_READER));
+		presidentPublicMeetingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRESIDENT));
 		watchtowerStudyConductorComboBox
-				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.CONDUCTOR_WATCHTOWER));
-		watchtowerStudyReaderComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WATCHTOWER_READER));
-		watchtowerStudyPray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.PRAY_END_WEEKEND));
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_WATCHTOWER));
+		watchtowerStudyReaderComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_WATCHTOWER_READER));
+		watchtowerStudyPray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRAY_END));
 	}
 
 	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
@@ -1570,28 +1570,28 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	public void updateSelectedComboBox(Privileges privilege, int memberID) {
 
 		switch (privilege) {
-		case PRESIDENT_MIDWEEK:
+		case MIDWEEK_PRESIDENT:
 			updateComboBox(this.presidentComboBox, memberID);
 			break;
-		case PRAY1_MIDWEEK:
+		case MIDWEEK_PRAY_START:
 			updateComboBox(this.pray1ComboBox, memberID);
 			break;
-		case TALK_MIDWEEK:
+		case MIDWEEK_TALK:
 			updateComboBox(this.talkComboBox, memberID);
 			break;
-		case DIGGING_MIDWEEK:
+		case MIDWEEK_DIGGING:
 			updateComboBox(this.diggingComboBox, memberID);
 			break;
-		case BIBLE_READING_A:
+		case MIDWEEK_BIBLE_READING_A:
 			updateComboBox(this.bibleReadingComboBox, memberID);
 			break;
-		case BIBLE_READING_B:
+		case MIDWEEK_BIBLE_READING_B:
 			updateComboBox(this.bibleReading2ComboBox, memberID);
 			break;
-		case CONGRBIBLESTUDY_MIDWEEK:
+		case MIDWEEK_CONGRBIBLESTUDY:
 			updateComboBox(this.congregationBibleStudyComboBox, memberID);
 			break;
-		case PRAY2_MIDWEEK:
+		case MIDWEEK_PRAY_END:
 			updateComboBox(this.pray2ComboBox, memberID);
 			break;
 		default:

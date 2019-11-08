@@ -4,43 +4,41 @@ import com.sm.net.project.Language;
 
 public enum Privileges {
 
-	PRESIDENT_MIDWEEK("TEXT0134", "talk.png"),
+	MIDWEEK_PRESIDENT("sp.privileges.midweek.president", "talk.png"),
 
-	PRAY("sp.privileges.pray", "talk.png"),
+	MIDWEEK_PRAY_START("sp.privileges.midweek.praystart", "talk.png"),
 
-	PRAY1_MIDWEEK("TEXT0084", "talk.png"),
+	MIDWEEK_PRAY_END("sp.privileges.midweek.prayend", "talk.png"),
 
-	PRAY2_MIDWEEK("TEXT0102", "talk.png"),
+	MIDWEEK_TALK("sp.privileges.midweek.talk", "talk.png"),
 
-	TALK_MIDWEEK("TEXT0051", "talk.png"),
+	MIDWEEK_DIGGING("sp.privileges.midweek.digging", "talk.png"),
 
-	DIGGING_MIDWEEK("TEXT0088", "talk.png"),
+	MIDWEEK_BIBLE_READING_A("sp.privileges.midweek.biblereading.a", "bible_monitor.png"),
 
-	CONGRBIBLESTUDY_MIDWEEK("TEXT0061", "talk.png"),
+	MIDWEEK_BIBLE_READING_B("sp.privileges.midweek.biblereading.b", "bible_monitor.png"),
 
-	CHRISTIAN_LIFE("TEXT0082", "talk.png"),
+	MIDWEEK_MINISTRY_STUDENT_1("sp.privileges.midweek.task.a", "ministry_monitor.png"),
 
-	BIBLE_READING_A("sp.privileges.biblereading.a", "bible_monitor.png"),
+	MIDWEEK_MINISTRY_ASSISTANT_1("sp.privileges.midweek.taskassistent.a", "ministry_monitor.png"),
 
-	BIBLE_READING_B("sp.privileges.biblereading.b", "bible_monitor.png"),
+	MIDWEEK_MINISTRY_STUDENT_2("sp.privileges.midweek.task.b", "ministry_monitor.png"),
 
-	MINISTRY_STUDENT_1("sp.privileges.task.a", "ministry_monitor.png"),
+	MIDWEEK_MINISTRY_ASSISTANT_2("sp.privileges.midweek.taskassistent.b", "ministry_monitor.png"),
 
-	MINISTRY_ASSISTANT_1("sp.privileges.taskassistent.a", "ministry_monitor.png"),
+	MIDWEEK_CHRISTIAN_LIFE("sp.privileges.midweek.christianlife", "talk.png"),
 
-	MINISTRY_STUDENT_2("sp.privileges.task.b", "ministry_monitor.png"),
+	MIDWEEK_CONGRBIBLESTUDY("sp.privileges.midweek.congrbiblestudy", "talk.png"),
 
-	MINISTRY_ASSISTANT_2("sp.privileges.taskassistent.b", "ministry_monitor.png"),
+	MIDWEEK_CONGRBIBLESTUDY_READER("sp.privileges.midweek.congrbiblestudy.reader", "talk.png"),
 
-	CONGRBIBLESTUDY_READER_MIDWEEK("sp.privileges.congregationbiblestudy.reader", "talk.png"),
+	WEEKEND_PRESIDENT("sp.privileges.weekend.president", "talk.png"),
 
-	WATCHTOWER_READER("sp.privileges.watchtower.reader", "talk.png"),
+	WEEKEND_WATCHTOWER("sp.privileges.weekend.watchtower", "talk.png"),
 
-	PRESIDENT_WEEKEND("sp.privileges.publicmeeting.president", "talk.png"),
+	WEEKEND_WATCHTOWER_READER("sp.privileges.weekend.watchtower.reader", "talk.png"),
 
-	CONDUCTOR_WATCHTOWER("sp.privileges.watchtower.conductor", "talk.png"),
-
-	PRAY_END_WEEKEND("sp.privileges.publicmeeting.prayend", "talk.png");
+	WEEKEND_PRAY_END("sp.privileges.weekend.prayend", "talk.png");
 
 	private String name;
 	private String imageName;

@@ -49,6 +49,7 @@ public class JRWeek {
 	private String christiansBibleStudyMin;
 	private String christiansBibleStudyText;
 	private String christiansBibleStudyName;
+	private String christiansBibleStudyReaderText;
 	private String christiansBibleStudyReaderName;
 	private String christiansReviewMin;
 	private String christiansReviewText;
@@ -103,6 +104,7 @@ public class JRWeek {
 		this.christiansBibleStudyMin = "";
 		this.christiansBibleStudyText = "";
 		this.christiansBibleStudyName = "";
+		this.christiansBibleStudyReaderText = "";
 		this.christiansBibleStudyReaderName = "";
 		this.christiansReviewMin = "";
 		this.christiansReviewText = "";
@@ -124,7 +126,7 @@ public class JRWeek {
 	}
 
 	public static JRWeek newObject(Week week, ObservableList<Member> membersList, Language language,
-			boolean extendedName) throws JRException {
+			boolean extendedName, boolean complete) throws JRException {
 
 		JRWeek jrWeek = new JRWeek();
 
@@ -179,7 +181,7 @@ public class JRWeek {
 			}
 		}
 
-		jrWeek.setWeekHeader(checkWeekHeader(week, spInf2, language));
+		jrWeek.setWeekHeader(checkMidweekHeader(week, spInf2, language, complete));
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
 		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
@@ -265,7 +267,15 @@ public class JRWeek {
 			else
 				jrWeek.setChristiansBibleStudyName(member.getNameStyle4());
 
-		jrWeek.setChristiansBibleStudyReaderName("");
+		jrWeek.setChristiansBibleStudyReaderText(
+				String.format(language.getString("jasper.layout.meeting.reader"), week.getSpInf20()));
+
+		member = getMemberFromList(membersList, week.getSpInf29());
+		if (member != null)
+			if (extendedName)
+				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle3());
+			else
+				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle4());
 
 		jrWeek.setChristiansReviewMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf24()));
@@ -295,7 +305,22 @@ public class JRWeek {
 		return null;
 	}
 
-	private static String checkWeekHeader(Week week, int spInf2, Language language) {
+	private static String checkMidweekHeader(Week week, int spInf2, Language language, boolean complete) {
+
+		if (spInf2 == 1) {
+
+			if (complete)
+				return String.format(language.getString("jasper.layout.meeting.midweek.withbible"), week.getSpInf6());
+			else
+				return String.format(language.getString("jasper.layout.meeting.weekheader.with.bible"),
+						checkWeekFromText(week, spInf2, language), week.getSpInf6());
+
+		} else {
+			return checkWeekFromText(week, spInf2, language);
+		}
+	}
+
+	private static String checkWeekFromText(Week week, int spInf2, Language language) {
 
 		LocalDate from = week.getFrom();
 
@@ -307,11 +332,9 @@ public class JRWeek {
 		String keyMonth = "time.months." + dtfMonth.format(from);
 		String month = language.getString(keyMonth);
 
-		String keyWeek = language.getString("jasper.layout.meeting.weekheader.with.bible");
-		if (spInf2 != 1)
-			keyWeek = language.getString("jasper.layout.meeting.weekheader");
+		String keyWeek = language.getString("jasper.layout.meeting.weekheader");
 
-		return String.format(keyWeek, day, month.toUpperCase(), week.getSpInf6());
+		return String.format(keyWeek, day, month.toUpperCase());
 	}
 
 	public String getWeekHeader() {
@@ -664,6 +687,14 @@ public class JRWeek {
 
 	public void setOverseerHeader(String overseerHeader) {
 		this.overseerHeader = overseerHeader;
+	}
+
+	public String getChristiansBibleStudyReaderText() {
+		return christiansBibleStudyReaderText;
+	}
+
+	public void setChristiansBibleStudyReaderText(String christiansBibleStudyReaderText) {
+		this.christiansBibleStudyReaderText = christiansBibleStudyReaderText;
 	}
 
 }

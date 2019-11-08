@@ -57,28 +57,28 @@ public class Activities {
 		LocalDate weekDate = keyWeekToLocalDate(weekCode);
 
 		if (memberID == week.getInt("spInf3"))
-			list.add(new Activities(Privileges.PRESIDENT_MIDWEEK, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_PRESIDENT, weekDate));
 
 		if (memberID == week.getInt("spInf4"))
-			list.add(new Activities(Privileges.PRAY1_MIDWEEK, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_PRAY_START, weekDate));
 
 		if (memberID == week.getInt("spInf11"))
-			list.add(new Activities(Privileges.TALK_MIDWEEK, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_TALK, weekDate));
 
 		if (memberID == week.getInt("spInf14"))
-			list.add(new Activities(Privileges.DIGGING_MIDWEEK, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_DIGGING, weekDate));
 
 		if (memberID == week.getInt("spInf18"))
-			list.add(new Activities(Privileges.BIBLE_READING_A, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_BIBLE_READING_A, weekDate));
 
 		if (memberID == week.getInt("spInf23"))
-			list.add(new Activities(Privileges.CONGRBIBLESTUDY_MIDWEEK, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_CONGRBIBLESTUDY, weekDate));
 
 		if (memberID == week.getInt("spInf27"))
-			list.add(new Activities(Privileges.PRAY2_MIDWEEK, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_PRAY_END, weekDate));
 
 		if (memberID == week.getInt("spInf28"))
-			list.add(new Activities(Privileges.BIBLE_READING_B, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_BIBLE_READING_B, weekDate));
 	}
 
 	private static void checkMinistry(Object ministryObj, int memberID, ObservableList<Activities> list) {
@@ -89,16 +89,16 @@ public class Activities {
 		LocalDate weekDate = keyWeekToLocalDate(weekCode);
 
 		if (memberID == ministry.getInt("spInf7"))
-			list.add(new Activities(Privileges.MINISTRY_STUDENT_1, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_MINISTRY_STUDENT_1, weekDate));
 
 		if (memberID == ministry.getInt("spInf8"))
-			list.add(new Activities(Privileges.MINISTRY_ASSISTANT_1, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_MINISTRY_ASSISTANT_1, weekDate));
 
 		if (memberID == ministry.getInt("spInf9"))
-			list.add(new Activities(Privileges.MINISTRY_STUDENT_2, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_MINISTRY_STUDENT_2, weekDate));
 
 		if (memberID == ministry.getInt("spInf10"))
-			list.add(new Activities(Privileges.MINISTRY_ASSISTANT_2, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_MINISTRY_ASSISTANT_2, weekDate));
 	}
 
 	private static void checkChristian(Object christianObj, int memberID, ObservableList<Activities> list) {
@@ -109,7 +109,7 @@ public class Activities {
 		LocalDate weekDate = keyWeekToLocalDate(weekCode);
 
 		if (memberID == christian.getInt("spInf6"))
-			list.add(new Activities(Privileges.CHRISTIAN_LIFE, weekDate));
+			list.add(new Activities(Privileges.MIDWEEK_CHRISTIAN_LIFE, weekDate));
 	}
 
 	public static LocalDate keyWeekToLocalDate(int keyWeek) {

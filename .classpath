@@ -37,5 +37,6 @@
 	<classpathentry kind="lib" path="lib/sm-net-project-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-util-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-javafx-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
