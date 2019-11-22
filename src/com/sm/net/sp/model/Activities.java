@@ -79,6 +79,21 @@ public class Activities {
 
 		if (memberID == week.getInt("spInf28"))
 			list.add(new Activities(Privileges.MIDWEEK_BIBLE_READING_B, weekDate));
+
+		if (memberID == week.getInt("spInf29"))
+			list.add(new Activities(Privileges.MIDWEEK_CONGRBIBLESTUDY_READER, weekDate));
+
+		if (memberID == week.getInt("spInf30"))
+			list.add(new Activities(Privileges.WEEKEND_PRESIDENT, weekDate));
+
+		if (memberID == week.getInt("spInf37"))
+			list.add(new Activities(Privileges.WEEKEND_WATCHTOWER, weekDate));
+
+		if (memberID == week.getInt("spInf38"))
+			list.add(new Activities(Privileges.WEEKEND_WATCHTOWER_READER, weekDate));
+
+		if (memberID == week.getInt("spInf40"))
+			list.add(new Activities(Privileges.WEEKEND_PRAY_END, weekDate));
 	}
 
 	private static void checkMinistry(Object ministryObj, int memberID, ObservableList<Activities> list) {
