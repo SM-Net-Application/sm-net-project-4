@@ -30,7 +30,19 @@ if (file_exists("languages/" . $langIni)) {
             $pwmon = $_GET["pwmon"];
 
             // Weekcode
-            $weekcode = date("oW");
+            $timestamp = strtotime("Next Sunday");
+
+            $day = date("j", $timestamp);
+            $month = date("n", $timestamp);
+            $year = date("o", $timestamp);
+
+            if ($month == 1)
+                if ($day < 4)
+                    $year = $year - 1;
+
+            $week = date("W", $timestamp);
+
+            $weekcode = $year . $week;
 
             // Database connection
             require_once dirname(__DIR__, 1) . '/query/config.php';
@@ -57,6 +69,7 @@ if (file_exists("languages/" . $langIni)) {
                     // Weeks
 
                     $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28";
+                    $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40";
                     $query_week .= " FROM sp_week";
                     $query_week .= " WHERE spInf1 >=";
                     $query_week .= " " . $weekcode;
@@ -80,6 +93,12 @@ if (file_exists("languages/" . $langIni)) {
                             $row["spInf23"] = $resultRow_week["spInf23"];
                             $row["spInf27"] = $resultRow_week["spInf27"];
                             $row["spInf28"] = $resultRow_week["spInf28"];
+
+                            $row["spInf29"] = $resultRow_week["spInf29"];
+                            $row["spInf30"] = $resultRow_week["spInf30"];
+                            $row["spInf37"] = $resultRow_week["spInf37"];
+                            $row["spInf38"] = $resultRow_week["spInf38"];
+                            $row["spInf40"] = $resultRow_week["spInf40"];
 
                             array_push($weeks, $row);
                         }
@@ -177,6 +196,26 @@ if (file_exists("languages/" . $langIni)) {
 
                     if ($memberID == $week["spInf28"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['BIBLE_READING_B'], $language['BIBLE_READING_B_ICON']));
+                    }
+                    
+                    if ($memberID == $week["spInf29"]) {
+                        array_push($activities, add_activity($row_weekcode, $date, $language['READER_CONGRBIBLESTUDY'], $language['READER_CONGRBIBLESTUDY_ICON']));
+                    }
+                    
+                    if ($memberID == $week["spInf30"]) {
+                        array_push($activities, add_activity($row_weekcode, $date, $language['PRESIDENT_WEEKEND'], $language['PRESIDENT_WEEKEND_ICON']));
+                    }
+                    
+                    if ($memberID == $week["spInf37"]) {
+                        array_push($activities, add_activity($row_weekcode, $date, $language['WATCHTOWER_WEEKEND'], $language['WATCHTOWER_WEEKEND_ICON']));
+                    }
+                    
+                    if ($memberID == $week["spInf38"]) {
+                        array_push($activities, add_activity($row_weekcode, $date, $language['READER_WATCHTOWER'], $language['READER_WATCHTOWER_ICON']));
+                    }
+                    
+                    if ($memberID == $week["spInf40"]) {
+                        array_push($activities, add_activity($row_weekcode, $date, $language['PRAY2_WEEKEND'], $language['PRAY2_WEEKEND_ICON']));
                     }
                 }
 
