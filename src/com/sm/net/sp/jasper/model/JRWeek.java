@@ -64,6 +64,30 @@ public class JRWeek {
 	private String overseerName;
 	private String overseerSongTalk1;
 
+	private String weekHeader2;
+	private String publicTalkHeader;
+	private String publicTalkMinSong1;
+	private String publicTalkSong1;
+	private String publicTalkPresidentText;
+	private String publicTalkPresident;
+	private String publicTalkMin;
+	private String publicTalkTheme;
+	private String publicTalkName;
+	private String publicTalkCongregation;
+	private String watchtowerStudyHeader;
+	private String watchtowerStudyMinSong2;
+	private String watchtowerStudySong2;
+	private String watchtowerStudyMin;
+	private String watchtowerStudyTheme;
+	private String watchtowerStudyName;
+	private String watchtowerStudyReaderText;
+	private String watchtowerStudyReaderName;
+	private String watchtowerStudyMinSong3;
+	private String watchtowerStudySong3;
+
+	private String congregationName;
+	private String programmName;
+
 	private JasperReport jasperReportMinistryPart;
 	private JasperReport jasperReportChristiansPart;
 	private JRBeanCollectionDataSource jrDataSourceMinistryPart;
@@ -295,6 +319,54 @@ public class JRWeek {
 
 		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
+		jrWeek.setWeekHeader2(checkWeekendHeader(week, spInf2, language));
+		jrWeek.setPublicTalkHeader(language.getString("jasper.layout.meeting.weekend.publictalk").toUpperCase());
+
+		jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		jrWeek.setPublicTalkSong1(String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf31()));
+		jrWeek.setPublicTalkPresidentText(language.getString("jasper.layout.meeting.weekend.president"));
+
+		member = getMemberFromList(membersList, week.getSpInf30());
+		if (member != null)
+			if (extendedName)
+				jrWeek.setPublicTalkPresident(member.getNameStyle3());
+			else
+				jrWeek.setPublicTalkPresident(member.getNameStyle4());
+
+		jrWeek.setPublicTalkMin(String.format(language.getString("jasper.layout.meeting.min"), "30"));
+		jrWeek.setPublicTalkTheme(week.getSpInf32());
+		jrWeek.setPublicTalkName(week.getSpInf33());
+		jrWeek.setPublicTalkCongregation(week.getSpInf34());
+
+		jrWeek.setWatchtowerStudyHeader(
+				language.getString("jasper.layout.meeting.weekend.watchtowerstudy").toUpperCase());
+
+		jrWeek.setWatchtowerStudyMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		jrWeek.setWatchtowerStudySong2(
+				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf35()));
+		jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), "60"));
+		jrWeek.setWatchtowerStudyTheme(week.getSpInf36());
+
+		member = getMemberFromList(membersList, week.getSpInf37());
+		if (member != null)
+			if (extendedName)
+				jrWeek.setWatchtowerStudyName(member.getNameStyle3());
+			else
+				jrWeek.setWatchtowerStudyName(member.getNameStyle4());
+
+		jrWeek.setWatchtowerStudyReaderText(language.getString("jasper.layout.meeting.weekend.reader"));
+
+		member = getMemberFromList(membersList, week.getSpInf38());
+		if (member != null)
+			if (extendedName)
+				jrWeek.setWatchtowerStudyReaderName(member.getNameStyle3());
+			else
+				jrWeek.setWatchtowerStudyReaderName(member.getNameStyle4());
+
+		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		jrWeek.setWatchtowerStudySong3(
+				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf39()));
+
 		return jrWeek;
 	}
 
@@ -318,6 +390,18 @@ public class JRWeek {
 		} else {
 			return checkWeekFromText(week, spInf2, language);
 		}
+	}
+
+	public static String getProgrammNameHeader(Week week, Language language) {
+
+		String header = checkWeekFromText(week, week.getSpInf2(), language);
+		return String.format(language.getString("jasper.layout.meeting.programmcomplete.header"), header);
+	}
+
+	private static String checkWeekendHeader(Week week, int spInf2, Language language) {
+
+		return (spInf2 == 1) ? String.format(language.getString("jasper.layout.meeting.weekend"), week.getSpInf6())
+				: "";
 	}
 
 	private static String checkWeekFromText(Week week, int spInf2, Language language) {
@@ -697,4 +781,179 @@ public class JRWeek {
 		this.christiansBibleStudyReaderText = christiansBibleStudyReaderText;
 	}
 
+	public String getWeekHeader2() {
+		return weekHeader2;
+	}
+
+	public void setWeekHeader2(String weekHeader2) {
+		this.weekHeader2 = weekHeader2;
+	}
+
+	public String getPublicTalkHeader() {
+		return publicTalkHeader;
+	}
+
+	public void setPublicTalkHeader(String publicTalkHeader) {
+		this.publicTalkHeader = publicTalkHeader;
+	}
+
+	public String getWatchtowerStudyHeader() {
+		return watchtowerStudyHeader;
+	}
+
+	public void setWatchtowerStudyHeader(String watchtowerStudyHeader) {
+		this.watchtowerStudyHeader = watchtowerStudyHeader;
+	}
+
+	public String getPublicTalkMinSong1() {
+		return publicTalkMinSong1;
+	}
+
+	public void setPublicTalkMinSong1(String publicTalkMinSong1) {
+		this.publicTalkMinSong1 = publicTalkMinSong1;
+	}
+
+	public String getPublicTalkSong1() {
+		return publicTalkSong1;
+	}
+
+	public void setPublicTalkSong1(String publicTalkSong1) {
+		this.publicTalkSong1 = publicTalkSong1;
+	}
+
+	public String getPublicTalkPresidentText() {
+		return publicTalkPresidentText;
+	}
+
+	public void setPublicTalkPresidentText(String publicTalkPresidentText) {
+		this.publicTalkPresidentText = publicTalkPresidentText;
+	}
+
+	public String getPublicTalkPresident() {
+		return publicTalkPresident;
+	}
+
+	public void setPublicTalkPresident(String publicTalkPresident) {
+		this.publicTalkPresident = publicTalkPresident;
+	}
+
+	public String getPublicTalkMin() {
+		return publicTalkMin;
+	}
+
+	public void setPublicTalkMin(String publicTalkMin) {
+		this.publicTalkMin = publicTalkMin;
+	}
+
+	public String getPublicTalkTheme() {
+		return publicTalkTheme;
+	}
+
+	public void setPublicTalkTheme(String publicTalkTheme) {
+		this.publicTalkTheme = publicTalkTheme;
+	}
+
+	public String getPublicTalkName() {
+		return publicTalkName;
+	}
+
+	public void setPublicTalkName(String publicTalkName) {
+		this.publicTalkName = publicTalkName;
+	}
+
+	public String getPublicTalkCongregation() {
+		return publicTalkCongregation;
+	}
+
+	public void setPublicTalkCongregation(String publicTalkCongregation) {
+		this.publicTalkCongregation = publicTalkCongregation;
+	}
+
+	public String getWatchtowerStudyMinSong2() {
+		return watchtowerStudyMinSong2;
+	}
+
+	public void setWatchtowerStudyMinSong2(String watchtowerStudyMinSong2) {
+		this.watchtowerStudyMinSong2 = watchtowerStudyMinSong2;
+	}
+
+	public String getWatchtowerStudySong2() {
+		return watchtowerStudySong2;
+	}
+
+	public void setWatchtowerStudySong2(String watchtowerStudySong2) {
+		this.watchtowerStudySong2 = watchtowerStudySong2;
+	}
+
+	public String getWatchtowerStudyMin() {
+		return watchtowerStudyMin;
+	}
+
+	public void setWatchtowerStudyMin(String watchtowerStudyMin) {
+		this.watchtowerStudyMin = watchtowerStudyMin;
+	}
+
+	public String getWatchtowerStudyTheme() {
+		return watchtowerStudyTheme;
+	}
+
+	public void setWatchtowerStudyTheme(String watchtowerStudyTheme) {
+		this.watchtowerStudyTheme = watchtowerStudyTheme;
+	}
+
+	public String getWatchtowerStudyName() {
+		return watchtowerStudyName;
+	}
+
+	public void setWatchtowerStudyName(String watchtowerStudyName) {
+		this.watchtowerStudyName = watchtowerStudyName;
+	}
+
+	public String getWatchtowerStudyReaderText() {
+		return watchtowerStudyReaderText;
+	}
+
+	public void setWatchtowerStudyReaderText(String watchtowerStudyReaderText) {
+		this.watchtowerStudyReaderText = watchtowerStudyReaderText;
+	}
+
+	public String getWatchtowerStudyReaderName() {
+		return watchtowerStudyReaderName;
+	}
+
+	public void setWatchtowerStudyReaderName(String watchtowerStudyReaderName) {
+		this.watchtowerStudyReaderName = watchtowerStudyReaderName;
+	}
+
+	public String getWatchtowerStudyMinSong3() {
+		return watchtowerStudyMinSong3;
+	}
+
+	public void setWatchtowerStudyMinSong3(String watchtowerStudyMinSong3) {
+		this.watchtowerStudyMinSong3 = watchtowerStudyMinSong3;
+	}
+
+	public String getWatchtowerStudySong3() {
+		return watchtowerStudySong3;
+	}
+
+	public void setWatchtowerStudySong3(String watchtowerStudySong3) {
+		this.watchtowerStudySong3 = watchtowerStudySong3;
+	}
+
+	public String getCongregationName() {
+		return congregationName;
+	}
+
+	public void setCongregationName(String congregationName) {
+		this.congregationName = congregationName;
+	}
+
+	public String getProgrammName() {
+		return programmName;
+	}
+
+	public void setProgrammName(String programmName) {
+		this.programmName = programmName;
+	}
 }

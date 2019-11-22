@@ -197,6 +197,7 @@ public class Meta {
 		public static final String USER_MENU_MEETINGS_CHRISTIANS_ADD = "christians_add.png";
 		public static final String USER_MENU_MEETINGS_CHRISTIANS_DELETE = "christians_delete.png";
 		public static final String USER_MENU_MEETINGS_WOL_LOAD = "wol_load.png";
+		public static final String USER_MENU_MEETINGS_WOL_VIEW = "wol_view.png";
 		public static final String OK = "ok.png";
 		public static final String HISTORY = "history.png";
 		public static final String SEARCH = "search.png";

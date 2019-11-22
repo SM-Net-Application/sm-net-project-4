@@ -2333,23 +2333,32 @@ public class Actions {
 
 				try {
 
-					String programmReportFile = Jasper.Layouts.SM_NET_MEETINGS_PROGRAMM.getAbsolutePath();
+					String programmReportFile = Jasper.Layouts.SM_NET_MEETINGS_PROGRAMM_COMPLETE.getAbsolutePath();
 					String weekReportFile = Jasper.Layouts.SM_NET_MEETINGS_WEEK_COMPLETE.getAbsolutePath();
 
 					JasperReport programmJasperReport = JasperCompileManager.compileReport(programmReportFile);
 					JasperReport weekJasperReport = JasperCompileManager.compileReport(weekReportFile);
 
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
-					for (Week week : weeks)
-						jrWeeks.add(JRWeek.newObject(week, membersList, language, extendedName, true));
+					for (Week week : weeks) {
+
+						JRWeek newJRWeek = JRWeek.newObject(week, membersList, language, extendedName, true);
+
+						String congregationNameHeader = String
+								.format(language.getString("jasper.layout.meeting.congregation"), congregationName);
+
+						newJRWeek.setCongregationName(congregationNameHeader);
+
+						String programmName = JRWeek.getProgrammNameHeader(week, language);
+
+						newJRWeek.setProgrammName(programmName);
+
+						jrWeeks.add(newJRWeek);
+					}
 
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
 					Map<String, Object> parameters = new HashMap<String, Object>();
-					parameters.put("congregationName",
-							String.format(language.getString("jasper.layout.meeting.congregation"), congregationName));
-					parameters.put("programmName",
-							language.getString("jasper.layout.meeting.programmcomplete").toUpperCase());
 					parameters.put("jrWeekReport", weekJasperReport);
 					parameters.put("jrWeeksDataSource", jrWeeksDataSource);
 

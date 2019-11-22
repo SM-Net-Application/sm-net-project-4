@@ -58,6 +58,8 @@ import javafx.util.StringConverter;
 public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	@FXML
+	private Button wolViewButton;
+	@FXML
 	private Button loadWeekFromWOLButton;
 	@FXML
 	private Button saveWeekButton;
@@ -469,6 +471,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		congregationBibleStudyReaderLabel.getStyleClass().add("label_001");
 		congregationBibleStudyReaderComboBox.getStyleClass().add("combo_box_001");
 
+		wolViewButton.getStyleClass().add("button_image_001");
 		loadWeekFromWOLButton.getStyleClass().add("button_image_001");
 		saveWeekButton.getStyleClass().add("button_image_001");
 	}
@@ -565,6 +568,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		congregationBibleStudyConductorLabel.setText(language.getString("sp.meetings.congregationbiblestudyconductor"));
 		congregationBibleStudyReaderLabel.setText(language.getString("sp.meetings.congregationbiblestudyreader"));
 
+		wolViewButton.setText(null);
+		wolViewButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_VIEW));
 		loadWeekFromWOLButton.setText(null);
 		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
 		saveWeekButton.setText(null);
@@ -696,7 +701,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		presidentPublicMeetingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRESIDENT));
 		watchtowerStudyConductorComboBox
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_WATCHTOWER));
-		watchtowerStudyReaderComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_WATCHTOWER_READER));
+		watchtowerStudyReaderComboBox
+				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_WATCHTOWER_READER));
 		watchtowerStudyPray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRAY_END));
 	}
 
@@ -1053,6 +1059,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		listenerChristiansPartAddButton();
 		listenerChristiansPartDeleteButton();
 
+		listenerWOLView();
 		listenerLoadWeekFromWOLButton();
 
 		listenerSaveWeekButton();
@@ -1329,6 +1336,16 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		boolean status = true;
 
 		return status;
+	}
+
+	private void listenerWOLView() {
+		wolViewButton.setOnAction(event -> wolViewOnAction());
+	}
+
+	private void wolViewOnAction() {
+
+		// TODO: Open Browser
+
 	}
 
 	private void listenerLoadWeekFromWOLButton() {

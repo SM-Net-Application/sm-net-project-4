@@ -26,6 +26,7 @@ public class Jasper {
 	public static final String FILE_MEETINGS_WEEK = "spMeetingWeek";
 	public static final String FILE_MEETINGS_WEEK_COMPLETE = "spMeetingWeekComplete";
 	public static final String FILE_MEETINGS_PROGRAMM = "spMeetingProgramm";
+	public static final String FILE_MEETINGS_PROGRAMM_COMPLETE = "spMeetingProgrammComplete";
 	public static final String FILE_NATURAL_DISASTER = "spNaturalDisaster";
 	public static final String FILE_NATURAL_DISASTER_FAMILY = "spNaturalDisasterFamilyRow";
 	public static final String FILE_NATURAL_DISASTER_MEMBER = "spNaturalDisasterMemberRow";
@@ -45,10 +46,13 @@ public class Jasper {
 				FILE_MEETINGS_CHRISTIAN_PART_ROW);
 
 		public static final File SM_NET_MEETINGS_WEEK = getLayout(TYPE_SM_NET, LAYOUT_MEETINGS, FILE_MEETINGS_WEEK);
-		public static final File SM_NET_MEETINGS_WEEK_COMPLETE = getLayout(TYPE_SM_NET, LAYOUT_MEETINGS, FILE_MEETINGS_WEEK_COMPLETE);
+		public static final File SM_NET_MEETINGS_WEEK_COMPLETE = getLayout(TYPE_SM_NET, LAYOUT_MEETINGS,
+				FILE_MEETINGS_WEEK_COMPLETE);
 
 		public static final File SM_NET_MEETINGS_PROGRAMM = getLayout(TYPE_SM_NET, LAYOUT_MEETINGS,
 				FILE_MEETINGS_PROGRAMM);
+		public static final File SM_NET_MEETINGS_PROGRAMM_COMPLETE = getLayout(TYPE_SM_NET, LAYOUT_MEETINGS,
+				FILE_MEETINGS_PROGRAMM_COMPLETE);
 
 		public static final File SM_NET_NATURAL_DISASTER = getLayout(TYPE_SM_NET, LAYOUT_NATURALDISASTER,
 				FILE_NATURAL_DISASTER);

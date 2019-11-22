@@ -164,11 +164,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 			int currentMonth = day.getMonthValue();
 
 			if (lastMonth == currentMonth)
-				calendar.add(new Week(day, language));
+				calendar.add(new Week(day.plusDays(6), language));
 			else {
 				countMonth = countMonth + 1;
 				if (countMonth < 4)
-					calendar.add(new Week(day, language));
+					calendar.add(new Week(day.plusDays(6), language));
 			}
 
 		} while (countMonth < 4);
@@ -254,15 +254,15 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 					switch (selectedLayout) {
 
 					case MEETING_COMPLETE_NAME_EXTENDED:
-						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-								true);
+						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage,
+								language, true);
 						break;
-					
+
 					case MEETING_COMPLETE_NAME_SHORT:
-						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-								false);
+						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage,
+								language, false);
 						break;
-					
+
 					case MEETING_MIDWEEK_NAME_EXTENDED:
 						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
 								true);

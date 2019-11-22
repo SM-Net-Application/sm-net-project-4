@@ -136,11 +136,11 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 			int currentMonth = day.getMonthValue();
 
 			if (lastMonth == currentMonth)
-				calendar.add(new WeekOverseer(day, language));
+				calendar.add(new WeekOverseer(day.plusDays(6), language));
 			else {
 				countMonth = countMonth + 1;
 				if (countMonth < 12)
-					calendar.add(new WeekOverseer(day, language));
+					calendar.add(new WeekOverseer(day.plusDays(6), language));
 			}
 
 		} while (countMonth < 12);
