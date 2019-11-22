@@ -25,6 +25,7 @@ import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
+import com.sm.net.sp.view.wolbrowser.WOLBrowser;
 
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
@@ -138,6 +139,7 @@ public class Meta {
 		public static final URL HOME_USER_MENU_MEETINGS_CHRISTIANS_PART_EDITOR = UserMenuMeetings.class
 				.getResource("ChristiansPartEditor.fxml");
 		public static final URL HISTORY = History.class.getResource("History.fxml");
+		public static final URL WOLBROWSER = WOLBrowser.class.getResource("WOLBrowser.fxml");
 	}
 
 	public static class Themes {

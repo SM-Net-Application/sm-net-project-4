@@ -21,6 +21,7 @@ import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.history.History;
+import com.sm.net.sp.view.wolbrowser.WOLBrowser;
 import com.sm.net.util.Crypt;
 
 import javafx.application.Platform;
@@ -1346,6 +1347,36 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 		// TODO: Open Browser
 
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.WOLBROWSER);
+
+			AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+
+			Scene scene = new Scene(anchorPane);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+
+			stage.setScene(scene);
+			stage.setTitle(Meta.Application.getFullTitle());
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
+			stage.initOwner(this.ownerStage);
+
+			stage.setWidth(750);
+			stage.setHeight(750);
+
+			WOLBrowser ctrl = fxmlLoader.getController();
+			ctrl.setLanguage(this.language);
+			ctrl.setWeek(this.selectedWeek);
+			ctrl.init();
+
+			stage.show();
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	private void listenerLoadWeekFromWOLButton() {

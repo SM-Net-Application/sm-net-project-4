@@ -143,6 +143,30 @@ public class JRWeek {
 		this.overseerName = "";
 		this.overseerSongTalk1 = "";
 
+		this.weekHeader2 = "";
+		this.publicTalkHeader = "";
+		this.publicTalkMinSong1 = "";
+		this.publicTalkSong1 = "";
+		this.publicTalkPresidentText = "";
+		this.publicTalkPresident = "";
+		this.publicTalkMin = "";
+		this.publicTalkTheme = "";
+		this.publicTalkName = "";
+		this.publicTalkCongregation = "";
+		this.watchtowerStudyHeader = "";
+		this.watchtowerStudyMinSong2 = "";
+		this.watchtowerStudySong2 = "";
+		this.watchtowerStudyMin = "";
+		this.watchtowerStudyTheme = "";
+		this.watchtowerStudyName = "";
+		this.watchtowerStudyReaderText = "";
+		this.watchtowerStudyReaderName = "";
+		this.watchtowerStudyMinSong3 = "";
+		this.watchtowerStudySong3 = "";
+
+		this.congregationName = "";
+		this.programmName = "";
+
 		this.jasperReportMinistryPart = null;
 		this.jasperReportChristiansPart = null;
 		this.jrDataSourceMinistryPart = null;
