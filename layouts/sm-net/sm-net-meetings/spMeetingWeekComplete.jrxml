@@ -1123,7 +1123,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="06f676a8-1ef4-4e61-a04d-19039e06582e">
+				<reportElement x="277" y="0" width="1" height="17" uuid="23451de5-3b97-4080-89ed-52f21ab04bee">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -1133,30 +1133,8 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-		</band>
-		<band height="17">
-			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1||$F{weekType}.intValue() == 4]]></printWhenExpression>
-			<rectangle>
-				<reportElement x="0" y="0" width="555" height="17" uuid="147c121c-4b52-4737-bf50-746115fae617">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</rectangle>
-			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="3754cacd-7692-4580-8bfb-41f94efc3231">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
 			<textField>
-				<reportElement x="60" y="0" width="356" height="17" forecolor="#000000" uuid="f49c6c99-670a-4c27-86b4-f162273439b5">
+				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="6415ba21-1140-4f30-b2a8-74c9cdf1db36">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1167,7 +1145,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkPresidentText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="70914d14-04a9-46db-ae22-2782710453a9">
+				<reportElement x="416" y="0" width="1" height="17" uuid="06f676a8-1ef4-4e61-a04d-19039e06582e">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -1178,7 +1156,7 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="421" y="0" width="134" height="17" forecolor="#000000" uuid="b05de287-33cf-4178-9882-11ba4dee4e49">
+				<reportElement x="421" y="0" width="134" height="17" forecolor="#000000" uuid="62aff0a7-1f97-4648-9895-3e5653f212e0">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
