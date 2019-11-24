@@ -1464,17 +1464,6 @@
 				<textFieldExpression><![CDATA[$F{watchtowerStudySong3}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="54c59bc3-43cd-412c-9414-2049023b1507">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
-			<line>
 				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="33c7cfef-655e-477a-9476-062331dd7fca">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
