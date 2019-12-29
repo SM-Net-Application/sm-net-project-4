@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.sm.net.project.Language;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetingsEditor;
+import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetingsEditor;
 import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 
@@ -293,6 +294,24 @@ public class Week {
 				editorMeeting.getWatchtowerStudyPray2ComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
 
 		week.setChristiansPartList(editorMeeting.getChristiansPartList());
+
+		return week;
+	}
+
+	public static Week buildPublicMeetingEditorWeek(UserMenuPublicMeetingsEditor editorMeeting) {
+
+		Week editorMeetingSelectedWeek = editorMeeting.getSelectedWeek();
+		Week week = null;
+
+		if (editorMeetingSelectedWeek.spInf1Property() != null)
+			week = new Week(editorMeetingSelectedWeek);
+		else {
+			week = new Week(editorMeetingSelectedWeek.getFrom(), editorMeeting.getLanguage());
+			week.setSpInf1(Integer.valueOf(week.getKey()));
+		}
+
+		week.setSpInf30(editorMeeting.getPresidentPublicMeetingComboBox().getSelectionModel().getSelectedItem()
+				.getSpMemberID());
 
 		return week;
 	}

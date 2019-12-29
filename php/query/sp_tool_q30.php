@@ -4,7 +4,7 @@ if (isset ( $jsonObj ["spWeekOvID"] ) && isset ( $jsonObj ["spInf1"] ) && isset 
 	if (! empty ( $jsonObj ["spWeekOvID"] ) && ! empty ( $jsonObj ["spInf1"] ) && ! empty ( $jsonObj ["spInf2"] ) && ! empty ( $jsonObj ["spInf3"] ) && ! empty ( $jsonObj ["spInf5"] )) {
 		require_once __DIR__ . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
-		mysqli_set_charset ( $conn, 'utf8' );
+		mysqli_set_charset ( $database, 'utf8' );
 		if (! $database) {
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();

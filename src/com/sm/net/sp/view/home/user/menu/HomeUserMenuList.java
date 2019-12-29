@@ -184,6 +184,9 @@ public class HomeUserMenuList {
 		case MEETINGS:
 			ctrlSupportPlannerView.viewHomeUserMenuMeetings();
 			break;
+		case PUBLIC_TALK:
+			ctrlSupportPlannerView.viewHomeUserMenuPublicMeetings();
+			break;
 		case CIRCUITOVERSEERS:
 			ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;

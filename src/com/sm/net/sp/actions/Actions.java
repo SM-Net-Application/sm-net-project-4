@@ -26,6 +26,7 @@ import com.sm.net.sp.model.User;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.utils.JSONUtils;
 import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -560,7 +561,7 @@ public class Actions {
 
 			@Override
 			protected JSONObject call() throws Exception {
-				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.GET_COUNT_USERS());
+				return JSONUtils.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.GET_COUNT_USERS());
 			}
 		};
 
@@ -2656,6 +2657,61 @@ public class Actions {
 		waitAlert.show();
 		Thread taskThread = new Thread(task);
 		taskThread.start();
+	}
+
+	public static void updatePublicMeeting(String spWeekID, String spInf30, String spInf31, String spInf32,
+			String spInf33, String spInf34, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
+			UpdateData callback) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+					if (result != null)
+						if (result.booleanValue()) {
+
+							tabPane.getTabs().remove(newTab);
+							callback.updateWeeks();
+
+						} else
+							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
+									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
+						JSONRequest.UPDATE_PUBLIC_MEETING(spWeekID, spInf30, spInf31, spInf32, spInf33, spInf34));
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
 	}
 
 	/**

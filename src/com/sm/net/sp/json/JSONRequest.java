@@ -568,6 +568,21 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject UPDATE_PUBLIC_MEETING(String spWeekID, String spInf30, String spInf31, String spInf32,
+			String spInf33, String spInf34) {
+
+		JSONObject jsonObj = create(Integer.valueOf(35));
+
+		jsonObj.put("spWeekID", spWeekID);
+		jsonObj.put("spInf30", spInf30);
+		jsonObj.put("spInf31", spInf31);
+		jsonObj.put("spInf32", spInf32);
+		jsonObj.put("spInf33", spInf33);
+		jsonObj.put("spInf34", spInf34);
+
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {

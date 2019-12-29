@@ -4,7 +4,7 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 	if (! empty ( $jsonObj ["spInf1"] ) && ! empty ( $jsonObj ["spInf2"] ) && ! empty ( $jsonObj ["spInf5"] ) && ! empty ( $jsonObj ["spInf6"] ) && ! empty ( $jsonObj ["spInf7"] ) && ! empty ( $jsonObj ["spInf8"] ) && ! empty ( $jsonObj ["spInf9"] ) && ! empty ( $jsonObj ["spInf10"] ) && ! empty ( $jsonObj ["spInf12"] ) && ! empty ( $jsonObj ["spInf13"] ) && ! empty ( $jsonObj ["spInf15"] ) && ! empty ( $jsonObj ["spInf16"] ) && ! empty ( $jsonObj ["spInf17"] ) && ! empty ( $jsonObj ["spInf19"] ) && ! empty ( $jsonObj ["spInf20"] ) && ! empty ( $jsonObj ["spInf21"] ) && ! empty ( $jsonObj ["spInf22"] ) && ! empty ( $jsonObj ["spInf24"] ) && ! empty ( $jsonObj ["spInf25"] ) && ! empty ( $jsonObj ["spInf26"] )) {
 		require_once __DIR__ . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
-		mysqli_set_charset ( $conn, 'utf8' );
+		mysqli_set_charset ( $database, 'utf8' );
 		if (! $database) {
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();

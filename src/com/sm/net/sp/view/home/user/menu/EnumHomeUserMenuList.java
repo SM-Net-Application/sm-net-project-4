@@ -12,6 +12,8 @@ public enum EnumHomeUserMenuList {
 
 	MEETINGS("USERMENU004", Meta.Resources.USER_MENU_MEETINGS),
 
+	PUBLIC_TALK("sp.menu.publictalk", Meta.Resources.PUBLIC_TALK),
+
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
 
 	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER),

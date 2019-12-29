@@ -4,7 +4,7 @@ if (isset($jsonObj["spFamID"]) && isset($jsonObj["spInf1"]) && isset($jsonObj["s
     if (! empty($jsonObj["spFamID"]) && ! empty($jsonObj["spInf1"])) {
         require_once __DIR__ . '/config.php';
         $database = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-        mysqli_set_charset($conn, 'utf8');
+        mysqli_set_charset($database, 'utf8');
         if (! $database) {
             $response["status"] = 4;
             $response["error"] = mysqli_connect_error();

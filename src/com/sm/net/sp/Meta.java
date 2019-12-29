@@ -17,6 +17,7 @@ import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
+import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
@@ -40,7 +41,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.0 (beta 7.1)";
+		public static final String VERSION = "1.0 (beta 8)";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -119,6 +120,8 @@ public class Meta {
 		public static final URL HOME_USER_MENU_SERGROUPS_EDITOR = UserMenuSerGroupsList.class
 				.getResource("UserMenuSerGroupsEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS = UserMenuMeetings.class.getResource("UserMenuMeetings.fxml");
+		public static final URL HOME_USER_MENU_PUBLICMEETINGS = UserMenuPublicMeetings.class
+				.getResource("UserMenuPublicMeetings.fxml");
 		public static final URL HOME_USER_MENU_CIRCUITOVERSEER = UserMenuCircuitOverseer.class
 				.getResource("UserMenuCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_MONITOR = UserMenuMonitor.class.getResource("UserMenuMonitor.fxml");
@@ -130,6 +133,8 @@ public class Meta {
 				.getResource("UserMenuNaturalDisasterFamilyEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_EDITOR = UserMenuMeetings.class
 				.getResource("UserMenuMeetingsEditor.fxml");
+		public static final URL HOME_USER_MENU_PUBLICMEETINGS_EDITOR = UserMenuPublicMeetings.class
+				.getResource("UserMenuPublicMeetingsEditor.fxml");
 		public static final URL HOME_USER_MENU_MEETINGS_CIRCUITOVERSEER = UserMenuMeetings.class
 				.getResource("UserMenuMeetingCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_CIRCUITOVERSEER_EDITOR = UserMenuCircuitOverseer.class
@@ -189,6 +194,7 @@ public class Meta {
 		public static final String USER_MENU_NATURALDISASTER = "naturaldis.png";
 		public static final String INFO = "info.png";
 		public static final String WOL = "wol.png";
+		public static final String PUBLIC_TALK = "public_talk.png";
 		public static final String CALENDAR = "calendar.png";
 		public static final String TALKS = "talks.png";
 		public static final String USER_MENU_MEETINGS_TREASURES = "treasures.png";
