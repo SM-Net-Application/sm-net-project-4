@@ -330,7 +330,8 @@ public class Actions {
 	 * @param callback
 	 */
 	public static void updateUserRules(String spUserID, String spInf1, String spInf2, String spInf3, String spInf4,
-			String spInf5, String spInf6, String spInf7, Settings settings, Stage ownerStage, UpdateData callback) {
+			String spInf5, String spInf6, String spInf7, String spInf8, Settings settings, Stage ownerStage,
+			UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -368,7 +369,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_USER_RULES(spUserID,
-						spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7));
+						spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8));
 			}
 		};
 

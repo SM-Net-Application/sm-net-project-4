@@ -371,8 +371,6 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	@Override
 	public void updateSelectedComboBox(Privileges privilege, int memberID) {
 
-		// TODO: Controllare se il presidente viene settato
-
 		switch (privilege) {
 		case WEEKEND_PRESIDENT:
 			updateComboBox(this.presidentPublicMeetingComboBox, memberID);

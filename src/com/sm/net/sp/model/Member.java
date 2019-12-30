@@ -225,7 +225,6 @@ public class Member {
 
 	public static Member getFromID(ObservableList<Member> membersList, int id, Language language) {
 
-		// TODO: membersList puo essere anche null...non era gestito
 		if (membersList != null)
 			for (Member member : membersList)
 				if (member.getSpMemberID() == id)

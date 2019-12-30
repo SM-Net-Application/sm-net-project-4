@@ -47,7 +47,7 @@ if (file_exists("languages/" . $langIni)) {
             // Database connection
             require_once dirname(__DIR__, 1) . '/query/config.php';
             $database = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
-            mysqli_set_charset($conn, 'utf8');
+            mysqli_set_charset($database, 'utf8');
             if (! $database) {
                 $error = "Database connection error: " . mysqli_connect_error();
             } else {
@@ -197,23 +197,23 @@ if (file_exists("languages/" . $langIni)) {
                     if ($memberID == $week["spInf28"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['BIBLE_READING_B'], $language['BIBLE_READING_B_ICON']));
                     }
-                    
+
                     if ($memberID == $week["spInf29"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['READER_CONGRBIBLESTUDY'], $language['READER_CONGRBIBLESTUDY_ICON']));
                     }
-                    
+
                     if ($memberID == $week["spInf30"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['PRESIDENT_WEEKEND'], $language['PRESIDENT_WEEKEND_ICON']));
                     }
-                    
+
                     if ($memberID == $week["spInf37"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['WATCHTOWER_WEEKEND'], $language['WATCHTOWER_WEEKEND_ICON']));
                     }
-                    
+
                     if ($memberID == $week["spInf38"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['READER_WATCHTOWER'], $language['READER_WATCHTOWER_ICON']));
                     }
-                    
+
                     if ($memberID == $week["spInf40"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['PRAY2_WEEKEND'], $language['PRAY2_WEEKEND_ICON']));
                     }
@@ -313,7 +313,9 @@ function cmp($a, $b)
 	</table>
 			
 			
-		<?php } else { ?>
+		<?php
+    } else {
+        ?>
 		
 			<?php if ( empty ( $memberID)) { ?>
 				

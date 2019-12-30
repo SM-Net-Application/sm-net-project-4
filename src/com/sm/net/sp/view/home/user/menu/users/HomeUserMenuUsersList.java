@@ -48,6 +48,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnMeetings;
 	@FXML
+	private TableColumn<User, Boolean> userTableColumnPublicTalk;
+	@FXML
 	private TableColumn<User, Boolean> userTableColumnOverseer;
 	@FXML
 	private TableColumn<User, Boolean> userTableColumnNaturalDisaster;
@@ -79,6 +81,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnOverseer.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnOverseer));
 		userTableColumnNaturalDisaster.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnNaturalDisaster));
 		userTableColumnMonitor.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMonitor));
+		userTableColumnPublicTalk.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnPublicTalk));
 	}
 
 	private void tableColumnsCellValueFactory() {
@@ -91,6 +94,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnOverseer.setCellValueFactory(cellData -> cellData.getValue().spInf5Property());
 		userTableColumnNaturalDisaster.setCellValueFactory(cellData -> cellData.getValue().spInf6Property());
 		userTableColumnMonitor.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
+		userTableColumnPublicTalk.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
 	}
 
 	private void styleClasses() {
@@ -114,6 +118,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnOverseer.getStyleClass().add("check_box_001");
 		userTableColumnNaturalDisaster.getStyleClass().add("check_box_001");
 		userTableColumnMonitor.getStyleClass().add("check_box_001");
+		userTableColumnPublicTalk.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -139,6 +144,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnOverseer.setText(language.getString("USERMENU005"));
 		userTableColumnNaturalDisaster.setText(language.getString("sp.menu.naturaldisaster"));
 		userTableColumnMonitor.setText(language.getString("sp.menu.monitor"));
+		userTableColumnPublicTalk.setText(language.getString("sp.menu.publictalk"));
 
 		userTableView.setEditable(true);
 		userTableColumnID.setMinWidth(50);
@@ -153,6 +159,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		userTableColumnMeetings.setEditable(true);
 		userTableColumnNaturalDisaster.setEditable(true);
 		userTableColumnMonitor.setEditable(true);
+		userTableColumnPublicTalk.setEditable(true);
 
 		userAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_USERS_ADD));
 		userAddButton.setText(null);

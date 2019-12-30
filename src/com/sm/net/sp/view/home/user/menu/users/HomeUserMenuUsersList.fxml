@@ -53,6 +53,7 @@
                         <TableColumn fx:id="userTableColumnCongregations" prefWidth="75.0" text="congr" />
                         <TableColumn fx:id="userTableColumnServiceGroups" prefWidth="75.0" text="sergr" />
                         <TableColumn fx:id="userTableColumnMeetings" prefWidth="75.0" text="meeting" />
+                        <TableColumn fx:id="userTableColumnPublicTalk" prefWidth="75.0" text="publictalk" />
                         <TableColumn fx:id="userTableColumnOverseer" prefWidth="75.0" text="overseer" />
                         <TableColumn fx:id="userTableColumnNaturalDisaster" prefWidth="75.0" text="natural" />
                         <TableColumn fx:id="userTableColumnMonitor" prefWidth="75.0" text="monitor" />
