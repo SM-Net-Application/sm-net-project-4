@@ -2,6 +2,8 @@ package com.sm.net.sp.view.history;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -11,7 +13,7 @@ import com.sm.net.sp.model.MemberHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
-import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetingsEditor;
+import com.sm.net.sp.utils.AlertBuilder;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -66,8 +68,10 @@ public class History {
 	private ObservableList<Week> databaseWeeks;
 	private Week selectedWeek;
 	private Week editorWeek;
-	private UserMenuMeetingsEditor editor;
+	private UpgradeableComboBoxSelection editor;
 	private Stage thisStage;
+
+	private AlertBuilder alertBuilder;
 
 	@FXML
 	private void initialize() {
@@ -130,10 +134,31 @@ public class History {
 		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			MemberHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
-			int memberID = member.getMember().getSpMemberID();
-			this.editor.updateSelectedComboBox(this.privilege, memberID);
-			this.thisStage.close();
+
+			Optional<PrivilegeHistory> find = StreamSupport.stream(this.memberPrivilegeHistory.spliterator(), false)
+					.filter(ph -> ph.getStatus().equals(Meta.Resources.PRESENT)).findFirst();
+
+			if (find.isPresent()) {
+
+				PrivilegeHistory privilegeHistory = find.get();
+
+				String header = String.format(this.language.getStringWithNewLine("sp.history.confirmselection"),
+						member.getMember().getNameStyle1());
+				String content = privilegeHistory.getPrivilege().getTranslatedName(this.language);
+
+				if (this.alertBuilder.confirm(thisStage, header, content))
+					selectionConfirmed(member);
+
+			} else
+				selectionConfirmed(member);
 		}
+	}
+
+	private void selectionConfirmed(MemberHistory member) {
+
+		int memberID = member.getMember().getSpMemberID();
+		this.editor.updateSelectedComboBox(this.privilege, memberID);
+		this.thisStage.close();
 	}
 
 	private void listenerMembersTableView() {
@@ -422,11 +447,11 @@ public class History {
 		this.editorWeek = editorWeek;
 	}
 
-	public UserMenuMeetingsEditor getEditor() {
+	public UpgradeableComboBoxSelection getEditor() {
 		return editor;
 	}
 
-	public void setEditor(UserMenuMeetingsEditor editor) {
+	public void setEditor(UpgradeableComboBoxSelection editor) {
 		this.editor = editor;
 	}
 
@@ -436,5 +461,13 @@ public class History {
 
 	public void setThisStage(Stage thisStage) {
 		this.thisStage = thisStage;
+	}
+
+	public AlertBuilder getAlertBuilder() {
+		return alertBuilder;
+	}
+
+	public void setAlertBuilder(AlertBuilder alertBuilder) {
+		this.alertBuilder = alertBuilder;
 	}
 }

@@ -310,8 +310,22 @@ public class Week {
 			week.setSpInf1(Integer.valueOf(week.getKey()));
 		}
 
+		week.setSpInf3(0);
+		week.setSpInf4(0);
+		week.setSpInf11(0);
+		week.setSpInf14(0);
+		week.setSpInf23(0);
+		week.setSpInf27(0);
+		week.setSpInf29(0);
+
 		week.setSpInf30(editorMeeting.getPresidentPublicMeetingComboBox().getSelectionModel().getSelectedItem()
 				.getSpMemberID());
+
+		week.setSpInf37(0);
+		week.setSpInf38(0);
+		week.setSpInf40(0);
+
+		week.setChristiansPartList(FXCollections.observableArrayList());
 
 		return week;
 	}

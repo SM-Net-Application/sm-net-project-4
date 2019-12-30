@@ -2711,7 +2711,6 @@ public class Actions {
 		waitAlert.show();
 		Thread taskThread = new Thread(task);
 		taskThread.start();
-
 	}
 
 	/**

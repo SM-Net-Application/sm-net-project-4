@@ -11,7 +11,9 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.utils.AlertBuilder;
 import com.sm.net.sp.view.history.History;
+import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.util.Crypt;
 
 import javafx.collections.FXCollections;
@@ -34,7 +36,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter {
+public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements UpgradeableComboBoxSelection {
 
 	@FXML
 	private Button saveWeekButton;
@@ -73,6 +75,8 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<Member> memberList;
 	private ObservableList<Member> presidentPublicMeetingList;
 	private ObservableList<Week> databaseWeeks;
+
+	private AlertBuilder alertBuilder;
 
 	@FXML
 	private void initialize() {
@@ -172,9 +176,9 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter {
 			ctrl.setDatabaseWeeks(this.databaseWeeks);
 			ctrl.setSelectedWeek(this.selectedWeek);
 			ctrl.setEditorWeek(Week.buildPublicMeetingEditorWeek(this));
-			// TODO: Devo unificare i 2 editor in qualche modo
-			// ctrl.setEditor(this);
+			ctrl.setEditor(this);
 			ctrl.setThisStage(stage);
+			ctrl.setAlertBuilder(this.alertBuilder);
 
 			ctrl.objectInitialize();
 
@@ -364,7 +368,10 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter {
 		return status;
 	}
 
+	@Override
 	public void updateSelectedComboBox(Privileges privilege, int memberID) {
+
+		// TODO: Controllare se il presidente viene settato
 
 		switch (privilege) {
 		case WEEKEND_PRESIDENT:
@@ -463,5 +470,13 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter {
 
 	public ComboBox<Member> getPresidentPublicMeetingComboBox() {
 		return presidentPublicMeetingComboBox;
+	}
+
+	public AlertBuilder getAlertBuilder() {
+		return alertBuilder;
+	}
+
+	public void setAlertBuilder(AlertBuilder alertBuilder) {
+		this.alertBuilder = alertBuilder;
 	}
 }

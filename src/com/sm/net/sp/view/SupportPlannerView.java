@@ -17,6 +17,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.settings.SettingsConf;
+import com.sm.net.sp.utils.AlertBuilder;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
@@ -49,6 +50,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	@FXML
 	private BorderPane viewSupportPlannerBorderPane;
 
+	private AlertBuilder alertBuilder;
 	private Stage viewSupportPlannerStage;
 	private SupportPlannerView ctrlViewSupportPlanner;
 	private User user;
@@ -58,6 +60,9 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	private int center;
 
 	public void objectInitialize() {
+
+		this.alertBuilder = new AlertBuilder(Meta.Application.getFullTitle(), Meta.Themes.SUPPORTPLANNER_THEME,
+				"alert_001", new File(Meta.Resources.ICON).toURI().toString());
 
 		viewSupportPlannerBorderPane.getStyleClass().add("main_color_001");
 
@@ -404,6 +409,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				UserMenuMeetings ctrl = (UserMenuMeetings) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setAlertBuilder(this.alertBuilder);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);
@@ -492,9 +498,9 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 
 	}
-	
+
 	public void viewHomeUserMenuPublicMeetings() {
-		
+
 		if (this.center != 11) {
 
 			this.center = 11;
@@ -509,6 +515,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				UserMenuPublicMeetings ctrl = (UserMenuPublicMeetings) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setAlertBuilder(this.alertBuilder);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);
@@ -517,7 +524,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -663,6 +670,12 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		this.user = user;
 	}
 
+	public AlertBuilder getAlertBuilder() {
+		return alertBuilder;
+	}
 
+	public void setAlertBuilder(AlertBuilder alertBuilder) {
+		this.alertBuilder = alertBuilder;
+	}
 
 }

@@ -20,7 +20,9 @@ import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.utils.AlertBuilder;
 import com.sm.net.sp.view.history.History;
+import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.sp.view.wolbrowser.WOLBrowser;
 import com.sm.net.util.Crypt;
 
@@ -56,7 +58,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class UserMenuMeetingsEditor extends UpdateDataAdapter {
+public class UserMenuMeetingsEditor extends UpdateDataAdapter implements UpgradeableComboBoxSelection {
 
 	@FXML
 	private Button wolViewButton;
@@ -336,6 +338,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 	private ObservableList<Member> congregationBibleStudyReaderList;
 
 	private ObservableList<Week> databaseWeeks;
+
+	private AlertBuilder alertBuilder;
 
 	@FXML
 	private void initialize() {
@@ -757,6 +761,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			ctrl.setEditorWeek(Week.buildMeetingEditorWeek(this));
 			ctrl.setEditor(this);
 			ctrl.setThisStage(stage);
+			ctrl.setAlertBuilder(this.alertBuilder);
 
 			ctrl.objectInitialize();
 
@@ -1345,8 +1350,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	private void wolViewOnAction() {
 
-		// TODO: Open Browser
-
 		try {
 
 			FXMLLoader fxmlLoader = new FXMLLoader();
@@ -1615,6 +1618,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 		}
 	}
 
+	@Override
 	public void updateSelectedComboBox(Privileges privilege, int memberID) {
 
 		switch (privilege) {
@@ -1641,6 +1645,21 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 			break;
 		case MIDWEEK_PRAY_END:
 			updateComboBox(this.pray2ComboBox, memberID);
+			break;
+		case MIDWEEK_CONGRBIBLESTUDY_READER:
+			updateComboBox(this.congregationBibleStudyReaderComboBox, memberID);
+			break;
+		case WEEKEND_PRESIDENT:
+			updateComboBox(this.presidentPublicMeetingComboBox, memberID);
+			break;
+		case WEEKEND_WATCHTOWER:
+			updateComboBox(this.watchtowerStudyConductorComboBox, memberID);
+			break;
+		case WEEKEND_WATCHTOWER_READER:
+			updateComboBox(this.watchtowerStudyReaderComboBox, memberID);
+			break;
+		case WEEKEND_PRAY_END:
+			updateComboBox(this.watchtowerStudyPray2ComboBox, memberID);
 			break;
 		default:
 			break;
@@ -1839,5 +1858,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter {
 
 	public ComboBox<Member> getCongregationBibleStudyReaderComboBox() {
 		return congregationBibleStudyReaderComboBox;
+	}
+
+	public AlertBuilder getAlertBuilder() {
+		return alertBuilder;
+	}
+
+	public void setAlertBuilder(AlertBuilder alertBuilder) {
+		this.alertBuilder = alertBuilder;
 	}
 }
