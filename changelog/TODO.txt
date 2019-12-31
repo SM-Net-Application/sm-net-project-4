@@ -1,0 +1,18 @@
+Sezione Utenti:
+	- Creare il tab dedicato alla modifica di un utente
+
+Sezione Sorvegliante di Circoscrizione:
+	- Quando inserisco il nome sorvegliante, si deve compilare automaticamente il nome abbreviato
+
+Bug-Fix:
+	
+JasperReports-Layouts:
+	
+
+Funzioni desiderate:
+	- Nuova sezione: Configurazione (Informazioni e settaggi)
+	- Decidere se la sezione Adunanze deve salvare le informazioni sul discorso pubblico
+	- Creare una verifica Versione Software -> Versione Database MySQL
+	- Creare un updater del database
+	- Creare un backup del database
+	- Installer per MAC

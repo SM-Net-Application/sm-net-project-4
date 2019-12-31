@@ -1,6 +1,6 @@
-1. Nuova sezione: Discorsi pubblici
+* Nuova sezione: Discorsi pubblici
 
-2. Sezione Discorsi pubblici:
+* Sezione Discorsi pubblici:
 	- Il calendario visualizza fino a 6 mesi
 	- La tabella del calendario visualizza le informazioni sui discorsi pubblici
 	- È possibile definire le seguenti informazioni:
@@ -11,7 +11,7 @@
 		- Tema del discorso pubblico
 	- Se una settimana non è presente nel database, ne viene creata una con solo le informazioni sul discorso pubblico. 
 
-3. Storico privilegio:
+* Storico privilegio:
 	- Bug-fix:	il fratello selezionato non veniva impostato per i seguenti privilegi
 		- Lettore (Studio biblico di congregazione)
 		- Presidente (Adunanza del fine settimana)
@@ -20,9 +20,18 @@
 		- Preghiera finale (Adunanza del fine settimana)
 	- Richiesta conferma quando si seleziona un fratello che era già stato impiegato per altri privilegi.
  
-4. Sezione utenti:
+* Sezione utenti:
 	- Nuova colonna Discorsi pubblici
+
+* Sezione Adunanze:
+	- Visita del Sorvegliante: vengono caricate le informazioni di tutti i discori
 	
-5. Database MySQL:
+* Layout:
+	- Programma:
+		- Aggiunte le informazioni del Sorvegliante
+		- Ottimizzata visualizzazione dei Lettori (inseriti nella stessa riga della parte)
+		- Ottimizzata visualizzazione dei Discorsi di esercitazione (quando la seconda classe non è presente)
+	
+* Database MySQL:
 	- Nuova colonna spInf8 nella tabella sp_users
 	- Query: ALTER TABLE sp_users ADD spInf8 INT NOT NULL AFTER spInf7;

@@ -59,10 +59,17 @@ public class JRWeek {
 	private String christiansPray2Name;
 
 	private String overseerHeader;
-	private String overseerMinTalk1;
-	private String overseerThemeTalk1;
 	private String overseerName;
 	private String overseerSongTalk1;
+	private String overseerMinTalk1;
+	private String overseerThemeTalk1;
+
+	private String overseerSongTalk2;
+	private String overseerMinTalk2;
+	private String overseerThemeTalk2;
+
+	private String overseerMinTalk3;
+	private String overseerThemeTalk3;
 
 	private String weekHeader2;
 	private String publicTalkHeader;
@@ -213,23 +220,40 @@ public class JRWeek {
 				String overseerMinTalk1 = weekOverseer.getSpInf9();
 				String overseerThemeTalk1 = weekOverseer.getSpInf10();
 
+				String overseerSongTalk2 = weekOverseer.getSpInf11();
+				String overseerMinTalk2 = weekOverseer.getSpInf12();
+				String overseerThemeTalk2 = weekOverseer.getSpInf13();
+
+				String overseerMinTalk3 = weekOverseer.getSpInf14();
+				String overseerThemeTalk3 = weekOverseer.getSpInf15();
+
 				jrWeek.setOverseerHeader(language.getString("TEXT0131").toUpperCase());
 
 				jrWeek.setOverseerMinTalk1(
 						String.format(language.getString("jasper.layout.meeting.min"), overseerMinTalk1));
+				jrWeek.setOverseerMinTalk2(
+						String.format(language.getString("jasper.layout.meeting.min"), overseerMinTalk2));
+				jrWeek.setOverseerMinTalk3(
+						String.format(language.getString("jasper.layout.meeting.min"), overseerMinTalk3));
+
+				jrWeek.setOverseerSongTalk1(
+						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk1));
+				jrWeek.setOverseerSongTalk2(
+						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk2));
+
 				jrWeek.setOverseerThemeTalk1(overseerThemeTalk1);
+				jrWeek.setOverseerThemeTalk2(overseerThemeTalk2);
+				jrWeek.setOverseerThemeTalk3(overseerThemeTalk3);
 
 				if (extendedName)
 					jrWeek.setOverseerName(overseerSurname + " " + overseerName);
 				else
 					jrWeek.setOverseerName(overseerSurname + " " + overseerShortName);
-
-				jrWeek.setOverseerSongTalk1(
-						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk1));
 			}
 		}
 
 		jrWeek.setWeekHeader(checkMidweekHeader(week, spInf2, language, complete));
+
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
 		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
@@ -305,6 +329,7 @@ public class JRWeek {
 
 		jrWeek.setChristiansBibleStudyMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf20()));
+
 		jrWeek.setChristiansBibleStudyText(String.format(language.getString("jasper.layout.meeting.dividedstyle"),
 				week.getSpInf21(), week.getSpInf22()));
 
@@ -324,6 +349,16 @@ public class JRWeek {
 				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle3());
 			else
 				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle4());
+
+		// Add reader to Congregation Study Bible
+		if (spInf2 == 1) {
+
+			jrWeek.setChristiansBibleStudyText(jrWeek.getChristiansBibleStudyText().concat("<br><i>")
+					.concat(jrWeek.getChristiansBibleStudyReaderText()).concat("</i>"));
+
+			jrWeek.setChristiansBibleStudyName(jrWeek.getChristiansBibleStudyName().concat("<br><i>")
+					.concat(jrWeek.getChristiansBibleStudyReaderName()).concat("</i>"));
+		}
 
 		jrWeek.setChristiansReviewMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf24()));
@@ -368,7 +403,12 @@ public class JRWeek {
 		jrWeek.setWatchtowerStudyMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 		jrWeek.setWatchtowerStudySong2(
 				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf35()));
-		jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), "60"));
+
+		if (spInf2 == 4)
+			jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), "30"));
+		else
+			jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), "60"));
+
 		jrWeek.setWatchtowerStudyTheme(week.getSpInf36());
 
 		member = getMemberFromList(membersList, week.getSpInf37());
@@ -387,6 +427,16 @@ public class JRWeek {
 			else
 				jrWeek.setWatchtowerStudyReaderName(member.getNameStyle4());
 
+		// Add reader to Watchtower Study
+		if (spInf2 == 1) {
+
+			jrWeek.setWatchtowerStudyTheme(jrWeek.getWatchtowerStudyTheme().concat("<br><i>")
+					.concat(jrWeek.getWatchtowerStudyReaderText()).concat("</i>"));
+
+			jrWeek.setWatchtowerStudyName(jrWeek.getWatchtowerStudyName().concat("<br><i>")
+					.concat(jrWeek.getWatchtowerStudyReaderName()).concat("</i>"));
+		}
+
 		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 		jrWeek.setWatchtowerStudySong3(
 				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf39()));
@@ -403,7 +453,7 @@ public class JRWeek {
 
 	private static String checkMidweekHeader(Week week, int spInf2, Language language, boolean complete) {
 
-		if (spInf2 == 1) {
+		if (spInf2 == 1 || spInf2 == 4) {
 
 			if (complete)
 				return String.format(language.getString("jasper.layout.meeting.midweek.withbible"), week.getSpInf6());
@@ -424,7 +474,8 @@ public class JRWeek {
 
 	private static String checkWeekendHeader(Week week, int spInf2, Language language) {
 
-		return (spInf2 == 1) ? String.format(language.getString("jasper.layout.meeting.weekend"), week.getSpInf6())
+		return (spInf2 == 1 || spInf2 == 4)
+				? String.format(language.getString("jasper.layout.meeting.weekend"), week.getSpInf6())
 				: "";
 	}
 
@@ -979,5 +1030,45 @@ public class JRWeek {
 
 	public void setProgrammName(String programmName) {
 		this.programmName = programmName;
+	}
+
+	public String getOverseerSongTalk2() {
+		return overseerSongTalk2;
+	}
+
+	public void setOverseerSongTalk2(String overseerSongTalk2) {
+		this.overseerSongTalk2 = overseerSongTalk2;
+	}
+
+	public String getOverseerMinTalk2() {
+		return overseerMinTalk2;
+	}
+
+	public void setOverseerMinTalk2(String overseerMinTalk2) {
+		this.overseerMinTalk2 = overseerMinTalk2;
+	}
+
+	public String getOverseerThemeTalk2() {
+		return overseerThemeTalk2;
+	}
+
+	public void setOverseerThemeTalk2(String overseerThemeTalk2) {
+		this.overseerThemeTalk2 = overseerThemeTalk2;
+	}
+
+	public String getOverseerMinTalk3() {
+		return overseerMinTalk3;
+	}
+
+	public void setOverseerMinTalk3(String overseerMinTalk3) {
+		this.overseerMinTalk3 = overseerMinTalk3;
+	}
+
+	public String getOverseerThemeTalk3() {
+		return overseerThemeTalk3;
+	}
+
+	public void setOverseerThemeTalk3(String overseerThemeTalk3) {
+		this.overseerThemeTalk3 = overseerThemeTalk3;
 	}
 }
