@@ -8,7 +8,9 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.value.ChangeListener;
@@ -42,10 +44,14 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 	private PasswordField decryptionKeyPasswordField;
 	@FXML
 	private Button userSUButton;
+	@FXML
+	private Button userSUPrintAccessDataButton;
 
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
+	private User loggedUser;
+	private SupportPlannerView application;
 
 	@FXML
 	private void initialize() {
@@ -66,6 +72,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		urlTextField.getStyleClass().add("text_field_001");
 		decryptionKeyPasswordField.getStyleClass().add("text_field_001");
 		userSUButton.getStyleClass().add("button_image_001");
+		userSUPrintAccessDataButton.getStyleClass().add("button_image_001");
 	}
 
 	private void viewUpdate() {
@@ -83,23 +90,46 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 
 		userSUButton.setText(language.getString("TEXT0008"));
 		userSUButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER));
+
+		userSUPrintAccessDataButton.setText(language.getString("sp.settings.database.superuserprint"));
+		userSUPrintAccessDataButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER_PRINT));
+
+		if (this.loggedUser != null) {
+
+			this.urlTextField.setEditable(false);
+			this.decryptionKeyPasswordField.setEditable(false);
+		}
 	}
 
 	private void listeners() {
 		listenerUrlTextField();
 		listenerDecryptionKeyPasswordField();
 		listenerUserSUButton();
+		listenerUserSUPrintButton();
+	}
+
+	private void listenerUserSUPrintButton() {
+
+		// TODO: Stampa dati di accesso superuser
+		
 	}
 
 	private void listenerUserSUButton() {
-		userSUButton.setOnAction(event -> Actions.checkNoUsers(settings, ownerStage, this));
+		userSUButton.setOnAction(event -> {
+
+			if (this.loggedUser == null)
+				if (this.application.getAlertBuilder().confirm(this.ownerStage,
+						this.language.getString("sp.settings.database.superuser1"),
+						this.language.getString("sp.settings.database.superuser2")))
+					Actions.checkNoUsers(settings, ownerStage, this);
+		});
 	}
 
 	private void listenerDecryptionKeyPasswordField() {
 
 		decryptionKeyPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
 			try {
-				settings.setDatabaseKeyEncrypted(decryptKey());
+				settings.setDatabaseKeyEncrypted(encryptKey());
 				settings.save();
 			} catch (IOException e) {
 			}
@@ -156,7 +186,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 
 	}
 
-	private String decryptKey() {
+	private String encryptKey() {
 
 		SecretKey applicationKey = settings.getApplicationKey();
 		if (applicationKey != null)
@@ -174,8 +204,15 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 
 				if (!newValue.booleanValue()) {
 					try {
-						settings.setDatabaseUrl(urlTextField.getText());
+
+						String url = "";
+						SecretKey applicationKey = settings.getApplicationKey();
+						if (applicationKey != null)
+							url = Crypt.encrypt(urlTextField.getText(), applicationKey);
+
+						settings.setDatabaseUrl(url);
 						settings.save();
+
 					} catch (IOException e) {
 					}
 				}
@@ -185,11 +222,17 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 
 	private void loadSettings() {
 
-		urlTextField.setText(settings.getDatabaseUrl());
-
 		SecretKey applicationKey = settings.getApplicationKey();
-		if (applicationKey != null)
-			decryptionKeyPasswordField.setText(Crypt.decrypt(settings.getDatabaseKeyEncrypted(), applicationKey));
+		if (applicationKey != null) {
+
+			String decryptedURL = Crypt.decrypt(settings.getDatabaseUrl(), applicationKey);
+			if (decryptedURL != null)
+				urlTextField.setText(decryptedURL);
+
+			String decryptedDatabaseKey = Crypt.decrypt(settings.getDatabaseKeyEncrypted(), applicationKey);
+			if (decryptedDatabaseKey != null)
+				decryptionKeyPasswordField.setText(decryptedDatabaseKey);
+		}
 	}
 
 	public Settings getSettings() {
@@ -208,4 +251,19 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		this.ownerStage = ownerStage;
 	}
 
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(User loggedUser) {
+		this.loggedUser = loggedUser;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
 }

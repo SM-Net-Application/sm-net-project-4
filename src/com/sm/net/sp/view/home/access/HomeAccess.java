@@ -1,5 +1,7 @@
 package com.sm.net.sp.view.home.access;
 
+import javax.crypto.SecretKey;
+
 import com.sm.net.easy.html.EasyHtml;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
@@ -61,14 +63,21 @@ public class HomeAccess {
 
 				if (checkSettings()) {
 
-					Actions.checkUser(settings.getDatabaseUrl(), settings.getUsernameEncrypted(),
-							settings.getUserPasswordReEncrypted(), settings, viewSupportPlannerStage,
-							supportPlannerViewCtrl);
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null) {
+
+						String usernameEncrypted = settings.getUsernameEncrypted();
+						String userPasswordReEncrypted = settings.getUserPasswordReEncrypted();
+
+						Actions.checkUser(settings.getDatabaseUrl(), usernameEncrypted, userPasswordReEncrypted,
+								settings, viewSupportPlannerStage, supportPlannerViewCtrl);
+					}
 
 				} else
 					new AlertDesigner(language.getStringWithNewLine("MEX004"),
 							supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 
 			}
 		});

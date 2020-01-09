@@ -6,6 +6,7 @@ import javax.crypto.SecretKey;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
@@ -38,6 +39,7 @@ public class SettingUser {
 
 	private Settings settings;
 	private Language language;
+	private User loggedUser;
 
 	@FXML
 	private void initialize() {
@@ -74,6 +76,13 @@ public class SettingUser {
 		passwordLabel.setText(language.getString("VIEW002LAB002"));
 
 		passwordMonitorLabel.setText(language.getString("sp.settings.passwordmonitor"));
+
+		if (this.loggedUser != null) {
+
+			this.usernameTextField.setEditable(false);
+			this.passwordField.setEditable(false);
+			this.passwordMonitorPasswordField.setEditable(false);
+		}
 	}
 
 	private void listeners() {
@@ -89,8 +98,15 @@ public class SettingUser {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				try {
-					settings.setUsername(usernameTextField.getText());
+
+					String username = "";
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null)
+						username = Crypt.encrypt(usernameTextField.getText(), applicationKey);
+
+					settings.setUsername(username);
 					settings.save();
+
 				} catch (IOException e) {
 				}
 			}
@@ -152,13 +168,20 @@ public class SettingUser {
 
 	private void loadSettings() {
 
-		usernameTextField.setText(settings.getUsername());
-
 		SecretKey applicationKey = settings.getApplicationKey();
 		if (applicationKey != null) {
-			passwordField.setText(Crypt.decrypt(settings.getUserPasswordEncrypted(), applicationKey));
-			passwordMonitorPasswordField
-					.setText(Crypt.decrypt(settings.getUserPasswordMonitorEncrypted(), applicationKey));
+
+			String decryptedUsername = Crypt.decrypt(settings.getUsername(), applicationKey);
+			if (decryptedUsername != null)
+				usernameTextField.setText(decryptedUsername);
+
+			String decryptedPassword = Crypt.decrypt(settings.getUserPasswordEncrypted(), applicationKey);
+			if (decryptedPassword != null)
+				passwordField.setText(decryptedPassword);
+
+			String decryptedPasswordMonitor = Crypt.decrypt(settings.getUserPasswordMonitorEncrypted(), applicationKey);
+			if (decryptedPasswordMonitor != null)
+				passwordMonitorPasswordField.setText(decryptedPasswordMonitor);
 		}
 	}
 
@@ -170,4 +193,11 @@ public class SettingUser {
 		this.settings = settings;
 	}
 
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(User loggedUser) {
+		this.loggedUser = loggedUser;
+	}
 }

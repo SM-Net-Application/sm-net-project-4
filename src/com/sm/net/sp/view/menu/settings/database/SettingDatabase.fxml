@@ -91,15 +91,28 @@
                   </VBox>
                </children>
             </HBox>
-            <StackPane alignment="CENTER_RIGHT">
+            <HBox alignment="TOP_RIGHT">
                <children>
-                  <Button fx:id="userSUButton" mnemonicParsing="false" text="Button">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </Button>
+                  <StackPane alignment="CENTER_RIGHT">
+                     <children>
+                        <Button fx:id="userSUButton" mnemonicParsing="false" text="Button">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Button>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER_RIGHT">
+                     <children>
+                        <Button fx:id="userSUPrintAccessDataButton" mnemonicParsing="false" text="Button">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Button>
+                     </children>
+                  </StackPane>
                </children>
-            </StackPane>
+            </HBox>
          </children>
       </VBox>
    </children>

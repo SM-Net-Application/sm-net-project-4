@@ -37,7 +37,6 @@ public class SupportPlannerMenu {
 
 	private void styleClasses() {
 		menuBar.getStyleClass().add("menu_bar_001");
-		// configMenuApp.getStyleClass().add("menu_001");
 		configSettingsMenuItem.getStyleClass().add("menu_item_001");
 	}
 

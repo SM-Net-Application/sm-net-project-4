@@ -21,9 +21,10 @@ public class Settings {
 	private String languageName;
 	private SecretKey applicationKey;
 	private String passwordEncrypted;
+	private String databaseUrlEncrypted;
 	private String databaseUrl;
 	private String databaseKeyEncrypted;
-	private String username;
+	private String usernameEncrypted;
 	private String userPasswordEncrypted;
 	private String userPasswordMonitorEncrypted;
 
@@ -34,9 +35,11 @@ public class Settings {
 	}
 
 	public void setDefaultSettings() {
+
+		this.databaseUrlEncrypted = "";
 		this.databaseUrl = "";
 		this.databaseKeyEncrypted = "";
-		this.username = "";
+		this.usernameEncrypted = "";
 		this.userPasswordEncrypted = "";
 		this.userPasswordMonitorEncrypted = "";
 	}
@@ -46,9 +49,9 @@ public class Settings {
 		Wini ini = settingsConf.getIni();
 		ini.add(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_LANGUAGE, languageName);
 		ini.add(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_PASSWORD, passwordEncrypted);
-		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, databaseUrl);
+		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, databaseUrlEncrypted);
 		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, databaseKeyEncrypted);
-		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, username);
+		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, usernameEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, userPasswordEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERMONITOR, userPasswordMonitorEncrypted);
 		ini.store();
@@ -62,15 +65,24 @@ public class Settings {
 		this.language = languageLoad();
 
 		this.passwordEncrypted = ini.get(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_PASSWORD, String.class);
-		this.databaseUrl = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, String.class);
+
+		this.databaseUrlEncrypted = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, String.class);
 		this.databaseKeyEncrypted = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, String.class);
 
-		this.username = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, String.class);
+		this.usernameEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, String.class);
 		this.userPasswordEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, String.class);
 		this.userPasswordMonitorEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERMONITOR,
 				String.class);
+
 		if (this.userPasswordMonitorEncrypted == null)
 			this.userPasswordMonitorEncrypted = "";
+
+		if (this.databaseUrlEncrypted != null)
+			if (!this.databaseUrlEncrypted.isEmpty()) {
+				SecretKey applicationKey = this.getApplicationKey();
+				if (this.applicationKey != null)
+					this.databaseUrl = Crypt.decrypt(this.databaseUrlEncrypted, applicationKey);
+			}
 	}
 
 	private Language languageLoad() throws FileNotFoundException, IOException {
@@ -95,10 +107,19 @@ public class Settings {
 
 	public String getUsernameEncrypted() {
 
-		if (!username.trim().isEmpty()) {
-			SecretKey databaseSecretKey = getDatabaseSecretKey();
-			if (databaseSecretKey != null)
-				return Crypt.encrypt(username, databaseSecretKey);
+		if (!usernameEncrypted.trim().isEmpty()) {
+
+			SecretKey applicationKey = getApplicationKey();
+			if (applicationKey != null) {
+
+				String decryptedUsername = Crypt.decrypt(usernameEncrypted, applicationKey);
+				if (decryptedUsername != null) {
+
+					SecretKey databaseSecretKey = getDatabaseSecretKey();
+					if (databaseSecretKey != null)
+						return Crypt.encrypt(decryptedUsername, databaseSecretKey);
+				}
+			}
 		}
 
 		return null;
@@ -152,6 +173,14 @@ public class Settings {
 		this.passwordEncrypted = passwordEncrypted;
 	}
 
+	public String getDatabaseUrlEncrypted() {
+		return databaseUrlEncrypted;
+	}
+
+	public void setDatabaseUrlEncrypted(String databaseUrlEncrypted) {
+		this.databaseUrlEncrypted = databaseUrlEncrypted;
+	}
+
 	public String getDatabaseUrl() {
 		return databaseUrl;
 	}
@@ -177,11 +206,11 @@ public class Settings {
 	}
 
 	public String getUsername() {
-		return username;
+		return usernameEncrypted;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.usernameEncrypted = username;
 	}
 
 	public String getUserPasswordEncrypted() {

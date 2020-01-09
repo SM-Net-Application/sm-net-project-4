@@ -568,6 +568,10 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		if (this.left != 1) {
 
+			if (this.user != null)
+				this.alertBuilder.information(viewSupportPlannerStage,
+						this.settings.getLanguage().getString("sp.settings.logged")).show();
+
 			this.left = 1;
 			this.center = 0;
 			this.viewSupportPlannerBorderPane.setCenter(null);
@@ -602,6 +606,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				SettingDatabase ctrl = (SettingDatabase) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setLoggedUser(this.user);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);
@@ -624,6 +630,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				SettingUser ctrl = (SettingUser) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				// ctrl.setCtrlViewSupportPlanner(this.ctrlViewSupportPlanner);
+				ctrl.setLoggedUser(this.user);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);

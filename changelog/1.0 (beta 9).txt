@@ -1,0 +1,8 @@
+* Impostazioni
+	- Se loggati, non sarà possibile modificare le impostazioni
+	- Aggiunta richiesta conferma creazione utente amministratore
+	- Le impostazioni SupportPlanner URL e Username non erano criptate nel file di configurazione locale. Queste informazioni dovranno essere reinserite.
+	
+	TODO: Ho bloccato tutta la situazione con le impostazioni criptate...devo trovare e risolvere il problema
+	TODO: Quando creo l'utente amministratore, compilo i campi delle impostazioni e creo il file ini
+	TODO: Crea PDF con i dati di accesso dell'utente amministratore (Possibile solo se loggato come utente amministratore)
