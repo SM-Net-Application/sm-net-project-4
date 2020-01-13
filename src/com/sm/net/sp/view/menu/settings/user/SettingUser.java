@@ -6,19 +6,29 @@ import javax.crypto.SecretKey;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.menu.settings.database.SettingDatabaseAddSuperuser;
+import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-public class SettingUser {
+public class SettingUser implements SettingsDatabaseCallback {
 
 	@FXML
 	private ImageView userImageView;
@@ -36,10 +46,17 @@ public class SettingUser {
 	private Label passwordMonitorLabel;
 	@FXML
 	private PasswordField passwordMonitorPasswordField;
+	@FXML
+	private Button userSUButton;
+	@FXML
+	private Button userSUPrintAccessDataButton;
 
 	private Settings settings;
 	private Language language;
 	private User loggedUser;
+
+	private SupportPlannerView application;
+	private Stage ownerStage;
 
 	@FXML
 	private void initialize() {
@@ -61,6 +78,9 @@ public class SettingUser {
 		passwordField.getStyleClass().add("text_field_001");
 		passwordMonitorLabel.getStyleClass().add("label_set_001");
 		passwordMonitorPasswordField.getStyleClass().add("text_field_001");
+
+		userSUButton.getStyleClass().add("button_image_001");
+		userSUPrintAccessDataButton.getStyleClass().add("button_image_001");
 	}
 
 	private void viewUpdate() {
@@ -77,6 +97,12 @@ public class SettingUser {
 
 		passwordMonitorLabel.setText(language.getString("sp.settings.passwordmonitor"));
 
+		userSUButton.setText(language.getString("TEXT0008"));
+		userSUButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER));
+
+		userSUPrintAccessDataButton.setText(language.getString("sp.settings.database.superuserprint"));
+		userSUPrintAccessDataButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER_PRINT));
+
 		if (this.loggedUser != null) {
 
 			this.usernameTextField.setEditable(false);
@@ -89,6 +115,37 @@ public class SettingUser {
 		listenerUsernameTextField();
 		listenerPasswordField();
 		listenerPasswordMonitorField();
+		listenerUserSUButton();
+		listenerUserSUPrintButton();
+	}
+
+	private void listenerUserSUPrintButton() {
+
+		this.userSUPrintAccessDataButton.setOnAction(event -> {
+
+			if (this.loggedUser != null) {
+				if (this.loggedUser.isSpUserSU())
+					Actions.printUser(this.loggedUser, settings, ownerStage, language);
+				else
+					this.application.getAlertBuilder().error(ownerStage, this.language.getString("sp.settings.nosu"))
+							.show();
+			} else
+				this.application.getAlertBuilder().error(ownerStage, this.language.getString("sp.settings.nosu"))
+						.show();
+
+		});
+
+	}
+
+	private void listenerUserSUButton() {
+		userSUButton.setOnAction(event -> {
+
+			if (this.loggedUser == null)
+				if (this.application.getAlertBuilder().confirm(this.ownerStage,
+						this.language.getString("sp.settings.database.superuser1"),
+						this.language.getString("sp.settings.database.superuser2")))
+					Actions.checkNoUsers(settings, ownerStage, this);
+		});
 	}
 
 	private void listenerUsernameTextField() {
@@ -199,5 +256,68 @@ public class SettingUser {
 
 	public void setLoggedUser(User loggedUser) {
 		this.loggedUser = loggedUser;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
+	public Stage getOwnerStage() {
+		return ownerStage;
+	}
+
+	public void setOwnerStage(Stage ownerStage) {
+		this.ownerStage = ownerStage;
+	}
+
+	@Override
+	public void usernameExists() {
+		this.application.getAlertBuilder().error(ownerStage, settings.getLanguage().getString("TEXT0009")).show();
+	}
+
+	@Override
+	public void usernameNotExists() {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.MENU_SETTING_DB_ROOT);
+			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+			SettingDatabaseAddSuperuser ctrl = (SettingDatabaseAddSuperuser) fxmlLoader.getController();
+			ctrl.setSettings(this.settings);
+			ctrl.objectInitialize();
+
+			Scene scene = new Scene(layout);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle(Meta.Application.getFullTitle());
+			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
+
+			stage.setMinWidth(500);
+			stage.setMaxWidth(Double.MAX_VALUE);
+			stage.setWidth(500);
+			stage.setMinHeight(500);
+			stage.setMaxHeight(Double.MAX_VALUE);
+			stage.setHeight(500);
+			stage.setMaximized(false);
+			stage.setResizable(false);
+
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(ownerStage);
+
+			ctrl.setThisStage(stage);
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

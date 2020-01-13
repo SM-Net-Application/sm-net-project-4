@@ -21,7 +21,6 @@ public class Settings {
 	private String languageName;
 	private SecretKey applicationKey;
 	private String passwordEncrypted;
-	private String databaseUrlEncrypted;
 	private String databaseUrl;
 	private String databaseKeyEncrypted;
 	private String usernameEncrypted;
@@ -36,7 +35,6 @@ public class Settings {
 
 	public void setDefaultSettings() {
 
-		this.databaseUrlEncrypted = "";
 		this.databaseUrl = "";
 		this.databaseKeyEncrypted = "";
 		this.usernameEncrypted = "";
@@ -49,7 +47,7 @@ public class Settings {
 		Wini ini = settingsConf.getIni();
 		ini.add(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_LANGUAGE, languageName);
 		ini.add(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_PASSWORD, passwordEncrypted);
-		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, databaseUrlEncrypted);
+		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, databaseUrl);
 		ini.add(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, databaseKeyEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, usernameEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, userPasswordEncrypted);
@@ -66,7 +64,7 @@ public class Settings {
 
 		this.passwordEncrypted = ini.get(Meta.Settings.SECTION_APPLICATION, Meta.Settings.KEY_PASSWORD, String.class);
 
-		this.databaseUrlEncrypted = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, String.class);
+		this.databaseUrl = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_URL, String.class);
 		this.databaseKeyEncrypted = ini.get(Meta.Settings.SECTION_DATABASE, Meta.Settings.KEY_DB_KEY, String.class);
 
 		this.usernameEncrypted = ini.get(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, String.class);
@@ -76,13 +74,6 @@ public class Settings {
 
 		if (this.userPasswordMonitorEncrypted == null)
 			this.userPasswordMonitorEncrypted = "";
-
-		if (this.databaseUrlEncrypted != null)
-			if (!this.databaseUrlEncrypted.isEmpty()) {
-				SecretKey applicationKey = this.getApplicationKey();
-				if (this.applicationKey != null)
-					this.databaseUrl = Crypt.decrypt(this.databaseUrlEncrypted, applicationKey);
-			}
 	}
 
 	private Language languageLoad() throws FileNotFoundException, IOException {
@@ -173,16 +164,14 @@ public class Settings {
 		this.passwordEncrypted = passwordEncrypted;
 	}
 
-	public String getDatabaseUrlEncrypted() {
-		return databaseUrlEncrypted;
-	}
-
-	public void setDatabaseUrlEncrypted(String databaseUrlEncrypted) {
-		this.databaseUrlEncrypted = databaseUrlEncrypted;
-	}
-
 	public String getDatabaseUrl() {
-		return databaseUrl;
+
+		if (this.applicationKey != null)
+			if (this.databaseUrl != null)
+				if (!this.databaseUrl.isEmpty())
+					return Crypt.decrypt(this.databaseUrl, this.applicationKey);
+
+		return "";
 	}
 
 	public void setDatabaseUrl(String databaseUrl) {

@@ -629,7 +629,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 				SettingUser ctrl = (SettingUser) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
-				// ctrl.setCtrlViewSupportPlanner(this.ctrlViewSupportPlanner);
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.setLoggedUser(this.user);
 				ctrl.objectInitialize();
 

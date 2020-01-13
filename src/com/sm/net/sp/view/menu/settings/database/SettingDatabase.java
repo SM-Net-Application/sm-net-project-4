@@ -28,7 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class SettingDatabase implements SettingsDatabaseCallback {
+public class SettingDatabase {
 
 	@FXML
 	private ImageView databaseImageView;
@@ -42,10 +42,6 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 	private Label decryptionKeyLabel;
 	@FXML
 	private PasswordField decryptionKeyPasswordField;
-	@FXML
-	private Button userSUButton;
-	@FXML
-	private Button userSUPrintAccessDataButton;
 
 	private Settings settings;
 	private Language language;
@@ -71,8 +67,6 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		decryptionKeyLabel.getStyleClass().add("label_set_001");
 		urlTextField.getStyleClass().add("text_field_001");
 		decryptionKeyPasswordField.getStyleClass().add("text_field_001");
-		userSUButton.getStyleClass().add("button_image_001");
-		userSUPrintAccessDataButton.getStyleClass().add("button_image_001");
 	}
 
 	private void viewUpdate() {
@@ -88,12 +82,6 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		urlLabel.setText(language.getString("VIEW005LAB002"));
 		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
 
-		userSUButton.setText(language.getString("TEXT0008"));
-		userSUButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER));
-
-		userSUPrintAccessDataButton.setText(language.getString("sp.settings.database.superuserprint"));
-		userSUPrintAccessDataButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER_PRINT));
-
 		if (this.loggedUser != null) {
 
 			this.urlTextField.setEditable(false);
@@ -104,25 +92,6 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 	private void listeners() {
 		listenerUrlTextField();
 		listenerDecryptionKeyPasswordField();
-		listenerUserSUButton();
-		listenerUserSUPrintButton();
-	}
-
-	private void listenerUserSUPrintButton() {
-
-		// TODO: Stampa dati di accesso superuser
-		
-	}
-
-	private void listenerUserSUButton() {
-		userSUButton.setOnAction(event -> {
-
-			if (this.loggedUser == null)
-				if (this.application.getAlertBuilder().confirm(this.ownerStage,
-						this.language.getString("sp.settings.database.superuser1"),
-						this.language.getString("sp.settings.database.superuser2")))
-					Actions.checkNoUsers(settings, ownerStage, this);
-		});
 	}
 
 	private void listenerDecryptionKeyPasswordField() {
@@ -134,56 +103,6 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 			} catch (IOException e) {
 			}
 		});
-	}
-
-	@Override
-	public void usernameExists() {
-		new AlertDesigner(settings.getLanguage().getString("TEXT0009"), ownerStage, AlertType.ERROR,
-				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-				Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
-	}
-
-	@Override
-	public void usernameNotExists() {
-
-		try {
-
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(Meta.Views.MENU_SETTING_DB_ROOT);
-			AnchorPane layout = (AnchorPane) fxmlLoader.load();
-
-			SettingDatabaseAddSuperuser ctrl = (SettingDatabaseAddSuperuser) fxmlLoader.getController();
-			ctrl.setSettings(this.settings);
-			ctrl.objectInitialize();
-
-			Scene scene = new Scene(layout);
-			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
-
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.setTitle(Meta.Application.getFullTitle());
-			stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
-
-			stage.setMinWidth(500);
-			stage.setMaxWidth(Double.MAX_VALUE);
-			stage.setWidth(500);
-			stage.setMinHeight(500);
-			stage.setMaxHeight(Double.MAX_VALUE);
-			stage.setHeight(500);
-			stage.setMaximized(false);
-			stage.setResizable(false);
-
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.initOwner(ownerStage);
-
-			ctrl.setThisStage(stage);
-
-			stage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	private String encryptKey() {
@@ -225,9 +144,7 @@ public class SettingDatabase implements SettingsDatabaseCallback {
 		SecretKey applicationKey = settings.getApplicationKey();
 		if (applicationKey != null) {
 
-			String decryptedURL = Crypt.decrypt(settings.getDatabaseUrl(), applicationKey);
-			if (decryptedURL != null)
-				urlTextField.setText(decryptedURL);
+			urlTextField.setText(settings.getDatabaseUrl());
 
 			String decryptedDatabaseKey = Crypt.decrypt(settings.getDatabaseKeyEncrypted(), applicationKey);
 			if (decryptedDatabaseKey != null)
