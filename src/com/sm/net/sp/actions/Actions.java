@@ -1,5 +1,6 @@
 package com.sm.net.sp.actions;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +32,7 @@ import com.sm.net.sp.view.SupportPlannerCallback;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAddCallback;
-import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
+import com.sm.net.sp.view.menu.settings.user.SettingsUserCallback;
 import com.sm.net.util.Crypt;
 import com.sm.net.util.JSON;
 
@@ -266,11 +267,15 @@ public class Actions {
 	 * @param url
 	 * @param usernameEnc
 	 * @param passwordEnc
+	 * @param key
+	 * @param password
+	 * @param user
 	 * @param settings
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void insertRootUser(String usernameEnc, String passwordEnc, Settings settings, Stage ownerStage) {
+	public static void insertRootUser(String usernameEnc, String passwordEnc, String user, String password, String key,
+			Settings settings, Stage ownerStage, SettingsUserCallback callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -286,9 +291,14 @@ public class Actions {
 					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
 
 					if (result != null)
-						if (result.booleanValue())
+						if (result.booleanValue()) {
+							try {
+								callback.updateSettings(user, password, key);
+							} catch (IOException e) {
+								System.out.println(e.getMessage());
+							}
 							ownerStage.close();
-						else
+						} else
 							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
 									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
 									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
@@ -512,7 +522,7 @@ public class Actions {
 	 * @param ownerStage
 	 * @param callback
 	 */
-	public static void checkNoUsers(Settings settings, Stage ownerStage, SettingsDatabaseCallback callback) {
+	public static void checkNoUsers(Settings settings, Stage ownerStage, SettingsUserCallback callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);

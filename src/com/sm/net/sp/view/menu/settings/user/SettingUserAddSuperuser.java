@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.menu.settings.database;
+package com.sm.net.sp.view.menu.settings.user;
 
 import javax.crypto.SecretKey;
 
@@ -21,7 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SettingDatabaseAddSuperuser {
+public class SettingUserAddSuperuser {
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -47,6 +47,8 @@ public class SettingDatabaseAddSuperuser {
 	private Settings settings;
 	private Language language;
 	private Stage thisStage;
+
+	private SettingsUserCallback settingUserCallback;
 
 	@FXML
 	private void initialize() {
@@ -119,7 +121,8 @@ public class SettingDatabaseAddSuperuser {
 				String passwordEnc = Crypt.encrypt(password, secretKey);
 
 				if (userEnc != null && passwordEnc != null)
-					Actions.insertRootUser(userEnc, passwordEnc, settings, thisStage);
+					Actions.insertRootUser(userEnc, passwordEnc, user, password, key, settings, thisStage,
+							settingUserCallback);
 
 			}
 		} else
@@ -154,5 +157,13 @@ public class SettingDatabaseAddSuperuser {
 
 	public void setThisStage(Stage thisStage) {
 		this.thisStage = thisStage;
+	}
+
+	public SettingsUserCallback getSettingUserCallback() {
+		return settingUserCallback;
+	}
+
+	public void setSettingUserCallback(SettingsUserCallback settingUserCallback) {
+		this.settingUserCallback = settingUserCallback;
 	}
 }

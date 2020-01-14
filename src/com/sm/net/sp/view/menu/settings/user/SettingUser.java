@@ -10,8 +10,6 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.menu.settings.database.SettingDatabaseAddSuperuser;
-import com.sm.net.sp.view.menu.settings.database.SettingsDatabaseCallback;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.value.ChangeListener;
@@ -28,7 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class SettingUser implements SettingsDatabaseCallback {
+public class SettingUser implements SettingsUserCallback {
 
 	@FXML
 	private ImageView userImageView;
@@ -288,7 +286,7 @@ public class SettingUser implements SettingsDatabaseCallback {
 			fxmlLoader.setLocation(Meta.Views.MENU_SETTING_DB_ROOT);
 			AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
-			SettingDatabaseAddSuperuser ctrl = (SettingDatabaseAddSuperuser) fxmlLoader.getController();
+			SettingUserAddSuperuser ctrl = (SettingUserAddSuperuser) fxmlLoader.getController();
 			ctrl.setSettings(this.settings);
 			ctrl.objectInitialize();
 
@@ -313,11 +311,32 @@ public class SettingUser implements SettingsDatabaseCallback {
 			stage.initOwner(ownerStage);
 
 			ctrl.setThisStage(stage);
+			ctrl.setSettingUserCallback(this);
 
 			stage.show();
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateSettings(String username, String password, String key) throws IOException {
+
+		this.usernameTextField.setText(username);
+		this.passwordField.setText(password);
+
+		SecretKey applicationKey = settings.getApplicationKey();
+		if (applicationKey != null) {
+
+			String usernameSetting = Crypt.encrypt(username, applicationKey);
+			String passwordSetting = Crypt.encrypt(password, applicationKey);
+			String keySetting = Crypt.encrypt(key, applicationKey);
+
+			this.settings.setUsername(usernameSetting);
+			this.settings.setUserPasswordEncrypted(passwordSetting);
+			this.settings.setDatabaseKeyEncrypted(keySetting);
+			this.settings.save();
 		}
 	}
 }

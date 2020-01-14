@@ -204,6 +204,7 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedWeek(week);
+				ctrl.setCalendar(this.calendar);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);

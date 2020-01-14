@@ -9,6 +9,7 @@ import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -137,6 +138,8 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	private WeekOverseer selectedWeek;
 	private TabPane ownerTabPane;
 	private Tab thisTab;
+
+	private ObservableList<WeekOverseer> calendar;
 
 	@FXML
 	private void initialize() {
@@ -288,11 +291,73 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 				this.mailWifeTextField.setText(this.selectedWeek.getSpInf19());
 
 				this.substituteCheckBox.setSelected((this.selectedWeek.getSpInf20() == 1));
+
+			} else {
+
+				// TODO : Aggiungere le altre informazioni
+
+				String visitNumber = "";
+				String overseerName = "";
+				String overseerShortName = "";
+				String overseerSurname = "";
+				String wifeName = "";
+				String wifeShortName = "";
+
+				for (WeekOverseer wo : this.calendar) {
+
+					if (wo.spWeekOvIDProperty() != null) {
+
+						visitNumber = String.valueOf(wo.getSpInf2());
+						if (wo.getSpInf20() == 0) {
+
+							overseerName = wo.getSpInf3();
+							overseerShortName = wo.getSpInf4();
+							overseerSurname = wo.getSpInf5();
+							wifeName = wo.getSpInf6();
+							wifeShortName = wo.getSpInf7();
+						}
+					}
+				}
+
+				visitNumber = (visitNumber.equals("6")) ? "1" : String.valueOf(Integer.valueOf(visitNumber) + 1);
+				
+				this.visitNumberTextField.setText(visitNumber);
+				this.overseerNameTextField.setText(overseerName);
+				this.overseerShortNameTextField.setText(overseerShortName);
+				this.overseerSurnameTextField.setText(overseerSurname);
+				this.wifeNameTextField.setText(wifeName);
+				this.wifeShortNameTextField.setText(wifeShortName);
 			}
 	}
 
 	private void listeners() {
 		listenerSaveWeekButton();
+		listenerOverseerNameTextField();
+		listenerWifeNameTextField();
+	}
+
+	private void listenerOverseerNameTextField() {
+
+		this.overseerNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue)
+				if (this.overseerShortNameTextField.getText().isEmpty()) {
+					if (!this.overseerNameTextField.getText().isEmpty())
+						this.overseerShortNameTextField.setText(this.overseerNameTextField.getText(0, 1) + ".");
+				} else if (this.overseerNameTextField.getText().isEmpty())
+					this.overseerShortNameTextField.setText("");
+		});
+	}
+
+	private void listenerWifeNameTextField() {
+
+		this.wifeNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue)
+				if (this.wifeShortNameTextField.getText().isEmpty()) {
+					if (!this.wifeNameTextField.getText().isEmpty())
+						this.wifeShortNameTextField.setText(this.wifeNameTextField.getText(0, 1) + ".");
+				} else if (this.wifeNameTextField.getText().isEmpty())
+					this.wifeShortNameTextField.setText("");
+		});
 	}
 
 	private void listenerSaveWeekButton() {
@@ -409,5 +474,13 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 	public void setThisTab(Tab thisTab) {
 		this.thisTab = thisTab;
+	}
+
+	public ObservableList<WeekOverseer> getCalendar() {
+		return calendar;
+	}
+
+	public void setCalendar(ObservableList<WeekOverseer> calendar) {
+		this.calendar = calendar;
 	}
 }

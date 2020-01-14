@@ -3,6 +3,7 @@ Sezione Utenti:
 
 Sezione Sorvegliante di Circoscrizione:
 	- Quando inserisco il nome sorvegliante, si deve compilare automaticamente il nome abbreviato
+	- Una nuova visita, deve compilare automaticamente le informazioni dalla precedente visita
 
 Bug-Fix:
 	
