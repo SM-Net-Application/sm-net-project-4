@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sm.net.javafx.AlertDesigner;
@@ -29,6 +30,7 @@ import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.JSONUtils;
 import com.sm.net.sp.view.SupportPlannerCallback;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAddCallback;
@@ -69,9 +71,10 @@ public class Actions {
 	 * @param settings
 	 * @param viewSupportPlannerStage
 	 * @param callback
+	 * @param application
 	 */
 	public static void checkUser(String url, String username, String password, Settings settings,
-			Stage viewSupportPlannerStage, SupportPlannerCallback callback) {
+			Stage viewSupportPlannerStage, SupportPlannerCallback callback, SupportPlannerView application) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), viewSupportPlannerStage);
@@ -84,26 +87,50 @@ public class Actions {
 					waitAlert.close();
 
 					JSONObject jsonObject = getValue();
-					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
 
-					if (result != null)
-						if (result.booleanValue()) {
+					int status = -1;
+					try {
+						status = jsonObject.getInt("status");
+					} catch (JSONException e) {
+					}
 
-							JSONArray jsonArray = jsonObject.getJSONArray("result");
-							if (jsonArray.length() == 1) {
-								callback.setUserLogin((JSONObject) jsonArray.get(0));
-								callback.viewSupportPlannerHomeUser();
+					switch (status) {
+					case 4:
+						application.getAlertBuilder()
+								.error(viewSupportPlannerStage, settings.getLanguage().getString("sp.login.error1"))
+								.show();
+						break;
+					case 5:
+						application.getAlertBuilder()
+								.error(viewSupportPlannerStage, settings.getLanguage().getString("sp.login.error2"))
+								.show();
+						break;
+
+					default:
+
+						Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+						if (result != null)
+							if (result.booleanValue()) {
+
+								JSONArray jsonArray = jsonObject.getJSONArray("result");
+								if (jsonArray.length() == 1) {
+									callback.setUserLogin((JSONObject) jsonArray.get(0));
+									callback.viewSupportPlannerHomeUser();
+								} else
+									new AlertDesigner(settings.getLanguage().getString("MEX006"),
+											viewSupportPlannerStage, AlertType.ERROR, Meta.Application.getFullTitle(),
+											Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
+											"alert_001").showAndWait();
+
 							} else
 								new AlertDesigner(settings.getLanguage().getString("MEX006"), viewSupportPlannerStage,
 										AlertType.ERROR, Meta.Application.getFullTitle(),
 										Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
 										"alert_001").showAndWait();
+						break;
+					}
 
-						} else
-							new AlertDesigner(settings.getLanguage().getString("MEX006"), viewSupportPlannerStage,
-									AlertType.ERROR, Meta.Application.getFullTitle(),
-									Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
-									"alert_001").showAndWait();
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();
@@ -521,8 +548,10 @@ public class Actions {
 	 * @param settings
 	 * @param ownerStage
 	 * @param callback
+	 * @param application
 	 */
-	public static void checkNoUsers(Settings settings, Stage ownerStage, SettingsUserCallback callback) {
+	public static void checkNoUsers(Settings settings, Stage ownerStage, SettingsUserCallback callback,
+			SupportPlannerView application) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -535,26 +564,48 @@ public class Actions {
 					waitAlert.close();
 
 					JSONObject jsonObject = getValue();
-					Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
 
-					if (result != null)
-						if (result.booleanValue()) {
+					int status = -1;
+					try {
+						status = jsonObject.getInt("status");
+					} catch (JSONException e) {
+					}
 
-							JSONArray jsonArray = jsonObject.getJSONArray("result");
-							if (jsonArray.length() > 0) {
+					switch (status) {
+					case 4:
+						application.getAlertBuilder()
+								.error(ownerStage, settings.getLanguage().getString("sp.login.error1")).show();
+						break;
+					case 5:
+						application.getAlertBuilder()
+								.error(ownerStage, settings.getLanguage().getString("sp.login.error2")).show();
+						break;
 
-								JSONObject resultQuery = (JSONObject) jsonArray.get(0);
-								if (resultQuery != null)
-									if (resultQuery.getInt("users") == 0)
-										callback.usernameNotExists();
-									else
-										callback.usernameExists();
-							}
+					default:
 
-						} else
-							new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage, AlertType.ERROR,
-									Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-									Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+						Boolean result = Boolean.valueOf(JSONRequest.isRequestOK(jsonObject));
+
+						if (result != null)
+							if (result.booleanValue()) {
+
+								JSONArray jsonArray = jsonObject.getJSONArray("result");
+								if (jsonArray.length() > 0) {
+
+									JSONObject resultQuery = (JSONObject) jsonArray.get(0);
+									if (resultQuery != null)
+										if (resultQuery.getInt("users") == 0)
+											callback.usernameNotExists();
+										else
+											callback.usernameExists();
+								}
+
+							} else
+								new AlertDesigner(settings.getLanguage().getString("MEX006"), ownerStage,
+										AlertType.ERROR, Meta.Application.getFullTitle(),
+										Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
+										"alert_001").showAndWait();
+						break;
+					}
 				});
 				setOnCancelled(value -> {
 					waitAlert.close();

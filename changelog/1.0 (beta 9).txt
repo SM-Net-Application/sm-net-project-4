@@ -6,3 +6,14 @@
 	- Aggiunto il tasto Stampa dati di accesso dell'utente amministratore
 	- I tasti Crea utente amministratore e il tasto stampa dati di accesso sono stati spostati nella sezione Utente
 	- Dopo aver creato l'utente amministratore, i dati di accesso vengono salvati automaticamente nelle impostazioni
+	
+* Sorvegliante di circoscrizione
+	- Quando si crea una nuova visita:
+    	- Il numero della visita viene definito automaticamente
+		- Le informazioni personali e i contatti dell'ultima visita (non sostituto) vengono copiati
+       
+* Monitor online
+	- Bug-fix: il Conduttore (Torre di Guardia) era definito Conduttore (Studio biblico di congregazione)
+	
+* Controllo Versione
+	- Sarà possibile effettuare il login solo se la versione del software corrisponde alla versione del database

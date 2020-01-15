@@ -65,7 +65,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				"alert_001", new File(Meta.Resources.ICON).toURI().toString());
 
 		viewSupportPlannerBorderPane.getStyleClass().add("main_color_001");
-
+		
 		this.left = 0;
 		this.center = 0;
 		this.user = null;

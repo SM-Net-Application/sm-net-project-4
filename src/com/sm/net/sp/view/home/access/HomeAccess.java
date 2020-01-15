@@ -24,7 +24,7 @@ public class HomeAccess {
 
 	private Settings settings;
 	private Language language;
-	private SupportPlannerView supportPlannerViewCtrl;
+	private SupportPlannerView application;
 	private Stage viewSupportPlannerStage;
 
 	@FXML
@@ -70,13 +70,12 @@ public class HomeAccess {
 						String userPasswordReEncrypted = settings.getUserPasswordReEncrypted();
 
 						Actions.checkUser(settings.getDatabaseUrl(), usernameEncrypted, userPasswordReEncrypted,
-								settings, viewSupportPlannerStage, supportPlannerViewCtrl);
+								settings, viewSupportPlannerStage, application, application);
 					}
 
 				} else
-					new AlertDesigner(language.getStringWithNewLine("MEX004"),
-							supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					new AlertDesigner(language.getStringWithNewLine("MEX004"), application.getViewSupportPlannerStage(),
+							AlertType.ERROR, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
 							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 
 			}
@@ -114,11 +113,11 @@ public class HomeAccess {
 	}
 
 	public SupportPlannerView getSupportPlannerViewCtrl() {
-		return supportPlannerViewCtrl;
+		return application;
 	}
 
 	public void setSupportPlannerViewCtrl(SupportPlannerView supportPlannerViewCtrl) {
-		this.supportPlannerViewCtrl = supportPlannerViewCtrl;
+		this.application = supportPlannerViewCtrl;
 	}
 
 	public Stage getViewSupportPlannerStage() {

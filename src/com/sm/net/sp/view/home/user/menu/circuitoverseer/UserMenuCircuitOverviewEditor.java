@@ -296,18 +296,22 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 				// TODO : Aggiungere le altre informazioni
 
-				String visitNumber = "";
+				int visitNumber = 1;
 				String overseerName = "";
 				String overseerShortName = "";
 				String overseerSurname = "";
 				String wifeName = "";
 				String wifeShortName = "";
+				String phoneOverseer = "";
+				String mailOverseer = "";
+				String phoneWife = "";
+				String mailWife = "";
 
 				for (WeekOverseer wo : this.calendar) {
 
 					if (wo.spWeekOvIDProperty() != null) {
 
-						visitNumber = String.valueOf(wo.getSpInf2());
+						visitNumber = wo.getSpInf2();
 						if (wo.getSpInf20() == 0) {
 
 							overseerName = wo.getSpInf3();
@@ -315,18 +319,28 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 							overseerSurname = wo.getSpInf5();
 							wifeName = wo.getSpInf6();
 							wifeShortName = wo.getSpInf7();
+
+							phoneOverseer = wo.getSpInf16();
+							mailOverseer = wo.getSpInf17();
+							phoneWife = wo.getSpInf18();
+							mailWife = wo.getSpInf19();
 						}
 					}
 				}
 
-				visitNumber = (visitNumber.equals("6")) ? "1" : String.valueOf(Integer.valueOf(visitNumber) + 1);
-				
-				this.visitNumberTextField.setText(visitNumber);
+				visitNumber = (visitNumber == 6) ? 1 : (visitNumber + 1);
+
+				this.visitNumberTextField.setText(String.valueOf(visitNumber));
 				this.overseerNameTextField.setText(overseerName);
 				this.overseerShortNameTextField.setText(overseerShortName);
 				this.overseerSurnameTextField.setText(overseerSurname);
 				this.wifeNameTextField.setText(wifeName);
 				this.wifeShortNameTextField.setText(wifeShortName);
+
+				this.phoneOverseerTextField.setText(phoneOverseer);
+				this.mailOverseerTextField.setText(mailOverseer);
+				this.phoneWifeTextField.setText(phoneWife);
+				this.mailWifeTextField.setText(mailWife);
 			}
 	}
 

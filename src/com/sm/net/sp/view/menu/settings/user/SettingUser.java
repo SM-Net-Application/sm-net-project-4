@@ -142,7 +142,8 @@ public class SettingUser implements SettingsUserCallback {
 				if (this.application.getAlertBuilder().confirm(this.ownerStage,
 						this.language.getString("sp.settings.database.superuser1"),
 						this.language.getString("sp.settings.database.superuser2")))
-					Actions.checkNoUsers(settings, ownerStage, this);
+
+					Actions.checkNoUsers(settings, ownerStage, this, this.application);
 		});
 	}
 

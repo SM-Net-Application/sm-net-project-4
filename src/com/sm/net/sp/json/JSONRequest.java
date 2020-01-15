@@ -3,6 +3,7 @@ package com.sm.net.sp.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.util.enumeration.JSONStatus;
@@ -614,6 +615,7 @@ public class JSONRequest {
 
 	private static JSONObject create(Integer type) {
 		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("version", Meta.Application.VERSION);
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
