@@ -1,0 +1,15 @@
+Come eseguire il dump di un database MySQL
+
+Su Windows
+Ho bisogno del file mysqldump.exe
+Questo file l'ho trovato nella cartella bin del file zip "MySQL Community Server ..."
+La linea di comando che ho eseguito con PowerShell:
+
+MySQL Community Server
+.\mysqldump.exe
+--skip-lock-tables						Salta le tabelle bloccate??
+--column-statistics=0					Mi dava un errore senza questo parametro
+-h IP_HOST								Host
+-u DB_USERNAME DB_NAME					Utente del db e Nome del db
+-pPASSWORD								Password (tra -p e la password non ci deve essere lo spazio)
+-r NOME_FILE.sql							Dove salvare i dati
