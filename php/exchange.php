@@ -17,109 +17,109 @@ if (! empty($jsonObjPar)) {
 
                     switch ($jsonObj["type"]) {
                         case 1:
-                            include 'query/sp_tool_q1.php';
+                            include 'query/sp_q1.php';
                             break;
                         case 2:
-                            include 'query/sp_tool_q2.php';
+                            include 'query/sp_q2.php';
                             break;
                         case 3:
-                            include 'query/sp_tool_q3.php';
+                            include 'query/sp_q3.php';
                             break;
                         case 4:
-                            include 'query/sp_tool_q4.php';
+                            include 'query/sp_q4.php';
                             break;
                         case 5:
-                            include 'query/sp_tool_q5.php';
+                            include 'query/sp_q5.php';
                             break;
                         case 6:
-                            include 'query/sp_tool_q6.php';
+                            include 'query/sp_q6.php';
                             break;
                         case 7:
-                            include 'query/sp_tool_q7.php';
+                            include 'query/sp_q7.php';
                             break;
                         case 8:
-                            include 'query/sp_tool_q8.php';
+                            include 'query/sp_q8.php';
                             break;
                         case 9:
-                            include 'query/sp_tool_q9.php';
+                            include 'query/sp_q9.php';
                             break;
                         case 10:
-                            include 'query/sp_tool_q10.php';
+                            include 'query/sp_q10.php';
                             break;
                         case 11:
-                            include 'query/sp_tool_q11.php';
+                            include 'query/sp_q11.php';
                             break;
                         case 12:
-                            include 'query/sp_tool_q12.php';
+                            include 'query/sp_q12.php';
                             break;
                         case 13:
-                            include 'query/sp_tool_q13.php';
+                            include 'query/sp_q13.php';
                             break;
                         case 14:
-                            include 'query/sp_tool_q14.php';
+                            include 'query/sp_q14.php';
                             break;
                         case 15:
-                            include 'query/sp_tool_q15.php';
+                            include 'query/sp_q15.php';
                             break;
                         case 16:
-                            include 'query/sp_tool_q16.php';
+                            include 'query/sp_q16.php';
                             break;
                         case 17:
-                            include 'query/sp_tool_q17.php';
+                            include 'query/sp_q17.php';
                             break;
                         case 18:
-                            include 'query/sp_tool_q18.php';
+                            include 'query/sp_q18.php';
                             break;
                         case 19:
-                            include 'query/sp_tool_q19.php';
+                            include 'query/sp_q19.php';
                             break;
                         case 20:
-                            include 'query/sp_tool_q20.php';
+                            include 'query/sp_q20.php';
                             break;
                         case 21:
-                            include 'query/sp_tool_q21.php';
+                            include 'query/sp_q21.php';
                             break;
                         case 22:
-                            include 'query/sp_tool_q22.php';
+                            include 'query/sp_q22.php';
                             break;
                         case 23:
-                            include 'query/sp_tool_q23.php';
+                            include 'query/sp_q23.php';
                             break;
                         case 24:
-                            include 'query/sp_tool_q24.php';
+                            include 'query/sp_q24.php';
                             break;
                         case 25:
-                            include 'query/sp_tool_q25.php';
+                            include 'query/sp_q25.php';
                             break;
                         case 26:
-                            include 'query/sp_tool_q26.php';
+                            include 'query/sp_q26.php';
                             break;
                         case 27:
-                            include 'query/sp_tool_q27.php';
+                            include 'query/sp_q27.php';
                             break;
                         case 28:
-                            include 'query/sp_tool_q28.php';
+                            include 'query/sp_q28.php';
                             break;
                         case 29:
-                            include 'query/sp_tool_q29.php';
+                            include 'query/sp_q29.php';
                             break;
                         case 30:
-                            include 'query/sp_tool_q30.php';
+                            include 'query/sp_q30.php';
                             break;
                         case 31:
-                            include 'query/sp_tool_q31.php';
+                            include 'query/sp_q31.php';
                             break;
                         case 32:
-                            include 'query/sp_tool_q32.php';
+                            include 'query/sp_q32.php';
                             break;
                         case 33:
-                            include 'query/sp_tool_q33.php';
+                            include 'query/sp_q33.php';
                             break;
                         case 34:
-                            include 'query/sp_tool_q34.php';
+                            include 'query/sp_q34.php';
                             break;
                         case 35:
-                            include 'query/sp_tool_q35.php';
+                            include 'query/sp_q35.php';
                             break;
                     }
                     

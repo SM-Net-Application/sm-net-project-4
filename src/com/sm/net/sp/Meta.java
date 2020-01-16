@@ -22,6 +22,7 @@ import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
 import com.sm.net.sp.view.menu.settings.SettingsList;
+import com.sm.net.sp.view.menu.settings.connection.SettingConnection;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
@@ -96,6 +97,7 @@ public class Meta {
 		public static final URL SUPPORTPLANNER_HOME_ACCESS = HomeAccess.class.getResource("HomeAccess.fxml");
 		public static final URL SUPPORTPLANNER_MENU = SupportPlannerMenu.class.getResource("SupportPlannerMenu.fxml");
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
+		public static final URL MENU_SETTING_CONNECTION = SettingConnection.class.getResource("SettingConnection.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
 		public static final URL MENU_SETTING_DB_ROOT = SettingUser.class.getResource("SettingUserAddSuperuser.fxml");
 		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");
@@ -159,6 +161,7 @@ public class Meta {
 		public static final String PRINT = "print.png";
 		public static final String MENU_APP = "menu_app.png";
 		public static final String MENU_APP_SETTINGS = "menu_app_settings.png";
+		public static final String MENU_SETTINGS_CONNECTION = "connection.png";
 		public static final String MENU_SETTINGS_DB = "menu_settings_db.png";
 		public static final String MENU_SETTINGS_USER = "menu_settings_user.png";
 		public static final String MENU_BACK = "menu_back.png";

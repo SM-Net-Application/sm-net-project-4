@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.menu.settings.database;
+package com.sm.net.sp.view.menu.settings.connection;
 
 import java.io.IOException;
 
@@ -11,22 +11,24 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class SettingDatabase {
+public class SettingConnection {
 
 	@FXML
 	private ImageView databaseImageView;
 	@FXML
 	private Label titleLabel;
 	@FXML
-	private Label decryptionKeyLabel;
+	private Label urlLabel;
 	@FXML
-	private PasswordField decryptionKeyPasswordField;
+	private TextField urlTextField;
 
 	private Settings settings;
 	private Language language;
@@ -48,8 +50,8 @@ public class SettingDatabase {
 	private void styleClasses() {
 
 		titleLabel.getStyleClass().add("label_setting_name");
-		decryptionKeyLabel.getStyleClass().add("label_set_001");
-		decryptionKeyPasswordField.getStyleClass().add("text_field_001");
+		urlLabel.getStyleClass().add("label_set_001");
+		urlTextField.getStyleClass().add("text_field_001");
 	}
 
 	private void viewUpdate() {
@@ -58,40 +60,45 @@ public class SettingDatabase {
 
 		databaseImageView.setFitWidth(100);
 		databaseImageView.setFitHeight(100);
-		databaseImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_DB, 100, 100));
+		databaseImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_CONNECTION, 100, 100));
 
-		titleLabel.setText(language.getString("VIEW005LAB001"));
+		titleLabel.setText(language.getString("sp.settings.connection"));
 
-		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
+		urlLabel.setText(language.getString("VIEW005LAB002"));
 
 		if (this.loggedUser != null) {
 
-			this.decryptionKeyPasswordField.setEditable(false);
+			this.urlTextField.setEditable(false);
 		}
 	}
 
 	private void listeners() {
-		listenerDecryptionKeyPasswordField();
+		listenerUrlTextField();
 	}
 
-	private void listenerDecryptionKeyPasswordField() {
+	private void listenerUrlTextField() {
 
-		decryptionKeyPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			try {
-				settings.setDatabaseKeyEncrypted(encryptKey());
-				settings.save();
-			} catch (IOException e) {
+		urlTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+				if (!newValue.booleanValue()) {
+					try {
+
+						String url = "";
+						SecretKey applicationKey = settings.getApplicationKey();
+						if (applicationKey != null)
+							url = Crypt.encrypt(urlTextField.getText(), applicationKey);
+
+						settings.setDatabaseUrl(url);
+						settings.save();
+
+					} catch (IOException e) {
+					}
+				}
 			}
 		});
-	}
-
-	private String encryptKey() {
-
-		SecretKey applicationKey = settings.getApplicationKey();
-		if (applicationKey != null)
-			return Crypt.encrypt(decryptionKeyPasswordField.getText(), applicationKey);
-
-		return "";
 	}
 
 	private void loadSettings() {
@@ -99,9 +106,7 @@ public class SettingDatabase {
 		SecretKey applicationKey = settings.getApplicationKey();
 		if (applicationKey != null) {
 
-			String decryptedDatabaseKey = Crypt.decrypt(settings.getDatabaseKeyEncrypted(), applicationKey);
-			if (decryptedDatabaseKey != null)
-				decryptionKeyPasswordField.setText(decryptedDatabaseKey);
+			urlTextField.setText(settings.getDatabaseUrl());
 		}
 	}
 

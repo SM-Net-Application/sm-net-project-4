@@ -30,6 +30,7 @@ import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
+import com.sm.net.sp.view.menu.settings.connection.SettingConnection;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
@@ -65,7 +66,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				"alert_001", new File(Meta.Resources.ICON).toURI().toString());
 
 		viewSupportPlannerBorderPane.getStyleClass().add("main_color_001");
-		
+
 		this.left = 0;
 		this.center = 0;
 		this.user = null;
@@ -525,6 +526,30 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			}
 		}
 
+	}
+
+	public void loadMenuSettingConnection() {
+
+		if (this.center != 12) {
+			this.center = 12;
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MENU_SETTING_CONNECTION);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				SettingConnection ctrl = (SettingConnection) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setLoggedUser(this.user);
+				ctrl.setApplication(this);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
 	}
 
 	@Override

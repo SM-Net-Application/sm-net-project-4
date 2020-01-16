@@ -45,7 +45,7 @@ if (file_exists("languages/" . $langIni)) {
             $weekcode = $year . $week;
 
             // Database connection
-            require_once dirname(__DIR__, 1) . '/query/config.php';
+            require_once dirname(__DIR__, 1) . '/config.php';
             $database = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
             mysqli_set_charset($database, 'utf8');
             if (! $database) {

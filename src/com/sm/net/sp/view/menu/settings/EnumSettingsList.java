@@ -4,6 +4,7 @@ import com.sm.net.sp.Meta;
 
 public enum EnumSettingsList {
 
+	CONNECTION("sp.settings.connection", Meta.Resources.MENU_SETTINGS_CONNECTION),
 	DATABASE("VIEW006MEN001", Meta.Resources.MENU_SETTINGS_DB),
 	USER("VIEW006MEN002", Meta.Resources.MENU_SETTINGS_USER);
 

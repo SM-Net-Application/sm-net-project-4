@@ -6,6 +6,8 @@
 	- Aggiunto il tasto Stampa dati di accesso dell'utente amministratore
 	- I tasti Crea utente amministratore e il tasto stampa dati di accesso sono stati spostati nella sezione Utente
 	- Dopo aver creato l'utente amministratore, i dati di accesso vengono salvati automaticamente nelle impostazioni
+	- Nuova sezione: Connessione - SupportPlanner URL
+	- Modificata sezione: Database - Rimossa l'impostazione SupportPlanner URL
 	
 * Sorvegliante di circoscrizione
 	- Quando si crea una nuova visita:
@@ -17,3 +19,8 @@
 	
 * Controllo Versione
 	- Sarà possibile effettuare il login solo se la versione del software corrisponde alla versione del database
+	
+* Ottimizzazione File PHP
+	- Il file config.php si trova adesso fuori cartella query
+	- Il monitor utilizza lo stesso file config.php
+	- Rimossa la parola tool dal nome delle query

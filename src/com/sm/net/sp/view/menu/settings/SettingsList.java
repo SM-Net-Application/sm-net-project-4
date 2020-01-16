@@ -83,6 +83,9 @@ public class SettingsList {
 		EnumSettingsList menuItem = settingsListView.getSelectionModel().getSelectedItem();
 
 		switch (menuItem) {
+		case CONNECTION:
+			ctrlViewSupportPlanner.loadMenuSettingConnection();
+			break;
 		case DATABASE:
 			ctrlViewSupportPlanner.loadMenuSettingDatabase();
 			break;

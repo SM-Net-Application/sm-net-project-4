@@ -1,27 +1,29 @@
 Impostazioni:
-	- Creare una sezione dedicata per l'url
-		- Creare poi un tasto per la verifica della comunicazione con il database (se l'url è valido))
+	- Creare poi un tasto per la verifica della comunicazione con il database (se l'url è valido))
+	- Creare una sezione dedicata al monitor
 
-Sezione Utenti:
-	- Creare il tab dedicato alla modifica di un utente
+	Da aggiungere al changelog quando completa
+	- Nuova sezione: Monitor - Password monitor
+	- Modificata sezione: Utente - Rimossa impostazione Password monitor
 
 Bug-Fix:
 	- Stampa Programma completo (Assemblema di circoscrizione) : compaiono righe	
 	
 JasperReports-Layouts:
-
-PHP:
-	- Portare il file config.php fuori dalla cartella query
-	- Lo stesso file config.php deve essere lo stesso per il monitor
-	- Rimuovere la parola tool dai file query
+	- Stampare il Presidente della seconda sala
 
 Funzioni desiderate:
 
+	- Creare un backup del database (MySQL Dump)
 	- Nuova sezione: Commemorazione
 		- Il programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
 	- Nuova sezione: Configurazione (Informazioni e settaggi)
 	- Nuova sezione: Programmazione adunanze
 	- Nuova sezione: Luoghi di adorazione
-	- Creare un updater del database
-	- Creare un backup del database
+	- Nuova sezione: Pulizia
+	- Nuova sezione: Acustica
+	- Nuova sezione: Uscieri
+	- Creare un updater del database	
 	- Installer per MAC
+	- Login rapido e login con username e password
+	- Sezione Utenti - Creare il tab dedicato alla modifica di un utente
