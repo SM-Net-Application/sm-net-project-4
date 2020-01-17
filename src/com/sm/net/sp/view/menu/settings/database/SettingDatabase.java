@@ -14,6 +14,7 @@ import com.sm.net.util.Crypt;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -27,6 +28,24 @@ public class SettingDatabase {
 	private Label decryptionKeyLabel;
 	@FXML
 	private PasswordField decryptionKeyPasswordField;
+
+	@FXML
+	private Label mysqlHostLabel;
+	@FXML
+	private Label mysqlDBNameLabel;
+	@FXML
+	private Label mysqlDBUserNameLabel;
+	@FXML
+	private Label mysqlDBUserPassLabel;
+
+	@FXML
+	private TextField mysqlHostTextField;
+	@FXML
+	private TextField mysqlDBNameTextField;
+	@FXML
+	private TextField mysqlDBUserNameTextField;
+	@FXML
+	private PasswordField mysqlDBUserPassPasswordField;
 
 	private Settings settings;
 	private Language language;
@@ -47,26 +66,46 @@ public class SettingDatabase {
 
 	private void styleClasses() {
 
-		titleLabel.getStyleClass().add("label_setting_name");
+		titleLabel.getStyleClass().add("label_header_001");
+
 		decryptionKeyLabel.getStyleClass().add("label_set_001");
+		mysqlHostLabel.getStyleClass().add("label_set_001");
+		mysqlDBNameLabel.getStyleClass().add("label_set_001");
+		mysqlDBUserNameLabel.getStyleClass().add("label_set_001");
+		mysqlDBUserPassLabel.getStyleClass().add("label_set_001");
+
 		decryptionKeyPasswordField.getStyleClass().add("text_field_001");
+
+		mysqlHostTextField.getStyleClass().add("text_field_001");
+		mysqlDBNameTextField.getStyleClass().add("text_field_001");
+		mysqlDBUserNameTextField.getStyleClass().add("text_field_001");
+		mysqlDBUserPassPasswordField.getStyleClass().add("text_field_001");
 	}
 
 	private void viewUpdate() {
 
 		this.language = settings.getLanguage();
 
-		databaseImageView.setFitWidth(100);
-		databaseImageView.setFitHeight(100);
-		databaseImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_DB, 100, 100));
+		databaseImageView.setFitWidth(50);
+		databaseImageView.setFitHeight(50);
+		databaseImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_DB, 50, 50));
 
-		titleLabel.setText(language.getString("VIEW005LAB001"));
+		titleLabel.setText(language.getString("VIEW006MEN001"));
 
 		decryptionKeyLabel.setText(language.getString("VIEW005LAB003"));
+
+		mysqlHostLabel.setText(language.getString("sp.settings.database.mysqlhost"));
+		mysqlDBNameLabel.setText(language.getString("sp.settings.database.mysqldbname"));
+		mysqlDBUserNameLabel.setText(language.getString("sp.settings.database.mysqldbusername"));
+		mysqlDBUserPassLabel.setText(language.getString("sp.settings.database.mysqldbuserpass"));
 
 		if (this.loggedUser != null) {
 
 			this.decryptionKeyPasswordField.setEditable(false);
+			this.mysqlHostTextField.setEditable(false);
+			this.mysqlDBNameTextField.setEditable(false);
+			this.mysqlDBUserNameTextField.setEditable(false);
+			this.mysqlDBUserPassPasswordField.setEditable(false);
 		}
 	}
 

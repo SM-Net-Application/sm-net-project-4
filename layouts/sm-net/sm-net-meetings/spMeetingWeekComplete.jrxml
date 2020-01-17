@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -427,7 +427,7 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[!$F{treasuresBibleReadingName2}.trim().isEmpty()]]></printWhenExpression>
+			<printWhenExpression><![CDATA[!$F{treasuresBibleReadingName2}.trim().isEmpty()&&($F{weekType}.intValue() == 1||$F{weekType}.intValue() == 4)]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="17" uuid="16630de9-747e-488f-b891-7723e3d1c907">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -515,7 +515,7 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[$F{treasuresBibleReadingName2}.trim().isEmpty()]]></printWhenExpression>
+			<printWhenExpression><![CDATA[$F{treasuresBibleReadingName2}.trim().isEmpty()&&($F{weekType}.intValue() == 1||$F{weekType}.intValue() == 4)]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="17" uuid="85251317-aed3-4d38-8645-714405410644">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -581,6 +581,7 @@
 			</textField>
 		</band>
 		<band height="17">
+			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1||$F{weekType}.intValue() == 4]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="17" backcolor="#DEA900" uuid="bd29629b-fc8b-45fa-9a77-82784b21bd55">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -1774,21 +1775,21 @@
 				<textFieldExpression><![CDATA[$F{overseerName}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="337">
+		<band height="720">
 			<printWhenExpression><![CDATA[$F{weekType}.intValue() != 1 && $F{weekType}.intValue() != 4]]></printWhenExpression>
 			<rectangle>
-				<reportElement x="0" y="20" width="555" height="300" forecolor="#000000" backcolor="#FFFFFF" uuid="df13fab9-c2ee-4433-b11b-b9813ccf4599">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<reportElement x="0" y="20" width="555" height="700" forecolor="#000000" backcolor="#FFFFFF" uuid="df13fab9-c2ee-4433-b11b-b9813ccf4599">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</rectangle>
 			<textField pattern="">
-				<reportElement x="5" y="20" width="545" height="290" forecolor="#000000" uuid="457aca74-0757-41bb-9ab2-f235cb968fb6">
+				<reportElement x="5" y="20" width="545" height="690" forecolor="#000000" uuid="457aca74-0757-41bb-9ab2-f235cb968fb6">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="25" isBold="false"/>

@@ -27,6 +27,11 @@ public class Settings {
 	private String userPasswordEncrypted;
 	private String userPasswordMonitorEncrypted;
 
+	private String mysqlHostEncrypted;
+	private String mysqlDBNameEncrypted;
+	private String mysqlDBUserNameEncrypted;
+	private String mysqlDBUserPasswordEncrypted;
+
 	public Settings(SettingsConf settingsConf) {
 		super();
 		this.settingsConf = settingsConf;
@@ -40,6 +45,11 @@ public class Settings {
 		this.usernameEncrypted = "";
 		this.userPasswordEncrypted = "";
 		this.userPasswordMonitorEncrypted = "";
+
+		this.mysqlHostEncrypted = "";
+		this.mysqlDBNameEncrypted = "";
+		this.mysqlDBUserNameEncrypted = "";
+		this.mysqlDBUserPasswordEncrypted = "";
 	}
 
 	public void save() throws IOException {
@@ -52,6 +62,12 @@ public class Settings {
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERNAME, usernameEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERPASS, userPasswordEncrypted);
 		ini.add(Meta.Settings.SECTION_USER, Meta.Settings.KEY_USERMONITOR, userPasswordMonitorEncrypted);
+
+		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_HOST, mysqlHostEncrypted);
+		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBNAME, mysqlDBNameEncrypted);
+		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBUSERNAME, mysqlDBUserNameEncrypted);
+		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBPASSWORD, mysqlDBUserPasswordEncrypted);
+
 		ini.store();
 	}
 
@@ -74,6 +90,24 @@ public class Settings {
 
 		if (this.userPasswordMonitorEncrypted == null)
 			this.userPasswordMonitorEncrypted = "";
+
+		this.mysqlHostEncrypted = ini.get(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_HOST, String.class);
+		if (this.mysqlHostEncrypted == null)
+			this.mysqlHostEncrypted = "";
+
+		this.mysqlDBNameEncrypted = ini.get(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBNAME, String.class);
+		if (this.mysqlDBNameEncrypted == null)
+			this.mysqlDBNameEncrypted = "";
+
+		this.mysqlDBUserNameEncrypted = ini.get(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBUSERNAME,
+				String.class);
+		if (this.mysqlDBUserNameEncrypted == null)
+			this.mysqlDBUserNameEncrypted = "";
+
+		this.mysqlDBUserPasswordEncrypted = ini.get(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBPASSWORD,
+				String.class);
+		if (this.mysqlDBUserPasswordEncrypted == null)
+			this.mysqlDBUserPasswordEncrypted = "";
 	}
 
 	private Language languageLoad() throws FileNotFoundException, IOException {
@@ -216,5 +250,77 @@ public class Settings {
 
 	public void setUserPasswordMonitorEncrypted(String userPasswordMonitorEncrypted) {
 		this.userPasswordMonitorEncrypted = userPasswordMonitorEncrypted;
+	}
+
+	public String getMysqlHostEncrypted() {
+		return mysqlHostEncrypted;
+	}
+
+	public String getMysqlHostDecrypted() {
+
+		if (this.applicationKey != null)
+			if (this.mysqlHostEncrypted != null)
+				if (!this.mysqlHostEncrypted.isEmpty())
+					return Crypt.decrypt(this.mysqlHostEncrypted, this.applicationKey);
+
+		return "";
+	}
+
+	public void setMysqlHostEncrypted(String mysqlHostEncrypted) {
+		this.mysqlHostEncrypted = mysqlHostEncrypted;
+	}
+
+	public String getMysqlDBNameEncrypted() {
+		return mysqlDBNameEncrypted;
+	}
+
+	public String getMysqlDBNameDecrypted() {
+
+		if (this.applicationKey != null)
+			if (this.mysqlDBNameEncrypted != null)
+				if (!this.mysqlDBNameEncrypted.isEmpty())
+					return Crypt.decrypt(this.mysqlDBNameEncrypted, this.applicationKey);
+
+		return "";
+	}
+
+	public void setMysqlDBNameEncrypted(String mysqlDBNameEncrypted) {
+		this.mysqlDBNameEncrypted = mysqlDBNameEncrypted;
+	}
+
+	public String getMysqlDBUserNameEncrypted() {
+		return mysqlDBUserNameEncrypted;
+	}
+
+	public String getMysqlDBUserNameDerypted() {
+
+		if (this.applicationKey != null)
+			if (this.mysqlDBUserNameEncrypted != null)
+				if (!this.mysqlDBUserNameEncrypted.isEmpty())
+					return Crypt.decrypt(this.mysqlDBUserNameEncrypted, this.applicationKey);
+
+		return "";
+	}
+
+	public void setMysqlDBUserNameEncrypted(String mysqlDBUserNameEncrypted) {
+		this.mysqlDBUserNameEncrypted = mysqlDBUserNameEncrypted;
+	}
+
+	public String getMysqlDBUserPasswordEncrypted() {
+		return mysqlDBUserPasswordEncrypted;
+	}
+
+	public String getMysqlDBUserPasswordDecrypted() {
+
+		if (this.applicationKey != null)
+			if (this.mysqlDBUserPasswordEncrypted != null)
+				if (!this.mysqlDBUserPasswordEncrypted.isEmpty())
+					return Crypt.decrypt(this.mysqlDBUserPasswordEncrypted, this.applicationKey);
+
+		return "";
+	}
+
+	public void setMysqlDBUserPasswordEncrypted(String mysqlDBUserPasswordEncrypted) {
+		this.mysqlDBUserPasswordEncrypted = mysqlDBUserPasswordEncrypted;
 	}
 }

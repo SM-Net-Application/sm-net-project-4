@@ -1,19 +1,12 @@
-Impostazioni:
-	- Creare poi un tasto per la verifica della comunicazione con il database (se l'url è valido))
-	- Creare una sezione dedicata al monitor
 
-	Da aggiungere al changelog quando completa
-	- Nuova sezione: Monitor - Password monitor
-	- Modificata sezione: Utente - Rimossa impostazione Password monitor
-
-Bug-Fix:
-	- Stampa Programma completo (Assemblema di circoscrizione) : compaiono righe	
-	
-JasperReports-Layouts:
-	- Stampare il Presidente della seconda sala
-
-Funzioni desiderate:
-
+	- Abbellire la pagina iniziale
+	- Login rapido e login con username e password
+	- Nelle impostazioni locali devo salvare le informazioni relative al database mysql
+		- Host
+		- Nome del Database
+		- Nome dell'utente
+		- Password
+		- In questa sezione posso generare il file config.php
 	- Creare una sezione Database che solo l'utente amministratore può visualizzare
 		- Dump del database
 		- Ripristino del database
@@ -21,22 +14,15 @@ Funzioni desiderate:
 		- Il file restituito dal dump del database deve poi essere criptato (Key del Database)
 		- Il testo criptato viene poi salvato in un file con estensione .splan
 		- Per il ripristino il file viene decryptato (Key del Database)
-	- Nelle impostazioni locali devo salvare le informazioni relative al database mysql
-		- Host
-		- Nome del Database
-		- Nome dell'utente
-		- Password
-		- In questa sezione posso generare il file config.php
+	- Nuova sezione: Programmazione adunanze
+	- Nuova sezione: Luoghi di adorazione
 	- Nuova sezione: Commemorazione
 		- Il programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
 	- Nuova sezione: Configurazione (Informazioni e settaggi)
-	- Nuova sezione: Programmazione adunanze
-	- Nuova sezione: Luoghi di adorazione
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
 	- Creare un updater del database	
 	- Installer per MAC
 	- Installer per Linux
-	- Login rapido e login con username e password
 	- Sezione Utenti - Creare il tab dedicato alla modifica di un utente

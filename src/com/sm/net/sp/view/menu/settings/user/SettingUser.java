@@ -41,10 +41,6 @@ public class SettingUser implements SettingsUserCallback {
 	@FXML
 	private PasswordField passwordField;
 	@FXML
-	private Label passwordMonitorLabel;
-	@FXML
-	private PasswordField passwordMonitorPasswordField;
-	@FXML
 	private Button userSUButton;
 	@FXML
 	private Button userSUPrintAccessDataButton;
@@ -69,13 +65,11 @@ public class SettingUser implements SettingsUserCallback {
 
 	private void styleClasses() {
 
-		titleLabel.getStyleClass().add("label_setting_name");
+		titleLabel.getStyleClass().add("label_header_001");
 		usernameLabel.getStyleClass().add("label_set_001");
 		passwordLabel.getStyleClass().add("label_set_001");
 		usernameTextField.getStyleClass().add("text_field_001");
 		passwordField.getStyleClass().add("text_field_001");
-		passwordMonitorLabel.getStyleClass().add("label_set_001");
-		passwordMonitorPasswordField.getStyleClass().add("text_field_001");
 
 		userSUButton.getStyleClass().add("button_image_001");
 		userSUPrintAccessDataButton.getStyleClass().add("button_image_001");
@@ -85,15 +79,13 @@ public class SettingUser implements SettingsUserCallback {
 
 		this.language = settings.getLanguage();
 
-		userImageView.setFitWidth(100);
-		userImageView.setFitHeight(100);
-		userImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_USER, 100, 100));
+		userImageView.setFitWidth(50);
+		userImageView.setFitHeight(50);
+		userImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MENU_SETTINGS_USER, 50, 50));
 
-		titleLabel.setText(language.getString("VIEW007LAB001"));
+		titleLabel.setText(language.getString("VIEW006MEN002"));
 		usernameLabel.setText(language.getString("VIEW007LAB002"));
 		passwordLabel.setText(language.getString("VIEW002LAB002"));
-
-		passwordMonitorLabel.setText(language.getString("sp.settings.passwordmonitor"));
 
 		userSUButton.setText(language.getString("TEXT0008"));
 		userSUButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SUPERUSER));
@@ -105,14 +97,12 @@ public class SettingUser implements SettingsUserCallback {
 
 			this.usernameTextField.setEditable(false);
 			this.passwordField.setEditable(false);
-			this.passwordMonitorPasswordField.setEditable(false);
 		}
 	}
 
 	private void listeners() {
 		listenerUsernameTextField();
 		listenerPasswordField();
-		listenerPasswordMonitorField();
 		listenerUserSUButton();
 		listenerUserSUPrintButton();
 	}
@@ -187,37 +177,11 @@ public class SettingUser implements SettingsUserCallback {
 
 	}
 
-	private void listenerPasswordMonitorField() {
-
-		passwordMonitorPasswordField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-				try {
-					settings.setUserPasswordMonitorEncrypted(decryptPasswordMonitor());
-					settings.save();
-				} catch (IOException e) {
-				}
-			}
-		});
-
-	}
-
 	private String decryptPassword() {
 
 		SecretKey applicationKey = settings.getApplicationKey();
 		if (applicationKey != null)
 			return Crypt.encrypt(passwordField.getText(), applicationKey);
-
-		return "";
-	}
-
-	private String decryptPasswordMonitor() {
-
-		SecretKey applicationKey = settings.getApplicationKey();
-		if (applicationKey != null)
-			return Crypt.encrypt(passwordMonitorPasswordField.getText(), applicationKey);
 
 		return "";
 	}
@@ -234,10 +198,6 @@ public class SettingUser implements SettingsUserCallback {
 			String decryptedPassword = Crypt.decrypt(settings.getUserPasswordEncrypted(), applicationKey);
 			if (decryptedPassword != null)
 				passwordField.setText(decryptedPassword);
-
-			String decryptedPasswordMonitor = Crypt.decrypt(settings.getUserPasswordMonitorEncrypted(), applicationKey);
-			if (decryptedPasswordMonitor != null)
-				passwordMonitorPasswordField.setText(decryptedPasswordMonitor);
 		}
 	}
 

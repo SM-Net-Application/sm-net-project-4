@@ -32,6 +32,7 @@ import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.connection.SettingConnection;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
+import com.sm.net.sp.view.menu.settings.monitor.SettingMonitor;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
 import com.sm.net.util.Crypt;
@@ -552,6 +553,30 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 	}
 
+	public void loadMenuSettingMonitor() {
+
+		if (this.center != 13) {
+			this.center = 13;
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MENU_SETTING_MONITOR);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				SettingMonitor ctrl = (SettingMonitor) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setLoggedUser(this.user);
+				ctrl.setApplication(this);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+	
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());

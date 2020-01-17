@@ -1,3 +1,9 @@
+* Bug-Fix:
+	- Layout Programma completo : Quando si stampava la settimana dell'assemblea comparivano alcune righe
+
+* Layout di stampa
+	- Il conduttore delle parti della seconda sala viene ora stampato
+
 * Impostazioni
 	- Se loggati, non sarà possibile modificare alcune impostazioni
 	- Aggiunta richiesta conferma creazione utente amministratore
@@ -7,7 +13,10 @@
 	- I tasti Crea utente amministratore e il tasto stampa dati di accesso sono stati spostati nella sezione Utente
 	- Dopo aver creato l'utente amministratore, i dati di accesso vengono salvati automaticamente nelle impostazioni
 	- Nuova sezione: Connessione - SupportPlanner URL
+	- Aggiunto il tasto per la verifica della comunicazione con il database (se l'url/versione software sono valide))
 	- Modificata sezione: Database - Rimossa l'impostazione SupportPlanner URL
+	- Nuova sezione: Monitor - Password monitor
+	- Modificata sezione: Utente - Rimossa impostazione Password monitor
 	
 * Sorvegliante di circoscrizione
 	- Quando si crea una nuova visita:

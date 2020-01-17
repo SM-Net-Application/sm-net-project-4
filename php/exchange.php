@@ -121,12 +121,15 @@ if (! empty($jsonObjPar)) {
                         case 35:
                             include 'query/sp_q35.php';
                             break;
+                        case 36:
+                            $response["status"] = 6; // Test connessione riuscito
+                            break;
                     }
-                    
+
                 } else {
                     $response["status"] = 3;
                 }
-                
+
             } else {
                 $response["status"] = 5; // La versione del software non è la stessa dell'hosting PHP
             }

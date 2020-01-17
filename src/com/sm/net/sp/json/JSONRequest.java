@@ -585,6 +585,13 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject CHECK_CONNECTION() {
+		
+		JSONObject jsonObj = create(Integer.valueOf(36));
+
+		return jsonObj;
+	}
+	
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -619,5 +626,4 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
-
 }

@@ -2775,6 +2775,73 @@ public class Actions {
 		taskThread.start();
 	}
 
+	public static void checkConnection(String url, Settings settings, Stage ownerStage,
+			SupportPlannerView application) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					JSONObject jsonObject = getValue();
+
+					int status = -1;
+					try {
+						if (jsonObject != null)
+							status = jsonObject.getInt("status");
+					} catch (JSONException e) {
+					}
+
+					switch (status) {
+					case 5:
+						application.getAlertBuilder().information(ownerStage,
+								settings.getLanguage().getString("sp.settings.connection.test5")).show();
+						break;
+					case 6:
+						application.getAlertBuilder().information(ownerStage,
+								settings.getLanguage().getString("sp.settings.connection.test3")).show();
+						break;
+
+					default:
+
+						application.getAlertBuilder()
+								.error(ownerStage, settings.getLanguage().getString("sp.settings.connection.test4"))
+								.show();
+
+						break;
+					}
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(url, JSONRequest.CHECK_CONNECTION());
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
 	/**
 	 * Create Alert Window
 	 * 

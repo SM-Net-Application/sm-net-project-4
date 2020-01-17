@@ -92,6 +92,9 @@ public class SettingsList {
 		case USER:
 			ctrlViewSupportPlanner.loadMenuSettingUser();
 			break;
+		case MONITOR:
+			ctrlViewSupportPlanner.loadMenuSettingMonitor();
+			break;
 		}
 
 	}
