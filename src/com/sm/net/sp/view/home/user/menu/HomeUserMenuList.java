@@ -198,6 +198,9 @@ public class HomeUserMenuList {
 		case NATURAL_DISASTER:
 			ctrlSupportPlannerView.viewHomeUserMenuNaturalDisaster();
 			break;
+		case DATABASE:
+			ctrlSupportPlannerView.viewHomeUserMenuDatabase();
+			break;
 		}
 	}
 

@@ -143,17 +143,21 @@ public class SettingUser implements SettingsUserCallback {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				try {
 
-					String username = "";
-					SecretKey applicationKey = settings.getApplicationKey();
-					if (applicationKey != null)
-						username = Crypt.encrypt(usernameTextField.getText(), applicationKey);
+				if (!newValue) {
 
-					settings.setUsername(username);
-					settings.save();
+					try {
 
-				} catch (IOException e) {
+						String username = "";
+						SecretKey applicationKey = settings.getApplicationKey();
+						if (applicationKey != null)
+							username = Crypt.encrypt(usernameTextField.getText(), applicationKey);
+
+						settings.setUsername(username);
+						settings.save();
+
+					} catch (IOException e) {
+					}
 				}
 			}
 		});
@@ -167,10 +171,13 @@ public class SettingUser implements SettingsUserCallback {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
-				try {
-					settings.setUserPasswordEncrypted(decryptPassword());
-					settings.save();
-				} catch (IOException e) {
+				if (!newValue) {
+
+					try {
+						settings.setUserPasswordEncrypted(decryptPassword());
+						settings.save();
+					} catch (IOException e) {
+					}
 				}
 			}
 		});

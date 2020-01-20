@@ -18,7 +18,9 @@ public enum EnumHomeUserMenuList {
 
 	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER),
 
-	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR);
+	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR),
+
+	DATABASE("sp.menu.database", Meta.Resources.DATABASE);
 
 	private String name;
 	private String imageName;

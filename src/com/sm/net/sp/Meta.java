@@ -14,6 +14,7 @@ import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -134,6 +135,7 @@ public class Meta {
 		public static final URL HOME_USER_MENU_CIRCUITOVERSEER = UserMenuCircuitOverseer.class
 				.getResource("UserMenuCircuitOverseer.fxml");
 		public static final URL HOME_USER_MENU_MONITOR = UserMenuMonitor.class.getResource("UserMenuMonitor.fxml");
+		public static final URL HOME_USER_MENU_DATABASE = UserMenuDatabase.class.getResource("UserMenuDatabase.fxml");
 		public static final URL HOME_USER_MENU_NATURALDISASTER = UserMenuNaturalDisasterList.class
 				.getResource("UserMenuNaturalDisasterList.fxml");
 		public static final URL HOME_USER_MENU_NATURALDISASTER_MEMBER_EDITOR = UserMenuNaturalDisasterList.class
@@ -225,6 +227,7 @@ public class Meta {
 		public static final String PRESENT = "present.png";
 		public static final String NOTHING = "nothing.png";
 		public static final String CONNECTION_TEST = "connection_test.png";
+		public static final String DATABASE = "menu_settings_db.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

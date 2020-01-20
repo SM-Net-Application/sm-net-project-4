@@ -111,26 +111,109 @@ public class SettingDatabase {
 
 	private void listeners() {
 		listenerDecryptionKeyPasswordField();
+
+		listenerMysqlHostTextField();
+		listenerMysqlDBNameTextField();
+		listenerMysqlDBUserNameTextField();
+		listenerMysqlDBUserPassPasswordField();
+	}
+
+	private void listenerMysqlHostTextField() {
+
+		mysqlHostTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+			if (!newValue) {
+				try {
+
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null) {
+						String encrypt = Crypt.encrypt(mysqlHostTextField.getText(), applicationKey);
+
+						settings.setMysqlHostEncrypted(encrypt);
+						settings.save();
+					}
+				} catch (IOException e) {
+				}
+			}
+		});
+	}
+
+	private void listenerMysqlDBNameTextField() {
+
+		mysqlDBNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+			if (!newValue) {
+				try {
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null) {
+						String encrypt = Crypt.encrypt(mysqlDBNameTextField.getText(), applicationKey);
+
+						settings.setMysqlDBNameEncrypted(encrypt);
+						settings.save();
+					}
+				} catch (IOException e) {
+				}
+			}
+		});
+	}
+
+	private void listenerMysqlDBUserNameTextField() {
+
+		mysqlDBUserNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+			if (!newValue) {
+				try {
+
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null) {
+						String encrypt = Crypt.encrypt(mysqlDBUserNameTextField.getText(), applicationKey);
+
+						settings.setMysqlDBUserNameEncrypted(encrypt);
+						settings.save();
+					}
+				} catch (IOException e) {
+				}
+			}
+		});
+	}
+
+	private void listenerMysqlDBUserPassPasswordField() {
+
+		mysqlDBUserPassPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+			if (!newValue) {
+				try {
+
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null) {
+						String encrypt = Crypt.encrypt(mysqlDBUserNameTextField.getText(), applicationKey);
+
+						settings.setMysqlDBUserPasswordEncrypted(encrypt);
+						settings.save();
+					}
+				} catch (IOException e) {
+				}
+			}
+		});
 	}
 
 	private void listenerDecryptionKeyPasswordField() {
 
 		decryptionKeyPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			try {
-				settings.setDatabaseKeyEncrypted(encryptKey());
-				settings.save();
-			} catch (IOException e) {
+
+			if (!newValue) {
+				try {
+					SecretKey applicationKey = settings.getApplicationKey();
+					if (applicationKey != null) {
+						String encrypt = Crypt.encrypt(decryptionKeyPasswordField.getText(), applicationKey);
+
+						settings.setDatabaseKeyEncrypted(encrypt);
+						settings.save();
+					}
+				} catch (IOException e) {
+				}
 			}
 		});
-	}
-
-	private String encryptKey() {
-
-		SecretKey applicationKey = settings.getApplicationKey();
-		if (applicationKey != null)
-			return Crypt.encrypt(decryptionKeyPasswordField.getText(), applicationKey);
-
-		return "";
 	}
 
 	private void loadSettings() {
@@ -142,6 +225,11 @@ public class SettingDatabase {
 			if (decryptedDatabaseKey != null)
 				decryptionKeyPasswordField.setText(decryptedDatabaseKey);
 		}
+
+		this.mysqlHostTextField.setText(this.settings.getMysqlHostDecrypted());
+		this.mysqlDBNameTextField.setText(this.settings.getMysqlDBNameDecrypted());
+		this.mysqlDBUserNameTextField.setText(this.settings.getMysqlDBUserNameDerypted());
+		this.mysqlDBUserPassPasswordField.setText(this.settings.getMysqlDBUserPasswordDecrypted());
 	}
 
 	public Settings getSettings() {

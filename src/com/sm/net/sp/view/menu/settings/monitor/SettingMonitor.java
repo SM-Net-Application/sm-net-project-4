@@ -84,10 +84,13 @@ public class SettingMonitor {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
-				try {
-					settings.setUserPasswordMonitorEncrypted(decryptPasswordMonitor());
-					settings.save();
-				} catch (IOException e) {
+				if (!newValue) {
+
+					try {
+						settings.setUserPasswordMonitorEncrypted(decryptPasswordMonitor());
+						settings.save();
+					} catch (IOException e) {
+					}
 				}
 			}
 		});

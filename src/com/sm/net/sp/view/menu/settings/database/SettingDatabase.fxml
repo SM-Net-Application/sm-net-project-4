@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -54,6 +55,27 @@
                               </Label>
                            </children>
                         </StackPane>
+                     </children>
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane>
+                           <children>
+                              <PasswordField fx:id="decryptionKeyPasswordField" maxWidth="1.7976931348623157E308">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </PasswordField>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox>
+                     <children>
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <Label fx:id="mysqlHostLabel" text="Label">
@@ -96,38 +118,29 @@
                      <children>
                         <StackPane>
                            <children>
-                              <PasswordField fx:id="decryptionKeyPasswordField" maxWidth="1.7976931348623157E308">
+                              <TextField fx:id="mysqlHostTextField">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
-                              </PasswordField>
+                              </TextField>
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <PasswordField fx:id="mysqlHostTextField" maxWidth="1.7976931348623157E308">
+                              <TextField fx:id="mysqlDBNameTextField">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
-                              </PasswordField>
+                              </TextField>
                            </children>
                         </StackPane>
                         <StackPane>
                            <children>
-                              <PasswordField fx:id="mysqlDBNameTextField" maxWidth="1.7976931348623157E308">
+                              <TextField fx:id="mysqlDBUserNameTextField">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
-                              </PasswordField>
-                           </children>
-                        </StackPane>
-                        <StackPane>
-                           <children>
-                              <PasswordField fx:id="mysqlDBUserNameTextField" maxWidth="1.7976931348623157E308">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </PasswordField>
+                              </TextField>
                            </children>
                         </StackPane>
                         <StackPane>
@@ -142,6 +155,9 @@
                      </children>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
