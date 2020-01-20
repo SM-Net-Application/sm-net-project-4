@@ -17,6 +17,11 @@
 	- Modificata sezione: Database - Rimossa l'impostazione SupportPlanner URL
 	- Nuova sezione: Monitor - Password monitor
 	- Modificata sezione: Utente - Rimossa impostazione Password monitor
+	- Nella sezione Database è possibile salvare le informazioni relative al database mysql
+		- Host
+		- Nome del Database
+		- Nome dell'utente
+		- Password
 	
 * Sorvegliante di circoscrizione
 	- Quando si crea una nuova visita:

@@ -1,19 +1,12 @@
 
 	- Abbellire la pagina iniziale
 	- Login rapido e login con username e password
-	- Nelle impostazioni locali devo salvare le informazioni relative al database mysql
-		- Host
-		- Nome del Database
-		- Nome dell'utente
-		- Password
+	- Sezione Settings - Database
 		- In questa sezione posso generare il file config.php
 	- Creare una sezione Database che solo l'utente amministratore può visualizzare
 		- Dump del database
 		- Ripristino del database
 		- Pulizia del database : Cancella i dati relativi alle settimane più vecchie di 1 anno
-		- Il file restituito dal dump del database deve poi essere criptato (Key del Database)
-		- Il testo criptato viene poi salvato in un file con estensione .splan
-		- Per il ripristino il file viene decryptato (Key del Database)
 	- Nuova sezione: Programmazione adunanze
 	- Nuova sezione: Luoghi di adorazione
 	- Nuova sezione: Commemorazione
