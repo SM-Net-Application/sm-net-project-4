@@ -1,21 +1,34 @@
 
-	- Abbellire la pagina iniziale
-	- Login rapido e login con username e password
-	- Sezione Settings - Database
-		- In questa sezione posso generare il file config.php
 	- Creare una sezione Database che solo l'utente amministratore può visualizzare
+		- I dati di accesso del database vengono automaticamente inseriti se presenti nelle impostazioni
 		- Dump del database
 		- Ripristino del database
 		- Pulizia del database : Cancella i dati relativi alle settimane più vecchie di 1 anno
+	- Installer per MAC
+	- Dump del database per MAC
+	- Abbellire la pagina iniziale
+		- Login rapido e login con username e password
 	- Nuova sezione: Programmazione adunanze
 	- Nuova sezione: Luoghi di adorazione
+	- Sezione adunanze:
+		- Aggiungere le informazioni:
+			- Giorno adunanza infrasettimanale (Lunedi - Giovedi)
+			- Giorno adunanza del fine settimana (Sabato - Domenica)
+			- Orario adunanza infrasettimanale (Ora, Minuto)
+			- Orario adunanza del fine settimana (Ora, Minuto)
+			- Luogo di adorazione (Sala del Regno / Sala Assemblee / Altro locale)
 	- Nuova sezione: Commemorazione
-		- Il programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
-	- Nuova sezione: Configurazione (Informazioni e settaggi)
+		- Mostra solo le settimane presenti nel database
+		- La stampa del programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
-	- Creare un updater del database	
-	- Installer per MAC
 	- Installer per Linux
+	- Dump del database per Linux
+	- Nuova sezione: Assemblee / Congressi
+		- Mostra solo le settimane presenti nel database
 	- Sezione Utenti - Creare il tab dedicato alla modifica di un utente
+	- Sorvegliante:
+		- Mostra solo le settimane presenti nel database
+	- Sorvegliante:
+		- Mostra solo le settimane presenti nel database

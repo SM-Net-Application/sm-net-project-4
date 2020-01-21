@@ -228,6 +228,7 @@ public class Meta {
 		public static final String NOTHING = "nothing.png";
 		public static final String CONNECTION_TEST = "connection_test.png";
 		public static final String DATABASE = "menu_settings_db.png";
+		public static final String DBCONFIG = "dbconfig.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

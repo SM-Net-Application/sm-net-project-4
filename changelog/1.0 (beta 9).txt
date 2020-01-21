@@ -22,6 +22,7 @@
 		- Nome del Database
 		- Nome dell'utente
 		- Password
+		- Inoltre è possibile generare il file config.php con le informazioni salvate
 	
 * Sorvegliante di circoscrizione
 	- Quando si crea una nuova visita:

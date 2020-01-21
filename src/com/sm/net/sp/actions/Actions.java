@@ -1,5 +1,8 @@
 package com.sm.net.sp.actions;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -2842,6 +2845,65 @@ public class Actions {
 		taskThread.start();
 	}
 
+	public static void createConfigPHPFile(String host, String dbname, String dbusername, String dbpassword,
+			File directory, Stage ownerStage, Settings settings, SupportPlannerView application) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<Void> task = new Task<Void>() {
+
+			{
+				setOnSucceeded(value -> {
+					application.getAlertBuilder()
+							.information(ownerStage,
+									settings.getLanguage().getString("sp.settings.database.createconfig.created"))
+							.show();
+					waitAlert.close();
+				});
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected Void call() throws Exception {
+
+				File config = new File(directory, "config.php");
+				config.createNewFile();
+
+				BufferedWriter bw = new BufferedWriter(new FileWriter(config));
+
+				bw.write("<?php\n");
+				bw.write(String.format("define ( 'DB_USER', \"%s\" );\n", dbusername));
+				bw.write(String.format("define ( 'DB_PASSWORD', \"%s\" );\n", dbpassword));
+				bw.write(String.format("define ( 'DB_DATABASE', \"%s\" );\n", dbname));
+				bw.write(String.format("define ( 'DB_SERVER', \"%s\" );\n", host));
+				bw.write("?>");
+
+				bw.close();
+
+				return null;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
 	/**
 	 * Create Alert Window
 	 * 
@@ -2867,5 +2929,4 @@ public class Actions {
 
 		return waitAlert;
 	}
-
 }

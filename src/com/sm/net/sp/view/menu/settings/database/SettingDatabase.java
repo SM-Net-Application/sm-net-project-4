@@ -1,21 +1,25 @@
 package com.sm.net.sp.view.menu.settings.database;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.crypto.SecretKey;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class SettingDatabase {
@@ -46,6 +50,9 @@ public class SettingDatabase {
 	private TextField mysqlDBUserNameTextField;
 	@FXML
 	private PasswordField mysqlDBUserPassPasswordField;
+
+	@FXML
+	private Button createConfigButton;
 
 	private Settings settings;
 	private Language language;
@@ -80,6 +87,8 @@ public class SettingDatabase {
 		mysqlDBNameTextField.getStyleClass().add("text_field_001");
 		mysqlDBUserNameTextField.getStyleClass().add("text_field_001");
 		mysqlDBUserPassPasswordField.getStyleClass().add("text_field_001");
+
+		createConfigButton.getStyleClass().add("button_image_001");
 	}
 
 	private void viewUpdate() {
@@ -99,6 +108,9 @@ public class SettingDatabase {
 		mysqlDBUserNameLabel.setText(language.getString("sp.settings.database.mysqldbusername"));
 		mysqlDBUserPassLabel.setText(language.getString("sp.settings.database.mysqldbuserpass"));
 
+		createConfigButton.setText(language.getString("sp.settings.database.createconfig"));
+		createConfigButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.DBCONFIG));
+
 		if (this.loggedUser != null) {
 
 			this.decryptionKeyPasswordField.setEditable(false);
@@ -116,6 +128,31 @@ public class SettingDatabase {
 		listenerMysqlDBNameTextField();
 		listenerMysqlDBUserNameTextField();
 		listenerMysqlDBUserPassPasswordField();
+
+		listenerCreateConfigButton();
+	}
+
+	private void listenerCreateConfigButton() {
+
+		this.createConfigButton.setOnAction(event -> {
+
+			if (this.application.getAlertBuilder().confirm(this.ownerStage,
+					this.language.getString("sp.settings.database.createconfig.confirm"))) {
+
+				String host = this.mysqlHostTextField.getText();
+				String dbname = this.mysqlDBNameTextField.getText();
+				String dbusername = this.mysqlDBUserNameTextField.getText();
+				String dbpassword = this.mysqlDBUserPassPasswordField.getText();
+
+				DirectoryChooser dc = new DirectoryChooser();
+				dc.setTitle(Meta.Application.getFullTitle());
+				File directory;
+				if ((directory = dc.showDialog(ownerStage)) != null)
+					Actions.createConfigPHPFile(host, dbname, dbusername, dbpassword, directory, this.ownerStage,
+							this.settings, this.application);
+
+			}
+		});
 	}
 
 	private void listenerMysqlHostTextField() {
