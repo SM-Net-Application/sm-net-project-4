@@ -3024,7 +3024,7 @@ public class Actions {
 				command += String.format(" -h %s", host);
 				command += String.format(" -u %s %s", dbusername, dbname);
 				command += String.format(" --password=%s", dbpassword);
-				command += String.format(" < \"%s\"", file.getAbsolutePath());
+				command += String.format(" -e \"source %s\"", file.getAbsolutePath());
 
 				Runtime rt = Runtime.getRuntime();
 				Process p = rt.exec(command);

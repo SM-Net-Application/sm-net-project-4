@@ -24,3 +24,5 @@ mysql.exe
 -u DB_USERNAME DB_NAME					Utente del db e Nome del db
 --password=PASSWORD						Password
 < NOME_FILE.sql							File da importare
+
+.\mysql.exe -h host -u username dbname --password=dbpassword -e "source Backup.sql"
