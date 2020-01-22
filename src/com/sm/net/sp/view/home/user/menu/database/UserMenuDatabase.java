@@ -1,94 +1,112 @@
 package com.sm.net.sp.view.home.user.menu.database;
 
-import java.time.LocalDate;
+import java.io.File;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.Activities;
-import com.sm.net.sp.model.UpdateDataAdapter;
-import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.util.Crypt;
+import com.sm.net.sp.view.SupportPlannerView;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class UserMenuDatabase extends UpdateDataAdapter {
+public class UserMenuDatabase {
 
 	@FXML
 	private Label titleLabel;
 	@FXML
 	private ImageView titleImageView;
+
 	@FXML
-	private Label passwordLabel;
+	private Label mysqlHostLabel;
 	@FXML
-	private PasswordField passwordTextField;
+	private Label mysqlDBNameLabel;
 	@FXML
-	private Button passwordButton;
+	private Label mysqlDBUserNameLabel;
 	@FXML
-	private TableView<Activities> activityTableView;
+	private Label mysqlDBUserPassLabel;
+
 	@FXML
-	private TableColumn<Activities, String> dateTableColumn;
+	private TextField mysqlHostTextField;
 	@FXML
-	private TableColumn<Activities, ImageView> imageTableColumn;
+	private TextField mysqlDBNameTextField;
 	@FXML
-	private TableColumn<Activities, String> activityTableColumn;
+	private TextField mysqlDBUserNameTextField;
+	@FXML
+	private PasswordField mysqlDBUserPassPasswordField;
+
+	@FXML
+	private Label backupRestoreLabel;
+	@FXML
+	private Label cleanLabel;
+
+	@FXML
+	private Button backupButton;
+	@FXML
+	private Button restoreButton;
+	@FXML
+	private Label backupLabel;
+	@FXML
+	private Label restoreLabel;
+
+	@FXML
+	private Button cleanDBButton;
+	@FXML
+	private Label cleanDBLabel;
 
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
+	private SupportPlannerView application;
 
 	@FXML
 	private void initialize() {
 		styleClasses();
-		cellValueFactory();
 		listeners();
-	}
-
-	private void cellValueFactory() {
-
-		dateTableColumn
-				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
-
-		imageTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
-				Meta.Resources.imageForButtonSmall(cellData.getValue().getPrivilege().getImageName())));
-
-		activityTableColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(language.getString(cellData.getValue().getPrivilege().getName())));
 	}
 
 	public void objectInitialize() {
 		viewUpdate();
-		loadPassword();
-		updateActivities();
+		loadData();
 	}
 
 	private void listeners() {
-		listenerPasswordButton();
+		listenerBackupButton();
+		listenerRestoreButton();
 	}
 
 	private void styleClasses() {
 
 		titleLabel.getStyleClass().add("label_header_001");
 
-		passwordLabel.getStyleClass().add("label_001");
-		passwordTextField.getStyleClass().add("text_field_001");
-		passwordButton.getStyleClass().add("button_image_001");
+		mysqlHostLabel.getStyleClass().add("label_set_001");
+		mysqlDBNameLabel.getStyleClass().add("label_set_001");
+		mysqlDBUserNameLabel.getStyleClass().add("label_set_001");
+		mysqlDBUserPassLabel.getStyleClass().add("label_set_001");
 
-		activityTableView.getStyleClass().add("table_view_001");
+		mysqlHostTextField.getStyleClass().add("text_field_001");
+		mysqlDBNameTextField.getStyleClass().add("text_field_001");
+		mysqlDBUserNameTextField.getStyleClass().add("text_field_001");
+		mysqlDBUserPassPasswordField.getStyleClass().add("text_field_001");
 
-		dateTableColumn.getStyleClass().add("table_column_002");
-		imageTableColumn.getStyleClass().add("table_column_002");
+		backupRestoreLabel.getStyleClass().add("label_002");
+		cleanLabel.getStyleClass().add("label_002");
+
+		backupButton.getStyleClass().add("button_image_001");
+		restoreButton.getStyleClass().add("button_image_001");
+		backupLabel.getStyleClass().add("label_001");
+		restoreLabel.getStyleClass().add("label_001");
+
+		cleanDBButton.getStyleClass().add("button_image_001");
+		cleanDBLabel.getStyleClass().add("label_001");
 	}
 
 	private void viewUpdate() {
@@ -100,50 +118,114 @@ public class UserMenuDatabase extends UpdateDataAdapter {
 		titleImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.DATABASE, 50, 50));
 
 		titleLabel.setText(language.getString("sp.menu.database"));
-		passwordLabel.setText(language.getString("sp.monitor.password"));
 
-		passwordButton.setText("");
-		passwordButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
+		mysqlHostLabel.setText(language.getString("sp.settings.database.mysqlhost"));
+		mysqlDBNameLabel.setText(language.getString("sp.settings.database.mysqldbname"));
+		mysqlDBUserNameLabel.setText(language.getString("sp.settings.database.mysqldbusername"));
+		mysqlDBUserPassLabel.setText(language.getString("sp.settings.database.mysqldbuserpass"));
 
-		dateTableColumn.setMinWidth(150);
-		dateTableColumn.setMaxWidth(150);
-		dateTableColumn.setText(language.getString("sp.monitor.table.data"));
+		backupRestoreLabel.setText(language.getString("sp.database.backuprestore"));
+		cleanLabel.setText(language.getString("sp.database.clean"));
 
-		imageTableColumn.setMinWidth(100);
-		imageTableColumn.setMaxWidth(100);
-		imageTableColumn.setText("");
+		backupButton.setText("");
+		backupButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.BACKUP));
 
-		activityTableColumn.setText(language.getString("sp.monitor.table.activity"));
+		restoreButton.setText("");
+		restoreButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.RESTORE));
+
+		backupLabel.setText(language.getString("sp.database.backup"));
+		restoreLabel.setText(language.getString("sp.database.restore"));
+
+		cleanDBButton.setText("");
+		cleanDBButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.CLEAN));
+		cleanDBLabel.setText(language.getString("sp.database.cleandb"));
 	}
 
-	private void loadPassword() {
+	private void loadData() {
 
-		String passwordMonitorEncrypted = this.settings.getUserPasswordMonitorEncrypted();
-		if (!passwordMonitorEncrypted.isEmpty()) {
-			String passwordMonitorDecrypted = Crypt.decrypt(passwordMonitorEncrypted, settings.getApplicationKey());
-			if (!passwordMonitorDecrypted.isEmpty())
-				this.passwordTextField.setText(passwordMonitorDecrypted);
-		}
+		String host = this.settings.getMysqlHostDecrypted();
+		String dbname = this.settings.getMysqlDBNameDecrypted();
+		String dbusername = this.settings.getMysqlDBUserNameDerypted();
+		String dbpassword = this.settings.getMysqlDBUserPasswordDecrypted();
+
+		this.mysqlHostTextField.setText(host);
+		this.mysqlDBNameTextField.setText(dbname);
+		this.mysqlDBUserNameTextField.setText(dbusername);
+		this.mysqlDBUserPassPasswordField.setText(dbpassword);
 	}
 
-	private void listenerPasswordButton() {
-		this.passwordButton.setOnAction(event -> updateActivities());
+	private void listenerBackupButton() {
+
+		this.backupButton.setOnAction(event -> {
+
+			String host = this.mysqlHostTextField.getText();
+			String dbname = this.mysqlDBNameTextField.getText();
+			String dbusername = this.mysqlDBUserNameTextField.getText();
+			String dbpassword = this.mysqlDBUserPassPasswordField.getText();
+
+			if (host.isEmpty() || dbname.isEmpty() || dbusername.isEmpty() || dbpassword.isEmpty())
+
+				this.application.getAlertBuilder().error(ownerStage, language.getString("sp.database.backup.error"))
+						.show();
+
+			else {
+
+				if (this.application.getAlertBuilder().confirm(ownerStage,
+						language.getString("sp.database.backup.confirm"))) {
+
+					DirectoryChooser dc = new DirectoryChooser();
+					dc.setTitle(Meta.Application.getFullTitle());
+					File directory;
+					if ((directory = dc.showDialog(ownerStage)) != null)
+
+						if (!this.application.getMysqlDump().exists())
+							this.application.getAlertBuilder()
+									.error(ownerStage, language.getString("sp.database.backup.errorfiledump")).show();
+						else
+							Actions.createBackupDatabase(host, dbname, dbusername, dbpassword, directory,
+									this.ownerStage, this.settings, this.application);
+
+				}
+			}
+		});
 	}
 
-	@Override
-	public void updateActivities() {
-		super.updateActivities();
+	private void listenerRestoreButton() {
 
-		String password = this.passwordTextField.getText();
-		if (!password.trim().isEmpty())
-			Actions.getAllActivities(password, Week.buildKey(LocalDate.now()), this.settings, this.ownerStage, this);
-	}
+		this.restoreButton.setOnAction(event -> {
 
-	@Override
-	public void updateActivities(ObservableList<Activities> list) {
-		super.updateActivities(list);
+			String host = this.mysqlHostTextField.getText();
+			String dbname = this.mysqlDBNameTextField.getText();
+			String dbusername = this.mysqlDBUserNameTextField.getText();
+			String dbpassword = this.mysqlDBUserPassPasswordField.getText();
 
-		this.activityTableView.setItems(list);
+			if (host.isEmpty() || dbname.isEmpty() || dbusername.isEmpty() || dbpassword.isEmpty())
+
+				this.application.getAlertBuilder().error(ownerStage, language.getString("sp.database.restore.error"))
+						.show();
+
+			else {
+
+				if (this.application.getAlertBuilder().confirm(ownerStage,
+						language.getString("sp.database.restore.confirm"))) {
+
+					FileChooser fc = new FileChooser();
+					fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("SupportPlanner Backup", "*.splan"));
+					fc.setTitle(Meta.Application.getFullTitle());
+					File file;
+					if ((file = fc.showOpenDialog(ownerStage)) != null)
+
+						if (!this.application.getMysqlRestore().exists())
+							this.application.getAlertBuilder()
+									.error(ownerStage, language.getString("sp.database.restore.errorfilerestore"))
+									.show();
+						else
+							Actions.startRestoreDatabase(host, dbname, dbusername, dbpassword, file, this.ownerStage,
+									this.settings, this.application);
+
+				}
+			}
+		});
 	}
 
 	public Settings getSettings() {
@@ -160,6 +242,14 @@ public class UserMenuDatabase extends UpdateDataAdapter {
 
 	public void setOwnerStage(Stage ownerStage) {
 		this.ownerStage = ownerStage;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
 	}
 
 }

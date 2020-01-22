@@ -80,7 +80,7 @@ public class Meta {
 		public static final String KEY_DBNAME = "dbname";
 		public static final String KEY_DBUSERNAME = "mysqluser";
 		public static final String KEY_DBPASSWORD = "mysqlpass";
-		
+
 		public static File getFile() {
 
 			String absoulutePath = PathBuilder.concatFolder(Project.currentWorkingDirectory(), FOLDER);
@@ -229,6 +229,9 @@ public class Meta {
 		public static final String CONNECTION_TEST = "connection_test.png";
 		public static final String DATABASE = "menu_settings_db.png";
 		public static final String DBCONFIG = "dbconfig.png";
+		public static final String RESTORE = "restore.png";
+		public static final String BACKUP = "backup.png";
+		public static final String CLEAN = "clean.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

@@ -223,7 +223,7 @@ public class SettingDatabase {
 
 					SecretKey applicationKey = settings.getApplicationKey();
 					if (applicationKey != null) {
-						String encrypt = Crypt.encrypt(mysqlDBUserNameTextField.getText(), applicationKey);
+						String encrypt = Crypt.encrypt(mysqlDBUserPassPasswordField.getText(), applicationKey);
 
 						settings.setMysqlDBUserPasswordEncrypted(encrypt);
 						settings.save();

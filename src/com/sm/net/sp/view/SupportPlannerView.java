@@ -57,6 +57,8 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	private Stage viewSupportPlannerStage;
 	private SupportPlannerView ctrlViewSupportPlanner;
 	private User user;
+	private File mysqlDump;
+	private File mysqlRestore;
 
 	private Settings settings;
 	private int left;
@@ -76,6 +78,31 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		this.settings = null;
 
 		settingsInitialize();
+
+		this.mysqlDump = setMySQLDumpFile();
+		this.mysqlRestore = setMySQLRestoreFile();
+	}
+
+	private File setMySQLRestoreFile() {
+
+		// TODO: differenziare per sistema operativo
+
+		File file = new File("tools", "mysql");
+
+		// Windows x64
+		File dump = new File(file, "winx64");
+		return new File(dump, "mysql.exe");
+	}
+
+	private File setMySQLDumpFile() {
+
+		// TODO: differenziare per sistema operativo
+
+		File file = new File("tools", "mysql");
+
+		// Windows x64
+		File dump = new File(file, "winx64");
+		return new File(dump, "mysqldump.exe");
 	}
 
 	private void settingsInitialize() {
@@ -594,6 +621,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				UserMenuDatabase ctrl = (UserMenuDatabase) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);
@@ -761,6 +789,22 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void setAlertBuilder(AlertBuilder alertBuilder) {
 		this.alertBuilder = alertBuilder;
+	}
+
+	public File getMysqlDump() {
+		return mysqlDump;
+	}
+
+	public void setMysqlDump(File mysqlDump) {
+		this.mysqlDump = mysqlDump;
+	}
+
+	public File getMysqlRestore() {
+		return mysqlRestore;
+	}
+
+	public void setMysqlRestore(File mysqlRestore) {
+		this.mysqlRestore = mysqlRestore;
 	}
 
 }

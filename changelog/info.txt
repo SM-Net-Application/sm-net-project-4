@@ -12,4 +12,15 @@ MySQL Community Server
 -h IP_HOST								Host
 -u DB_USERNAME DB_NAME					Utente del db e Nome del db
 -pPASSWORD								Password (tra -p e la password non ci deve essere lo spazio)
--r NOME_FILE.sql							Dove salvare i dati
+-r NOME_FILE.sql						Dove salvare i dati
+
+Come ripristinare un database MySQL
+
+Su Windows
+Ho bisogno del file mysql.exe
+
+mysql.exe
+-h IP_HOST								Host
+-u DB_USERNAME DB_NAME					Utente del db e Nome del db
+--password=PASSWORD						Password
+< NOME_FILE.sql							File da importare

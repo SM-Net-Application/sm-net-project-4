@@ -1,9 +1,11 @@
 package com.sm.net.sp.actions;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -2902,6 +2904,146 @@ public class Actions {
 		Thread taskThread = new Thread(task);
 		taskThread.start();
 
+	}
+
+	public static void createBackupDatabase(String host, String dbname, String dbusername, String dbpassword,
+			File directory, Stage ownerStage, Settings settings, SupportPlannerView application) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<String> task = new Task<String>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					String console = getValue();
+					if (!console.trim().isEmpty())
+						application.getAlertBuilder().error(ownerStage, console).show();
+					else
+						application.getAlertBuilder().information(ownerStage,
+								settings.getLanguage().getString("sp.database.mysqldump.created")).show();
+
+					waitAlert.close();
+				});
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected String call() throws Exception {
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+				String fileName = String.format("Backup%s.splan", sdf.format(new Date()));
+				File file = new File(directory, fileName);
+
+				String command = String.format("\"%s\"", application.getMysqlDump().getAbsolutePath());
+				command += " --skip-lock-tables";
+				command += " --column-statistics=0";
+				command += String.format(" -h %s", host);
+				command += String.format(" -u %s %s", dbusername, dbname);
+				command += String.format(" -p%s", dbpassword);
+				command += String.format(" -r \"%s\"", file.getAbsolutePath());
+
+				Runtime rt = Runtime.getRuntime();
+				Process p = rt.exec(command);
+
+				BufferedReader input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+				String console = "";
+				String line = null;
+				while ((line = input.readLine()) != null)
+					if (!line.contains("[Warning]"))
+						console += line + "\n";
+
+				if (!console.trim().isEmpty())
+					file.delete();
+
+				return console;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+
+	}
+
+	public static void startRestoreDatabase(String host, String dbname, String dbusername, String dbpassword, File file,
+			Stage ownerStage, Settings settings, SupportPlannerView application) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<String> task = new Task<String>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					String console = getValue();
+					if (!console.trim().isEmpty())
+						application.getAlertBuilder().error(ownerStage, console).show();
+					else
+						application.getAlertBuilder().information(ownerStage,
+								settings.getLanguage().getString("sp.database.mysqlrestore.restored")).show();
+
+					waitAlert.close();
+				});
+
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected String call() throws Exception {
+
+				String command = String.format("\"%s\"", application.getMysqlRestore().getAbsolutePath());
+				command += String.format(" -h %s", host);
+				command += String.format(" -u %s %s", dbusername, dbname);
+				command += String.format(" --password=%s", dbpassword);
+				command += String.format(" < \"%s\"", file.getAbsolutePath());
+
+				Runtime rt = Runtime.getRuntime();
+				Process p = rt.exec(command);
+
+				BufferedReader input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+				String console = "";
+				String line = null;
+				while ((line = input.readLine()) != null)
+					if (!line.contains("[Warning]"))
+						console += line + "\n";
+
+				return console;
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
 	}
 
 	/**

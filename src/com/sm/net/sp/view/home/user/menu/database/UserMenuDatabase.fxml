@@ -5,8 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -50,52 +49,214 @@
             </StackPane>
             <HBox>
                <children>
-                  <StackPane>
+                  <VBox>
                      <children>
-                        <Label fx:id="passwordLabel" text="password">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Label>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="mysqlHostLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="mysqlDBNameLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="mysqlDBUserNameLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="mysqlDBUserPassLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
                      </children>
-                  </StackPane>
-                  <StackPane HBox.hgrow="ALWAYS">
+                  </VBox>
+                  <VBox HBox.hgrow="ALWAYS">
                      <children>
-                        <PasswordField fx:id="passwordTextField">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </PasswordField>
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="mysqlHostTextField">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="mysqlDBNameTextField">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="mysqlDBUserNameTextField">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <PasswordField fx:id="mysqlDBUserPassPasswordField">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </PasswordField>
+                           </children>
+                        </StackPane>
                      </children>
-                  </StackPane>
-                  <StackPane>
-                     <children>
-                        <Button fx:id="passwordButton" mnemonicParsing="false" text="load">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Button>
-                     </children>
-                  </StackPane>
+                  </VBox>
                </children>
             </HBox>
-            <StackPane VBox.vgrow="ALWAYS">
+            <HBox VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="activityTableView">
-                    <columns>
-                      <TableColumn fx:id="dateTableColumn" prefWidth="75.0" text="C1" />
-                      <TableColumn fx:id="imageTableColumn" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="activityTableColumn" prefWidth="75.0" text="C2" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </TableView>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="backupRestoreLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <Separator>
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
+                        <HBox>
+                           <children>
+                              <StackPane>
+                                 <children>
+                                    <Button fx:id="backupButton" mnemonicParsing="false" text="Button">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="backupLabel" text="Label">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <StackPane>
+                                 <children>
+                                    <Button fx:id="restoreButton" mnemonicParsing="false" text="Button">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="restoreLabel" text="Label">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <StackPane>
+                     <children>
+                        <Separator orientation="VERTICAL">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Separator>
+                     </children>
+                  </StackPane>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="cleanLabel" text="Label">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <Separator>
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
+                        <HBox>
+                           <children>
+                              <StackPane>
+                                 <children>
+                                    <Button fx:id="cleanDBButton" mnemonicParsing="false" text="Button">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="cleanDBLabel" text="Label">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-            </StackPane>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
    </children>
