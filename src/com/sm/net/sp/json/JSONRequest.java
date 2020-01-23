@@ -586,12 +586,19 @@ public class JSONRequest {
 	}
 
 	public static JSONObject CHECK_CONNECTION() {
-		
+
 		JSONObject jsonObj = create(Integer.valueOf(36));
 
 		return jsonObj;
 	}
-	
+
+	public static JSONObject CLEAN_DATABASE() {
+
+		JSONObject jsonObj = create(Integer.valueOf(37));
+
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -600,7 +607,8 @@ public class JSONRequest {
 			} catch (JSONException e) {
 			}
 		}
-		return JSONStatus.getFromId(Integer.valueOf(status));
+		JSONStatus jsonStatus = JSONStatus.getFromId(Integer.valueOf(status));
+		return (jsonStatus != null) ? jsonStatus : JSONStatus.DB_RESULT_EMPTY;
 	}
 
 	public static boolean isRequestOK(JSONObject jsonObject) {

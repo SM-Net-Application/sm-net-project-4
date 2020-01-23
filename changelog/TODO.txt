@@ -1,13 +1,5 @@
-
-	- Creare una sezione Database che solo l'utente amministratore può visualizzare
-		- I dati di accesso del database vengono automaticamente inseriti se presenti nelle impostazioni
-		- Dump del database
-		- Ripristino del database
-		- Pulizia del database : Cancella i dati relativi alle settimane più vecchie di 1 anno
+		
 	- Installer per MAC
-	- Dump del database per MAC
-	- Abbellire la pagina iniziale
-		- Login rapido e login con username e password
 	- Nuova sezione: Programmazione adunanze
 	- Nuova sezione: Luoghi di adorazione
 	- Sezione adunanze:
@@ -24,11 +16,10 @@
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
 	- Installer per Linux
-	- Dump del database per Linux
+	- Dump/Ripristino del database per Linux
+	- Dump/Ripristino del database per MAC
 	- Nuova sezione: Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
 	- Sezione Utenti - Creare il tab dedicato alla modifica di un utente
-	- Sorvegliante:
-		- Mostra solo le settimane presenti nel database
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database

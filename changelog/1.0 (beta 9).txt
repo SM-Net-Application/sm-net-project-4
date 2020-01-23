@@ -1,3 +1,15 @@
+* Accesso
+	- Inserito logo del software
+	- Accesso rapido : Login utilizzando i dati di accesso presenti nelle impostazioni
+	- Dati di accesso : Login utilizzando i dati di accesso inseriti
+
+* Nuova sezione: Database
+	- Questa sezione è visibile solo per l'utente amministratore
+	- I dati di accesso del database vengono automaticamente inseriti se presenti nelle impostazioni
+	- Possibilità di effettuare il backup del database (attualmente solo su Windows x64)
+	- Possibilità di effettuare il ripristino di un backup (attualmente solo su Windows x64)
+	- Pulizia del database : Cancella i dati delle adunanze più vecchi di 1 anno
+
 * Bug-Fix:
 	- Layout Programma completo : Quando si stampava la settimana dell'assemblea comparivano alcune righe
 

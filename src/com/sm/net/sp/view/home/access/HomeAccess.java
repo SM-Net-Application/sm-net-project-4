@@ -9,23 +9,49 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.util.Crypt;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class HomeAccess {
 
 	@FXML
+	private ImageView logoImageView;
+	@FXML
 	private Button accessButton;
+
+	@FXML
+	private Label accessFastLabel;
+	@FXML
+	private Label accessFastDescrLabel;
+	@FXML
+	private Label accessNormalLabel;
+
+	@FXML
+	private Label usernameLabel;
+	@FXML
+	private Label passwordLabel;
+	@FXML
+	private TextField usernameTextField;
+	@FXML
+	private PasswordField passwordPasswordField;
+
+	@FXML
+	private Button accessNormalButton;
 
 	private Settings settings;
 	private Language language;
 	private SupportPlannerView application;
-	private Stage viewSupportPlannerStage;
+	private Stage ownerStage;
 
 	@FXML
 	private void initialize() {
@@ -33,7 +59,19 @@ public class HomeAccess {
 	}
 
 	private void styleClasses() {
+
 		accessButton.getStyleClass().add("button_image_001");
+
+		accessFastLabel.getStyleClass().add("label_002");
+		accessNormalLabel.getStyleClass().add("label_002");
+		accessFastDescrLabel.getStyleClass().add("label_001");
+
+		usernameLabel.getStyleClass().add("label_set_001");
+		passwordLabel.getStyleClass().add("label_set_001");
+		usernameTextField.getStyleClass().add("text_field_001");
+		passwordPasswordField.getStyleClass().add("text_field_001");
+
+		accessNormalButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -45,13 +83,61 @@ public class HomeAccess {
 
 		this.language = settings.getLanguage();
 
-		accessButton.setText(language.getString("VIEW008BUT001"));
+		logoImageView.setFitWidth(524);
+		logoImageView.setFitHeight(150);
+		logoImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.LOGO, 524, 150));
+
+		accessFastLabel.setText(language.getString("sp.access.fast"));
+		accessNormalLabel.setText(language.getString("sp.access.normal"));
+		accessFastDescrLabel.setText(language.getStringWithNewLine("sp.access.fastdescr"));
+
+		usernameLabel.setText(language.getString("sp.access.username"));
+		passwordLabel.setText(language.getString("sp.access.password"));
+
+		accessButton.setText("");
 		accessButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.HOME_ACCESS));
 		accessButton.setGraphicTextGap(25.0);
+
+		accessNormalButton.setText("");
+		accessNormalButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.HOME_ACCESS));
+		accessNormalButton.setGraphicTextGap(25.0);
 	}
 
 	private void listeners() {
 		listenerAccessButton();
+		listenerAccessNormalButton();
+	}
+
+	private void listenerAccessNormalButton() {
+
+		accessNormalButton.setOnAction(event -> {
+
+			if (checkRequiredData()) {
+
+				SecretKey databaseKey = settings.getDatabaseSecretKey();
+				if (databaseKey != null) {
+
+					String usernameDecrypted = usernameTextField.getText();
+					String passwordDecrypted = passwordPasswordField.getText();
+
+					String usernameEncrypted = Crypt.encrypt(usernameDecrypted, databaseKey);
+					String userPasswordReEncrypted = Crypt.encrypt(passwordDecrypted, databaseKey);
+
+					if (usernameEncrypted != null && userPasswordReEncrypted != null) {
+
+						Actions.checkUser(settings.getDatabaseUrl(), usernameEncrypted, userPasswordReEncrypted,
+								settings, ownerStage, application, application);
+
+					} else
+
+						application.getAlertBuilder().error(ownerStage, language.getString("sp.access.error1")).show();
+
+				}
+
+			} else
+				application.getAlertBuilder().error(ownerStage, language.getString("sp.access.error1")).show();
+
+		});
 	}
 
 	private void listenerAccessButton() {
@@ -70,7 +156,7 @@ public class HomeAccess {
 						String userPasswordReEncrypted = settings.getUserPasswordReEncrypted();
 
 						Actions.checkUser(settings.getDatabaseUrl(), usernameEncrypted, userPasswordReEncrypted,
-								settings, viewSupportPlannerStage, application, application);
+								settings, ownerStage, application, application);
 					}
 
 				} else
@@ -100,6 +186,23 @@ public class HomeAccess {
 		return status;
 	}
 
+	private boolean checkRequiredData() {
+
+		boolean status = true;
+
+		status = checkDatabaseURL();
+		if (status)
+			status = (settings.getDatabaseSecretKey() != null);
+
+		if (status)
+			status = !usernameTextField.getText().isEmpty();
+
+		if (status)
+			status = !passwordPasswordField.getText().isEmpty();
+
+		return status;
+	}
+
 	private boolean checkDatabaseURL() {
 		return EasyHtml.isValidUrl(this.settings.getDatabaseUrl());
 	}
@@ -121,11 +224,11 @@ public class HomeAccess {
 	}
 
 	public Stage getViewSupportPlannerStage() {
-		return viewSupportPlannerStage;
+		return ownerStage;
 	}
 
 	public void setViewSupportPlannerStage(Stage viewSupportPlannerStage) {
-		this.viewSupportPlannerStage = viewSupportPlannerStage;
+		this.ownerStage = viewSupportPlannerStage;
 	}
 
 }

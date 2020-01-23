@@ -124,6 +124,9 @@ if (! empty($jsonObjPar)) {
                         case 36:
                             $response["status"] = 6; // Test connessione riuscito
                             break;
+                        case 37:
+                            include 'query/sp_q37.php';
+                            break;
                     }
 
                 } else {

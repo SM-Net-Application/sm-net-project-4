@@ -232,6 +232,7 @@ public class Meta {
 		public static final String RESTORE = "restore.png";
 		public static final String BACKUP = "backup.png";
 		public static final String CLEAN = "clean.png";
+		public static final String LOGO = "logo.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

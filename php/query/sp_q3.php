@@ -38,7 +38,7 @@ if (isset ( $jsonObj ["user"] ) && isset ( $jsonObj ["password"] )) {
 					array_push ( $response ["result"], $row );
 				}
 			} else {
-				$response ["status"] = 5;
+				$response ["status"] = 7;
 			}
 			$result->close ();
 			mysqli_close ( $database );

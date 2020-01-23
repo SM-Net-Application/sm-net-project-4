@@ -81,6 +81,7 @@ public class UserMenuDatabase {
 	private void listeners() {
 		listenerBackupButton();
 		listenerRestoreButton();
+		listenerCleanDBButton();
 	}
 
 	private void styleClasses() {
@@ -224,6 +225,19 @@ public class UserMenuDatabase {
 									this.settings, this.application);
 
 				}
+			}
+		});
+	}
+
+	private void listenerCleanDBButton() {
+
+		this.cleanDBButton.setOnAction(event -> {
+
+			if (this.application.getAlertBuilder().confirm(ownerStage,
+					language.getString("sp.database.clean.confirm"))) {
+
+				Actions.cleanDatabase(this.settings, this.ownerStage, this.application);
+
 			}
 		});
 	}

@@ -3046,6 +3046,48 @@ public class Actions {
 		taskThread.start();
 	}
 
+	public static void cleanDatabase(Settings settings, Stage ownerStage, SupportPlannerView application) {
+
+		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
+				settings.getLanguage().getString("MEX005"), ownerStage);
+
+		Task<JSONObject> task = new Task<JSONObject>() {
+
+			{
+				setOnSucceeded(value -> {
+
+					waitAlert.close();
+
+					application.getAlertBuilder()
+							.information(ownerStage, settings.getLanguage().getString("sp.database.clean.done"))
+							.show();
+
+				});
+				setOnCancelled(value -> {
+					waitAlert.close();
+					new AlertDesigner(settings.getLanguage().getString("MEX007"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				});
+				setOnFailed(value -> {
+					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
+							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+					waitAlert.close();
+				});
+			}
+
+			@Override
+			protected JSONObject call() throws Exception {
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.CLEAN_DATABASE());
+			}
+		};
+
+		waitAlert.show();
+		Thread taskThread = new Thread(task);
+		taskThread.start();
+	}
+
 	/**
 	 * Create Alert Window
 	 * 
