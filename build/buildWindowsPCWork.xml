@@ -6,7 +6,7 @@
 	<property name="projectPath" value="C:\Users\molaro\GitHub\sm-net-project-4" />
 	<property name="applicationVendor" value="SM-Net" />
 	<property name="applicationName" value="Support Planner" />
-	<property name="applicationVersion" value="1.0 (beta 6)" />
+	<property name="applicationVersion" value="1.0 (beta 9)" />
 	<property name="jdk" value="C:\Program Files\Java\jdk1.8.0_221" />
 
 	<target name="init-fx-tasks">

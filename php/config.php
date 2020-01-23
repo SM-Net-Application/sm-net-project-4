@@ -1,7 +1,4 @@
 <?php
-/*
- * All database connection variables
- */
 define ( 'DB_USER', "" );
 define ( 'DB_PASSWORD', "" );
 define ( 'DB_DATABASE', "" );
