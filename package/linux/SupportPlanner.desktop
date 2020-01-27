@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SupportPlanner
+Comment=SupportPlanner
+Exec=/opt/SupportPlanner/SupportPlanner
+Icon=/opt/SupportPlanner/SupportPlanner.png
+Terminal=false
+Type=Application
+Categories=SM-Net
+

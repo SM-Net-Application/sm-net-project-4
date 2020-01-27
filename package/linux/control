@@ -1,0 +1,9 @@
+Package: supportplanner
+Version: 1.0b9
+Section: section
+Maintainer: SM-Net
+Priority: optional
+Architecture: amd64
+Provides: provides
+Description: SupportPlanner
+Installed-Size: 264515

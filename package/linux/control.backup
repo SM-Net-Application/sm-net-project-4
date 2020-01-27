@@ -1,0 +1,9 @@
+Package: support-planner
+Version: 1.0b9
+Section: unknown
+Maintainer: SM-Net <Unknown>
+Priority: optional
+Architecture: amd64
+Provides: support-planner
+Description: sm-net-project-4
+Installed-Size: 264515
