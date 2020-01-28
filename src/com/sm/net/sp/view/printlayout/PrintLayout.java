@@ -21,6 +21,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class PrintLayout {
@@ -73,7 +74,7 @@ public class PrintLayout {
 
 		this.logoImageView.setImage(Meta.Resources.imageForImage(Meta.Resources.PRINT));
 		this.titleLabel.setText(this.language.getString("sp.printlayout.select"));
-		this.printLayoutListView.setMinWidth(500);
+		// this.printLayoutListView.setMinWidth(500);
 	}
 
 	private boolean checkSelectedIndex() {
@@ -97,7 +98,8 @@ public class PrintLayout {
 			DialogPane dialogPane = dialog.getDialogPane();
 			dialogPane.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
 			dialogPane.getStyleClass().add("dialog_001");
-
+			dialogPane.setMinHeight(Region.USE_PREF_SIZE);
+			
 			Scene scene = dialogPane.getScene();
 
 			Stage stage = (Stage) scene.getWindow();
