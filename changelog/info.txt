@@ -14,6 +14,8 @@ MySQL Community Server
 -pPASSWORD								Password (tra -p e la password non ci deve essere lo spazio)
 -r NOME_FILE.sql						Dove salvare i dati
 
+SU LINUX DEVO RENDERE PRIMA IL FILE ESEGUIBILE sudo chmod +x mysqldump
+
 Come ripristinare un database MySQL
 
 Su Windows
