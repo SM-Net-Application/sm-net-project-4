@@ -99,7 +99,7 @@ public class PrintLayout {
 			dialogPane.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
 			dialogPane.getStyleClass().add("dialog_001");
 			dialogPane.setMinHeight(Region.USE_PREF_SIZE);
-			
+
 			Scene scene = dialogPane.getScene();
 
 			Stage stage = (Stage) scene.getWindow();
