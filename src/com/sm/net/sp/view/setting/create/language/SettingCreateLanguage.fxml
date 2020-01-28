@@ -35,12 +35,22 @@
                      </children>
                   </StackPane>
                </children>
-            </VBox>
-            <Separator prefWidth="200.0">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets left="25.0" right="25.0" top="25.0" />
                </VBox.margin>
-            </Separator>
+            </VBox>
+            <StackPane>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
+               <children>
+                  <Separator>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Separator>
+               </children>
+            </StackPane>
             <StackPane>
                <children>
                   <Label fx:id="labelSelect" text="Label">
@@ -49,6 +59,9 @@
                      </StackPane.margin>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
             </StackPane>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
@@ -58,6 +71,9 @@
                      </StackPane.margin>
                   </ListView>
                </children>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
             </StackPane>
             <StackPane>
                <children>
@@ -67,6 +83,9 @@
                      </StackPane.margin>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" />
+               </VBox.margin>
             </StackPane>
          </children>
       </VBox>
