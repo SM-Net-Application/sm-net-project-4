@@ -23,3 +23,8 @@
 	- Sezione Utenti - Creare il tab dedicato alla modifica di un utente
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database
+	- Sezione Gruppi di servizio:
+		- Creare layout di stampa
+	- Sezione Congregazione:
+		- Aggiungere ai Membri il CheckBox Non stampare nell'elenco Gruppi di Servizio
+		- Famiglie : il CheckBox pulizia semplificata può essere utilizzato per qualcos altro 

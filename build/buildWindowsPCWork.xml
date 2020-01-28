@@ -285,8 +285,8 @@
 			</fileset>
 		</copy>
 
-		<delete file="dist/libs/sm-net-javafx-1.0.jar"/>
-		
+		<delete file="dist/libs/sm-net-javafx-1.0.jar" />
+
 		<mkdir dir="dist/languages" />
 
 		<copy todir="dist/languages">
@@ -311,12 +311,39 @@
 			</fileset>
 		</copy>
 
+		<mkdir dir="dist/tools" />
+
+		<copy todir="dist/tools">
+			<fileset dir="${projectPath}\tools">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="dist/php" />
+
+		<copy todir="dist/php">
+			<fileset dir="${projectPath}\php">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="dist/mysql" />
+
+		<copy todir="dist/mysql">
+			<fileset dir="${projectPath}\mysql">
+				<include name="**" />
+			</fileset>
+		</copy>
+
 		<fx:resources id="appRes">
 			<fx:fileset dir="dist" includes="sm-net-project-4.jar" />
 			<fx:fileset dir="dist" includes="libs/*" />
 			<fx:fileset dir="dist" includes="languages/**" />
 			<fx:fileset dir="dist" includes="layouts/**" />
 			<fx:fileset dir="dist" includes="resources/**" />
+			<fx:fileset dir="dist" includes="tools/**" />
+			<fx:fileset dir="dist" includes="php/**" />
+			<fx:fileset dir="dist" includes="mysql/**" />
 		</fx:resources>
 
 		<fx:application id="fxApplication" name="${applicationName}" mainClass="com.sm.net.sp.SupportPlannerMain" toolkit="fx" version="${applicationVersion}" />

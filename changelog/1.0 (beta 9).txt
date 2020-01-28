@@ -1,3 +1,5 @@
+Data di pubblicazione : 23.01.2020
+
 * Accesso
 	- Inserito logo del software
 	- Accesso rapido : Login utilizzando i dati di accesso presenti nelle impostazioni
