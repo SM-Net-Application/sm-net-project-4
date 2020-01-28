@@ -1,6 +1,6 @@
 <?php
 
-$phpVersion = "1.0 (beta 9)";
+$phpVersion = "1.0 (beta 10)";
 $response = array();
 $jsonObjPar = file_get_contents('php://input');
 

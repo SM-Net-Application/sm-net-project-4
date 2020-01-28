@@ -44,7 +44,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.0 (beta 9)";
+		public static final String VERSION = "1.0 (beta 10)";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
