@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -44,6 +45,7 @@ public class AlertBuilder {
 			alert.setTitle(this.title);
 
 		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.setMinHeight(Region.USE_PREF_SIZE);
 
 		if (!this.themeFileURL.isEmpty() && !this.themeClass.isEmpty()) {
 			dialogPane.getStylesheets().add(this.themeFileURL);
