@@ -36,8 +36,11 @@
                      </children>
                   </StackPane>
                </children>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" top="25.0" />
+               </VBox.margin>
             </VBox>
-            <StackPane alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+            <StackPane alignment="TOP_CENTER">
                <children>
                   <Separator>
                      <StackPane.margin>
@@ -45,6 +48,9 @@
                      </StackPane.margin>
                   </Separator>
                </children>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
             </StackPane>
             <StackPane>
                <children>
@@ -54,6 +60,9 @@
                      </StackPane.margin>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" top="25.0" />
+               </VBox.margin>
             </StackPane>
             <HBox>
                <children>
@@ -102,8 +111,11 @@
                      </children>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </VBox.margin>
             </HBox>
-            <StackPane alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+            <StackPane alignment="BOTTOM_CENTER">
                <children>
                   <Button fx:id="buttonCreate" mnemonicParsing="false" text="Button">
                      <StackPane.margin>
@@ -111,6 +123,9 @@
                      </StackPane.margin>
                   </Button>
                </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </VBox.margin>
             </StackPane>
          </children>
       </VBox>

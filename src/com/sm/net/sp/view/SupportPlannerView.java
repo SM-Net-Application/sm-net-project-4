@@ -215,14 +215,10 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void viewSettingCreateAccess(AnchorPane accessCreateViewAnchorPane) {
 
 		this.viewSupportPlannerBorderPane.setCenter(accessCreateViewAnchorPane);
-		this.viewSupportPlannerStage.setMinWidth(500);
-		this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
-		this.viewSupportPlannerStage.setWidth(500);
-		this.viewSupportPlannerStage.setMinHeight(500);
-		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
-		this.viewSupportPlannerStage.setHeight(500);
 		this.viewSupportPlannerStage.setMaximized(false);
 		this.viewSupportPlannerStage.setResizable(false);
+		this.viewSupportPlannerStage.hide();
+		this.viewSupportPlannerStage.show();
 	}
 
 	private void viewCheckAccess() {
