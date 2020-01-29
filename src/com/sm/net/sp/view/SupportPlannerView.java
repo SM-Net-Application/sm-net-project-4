@@ -18,6 +18,9 @@ import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.settings.SettingsConf;
 import com.sm.net.sp.utils.AlertBuilder;
+import com.sm.net.sp.utils.EnumOperatingSystem;
+import com.sm.net.sp.utils.EnumOperatingSystemArchitecture;
+import com.sm.net.sp.utils.OperatingSystemUtils;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
@@ -64,7 +67,13 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	private int left;
 	private int center;
 
+	private EnumOperatingSystem system;
+	private EnumOperatingSystemArchitecture architecture;
+
 	public void objectInitialize() {
+
+		this.system = OperatingSystemUtils.getOperatingSystem();
+		this.architecture = OperatingSystemUtils.getOperatingSystemArchitecture();
 
 		this.alertBuilder = new AlertBuilder(Meta.Application.getFullTitle(), Meta.Themes.SUPPORTPLANNER_THEME,
 				"alert_001", new File(Meta.Resources.ICON).toURI().toString());
@@ -81,6 +90,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		this.mysqlDump = setMySQLDumpFile();
 		this.mysqlRestore = setMySQLRestoreFile();
+
 	}
 
 	private File setMySQLRestoreFile() {
@@ -89,20 +99,94 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		File file = new File("tools", "mysql");
 
-		// Windows x64
-		File dump = new File(file, "winx64");
-		return new File(dump, "mysql.exe");
+		File mysql = null;
+
+		switch (this.architecture) {
+		case BIT32:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				break;
+			case LINUX:
+
+				break;
+			case MAC:
+
+				break;
+			}
+
+			break;
+
+		case BIT64:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				mysql = new File(file, "winx64");
+				return new File(mysql, "mysql.exe");
+
+			case LINUX:
+
+				mysql = new File(file, "linuxx64");
+				return new File(mysql, "mysql");
+
+			case MAC:
+
+				break;
+			}
+
+			break;
+		}
+
+		return mysql;
 	}
 
 	private File setMySQLDumpFile() {
 
-		// TODO: differenziare per sistema operativo
-
 		File file = new File("tools", "mysql");
 
-		// Windows x64
-		File dump = new File(file, "winx64");
-		return new File(dump, "mysqldump.exe");
+		File dump = null;
+
+		switch (this.architecture) {
+		case BIT32:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				break;
+			case LINUX:
+
+				break;
+			case MAC:
+
+				break;
+			}
+
+			break;
+
+		case BIT64:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				dump = new File(file, "winx64");
+				return new File(dump, "mysqldump.exe");
+
+			case LINUX:
+
+				dump = new File(file, "linuxx64");
+				return new File(dump, "mysqldump");
+
+			case MAC:
+
+				break;
+			}
+
+			break;
+		}
+
+		return dump;
 	}
 
 	private void settingsInitialize() {
@@ -789,6 +873,22 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void setMysqlRestore(File mysqlRestore) {
 		this.mysqlRestore = mysqlRestore;
+	}
+
+	public EnumOperatingSystem getSystem() {
+		return system;
+	}
+
+	public void setSystem(EnumOperatingSystem system) {
+		this.system = system;
+	}
+
+	public EnumOperatingSystemArchitecture getArchitecture() {
+		return architecture;
+	}
+
+	public void setArchitecture(EnumOperatingSystemArchitecture architecture) {
+		this.architecture = architecture;
 	}
 
 }
