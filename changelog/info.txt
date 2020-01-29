@@ -28,3 +28,11 @@ mysql.exe
 -e "source NOME_FILE.sql"				File da importare
 
 .\mysql.exe -h host -u username dbname --password=dbpassword -e "source Backup.sql"
+
+RESTORE MYSQL DB LINUX
+
+Nel sistema linux deve essere presente la libreria libtinfo.so.5
+Probabilmente si trova nella cartella /usr/lib/x86-64-linux-gnu
+È probabile anche che la versione sul sistema sia diversa. Es. libtinfo.so.6.1
+In questo caso bisogna creare un Link Simbolico nella stessa cartella con il comando:
+sudo ln -s libtinfo.so.6.1 libtinfo.so.5

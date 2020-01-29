@@ -2949,24 +2949,52 @@ public class Actions {
 				String fileName = String.format("Backup%s.splan", sdf.format(new Date()));
 				File file = new File(directory, fileName);
 
-				String command = String.format("\"%s\"", application.getMysqlDump().getAbsolutePath());
+				String command = "";
+
+				command = "%s";
 				command += " --skip-lock-tables";
 				command += " --column-statistics=0";
 				command += String.format(" -h %s", host);
 				command += String.format(" -u %s %s", dbusername, dbname);
 				command += String.format(" -p%s", dbpassword);
-				command += String.format(" -r \"%s\"", file.getAbsolutePath());
+				command += " %s";
+
+				switch (application.getSystem()) {
+				case WINDOWS:
+
+					command = String.format(command,
+							String.format("\"%s\"", application.getMysqlDump().getAbsolutePath()),
+							String.format("-r \"%s\"", file.getAbsolutePath()));
+
+					break;
+				case LINUX:
+
+					command = String.format(command, String.format("%s", application.getMysqlDump().getAbsolutePath()),
+							String.format("-r %s", file.getAbsolutePath()));
+
+					break;
+				case MAC:
+					break;
+				default:
+					break;
+
+				}
+
+				// System.out.println("command : " + command);
+
+				String console = "";
 
 				Runtime rt = Runtime.getRuntime();
 				Process p = rt.exec(command);
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-				String console = "";
 				String line = null;
-				while ((line = input.readLine()) != null)
+				while ((line = input.readLine()) != null) {
+					// System.out.println(line);
 					if (!line.contains("[Warning]"))
 						console += line + "\n";
+				}
 
 				if (!console.trim().isEmpty())
 					file.delete();
@@ -3020,28 +3048,78 @@ public class Actions {
 			@Override
 			protected String call() throws Exception {
 
-				String command = String.format("\"%s\"", application.getMysqlRestore().getAbsolutePath());
-				command += String.format(" -h %s", host);
-				command += String.format(" -u %s %s", dbusername, dbname);
-				command += String.format(" --password=%s", dbpassword);
-				command += String.format(" -e \"source %s\"", file.getAbsolutePath());
+				ProcessBuilder builder = null;
+				String command = "";
 
-				Runtime rt = Runtime.getRuntime();
-				Process p = rt.exec(command);
+				command = "%s";
+				command += String.format(" -h %s", host);
+				command += String.format(" --password=%s", dbpassword);
+				command += String.format(" -u %s %s", dbusername, dbname);
+				command += "%s";
+
+				switch (application.getSystem()) {
+				case WINDOWS:
+
+					command = String.format(command,
+							String.format("\"%s\"", application.getMysqlRestore().getAbsolutePath()),
+							String.format(" -e \"source %s\"", file.getAbsolutePath()));
+
+					break;
+				case LINUX:
+
+					builder = new ProcessBuilder();
+
+					String mysqlValue = String.format("%s", application.getMysqlRestore().getAbsolutePath());
+					String hostKey = "-h";
+					String hostValue = host;
+					String passwordValue = String.format("--password=%s", dbpassword);
+					String dbKey = "-u";
+					String dbUserValue = dbusername;
+					String dbNameValue = dbname;
+					String sourceKey = "-e";
+					String sourceValue = String.format("source %s", file.getAbsolutePath());
+
+					builder.command(mysqlValue, hostKey, hostValue, passwordValue, dbKey, dbUserValue, dbNameValue,
+							sourceKey, sourceValue);
+
+					break;
+				case MAC:
+					break;
+				default:
+					break;
+
+				}
+
+				String console = "";
+				Process p = null;
+
+				switch (application.getSystem()) {
+				case LINUX:
+					p = builder.start();
+					break;
+				case MAC:
+					break;
+				case WINDOWS:
+					Runtime rt = Runtime.getRuntime();
+					p = rt.exec(command);
+					break;
+				}
 
 				BufferedReader input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-				String console = "";
 				String line = null;
-				while ((line = input.readLine()) != null)
+				while ((line = input.readLine()) != null) {
+					// System.out.println(line);
 					if (!line.contains("[Warning]"))
 						console += line + "\n";
+				}
 
 				return console;
 			}
 		};
 
 		waitAlert.show();
+
 		Thread taskThread = new Thread(task);
 		taskThread.start();
 	}
@@ -3059,8 +3137,7 @@ public class Actions {
 					waitAlert.close();
 
 					application.getAlertBuilder()
-							.information(ownerStage, settings.getLanguage().getString("sp.database.clean.done"))
-							.show();
+							.information(ownerStage, settings.getLanguage().getString("sp.database.clean.done")).show();
 
 				});
 				setOnCancelled(value -> {

@@ -171,21 +171,21 @@ public class UserMenuDatabase {
 
 			else {
 
-				if (this.application.getAlertBuilder().confirm(ownerStage,
-						language.getString("sp.database.backup.confirm"))) {
+				if (!this.application.getMysqlDump().exists())
+					this.application.getAlertBuilder()
+							.error(ownerStage, language.getString("sp.database.backup.errorfiledump")).show();
+				else {
 
-					DirectoryChooser dc = new DirectoryChooser();
-					dc.setTitle(Meta.Application.getFullTitle());
-					File directory;
-					if ((directory = dc.showDialog(ownerStage)) != null)
+					if (this.application.getAlertBuilder().confirm(ownerStage,
+							language.getString("sp.database.backup.confirm"))) {
 
-						if (!this.application.getMysqlDump().exists())
-							this.application.getAlertBuilder()
-									.error(ownerStage, language.getString("sp.database.backup.errorfiledump")).show();
-						else
+						DirectoryChooser dc = new DirectoryChooser();
+						dc.setTitle(Meta.Application.getFullTitle());
+						File directory;
+						if ((directory = dc.showDialog(ownerStage)) != null)
 							Actions.createBackupDatabase(host, dbname, dbusername, dbpassword, directory,
 									this.ownerStage, this.settings, this.application);
-
+					}
 				}
 			}
 		});
@@ -207,23 +207,23 @@ public class UserMenuDatabase {
 
 			else {
 
-				if (this.application.getAlertBuilder().confirm(ownerStage,
-						language.getString("sp.database.restore.confirm"))) {
+				if (!this.application.getMysqlRestore().exists())
+					this.application.getAlertBuilder()
+							.error(ownerStage, language.getString("sp.database.restore.errorfilerestore")).show();
+				else {
 
-					FileChooser fc = new FileChooser();
-					fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("SupportPlanner Backup", "*.splan"));
-					fc.setTitle(Meta.Application.getFullTitle());
-					File file;
-					if ((file = fc.showOpenDialog(ownerStage)) != null)
+					if (this.application.getAlertBuilder().confirm(ownerStage,
+							language.getString("sp.database.restore.confirm"))) {
 
-						if (!this.application.getMysqlRestore().exists())
-							this.application.getAlertBuilder()
-									.error(ownerStage, language.getString("sp.database.restore.errorfilerestore"))
-									.show();
-						else
+						FileChooser fc = new FileChooser();
+						fc.getExtensionFilters()
+								.add(new FileChooser.ExtensionFilter("SupportPlanner Backup", "*.splan"));
+						fc.setTitle(Meta.Application.getFullTitle());
+						File file;
+						if ((file = fc.showOpenDialog(ownerStage)) != null)
 							Actions.startRestoreDatabase(host, dbname, dbusername, dbpassword, file, this.ownerStage,
 									this.settings, this.application);
-
+					}
 				}
 			}
 		});
