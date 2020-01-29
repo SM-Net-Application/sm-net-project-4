@@ -28,6 +28,7 @@ mysql.exe
 -e "source NOME_FILE.sql"				File da importare
 
 .\mysql.exe -h host -u username dbname --password=dbpassword -e "source Backup.sql"
+Su LINUX usare la classe Java ProcessBuilder
 
 RESTORE MYSQL DB LINUX
 

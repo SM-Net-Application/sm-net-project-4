@@ -1,0 +1,11 @@
+
+	* Nuova gestione della versione software
+		- Formato 0.0.0
+			- 0.x.x MAJOR UPDATE	: Il software non è più compatibile con la struttura delle versioni precedenti
+			- x.0.x MINOR UPDATE	: Aggiunta di nuove funzionalità
+			- x.x.0 PATCH			: Bug fix
+		- Pertanto questa versione diventa : 0.10.0
+		
+	* Versione Linux
+		- Risolti diversi problemi grafici
+		- Implementata funzione di Backup/Restore database MySQL
