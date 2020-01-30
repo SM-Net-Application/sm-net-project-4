@@ -24,6 +24,8 @@ if (file_exists("languages/" . $langIni)) {
 
     $language = parse_ini_file("languages/" . $langIni);
 
+    $president2icon = $language['MINISTRY_PRESIDENTICON'];
+
     // Password monitor
     if (isset($_GET["pwmon"])) {
         if (! empty($_GET["pwmon"])) {
@@ -104,7 +106,7 @@ if (file_exists("languages/" . $langIni)) {
                         }
                     }
 
-                    $query_ministry = "SELECT spInf1, spInf7, spInf8, spInf9, spInf10";
+                    $query_ministry = "SELECT spInf1, spInf3, spInf7, spInf8, spInf9, spInf10";
                     $query_ministry .= " FROM sp_week_min";
                     $query_ministry .= " WHERE spInf1 >=";
                     $query_ministry .= " " . $weekcode;
@@ -120,6 +122,7 @@ if (file_exists("languages/" . $langIni)) {
 
                             $row = array();
                             $row["spInf1"] = $resultRow_ministry["spInf1"];
+                            $row["spInf3"] = $resultRow_ministry["spInf3"];
                             $row["spInf7"] = $resultRow_ministry["spInf7"];
                             $row["spInf8"] = $resultRow_ministry["spInf8"];
                             $row["spInf9"] = $resultRow_ministry["spInf9"];
@@ -236,7 +239,12 @@ if (file_exists("languages/" . $langIni)) {
                     }
 
                     if ($memberID == $min["spInf9"]) {
-                        array_push($activities, add_activity($row_weekcode, $date, $language['MINISTRY_STUDENT_2'], $language['MINISTRY_STUDENT_2_ICON']));
+
+                        if ($min["spInf3"] == 1) {                
+                            array_push($activities, add_activity($row_weekcode, $date, $language['MINISTRY_PRESIDENT'], $president2icon));
+                        } else {
+                            array_push($activities, add_activity($row_weekcode, $date, $language['MINISTRY_STUDENT_2'], $language['MINISTRY_STUDENT_2_ICON']));
+                        }
                     }
 
                     if ($memberID == $min["spInf10"]) {
@@ -285,65 +293,65 @@ function cmp($a, $b)
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<title>SM-Net: SupportPlanner - Monitor</title>
-<link rel="stylesheet" type="text/css"
-	href="bootstrap-4.3.1-dist/css/bootstrap.css">
-<script src="bootstrap-4.3.1-dist/js/bootstrap.js"></script>
-</head>
-<body class="bg-dark">
+    <head>
+        <title>SM-Net: SupportPlanner - Monitor</title>
+        <link rel="stylesheet" type="text/css"
+              href="bootstrap-4.3.1-dist/css/bootstrap.css">
+        <script src="bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+    </head>
+    <body class="bg-dark">
 
-	<div class="container-fluid">
-		<img src="images/logo.png" class="img-fluid" alt="SupportPlanner Logo">
-	</div>
+        <div class="container-fluid">
+            <img src="images/logo.png" class="img-fluid" alt="SupportPlanner Logo">
+        </div>
 
-	<?php if (isset ( $language )) { ?>
+        <?php if (isset ( $language )) { ?>
 
-		<?php if ( empty ( $pwmon )) { ?>
-		
-		
-	<table class="table table-striped table-dark">
-		<thead>
-			<tr>
-				<th scope="col" class="text-center"><?php echo $language['error1']?></th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-			
-			
-		<?php
-    } else {
+        <?php if ( empty ( $pwmon )) { ?>
+
+
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center"><?php echo $language['error1']?></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+
+        <?php
+                                     } else {
         ?>
-		
-			<?php if ( empty ( $memberID)) { ?>
-				
-	<table class="table table-striped table-dark">
-		<thead>
-			<tr>
-				<th scope="col"><?php echo $language['error1']?></th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
 
-			<?php
-        } else {
+        <?php if ( empty ( $memberID)) { ?>
 
-            ?>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col"><?php echo $language['error1']?></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
 
-		<table class="table table-striped table-dark">
-		<thead>
-			<tr>
-				<th scope="col"><?php echo $language['week'];?></th>
-				<th scope="col"></th>
-				<th scope="col"><?php echo $language['activity'];?></th>
-			</tr>
-		</thead>
-		<tbody>
-            <?php
+        <?php
+                                       } else {
+
+        ?>
+
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col"><?php echo $language['week'];?></th>
+                    <th scope="col"></th>
+                    <th scope="col"><?php echo $language['activity'];?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
 
             foreach ($activities as $activity) {
 
@@ -352,22 +360,22 @@ function cmp($a, $b)
                 $activity_icon = $activity['icon'];
 
                 ?>
-             
-             <tr>
-				<td><?php echo $activity_date;?></td>
-				<td class="text-center"><img
-					src="images/<?php echo $activity_icon;?>" width="25" height="25"
-					alt="Activity Icon"></td>
-				<td><?php echo $activity_name;?></td>
-			</tr>
-             
-             <?php
+
+                <tr>
+                    <td><?php echo $activity_date;?></td>
+                    <td class="text-center"><img
+                                                 src="images/<?php echo $activity_icon;?>" width="25" height="25"
+                                                 alt="Activity Icon"></td>
+                    <td><?php echo $activity_name;?></td>
+                </tr>
+
+                <?php
             }
         }
-        ?>
-        </tbody>
-	</table>
-		<?php } ?>
-	<?php } ?>
-</body>
+                ?>
+            </tbody>
+        </table>
+        <?php } ?>
+        <?php } ?>
+    </body>
 </html>

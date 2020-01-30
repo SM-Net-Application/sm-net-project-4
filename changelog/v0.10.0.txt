@@ -1,11 +1,14 @@
+Data di pubblicazione : ..-..-....
 
 	* Nuova gestione della versione software
 		- Formato 0.0.0
 			- 0.x.x MAJOR UPDATE	: Il software non è più compatibile con la struttura delle versioni precedenti
 			- x.0.x MINOR UPDATE	: Aggiunta di nuove funzionalità
 			- x.x.0 PATCH			: Bug fix
-		- Pertanto questa versione diventa : 0.10.0
+		- Pertanto questa versione diventa : 0.10.0 e verrà incrementato fino a quando non verrà ultimata la versione 1.0.0
 		
 	* Versione Linux
 		- Risolti diversi problemi grafici
-		- Implementata funzione di Backup/Restore database MySQL
+		- Possibilità di effettuare il backup del database (Linux x64)
+		- Possibilità di effettuare il ripristino di un backup (Linux x64)
+		- Disponibile pacchetto .deb per l'installazione

@@ -1,7 +1,26 @@
-		
+
 	- Installer per MAC
+	- Dump/Ripristino del database per MAC
+	
 	- Nuova sezione: Programmazione adunanze
-	- Nuova sezione: Luoghi di adorazione
+		- Tabella:
+			- Data inizio validità (la nuova programmazione non può essere precedente all'ultima inserita)
+			- Adunanza infrasettimanale
+				- Giorno
+				- Ora
+				- Minuto
+			- Adunanza del fine settimana
+				- Giorno
+				- Ora
+				-Minuto
+		- La nuova programmazione carica i dati dell'ultima inserita (se presente)
+		
+	- Nuova sezione: Luoghi di adorazione (Indirizzo : Via, Civico, CAP, Città, Provincia, Nazione, Coordinate)
+		- Sale del Regno
+			- Impostare luogo di adorazione predefinito
+		- Sala assemblee/congressi
+		- Altri luoghi
+	
 	- Sezione adunanze:
 		- Aggiungere le informazioni:
 			- Giorno adunanza infrasettimanale (Lunedi - Giovedi)
@@ -9,22 +28,27 @@
 			- Orario adunanza infrasettimanale (Ora, Minuto)
 			- Orario adunanza del fine settimana (Ora, Minuto)
 			- Luogo di adorazione (Sala del Regno / Sala Assemblee / Altro locale)
+			
 	- Nuova sezione: Commemorazione
 		- Mostra solo le settimane presenti nel database
 		- La stampa del programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
+		
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
-	- Installer per Linux
-	- Dump/Ripristino del database per Linux
-	- Dump/Ripristino del database per MAC
+	
 	- Nuova sezione: Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
-	- Sezione Utenti - Creare il tab dedicato alla modifica di un utente
+		
+	- Sezione Utenti
+		- Creare il tab dedicato alla modifica di un utente
+	
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database
-	- Sezione Gruppi di servizio:
-		- Creare layout di stampa
-	- Sezione Congregazione:
+		
+	- Sezione Gruppi di servizio
+		- Creare layout di stampa Gruppi di servizio (selezionati (1-5))
+		
+	- Sezione Congregazione
 		- Aggiungere ai Membri il CheckBox Non stampare nell'elenco Gruppi di Servizio
-		- Famiglie : il CheckBox pulizia semplificata può essere utilizzato per qualcos altro 
+		- Famiglie : il CheckBox pulizia semplificata può essere utilizzato per qualcos'altro 
