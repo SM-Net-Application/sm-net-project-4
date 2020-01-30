@@ -12,3 +12,6 @@ Data di pubblicazione : ..-..-....
 		- Possibilità di effettuare il backup del database (Linux x64)
 		- Possibilità di effettuare il ripristino di un backup (Linux x64)
 		- Disponibile pacchetto .deb per l'installazione
+	
+	* Monitor Online
+		- Bug-Fix : Il presidente della seconda sala veniva mostrato come Discorso di esercitazione
