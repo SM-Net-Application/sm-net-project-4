@@ -362,3 +362,13 @@
 .context-menu {
     -fx-background-color: #3c3f41;
 }
+
+.context-menu .menu-item .label {
+    -fx-font-size: 14.0pt;
+    -fx-text-fill: #bbbbbb;
+}
+
+.context-menu .menu-item:selected {
+    -fx-background-color: #4b6eaf;
+    -fx-font-weight: bold;
+}
