@@ -70,7 +70,7 @@ if (file_exists("languages/" . $langIni)) {
 
                     // Weeks
 
-                    $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28";
+                    $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28,";
                     $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40";
                     $query_week .= " FROM sp_week";
                     $query_week .= " WHERE spInf1 >=";
@@ -95,7 +95,6 @@ if (file_exists("languages/" . $langIni)) {
                             $row["spInf23"] = $resultRow_week["spInf23"];
                             $row["spInf27"] = $resultRow_week["spInf27"];
                             $row["spInf28"] = $resultRow_week["spInf28"];
-
                             $row["spInf29"] = $resultRow_week["spInf29"];
                             $row["spInf30"] = $resultRow_week["spInf30"];
                             $row["spInf37"] = $resultRow_week["spInf37"];
@@ -162,7 +161,7 @@ if (file_exists("languages/" . $langIni)) {
                 mysqli_close($database);
 
                 foreach ($weeks as $week) {
-
+                    
                     $row_weekcode = $week['spInf1'];
 
                     $year = substr($row_weekcode, 0, 4);

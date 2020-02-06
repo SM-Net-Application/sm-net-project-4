@@ -1,5 +1,8 @@
 Data di pubblicazione : ..-..-....
 
+	* Fix
+		- Visualizzazione del menù contestuale ottimizzata
+		 
 	* Nuova gestione della versione software
 		- Formato 0.0.0
 			- 0.x.x MAJOR UPDATE	: Il software non è più compatibile con la struttura delle versioni precedenti
@@ -15,3 +18,4 @@ Data di pubblicazione : ..-..-....
 	
 	* Monitor Online
 		- Bug-Fix : Il presidente della seconda sala veniva mostrato come Discorso di esercitazione
+		- Bug-Fix : Il lettore dello studio biblico di congregazione compariva
