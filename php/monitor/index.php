@@ -161,7 +161,7 @@ if (file_exists("languages/" . $langIni)) {
                 mysqli_close($database);
 
                 foreach ($weeks as $week) {
-                    
+
                     $row_weekcode = $week['spInf1'];
 
                     $year = substr($row_weekcode, 0, 4);
@@ -239,7 +239,7 @@ if (file_exists("languages/" . $langIni)) {
 
                     if ($memberID == $min["spInf9"]) {
 
-                        if ($min["spInf3"] == 1) {                
+                        if ($min["spInf3"] == 1) {
                             array_push($activities, add_activity($row_weekcode, $date, $language['MINISTRY_PRESIDENT'], $president2icon));
                         } else {
                             array_push($activities, add_activity($row_weekcode, $date, $language['MINISTRY_STUDENT_2'], $language['MINISTRY_STUDENT_2_ICON']));
@@ -292,17 +292,17 @@ function cmp($a, $b)
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <title>SM-Net: SupportPlanner - Monitor</title>
-        <link rel="stylesheet" type="text/css"
-              href="bootstrap-4.3.1-dist/css/bootstrap.css">
-        <script src="bootstrap-4.3.1-dist/js/bootstrap.js"></script>
-    </head>
-    <body class="bg-dark">
+<head>
+<title>SM-Net: SupportPlanner - Monitor</title>
+<link rel="stylesheet" type="text/css"
+	href="bootstrap-4.3.1-dist/css/bootstrap.css">
+<script src="bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+</head>
+<body class="bg-dark">
 
-        <div class="container-fluid">
-            <img src="images/logo.png" class="img-fluid" alt="SupportPlanner Logo">
-        </div>
+	<div class="container-fluid">
+		<img src="images/logo.png" class="img-fluid" alt="SupportPlanner Logo">
+	</div>
 
         <?php if (isset ( $language )) { ?>
 
@@ -310,70 +310,73 @@ function cmp($a, $b)
 
 
         <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center"><?php echo $language['error1']?></th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+		<thead>
+			<tr>
+				<th scope="col" class="text-center"><?php echo $language['error1']?></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 
 
         <?php
-                                     } else {
-        ?>
+            } else {
+                ?>
 
         <?php if ( empty ( $memberID)) { ?>
 
         <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th scope="col"><?php echo $language['error1']?></th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+		<thead>
+			<tr>
+				<th scope="col"><?php echo $language['error1']?></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 
         <?php
-                                       } else {
+                } else {
 
-        ?>
+                    ?>
 
-        <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th scope="col"><?php echo $language['week'];?></th>
-                    <th scope="col"></th>
-                    <th scope="col"><?php echo $language['activity'];?></th>
-                </tr>
-            </thead>
-            <tbody>
+	<!-- TODO: Visualizzare la data odierna -->
+	<div class="p-3 mb-2 bg-secondary text-white"><?php echo sprintf($language['todayText'], date($language['todayFormat']));?></div>
+
+	<table class="table table-striped table-dark">
+		<thead>
+			<tr>
+				<th scope="col"><?php echo $language['week'];?></th>
+				<th scope="col"></th>
+				<th scope="col"><?php echo $language['activity'];?></th>
+			</tr>
+		</thead>
+		<tbody>
                 <?php
 
-            foreach ($activities as $activity) {
+                    foreach ($activities as $activity) {
 
-                $activity_date = $activity['date'];
-                $activity_name = $activity['name'];
-                $activity_icon = $activity['icon'];
+                        $activity_date = $activity['date'];
+                        $activity_name = $activity['name'];
+                        $activity_icon = $activity['icon'];
 
-                ?>
+                        ?>
 
                 <tr>
-                    <td><?php echo $activity_date;?></td>
-                    <td class="text-center"><img
-                                                 src="images/<?php echo $activity_icon;?>" width="25" height="25"
-                                                 alt="Activity Icon"></td>
-                    <td><?php echo $activity_name;?></td>
-                </tr>
+				<td><?php echo $activity_date;?></td>
+				<td class="text-center"><img
+					src="images/<?php echo $activity_icon;?>" width="25" height="25"
+					alt="Activity Icon"></td>
+				<td><?php echo $activity_name;?></td>
+			</tr>
 
                 <?php
-            }
-        }
+                    }
+                }
                 ?>
             </tbody>
-        </table>
+	</table>
         <?php } ?>
         <?php } ?>
     </body>

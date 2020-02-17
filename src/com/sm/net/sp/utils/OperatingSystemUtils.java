@@ -6,8 +6,6 @@ public class OperatingSystemUtils {
 
 		final String osName = System.getProperty("os.name").toLowerCase();
 
-		System.out.println("osName : " + osName);
-
 		if (!osName.isEmpty()) {
 
 			if (osName.contains("windows"))
@@ -27,8 +25,6 @@ public class OperatingSystemUtils {
 	public static EnumOperatingSystemArchitecture getOperatingSystemArchitecture() {
 
 		final String osArch = System.getProperty("os.arch").toLowerCase();
-
-		System.out.println("osArch : " + osArch);
 		
 		if (!osArch.isEmpty())
 			return osArch.contains("86")

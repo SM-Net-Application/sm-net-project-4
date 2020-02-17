@@ -1,6 +1,3 @@
-
-	- Installer per MAC
-	- Dump/Ripristino del database per MAC
 	
 	- Nuova sezione: Programmazione adunanze
 		- Tabella:
@@ -51,4 +48,7 @@
 		
 	- Sezione Congregazione
 		- Aggiungere ai Membri il CheckBox Non stampare nell'elenco Gruppi di Servizio
-		- Famiglie : il CheckBox pulizia semplificata può essere utilizzato per qualcos'altro 
+		- Famiglie : il CheckBox pulizia semplificata può essere utilizzato per qualcos'altro
+		
+	- Installer per MAC
+	- Dump/Ripristino del database per MAC 
