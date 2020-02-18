@@ -339,31 +339,105 @@ function cmp($a, $b)
         <?php
                 } else {
 
+                    $thisweekcount = 0;
+                    $nextweekcount = 0;
+                    $thisweekheader = 0;
+                    $nextweekheader = 0;
+                    $thisweeknoactivity = 0;
+                    $nextweeknoactivity = 0;
+
                     ?>
 
-	<!-- TODO: Visualizzare la data odierna -->
+	<!-- TODAY -->
+	<br>
 	<div class="p-3 mb-2 bg-secondary text-white"><?php echo sprintf($language['todayText'], date($language['todayFormat']));?></div>
-
-	<table class="table table-striped table-dark">
-		<thead>
-			<tr>
-				<th scope="col"><?php echo $language['week'];?></th>
-				<th scope="col"></th>
-				<th scope="col"><?php echo $language['activity'];?></th>
-			</tr>
-		</thead>
-		<tbody>
+	<br>
+	
                 <?php
 
                     foreach ($activities as $activity) {
 
+                        $activity_weekcode = $activity['weekcode'];
                         $activity_date = $activity['date'];
                         $activity_name = $activity['name'];
                         $activity_icon = $activity['icon'];
 
+                        if ($thisweekheader == 0) {
+
+                            ?>
+                                
+    <!-- THIS WEEK -->
+	<table class="table table-striped table-dark">
+		<thead>
+			<tr>
+				<th style="width: 48%"><?php echo $language['thisweek'];?></th>
+				<th style="width: 4%"></th>
+				<th style="width: 48%"><?php echo $language['activity'];?></th>
+			</tr>
+		</thead>
+		<tbody>
+                                
+                                <?php
+
+                            $thisweekheader = 1;
+                        }
+
+                        if ($activity_weekcode == $weekcode) {
+
+                            $thisweekcount = $thisweekcount + 1;
+                        } else {
+
+                            $nextweekcount = $nextweekcount + 1;
+
+                            if ($nextweekheader == 0) {
+
+                                if ($thisweekcount == 0) {
+
+                                    if ($thisweeknoactivity == 0) {
+
+                                        ?>
+                                    
+			<!-- NO ACTIVITY FOR THIS WEEK -->
+			<tr>
+				<td><?php echo $language['noactivity'];?></td>
+				<td></td>
+				<td></td>
+			</tr>
+                                    
+                                    <?php
+
+                                        $thisweeknoactivity = 1;
+                                    }
+                                }
+
+                                ?>
+                
+                            
+    <!-- THIS WEEK CLOSE -->
+		</tbody>
+	</table>
+	<br>
+
+	<!-- NEXT WEEK -->
+	<table class="table table-striped table-dark">
+		<thead>
+			<tr>
+				<th style="width: 48%"><?php echo $language['nextweek'];?></th>
+				<th style="width: 4%"></th>
+				<th style="width: 48%"><?php echo $language['activity'];?></th>
+			</tr>
+		</thead>
+		<tbody>
+                            
+                            <?php
+
+                                $nextweekheader = 1;
+                            }
+                        }
+
                         ?>
 
-                <tr>
+            <tr>
 				<td><?php echo $activity_date;?></td>
 				<td class="text-center"><img
 					src="images/<?php echo $activity_icon;?>" width="25" height="25"
@@ -373,11 +447,57 @@ function cmp($a, $b)
 
                 <?php
                     }
+
+                    if ($nextweekcount == 0) {
+
+                        if ($nextweekheader == 0) {
+
+                            ?>
+                            
+        <!-- THIS WEEK CLOSE 2 WITHOUT NEXTWEEK IN LOOP -->
+		</tbody>
+	</table>
+	<br>
+
+	<!-- NEXT WEEK -->
+	<table class="table table-striped table-dark">
+		<thead>
+			<tr>
+				<th style="width: 48%"><?php echo $language['nextweek'];?></th>
+				<th style="width: 4%"></th>
+				<th style="width: 48%"><?php echo $language['activity'];?></th>
+			</tr>
+		</thead>
+		<tbody>
+                            
+                            <?php
+                        }
+
+                        if ($nextweeknoactivity == 0) {
+
+                            ?>
+                                    
+			<!-- NO ACTIVITY FOR NEXT WEEK -->
+			<tr>
+				<td><?php echo $language['noactivity'];?></td>
+				<td></td>
+				<td></td>
+			</tr>
+                                    
+            <?php
+                        }
+
+                        $nextweeknoactivity = 1;
+                    }
                 }
+
                 ?>
             </tbody>
 	</table>
-        <?php } ?>
-        <?php } ?>
-    </body>
+        <?php
+            }
+        }
+        ?>
+        
+</body>
 </html>

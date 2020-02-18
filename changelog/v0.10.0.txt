@@ -19,3 +19,5 @@ Data di pubblicazione : ..-..-....
 	* Monitor Online
 		- Bug-Fix : Il presidente della seconda sala veniva mostrato come Discorso di esercitazione
 		- Bug-Fix : Il lettore dello studio biblico di congregazione compariva
+		- Aggiunta la data odierna
+		- Le attività della settimana in corso e quelle delle prossime settimane vengono visualizzate in 2 tabelle diverse
