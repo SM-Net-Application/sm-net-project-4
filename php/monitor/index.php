@@ -448,6 +448,49 @@ function cmp($a, $b)
                 <?php
                     }
 
+                    // NO ACTIVITY THIS AND NEXT WEEK ?
+
+                    if ($thisweekcount == 0) {
+
+                        if ($thisweekheader == 0) {
+
+                            ?>
+                           
+
+	<!-- THIS WEEK HEADER -->
+			<table class="table table-striped table-dark">
+				<thead>
+					<tr>
+						<th style="width: 48%"><?php echo $language['thisweek'];?></th>
+						<th style="width: 4%"></th>
+						<th style="width: 48%"><?php echo $language['activity'];?></th>
+					</tr>
+				</thead>
+				<tbody>
+                            
+                            <?php
+                        }
+
+                        if ($thisweeknoactivity == 0) {
+
+                            ?>
+                                    
+			<!-- NO ACTIVITY FOR NEXT WEEK -->
+					<tr>
+						<td><?php echo $language['noactivity'];?></td>
+						<td></td>
+						<td></td>
+					</tr>
+                                    
+            <?php
+                        }
+
+                        $thisweeknoactivity = 1;
+                    }
+
+                    
+                    // NO ACTIVITY NEXT WEEK?
+                    
                     if ($nextweekcount == 0) {
 
                         if ($nextweekheader == 0) {
@@ -455,20 +498,20 @@ function cmp($a, $b)
                             ?>
                             
         <!-- THIS WEEK CLOSE 2 WITHOUT NEXTWEEK IN LOOP -->
-		</tbody>
-	</table>
-	<br>
+				</tbody>
+			</table>
+			<br>
 
-	<!-- NEXT WEEK -->
-	<table class="table table-striped table-dark">
-		<thead>
-			<tr>
-				<th style="width: 48%"><?php echo $language['nextweek'];?></th>
-				<th style="width: 4%"></th>
-				<th style="width: 48%"><?php echo $language['activity'];?></th>
-			</tr>
-		</thead>
-		<tbody>
+			<!-- NEXT WEEK -->
+			<table class="table table-striped table-dark">
+				<thead>
+					<tr>
+						<th style="width: 48%"><?php echo $language['nextweek'];?></th>
+						<th style="width: 4%"></th>
+						<th style="width: 48%"><?php echo $language['activity'];?></th>
+					</tr>
+				</thead>
+				<tbody>
                             
                             <?php
                         }
@@ -478,11 +521,11 @@ function cmp($a, $b)
                             ?>
                                     
 			<!-- NO ACTIVITY FOR NEXT WEEK -->
-			<tr>
-				<td><?php echo $language['noactivity'];?></td>
-				<td></td>
-				<td></td>
-			</tr>
+					<tr>
+						<td><?php echo $language['noactivity'];?></td>
+						<td></td>
+						<td></td>
+					</tr>
                                     
             <?php
                         }
@@ -493,11 +536,15 @@ function cmp($a, $b)
 
                 ?>
             </tbody>
-	</table>
+			</table>
         <?php
             }
         }
         ?>
         
+
+
+
+
 </body>
 </html>
