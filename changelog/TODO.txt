@@ -33,15 +33,15 @@
 		- Mostra solo le settimane presenti nel database
 		- La stampa del programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
 		
-	- Nuova sezione: Pulizia
-	- Nuova sezione: Acustica
-	- Nuova sezione: Uscieri
-	
 	- Nuova sezione: Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
 		
 	- Sezione Utenti
 		- Creare il tab dedicato alla modifica di un utente
+		
+	- Nuova sezione: Pulizia
+	- Nuova sezione: Acustica
+	- Nuova sezione: Uscieri
 	
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database
