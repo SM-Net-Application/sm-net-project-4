@@ -18,6 +18,9 @@
 		- Sala assemblee/congressi
 		- Altri luoghi
 	
+	- Sezione: Disastri Naturali
+		- Stampare l'elenco per Gruppo di Servizio
+	
 	- Sezione adunanze:
 		- Aggiungere le informazioni:
 			- Giorno adunanza infrasettimanale (Lunedi - Giovedi)

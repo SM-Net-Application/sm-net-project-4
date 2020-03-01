@@ -233,6 +233,10 @@ public class Meta {
 		public static final String BACKUP = "backup.png";
 		public static final String CLEAN = "clean.png";
 		public static final String LOGO = "logo.png";
+		public static final String TIME = "time.png";
+		public static final String PLACES = "places.png";
+		public static final String MEMORIAL = "memorial.png";
+		public static final String CONVENTIONS = "conventions.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

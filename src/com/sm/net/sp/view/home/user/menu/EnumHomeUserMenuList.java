@@ -6,6 +6,10 @@ public enum EnumHomeUserMenuList {
 
 	USERS("USERMENU001", Meta.Resources.USER_MENU_USERS),
 
+	DATE_AND_TIME("sp.menu.dateandtime", Meta.Resources.TIME),
+	
+	PLACES("sp.menu.places", Meta.Resources.PLACES),
+	
 	CONGREGATION("USERMENU002", Meta.Resources.USER_MENU_CONGR),
 
 	SERVICEGROUPS("USERMENU003", Meta.Resources.USER_MENU_SERVICEGROUPS),
@@ -16,6 +20,10 @@ public enum EnumHomeUserMenuList {
 
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
 
+	CONVENTIONS("sp.menu.conventions", Meta.Resources.CONVENTIONS),
+	
+	MEMORIAL("sp.menu.memorial", Meta.Resources.MEMORIAL),
+	
 	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER),
 
 	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR),
