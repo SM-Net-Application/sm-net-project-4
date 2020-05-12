@@ -21,3 +21,16 @@ Data di pubblicazione : ..-..-....
 		- Bug-Fix : Il lettore dello studio biblico di congregazione compariva
 		- Aggiunta la data odierna
 		- Le attività della settimana in corso e quelle delle prossime settimane vengono visualizzate in 2 tabelle diverse
+		
+	* Database update
+
+		CREATE TABLE `smnetzwe_albstadtita`.`sp_datetime` (
+		  `spDateTimeID` INT NOT NULL,
+		  `spInf1` DATE NULL,
+		  `spInf2` INT NULL,
+		  `spInf3` INT NULL,
+		  `spInf4` INT NULL,
+		  `spInf5` INT NULL,
+		  `spInf6` INT NULL,
+		  `spInf7` INT NULL,
+		  PRIMARY KEY (`spDateTimeID`));

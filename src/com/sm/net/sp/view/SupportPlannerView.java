@@ -27,6 +27,7 @@ import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
+import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -698,6 +699,31 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void viewHomeUserMenuDateAndTime() {
+
+		if (this.center != 15) {
+
+			this.center = 15;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_DATEANDTIME);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				HomeUserMenuDateAndTime ctrl = (HomeUserMenuDateAndTime) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+
 	}
 
 	@Override

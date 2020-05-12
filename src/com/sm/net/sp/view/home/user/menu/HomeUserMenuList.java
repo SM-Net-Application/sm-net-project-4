@@ -147,6 +147,9 @@ public class HomeUserMenuList {
 	}
 
 	private void buildMenuList() {
+
+		// TODO : Gestire le autorizzazioni degli utenti
+
 		if (this.user.isSpUserSU())
 			menuListView.getItems().addAll(EnumHomeUserMenuList.values());
 		else {
@@ -171,11 +174,19 @@ public class HomeUserMenuList {
 
 	private void loadSettings() {
 
+		// TODO : Aggiungere il metodo per caricare l'opzione selezionata
+
 		EnumHomeUserMenuList menuItem = menuListView.getSelectionModel().getSelectedItem();
 
 		switch (menuItem) {
+
 		case USERS:
 			ctrlSupportPlannerView.viewHomeUserMenuUsers();
+			break;
+		case DATE_AND_TIME:
+			ctrlSupportPlannerView.viewHomeUserMenuDateAndTime();
+			break;
+		case PLACES:
 			break;
 		case CONGREGATION:
 			ctrlSupportPlannerView.viewHomeUserMenuCongregation();
@@ -191,6 +202,10 @@ public class HomeUserMenuList {
 			break;
 		case CIRCUITOVERSEERS:
 			ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			break;
+		case CONVENTIONS:
+			break;
+		case MEMORIAL:
 			break;
 		case MONITOR:
 			ctrlSupportPlannerView.viewHomeUserMenuMonitor();

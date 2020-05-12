@@ -15,6 +15,7 @@ import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
+import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -156,6 +157,8 @@ public class Meta {
 				.getResource("ChristiansPartEditor.fxml");
 		public static final URL HISTORY = History.class.getResource("History.fxml");
 		public static final URL WOLBROWSER = WOLBrowser.class.getResource("WOLBrowser.fxml");
+		public static final URL HOME_USER_MENU_DATEANDTIME = HomeUserMenuDateAndTime.class
+				.getResource("HomeUserMenuDateAndTime.fxml");
 	}
 
 	public static class Themes {
