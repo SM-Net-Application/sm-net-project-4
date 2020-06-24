@@ -5,8 +5,6 @@ import com.sm.net.auth.ValidationType;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
@@ -14,6 +12,9 @@ import com.sm.net.util.Crypt;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,20 +27,50 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 	@FXML
 	private AnchorPane anchorPane;
 	@FXML
-	private ImageView newUserImageView;
+	private ImageView imageView;
 	@FXML
 	private Label titleLabel;
 	@FXML
-	private Label usernameLabel;
+	private Label dateLabel;
 	@FXML
-	private Label passwordLabel;
+	private Label meeting1Label;
 	@FXML
-	private TextField usernameTextField;
+	private Label meeting2Label;
 	@FXML
-	private PasswordField passwordField;
+	private Label time1Label;
+	@FXML
+	private Label timeSeparator1Label;
+	@FXML
+	private Label time2Label;
+	@FXML
+	private Label timeSeparator2Label;
+	@FXML
+	private DatePicker datePicker;
+	@FXML
+	private CheckBox day1CheckBox;
+	@FXML
+	private CheckBox day2CheckBox;
+	@FXML
+	private CheckBox day3CheckBox;
+	@FXML
+	private CheckBox day4CheckBox;
+	@FXML
+	private CheckBox day5CheckBox;
+	@FXML
+	private CheckBox day6CheckBox;
+	@FXML
+	private CheckBox day7CheckBox;
+	@FXML
+	private ComboBox<Integer> hours1ComboBox;
+	@FXML
+	private ComboBox<Integer> minute1ComboBox;
+	@FXML
+	private ComboBox<Integer> hours2ComboBox;
+	@FXML
+	private ComboBox<Integer> minute2ComboBox;
 
 	@FXML
-	private Button createUserButton;
+	private Button saveButton;
 
 	private Settings settings;
 	private Language language;
@@ -58,13 +89,10 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 
 		titleLabel.getStyleClass().add("label_setting_name");
 
-		usernameLabel.getStyleClass().add("label_set_001");
-		passwordLabel.getStyleClass().add("label_set_001");
+		dateLabel.getStyleClass().add("label_set_001");
+		meeting1Label.getStyleClass().add("label_set_001");
 
-		usernameTextField.getStyleClass().add("text_field_001");
-		passwordField.getStyleClass().add("text_field_001");
-
-		createUserButton.getStyleClass().add("button_image_001");
+		saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -76,17 +104,17 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 
 		this.language = settings.getLanguage();
 
-		newUserImageView.setFitWidth(100);
-		newUserImageView.setFitHeight(100);
-		newUserImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_USERS, 100, 100));
+		imageView.setFitWidth(100);
+		imageView.setFitHeight(100);
+		imageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_USERS, 100, 100));
 
 		titleLabel.setText(language.getString("TEXT0003"));
 
-		usernameLabel.setText(language.getString("VIEW007LAB002"));
-		passwordLabel.setText(language.getString("VIEW002LAB002"));
+		dateLabel.setText(language.getString("VIEW007LAB002"));
+		meeting1Label.setText(language.getString("VIEW002LAB002"));
 
-		createUserButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
-		createUserButton.setText(language.getString("VIEW002BUT001"));
+		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
+		saveButton.setText(language.getString("VIEW002BUT001"));
 	}
 
 	private void listeners() {
@@ -95,26 +123,29 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 
 	private void listenerCreateUserButton() {
 
-		createUserButton.setOnAction(event -> {
+		saveButton.setOnAction(event -> {
 
-			String user = usernameTextField.getText();
-			String password = passwordField.getText();
+			// String user = usernameTextField.getText();
+			// String password = passwordField.getText();
 
-			if (checkFields(user, password)) {
+			// if (checkFields(user, password)) {
 
-				String userEncrypted = Crypt.encrypt(user, settings.getDatabaseSecretKey());
-				String passwordEncrypted = Crypt.encrypt(password, settings.getDatabaseSecretKey());
+			// String userEncrypted = Crypt.encrypt(user, settings.getDatabaseSecretKey());
+			// String passwordEncrypted = Crypt.encrypt(password,
+			// settings.getDatabaseSecretKey());
 
-				// Actions.checkUsername(userEncrypted, passwordEncrypted, settings, thisStage, this);
+			// Actions.checkUsername(userEncrypted, passwordEncrypted, settings, thisStage,
+			// this);
 
-			} else
-				new AlertDesigner(language.getStringWithNewLine("TEXT0004"), language.getStringWithNewLine("MEX002"),
-						thisStage, AlertType.ERROR, Meta.Application.getFullTitle(),
-						Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+			// } else
+			// new AlertDesigner(language.getStringWithNewLine("TEXT0004"),
+			// language.getStringWithNewLine("MEX002"),
+			// thisStage, AlertType.ERROR, Meta.Application.getFullTitle(),
+			// Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME,
+			// "alert_001").show();
 		});
 	}
 
-	
 	private boolean checkFields(String user, String password) {
 
 		boolean check = true;

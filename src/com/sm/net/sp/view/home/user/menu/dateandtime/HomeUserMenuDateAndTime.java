@@ -21,7 +21,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -30,37 +29,25 @@ import javafx.stage.Stage;
 public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 
 	@FXML
-	private ImageView usersImageView;
+	private ImageView headerImageView;
 	@FXML
-	private Label userLabel;
+	private Label headerLabel;
 	@FXML
-	private TableView<User> userTableView;
+	private TableView<User> dateTimeTableView;
 	@FXML
-	private TableColumn<User, Integer> userTableColumnID;
+	private TableColumn<User, Integer> dateTimeStartDayTableColumn;
 	@FXML
-	private TableColumn<User, String> userTableColumnName;
+	private TableColumn<User, String> dateTimeDay1TableColumn;
 	@FXML
-	private TableColumn<User, Boolean> userTableColumnUsers;
+	private TableColumn<User, String> dateTimeHours1TableColumn;
 	@FXML
-	private TableColumn<User, Boolean> userTableColumnCongregations;
+	private TableColumn<User, String> dateTimeDay2TableColumn;
 	@FXML
-	private TableColumn<User, Boolean> userTableColumnServiceGroups;
+	private TableColumn<User, String> dateTimeHours2TableColumn;
 	@FXML
-	private TableColumn<User, Boolean> userTableColumnMeetings;
+	private Button addButton;
 	@FXML
-	private TableColumn<User, Boolean> userTableColumnPublicTalk;
-	@FXML
-	private TableColumn<User, Boolean> userTableColumnOverseer;
-	@FXML
-	private TableColumn<User, Boolean> userTableColumnNaturalDisaster;
-	@FXML
-	private TableColumn<User, Boolean> userTableColumnMonitor;
-	@FXML
-	private Button userAddButton;
-	@FXML
-	private Button userDeleteButton;
-	@FXML
-	private Button userPrintButton;
+	private Button deleteButton;
 
 	private Settings settings;
 	private Language language;
@@ -69,56 +56,33 @@ public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 	@FXML
 	private void initialize() {
 		styleClasses();
-		tableColumnsCellFactory();
 		tableColumnsCellValueFactory();
 	}
 
-	private void tableColumnsCellFactory() {
-		userTableColumnUsers.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnUsers));
-		userTableColumnCongregations.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnCongregations));
-		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
-		userTableColumnMeetings.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMeetings));
-		userTableColumnOverseer.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnOverseer));
-		userTableColumnNaturalDisaster.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnNaturalDisaster));
-		userTableColumnMonitor.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMonitor));
-		userTableColumnPublicTalk.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnPublicTalk));
-	}
-
 	private void tableColumnsCellValueFactory() {
-		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
-		userTableColumnName.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
-		userTableColumnUsers.setCellValueFactory(cellData -> cellData.getValue().spInf1Property());
-		userTableColumnCongregations.setCellValueFactory(cellData -> cellData.getValue().spInf2Property());
-		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().spInf3Property());
-		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().spInf4Property());
-		userTableColumnOverseer.setCellValueFactory(cellData -> cellData.getValue().spInf5Property());
-		userTableColumnNaturalDisaster.setCellValueFactory(cellData -> cellData.getValue().spInf6Property());
-		userTableColumnMonitor.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
-		userTableColumnPublicTalk.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
+		this.dateTimeStartDayTableColumn.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
+		dateTimeDay1TableColumn.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
+		dateTimeHours1TableColumn.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
+		dateTimeDay2TableColumn.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
+		dateTimeHours2TableColumn.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
 	}
 
 	private void styleClasses() {
 
-		usersImageView.setFitWidth(50);
-		usersImageView.setFitHeight(50);
-		usersImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.TIME, 50, 50));
+		this.headerImageView.setFitWidth(50);
+		this.headerImageView.setFitHeight(50);
+		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.TIME, 50, 50));
 
-		userLabel.getStyleClass().add("label_header_001");
+		this.headerLabel.getStyleClass().add("label_header_001");
 
-		userTableView.getStyleClass().add("table_view_001");
+		this.dateTimeTableView.getStyleClass().add("table_view_001");
 
-		userAddButton.getStyleClass().add("button_image_001");
-		userDeleteButton.getStyleClass().add("button_image_001");
-		userPrintButton.getStyleClass().add("button_image_001");
+		addButton.getStyleClass().add("button_image_001");
+		deleteButton.getStyleClass().add("button_image_001");
 
-		userTableColumnUsers.getStyleClass().add("check_box_001");
-		userTableColumnCongregations.getStyleClass().add("check_box_001");
-		userTableColumnServiceGroups.getStyleClass().add("check_box_001");
-		userTableColumnMeetings.getStyleClass().add("check_box_001");
-		userTableColumnOverseer.getStyleClass().add("check_box_001");
-		userTableColumnNaturalDisaster.getStyleClass().add("check_box_001");
-		userTableColumnMonitor.getStyleClass().add("check_box_001");
-		userTableColumnPublicTalk.getStyleClass().add("check_box_001");
+//		dateTimeHours1TableColumn.getStyleClass().add("check_box_001");
+//		dateTimeDay2TableColumn.getStyleClass().add("check_box_001");
+//		dateTimeHours2TableColumn.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -133,42 +97,19 @@ public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 
 		this.language = settings.getLanguage();
 
-		userLabel.setText(language.getString("sp.menu.dateandtime"));
+		this.headerLabel.setText(language.getString("sp.menu.dateandtime"));
 
-		userTableColumnID.setText(language.getString("TEXT0005"));
-		userTableColumnName.setText(language.getString("VIEW007LAB002"));
-		userTableColumnUsers.setText(language.getString("USERMENU001"));
-		userTableColumnCongregations.setText(language.getString("USERMENU002"));
-		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
-		userTableColumnMeetings.setText(language.getString("USERMENU004"));
-		userTableColumnOverseer.setText(language.getString("USERMENU005"));
-		userTableColumnNaturalDisaster.setText(language.getString("sp.menu.naturaldisaster"));
-		userTableColumnMonitor.setText(language.getString("sp.menu.monitor"));
-		userTableColumnPublicTalk.setText(language.getString("sp.menu.publictalk"));
+		this.dateTimeStartDayTableColumn.setText(language.getString("datetime.table.column.start"));
+		this.dateTimeDay1TableColumn.setText(language.getString("datetime.table.column.day1"));
+		this.dateTimeHours1TableColumn.setText(language.getString("datetime.table.column.hours1"));
+		this.dateTimeDay2TableColumn.setText(language.getString("datetime.table.column.day2"));
+		this.dateTimeHours2TableColumn.setText(language.getString("datetime.table.column.hours2"));
 
-		userTableView.setEditable(true);
-		userTableColumnID.setMinWidth(50);
-		userTableColumnID.setMaxWidth(50);
-		userTableColumnID.setResizable(false);
-		userTableColumnName.setMinWidth(350);
-		userTableColumnName.setMaxWidth(350);
-		userTableColumnName.setResizable(false);
-		userTableColumnUsers.setEditable(true);
-		userTableColumnCongregations.setEditable(true);
-		userTableColumnServiceGroups.setEditable(true);
-		userTableColumnMeetings.setEditable(true);
-		userTableColumnNaturalDisaster.setEditable(true);
-		userTableColumnMonitor.setEditable(true);
-		userTableColumnPublicTalk.setEditable(true);
+		this.addButton.setText(null);
+		this.addButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ADD));
 
-		userAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_USERS_ADD));
-		userAddButton.setText(null);
-
-		userDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_USERS_DEL));
-		userDeleteButton.setText(null);
-
-		userPrintButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		userPrintButton.setText(null);
+		this.deleteButton.setText(null);
+		this.deleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
 	}
 
 	@Override
@@ -177,29 +118,16 @@ public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 	}
 
 	private void listeners() {
-		listenerUserPrintButton();
 		listenerUserAddButton();
 		listenerUserDeleteButton();
 	}
 
-	private void listenerUserPrintButton() {
-		this.userPrintButton.setOnAction(event -> printUser());
-	}
-
-	private void printUser() {
-
-		if (userTableView.getSelectionModel().getSelectedIndex() > -1) {
-			User user = userTableView.getSelectionModel().getSelectedItem();
-			Actions.printUser(user, settings, stageSupportPlannerView, language);
-		}
-	}
-
 	private void listenerUserDeleteButton() {
-		userDeleteButton.setOnAction(event -> {
+		deleteButton.setOnAction(event -> {
 
-			if (userTableView.getSelectionModel().getSelectedIndex() > -1) {
+			if (this.dateTimeTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-				User selectedUser = userTableView.getSelectionModel().getSelectedItem();
+				User selectedUser = this.dateTimeTableView.getSelectionModel().getSelectedItem();
 
 				Alert alert = new AlertDesigner(language.getString("TEXT0006"), selectedUser.getUsername(),
 						stageSupportPlannerView, AlertType.CONFIRMATION, Meta.Application.getFullTitle(),
@@ -213,17 +141,17 @@ public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 	}
 
 	private void listenerUserAddButton() {
-		userAddButton.setOnAction(event -> {
+		addButton.setOnAction(event -> {
 
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_USER_ADD);
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_DATEANDTIME_ADD);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				MenuDateAndTimeAdd ctrl = (MenuDateAndTimeAdd) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
-				ctrl.setOwnerStage(stageSupportPlannerView);
+				ctrl.setOwnerStage(this.stageSupportPlannerView);
 				ctrl.setOwnerCtrl(this);
 				ctrl.objectInitialize();
 
@@ -236,17 +164,17 @@ public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 				stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
 
 				stage.setResizable(false);
-				stage.setMinWidth(500);
-				stage.setMaxWidth(Double.MAX_VALUE);
-				stage.setWidth(500);
-				stage.setMinHeight(400);
-				stage.setMaxHeight(Double.MAX_VALUE);
-				stage.setHeight(400);
-				stage.setResizable(false);
-				stage.setMaximized(false);
+//				stage.setMinWidth(500);
+//				stage.setMaxWidth(Double.MAX_VALUE);
+//				stage.setWidth(500);
+//				stage.setMinHeight(400);
+//				stage.setMaxHeight(Double.MAX_VALUE);
+//				stage.setHeight(400);
+//				stage.setResizable(false);
+//				stage.setMaximized(false);
 
 				stage.initModality(Modality.WINDOW_MODAL);
-				stage.initOwner(stageSupportPlannerView);
+				stage.initOwner(this.stageSupportPlannerView);
 
 				ctrl.setThisStage(stage);
 				stage.show();
@@ -260,7 +188,7 @@ public class HomeUserMenuDateAndTime extends UpdateDataAdapter {
 
 	@Override
 	public void updateUsers(ObservableList<User> listUser) {
-		userTableView.setItems(listUser);
+		this.dateTimeTableView.setItems(listUser);
 	}
 
 	public Settings getSettings() {

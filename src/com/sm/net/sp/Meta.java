@@ -16,6 +16,7 @@ import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
+import com.sm.net.sp.view.home.user.menu.dateandtime.MenuDateAndTimeAdd;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -159,6 +160,8 @@ public class Meta {
 		public static final URL WOLBROWSER = WOLBrowser.class.getResource("WOLBrowser.fxml");
 		public static final URL HOME_USER_MENU_DATEANDTIME = HomeUserMenuDateAndTime.class
 				.getResource("HomeUserMenuDateAndTime.fxml");
+		public static final URL HOME_USER_MENU_DATEANDTIME_ADD = MenuDateAndTimeAdd.class
+				.getResource("MenuDateAndTimeAdd.fxml");
 	}
 
 	public static class Themes {
@@ -184,6 +187,8 @@ public class Meta {
 		public static final String USER_MENU_CONGR = "user_menu_congr.png";
 		public static final String USER_MENU_USERS_ADD = "addUser_50x50.png";
 		public static final String USER_MENU_USERS_DEL = "deleteUser_50x50.png";
+		public static final String ADD = "add.png";
+		public static final String REMOVE = "remove.png";
 		public static final String SUPERUSER = "superuser.png";
 		public static final String SUPERUSER_PRINT = "superuserPrint.png";
 		public static final String MEMBER = "person_35x35.png";
