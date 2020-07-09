@@ -20,7 +20,7 @@ import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.utils.AlertBuilder;
+import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.sp.view.wolbrowser.WOLBrowser;
@@ -339,7 +339,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private ObservableList<Week> databaseWeeks;
 
-	private AlertBuilder alertBuilder;
+	private AlertBuilderOld alertBuilder;
 
 	@FXML
 	private void initialize() {
@@ -1860,11 +1860,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		return congregationBibleStudyReaderComboBox;
 	}
 
-	public AlertBuilder getAlertBuilder() {
+	public AlertBuilderOld getAlertBuilder() {
 		return alertBuilder;
 	}
 
-	public void setAlertBuilder(AlertBuilder alertBuilder) {
+	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
 }

@@ -11,7 +11,7 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.utils.AlertBuilder;
+import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.util.Crypt;
@@ -76,7 +76,7 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	private ObservableList<Member> presidentPublicMeetingList;
 	private ObservableList<Week> databaseWeeks;
 
-	private AlertBuilder alertBuilder;
+	private AlertBuilderOld alertBuilder;
 
 	@FXML
 	private void initialize() {
@@ -470,11 +470,11 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 		return presidentPublicMeetingComboBox;
 	}
 
-	public AlertBuilder getAlertBuilder() {
+	public AlertBuilderOld getAlertBuilder() {
 		return alertBuilder;
 	}
 
-	public void setAlertBuilder(AlertBuilder alertBuilder) {
+	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
 }

@@ -187,6 +187,7 @@ public class HomeUserMenuList {
 			ctrlSupportPlannerView.viewHomeUserMenuDateAndTime();
 			break;
 		case PLACES:
+			this.ctrlSupportPlannerView.viewHomeUserMenuPlaces();
 			break;
 		case CONGREGATION:
 			ctrlSupportPlannerView.viewHomeUserMenuCongregation();

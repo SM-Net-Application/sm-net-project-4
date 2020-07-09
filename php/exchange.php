@@ -5,6 +5,7 @@ $response = array();
 $jsonObjPar = file_get_contents('php://input');
 
 if (! empty($jsonObjPar)) {
+
     $jsonObj = json_decode($jsonObjPar, true);
 
     if (! empty($jsonObj)) {
@@ -126,6 +127,15 @@ if (! empty($jsonObjPar)) {
                             break;
                         case 37:
                             include 'query/sp_q37.php';
+                            break;
+                        case 38:
+                            include 'query/sp_q38.php';
+                            break;
+                        case 39:
+                            include 'query/sp_q39.php';
+                            break;
+                        case 40:
+                            include 'query/sp_q40.php';
                             break;
                     }
 

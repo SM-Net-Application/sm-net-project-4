@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.home.user.menu.dateandtime;
+package com.sm.net.sp.view.home.user.menu.places;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -6,12 +6,9 @@ import java.util.ArrayList;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.dateandtime.task.DateAndTimeSaveTask;
-import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,7 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class MenuDateAndTimeAdd extends UpdateDataAdapter {
+public class PlacesAdd extends UpdateDataAdapter {
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -76,7 +73,7 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
-	private HomeUserMenuDateAndTime ownerCtrl;
+	private HomeUserMenuPlaces ownerCtrl;
 	private Stage thisStage;
 	private SupportPlannerView application;
 
@@ -260,9 +257,9 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 
 		this.imageView.setFitWidth(100);
 		this.imageView.setFitHeight(100);
-		this.imageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.TIME, 100, 100));
+		this.imageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.PLACES, 100, 100));
 
-		this.titleLabel.setText(this.language.getString("datetime.new.title"));
+		this.titleLabel.setText(this.language.getString("places.new.title"));
 		this.dateLabel.setText(this.language.getString("datetime.new.week"));
 		this.time1Label.setText(this.language.getString("datetime.new.time1"));
 		this.timeSeparator1Label.setText(this.language.getString("datetime.new.separator"));
@@ -321,11 +318,11 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 
 		if (this.checkFields()) {
 
-			DateAndTime dateAndTime = DateAndTime.newInstanceByView(this);
+//			DateAndTime dateAndTime = DateAndTime.newInstanceByView(this);
 
 			String waitMessage = this.language.getString("datetime.new.wait.save");
-			TaskManager.run(this.application.getAlertBuilder2(), this.thisStage, waitMessage, new DateAndTimeSaveTask(
-					this.application.getAlertBuilder2(), this.settings, this.thisStage, dateAndTime, this.ownerCtrl));
+//			TaskManager.run(this.application.getAlertBuilder2(), this.thisStage, waitMessage, new DateAndTimeSaveTask(
+//					this.application.getAlertBuilder2(), this.settings, this.thisStage, dateAndTime, this.ownerCtrl));
 		}
 	}
 
@@ -389,11 +386,11 @@ public class MenuDateAndTimeAdd extends UpdateDataAdapter {
 		this.ownerStage = ownerStage;
 	}
 
-	public HomeUserMenuDateAndTime getOwnerCtrl() {
+	public HomeUserMenuPlaces getOwnerCtrl() {
 		return ownerCtrl;
 	}
 
-	public void setOwnerCtrl(HomeUserMenuDateAndTime ownerCtrl) {
+	public void setOwnerCtrl(HomeUserMenuPlaces ownerCtrl) {
 		this.ownerCtrl = ownerCtrl;
 	}
 

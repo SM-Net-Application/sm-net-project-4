@@ -13,7 +13,7 @@ import com.sm.net.sp.model.MemberHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
-import com.sm.net.sp.utils.AlertBuilder;
+import com.sm.net.sp.utils.AlertBuilderOld;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -71,7 +71,7 @@ public class History {
 	private UpgradeableComboBoxSelection editor;
 	private Stage thisStage;
 
-	private AlertBuilder alertBuilder;
+	private AlertBuilderOld alertBuilder;
 
 	@FXML
 	private void initialize() {
@@ -463,11 +463,11 @@ public class History {
 		this.thisStage = thisStage;
 	}
 
-	public AlertBuilder getAlertBuilder() {
+	public AlertBuilderOld getAlertBuilder() {
 		return alertBuilder;
 	}
 
-	public void setAlertBuilder(AlertBuilder alertBuilder) {
+	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
 }

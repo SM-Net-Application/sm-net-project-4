@@ -1,5 +1,9 @@
 Data di pubblicazione : ..-..-....
 
+	* Nuova sezione: Programmazione adunanze
+		- In questa sezione è possibile definire il giorno e l'ora delle adunanze a partire dalla settimana X
+		- Queste informazioni verrano utilizzate nella sezione Adunanze/Discorsi pubblici
+
 	* Fix
 		- Visualizzazione del menù contestuale ottimizzata
 		 
@@ -23,14 +27,6 @@ Data di pubblicazione : ..-..-....
 		- Le attività della settimana in corso e quelle delle prossime settimane vengono visualizzate in 2 tabelle diverse
 		
 	* Database update
-
-		CREATE TABLE `smnetzwe_albstadtita`.`sp_datetime` (
-		  `spDateTimeID` INT NOT NULL,
-		  `spInf1` DATE NULL,
-		  `spInf2` INT NULL,
-		  `spInf3` INT NULL,
-		  `spInf4` INT NULL,
-		  `spInf5` INT NULL,
-		  `spInf6` INT NULL,
-		  `spInf7` INT NULL,
-		  PRIMARY KEY (`spDateTimeID`));
+		  
+		  CREATE TABLE `smnetzwe_albstadtita`.`sp_datetime` ( `spDateTimeID` INT NOT NULL AUTO_INCREMENT , `spInf1` DATE NOT NULL , `spInf2` INT NOT NULL , `spInf3` INT NOT NULL , `spInf4` INT NOT NULL , `spInf5` INT NOT NULL , `spInf6` INT NOT NULL , `spInf7` INT NOT NULL , PRIMARY KEY (`spDateTimeID`)) ENGINE = InnoDB;
+		  CREATE TABLE `smnetzwe_albstadtita`.`sp_places` ( `spPlaceID` INT NOT NULL AUTO_INCREMENT , `spInf1` INT NOT NULL , `spInf2` VARCHAR(250) NOT NULL , `spInf3` VARCHAR(250) NOT NULL , `spInf4` VARCHAR(250) NOT NULL , `spInf5` VARCHAR(250) NOT NULL , `spInf6` VARCHAR(250) NOT NULL , `spInf7` VARCHAR(250) NOT NULL , `spInf8` VARCHAR(250) NOT NULL , `spInf9` VARCHAR(250) NOT NULL , `spInf10` INT NOT NULL , PRIMARY KEY (`spPlaceID`)) ENGINE = InnoDB;

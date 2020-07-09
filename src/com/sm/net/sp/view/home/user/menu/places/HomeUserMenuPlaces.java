@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.home.user.menu.dateandtime;
+package com.sm.net.sp.view.home.user.menu.places;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -10,9 +10,6 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.dateandtime.task.DateAndTimeDeleteTask;
-import com.sm.net.sp.view.home.user.menu.dateandtime.task.DateAndTimeLoadTask;
-import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class HomeUserMenuDateAndTime {
+public class HomeUserMenuPlaces {
 
 	@FXML
 	private ImageView headerImageView;
@@ -110,7 +107,7 @@ public class HomeUserMenuDateAndTime {
 
 		this.headerImageView.setFitWidth(50);
 		this.headerImageView.setFitHeight(50);
-		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.TIME, 50, 50));
+		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.PLACES, 50, 50));
 
 		this.headerLabel.getStyleClass().add("label_header_001");
 
@@ -131,7 +128,7 @@ public class HomeUserMenuDateAndTime {
 
 	private void viewUpdate() {
 
-		this.headerLabel.setText(this.language.getString("sp.menu.dateandtime"));
+		this.headerLabel.setText(this.language.getString("sp.menu.places"));
 
 		this.dateTimeStartDayTableColumn.setText(this.language.getString("datetime.table.column.start"));
 		this.dateTimeDay1TableColumn.setText(this.language.getString("datetime.table.column.day1"));
@@ -150,9 +147,9 @@ public class HomeUserMenuDateAndTime {
 
 		String waitMessage = this.language.getString("datetime.wait.load");
 
-		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-				new DateAndTimeLoadTask(this.application.getAlertBuilder2(), this.settings,
-						this.stageSupportPlannerView, this));
+//		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+//				new DateAndTimeLoadTask(this.application.getAlertBuilder2(), this.settings,
+//						this.stageSupportPlannerView, this));
 
 	}
 
@@ -176,9 +173,9 @@ public class HomeUserMenuDateAndTime {
 
 					String waitMessage = this.language.getString("datetime.wait.delete");
 
-					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-							new DateAndTimeDeleteTask(this.application.getAlertBuilder2(), this.settings,
-									this.stageSupportPlannerView, item, this));
+//					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+//							new DateAndTimeDeleteTask(this.application.getAlertBuilder2(), this.settings,
+//									this.stageSupportPlannerView, item, this));
 				}
 			}
 
@@ -192,10 +189,10 @@ public class HomeUserMenuDateAndTime {
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_DATEANDTIME_ADD);
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_PLACES_ADD);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
-				MenuDateAndTimeAdd ctrl = (MenuDateAndTimeAdd) fxmlLoader.getController();
+				PlacesAdd ctrl = (PlacesAdd) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.stageSupportPlannerView);
 				ctrl.setOwnerCtrl(this);

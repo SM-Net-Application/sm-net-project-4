@@ -1,16 +1,3 @@
-	
-	- Nuova sezione: Programmazione adunanze
-		- Tabella:
-			- Data inizio validità (la nuova programmazione non può essere precedente all'ultima inserita)
-			- Adunanza infrasettimanale
-				- Giorno
-				- Ora
-				- Minuto
-			- Adunanza del fine settimana
-				- Giorno
-				- Ora
-				-Minuto
-		- La nuova programmazione carica i dati dell'ultima inserita (se presente)
 		
 	- Nuova sezione: Luoghi di adorazione (Indirizzo : Via, Civico, CAP, Città, Provincia, Nazione, Coordinate)
 		- Sale del Regno

@@ -20,6 +20,8 @@ import com.sm.net.sp.view.home.user.menu.dateandtime.MenuDateAndTimeAdd;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
+import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
+import com.sm.net.sp.view.home.user.menu.places.PlacesAdd;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
@@ -162,6 +164,8 @@ public class Meta {
 				.getResource("HomeUserMenuDateAndTime.fxml");
 		public static final URL HOME_USER_MENU_DATEANDTIME_ADD = MenuDateAndTimeAdd.class
 				.getResource("MenuDateAndTimeAdd.fxml");
+		public static final URL HOME_USER_MENU_PLACES = HomeUserMenuPlaces.class.getResource("HomeUserMenuPlaces.fxml");
+		public static final URL HOME_USER_MENU_PLACES_ADD = PlacesAdd.class.getResource("PlacesAdd.fxml");
 	}
 
 	public static class Themes {
@@ -171,7 +175,7 @@ public class Meta {
 
 	public static class Resources {
 
-		private static final String RESOURCES = "resources";
+		public static final String RESOURCES = "resources";
 
 		public static final String ICON = "iconSP.png";
 		public static final String PRINT = "print.png";

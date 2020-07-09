@@ -1,9 +1,12 @@
 package com.sm.net.sp.json;
 
+import java.time.format.DateTimeFormatter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.util.enumeration.JSONStatus;
@@ -595,6 +598,39 @@ public class JSONRequest {
 	public static JSONObject CLEAN_DATABASE() {
 
 		JSONObject jsonObj = create(Integer.valueOf(37));
+
+		return jsonObj;
+	}
+
+	public static JSONObject DATE_AND_TIME_INSERT(DateAndTime dateAndTime) {
+
+		JSONObject jsonObj = create(Integer.valueOf(38));
+
+		DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String dateString = pattern.format(dateAndTime.getDate().get());
+
+		jsonObj.put("startDate", dateString);
+		jsonObj.put("day1", dateAndTime.getDay1().get());
+		jsonObj.put("hour1", dateAndTime.getHour1().get());
+		jsonObj.put("minute1", dateAndTime.getMinute1().get());
+		jsonObj.put("day2", dateAndTime.getDay2().get());
+		jsonObj.put("hour2", dateAndTime.getHour2().get());
+		jsonObj.put("minute2", dateAndTime.getMinute2().get());
+
+		return jsonObj;
+	}
+
+	public static JSONObject DATE_AND_TIME_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(39));
+		return jsonObj;
+	}
+
+	public static JSONObject DATE_AND_TIME_DELETE(DateAndTime dateAndTime) {
+
+		JSONObject jsonObj = create(Integer.valueOf(40));
+
+		jsonObj.put("id", dateAndTime.getId().get());
 
 		return jsonObj;
 	}

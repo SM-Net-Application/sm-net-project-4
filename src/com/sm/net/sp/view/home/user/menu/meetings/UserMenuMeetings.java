@@ -13,7 +13,7 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.utils.AlertBuilder;
+import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.sm.net.util.DateUtil;
 
@@ -62,7 +62,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private ObservableList<Week> calendar;
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<Member> membersList;
-	private AlertBuilder alertBuilder;
+	private AlertBuilderOld alertBuilder;
 
 	private String congregationName;
 
@@ -400,11 +400,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		this.databaseWeeks = databaseWeeks;
 	}
 
-	public AlertBuilder getAlertBuilder() {
+	public AlertBuilderOld getAlertBuilder() {
 		return alertBuilder;
 	}
 
-	public void setAlertBuilder(AlertBuilder alertBuilder) {
+	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
 }

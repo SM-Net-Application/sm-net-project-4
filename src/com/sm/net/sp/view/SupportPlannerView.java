@@ -2,6 +2,7 @@ package com.sm.net.sp.view;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.crypto.SecretKey;
 
@@ -14,10 +15,11 @@ import com.sm.net.file.FileUtils;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.SupportPlannerMain;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.settings.SettingsConf;
-import com.sm.net.sp.utils.AlertBuilder;
+import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.utils.EnumOperatingSystem;
 import com.sm.net.sp.utils.EnumOperatingSystemArchitecture;
 import com.sm.net.sp.utils.OperatingSystemUtils;
@@ -31,6 +33,7 @@ import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
+import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
@@ -41,6 +44,7 @@ import com.sm.net.sp.view.menu.settings.monitor.SettingMonitor;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
 import com.sm.net.util.Crypt;
+import com.smnet.core.dialog.AlertBuilder;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,7 +61,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	@FXML
 	private BorderPane viewSupportPlannerBorderPane;
 
-	private AlertBuilder alertBuilder;
+	private AlertBuilderOld alertBuilder;
 	private Stage viewSupportPlannerStage;
 	private SupportPlannerView ctrlViewSupportPlanner;
 	private User user;
@@ -71,12 +75,27 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	private EnumOperatingSystem system;
 	private EnumOperatingSystemArchitecture architecture;
 
+	private AlertBuilder alertBuilder2;
+
 	public void objectInitialize() {
+
+		this.alertBuilder2 = new AlertBuilder(Meta.Application.getFullTitle());
+		try {
+
+			File css = new File(SupportPlannerMain.class.getResource("theme.css").toURI());
+			File icon = new File(Meta.Resources.RESOURCES, Meta.Resources.ICON);
+
+			this.alertBuilder2.setCSS(css, "alert_001");
+			this.alertBuilder2.setIcon(icon);
+
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 
 		this.system = OperatingSystemUtils.getOperatingSystem();
 		this.architecture = OperatingSystemUtils.getOperatingSystemArchitecture();
 
-		this.alertBuilder = new AlertBuilder(Meta.Application.getFullTitle(), Meta.Themes.SUPPORTPLANNER_THEME,
+		this.alertBuilder = new AlertBuilderOld(Meta.Application.getFullTitle(), Meta.Themes.SUPPORTPLANNER_THEME,
 				"alert_001", new File(Meta.Resources.ICON).toURI().toString());
 
 		viewSupportPlannerBorderPane.getStyleClass().add("main_color_001");
@@ -716,6 +735,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				HomeUserMenuDateAndTime ctrl = (HomeUserMenuDateAndTime) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);
@@ -723,7 +743,31 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			} catch (IOException e) {
 			}
 		}
+	}
 
+	public void viewHomeUserMenuPlaces() {
+
+		if (this.center != 16) {
+
+			this.center = 16;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_PLACES);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				HomeUserMenuPlaces ctrl = (HomeUserMenuPlaces) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.setApplication(this);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
 	}
 
 	@Override
@@ -877,11 +921,11 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		this.user = user;
 	}
 
-	public AlertBuilder getAlertBuilder() {
+	public AlertBuilderOld getAlertBuilder() {
 		return alertBuilder;
 	}
 
-	public void setAlertBuilder(AlertBuilder alertBuilder) {
+	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
 
@@ -915,6 +959,14 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void setArchitecture(EnumOperatingSystemArchitecture architecture) {
 		this.architecture = architecture;
+	}
+
+	public AlertBuilder getAlertBuilder2() {
+		return alertBuilder2;
+	}
+
+	public void setAlertBuilder2(AlertBuilder alertBuilder2) {
+		this.alertBuilder2 = alertBuilder2;
 	}
 
 }

@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
-public class AlertBuilder {
+public class AlertBuilderOld {
 
 	private String title;
 	private String themeFileURL;
 	private String themeClass;
 	private String iconFileURL;
 
-	public AlertBuilder(String title, String themeFileURL, String themeClass, String iconFileURL) {
+	public AlertBuilderOld(String title, String themeFileURL, String themeClass, String iconFileURL) {
 		this.title = title;
 		this.themeFileURL = themeFileURL;
 		this.themeClass = themeClass;
