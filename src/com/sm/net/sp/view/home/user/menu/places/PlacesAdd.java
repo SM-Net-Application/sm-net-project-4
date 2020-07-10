@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.EnumPlaceType;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -16,9 +17,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class PlacesAdd extends UpdateDataAdapter {
 
@@ -29,7 +34,9 @@ public class PlacesAdd extends UpdateDataAdapter {
 	@FXML
 	private Label titleLabel;
 	@FXML
-	private Label dateLabel;
+	private Label typeLabel;
+	@FXML
+	private Label descrLabel;
 	@FXML
 	private Label meeting1Label;
 	@FXML
@@ -42,8 +49,13 @@ public class PlacesAdd extends UpdateDataAdapter {
 	private Label time2Label;
 	@FXML
 	private Label timeSeparator2Label;
+
 	@FXML
-	private DatePicker datePicker;
+	private ComboBox<EnumPlaceType> typeComboBox;
+
+	@FXML
+	private TextField descrTextField;
+
 	@FXML
 	private CheckBox day1CheckBox;
 	@FXML
@@ -93,7 +105,13 @@ public class PlacesAdd extends UpdateDataAdapter {
 
 		this.titleLabel.getStyleClass().add("label_setting_name");
 
-		this.dateLabel.getStyleClass().add("label_001");
+		this.typeLabel.getStyleClass().add("label_set_001");
+		this.descrLabel.getStyleClass().add("label_set_001");
+
+		this.typeComboBox.getStyleClass().add("combo_box_002");
+		this.descrTextField.getStyleClass().add("text_field_001");
+
+		// this.dateLabel.getStyleClass().add("label_001");
 		this.meeting1Label.getStyleClass().add("label_001");
 		this.meeting2Label.getStyleClass().add("label_001");
 		this.time1Label.getStyleClass().add("label_001");
@@ -108,8 +126,6 @@ public class PlacesAdd extends UpdateDataAdapter {
 		this.day5CheckBox.getStyleClass().add("check_box_001");
 		this.day6CheckBox.getStyleClass().add("check_box_001");
 		this.day7CheckBox.getStyleClass().add("check_box_001");
-
-		this.datePicker.getStyleClass().add("combo_box_002");
 
 		this.hours1ComboBox.getStyleClass().add("combo_box_002");
 		this.hours2ComboBox.getStyleClass().add("combo_box_002");
@@ -127,128 +143,21 @@ public class PlacesAdd extends UpdateDataAdapter {
 		listeners();
 		viewUpdate();
 
+		Callback<ListView<EnumPlaceType>, ListCell<EnumPlaceType>> callbackEnumPlaceType = callbackForEnumPlaceType();
+		this.typeComboBox.setButtonCell(callbackEnumPlaceType.call(null));
+		this.typeComboBox.setCellFactory(callbackEnumPlaceType);
+
 		this.listenerCheckFields = true;
+	}
+
+	private Callback<ListView<EnumPlaceType>, ListCell<EnumPlaceType>> callbackForEnumPlaceType() {
+		return param -> new EnumPlaceTypeComboBoxListCell(this.language);
 	}
 
 	private void initDataNew() {
 
-		thisWeek();
-
-		hours();
-		minutes();
-
-		this.day1CheckBox.setSelected(true);
-		this.day6CheckBox.setSelected(true);
-
-		this.hours1ComboBox.getSelectionModel().selectFirst();
-		this.hours2ComboBox.getSelectionModel().selectFirst();
-
-		this.minute1ComboBox.getSelectionModel().selectFirst();
-		this.minute2ComboBox.getSelectionModel().selectFirst();
-	}
-
-	private void thisWeek() {
-
-		firstDayOfWeek(LocalDate.now());
-	}
-
-	private void minutes() {
-		this.minutes = new ArrayList<Integer>();
-		this.minutes.add(0);
-		this.minutes.add(1);
-		this.minutes.add(2);
-		this.minutes.add(3);
-		this.minutes.add(4);
-		this.minutes.add(5);
-		this.minutes.add(6);
-		this.minutes.add(7);
-		this.minutes.add(8);
-		this.minutes.add(9);
-		this.minutes.add(10);
-		this.minutes.add(11);
-		this.minutes.add(12);
-		this.minutes.add(13);
-		this.minutes.add(14);
-		this.minutes.add(15);
-		this.minutes.add(16);
-		this.minutes.add(17);
-		this.minutes.add(18);
-		this.minutes.add(19);
-		this.minutes.add(20);
-		this.minutes.add(21);
-		this.minutes.add(22);
-		this.minutes.add(23);
-		this.minutes.add(24);
-		this.minutes.add(25);
-		this.minutes.add(26);
-		this.minutes.add(27);
-		this.minutes.add(28);
-		this.minutes.add(29);
-		this.minutes.add(30);
-		this.minutes.add(31);
-		this.minutes.add(32);
-		this.minutes.add(33);
-		this.minutes.add(34);
-		this.minutes.add(35);
-		this.minutes.add(36);
-		this.minutes.add(37);
-		this.minutes.add(38);
-		this.minutes.add(39);
-		this.minutes.add(40);
-		this.minutes.add(41);
-		this.minutes.add(42);
-		this.minutes.add(43);
-		this.minutes.add(44);
-		this.minutes.add(45);
-		this.minutes.add(46);
-		this.minutes.add(47);
-		this.minutes.add(48);
-		this.minutes.add(49);
-		this.minutes.add(50);
-		this.minutes.add(51);
-		this.minutes.add(52);
-		this.minutes.add(53);
-		this.minutes.add(54);
-		this.minutes.add(55);
-		this.minutes.add(56);
-		this.minutes.add(57);
-		this.minutes.add(58);
-		this.minutes.add(59);
-
-		this.minute1ComboBox.getItems().addAll(this.minutes);
-		this.minute2ComboBox.getItems().addAll(this.minutes);
-	}
-
-	private void hours() {
-		this.hours = new ArrayList<Integer>();
-		this.hours.add(0);
-		this.hours.add(1);
-		this.hours.add(2);
-		this.hours.add(3);
-		this.hours.add(4);
-		this.hours.add(5);
-		this.hours.add(6);
-		this.hours.add(7);
-		this.hours.add(8);
-		this.hours.add(9);
-		this.hours.add(10);
-		this.hours.add(11);
-		this.hours.add(12);
-		this.hours.add(13);
-		this.hours.add(14);
-		this.hours.add(15);
-		this.hours.add(16);
-		this.hours.add(17);
-		this.hours.add(18);
-		this.hours.add(19);
-		this.hours.add(20);
-		this.hours.add(21);
-		this.hours.add(22);
-		this.hours.add(23);
-		this.hours.add(24);
-
-		this.hours1ComboBox.getItems().addAll(this.hours);
-		this.hours2ComboBox.getItems().addAll(this.hours);
+		this.typeComboBox.getItems().addAll(EnumPlaceType.values());
+		this.typeComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void viewUpdate() {
@@ -260,7 +169,10 @@ public class PlacesAdd extends UpdateDataAdapter {
 		this.imageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.PLACES, 100, 100));
 
 		this.titleLabel.setText(this.language.getString("places.new.title"));
-		this.dateLabel.setText(this.language.getString("datetime.new.week"));
+
+		this.typeLabel.setText(this.language.getString("places.new.type"));
+		this.descrLabel.setText(this.language.getString("places.new.descr"));
+
 		this.time1Label.setText(this.language.getString("datetime.new.time1"));
 		this.timeSeparator1Label.setText(this.language.getString("datetime.new.separator"));
 		this.time2Label.setText(this.language.getString("datetime.new.time2"));
@@ -294,8 +206,6 @@ public class PlacesAdd extends UpdateDataAdapter {
 	private void listeners() {
 
 		this.saveButton.setOnAction(event -> save());
-
-		this.datePicker.valueProperty().addListener((obs, oldV, newV) -> firstDayOfWeek(newV));
 
 		this.day1CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day1CheckBox,
 				day2CheckBox, day3CheckBox, day4CheckBox, day5CheckBox));
@@ -343,29 +253,10 @@ public class PlacesAdd extends UpdateDataAdapter {
 		}
 	}
 
-	private void firstDayOfWeek(LocalDate newV) {
-
-		if (newV != null) {
-
-			DayOfWeek dayOfWeek = newV.getDayOfWeek();
-			if (dayOfWeek != null) {
-
-				int diff = dayOfWeek.getValue() - 1;
-				LocalDate localDate = newV.minusDays(diff);
-				this.datePicker.setValue(localDate);
-			}
-		}
-	}
 
 	private boolean checkFields() {
 
 		boolean check = true;
-
-		if (this.datePicker.getValue() == null) {
-			String content = this.language.getString("datetime.new.error.date");
-			this.application.getAlertBuilder2().error(thisStage, content);
-			return false;
-		}
 
 		return check;
 	}
@@ -408,14 +299,6 @@ public class PlacesAdd extends UpdateDataAdapter {
 
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
-	}
-
-	public DatePicker getDatePicker() {
-		return datePicker;
-	}
-
-	public void setDatePicker(DatePicker datePicker) {
-		this.datePicker = datePicker;
 	}
 
 	public CheckBox getDay1CheckBox() {
