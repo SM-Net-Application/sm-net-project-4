@@ -1,21 +1,19 @@
 package com.sm.net.sp.view.home.user.menu.places;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.EnumPlaceType;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.places.task.PlaceSaveTask;
+import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -33,51 +31,50 @@ public class PlacesAdd extends UpdateDataAdapter {
 	private ImageView imageView;
 	@FXML
 	private Label titleLabel;
+
 	@FXML
 	private Label typeLabel;
 	@FXML
 	private Label descrLabel;
 	@FXML
-	private Label meeting1Label;
-	@FXML
-	private Label meeting2Label;
-	@FXML
-	private Label time1Label;
-	@FXML
-	private Label timeSeparator1Label;
-	@FXML
-	private Label time2Label;
-	@FXML
-	private Label timeSeparator2Label;
-
-	@FXML
 	private ComboBox<EnumPlaceType> typeComboBox;
-
 	@FXML
 	private TextField descrTextField;
 
 	@FXML
-	private CheckBox day1CheckBox;
+	private Label streetLabel;
 	@FXML
-	private CheckBox day2CheckBox;
+	private Label numLabel;
 	@FXML
-	private CheckBox day3CheckBox;
+	private Label postCodeLabel;
 	@FXML
-	private CheckBox day4CheckBox;
+	private Label cityLabel;
 	@FXML
-	private CheckBox day5CheckBox;
+	private Label countyLabel;
 	@FXML
-	private CheckBox day6CheckBox;
+	private Label countryLabel;
 	@FXML
-	private CheckBox day7CheckBox;
+	private Label coordLabel;
 	@FXML
-	private ComboBox<Integer> hours1ComboBox;
+	private Label defaultLabel;
+
 	@FXML
-	private ComboBox<Integer> minute1ComboBox;
+	private TextField streetTextField;
 	@FXML
-	private ComboBox<Integer> hours2ComboBox;
+	private TextField numTextField;
 	@FXML
-	private ComboBox<Integer> minute2ComboBox;
+	private TextField postCodeTextField;
+	@FXML
+	private TextField cityTextField;
+	@FXML
+	private TextField countyTextField;
+	@FXML
+	private TextField countryTextField;
+	@FXML
+	private TextField coordTextField;
+
+	@FXML
+	private CheckBox defaultCheckBox;
 
 	@FXML
 	private Button saveButton;
@@ -88,11 +85,6 @@ public class PlacesAdd extends UpdateDataAdapter {
 	private HomeUserMenuPlaces ownerCtrl;
 	private Stage thisStage;
 	private SupportPlannerView application;
-
-	private ArrayList<Integer> hours;
-	private ArrayList<Integer> minutes;
-
-	private boolean listenerCheckFields;
 
 	@FXML
 	private void initialize() {
@@ -105,56 +97,51 @@ public class PlacesAdd extends UpdateDataAdapter {
 
 		this.titleLabel.getStyleClass().add("label_setting_name");
 
-		this.typeLabel.getStyleClass().add("label_set_001");
-		this.descrLabel.getStyleClass().add("label_set_001");
-
 		this.typeComboBox.getStyleClass().add("combo_box_002");
 		this.descrTextField.getStyleClass().add("text_field_001");
 
-		// this.dateLabel.getStyleClass().add("label_001");
-		this.meeting1Label.getStyleClass().add("label_001");
-		this.meeting2Label.getStyleClass().add("label_001");
-		this.time1Label.getStyleClass().add("label_001");
-		this.time2Label.getStyleClass().add("label_001");
-		this.timeSeparator1Label.getStyleClass().add("label_001");
-		this.timeSeparator2Label.getStyleClass().add("label_001");
+		this.typeLabel.getStyleClass().add("label_set_001");
+		this.descrLabel.getStyleClass().add("label_set_001");
 
-		this.day1CheckBox.getStyleClass().add("check_box_001");
-		this.day2CheckBox.getStyleClass().add("check_box_001");
-		this.day3CheckBox.getStyleClass().add("check_box_001");
-		this.day4CheckBox.getStyleClass().add("check_box_001");
-		this.day5CheckBox.getStyleClass().add("check_box_001");
-		this.day6CheckBox.getStyleClass().add("check_box_001");
-		this.day7CheckBox.getStyleClass().add("check_box_001");
+		this.streetLabel.getStyleClass().add("label_set_001");
+		this.postCodeLabel.getStyleClass().add("label_set_001");
+		this.countryLabel.getStyleClass().add("label_set_001");
+		this.coordLabel.getStyleClass().add("label_set_001");
+		this.defaultLabel.getStyleClass().add("label_set_001");
 
-		this.hours1ComboBox.getStyleClass().add("combo_box_002");
-		this.hours2ComboBox.getStyleClass().add("combo_box_002");
-		this.minute1ComboBox.getStyleClass().add("combo_box_002");
-		this.minute2ComboBox.getStyleClass().add("combo_box_002");
+		this.numLabel.getStyleClass().add("label_001");
+		this.cityLabel.getStyleClass().add("label_001");
+		this.countyLabel.getStyleClass().add("label_001");
+
+		this.streetTextField.getStyleClass().add("text_field_001");
+		this.numTextField.getStyleClass().add("text_field_001");
+		this.postCodeTextField.getStyleClass().add("text_field_001");
+		this.cityTextField.getStyleClass().add("text_field_001");
+		this.countyTextField.getStyleClass().add("text_field_001");
+		this.countryTextField.getStyleClass().add("text_field_001");
+		this.coordTextField.getStyleClass().add("text_field_001");
+
+		this.defaultCheckBox.getStyleClass().add("check_box_001");
 
 		this.saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
 
-		this.listenerCheckFields = false;
-
-		initDataNew();
+		initData();
 		listeners();
 		viewUpdate();
 
 		Callback<ListView<EnumPlaceType>, ListCell<EnumPlaceType>> callbackEnumPlaceType = callbackForEnumPlaceType();
 		this.typeComboBox.setButtonCell(callbackEnumPlaceType.call(null));
 		this.typeComboBox.setCellFactory(callbackEnumPlaceType);
-
-		this.listenerCheckFields = true;
 	}
 
 	private Callback<ListView<EnumPlaceType>, ListCell<EnumPlaceType>> callbackForEnumPlaceType() {
 		return param -> new EnumPlaceTypeComboBoxListCell(this.language);
 	}
 
-	private void initDataNew() {
+	private void initData() {
 
 		this.typeComboBox.getItems().addAll(EnumPlaceType.values());
 		this.typeComboBox.getSelectionModel().selectFirst();
@@ -173,31 +160,20 @@ public class PlacesAdd extends UpdateDataAdapter {
 		this.typeLabel.setText(this.language.getString("places.new.type"));
 		this.descrLabel.setText(this.language.getString("places.new.descr"));
 
-		this.time1Label.setText(this.language.getString("datetime.new.time1"));
-		this.timeSeparator1Label.setText(this.language.getString("datetime.new.separator"));
-		this.time2Label.setText(this.language.getString("datetime.new.time2"));
-		this.timeSeparator2Label.setText(this.language.getString("datetime.new.separator"));
+		this.streetLabel.setText(this.language.getString("places.new.street"));
+		this.postCodeLabel.setText(this.language.getString("places.new.postcode"));
+		this.countryLabel.setText(this.language.getString("places.new.country"));
+		this.coordLabel.setText(this.language.getString("places.new.coord"));
+		this.defaultLabel.setText(this.language.getString("places.new.default"));
 
-		this.meeting1Label.setText(this.language.getString("datetime.new.meeting1"));
-		this.meeting2Label.setText(this.language.getString("datetime.new.meeting2"));
-
-		this.day1CheckBox.setText(this.language.getString("TEXT0123"));
-		this.day2CheckBox.setText(this.language.getString("TEXT0124"));
-		this.day3CheckBox.setText(this.language.getString("TEXT0125"));
-		this.day4CheckBox.setText(this.language.getString("TEXT0126"));
-		this.day5CheckBox.setText(this.language.getString("TEXT0127"));
-		this.day6CheckBox.setText(this.language.getString("TEXT0128"));
-		this.day7CheckBox.setText(this.language.getString("TEXT0129"));
+		this.numLabel.setText(this.language.getString("places.new.num"));
+		this.cityLabel.setText(this.language.getString("places.new.city"));
+		this.countyLabel.setText(this.language.getString("places.new.county"));
 
 		int width = 100;
-		this.hours1ComboBox.setMinWidth(width);
-		this.hours1ComboBox.setMaxWidth(width);
-		this.hours2ComboBox.setMinWidth(width);
-		this.hours2ComboBox.setMaxWidth(width);
-		this.minute1ComboBox.setMinWidth(width);
-		this.minute1ComboBox.setMaxWidth(width);
-		this.minute2ComboBox.setMinWidth(width);
-		this.minute2ComboBox.setMaxWidth(width);
+		this.numTextField.setMaxWidth(width);
+		this.countyTextField.setMaxWidth(width);
+		this.postCodeTextField.setMaxWidth(width);
 
 		this.saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
 		this.saveButton.setText(null);
@@ -207,52 +183,19 @@ public class PlacesAdd extends UpdateDataAdapter {
 
 		this.saveButton.setOnAction(event -> save());
 
-		this.day1CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day1CheckBox,
-				day2CheckBox, day3CheckBox, day4CheckBox, day5CheckBox));
-		this.day2CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day2CheckBox,
-				day1CheckBox, day3CheckBox, day4CheckBox, day5CheckBox));
-		this.day3CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day3CheckBox,
-				day2CheckBox, day1CheckBox, day4CheckBox, day5CheckBox));
-		this.day4CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day4CheckBox,
-				day2CheckBox, day3CheckBox, day1CheckBox, day5CheckBox));
-		this.day5CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day5CheckBox,
-				day2CheckBox, day3CheckBox, day4CheckBox, day1CheckBox));
-
-		this.day6CheckBox.selectedProperty()
-				.addListener((obs, oldV, newV) -> checkBoxGroups(newV, day6CheckBox, day7CheckBox));
-		this.day7CheckBox.selectedProperty()
-				.addListener((obs, oldV, newV) -> checkBoxGroups(newV, day7CheckBox, day6CheckBox));
 	}
 
 	private void save() {
 
 		if (this.checkFields()) {
 
-//			DateAndTime dateAndTime = DateAndTime.newInstanceByView(this);
+			Place place = Place.newInstanceByView(this, this.settings.getDatabaseSecretKey());
 
-			String waitMessage = this.language.getString("datetime.new.wait.save");
-//			TaskManager.run(this.application.getAlertBuilder2(), this.thisStage, waitMessage, new DateAndTimeSaveTask(
-//					this.application.getAlertBuilder2(), this.settings, this.thisStage, dateAndTime, this.ownerCtrl));
+			String waitMessage = this.language.getString("places.new.wait.save");
+			TaskManager.run(this.application.getAlertBuilder2(), this.thisStage, waitMessage, new PlaceSaveTask(
+					this.application.getAlertBuilder2(), this.settings, this.thisStage, place, this.ownerCtrl));
 		}
 	}
-
-	private void checkBoxGroups(Boolean newV, CheckBox edited, CheckBox... others) {
-
-		if (this.listenerCheckFields) {
-
-			this.listenerCheckFields = false;
-
-			if (newV) {
-				for (CheckBox cb : others)
-					if (cb.isSelected())
-						cb.setSelected(false);
-			} else
-				edited.setSelected(true);
-
-			this.listenerCheckFields = true;
-		}
-	}
-
 
 	private boolean checkFields() {
 
@@ -301,91 +244,204 @@ public class PlacesAdd extends UpdateDataAdapter {
 		this.application = application;
 	}
 
-	public CheckBox getDay1CheckBox() {
-		return day1CheckBox;
+	public AnchorPane getAnchorPane() {
+		return anchorPane;
 	}
 
-	public void setDay1CheckBox(CheckBox day1CheckBox) {
-		this.day1CheckBox = day1CheckBox;
+	public void setAnchorPane(AnchorPane anchorPane) {
+		this.anchorPane = anchorPane;
 	}
 
-	public CheckBox getDay2CheckBox() {
-		return day2CheckBox;
+	public ImageView getImageView() {
+		return imageView;
 	}
 
-	public void setDay2CheckBox(CheckBox day2CheckBox) {
-		this.day2CheckBox = day2CheckBox;
+	public void setImageView(ImageView imageView) {
+		this.imageView = imageView;
 	}
 
-	public CheckBox getDay3CheckBox() {
-		return day3CheckBox;
+	public Label getTitleLabel() {
+		return titleLabel;
 	}
 
-	public void setDay3CheckBox(CheckBox day3CheckBox) {
-		this.day3CheckBox = day3CheckBox;
+	public void setTitleLabel(Label titleLabel) {
+		this.titleLabel = titleLabel;
 	}
 
-	public CheckBox getDay4CheckBox() {
-		return day4CheckBox;
+	public Label getTypeLabel() {
+		return typeLabel;
 	}
 
-	public void setDay4CheckBox(CheckBox day4CheckBox) {
-		this.day4CheckBox = day4CheckBox;
+	public void setTypeLabel(Label typeLabel) {
+		this.typeLabel = typeLabel;
 	}
 
-	public CheckBox getDay5CheckBox() {
-		return day5CheckBox;
+	public Label getDescrLabel() {
+		return descrLabel;
 	}
 
-	public void setDay5CheckBox(CheckBox day5CheckBox) {
-		this.day5CheckBox = day5CheckBox;
+	public void setDescrLabel(Label descrLabel) {
+		this.descrLabel = descrLabel;
 	}
 
-	public CheckBox getDay6CheckBox() {
-		return day6CheckBox;
+	public ComboBox<EnumPlaceType> getTypeComboBox() {
+		return typeComboBox;
 	}
 
-	public void setDay6CheckBox(CheckBox day6CheckBox) {
-		this.day6CheckBox = day6CheckBox;
+	public void setTypeComboBox(ComboBox<EnumPlaceType> typeComboBox) {
+		this.typeComboBox = typeComboBox;
 	}
 
-	public CheckBox getDay7CheckBox() {
-		return day7CheckBox;
+	public TextField getDescrTextField() {
+		return descrTextField;
 	}
 
-	public void setDay7CheckBox(CheckBox day7CheckBox) {
-		this.day7CheckBox = day7CheckBox;
+	public void setDescrTextField(TextField descrTextField) {
+		this.descrTextField = descrTextField;
 	}
 
-	public ComboBox<Integer> getHours1ComboBox() {
-		return hours1ComboBox;
+	public Label getStreetLabel() {
+		return streetLabel;
 	}
 
-	public void setHours1ComboBox(ComboBox<Integer> hours1ComboBox) {
-		this.hours1ComboBox = hours1ComboBox;
+	public void setStreetLabel(Label streetLabel) {
+		this.streetLabel = streetLabel;
 	}
 
-	public ComboBox<Integer> getMinute1ComboBox() {
-		return minute1ComboBox;
+	public Label getNumLabel() {
+		return numLabel;
 	}
 
-	public void setMinute1ComboBox(ComboBox<Integer> minute1ComboBox) {
-		this.minute1ComboBox = minute1ComboBox;
+	public void setNumLabel(Label numLabel) {
+		this.numLabel = numLabel;
 	}
 
-	public ComboBox<Integer> getHours2ComboBox() {
-		return hours2ComboBox;
+	public Label getPostCodeLabel() {
+		return postCodeLabel;
 	}
 
-	public void setHours2ComboBox(ComboBox<Integer> hours2ComboBox) {
-		this.hours2ComboBox = hours2ComboBox;
+	public void setPostCodeLabel(Label postCodeLabel) {
+		this.postCodeLabel = postCodeLabel;
 	}
 
-	public ComboBox<Integer> getMinute2ComboBox() {
-		return minute2ComboBox;
+	public Label getCityLabel() {
+		return cityLabel;
 	}
 
-	public void setMinute2ComboBox(ComboBox<Integer> minute2ComboBox) {
-		this.minute2ComboBox = minute2ComboBox;
+	public void setCityLabel(Label cityLabel) {
+		this.cityLabel = cityLabel;
 	}
+
+	public Label getCountyLabel() {
+		return countyLabel;
+	}
+
+	public void setCountyLabel(Label countyLabel) {
+		this.countyLabel = countyLabel;
+	}
+
+	public Label getCountryLabel() {
+		return countryLabel;
+	}
+
+	public void setCountryLabel(Label countryLabel) {
+		this.countryLabel = countryLabel;
+	}
+
+	public Label getCoordLabel() {
+		return coordLabel;
+	}
+
+	public void setCoordLabel(Label coordLabel) {
+		this.coordLabel = coordLabel;
+	}
+
+	public Label getDefaultLabel() {
+		return defaultLabel;
+	}
+
+	public void setDefaultLabel(Label defaultLabel) {
+		this.defaultLabel = defaultLabel;
+	}
+
+	public TextField getStreetTextField() {
+		return streetTextField;
+	}
+
+	public void setStreetTextField(TextField streetTextField) {
+		this.streetTextField = streetTextField;
+	}
+
+	public TextField getNumTextField() {
+		return numTextField;
+	}
+
+	public void setNumTextField(TextField numTextField) {
+		this.numTextField = numTextField;
+	}
+
+	public TextField getPostCodeTextField() {
+		return postCodeTextField;
+	}
+
+	public void setPostCodeTextField(TextField postCodeTextField) {
+		this.postCodeTextField = postCodeTextField;
+	}
+
+	public TextField getCityTextField() {
+		return cityTextField;
+	}
+
+	public void setCityTextField(TextField cityTextField) {
+		this.cityTextField = cityTextField;
+	}
+
+	public TextField getCountyTextField() {
+		return countyTextField;
+	}
+
+	public void setCountyTextField(TextField countyTextField) {
+		this.countyTextField = countyTextField;
+	}
+
+	public TextField getCountryTextField() {
+		return countryTextField;
+	}
+
+	public void setCountryTextField(TextField countryTextField) {
+		this.countryTextField = countryTextField;
+	}
+
+	public TextField getCoordTextField() {
+		return coordTextField;
+	}
+
+	public void setCoordTextField(TextField coordTextField) {
+		this.coordTextField = coordTextField;
+	}
+
+	public CheckBox getDefaultCheckBox() {
+		return defaultCheckBox;
+	}
+
+	public void setDefaultCheckBox(CheckBox defaultCheckBox) {
+		this.defaultCheckBox = defaultCheckBox;
+	}
+
+	public Button getSaveButton() {
+		return saveButton;
+	}
+
+	public void setSaveButton(Button saveButton) {
+		this.saveButton = saveButton;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
 }

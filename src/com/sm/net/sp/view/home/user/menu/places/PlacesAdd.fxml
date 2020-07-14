@@ -70,6 +70,51 @@
                               </Label>
                            </children>
                         </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="streetLabel" text="via">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="postCodeLabel" text="cap">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="countryLabel" text="nazione">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="coordLabel" text="coordinate">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="defaultLabel" text="predef">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                   <VBox HBox.hgrow="ALWAYS">
@@ -92,215 +137,113 @@
                               </TextField>
                            </children>
                         </StackPane>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <StackPane alignment="TOP_CENTER">
-               <children>
-                  <Separator>
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </Separator>
-               </children>
-            </StackPane>
-            <HBox>
-               <children>
-                  <VBox>
-                     <children>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <Label fx:id="meeting1Label" text="Label">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </Label>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day1CheckBox" mnemonicParsing="false" text="lun">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day2CheckBox" mnemonicParsing="false" text="mar">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day3CheckBox" mnemonicParsing="false" text="mer">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day4CheckBox" mnemonicParsing="false" text="gio">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day5CheckBox" mnemonicParsing="false" text="ven">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="TOP_CENTER">
-                           <children>
-                              <Separator>
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </Separator>
-                           </children>
-                        </StackPane>
                         <HBox>
                            <children>
+                              <StackPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="streetTextField">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
                               <StackPane alignment="CENTER_LEFT">
                                  <children>
-                                    <Label fx:id="time1Label" text="orario">
+                                    <Label fx:id="numLabel" text="n.">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox fx:id="hours1ComboBox" StackPane.alignment="CENTER_LEFT">
+                                    <TextField fx:id="numTextField">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </ComboBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
-                                 <children>
-                                    <Label fx:id="timeSeparator1Label" text=":">
-                                       <StackPane.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </StackPane.margin>
-                                    </Label>
-                                 </children>
-                              </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
-                                 <children>
-                                    <ComboBox fx:id="minute1ComboBox" StackPane.alignment="CENTER_LEFT">
-                                       <StackPane.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </StackPane.margin>
-                                    </ComboBox>
+                                    </TextField>
                                  </children>
                               </StackPane>
                            </children>
                         </HBox>
-                     </children>
-                  </VBox>
-                  <StackPane>
-                     <children>
-                        <Separator orientation="VERTICAL">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Separator>
-                     </children>
-                  </StackPane>
-                  <VBox>
-                     <children>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <Label fx:id="meeting2Label" text="Label">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </Label>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day6CheckBox" mnemonicParsing="false" text="sab">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="day7CheckBox" mnemonicParsing="false" text="dom">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Separator>
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </Separator>
-                           </children>
-                        </StackPane>
                         <HBox>
                            <children>
+                              <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="postCodeTextField">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                 </children>
+                              </StackPane>
                               <StackPane alignment="CENTER_LEFT">
                                  <children>
-                                    <Label fx:id="time2Label" text="orario">
+                                    <Label fx:id="cityLabel" text="citta">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox fx:id="hours2ComboBox" StackPane.alignment="CENTER_LEFT">
+                                    <TextField fx:id="cityTextField">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </ComboBox>
+                                    </TextField>
                                  </children>
                               </StackPane>
                               <StackPane alignment="CENTER_LEFT">
                                  <children>
-                                    <Label fx:id="timeSeparator2Label" text=":">
+                                    <Label fx:id="countyLabel" text="prov">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox fx:id="minute2ComboBox" StackPane.alignment="CENTER_LEFT">
+                                    <TextField fx:id="countyTextField">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </ComboBox>
+                                    </TextField>
                                  </children>
                               </StackPane>
                            </children>
                         </HBox>
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="countryTextField">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="coordTextField">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </TextField>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                           <children>
+                              <CheckBox fx:id="defaultCheckBox" mnemonicParsing="false">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </CheckBox>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                </children>

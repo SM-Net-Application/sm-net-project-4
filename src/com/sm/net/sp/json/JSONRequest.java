@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.util.enumeration.JSONStatus;
@@ -631,6 +632,26 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(40));
 
 		jsonObj.put("id", dateAndTime.getId().get());
+
+		return jsonObj;
+	}
+
+	public static JSONObject PLACE_INSERT(Place place) {
+
+		JSONObject jsonObj = create(Integer.valueOf(41));
+
+		jsonObj.put("typePlace", place.getType().get());
+		jsonObj.put("descr", place.getDescr().get());
+		jsonObj.put("street", place.getStreet().get());
+		jsonObj.put("num", place.getNum().get());
+		jsonObj.put("postCode", place.getPostCode().get());
+		jsonObj.put("city", place.getCity().get());
+		jsonObj.put("county", place.getCounty().get());
+		jsonObj.put("country", place.getCountry().get());
+		jsonObj.put("coord", place.getCoord().get());
+
+		int def = place.getDef().get() ? 1 : 0;
+		jsonObj.put("def", def);
 
 		return jsonObj;
 	}
