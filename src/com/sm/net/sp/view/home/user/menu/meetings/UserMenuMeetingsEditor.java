@@ -13,6 +13,7 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
@@ -36,6 +37,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -306,6 +308,49 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	@FXML
 	private ComboBox<Member> congregationBibleStudyReaderComboBox;
 
+	@FXML
+	private Label dateAndTimeTitleLabel;
+	@FXML
+	private Label dateAndTimeMidLabel;
+	@FXML
+	private Label dateAndTimeWeekendLabel;
+	@FXML
+	private Label time1Label;
+	@FXML
+	private Label timeSeparator1Label;
+	@FXML
+	private Label time2Label;
+	@FXML
+	private Label timeSeparator2Label;
+	@FXML
+	private Label placeLabel;
+
+	@FXML
+	private CheckBox day1CheckBox;
+	@FXML
+	private CheckBox day2CheckBox;
+	@FXML
+	private CheckBox day3CheckBox;
+	@FXML
+	private CheckBox day4CheckBox;
+	@FXML
+	private CheckBox day5CheckBox;
+	@FXML
+	private CheckBox day6CheckBox;
+	@FXML
+	private CheckBox day7CheckBox;
+
+	@FXML
+	private ComboBox<Integer> hours1ComboBox;
+	@FXML
+	private ComboBox<Integer> minute1ComboBox;
+	@FXML
+	private ComboBox<Integer> hours2ComboBox;
+	@FXML
+	private ComboBox<Integer> minute2ComboBox;
+	@FXML
+	private ComboBox<Place> placeComboBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -479,6 +524,32 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		wolViewButton.getStyleClass().add("button_image_001");
 		loadWeekFromWOLButton.getStyleClass().add("button_image_001");
 		saveWeekButton.getStyleClass().add("button_image_001");
+
+		this.dateAndTimeTitleLabel.getStyleClass().add("label_002");
+
+		this.dateAndTimeMidLabel.getStyleClass().add("label_001");
+		this.dateAndTimeWeekendLabel.getStyleClass().add("label_001");
+
+		this.time1Label.getStyleClass().add("label_001");
+		this.timeSeparator1Label.getStyleClass().add("label_001");
+		this.time2Label.getStyleClass().add("label_001");
+		this.timeSeparator2Label.getStyleClass().add("label_001");
+
+		this.hours1ComboBox.getStyleClass().add("combo_box_002");
+		this.minute1ComboBox.getStyleClass().add("combo_box_002");
+		this.hours2ComboBox.getStyleClass().add("combo_box_002");
+		this.minute2ComboBox.getStyleClass().add("combo_box_002");
+
+		this.day1CheckBox.getStyleClass().add("check_box_001");
+		this.day2CheckBox.getStyleClass().add("check_box_001");
+		this.day3CheckBox.getStyleClass().add("check_box_001");
+		this.day4CheckBox.getStyleClass().add("check_box_001");
+		this.day5CheckBox.getStyleClass().add("check_box_001");
+		this.day6CheckBox.getStyleClass().add("check_box_001");
+		this.day7CheckBox.getStyleClass().add("check_box_001");
+
+		this.placeLabel.getStyleClass().add("label_001");
+		this.placeComboBox.getStyleClass().add("combo_box_002");
 	}
 
 	private void viewUpdate() {
@@ -579,6 +650,34 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
 		saveWeekButton.setText(null);
 		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
+
+		this.day1CheckBox.setText(this.language.getString("TEXT0123"));
+		this.day2CheckBox.setText(this.language.getString("TEXT0124"));
+		this.day3CheckBox.setText(this.language.getString("TEXT0125"));
+		this.day4CheckBox.setText(this.language.getString("TEXT0126"));
+		this.day5CheckBox.setText(this.language.getString("TEXT0127"));
+		this.day6CheckBox.setText(this.language.getString("TEXT0128"));
+		this.day7CheckBox.setText(this.language.getString("TEXT0129"));
+
+		int width = 100;
+		this.hours1ComboBox.setMinWidth(width);
+		this.hours1ComboBox.setMaxWidth(width);
+		this.hours2ComboBox.setMinWidth(width);
+		this.hours2ComboBox.setMaxWidth(width);
+		this.minute1ComboBox.setMinWidth(width);
+		this.minute1ComboBox.setMaxWidth(width);
+		this.minute2ComboBox.setMinWidth(width);
+		this.minute2ComboBox.setMaxWidth(width);
+
+		this.dateAndTimeTitleLabel.setText(this.language.getString("meetings.dateandtime.title"));
+		this.dateAndTimeMidLabel.setText(this.language.getString("meetings.dateandtime.mid"));
+		this.dateAndTimeWeekendLabel.setText(this.language.getString("meetings.dateandtime.weekend"));
+		this.time1Label.setText(this.language.getString("meetings.dateandtime.time1"));
+		this.timeSeparator1Label.setText(this.language.getString("meetings.dateandtime.timeseparator1"));
+		this.time2Label.setText(this.language.getString("meetings.dateandtime.time2"));
+		this.timeSeparator2Label.setText(this.language.getString("meetings.dateandtime.timeseparator2"));
+		
+		this.placeLabel.setText(this.language.getString("meetings.place"));
 	}
 
 	private void cellValueFactory() {
