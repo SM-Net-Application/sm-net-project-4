@@ -1,15 +1,15 @@
 package com.sm.net.sp.view.home.user.menu.places;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.places.task.PlaceDeleteTask;
+import com.sm.net.sp.view.home.user.menu.places.task.PlaceLoadTask;
+import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -31,17 +32,27 @@ public class HomeUserMenuPlaces {
 	@FXML
 	private Label headerLabel;
 	@FXML
-	private TableView<DateAndTime> dateTimeTableView;
+	private TableView<Place> placesTableView;
 	@FXML
-	private TableColumn<DateAndTime, LocalDate> dateTimeStartDayTableColumn;
+	private TableColumn<Place, String> typeTableColumn;
 	@FXML
-	private TableColumn<DateAndTime, String> dateTimeDay1TableColumn;
+	private TableColumn<Place, String> descrTableColumn;
 	@FXML
-	private TableColumn<DateAndTime, LocalTime> dateTimeHours1TableColumn;
+	private TableColumn<Place, String> streetTableColumn;
 	@FXML
-	private TableColumn<DateAndTime, String> dateTimeDay2TableColumn;
+	private TableColumn<Place, String> numTableColumn;
 	@FXML
-	private TableColumn<DateAndTime, LocalTime> dateTimeHours2TableColumn;
+	private TableColumn<Place, String> postCodeTableColumn;
+	@FXML
+	private TableColumn<Place, String> cityTableColumn;
+	@FXML
+	private TableColumn<Place, String> countyTableColumn;
+	@FXML
+	private TableColumn<Place, String> countryTableColumn;
+	@FXML
+	private TableColumn<Place, String> coordTableColumn;
+	@FXML
+	private TableColumn<Place, Boolean> defaultTableColumn;
 	@FXML
 	private Button addButton;
 	@FXML
@@ -60,20 +71,26 @@ public class HomeUserMenuPlaces {
 
 	private void tableColumnsCells() {
 
-		this.dateTimeStartDayTableColumn.setCellFactory(param -> tableCellForLocalDate());
-		this.dateTimeDay1TableColumn.setCellFactory(param -> tableCellForDayText());
-		this.dateTimeDay2TableColumn.setCellFactory(param -> tableCellForDayText());
+		this.typeTableColumn.setCellFactory(c -> tableCellForEnumText());
+		this.typeTableColumn.setCellValueFactory(cellData -> cellData.getValue().getType().get().getTextKey());
 
-		this.dateTimeStartDayTableColumn.setCellValueFactory(cellData -> cellData.getValue().getDate());
-		this.dateTimeDay1TableColumn.setCellValueFactory(cellData -> cellData.getValue().getDay1Text());
-		this.dateTimeHours1TableColumn.setCellValueFactory(cellData -> cellData.getValue().getTime1());
-		this.dateTimeDay2TableColumn.setCellValueFactory(cellData -> cellData.getValue().getDay2Text());
-		this.dateTimeHours2TableColumn.setCellValueFactory(cellData -> cellData.getValue().getTime2());
+		this.descrTableColumn.setCellValueFactory(cellData -> cellData.getValue().getDescr());
+		this.streetTableColumn.setCellValueFactory(cellData -> cellData.getValue().getStreet());
+		this.numTableColumn.setCellValueFactory(cellData -> cellData.getValue().getNum());
+		this.postCodeTableColumn.setCellValueFactory(cellData -> cellData.getValue().getPostCode());
+		this.cityTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCity());
+		this.countyTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCounty());
+		this.countryTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCountry());
+		this.coordTableColumn.setCellValueFactory(cellData -> cellData.getValue().getCoord());
+
+		this.defaultTableColumn.setCellFactory(CheckBoxTableCell.forTableColumn(this.defaultTableColumn));
+		this.defaultTableColumn.setCellValueFactory(cellData -> cellData.getValue().getDef());
+
 	}
 
-	private TableCell<DateAndTime, String> tableCellForDayText() {
+	private TableCell<Place, String> tableCellForEnumText() {
 
-		return new TableCell<DateAndTime, String>() {
+		return new TableCell<Place, String>() {
 			@Override
 			protected void updateItem(String item, boolean empty) {
 				super.updateItem(item, empty);
@@ -86,23 +103,6 @@ public class HomeUserMenuPlaces {
 		};
 	}
 
-	private TableCell<DateAndTime, LocalDate> tableCellForLocalDate() {
-
-		return new TableCell<DateAndTime, LocalDate>() {
-			@Override
-			protected void updateItem(LocalDate item, boolean empty) {
-				super.updateItem(item, empty);
-
-				if (empty)
-					setText(null);
-				else {
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-					setText(dtf.format(item));
-				}
-			}
-		};
-	}
-
 	private void styleClasses() {
 
 		this.headerImageView.setFitWidth(50);
@@ -111,7 +111,7 @@ public class HomeUserMenuPlaces {
 
 		this.headerLabel.getStyleClass().add("label_header_001");
 
-		this.dateTimeTableView.getStyleClass().add("table_view_001");
+		this.placesTableView.getStyleClass().add("table_view_001");
 
 		this.addButton.getStyleClass().add("button_image_001");
 		this.deleteButton.getStyleClass().add("button_image_001");
@@ -130,11 +130,16 @@ public class HomeUserMenuPlaces {
 
 		this.headerLabel.setText(this.language.getString("sp.menu.places"));
 
-		this.dateTimeStartDayTableColumn.setText(this.language.getString("datetime.table.column.start"));
-		this.dateTimeDay1TableColumn.setText(this.language.getString("datetime.table.column.day1"));
-		this.dateTimeHours1TableColumn.setText(this.language.getString("datetime.table.column.hours1"));
-		this.dateTimeDay2TableColumn.setText(this.language.getString("datetime.table.column.day2"));
-		this.dateTimeHours2TableColumn.setText(this.language.getString("datetime.table.column.hours2"));
+		this.typeTableColumn.setText(this.language.getString("places.table.column.type"));
+		this.descrTableColumn.setText(this.language.getString("places.table.column.descr"));
+		this.streetTableColumn.setText(this.language.getString("places.table.column.street"));
+		this.numTableColumn.setText(this.language.getString("places.table.column.num"));
+		this.postCodeTableColumn.setText(this.language.getString("places.table.column.postCode"));
+		this.cityTableColumn.setText(this.language.getString("places.table.column.city"));
+		this.countyTableColumn.setText(this.language.getString("places.table.column.county"));
+		this.countryTableColumn.setText(this.language.getString("places.table.column.country"));
+		this.coordTableColumn.setText(this.language.getString("places.table.column.coord"));
+		this.defaultTableColumn.setText(this.language.getString("places.table.column.default"));
 
 		this.addButton.setText(null);
 		this.addButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ADD));
@@ -145,11 +150,11 @@ public class HomeUserMenuPlaces {
 
 	public void loadList() {
 
-		String waitMessage = this.language.getString("datetime.wait.load");
+		String waitMessage = this.language.getString("places.wait.load");
 
-//		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-//				new DateAndTimeLoadTask(this.application.getAlertBuilder2(), this.settings,
-//						this.stageSupportPlannerView, this));
+		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+				new PlaceLoadTask(this.application.getAlertBuilder2(), this.settings, this.stageSupportPlannerView,
+						this, this.settings.getDatabaseSecretKey()));
 
 	}
 
@@ -162,20 +167,18 @@ public class HomeUserMenuPlaces {
 
 		this.deleteButton.setOnAction(event -> {
 
-			if (this.dateTimeTableView.getSelectionModel().getSelectedIndex() > -1) {
+			if (this.placesTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-				DateAndTime item = this.dateTimeTableView.getSelectionModel().getSelectedItem();
-				LocalDate localDate = item.getDate().get();
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+				Place item = this.placesTableView.getSelectionModel().getSelectedItem();
 
 				if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView,
-						this.language.getString("datetime.delete.confirm"), dtf.format(localDate))) {
+						this.language.getString("places.delete.confirm"), item.getDescr().get())) {
 
-					String waitMessage = this.language.getString("datetime.wait.delete");
+					String waitMessage = this.language.getString("places.wait.delete");
 
-//					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-//							new DateAndTimeDeleteTask(this.application.getAlertBuilder2(), this.settings,
-//									this.stageSupportPlannerView, item, this));
+					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+							new PlaceDeleteTask(this.application.getAlertBuilder2(), this.settings,
+									this.stageSupportPlannerView, item, this));
 				}
 			}
 
@@ -286,52 +289,91 @@ public class HomeUserMenuPlaces {
 		this.language = language;
 	}
 
-	public TableView<DateAndTime> getDateTimeTableView() {
-		return dateTimeTableView;
+	public TableView<Place> getPlacesTableView() {
+		return placesTableView;
 	}
 
-	public void setDateTimeTableView(TableView<DateAndTime> dateTimeTableView) {
-		this.dateTimeTableView = dateTimeTableView;
+	public void setPlacesTableView(TableView<Place> placesTableView) {
+		this.placesTableView = placesTableView;
 	}
 
-	public TableColumn<DateAndTime, LocalDate> getDateTimeStartDayTableColumn() {
-		return dateTimeStartDayTableColumn;
+	public TableColumn<Place, String> getTypeTableColumn() {
+		return typeTableColumn;
 	}
 
-	public void setDateTimeStartDayTableColumn(TableColumn<DateAndTime, LocalDate> dateTimeStartDayTableColumn) {
-		this.dateTimeStartDayTableColumn = dateTimeStartDayTableColumn;
+	public void setTypeTableColumn(TableColumn<Place, String> typeTableColumn) {
+		this.typeTableColumn = typeTableColumn;
 	}
 
-	public TableColumn<DateAndTime, String> getDateTimeDay1TableColumn() {
-		return dateTimeDay1TableColumn;
+	public TableColumn<Place, String> getDescrTableColumn() {
+		return descrTableColumn;
 	}
 
-	public void setDateTimeDay1TableColumn(TableColumn<DateAndTime, String> dateTimeDay1TableColumn) {
-		this.dateTimeDay1TableColumn = dateTimeDay1TableColumn;
+	public void setDescrTableColumn(TableColumn<Place, String> descrTableColumn) {
+		this.descrTableColumn = descrTableColumn;
 	}
 
-	public TableColumn<DateAndTime, LocalTime> getDateTimeHours1TableColumn() {
-		return dateTimeHours1TableColumn;
+	public TableColumn<Place, String> getStreetTableColumn() {
+		return streetTableColumn;
 	}
 
-	public void setDateTimeHours1TableColumn(TableColumn<DateAndTime, LocalTime> dateTimeHours1TableColumn) {
-		this.dateTimeHours1TableColumn = dateTimeHours1TableColumn;
+	public void setStreetTableColumn(TableColumn<Place, String> streetTableColumn) {
+		this.streetTableColumn = streetTableColumn;
 	}
 
-	public TableColumn<DateAndTime, String> getDateTimeDay2TableColumn() {
-		return dateTimeDay2TableColumn;
+	public TableColumn<Place, String> getNumTableColumn() {
+		return numTableColumn;
 	}
 
-	public void setDateTimeDay2TableColumn(TableColumn<DateAndTime, String> dateTimeDay2TableColumn) {
-		this.dateTimeDay2TableColumn = dateTimeDay2TableColumn;
+	public void setNumTableColumn(TableColumn<Place, String> numTableColumn) {
+		this.numTableColumn = numTableColumn;
 	}
 
-	public TableColumn<DateAndTime, LocalTime> getDateTimeHours2TableColumn() {
-		return dateTimeHours2TableColumn;
+	public TableColumn<Place, String> getPostCodeTableColumn() {
+		return postCodeTableColumn;
 	}
 
-	public void setDateTimeHours2TableColumn(TableColumn<DateAndTime, LocalTime> dateTimeHours2TableColumn) {
-		this.dateTimeHours2TableColumn = dateTimeHours2TableColumn;
+	public void setPostCodeTableColumn(TableColumn<Place, String> postCodeTableColumn) {
+		this.postCodeTableColumn = postCodeTableColumn;
 	}
 
+	public TableColumn<Place, String> getCityTableColumn() {
+		return cityTableColumn;
+	}
+
+	public void setCityTableColumn(TableColumn<Place, String> cityTableColumn) {
+		this.cityTableColumn = cityTableColumn;
+	}
+
+	public TableColumn<Place, String> getCountyTableColumn() {
+		return countyTableColumn;
+	}
+
+	public void setCountyTableColumn(TableColumn<Place, String> countyTableColumn) {
+		this.countyTableColumn = countyTableColumn;
+	}
+
+	public TableColumn<Place, String> getCountryTableColumn() {
+		return countryTableColumn;
+	}
+
+	public void setCountryTableColumn(TableColumn<Place, String> countryTableColumn) {
+		this.countryTableColumn = countryTableColumn;
+	}
+
+	public TableColumn<Place, String> getCoordTableColumn() {
+		return coordTableColumn;
+	}
+
+	public void setCoordTableColumn(TableColumn<Place, String> coordTableColumn) {
+		this.coordTableColumn = coordTableColumn;
+	}
+
+	public TableColumn<Place, Boolean> getDefaultTableColumn() {
+		return defaultTableColumn;
+	}
+
+	public void setDefaultTableColumn(TableColumn<Place, Boolean> defaultTableColumn) {
+		this.defaultTableColumn = defaultTableColumn;
+	}
 }

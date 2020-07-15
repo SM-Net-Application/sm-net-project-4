@@ -640,7 +640,7 @@ public class JSONRequest {
 
 		JSONObject jsonObj = create(Integer.valueOf(41));
 
-		jsonObj.put("typePlace", place.getType().get());
+		jsonObj.put("typePlace", place.getType().get().getId());
 		jsonObj.put("descr", place.getDescr().get());
 		jsonObj.put("street", place.getStreet().get());
 		jsonObj.put("num", place.getNum().get());
@@ -652,6 +652,21 @@ public class JSONRequest {
 
 		int def = place.getDef().get() ? 1 : 0;
 		jsonObj.put("def", def);
+
+		return jsonObj;
+	}
+
+	public static JSONObject PLACES_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(42));
+		return jsonObj;
+	}
+
+	public static JSONObject PLACE_DELETE(Place place) {
+
+		JSONObject jsonObj = create(Integer.valueOf(43));
+
+		jsonObj.put("id", place.getId().get());
 
 		return jsonObj;
 	}

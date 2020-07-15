@@ -4,8 +4,11 @@ Data di pubblicazione : ..-..-....
 		- In questa sezione è possibile definire il giorno e l'ora delle adunanze a partire dalla settimana X
 		- Queste informazioni verrano utilizzate nella sezione Adunanze/Discorsi pubblici
 
+	* Nuova sezione: Luoghi di adorazione
+		- In questa sezione è possibile definire i luoghi in cui si tengono le adunanze, i congressi o altri eventi
+
 	* Fix
-		- Visualizzazione del menù contestuale ottimizzata
+		- Visualizzazione del menù contestuale (tasto destro) ottimizzata
 		 
 	* Nuova gestione della versione software
 		- Formato 0.0.0
@@ -28,5 +31,5 @@ Data di pubblicazione : ..-..-....
 		
 	* Database update
 		  
-		  CREATE TABLE `smnetzwe_albstadtita`.`sp_datetime` ( `spDateTimeID` INT NOT NULL AUTO_INCREMENT , `spInf1` DATE NOT NULL , `spInf2` INT NOT NULL , `spInf3` INT NOT NULL , `spInf4` INT NOT NULL , `spInf5` INT NOT NULL , `spInf6` INT NOT NULL , `spInf7` INT NOT NULL , PRIMARY KEY (`spDateTimeID`)) ENGINE = InnoDB;
-		  CREATE TABLE `smnetzwe_albstadtita`.`sp_places` ( `spPlaceID` INT NOT NULL AUTO_INCREMENT , `spInf1` INT NOT NULL , `spInf2` VARCHAR(250) NOT NULL , `spInf3` VARCHAR(250) NOT NULL , `spInf4` VARCHAR(250) NOT NULL , `spInf5` VARCHAR(250) NOT NULL , `spInf6` VARCHAR(250) NOT NULL , `spInf7` VARCHAR(250) NOT NULL , `spInf8` VARCHAR(250) NOT NULL , `spInf9` VARCHAR(250) NOT NULL , `spInf10` INT NOT NULL , PRIMARY KEY (`spPlaceID`)) ENGINE = InnoDB;
+		  CREATE TABLE sp_datetime ( spDateTimeID INT NOT NULL AUTO_INCREMENT , spInf1 DATE NOT NULL , spInf2 INT NOT NULL , spInf3 INT NOT NULL , spInf4 INT NOT NULL , spInf5 INT NOT NULL , spInf6 INT NOT NULL , spInf7 INT NOT NULL , PRIMARY KEY (spDateTimeID)) ENGINE = InnoDB;
+		  CREATE TABLE sp_places ( spPlaceID INT NOT NULL AUTO_INCREMENT , spInf1 INT NOT NULL , spInf2 VARCHAR(250) NOT NULL , spInf3 VARCHAR(250) NOT NULL , spInf4 VARCHAR(250) NOT NULL , spInf5 VARCHAR(250) NOT NULL , spInf6 VARCHAR(250) NOT NULL , spInf7 VARCHAR(250) NOT NULL , spInf8 VARCHAR(250) NOT NULL , spInf9 VARCHAR(250) NOT NULL , spInf10 INT NOT NULL , PRIMARY KEY (spPlaceID)) ENGINE = InnoDB;

@@ -19,7 +19,7 @@ public class EnumPlaceTypeComboBoxListCell extends ListCell<EnumPlaceType> {
 		super.updateItem(item, empty);
 
 		if (!empty)
-			setText(this.language.getString(item.getTextKey()));
+			setText(this.language.getString(item.getTextKey().get()));
 		else
 			setText(null);
 

@@ -201,6 +201,13 @@ public class PlacesAdd extends UpdateDataAdapter {
 
 		boolean check = true;
 
+		if (this.descrTextField.getText().isEmpty()) {
+			this.application.getAlertBuilder2().error(this.thisStage,
+					this.language.getString("places.new.error.descr"));
+
+			return false;
+		}
+
 		return check;
 	}
 

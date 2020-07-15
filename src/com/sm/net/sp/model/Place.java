@@ -2,20 +2,24 @@ package com.sm.net.sp.model;
 
 import javax.crypto.SecretKey;
 
+import org.json.JSONObject;
+
 import com.sm.net.sp.view.home.user.menu.places.PlacesAdd;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Place {
 
 	private IntegerProperty id;
-	private IntegerProperty type;
+	private ObjectProperty<EnumPlaceType> type;
 	private StringProperty descr;
 	private StringProperty street;
 	private StringProperty num;
@@ -29,7 +33,7 @@ public class Place {
 	public Place(EnumPlaceType placeType, String descr, String street, String num, String postCode, String city,
 			String county, String country, String coord, boolean def) {
 
-		this.type = new SimpleIntegerProperty(placeType.getId());
+		this.type = new SimpleObjectProperty<>(placeType);
 		this.descr = new SimpleStringProperty(descr);
 		this.street = new SimpleStringProperty(street);
 		this.num = new SimpleStringProperty(num);
@@ -39,6 +43,14 @@ public class Place {
 		this.country = new SimpleStringProperty(country);
 		this.coord = new SimpleStringProperty(coord);
 		this.def = new SimpleBooleanProperty(def);
+	}
+
+	public Place(int spPlaceID, EnumPlaceType placeType, String descr, String street, String num, String postCode,
+			String city, String county, String country, String coord, boolean def) {
+
+		this(placeType, descr, street, num, postCode, city, county, country, coord, def);
+
+		this.id = new SimpleIntegerProperty(spPlaceID);
 	}
 
 	public static Place newInstanceByView(PlacesAdd view, SecretKey key) {
@@ -66,20 +78,40 @@ public class Place {
 		return new Place(placeType, descr, street, num, postCode, city, county, country, coord, def);
 	}
 
+	public static Place newInstanceByJSONObject(JSONObject json, SecretKey secretKey) {
+
+		int spPlaceID = json.getInt("spPlaceID");
+		int type = json.getInt("spInf1");
+		String descr = json.getString("spInf2");
+		String street = json.getString("spInf3");
+		String num = json.getString("spInf4");
+		String postCode = json.getString("spInf5");
+		String city = json.getString("spInf6");
+		String county = json.getString("spInf7");
+		String country = json.getString("spInf8");
+		String coord = json.getString("spInf9");
+		boolean def = json.getInt("spInf10") == 1;
+
+		descr = Crypt.decrypt(descr, secretKey);
+		street = Crypt.decrypt(street, secretKey);
+		num = Crypt.decrypt(num, secretKey);
+		postCode = Crypt.decrypt(postCode, secretKey);
+		city = Crypt.decrypt(city, secretKey);
+		county = Crypt.decrypt(county, secretKey);
+		country = Crypt.decrypt(country, secretKey);
+		coord = Crypt.decrypt(coord, secretKey);
+
+		EnumPlaceType placeType = EnumPlaceType.valueByID(type);
+
+		return new Place(spPlaceID, placeType, descr, street, num, postCode, city, county, country, coord, def);
+	}
+
 	public IntegerProperty getId() {
 		return id;
 	}
 
 	public void setId(IntegerProperty id) {
 		this.id = id;
-	}
-
-	public IntegerProperty getType() {
-		return type;
-	}
-
-	public void setType(IntegerProperty type) {
-		this.type = type;
 	}
 
 	public StringProperty getDescr() {
@@ -154,4 +186,11 @@ public class Place {
 		this.def = def;
 	}
 
+	public ObjectProperty<EnumPlaceType> getType() {
+		return type;
+	}
+
+	public void setType(ObjectProperty<EnumPlaceType> type) {
+		this.type = type;
+	}
 }

@@ -67,13 +67,18 @@
             </HBox>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="dateTimeTableView" maxHeight="1.7976931348623157E308">
+                  <TableView fx:id="placesTableView" maxHeight="1.7976931348623157E308">
                     <columns>
-                        <TableColumn fx:id="dateTimeStartDayTableColumn" prefWidth="75.0" text="data" />
-                      <TableColumn fx:id="dateTimeDay1TableColumn" prefWidth="75.0" text="giornoinfr" />
-                        <TableColumn fx:id="dateTimeHours1TableColumn" prefWidth="75.0" text="orainfr" />
-                        <TableColumn fx:id="dateTimeDay2TableColumn" prefWidth="75.0" text="giornofs" />
-                        <TableColumn fx:id="dateTimeHours2TableColumn" prefWidth="75.0" text="orafs" />
+                        <TableColumn fx:id="typeTableColumn" prefWidth="75.0" text="tipo" />
+                      <TableColumn fx:id="descrTableColumn" prefWidth="75.0" text="denom" />
+                        <TableColumn fx:id="streetTableColumn" prefWidth="75.0" text="strada" />
+                        <TableColumn fx:id="numTableColumn" prefWidth="75.0" text="n" />
+                        <TableColumn fx:id="postCodeTableColumn" prefWidth="75.0" text="cap" />
+                        <TableColumn fx:id="cityTableColumn" prefWidth="75.0" text="citta" />
+                        <TableColumn fx:id="countyTableColumn" prefWidth="75.0" text="provincia" />
+                        <TableColumn fx:id="countryTableColumn" prefWidth="75.0" text="nazione" />
+                        <TableColumn fx:id="coordTableColumn" prefWidth="75.0" text="coord" />
+                        <TableColumn fx:id="defaultTableColumn" prefWidth="75.0" text="predef" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
