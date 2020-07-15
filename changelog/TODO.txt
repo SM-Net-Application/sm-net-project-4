@@ -1,44 +1,72 @@
-		
-	- Nuova sezione: Luoghi di adorazione (Indirizzo : Via, Civico, CAP, Città, Provincia, Nazione, Coordinate)
-		- Sale del Regno
-			- Impostare luogo di adorazione predefinito
-		- Sala assemblee/congressi
-		- Altri luoghi
 	
-	- Sezione: Disastri Naturali
-		- Stampare l'elenco per Gruppo di Servizio
-	
-	- Sezione adunanze:
+	- Adunanze:
 		- Aggiungere le informazioni:
 			- Giorno adunanza infrasettimanale (Lunedi - Giovedi)
 			- Giorno adunanza del fine settimana (Sabato - Domenica)
 			- Orario adunanza infrasettimanale (Ora, Minuto)
 			- Orario adunanza del fine settimana (Ora, Minuto)
 			- Luogo di adorazione (Sala del Regno / Sala Assemblee / Altro locale)
+			- Queste informazioni devono essere preimpostate quando:
+				- Si crea una nuova adunanza
+				- Si crea una nuova adunanza dalla Sezione Discorsi pubblici
+				
+		- Aggiungere Minuti dello Studio Torre di Guardia
+		- Aggiungere Minuti del Discorso Pubblico
+		- Inverti Studio e Discorso Pubblico
+		- Senza Lettore (Non stampare il lettore se non disponbile)
+		- Solo Studio Torre di Guardia (Cambiare Presidente in Preghiera iniziale)
+		- Tasti piccoli e in alto
+		- WOL : Ottenere i cantici e il tema della Torre di Guardia
+
+	- Discorsi pubblici
+		- Filtro : Presidente / Oratore / Congregazione / Tema
+
+	- Disastri Naturali
+		- Stampare l'elenco per Gruppo di Servizio
+		- Filtro : Componenti / Famiglie
 			
-	- Nuova sezione: Commemorazione
+	- Commemorazione
 		- Mostra solo le settimane presenti nel database
 		- La stampa del programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
 		
-	- Nuova sezione: Assemblee / Congressi
+	- Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
 		
-	- Sezione Utenti
+	- Utenti
 		- Creare il tab dedicato alla modifica di un utente
+		- Tasti piccoli e in alto
+		
+	- Sorvegliante:
+		- Mostra solo le settimane presenti nel database
+		- Eliminare settimana
+		
+	- Gruppi di servizio
+		- Creare layout di stampa Gruppi di servizio (il layout viene determinato in base al numero di gruppi creati)
+		- Creare layout per numero di gruppi da 1 a 6
+		- Tasti piccoli e in alto
+		
+	- Congregazione
+		- Rimuovere il tab Generali e spostarlo nella nuova sezione Configurazione
+		- Filtro Componenti : Nome / Cognome / Cognome da nubile / Cellulare / E-Mail
+		- Filtro Famiglie : Nome famiglia / Strada / Civico / CAP / Città
+		- Tasti piccoli e in alto
+		
+		- Componenti:
+			- Nuova informazione : Data di nascita
+			- Spostare Password monitor in un altro Tab (non centra con Contatti)
+			- Nuovo CheckBox : "Non visualizzare nell'elenco Disastri Naturali"
+		
+		- Famiglie :
+			- il CheckBox Pulizia semplificata diventa "Non visualizzare nell'elenco Gruppi di Servizio"
+			- Creare un TabPane, al momento solo con il Tab "Altro"
+		
+	- Nuova sezione : Configurazione
+		- Nome della congregazione
 		
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
-	
-	- Sorvegliante:
-		- Mostra solo le settimane presenti nel database
-		
-	- Sezione Gruppi di servizio
-		- Creare layout di stampa Gruppi di servizio (selezionati (1-5))
-		
-	- Sezione Congregazione
-		- Aggiungere ai Membri il CheckBox Non stampare nell'elenco Gruppi di Servizio
-		- Famiglie : il CheckBox pulizia semplificata può essere utilizzato per qualcos'altro
-		
+	- Nuova sezione: Territori
+	- Nuova sezione: Letteratura
 	- Installer per MAC
 	- Dump/Ripristino del database per MAC 
