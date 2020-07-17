@@ -13,7 +13,6 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
-import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
@@ -322,8 +321,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private Label time2Label;
 	@FXML
 	private Label timeSeparator2Label;
+
 	@FXML
 	private Label placeLabel;
+	@FXML
+	private Label placeAddressLabel;
 
 	@FXML
 	private CheckBox day1CheckBox;
@@ -348,8 +350,28 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private ComboBox<Integer> hours2ComboBox;
 	@FXML
 	private ComboBox<Integer> minute2ComboBox;
+
 	@FXML
-	private ComboBox<Place> placeComboBox;
+	private TextField placeTextField;
+	@FXML
+	private Button placeSelectButton;
+	@FXML
+	private Label placePrintLabel;
+	@FXML
+	private CheckBox placePrintCheckBox;
+
+	@FXML
+	private CheckBox presidentPublicMeetingOnlyPrayCheckBox;
+
+	@FXML
+	private Label publicTalkMinLabel;
+	@FXML
+	private TextField publicTalkMinTextField;
+
+	@FXML
+	private Label watchtowerStudyMinLabel;
+	@FXML
+	private TextField watchtowerStudyMinTextField;
 
 	private Settings settings;
 	private Language language;
@@ -548,8 +570,23 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.day6CheckBox.getStyleClass().add("check_box_001");
 		this.day7CheckBox.getStyleClass().add("check_box_001");
 
-		this.placeLabel.getStyleClass().add("label_001");
-		this.placeComboBox.getStyleClass().add("combo_box_002");
+		this.placeLabel.getStyleClass().add("label_002");
+
+		this.placeAddressLabel.getStyleClass().add("label_set_001");
+		this.placePrintLabel.getStyleClass().add("label_set_001");
+
+		this.placeTextField.getStyleClass().add("text_field_001");
+
+		this.placeSelectButton.getStyleClass().add("button_image_001");
+
+		this.placePrintCheckBox.getStyleClass().add("check_box_001");
+		this.presidentPublicMeetingOnlyPrayCheckBox.getStyleClass().add("check_box_001");
+
+		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
+		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
+
+		this.watchtowerStudyMinLabel.getStyleClass().add("label_set_001");
+		this.watchtowerStudyMinTextField.getStyleClass().add("text_field_002");
 	}
 
 	private void viewUpdate() {
@@ -676,8 +713,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.timeSeparator1Label.setText(this.language.getString("meetings.dateandtime.timeseparator1"));
 		this.time2Label.setText(this.language.getString("meetings.dateandtime.time2"));
 		this.timeSeparator2Label.setText(this.language.getString("meetings.dateandtime.timeseparator2"));
-		
+
 		this.placeLabel.setText(this.language.getString("meetings.place"));
+		this.placeAddressLabel.setText(this.language.getString("meetings.place.addr"));
+		this.placePrintLabel.setText(this.language.getString("meetings.place.print"));
+
+		this.presidentPublicMeetingOnlyPrayCheckBox
+				.setText(this.language.getString("meetings.presidentpublicmeeting.onlypray"));
+
+		this.publicTalkMinLabel.setText(this.language.getString("meetings.publictalk.min"));
+		this.watchtowerStudyMinLabel.setText(this.language.getString("meetings.watchtowerstudy.min"));
+		
+		this.placeSelectButton.setText(null);
+		this.placeSelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
 	}
 
 	private void cellValueFactory() {
