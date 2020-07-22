@@ -350,12 +350,14 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
 
-				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
-						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
-						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
-						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
-						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
-						ownerCtrl);
+				// TODO : sistemare insert week anche per la maschera discorsi pubblici
+				
+//				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
+//						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
+//						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
+//						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
+//						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
+//						ownerCtrl);
 			}
 		}
 	}

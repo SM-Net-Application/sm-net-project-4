@@ -99,6 +99,23 @@
 	-fx-background-color: #000000;
 }
 
+.check_box_set_001 {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 12.0pt;
+	-fx-min-height: 29pt;
+}
+
+.check_box_set_001 .box {
+	-fx-background-color: #43494a;
+	-fx-background-radius: 10.0 10.0 10.0 10.0;
+	-fx-border-color: #6b6b6b;
+	-fx-border-radius: 10.0 10.0 10.0 10.0;
+}
+
+.check_box_set_001:selected .mark {
+	-fx-background-color: #000000;
+}
+
 .button_image_001 {
 	-fx-border-color: #5e6060;
 	-fx-border-radius: 10.0 10.0 10.0 10.0;
@@ -386,6 +403,22 @@
 	-fx-border-color: #3e86a0;
 }
 
+.tab_pane_003 {
+	-fx-background-color: #313335;
+	/*-fx-tab-min-height:75.0px;*/
+	/*-fx-tab-max-height:75.0px;*/
+	/*-fx-tab-min-width:250.0px;*/
+	/*-fx-tab-max-width:250.0px;*/
+}
+
+.tab_pane_003 .tab-header-background {
+	-fx-background-color: #3c3f41;
+}
+
+.tab_pane_003:focused .tab-header-area .headers-region .tab:selected .focus-indicator {
+	-fx-border-color: #3e86a0;
+}
+
 .tab_001 {
 	-fx-background-color: #515658;
 	-fx-font-size: 12.0pt;
@@ -397,6 +430,11 @@
 
 .tab_001:selected {
 	-fx-background-color: #3e86a0;
+}
+
+.tooltip_001 {
+	-fx-text-fill: #bbbbbb;
+	-fx-font-size: 12.0pt;
 }
 
 .tree_view_001 {

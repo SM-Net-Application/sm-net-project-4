@@ -16,6 +16,8 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 			$query .= " sp_week.spInf23, sp_week.spInf24, sp_week.spInf25, sp_week.spInf26, sp_week.spInf27, sp_week.spInf28,";
             $query .= " sp_week.spInf29, sp_week.spInf30, sp_week.spInf31, sp_week.spInf32, sp_week.spInf33, sp_week.spInf34,";
             $query .= " sp_week.spInf35, sp_week.spInf36, sp_week.spInf37, sp_week.spInf38, sp_week.spInf39, sp_week.spInf40,";
+            $query .= " sp_week.spInf41, sp_week.spInf42, sp_week.spInf43, sp_week.spInf44, sp_week.spInf45, sp_week.spInf46,";
+            $query .= " sp_week.spInf47, sp_week.spInf48, sp_week.spInf49, sp_week.spInf50, sp_week.spInf51, sp_week.spInf52, sp_week.spInf53,";
 			$query .= " sp_week_ov.spWeekOvID, sp_week_ov.spInf1 as spInf1_ov, sp_week_ov.spInf2 as spInf2_ov, sp_week_ov.spInf3 as spInf3_ov,";
 			$query .= " sp_week_ov.spInf4 as spInf4_ov, sp_week_ov.spInf5 as spInf5_ov, sp_week_ov.spInf6 as spInf6_ov,";
 			$query .= " sp_week_ov.spInf7 as spInf7_ov, sp_week_ov.spInf8 as spInf8_ov, sp_week_ov.spInf9 as spInf9_ov,";
@@ -84,6 +86,20 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
                     $row ["spInf38"] = $resultRow ["spInf38"];
                     $row ["spInf39"] = $resultRow ["spInf39"];
                     $row ["spInf40"] = $resultRow ["spInf40"];
+                    
+                    $row ["spInf41"] = $resultRow ["spInf41"];
+                    $row ["spInf42"] = $resultRow ["spInf42"];
+                    $row ["spInf43"] = $resultRow ["spInf43"];
+                    $row ["spInf44"] = $resultRow ["spInf44"];
+                    $row ["spInf45"] = $resultRow ["spInf45"];
+                    $row ["spInf46"] = $resultRow ["spInf46"];
+                    $row ["spInf47"] = $resultRow ["spInf47"];
+                    $row ["spInf48"] = $resultRow ["spInf48"];
+                    $row ["spInf49"] = $resultRow ["spInf49"];
+                    $row ["spInf50"] = $resultRow ["spInf50"];
+                    $row ["spInf51"] = $resultRow ["spInf51"];
+                    $row ["spInf52"] = $resultRow ["spInf52"];
+                    $row ["spInf53"] = $resultRow ["spInf53"];
 					
 					// Circuit Overseer
 					$row ["spWeekOvID"] = $resultRow ["spWeekOvID"];

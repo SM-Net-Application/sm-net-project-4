@@ -50,6 +50,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -171,8 +172,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private TableView<MinistryPart> ministryTableView;
 	@FXML
 	private TableColumn<MinistryPart, String> ministryTypeTableColumn;
-	@FXML
-	private TableColumn<MinistryPart, String> ministryFulltextTableColumn;
+	// @FXML
+	// private TableColumn<MinistryPart, String> ministryFulltextTableColumn;
 	@FXML
 	private TableColumn<MinistryPart, Integer> ministryMinTableColumn;
 	@FXML
@@ -200,8 +201,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	@FXML
 	private TableView<ChristiansPart> christiansPartTableView;
-	@FXML
-	private TableColumn<ChristiansPart, String> christiansPartFulltextTableColumn;
+	// @FXML
+	// private TableColumn<ChristiansPart, String>
+	// christiansPartFulltextTableColumn;
 	@FXML
 	private TableColumn<ChristiansPart, Integer> christiansPartMinTableColumn;
 	@FXML
@@ -325,7 +327,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	@FXML
 	private Label placeLabel;
 	@FXML
-	private Label placeAddressLabel;
+	private Label place1AddressLabel;
+	@FXML
+	private Label place2AddressLabel;
 
 	@FXML
 	private CheckBox day1CheckBox;
@@ -352,13 +356,22 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private ComboBox<Integer> minute2ComboBox;
 
 	@FXML
-	private TextField placeTextField;
+	private TextField place1TextField;
 	@FXML
-	private Button placeSelectButton;
+	private Button place1SelectButton;
 	@FXML
-	private Label placePrintLabel;
+	private Label place1PrintLabel;
 	@FXML
-	private CheckBox placePrintCheckBox;
+	private CheckBox place1PrintCheckBox;
+
+	@FXML
+	private TextField place2TextField;
+	@FXML
+	private Button place2SelectButton;
+	@FXML
+	private Label place2PrintLabel;
+	@FXML
+	private CheckBox place2PrintCheckBox;
 
 	@FXML
 	private CheckBox presidentPublicMeetingOnlyPrayCheckBox;
@@ -372,6 +385,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private Label watchtowerStudyMinLabel;
 	@FXML
 	private TextField watchtowerStudyMinTextField;
+
+	@FXML
+	private Label publicTalkOnlyPray1Label;
 
 	private Settings settings;
 	private Language language;
@@ -408,6 +424,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private AlertBuilderOld alertBuilder;
 
+	private boolean listenerCheckFields;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -417,9 +435,21 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		cellFactory();
 	}
 
+	public void objectInitialize() {
+
+		this.listenerCheckFields = false;
+
+		viewUpdate();
+		contextMenu();
+		initData();
+		listeners();
+
+		this.listenerCheckFields = true;
+	}
+
 	private void styleClasses() {
 
-		tabPane.getStyleClass().add("tab_pane_002");
+		tabPane.getStyleClass().add("tab_pane_003");
 
 		generalTab.getStyleClass().add("tab_001");
 		treasuresTab.getStyleClass().add("tab_001");
@@ -477,7 +507,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		bibleReading2ComboBox.getStyleClass().add("combo_box_001");
 
 		ministryTableView.getStyleClass().add("table_view_001");
-		ministryMinTableColumn.getStyleClass().add("tableColumnStyle1");
+		ministryMinTableColumn.getStyleClass().add("table_column_002");
 
 		ministryPartAddButton.getStyleClass().add("button_image_001");
 		ministryPartDeleteButton.getStyleClass().add("button_image_001");
@@ -486,7 +516,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		song2TextField.getStyleClass().add("text_field_002");
 
 		christiansPartTableView.getStyleClass().add("table_view_001");
-		christiansPartMinTableColumn.getStyleClass().add("tableColumnStyle1");
+		christiansPartMinTableColumn.getStyleClass().add("table_column_002");
 
 		christiansPartAddButton.getStyleClass().add("button_image_001");
 		christiansPartDeleteButton.getStyleClass().add("button_image_001");
@@ -524,6 +554,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		publicTalkTalkerTextField.getStyleClass().add("text_field_001");
 		publicTalkTalkerCongrLabel.getStyleClass().add("label_set_001");
 		publicTalkTalkerCongrTextField.getStyleClass().add("text_field_001");
+
+		this.publicTalkOnlyPray1Label.getStyleClass().add("label_set_001");
 
 		watchtowerStudyLabel.getStyleClass().add("label_002");
 		watchtowerStudySong2Label.getStyleClass().add("label_set_001");
@@ -572,15 +604,20 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.placeLabel.getStyleClass().add("label_002");
 
-		this.placeAddressLabel.getStyleClass().add("label_set_001");
-		this.placePrintLabel.getStyleClass().add("label_set_001");
+		this.place1AddressLabel.getStyleClass().add("label_set_001");
+		this.place2AddressLabel.getStyleClass().add("label_set_001");
+		this.place1PrintLabel.getStyleClass().add("label_set_001");
+		this.place2PrintLabel.getStyleClass().add("label_set_001");
 
-		this.placeTextField.getStyleClass().add("text_field_001");
+		this.place1TextField.getStyleClass().add("text_field_001");
+		this.place2TextField.getStyleClass().add("text_field_001");
 
-		this.placeSelectButton.getStyleClass().add("button_image_001");
+		this.place1SelectButton.getStyleClass().add("button_image_001");
+		this.place2SelectButton.getStyleClass().add("button_image_001");
 
-		this.placePrintCheckBox.getStyleClass().add("check_box_001");
-		this.presidentPublicMeetingOnlyPrayCheckBox.getStyleClass().add("check_box_001");
+		this.place1PrintCheckBox.getStyleClass().add("check_box_001");
+		this.place2PrintCheckBox.getStyleClass().add("check_box_001");
+		this.presidentPublicMeetingOnlyPrayCheckBox.getStyleClass().add("check_box_set_001");
 
 		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
 		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
@@ -593,16 +630,38 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.language = settings.getLanguage();
 
-		generalTab.setText(language.getString("TEXT0043"));
-		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
-		treasuresTab.setText(language.getString("TEXT0080"));
-		treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
-		ministryTab.setText(language.getString("TEXT0081"));
-		ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
-		christiansTab.setText(language.getString("TEXT0082"));
-		christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
-		watchtowerTab.setText(language.getString("sp.meetings.publicmeeting"));
-		watchtowerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.WOL));
+		this.tabPane.setTabMinHeight(75);
+		this.tabPane.setTabMaxHeight(75);
+
+		Tooltip generalTabTooltip = new Tooltip(language.getString("TEXT0043"));
+		generalTabTooltip.getStyleClass().add("tooltip_001");
+		this.generalTab.setTooltip(generalTabTooltip);
+		this.generalTab.setText("");
+		this.generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
+
+		Tooltip treasuresTabTooltip = new Tooltip(language.getString("TEXT0080"));
+		treasuresTabTooltip.getStyleClass().add("tooltip_001");
+		this.treasuresTab.setTooltip(treasuresTabTooltip);
+		this.treasuresTab.setText("");
+		this.treasuresTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_TREASURES));
+
+		Tooltip ministryTabTooltip = new Tooltip(language.getString("TEXT0081"));
+		ministryTabTooltip.getStyleClass().add("tooltip_001");
+		this.ministryTab.setTooltip(ministryTabTooltip);
+		this.ministryTab.setText("");
+		this.ministryTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_MINISTRY));
+
+		Tooltip christiansTabTooltip = new Tooltip(language.getString("TEXT0082"));
+		christiansTabTooltip.getStyleClass().add("tooltip_001");
+		this.christiansTab.setTooltip(christiansTabTooltip);
+		this.christiansTab.setText("");
+		this.christiansTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS));
+
+		Tooltip watchtowerTabTooltip = new Tooltip(language.getString("sp.meetings.publicmeeting"));
+		watchtowerTabTooltip.getStyleClass().add("tooltip_001");
+		this.watchtowerTab.setTooltip(watchtowerTabTooltip);
+		this.watchtowerTab.setText("");
+		this.watchtowerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.WOL));
 
 		typeWeekLabel.setText(language.getString("TEXT0122"));
 		generalLabel.setText(language.getString("TEXT0079"));
@@ -625,8 +684,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		bibleReadingStudent2Label.setText(language.getString("TEXT0136"));
 
 		ministryTypeTableColumn.setText(language.getString("TEXT0091"));
-		ministryFulltextTableColumn.setText(language.getString("TEXT0092"));
-		ministryMinTableColumn.setText(language.getString("TEXT0093"));
+		// ministryFulltextTableColumn.setText(language.getString("TEXT0092"));
+
+		this.ministryMinTableColumn.setText(language.getString("TEXT0093"));
+		this.ministryMinTableColumn.setMinWidth(50);
+		this.ministryMinTableColumn.setMaxWidth(50);
+
 		ministryThemeTableColumn.setText(language.getString("TEXT0094"));
 		ministryMaterialTableColumn.setText(language.getString("TEXT0095"));
 		ministryMember1TableColumn.setText(language.getString("TEXT0135"));
@@ -636,25 +699,28 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		ministryPartAddButton.setText(null);
 		ministryPartAddButton
-				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_ADD));
 		ministryPartDeleteButton.setText(null);
 		ministryPartDeleteButton
-				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_MINISTRY_DELETE));
 
 		song2Label.setText(language.getString("TEXT0099"));
 
-		christiansPartFulltextTableColumn.setText(language.getString("TEXT0092"));
-		christiansPartMinTableColumn.setText(language.getString("TEXT0093"));
+		// christiansPartFulltextTableColumn.setText(language.getString("TEXT0092"));
+		this.christiansPartMinTableColumn.setText(language.getString("TEXT0093"));
+		this.christiansPartMinTableColumn.setMinWidth(50);
+		this.christiansPartMinTableColumn.setMaxWidth(50);
+
 		christiansPartThemeTableColumn.setText(language.getString("TEXT0094"));
 		christiansPartMaterialTableColumn.setText(language.getString("TEXT0095"));
 		christiansPartTeacherTableColumn.setText(language.getString("TEXT0098"));
 
 		christiansPartAddButton.setText(null);
 		christiansPartAddButton
-				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_ADD));
 		christiansPartDeleteButton.setText(null);
 		christiansPartDeleteButton
-				.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_CHRISTIANS_DELETE));
 
 		congregationBibleStudyLabel.setText(language.getString("TEXT0061"));
 		congregationBibleStudyMinLabel.setText(language.getString("TEXT0089"));
@@ -681,12 +747,15 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		congregationBibleStudyConductorLabel.setText(language.getString("sp.meetings.congregationbiblestudyconductor"));
 		congregationBibleStudyReaderLabel.setText(language.getString("sp.meetings.congregationbiblestudyreader"));
 
+		this.publicTalkOnlyPray1Label.setText("");
+
 		wolViewButton.setText(null);
-		wolViewButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_VIEW));
+		wolViewButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_VIEW));
 		loadWeekFromWOLButton.setText(null);
-		loadWeekFromWOLButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
+		loadWeekFromWOLButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
 		saveWeekButton.setText(null);
-		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
+		saveWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
 		this.day1CheckBox.setText(this.language.getString("TEXT0123"));
 		this.day2CheckBox.setText(this.language.getString("TEXT0124"));
@@ -715,24 +784,30 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.timeSeparator2Label.setText(this.language.getString("meetings.dateandtime.timeseparator2"));
 
 		this.placeLabel.setText(this.language.getString("meetings.place"));
-		this.placeAddressLabel.setText(this.language.getString("meetings.place.addr"));
-		this.placePrintLabel.setText(this.language.getString("meetings.place.print"));
+		this.place1AddressLabel.setText(this.language.getString("meetings.place.addr1"));
+		this.place2AddressLabel.setText(this.language.getString("meetings.place.addr2"));
+		this.place1PrintLabel.setText(this.language.getString("meetings.place.print"));
+		this.place2PrintLabel.setText(this.language.getString("meetings.place.print"));
 
 		this.presidentPublicMeetingOnlyPrayCheckBox
 				.setText(this.language.getString("meetings.presidentpublicmeeting.onlypray"));
 
 		this.publicTalkMinLabel.setText(this.language.getString("meetings.publictalk.min"));
 		this.watchtowerStudyMinLabel.setText(this.language.getString("meetings.watchtowerstudy.min"));
-		
-		this.placeSelectButton.setText(null);
-		this.placeSelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
+
+		this.place1SelectButton.setText(null);
+		this.place1SelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
+
+		this.place2SelectButton.setText(null);
+		this.place2SelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
 	}
 
 	private void cellValueFactory() {
 
 		ministryTypeTableColumn
 				.setCellValueFactory(cellData -> cellData.getValue().getMinistryTypeTranslated().nameProperty());
-		ministryFulltextTableColumn.setCellValueFactory(cellData -> cellData.getValue().fullTextProperty());
+		// ministryFulltextTableColumn.setCellValueFactory(cellData ->
+		// cellData.getValue().fullTextProperty());
 		ministryMinTableColumn.setCellValueFactory(cellData -> cellData.getValue().minProperty().asObject());
 		ministryThemeTableColumn.setCellValueFactory(cellData -> cellData.getValue().themeProperty());
 		ministryMaterialTableColumn.setCellValueFactory(cellData -> cellData.getValue().materialProperty());
@@ -741,7 +816,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		ministryMember3TableColumn.setCellValueFactory(cellData -> cellData.getValue().student2Property());
 		ministryMember4TableColumn.setCellValueFactory(cellData -> cellData.getValue().assistant2Property());
 
-		christiansPartFulltextTableColumn.setCellValueFactory(cellData -> cellData.getValue().fullTextProperty());
+		// christiansPartFulltextTableColumn.setCellValueFactory(cellData ->
+		// cellData.getValue().fullTextProperty());
 		christiansPartMinTableColumn.setCellValueFactory(cellData -> cellData.getValue().minProperty().asObject());
 		christiansPartThemeTableColumn.setCellValueFactory(cellData -> cellData.getValue().themeProperty());
 		christiansPartMaterialTableColumn.setCellValueFactory(cellData -> cellData.getValue().materialProperty());
@@ -831,13 +907,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		christiansPartPart.setMaterial(event.getNewValue());
 	}
 
-	public void objectInitialize() {
-		viewUpdate();
-		contextMenu();
-		initData();
-		listeners();
-	}
-
 	private void contextMenu() {
 
 		presidentComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_PRESIDENT));
@@ -922,6 +991,22 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private void initData() {
 
+		for (int i = 0; i < 24; i++) {
+			this.hours1ComboBox.getItems().add(i);
+			this.hours2ComboBox.getItems().add(i);
+		}
+
+		this.hours1ComboBox.getSelectionModel().selectFirst();
+		this.hours2ComboBox.getSelectionModel().selectFirst();
+
+		for (int i = 0; i < 60; i++) {
+			this.minute1ComboBox.getItems().add(i);
+			this.minute2ComboBox.getItems().add(i);
+		}
+
+		this.minute1ComboBox.getSelectionModel().selectFirst();
+		this.minute2ComboBox.getSelectionModel().selectFirst();
+
 		if (memberList == null)
 			memberList = FXCollections.observableArrayList();
 
@@ -977,6 +1062,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		selectFirst();
 
 		updateLists();
+
 		loadSelectedWeek();
 	}
 
@@ -1190,12 +1276,86 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				this.watchtowerStudySong3TextField.setText(this.selectedWeek.getSpInf39());
 				setMemberComboBoxIndex(this.watchtowerStudyPray2ComboBox, this.selectedWeek.getSpInf40());
 
+				int spInf41 = this.selectedWeek.getSpInf41();
+				this.presidentPublicMeetingOnlyPrayCheckBox.setSelected(spInf41 == 1);
+
+				this.publicTalkMinTextField.setText(this.selectedWeek.getSpInf42());
+
+				this.watchtowerStudyMinTextField.setText(this.selectedWeek.getSpInf43());
+
+				setDayMeeting1(this.selectedWeek.getSpInf44());
+
+				this.hours1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf45());
+
+				this.minute1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf46());
+
+				setDayMeeting2(this.selectedWeek.getSpInf47());
+
+				this.hours2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf48());
+
+				this.minute2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf49());
+
+				this.place1TextField.setText(this.selectedWeek.getSpInf50());
+
+				int spInf51 = this.selectedWeek.getSpInf51();
+				this.place1PrintCheckBox.setSelected(spInf51 == 1);
+
+				this.place2TextField.setText(this.selectedWeek.getSpInf52());
+
+				int spInf53 = this.selectedWeek.getSpInf53();
+				this.place2PrintCheckBox.setSelected(spInf53 == 1);
+
 				this.ministryPartList.addAll(this.selectedWeek.getMinistryPartList());
 				this.christiansPartList.addAll(this.selectedWeek.getChristiansPartList());
 
 				this.ministryTableView.refresh();
 				this.christiansPartTableView.refresh();
+
+			} else {
+
+				this.day1CheckBox.setSelected(true);
+				this.day6CheckBox.setSelected(true);
+
 			}
+	}
+
+	private void setDayMeeting1(int day) {
+
+		switch (day) {
+		case 1:
+			this.day1CheckBox.setSelected(true);
+			break;
+		case 2:
+			this.day2CheckBox.setSelected(true);
+			break;
+		case 3:
+			this.day3CheckBox.setSelected(true);
+			break;
+		case 4:
+			this.day4CheckBox.setSelected(true);
+			break;
+		case 5:
+			this.day5CheckBox.setSelected(true);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	private void setDayMeeting2(int day) {
+
+		switch (day) {
+		case 6:
+			this.day6CheckBox.setSelected(true);
+			break;
+		case 7:
+			this.day7CheckBox.setSelected(true);
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	private void listeners() {
@@ -1216,6 +1376,39 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		listenerLoadWeekFromWOLButton();
 
 		listenerSaveWeekButton();
+
+		this.day1CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day1CheckBox,
+				day2CheckBox, day3CheckBox, day4CheckBox, day5CheckBox));
+		this.day2CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day2CheckBox,
+				day1CheckBox, day3CheckBox, day4CheckBox, day5CheckBox));
+		this.day3CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day3CheckBox,
+				day2CheckBox, day1CheckBox, day4CheckBox, day5CheckBox));
+		this.day4CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day4CheckBox,
+				day2CheckBox, day3CheckBox, day1CheckBox, day5CheckBox));
+		this.day5CheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, day5CheckBox,
+				day2CheckBox, day3CheckBox, day4CheckBox, day1CheckBox));
+
+		this.day6CheckBox.selectedProperty()
+				.addListener((obs, oldV, newV) -> checkBoxGroups(newV, day6CheckBox, day7CheckBox));
+		this.day7CheckBox.selectedProperty()
+				.addListener((obs, oldV, newV) -> checkBoxGroups(newV, day7CheckBox, day6CheckBox));
+	}
+
+	private void checkBoxGroups(Boolean newV, CheckBox edited, CheckBox... others) {
+
+		if (this.listenerCheckFields) {
+
+			this.listenerCheckFields = false;
+
+			if (newV) {
+				for (CheckBox cb : others)
+					if (cb.isSelected())
+						cb.setSelected(false);
+			} else
+				edited.setSelected(true);
+
+			this.listenerCheckFields = true;
+		}
 	}
 
 	private void listenerDisableMouseSecondary() {
@@ -1382,6 +1575,49 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			String spInf40 = String
 					.valueOf(this.watchtowerStudyPray2ComboBox.getSelectionModel().getSelectedItem().getSpMemberID());
 
+			// 0.10.0
+
+			int spInf41 = this.presidentPublicMeetingOnlyPrayCheckBox.isSelected() ? 1 : 0;
+
+			String spInf42 = Crypt.encrypt(this.publicTalkMinTextField.getText(), this.settings.getDatabaseSecretKey());
+
+			String spInf43 = Crypt.encrypt(this.watchtowerStudyMinTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+
+			int spInf44 = defineDayMeetings1();
+
+			int spInf45 = 0;
+			Integer hour1 = this.hours1ComboBox.getSelectionModel().getSelectedItem();
+			if (hour1 != null)
+				spInf45 = hour1;
+
+			int spInf46 = 0;
+			Integer minute1 = this.minute1ComboBox.getSelectionModel().getSelectedItem();
+			if (minute1 != null)
+				spInf46 = minute1;
+
+			int spInf47 = defineDayMeetings2();
+
+			int spInf48 = 0;
+			Integer hour2 = this.hours2ComboBox.getSelectionModel().getSelectedItem();
+			if (hour2 != null)
+				spInf48 = hour2;
+
+			int spInf49 = 0;
+			Integer minute2 = this.minute2ComboBox.getSelectionModel().getSelectedItem();
+			if (minute2 != null)
+				spInf49 = minute2;
+
+			String spInf50 = Crypt.encrypt(this.place1TextField.getText(), this.settings.getDatabaseSecretKey());
+
+			int spInf51 = this.place1PrintCheckBox.isSelected() ? 1 : 0;
+
+			String spInf52 = Crypt.encrypt(this.place2TextField.getText(), this.settings.getDatabaseSecretKey());
+
+			int spInf53 = this.place2PrintCheckBox.isSelected() ? 1 : 0;
+
+			// -------
+
 			String spInfMinistryParts = getMinistryParts();
 			String spInfChristiansParts = getChristiansParts();
 
@@ -1407,10 +1643,37 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
 						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
 						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
-						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
-						ownerCtrl);
+						spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50,
+						spInf51, spInf52, spInf53, spInfMinistryParts, spInfChristiansParts, settings, ownerStage,
+						ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
+	}
+
+	private int defineDayMeetings1() {
+
+		if (day1CheckBox.isSelected())
+			return 1;
+		else if (day2CheckBox.isSelected())
+			return 2;
+		else if (day3CheckBox.isSelected())
+			return 3;
+		else if (day4CheckBox.isSelected())
+			return 4;
+		else if (day5CheckBox.isSelected())
+			return 5;
+
+		return 0;
+	}
+
+	private int defineDayMeetings2() {
+
+		if (day6CheckBox.isSelected())
+			return 6;
+		else if (day7CheckBox.isSelected())
+			return 7;
+
+		return 0;
 	}
 
 	private String getMinistryParts() {
