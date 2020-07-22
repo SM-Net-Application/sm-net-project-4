@@ -7,15 +7,20 @@ import java.util.ArrayList;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.meetings.task.MeetingsInitDataLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.sm.net.util.DateUtil;
+import com.smnet.core.task.TaskManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +34,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -63,6 +69,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<Member> membersList;
 	private AlertBuilderOld alertBuilder;
+
+	private ObservableList<DateAndTime> dateAndTimeList;
+	private ObservableList<Place> placesList;
+
+	private SupportPlannerView application;
 
 	private String congregationName;
 
@@ -115,8 +126,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		toTableColumn.setText(language.getString("TEXT0078"));
 		typeColumn.setText(language.getString("TEXT0091"));
 
-		printButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		printButton.setText(null);
+		Tooltip printTooltip = new Tooltip(language.getString("meetings.tooltip.print"));
+		printTooltip.getStyleClass().add("tooltip_001");
+		this.printButton.setTooltip(printTooltip);
+		this.printButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
+		this.printButton.setText(null);
 	}
 
 	private void initData() {
@@ -222,6 +236,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 			this.weekTableView.refresh();
 		}
+
+		// Carica programmazione e luoghi
+
+		String waitMessage = this.language.getString("datetime.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new MeetingsInitDataLoadTask(
+				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void listeners() {
@@ -321,6 +342,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				ctrl.setOwnerTabPane(tabPane);
 				ctrl.setThisTab(newTab);
 				ctrl.setAlertBuilder(this.alertBuilder);
+				ctrl.setApplication(this.application);
 
 				tabPane.getTabs().add(newTab);
 				tabPane.getSelectionModel().select(newTab);
@@ -407,4 +429,29 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
+	public ObservableList<DateAndTime> getDateAndTimeList() {
+		return dateAndTimeList;
+	}
+
+	public void setDateAndTimeList(ObservableList<DateAndTime> dateAndTimeList) {
+		this.dateAndTimeList = dateAndTimeList;
+	}
+
+	public ObservableList<Place> getPlacesList() {
+		return placesList;
+	}
+
+	public void setPlacesList(ObservableList<Place> placesList) {
+		this.placesList = placesList;
+	}
+
 }

@@ -528,6 +528,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.setAlertBuilder(this.alertBuilder);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);
@@ -967,6 +968,14 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void setAlertBuilder2(AlertBuilder alertBuilder2) {
 		this.alertBuilder2 = alertBuilder2;
+	}
+
+	public Settings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(Settings settings) {
+		this.settings = settings;
 	}
 
 }

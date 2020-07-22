@@ -7,6 +7,22 @@ Data di pubblicazione : ..-..-....
 	* Nuova sezione: Luoghi di adorazione
 		- In questa sezione è possibile definire i luoghi in cui si tengono le adunanze, i congressi o altri eventi
 
+	* Sezione : Adunanze
+		- Modifica della GUI
+		- Nuove informazioni disponibili :
+			- Giorno adunanza infrasettimanale (Lunedi - Giovedi)
+			- Giorno adunanza del fine settimana (Sabato - Domenica)
+			- Orario adunanza infrasettimanale (Ora, Minuto)
+			- Orario adunanza del fine settimana (Ora, Minuto)
+			- Indirizzo luogo di adorazione adunanza infrasettimanale
+			- Indirizzo luogo di adorazione adunanza del fine settimana
+			- Queste informazioni vengono precaricate quando:
+				- Si crea un nuovo programma settimanale
+				- Si crea un nuova programma settimanale dalla sezione Discorsi pubblici
+			- Minuti del Discorso Pubblico
+			- Minuti dello Studio Torre di Guardia
+			- Solo preghiera iniziale (il Presidente adunanza del fine settimana diventa Preghiera iniziale sulla stampa del programma)
+
 	* Fix
 		- Visualizzazione del menù contestuale (tasto destro) ottimizzata
 		 

@@ -44,6 +44,7 @@ public class PrintLayout {
 	@FXML
 	private void initialize() {
 		styleClasses();
+		this.printLayoutListView.setMinWidth(750);
 	}
 
 	private void styleClasses() {

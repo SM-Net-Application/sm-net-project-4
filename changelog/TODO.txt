@@ -1,21 +1,7 @@
 	
 	- Adunanze:
-		- Aggiungere le informazioni:
-			- Giorno adunanza infrasettimanale (Lunedi - Giovedi)
-			- Giorno adunanza del fine settimana (Sabato - Domenica)
-			- Orario adunanza infrasettimanale (Ora, Minuto)
-			- Orario adunanza del fine settimana (Ora, Minuto)
-			- Luogo di adorazione (Sala del Regno / Sala Assemblee / Altro locale)
-			- Queste informazioni devono essere preimpostate quando:
-				- Si crea una nuova adunanza
-				- Si crea una nuova adunanza dalla Sezione Discorsi pubblici
-				
-		- Aggiungere Minuti dello Studio Torre di Guardia
-		- Aggiungere Minuti del Discorso Pubblico
 		- Inverti Studio e Discorso Pubblico
 		- Senza Lettore (Non stampare il lettore se non disponbile)
-		- Solo Studio Torre di Guardia (Cambiare Presidente in Preghiera iniziale)
-		- Tasti piccoli e in alto
 		- WOL : Ottenere i cantici e il tema della Torre di Guardia
 
 	- Discorsi pubblici

@@ -10,9 +10,13 @@ import com.sm.net.jw.wol.ScheduleForMeetingHTML;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.dialogs.place.PlaceDialog;
 import com.sm.net.sp.model.ChristiansPart;
+import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.EnumPlaceType;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
@@ -21,6 +25,9 @@ import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
+import com.sm.net.sp.utils.DateAndTimeUtils;
+import com.sm.net.sp.utils.PlaceUtils;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.sp.view.wolbrowser.WOLBrowser;
@@ -389,6 +396,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	@FXML
 	private Label publicTalkOnlyPray1Label;
 
+	private SupportPlannerView application;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -749,13 +758,24 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.publicTalkOnlyPray1Label.setText("");
 
-		wolViewButton.setText(null);
-		wolViewButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_VIEW));
-		loadWeekFromWOLButton.setText(null);
-		loadWeekFromWOLButton
+		Tooltip wolViewTooltip = new Tooltip(language.getString("meetings.tooltip.wolview"));
+		wolViewTooltip.getStyleClass().add("tooltip_001");
+		this.wolViewButton.setTooltip(wolViewTooltip);
+		this.wolViewButton.setText(null);
+		this.wolViewButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_VIEW));
+
+		Tooltip loadWOLTooltip = new Tooltip(language.getString("meetings.tooltip.woldownload"));
+		loadWOLTooltip.getStyleClass().add("tooltip_001");
+		this.loadWeekFromWOLButton.setTooltip(loadWOLTooltip);
+		this.loadWeekFromWOLButton.setText(null);
+		this.loadWeekFromWOLButton
 				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
-		saveWeekButton.setText(null);
-		saveWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
+
+		Tooltip saveTooltip = new Tooltip(language.getString("meetings.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveWeekButton.setTooltip(saveTooltip);
+		this.saveWeekButton.setText(null);
+		this.saveWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
 		this.day1CheckBox.setText(this.language.getString("TEXT0123"));
 		this.day2CheckBox.setText(this.language.getString("TEXT0124"));
@@ -1313,10 +1333,96 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 			} else {
 
-				this.day1CheckBox.setSelected(true);
-				this.day6CheckBox.setSelected(true);
+				initDateAndTime();
+				initPlace();
 
 			}
+	}
+
+	private void initPlace() {
+
+		// TODO : definire il formato indirizzo
+
+		ObservableList<Place> placesList = this.ownerCtrl.getPlacesList();
+		Place found = null;
+		for (Place place : placesList)
+			if (place.getType().get() == EnumPlaceType.KINGDOMHALL)
+				if (place.getDef().get()) {
+					found = place;
+					break;
+				}
+
+		if (found != null) {
+
+			String addr = placeToText(found);
+
+			this.place1TextField.setText(addr);
+			this.place2TextField.setText(addr);
+		}
+	}
+
+	private String placeToText(Place found) {
+
+		String addr = PlaceUtils.toText(found);
+
+		return addr;
+	}
+
+	private void initDateAndTime() {
+		ObservableList<DateAndTime> dateAndTimeList = this.ownerCtrl.getDateAndTimeList();
+		DateAndTime dateAndTime = DateAndTimeUtils.check(dateAndTimeList, this.selectedWeek.getFrom());
+
+		if (dateAndTime != null) {
+
+			int day1 = dateAndTime.getDay1().get();
+			switch (day1) {
+			case 1:
+				this.day1CheckBox.setSelected(true);
+				break;
+			case 2:
+				this.day2CheckBox.setSelected(true);
+				break;
+			case 3:
+				this.day3CheckBox.setSelected(true);
+				break;
+			case 4:
+				this.day4CheckBox.setSelected(true);
+				break;
+			case 5:
+				this.day5CheckBox.setSelected(true);
+				break;
+			default:
+				break;
+			}
+
+			int h1 = dateAndTime.getHour1().get();
+			int m1 = dateAndTime.getMinute1().get();
+
+			this.hours1ComboBox.getSelectionModel().select(h1);
+			this.minute1ComboBox.getSelectionModel().select(m1);
+
+			int day2 = dateAndTime.getDay2().get();
+			switch (day2) {
+			case 6:
+				this.day6CheckBox.setSelected(true);
+				break;
+			case 7:
+				this.day7CheckBox.setSelected(true);
+				break;
+			default:
+				break;
+			}
+
+			int h2 = dateAndTime.getHour2().get();
+			int m2 = dateAndTime.getMinute2().get();
+
+			this.hours2ComboBox.getSelectionModel().select(h2);
+			this.minute2ComboBox.getSelectionModel().select(m2);
+
+		} else {
+			this.day1CheckBox.setSelected(true);
+			this.day6CheckBox.setSelected(true);
+		}
 	}
 
 	private void setDayMeeting1(int day) {
@@ -1392,6 +1498,22 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				.addListener((obs, oldV, newV) -> checkBoxGroups(newV, day6CheckBox, day7CheckBox));
 		this.day7CheckBox.selectedProperty()
 				.addListener((obs, oldV, newV) -> checkBoxGroups(newV, day7CheckBox, day6CheckBox));
+
+		this.place1SelectButton.setOnAction(param -> selectPlace1());
+		this.place2SelectButton.setOnAction(param -> selectPlace2());
+	}
+
+	private void selectPlace1() {
+
+		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList());
+		if (place != null)
+			this.place1TextField.setText(placeToText(place));
+	}
+
+	private void selectPlace2() {
+		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList());
+		if (place != null)
+			this.place2TextField.setText(placeToText(place));
 	}
 
 	private void checkBoxGroups(Boolean newV, CheckBox edited, CheckBox... others) {
@@ -1631,8 +1753,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
 						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
 						spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39,
-						spInf40, spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
-						ownerCtrl);
+						spInf40, spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49,
+						spInf50, spInf51, spInf52, spInf53, spInfMinistryParts, spInfChristiansParts, settings,
+						ownerStage, ownerTabPane, thisTab, ownerCtrl);
 
 			} else {
 				// newWeek
@@ -2276,5 +2399,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
 	}
 }

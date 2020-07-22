@@ -1547,7 +1547,9 @@ public class Actions {
 			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, String spInf23,
 			String spInf24, String spInf25, String spInf26, String spInf27, String spInf28, String spInf29,
 			String spInf30, String spInf31, String spInf32, String spInf33, String spInf34, String spInf35,
-			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, String spInfMinistryParts,
+			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, int spInf41, String spInf42,
+			String spInf43, int spInf44, int spInf45, int spInf46, int spInf47, int spInf48, int spInf49,
+			String spInf50, int spInf51, String spInf52, int spInf53, String spInfMinistryParts,
 			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
 			UpdateData callback) {
 
@@ -1596,7 +1598,9 @@ public class Actions {
 								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
 								spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26,
 								spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35,
-								spInf36, spInf37, spInf38, spInf39, spInf40, spInfMinistryParts, spInfChristiansParts));
+								spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
+								spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53,
+								spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 

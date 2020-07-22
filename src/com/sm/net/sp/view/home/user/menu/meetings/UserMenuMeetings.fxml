@@ -59,6 +59,33 @@
                                  <children>
                                     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
+                                          <StackPane>
+                                             <children>
+                                                <Separator>
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="CENTER_LEFT">
+                                             <children>
+                                                <Button fx:id="printButton" mnemonicParsing="false" text="Stampa">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane>
+                                             <children>
+                                                <Separator>
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
                                           <StackPane VBox.vgrow="ALWAYS">
                                              <children>
                                                 <TableView fx:id="weekTableView">
@@ -75,15 +102,6 @@
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </StackPane.margin>
                                                 </TableView>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_RIGHT">
-                                             <children>
-                                                <Button fx:id="printButton" mnemonicParsing="false" text="Stampa">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Button>
                                              </children>
                                           </StackPane>
                                        </children>
