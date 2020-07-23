@@ -449,6 +449,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				HomeUserMenuUsersList ctrl = (HomeUserMenuUsersList) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);

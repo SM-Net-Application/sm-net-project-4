@@ -359,11 +359,14 @@ public class JRWeek {
 		// Add reader to Congregation Study Bible
 		if (spInf2 == 1) {
 
-			jrWeek.setChristiansBibleStudyText(jrWeek.getChristiansBibleStudyText().concat("<br><i>")
-					.concat(jrWeek.getChristiansBibleStudyReaderText()).concat("</i>"));
+			if (!jrWeek.getChristiansBibleStudyReaderName().isEmpty()) {
 
-			jrWeek.setChristiansBibleStudyName(jrWeek.getChristiansBibleStudyName().concat("<br><i>")
-					.concat(jrWeek.getChristiansBibleStudyReaderName()).concat("</i>"));
+				jrWeek.setChristiansBibleStudyText(jrWeek.getChristiansBibleStudyText().concat("<br><i>")
+						.concat(jrWeek.getChristiansBibleStudyReaderText()).concat("</i>"));
+
+				jrWeek.setChristiansBibleStudyName(jrWeek.getChristiansBibleStudyName().concat("<br><i>")
+						.concat(jrWeek.getChristiansBibleStudyReaderName()).concat("</i>"));
+			}
 		}
 
 		jrWeek.setChristiansReviewMin(

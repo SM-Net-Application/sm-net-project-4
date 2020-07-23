@@ -1,9 +1,11 @@
-	
+	- Utenti
+		- Migliramento della GUI
+		- Creare il tab dedicato alla modifica di un utente
+		- Tasti piccoli e in alto
+		
 	- Adunanze:
-		- Inverti Studio e Discorso Pubblico
-		- Senza Lettore (Non stampare il lettore se non disponbile)
 		- WOL : Ottenere i cantici e il tema della Torre di Guardia
-
+		
 	- Discorsi pubblici
 		- Filtro : Presidente / Oratore / Congregazione / Tema
 
@@ -17,10 +19,6 @@
 		
 	- Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
-		
-	- Utenti
-		- Creare il tab dedicato alla modifica di un utente
-		- Tasti piccoli e in alto
 		
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database

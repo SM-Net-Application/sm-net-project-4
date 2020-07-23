@@ -14,14 +14,24 @@ Data di pubblicazione : ..-..-....
 			- Giorno adunanza del fine settimana (Sabato - Domenica)
 			- Orario adunanza infrasettimanale (Ora, Minuto)
 			- Orario adunanza del fine settimana (Ora, Minuto)
-			- Indirizzo luogo di adorazione adunanza infrasettimanale
-			- Indirizzo luogo di adorazione adunanza del fine settimana
+			- Indirizzo luogo di adorazione adunanza infrasettimanale (+ impostazione per la stampa)
+			- Indirizzo luogo di adorazione adunanza del fine settimana (+ impostazione per la stampa)
 			- Queste informazioni vengono precaricate quando:
 				- Si crea un nuovo programma settimanale
 				- Si crea un nuova programma settimanale dalla sezione Discorsi pubblici
 			- Minuti del Discorso Pubblico
 			- Minuti dello Studio Torre di Guardia
 			- Solo preghiera iniziale (il Presidente adunanza del fine settimana diventa Preghiera iniziale sulla stampa del programma)
+
+	* Layout : Programma adunanze
+		- Studio biblico di congregazione :
+			- se il lettore non viene inserito, non viene stampata la dicitura "Lettore"
+		- Studio Torre di Guardia :
+			- se il lettore non viene inserito, non viene stampata la dicitura "Lettore"
+			- il tempo viene definito nelle informazioni della settimana (non è più fisso a 60)
+		- Discorso pubblico :
+			- il tempo viene definito nelle informazioni della settimana (non è più fisso a 30)
+		- Se impostata la stampa del Luogo di adorazione, viene stampato in rosso alla fine della tabella
 
 	* Fix
 		- Visualizzazione del menù contestuale (tasto destro) ottimizzata
