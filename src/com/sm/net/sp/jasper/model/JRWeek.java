@@ -92,6 +92,9 @@ public class JRWeek {
 	private String watchtowerStudyMinSong3;
 	private String watchtowerStudySong3;
 
+	private String place1;
+	private String place2;
+
 	private String congregationName;
 	private String programmName;
 
@@ -170,6 +173,9 @@ public class JRWeek {
 		this.watchtowerStudyReaderName = "";
 		this.watchtowerStudyMinSong3 = "";
 		this.watchtowerStudySong3 = "";
+
+		this.place1 = "";
+		this.place2 = "";
 
 		this.congregationName = "";
 		this.programmName = "";
@@ -383,7 +389,12 @@ public class JRWeek {
 
 		jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 		jrWeek.setPublicTalkSong1(String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf31()));
-		jrWeek.setPublicTalkPresidentText(language.getString("jasper.layout.meeting.weekend.president"));
+
+		// Solo preghiera
+		if (week.getSpInf41() == 1)
+			jrWeek.setPublicTalkPresidentText(language.getString("jasper.layout.meeting.weekend.presidentonlypray"));
+		else
+			jrWeek.setPublicTalkPresidentText(language.getString("jasper.layout.meeting.weekend.president"));
 
 		member = getMemberFromList(membersList, week.getSpInf30());
 		if (member != null)
@@ -392,7 +403,7 @@ public class JRWeek {
 			else
 				jrWeek.setPublicTalkPresident(member.getNameStyle4());
 
-		jrWeek.setPublicTalkMin(String.format(language.getString("jasper.layout.meeting.min"), "30"));
+		jrWeek.setPublicTalkMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf42()));
 		jrWeek.setPublicTalkTheme(week.getSpInf32());
 		jrWeek.setPublicTalkName(week.getSpInf33());
 		jrWeek.setPublicTalkCongregation(week.getSpInf34());
@@ -404,10 +415,11 @@ public class JRWeek {
 		jrWeek.setWatchtowerStudySong2(
 				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf35()));
 
-		if (spInf2 == 4)
-			jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), "30"));
-		else
-			jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), "60"));
+		// if (spInf2 == 4)
+		jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf43()));
+		// else
+		// jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"),
+		// "60"));
 
 		jrWeek.setWatchtowerStudyTheme(week.getSpInf36());
 
@@ -430,16 +442,25 @@ public class JRWeek {
 		// Add reader to Watchtower Study
 		if (spInf2 == 1) {
 
-			jrWeek.setWatchtowerStudyTheme(jrWeek.getWatchtowerStudyTheme().concat("<br><i>")
-					.concat(jrWeek.getWatchtowerStudyReaderText()).concat("</i>"));
+			if (!jrWeek.getWatchtowerStudyReaderName().isEmpty()) {
 
-			jrWeek.setWatchtowerStudyName(jrWeek.getWatchtowerStudyName().concat("<br><i>")
-					.concat(jrWeek.getWatchtowerStudyReaderName()).concat("</i>"));
+				jrWeek.setWatchtowerStudyTheme(jrWeek.getWatchtowerStudyTheme().concat("<br><i>")
+						.concat(jrWeek.getWatchtowerStudyReaderText()).concat("</i>"));
+
+				jrWeek.setWatchtowerStudyName(jrWeek.getWatchtowerStudyName().concat("<br><i>")
+						.concat(jrWeek.getWatchtowerStudyReaderName()).concat("</i>"));
+			}
 		}
 
 		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 		jrWeek.setWatchtowerStudySong3(
 				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf39()));
+
+		// Places
+		if (week.getSpInf51() == 1)
+			jrWeek.setPlace1(week.getSpInf50());
+		if (week.getSpInf53() == 1)
+			jrWeek.setPlace2(week.getSpInf52());
 
 		return jrWeek;
 	}
@@ -1071,4 +1092,21 @@ public class JRWeek {
 	public void setOverseerThemeTalk3(String overseerThemeTalk3) {
 		this.overseerThemeTalk3 = overseerThemeTalk3;
 	}
+
+	public String getPlace1() {
+		return place1;
+	}
+
+	public void setPlace1(String place1) {
+		this.place1 = place1;
+	}
+
+	public String getPlace2() {
+		return place2;
+	}
+
+	public void setPlace2(String place2) {
+		this.place2 = place2;
+	}
+
 }

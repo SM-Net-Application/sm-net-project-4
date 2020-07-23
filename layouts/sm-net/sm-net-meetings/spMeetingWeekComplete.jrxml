@@ -86,6 +86,8 @@
 	<field name="overseerThemeTalk2" class="java.lang.String"/>
 	<field name="overseerMinTalk3" class="java.lang.String"/>
 	<field name="overseerThemeTalk3" class="java.lang.String"/>
+	<field name="place1" class="java.lang.String"/>
+	<field name="place2" class="java.lang.String"/>
 	<detail>
 		<band height="70">
 			<rectangle>
@@ -1060,6 +1062,20 @@
 				<textFieldExpression><![CDATA[$F{christiansPray2Name}]]></textFieldExpression>
 			</textField>
 		</band>
+		<band height="17">
+			<printWhenExpression><![CDATA[!$F{place1}.isEmpty()]]></printWhenExpression>
+			<textField>
+				<reportElement x="5" y="0" width="545" height="17" forecolor="#FF0400" uuid="96036f00-8769-4fdf-946f-f363f4cc3800">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{place1}]]></textFieldExpression>
+			</textField>
+		</band>
 		<band height="37">
 			<printWhenExpression><![CDATA[$F{weekType}.intValue() == 1||$F{weekType}.intValue() == 4]]></printWhenExpression>
 			<rectangle>
@@ -1773,6 +1789,20 @@
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{overseerName}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="17">
+			<printWhenExpression><![CDATA[!$F{place2}.isEmpty()]]></printWhenExpression>
+			<textField>
+				<reportElement x="5" y="0" width="545" height="17" forecolor="#FF0400" uuid="d1a328a4-4a60-4980-a314-1f67b4b04bdb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{place2}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="720">
