@@ -10,6 +10,8 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.users.task.UserSaveTask;
+import com.smnet.core.task.TaskManager;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,6 +63,15 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private CheckBox authNaturalDisasterCheckBox;
 	@FXML
 	private CheckBox authMonitorCheckBox;
+
+	@FXML
+	private CheckBox authDateAndTimeCheckBox;
+	@FXML
+	private CheckBox authPlacesCheckBox;
+	@FXML
+	private CheckBox authConventionsCheckBox;
+	@FXML
+	private CheckBox authMemorialCheckBox;
 
 //	@FXML
 //	private TableColumn<User, Boolean> userTableColumnUsers;
@@ -150,6 +161,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authNaturalDisasterCheckBox.getStyleClass().add("check_box_001");
 		this.authMonitorCheckBox.getStyleClass().add("check_box_001");
 		this.authPublicTalkCheckBox.getStyleClass().add("check_box_001");
+		this.authDateAndTimeCheckBox.getStyleClass().add("check_box_001");
+		this.authPlacesCheckBox.getStyleClass().add("check_box_001");
+		this.authConventionsCheckBox.getStyleClass().add("check_box_001");
+		this.authMemorialCheckBox.getStyleClass().add("check_box_001");
 
 //		userTableColumnUsers.getStyleClass().add("check_box_001");
 //		userTableColumnCongregations.getStyleClass().add("check_box_001");
@@ -241,6 +256,15 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authPublicTalkCheckBox.setText(language.getString("users.auth.publictalk"));
 		this.authPublicTalkCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PUBLIC_TALK));
+
+		this.authDateAndTimeCheckBox.setText(language.getString("users.auth.dateandtime"));
+		this.authDateAndTimeCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TIME));
+		this.authPlacesCheckBox.setText(language.getString("users.auth.places"));
+		this.authPlacesCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PLACES));
+		this.authConventionsCheckBox.setText(language.getString("users.auth.conventions"));
+		this.authConventionsCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CONVENTIONS));
+		this.authMemorialCheckBox.setText(language.getString("users.auth.memorial"));
+		this.authMemorialCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMORIAL));
 	}
 
 	@Override
@@ -271,6 +295,10 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				this.authNaturalDisasterCheckBox.setSelected(user.isSpInf6());
 				this.authMonitorCheckBox.setSelected(user.isSpInf7());
 				this.authPublicTalkCheckBox.setSelected(user.isSpInf8());
+				this.authDateAndTimeCheckBox.setSelected(user.isSpInf9());
+				this.authPlacesCheckBox.setSelected(user.isSpInf10());
+				this.authConventionsCheckBox.setSelected(user.isSpInf11());
+				this.authMemorialCheckBox.setSelected(user.isSpInf12());
 			}
 
 		});
@@ -289,12 +317,44 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 			if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView, header, content)) {
 
+				int userID = user.getUserID().get();
+
+				int spInf1 = this.authUsersCheckBox.isSelected() ? 1 : 0;
+				int spInf2 = this.authCongregationsCheckBox.isSelected() ? 1 : 0;
+				int spInf3 = this.authServiceGroupsCheckBox.isSelected() ? 1 : 0;
+				int spInf4 = this.authMeetingsCheckBox.isSelected() ? 1 : 0;
+				int spInf5 = this.authOverseerCheckBox.isSelected() ? 1 : 0;
+				int spInf6 = this.authNaturalDisasterCheckBox.isSelected() ? 1 : 0;
+				int spInf7 = this.authMonitorCheckBox.isSelected() ? 1 : 0;
+				int spInf8 = this.authPublicTalkCheckBox.isSelected() ? 1 : 0;
+				int spInf9 = this.authDateAndTimeCheckBox.isSelected() ? 1 : 0;
+				int spInf10 = this.authPlacesCheckBox.isSelected() ? 1 : 0;
+				int spInf11 = this.authConventionsCheckBox.isSelected() ? 1 : 0;
+				int spInf12 = this.authMemorialCheckBox.isSelected() ? 1 : 0;
+				int spInf13 = 0;
+				int spInf14 = 0;
+				int spInf15 = 0;
+				int spInf16 = 0;
+				int spInf17 = 0;
+				int spInf18 = 0;
+				int spInf19 = 0;
+				int spInf20 = 0;
+
+				String waitMessage = this.language.getString("users.save.wait");
+
+				TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+						new UserSaveTask(this.application.getAlertBuilder2(), this.settings,
+								this.stageSupportPlannerView, userID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6,
+								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16,
+								spInf17, spInf18, spInf19, spInf20, this));
 			}
 		}
 	}
 
 	private void resetAuth() {
 
+		// TODO: aggiungi reset del titolo
+		
 		this.authCongregationsCheckBox.setSelected(false);
 		this.authMeetingsCheckBox.setSelected(false);
 		this.authMonitorCheckBox.setSelected(false);
@@ -303,6 +363,11 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authPublicTalkCheckBox.setSelected(false);
 		this.authServiceGroupsCheckBox.setSelected(false);
 		this.authUsersCheckBox.setSelected(false);
+
+		this.authDateAndTimeCheckBox.setSelected(false);
+		this.authPlacesCheckBox.setSelected(false);
+		this.authConventionsCheckBox.setSelected(false);
+		this.authMemorialCheckBox.setSelected(false);
 
 	}
 

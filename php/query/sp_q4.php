@@ -7,7 +7,7 @@ if (! $database) {
 	$response ["status"] = 4;
 	$response ["error"] = mysqli_connect_error ();
 } else {
-	$query = "SELECT spUserID, spUserSU, spUserName, spUserPassword, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8 FROM sp_users WHERE spUserSU=0";
+	$query = "SELECT spUserID, spUserSU, spUserName, spUserPassword, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20 FROM sp_users WHERE spUserSU=0";
 	$result = mysqli_query ( $database, $query );
 	
 	if (mysqli_num_rows ( $result ) > 0) {
@@ -28,6 +28,19 @@ if (! $database) {
             $row ["spInf6"] = $resultRow ["spInf6"];
             $row ["spInf7"] = $resultRow ["spInf7"];
             $row ["spInf8"] = $resultRow ["spInf8"];
+            $row ["spInf9"] = $resultRow ["spInf9"];
+            $row ["spInf10"] = $resultRow ["spInf10"];
+            $row ["spInf11"] = $resultRow ["spInf11"];
+            $row ["spInf12"] = $resultRow ["spInf12"];
+            $row ["spInf13"] = $resultRow ["spInf13"];
+            $row ["spInf14"] = $resultRow ["spInf14"];
+            $row ["spInf15"] = $resultRow ["spInf15"];
+            $row ["spInf16"] = $resultRow ["spInf16"];
+            $row ["spInf17"] = $resultRow ["spInf17"];
+            $row ["spInf18"] = $resultRow ["spInf18"];
+            $row ["spInf19"] = $resultRow ["spInf19"];
+            $row ["spInf20"] = $resultRow ["spInf20"];
+            
 			array_push ( $response ["result"], $row );
 		}
 	} else {

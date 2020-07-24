@@ -485,7 +485,7 @@ public class JSONRequest {
 		jsonObj.put("spInf51", spInf51);
 		jsonObj.put("spInf52", spInf52);
 		jsonObj.put("spInf53", spInf53);
-		
+
 		jsonObj.put("spInfMP", spInfMinistryParts);
 		jsonObj.put("spInfCP", spInfChristiansParts);
 
@@ -702,6 +702,37 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject USER_SAVE(int userID, int spInf1, int spInf2, int spInf3, int spInf4, int spInf5,
+			int spInf6, int spInf7, int spInf8, int spInf9, int spInf10, int spInf11, int spInf12, int spInf13,
+			int spInf14, int spInf15, int spInf16, int spInf17, int spInf18, int spInf19, int spInf20) {
+
+		JSONObject jsonObj = create(Integer.valueOf(44));
+
+		jsonObj.put("id", userID);
+		jsonObj.put("spInf1", spInf1);
+		jsonObj.put("spInf2", spInf2);
+		jsonObj.put("spInf3", spInf3);
+		jsonObj.put("spInf4", spInf4);
+		jsonObj.put("spInf5", spInf5);
+		jsonObj.put("spInf6", spInf6);
+		jsonObj.put("spInf7", spInf7);
+		jsonObj.put("spInf8", spInf8);
+		jsonObj.put("spInf9", spInf9);
+		jsonObj.put("spInf10", spInf10);
+		jsonObj.put("spInf11", spInf11);
+		jsonObj.put("spInf12", spInf12);
+		jsonObj.put("spInf13", spInf13);
+		jsonObj.put("spInf14", spInf14);
+		jsonObj.put("spInf15", spInf15);
+		jsonObj.put("spInf16", spInf16);
+		jsonObj.put("spInf17", spInf17);
+		jsonObj.put("spInf18", spInf18);
+		jsonObj.put("spInf19", spInf19);
+		jsonObj.put("spInf20", spInf20);
+
+		return jsonObj;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -737,4 +768,5 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
+
 }
