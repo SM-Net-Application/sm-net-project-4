@@ -25,6 +25,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -73,6 +74,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private CheckBox authMemorialCheckBox;
 
+	@FXML
+	private CheckBox authGeneralInfoCheckBox;
+
 //	@FXML
 //	private TableColumn<User, Boolean> userTableColumnUsers;
 //	@FXML
@@ -109,7 +113,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		tableColumnsCellValueFactory();
 	}
 
-	private void tableColumnsCellFactory() {
+//	private void tableColumnsCellFactory() {
 //		userTableColumnUsers.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnUsers));
 //		userTableColumnCongregations.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnCongregations));
 //		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
@@ -118,7 +122,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 //		userTableColumnNaturalDisaster.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnNaturalDisaster));
 //		userTableColumnMonitor.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMonitor));
 //		userTableColumnPublicTalk.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnPublicTalk));
-	}
+//	}
 
 	private void tableColumnsCellValueFactory() {
 		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
@@ -165,6 +169,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authPlacesCheckBox.getStyleClass().add("check_box_001");
 		this.authConventionsCheckBox.getStyleClass().add("check_box_001");
 		this.authMemorialCheckBox.getStyleClass().add("check_box_001");
+
+		this.authGeneralInfoCheckBox.getStyleClass().add("check_box_001");
 
 //		userTableColumnUsers.getStyleClass().add("check_box_001");
 //		userTableColumnCongregations.getStyleClass().add("check_box_001");
@@ -216,15 +222,27 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 //		userTableColumnMonitor.setEditable(true);
 //		userTableColumnPublicTalk.setEditable(true);
 
-		userAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_USERS_ADD));
-		userAddButton.setText(null);
+		Tooltip userAddTooltip = new Tooltip(this.language.getString("users.tooltip.add"));
+		userAddTooltip.getStyleClass().add("tooltip_001");
+		this.userAddButton.setTooltip(userAddTooltip);
+		this.userAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_USERS_ADD));
+		this.userAddButton.setText(null);
 
-		userDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_USERS_DEL));
-		userDeleteButton.setText(null);
+		Tooltip userDeleteTooltip = new Tooltip(language.getString("users.tooltip.delete"));
+		userDeleteTooltip.getStyleClass().add("tooltip_001");
+		this.userDeleteButton.setTooltip(userDeleteTooltip);
+		this.userDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_USERS_DEL));
+		this.userDeleteButton.setText(null);
 
-		userPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
-		userPrintButton.setText(null);
+		Tooltip userPrintTooltip = new Tooltip(language.getString("users.tooltip.print"));
+		userPrintTooltip.getStyleClass().add("tooltip_001");
+		this.userPrintButton.setTooltip(userPrintTooltip);
+		this.userPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
+		this.userPrintButton.setText(null);
 
+		Tooltip saveTooltip = new Tooltip(language.getString("users.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveButton.setTooltip(saveTooltip);
 		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 		this.saveButton.setText(null);
 
@@ -265,11 +283,20 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authConventionsCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CONVENTIONS));
 		this.authMemorialCheckBox.setText(language.getString("users.auth.memorial"));
 		this.authMemorialCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMORIAL));
+
+		this.authGeneralInfoCheckBox.setText(language.getString("users.auth.generalinfo"));
+		this.authGeneralInfoCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.GENERALINFO));
 	}
 
 	@Override
 	public void updateUsers() {
-		Actions.getAllUsers(settings.getDatabaseUrl(), settings, stageSupportPlannerView, this);
+		Actions.getAllUsers(this.settings.getDatabaseUrl(), this.settings, this.stageSupportPlannerView, this);
+	}
+
+	@Override
+	public void updateUsers(ObservableList<User> listUser) {
+		this.userTableView.setItems(listUser);
+		this.resetAuth();
 	}
 
 	private void listeners() {
@@ -299,6 +326,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				this.authPlacesCheckBox.setSelected(user.isSpInf10());
 				this.authConventionsCheckBox.setSelected(user.isSpInf11());
 				this.authMemorialCheckBox.setSelected(user.isSpInf12());
+
+				this.authGeneralInfoCheckBox.setSelected(user.isSpInf13());
 			}
 
 		});
@@ -331,7 +360,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				int spInf10 = this.authPlacesCheckBox.isSelected() ? 1 : 0;
 				int spInf11 = this.authConventionsCheckBox.isSelected() ? 1 : 0;
 				int spInf12 = this.authMemorialCheckBox.isSelected() ? 1 : 0;
-				int spInf13 = 0;
+				int spInf13 = this.authGeneralInfoCheckBox.isSelected() ? 1 : 0;
 				int spInf14 = 0;
 				int spInf15 = 0;
 				int spInf16 = 0;
@@ -353,8 +382,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 	private void resetAuth() {
 
-		// TODO: aggiungi reset del titolo
-		
+		this.selectedUserLabel.setText(this.language.getString("users.selected.empty"));
+
 		this.authCongregationsCheckBox.setSelected(false);
 		this.authMeetingsCheckBox.setSelected(false);
 		this.authMonitorCheckBox.setSelected(false);
@@ -369,6 +398,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authConventionsCheckBox.setSelected(false);
 		this.authMemorialCheckBox.setSelected(false);
 
+		this.authGeneralInfoCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {
@@ -445,11 +475,6 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 			}
 
 		});
-	}
-
-	@Override
-	public void updateUsers(ObservableList<User> listUser) {
-		userTableView.setItems(listUser);
 	}
 
 	public Settings getSettings() {

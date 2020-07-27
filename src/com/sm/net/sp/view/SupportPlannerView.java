@@ -27,9 +27,11 @@ import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
+import com.sm.net.sp.view.home.user.menu.config.UserMenuConfig;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
+import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -772,6 +774,55 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 	}
 
+	public void viewHomeUserMenuInfo() {
+
+		if (this.center != 17) {
+
+			this.center = 17;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_GENERALINFO);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				UserMenuGeneralInfo ctrl = (UserMenuGeneralInfo) fxmlLoader.getController();
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	public void viewHomeUserMenuConfig() {
+
+		if (this.center != 18) {
+
+			this.center = 18;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONFIG);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				UserMenuConfig ctrl = (UserMenuConfig) fxmlLoader.getController();
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+
+	}
+
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());
@@ -978,5 +1029,4 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void setSettings(Settings settings) {
 		this.settings = settings;
 	}
-
 }

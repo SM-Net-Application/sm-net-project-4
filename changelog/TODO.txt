@@ -1,8 +1,4 @@
-	- Utenti
-		- Migliramento della GUI
-		- Creare il tab dedicato alla modifica di un utente
-		- Tasti piccoli e in alto
-		
+	
 	- Adunanze:
 		- WOL : Ottenere i cantici e il tema della Torre di Guardia
 		
@@ -44,9 +40,12 @@
 			- il CheckBox Pulizia semplificata diventa "Non visualizzare nell'elenco Gruppi di Servizio"
 			- Creare un TabPane, al momento solo con il Tab "Altro"
 		
-	- Nuova sezione : Configurazione
-		- Nome della congregazione
-		
+	- Cantici:
+		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
+		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
+		- Nelle adunanze determinare il titolo in base al numero inserito
+		- Nel layout stampare anche il titolo
+				
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri

@@ -149,6 +149,12 @@ if (! empty($jsonObjPar)) {
                         case 44:
                             include 'query/sp_q44.php';
                             break;
+                        case 45:
+                            include 'query/sp_q45.php';
+                            break;
+                        case 46:
+                            include 'query/sp_q46.php';
+                            break;
                     }
 
                 } else {

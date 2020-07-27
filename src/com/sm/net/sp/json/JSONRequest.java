@@ -2,6 +2,7 @@ package com.sm.net.sp.json;
 
 import java.time.format.DateTimeFormatter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -733,6 +734,56 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject GENERAL_INFO_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(25));
+		return jsonObj;
+	}
+
+	public static JSONObject GENERAL_INFO_UPDATE(String congregationNameEncrypted, String congregationNumberEncrypted) {
+
+		JSONObject jsonObj = create(Integer.valueOf(24));
+
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put(createJSONKeyValue("inf1", congregationNameEncrypted));
+		jsonArray.put(createJSONKeyValue("inf2", congregationNumberEncrypted));
+
+		jsonObj.put("infos", jsonArray);
+
+		return jsonObj;
+	}
+
+	public static JSONObject CONFIG_UPDATE(String placesPatternEncrypted, String publicTalkMinEncrypted,
+			String watchtowerMinEncrypted) {
+
+		JSONObject jsonObj = create(Integer.valueOf(45));
+
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put(createJSONKeyValue("inf1", placesPatternEncrypted));
+		jsonArray.put(createJSONKeyValue("inf2", publicTalkMinEncrypted));
+		jsonArray.put(createJSONKeyValue("inf3", watchtowerMinEncrypted));
+
+		jsonObj.put("infos", jsonArray);
+
+		return jsonObj;
+	}
+
+	public static JSONObject CONFIG_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(46));
+		return jsonObj;
+	}
+
+	private static JSONObject createJSONKeyValue(String key, String value) {
+
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put("key", key);
+		jsonObject.put("value", value);
+
+		return jsonObject;
+	}
+
 	public static JSONStatus getStatus(JSONObject jsonObject) {
 		int status = -1;
 		if (jsonObject != null) {
@@ -768,5 +819,4 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
-
 }

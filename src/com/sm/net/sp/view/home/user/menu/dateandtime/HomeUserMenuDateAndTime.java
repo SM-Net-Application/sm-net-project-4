@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -139,9 +140,15 @@ public class HomeUserMenuDateAndTime {
 		this.dateTimeDay2TableColumn.setText(this.language.getString("datetime.table.column.day2"));
 		this.dateTimeHours2TableColumn.setText(this.language.getString("datetime.table.column.hours2"));
 
+		Tooltip addTooltip = new Tooltip(this.language.getString("dateandtime.tooltip.add"));
+		addTooltip.getStyleClass().add("tooltip_001");
+		this.addButton.setTooltip(addTooltip);
 		this.addButton.setText(null);
 		this.addButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ADD));
 
+		Tooltip deleteTooltip = new Tooltip(this.language.getString("dateandtime.tooltip.delete"));
+		deleteTooltip.getStyleClass().add("tooltip_001");
+		this.deleteButton.setTooltip(deleteTooltip);
 		this.deleteButton.setText(null);
 		this.deleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
 	}

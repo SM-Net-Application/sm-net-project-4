@@ -96,7 +96,7 @@
                   </Separator>
                </children>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets />
                </VBox.margin>
             </StackPane>
             <HBox VBox.vgrow="ALWAYS">
@@ -140,6 +140,15 @@
                         <StackPane alignment="CENTER_LEFT">
                            <children>
                               <CheckBox fx:id="authUsersCheckBox" mnemonicParsing="false" text="users">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </CheckBox>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <CheckBox fx:id="authGeneralInfoCheckBox" mnemonicParsing="false" text="geninfo">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>

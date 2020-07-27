@@ -18,13 +18,13 @@ if (isset ( $jsonObj ["infos"] )) {
             foreach($jsonObj ["infos"] as $info)
             {
 
-                $query = "SELECT * FROM sp_info WHERE keyInf='". $info ["key"] ."'";
+                $query = "SELECT * FROM sp_conf WHERE keyInf='". $info ["key"] ."'";
 
                 $find = mysqli_query ( $database, $query );
 
                 if (mysqli_num_rows ( $find ) > 0) {
 
-                    $query = "UPDATE sp_info SET";
+                    $query = "UPDATE sp_conf SET";
                     $query .= " inf='" . $info ["value"] . "'";
                     $query .= " WHERE keyInf='" . $info ["key"] . "'";
 
@@ -42,7 +42,7 @@ if (isset ( $jsonObj ["infos"] )) {
 
                 } else {
 
-                    $query = "INSERT INTO sp_info (keyInf, inf) VALUES (";
+                    $query = "INSERT INTO sp_conf (keyInf, inf) VALUES (";
                     $query .= "'" . $info ["key"] . "', ";
                     $query .= "'" . $info ["value"] . "')";
 

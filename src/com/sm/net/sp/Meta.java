@@ -13,10 +13,12 @@ import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
+import com.sm.net.sp.view.home.user.menu.config.UserMenuConfig;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.dateandtime.MenuDateAndTimeAdd;
+import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
@@ -166,6 +168,8 @@ public class Meta {
 				.getResource("MenuDateAndTimeAdd.fxml");
 		public static final URL HOME_USER_MENU_PLACES = HomeUserMenuPlaces.class.getResource("HomeUserMenuPlaces.fxml");
 		public static final URL HOME_USER_MENU_PLACES_ADD = PlacesAdd.class.getResource("PlacesAdd.fxml");
+		public static final URL HOME_USER_MENU_GENERALINFO = UserMenuGeneralInfo.class.getResource("UserMenuGeneralInfo.fxml");
+		public static final URL HOME_USER_MENU_CONFIG = UserMenuConfig.class.getResource("UserMenuConfig.fxml");
 	}
 
 	public static class Themes {
@@ -240,12 +244,14 @@ public class Meta {
 		public static final String NOTHING = "nothing.png";
 		public static final String CONNECTION_TEST = "connection_test.png";
 		public static final String DATABASE = "menu_settings_db.png";
+		public static final String CONFIG = "config.png";
 		public static final String DBCONFIG = "dbconfig.png";
 		public static final String RESTORE = "restore.png";
 		public static final String BACKUP = "backup.png";
 		public static final String CLEAN = "clean.png";
 		public static final String LOGO = "logo.png";
 		public static final String TIME = "time.png";
+		public static final String GENERALINFO = "generalinfo.png";
 		public static final String PLACES = "places.png";
 		public static final String MEMORIAL = "memorial.png";
 		public static final String CONVENTIONS = "conventions.png";

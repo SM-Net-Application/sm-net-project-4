@@ -12,7 +12,7 @@ if (! $database) {
 } else {
     
     $query = "SELECT keyInf, inf";
-    $query .= " FROM sp_info";
+    $query .= " FROM sp_conf";
 
     $result = mysqli_query ( $database, $query );
 

@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -141,9 +142,15 @@ public class HomeUserMenuPlaces {
 		this.coordTableColumn.setText(this.language.getString("places.table.column.coord"));
 		this.defaultTableColumn.setText(this.language.getString("places.table.column.default"));
 
+		Tooltip addTooltip = new Tooltip(this.language.getString("places.tooltip.add"));
+		addTooltip.getStyleClass().add("tooltip_001");
+		this.addButton.setTooltip(addTooltip);
 		this.addButton.setText(null);
 		this.addButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ADD));
 
+		Tooltip deleteTooltip = new Tooltip(this.language.getString("places.tooltip.delete"));
+		deleteTooltip.getStyleClass().add("tooltip_001");
+		this.deleteButton.setTooltip(deleteTooltip);
 		this.deleteButton.setText(null);
 		this.deleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
 	}

@@ -155,6 +155,12 @@ public class HomeUserMenuList {
 		else {
 			if (this.user.isSpInf1())
 				menuListView.getItems().add(EnumHomeUserMenuList.USERS);
+			if (this.user.isSpInf13())
+				menuListView.getItems().add(EnumHomeUserMenuList.INFO);
+			if (this.user.isSpInf9())
+				menuListView.getItems().add(EnumHomeUserMenuList.DATE_AND_TIME);
+			if (this.user.isSpInf10())
+				menuListView.getItems().add(EnumHomeUserMenuList.PLACES);
 			if (this.user.isSpInf2())
 				menuListView.getItems().add(EnumHomeUserMenuList.CONGREGATION);
 			if (this.user.isSpInf3())
@@ -165,6 +171,10 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.PUBLIC_TALK);
 			if (this.user.isSpInf5())
 				menuListView.getItems().add(EnumHomeUserMenuList.CIRCUITOVERSEERS);
+			if (this.user.isSpInf11())
+				menuListView.getItems().add(EnumHomeUserMenuList.CONVENTIONS);
+			if (this.user.isSpInf12())
+				menuListView.getItems().add(EnumHomeUserMenuList.MEMORIAL);
 			if (this.user.isSpInf6())
 				menuListView.getItems().add(EnumHomeUserMenuList.NATURAL_DISASTER);
 			if (this.user.isSpInf7())
@@ -182,6 +192,9 @@ public class HomeUserMenuList {
 
 		case USERS:
 			ctrlSupportPlannerView.viewHomeUserMenuUsers();
+			break;
+		case INFO:
+			ctrlSupportPlannerView.viewHomeUserMenuInfo();
 			break;
 		case DATE_AND_TIME:
 			ctrlSupportPlannerView.viewHomeUserMenuDateAndTime();
@@ -213,6 +226,9 @@ public class HomeUserMenuList {
 			break;
 		case NATURAL_DISASTER:
 			ctrlSupportPlannerView.viewHomeUserMenuNaturalDisaster();
+			break;
+		case CONFIG:
+			ctrlSupportPlannerView.viewHomeUserMenuConfig();
 			break;
 		case DATABASE:
 			ctrlSupportPlannerView.viewHomeUserMenuDatabase();

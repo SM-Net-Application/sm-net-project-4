@@ -1,11 +1,29 @@
 Data di pubblicazione : ..-..-....
 
+	* Nuova sezione : Informazioni generali
+		In questa sezione vengono gestite alcune informazioni generali.
+		La modifica di questa sezione può essere assegnata ad un utente.
+		- Congregazione
+			- Nome della congregazione
+			- Numero della congregazione
+
 	* Nuova sezione: Programmazione adunanze
 		- In questa sezione è possibile definire il giorno e l'ora delle adunanze a partire dalla settimana X
 		- Queste informazioni verrano utilizzate nella sezione Adunanze/Discorsi pubblici
 
 	* Nuova sezione: Luoghi di adorazione
 		- In questa sezione è possibile definire i luoghi in cui si tengono le adunanze, i congressi o altri eventi
+		- Se una Sala del Regno viene settata come Predefinita, l'indirizzo viene pre-caricato nelle nuove adunanze
+
+	* Nuova sezione : Configurazione
+		In questa sezione vengono gestite informazioni relative alla configurazione del software.
+		Questa sezione è gestita solo dall'utente amministratore.
+		- Luoghi di adorazione
+			- Formato indirizzo
+		- Discorsi pubblici
+			- Durata da preimpostare (minuti)
+		- Studio Torre di Guardia
+			- Durata da preimpostare (minuti)
 
 	* Sezione : Adunanze
 		- Modifica della GUI
@@ -22,6 +40,9 @@ Data di pubblicazione : ..-..-....
 			- Minuti del Discorso Pubblico
 			- Minuti dello Studio Torre di Guardia
 			- Solo preghiera iniziale (il Presidente adunanza del fine settimana diventa Preghiera iniziale sulla stampa del programma)
+
+	* Sezione : Utenti
+		- Migliramento della GUI
 
 	* Layout : Programma adunanze
 		- Studio biblico di congregazione :
@@ -62,3 +83,7 @@ Data di pubblicazione : ..-..-....
 		  ALTER TABLE sp_week ADD spInf41 INT NOT NULL AFTER spInf40, ADD spInf42 VARCHAR(250) NOT NULL AFTER spInf41, ADD spInf43 VARCHAR(250) NOT NULL AFTER spInf42, ADD spInf44 INT NOT NULL AFTER spInf43, ADD spInf45 INT NOT NULL AFTER spInf44, ADD spInf46 INT NOT NULL AFTER spInf45, ADD spInf47 INT NOT NULL AFTER spInf46, ADD spInf48 INT NOT NULL AFTER spInf47, ADD spInf49 INT NOT NULL AFTER spInf48, ADD spInf50 VARCHAR(250) NOT NULL AFTER spInf49, ADD spInf51 INT NOT NULL AFTER spInf50;
 		  ALTER TABLE sp_week ADD spInf52 VARCHAR(250) NOT NULL AFTER spInf51, ADD spInf53 INT NOT NULL AFTER spInf52;
 		  ALTER TABLE sp_users ADD spInf9 INT NOT NULL AFTER spInf8, ADD spInf10 INT NOT NULL AFTER spInf9, ADD spInf11 INT NOT NULL AFTER spInf10, ADD spInf12 INT NOT NULL AFTER spInf11, ADD spInf13 INT NOT NULL AFTER spInf12, ADD spInf14 INT NOT NULL AFTER spInf13, ADD spInf15 INT NOT NULL AFTER spInf14, ADD spInf16 INT NOT NULL AFTER spInf15, ADD spInf17 INT NOT NULL AFTER spInf16, ADD spInf18 INT NOT NULL AFTER spInf17, ADD spInf19 INT NOT NULL AFTER spInf18, ADD spInf20 INT NOT NULL AFTER spInf19;
+		  ALTER TABLE sp_info ADD id INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (id);
+		  CREATE TABLE sp_conf (id int(11) NOT NULL, keyInf varchar(250) NOT NULL, inf varchar(250) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+          ALTER TABLE sp_conf ADD PRIMARY KEY (id);
+          ALTER TABLE sp_conf MODIFY id int(11) NOT NULL AUTO_INCREMENT;
