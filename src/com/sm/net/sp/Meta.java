@@ -255,6 +255,7 @@ public class Meta {
 		public static final String PLACES = "places.png";
 		public static final String MEMORIAL = "memorial.png";
 		public static final String CONVENTIONS = "conventions.png";
+		public static final String HELP = "help.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

@@ -1,6 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.meetings;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.jw.wol.MinistryType;
@@ -1333,6 +1334,20 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 			} else {
 
+				// Minuti discorso pubblico
+				String publicTalkMin = this.ownerCtrl.getConfigs().get("inf2");
+				if (publicTalkMin != null) {
+					publicTalkMin = Crypt.decrypt(publicTalkMin, this.application.getSettings().getDatabaseSecretKey());
+					this.publicTalkMinTextField.setText(publicTalkMin);
+				}
+
+				// Minuti Studio Torre di Guardia
+				String watchtowerMin = this.ownerCtrl.getConfigs().get("inf3");
+				if (watchtowerMin != null) {
+					watchtowerMin = Crypt.decrypt(watchtowerMin, this.application.getSettings().getDatabaseSecretKey());
+					this.watchtowerStudyMinTextField.setText(watchtowerMin);
+				}
+
 				initDateAndTime();
 				initPlace();
 
@@ -1340,8 +1355,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	}
 
 	private void initPlace() {
-
-		// TODO : definire il formato indirizzo
 
 		ObservableList<Place> placesList = this.ownerCtrl.getPlacesList();
 		Place found = null;
@@ -1363,7 +1376,18 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private String placeToText(Place found) {
 
-		String addr = PlaceUtils.toText(found);
+		String addr = "";
+
+		HashMap<String, String> configs = this.ownerCtrl.getConfigs();
+		String pattern = configs.get("inf1");
+		if (pattern != null) {
+
+			pattern = Crypt.decrypt(pattern, this.application.getSettings().getDatabaseSecretKey());
+			addr = PlaceUtils.toText(found, pattern);
+
+		} else
+
+			addr = PlaceUtils.toText(found);
 
 		return addr;
 	}

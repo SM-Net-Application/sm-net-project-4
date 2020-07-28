@@ -3,6 +3,7 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -72,6 +73,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	private ObservableList<DateAndTime> dateAndTimeList;
 	private ObservableList<Place> placesList;
+	private HashMap<String, String> configs;
 
 	private SupportPlannerView application;
 
@@ -452,6 +454,14 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setPlacesList(ObservableList<Place> placesList) {
 		this.placesList = placesList;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
 	}
 
 }

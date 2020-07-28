@@ -61,6 +61,9 @@ public class UserMenuConfig {
 	@FXML
 	private TextField watchtowerMinTextField;
 
+	@FXML
+	private Button placesPatternButton;
+
 	private SupportPlannerView application;
 	private Stage ownerStage;
 
@@ -101,6 +104,7 @@ public class UserMenuConfig {
 		this.publicTalkMinTextField.getStyleClass().add("text_field_001");
 		this.watchtowerMinTextField.getStyleClass().add("text_field_001");
 
+		this.placesPatternButton.getStyleClass().add("button_image_001");
 		this.saveButton.getStyleClass().add("button_image_001");
 	}
 
@@ -138,6 +142,12 @@ public class UserMenuConfig {
 		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
 		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
 		this.watchtowerMinLabel.setText(language.getString("conf.label.watchtower.min"));
+
+		Tooltip placesPatternHelpTooltip = new Tooltip(language.getString("conf.tooltip.places.pattern.help"));
+		placesPatternHelpTooltip.getStyleClass().add("tooltip_001");
+		this.placesPatternButton.setTooltip(placesPatternHelpTooltip);
+		this.placesPatternButton.setText(null);
+		this.placesPatternButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.HELP));
 
 		Tooltip saveTooltip = new Tooltip(language.getString("conf.tooltip.save"));
 		saveTooltip.getStyleClass().add("tooltip_001");
@@ -183,6 +193,16 @@ public class UserMenuConfig {
 	private void listeners() {
 
 		this.saveButton.setOnAction(event -> save());
+		this.placesPatternButton.setOnAction(event -> showHelp());
+	}
+
+	private void showHelp() {
+
+		String header = this.application.getSettings().getLanguage().getString("conf.dialog.places.pattern.help");
+		String content = this.application.getSettings().getLanguage()
+				.getStringWithNewLine("conf.dialog.places.pattern.info");
+
+		this.application.getAlertBuilder2().information(this.ownerStage, header, content);
 	}
 
 	private void save() {

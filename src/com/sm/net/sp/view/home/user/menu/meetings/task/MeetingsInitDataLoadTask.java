@@ -43,9 +43,11 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 
 		JSONObject jsonDateAndTime = JSONRequest.DATE_AND_TIME_LOAD();
 		JSONObject jsonPlaces = JSONRequest.PLACES_LOAD();
+		JSONObject jsonConfig = JSONRequest.CONFIG_LOAD();
 
 		post(hashMap, url, jsonDateAndTime, "responseDateAndTime");
 		post(hashMap, url, jsonPlaces, "responsePlaces");
+		post(hashMap, url, jsonConfig, "responseConfig");
 
 	}
 
@@ -68,9 +70,11 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 
 		ObservableList<DateAndTime> dateAndTimeList = dateAndTimeFeedback(hashMap);
 		ObservableList<Place> placesList = placesFeedback(hashMap);
+		HashMap<String, String> configs = configFeedback(hashMap);
 
 		this.view.setDateAndTimeList(dateAndTimeList);
 		this.view.setPlacesList(placesList);
+		this.view.setConfigs(configs);
 	}
 
 	private ObservableList<Place> placesFeedback(HashMap<String, Object> hashMap) {
@@ -125,5 +129,29 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		}
 
 		return dateAndTimeList;
+	}
+
+	private HashMap<String, String> configFeedback(HashMap<String, Object> hashMap) {
+
+		HashMap<String, String> configs = new HashMap<>();
+
+		JSONObject response = (JSONObject) hashMap.get("responseConfig");
+		int status = response.getInt("status");
+
+		if (status == 0) {
+
+			JSONArray result = (JSONArray) response.get("result");
+			for (Object obj : result) {
+
+				JSONObject jsonObj = (JSONObject) obj;
+
+				String key = jsonObj.getString("keyInf");
+				String value = jsonObj.getString("inf");
+
+				configs.put(key, value);
+			}
+		}
+
+		return configs;
 	}
 }

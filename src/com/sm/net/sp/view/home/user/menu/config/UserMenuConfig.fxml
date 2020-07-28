@@ -102,15 +102,28 @@
                                                             </VBox>
                                                             <VBox HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <HBox>
                                                                      <children>
-                                                                        <TextField fx:id="placesPatternTextField">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </TextField>
+                                                                        <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <TextField fx:id="placesPatternTextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane>
+                                                                           <children>
+                                                                              <Button fx:id="placesPatternButton" mnemonicParsing="false" text="help">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </Button>
+                                                                           </children>
+                                                                        </StackPane>
                                                                      </children>
-                                                                  </StackPane>
+                                                                  </HBox>
                                                                </children>
                                                             </VBox>
                                                          </children>
