@@ -478,6 +478,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				UserMenuCongrList ctrl = (UserMenuCongrList) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);

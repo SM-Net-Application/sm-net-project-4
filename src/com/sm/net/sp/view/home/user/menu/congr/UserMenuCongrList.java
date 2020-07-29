@@ -8,14 +8,13 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
-import com.sm.net.sp.model.Info;
-import com.sm.net.sp.model.Info.EnumActions;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.printlayout.PrintLayout;
-import com.sm.net.util.Crypt;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +29,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -45,16 +44,14 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	@FXML
 	private TabPane congrTabPane;
 	@FXML
-	private Tab generalTab;
-	@FXML
 	private Tab membersTab;
 	@FXML
 	private Tab familyTab;
 
 	@FXML
-	private Label congrLabel;
+	private TabPane memberTabPane;
 	@FXML
-	private TextField congrTextField;
+	private Tab memberListTab;
 
 	@FXML
 	private TableView<Member> membersTableView;
@@ -64,6 +61,19 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private TableColumn<Member, String> memberSurnameTableColumn;
 	@FXML
 	private TableColumn<Member, String> memberNameTableColumn;
+	@FXML
+	private TableColumn<Member, ImageView> memberIconTableColumn;
+	@FXML
+	private TableColumn<Member, String> memberSurname2TableColumn;
+	@FXML
+	private TableColumn<Member, String> memberName2TableColumn;
+	@FXML
+	private TableColumn<Member, String> memberAgeTableColumn;
+	@FXML
+	private TableColumn<Member, String> memberNumberTableColumn;
+	@FXML
+	private TableColumn<Member, String> memberMailTableColumn;
+
 	@FXML
 	private Button memberAddButton;
 	@FXML
@@ -100,14 +110,10 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 
+	private SupportPlannerView application;
+
 	private ObservableList<Member> membersList;
 	private ObservableList<Family> familiesList;
-
-	private String bufferCongr;
-	// private String bufferOverseer1;
-	// private String bufferOverseer1Wife;
-	// private String bufferOverseer2;
-	// private String bufferOverseer2Wife;
 
 	@FXML
 	private void initialize() {
@@ -117,9 +123,24 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void cellValueFactory() {
 
-		memberIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
-		memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
-		memberNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+		this.memberIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
+		this.memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
+		this.memberNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+
+		this.memberIconTableColumn.setCellValueFactory(cellData -> {
+
+			if (cellData.getValue().getSpInf4() == 0)
+				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.MALE));
+			else
+				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
+
+		});
+		this.memberSurname2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf39DecryptedProperty());
+		this.memberName2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
+		// this.memberAgeTableColumn.setCellValueFactory(cellData ->
+		// cellData.getValue().spMemberIDProperty().asObject());
+		this.memberNumberTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf40DecryptedProperty());
+		this.memberMailTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf41DecryptedProperty());
 
 		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
 		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
@@ -134,11 +155,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		congrHeaderLabel.getStyleClass().add("label_header_001");
 
-		congrTabPane.getStyleClass().add("tab_pane_001");
+		congrTabPane.getStyleClass().add("tab_pane_003");
 
-		generalTab.getStyleClass().add("tab_001");
 		membersTab.getStyleClass().add("tab_001");
 		familyTab.getStyleClass().add("tab_001");
+
+		this.memberTabPane.getStyleClass().add("tab_pane_001");
+		this.memberListTab.getStyleClass().add("tab_001");
 
 		membersTableView.getStyleClass().add("table_view_001");
 		familiesTableView.getStyleClass().add("table_view_001");
@@ -151,21 +174,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familyDeleteButton.getStyleClass().add("button_image_001");
 		familiesUpdateButton.getStyleClass().add("button_image_001");
 
-		congrLabel.getStyleClass().add("label_set_001");
-		congrTextField.getStyleClass().add("text_field_001");
-
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
-
-		// overseer1Label.getStyleClass().add("labelStyle2");
-		// overseer1NameLabel.getStyleClass().add("labelStyle3");
-		// overseer1NameTextField.getStyleClass().add("textFieldStyle1");
-		// overseer1WifeLabel.getStyleClass().add("labelStyle3");
-		// overseer1WifeTextField.getStyleClass().add("textFieldStyle1");
-		// overseer2Label.getStyleClass().add("labelStyle2");
-		// overseer2NameLabel.getStyleClass().add("labelStyle3");
-		// overseer2NameTextField.getStyleClass().add("textFieldStyle1");
-		// overseer2WifeLabel.getStyleClass().add("labelStyle3");
-		// overseer2WifeTextField.getStyleClass().add("textFieldStyle1");
 	}
 
 	public void objectInitialize() {
@@ -187,34 +196,72 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		congrImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_CONGR, 50, 50));
 
 		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
+		this.congrTabPane.setTabMinHeight(75);
+		this.congrTabPane.setTabMaxHeight(75);
 
-		generalTab.setText(language.getString("TEXT0043"));
-		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
-		generalTab.setClosable(false);
+		Tooltip memberTabTooltip = new Tooltip(language.getString("TEXT0011"));
+		memberTabTooltip.getStyleClass().add("tooltip_001");
+		this.membersTab.setTooltip(memberTabTooltip);
+		this.membersTab.setText("");
+		this.membersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
+		this.membersTab.setClosable(false);
 
-		membersTab.setText(language.getString("TEXT0011"));
-		membersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
-		membersTab.setClosable(false);
+		Tooltip familyTabTooltip = new Tooltip(language.getString("TEXT0012"));
+		familyTabTooltip.getStyleClass().add("tooltip_001");
+		this.familyTab.setTooltip(familyTabTooltip);
+		this.familyTab.setText("");
+		this.familyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
+		this.familyTab.setClosable(false);
 
-		familyTab.setText(language.getString("TEXT0012"));
-		familyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
-		familyTab.setClosable(false);
+		this.memberListTab.setText(this.language.getString("congregation.members.list"));
 
 		memberIDTableColumn.setText(language.getString("TEXT0005"));
 		memberIDTableColumn.setMinWidth(50);
 		memberIDTableColumn.setMaxWidth(50);
 		memberIDTableColumn.setResizable(false);
-		memberSurnameTableColumn.setText(language.getString("TEXT0013"));
-		memberNameTableColumn.setText(language.getString("TEXT0014"));
 
-		memberAddButton.setText("");
-		memberAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.MEMBER_ADD));
+		this.memberIconTableColumn.setText("");
+		this.memberIconTableColumn.setMinWidth(50);
+		this.memberIconTableColumn.setMaxWidth(50);
+		this.memberIconTableColumn.setResizable(false);
 
-		memberDeleteButton.setText("");
-		memberDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.MEMBER_DEL));
+		this.memberSurnameTableColumn.setText(this.language.getString("TEXT0013"));
+		this.memberSurname2TableColumn.setText(this.language.getString("congregation.members.column.surname2"));
+		this.memberNameTableColumn.setText(this.language.getString("TEXT0014"));
 
-		membersUpdateButton.setText("");
-		membersUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
+		this.memberName2TableColumn.setText("");
+		this.memberName2TableColumn.setMinWidth(50);
+		this.memberName2TableColumn.setMaxWidth(50);
+		this.memberName2TableColumn.setResizable(false);
+
+		this.memberAgeTableColumn.setText(this.language.getString("congregation.members.column.age"));
+		this.memberAgeTableColumn.setMinWidth(50);
+		this.memberAgeTableColumn.setMaxWidth(50);
+		this.memberAgeTableColumn.setResizable(false);
+
+		Tooltip memberAddTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.add"));
+		memberAddTooltip.getStyleClass().add("tooltip_001");
+		this.memberAddButton.setTooltip(memberAddTooltip);
+		this.memberAddButton.setText("");
+		this.memberAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER_ADD));
+
+		Tooltip memberDeleteTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.delete"));
+		memberDeleteTooltip.getStyleClass().add("tooltip_001");
+		this.memberDeleteButton.setTooltip(memberDeleteTooltip);
+		this.memberDeleteButton.setText("");
+		this.memberDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER_DEL));
+
+		Tooltip membersUpdateTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.update"));
+		membersUpdateTooltip.getStyleClass().add("tooltip_001");
+		this.membersUpdateButton.setTooltip(membersUpdateTooltip);
+		this.membersUpdateButton.setText("");
+		this.membersUpdateButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
+
+		Tooltip memberMonitorPrintTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.print"));
+		memberMonitorPrintTooltip.getStyleClass().add("tooltip_001");
+		this.memberMonitorPrintButton.setTooltip(memberMonitorPrintTooltip);
+		this.memberMonitorPrintButton.setText("");
+		this.memberMonitorPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 
 		familyIDTableColumn.setText(language.getString("TEXT0005"));
 		familyIDTableColumn.setMinWidth(50);
@@ -234,42 +281,15 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familiesUpdateButton.setText("");
 		familiesUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
 
-		congrLabel.setText(language.getString("sp.congr.name"));
-
-		memberMonitorPrintButton.setText("");
-		memberMonitorPrintButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
 	}
 
 	private void initInfo() {
-		Actions.getUserMenuCongrListInfo(settings, ownerStage, this);
-	}
 
-	@Override
-	public void updateInfo(Info info) {
-		super.updateInfo(info);
+		// TODO : load Info con il nuovo sistema
 
-		String congr = info.getCongr();
-		setTextField(congrTextField, congr);
-
-		// setTextField(overseer1NameTextField, info.getOverseer1());
-		// setTextField(overseer1WifeTextField, info.getOverseer1wife());
-		// setTextField(overseer2NameTextField, info.getOverseer2());
-		// setTextField(overseer2WifeTextField, info.getOverseer2wife());
-
-		if (!congr.isEmpty())
-			congrHeaderLabel.setText(language.getString("USERMENU002") + ": " + congr);
-	}
-
-	private void setTextField(TextField tf, String text) {
-		if (text != null)
-			tf.setText(text);
-		else
-			tf.setText("");
 	}
 
 	private void listeners() {
-
-		listenerCongrTextField();
 
 		listenerMemberAddButton();
 		listenerMemberDeleteButton();
@@ -287,94 +307,6 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private void listenerMemberMonitorPrintButton() {
 		this.memberMonitorPrintButton.setOnAction(event -> print());
 	}
-
-	private void listenerCongrTextField() {
-		congrTextField.focusedProperty()
-				.addListener((observable, oldValue, newValue) -> congrTextFieldFocused(newValue.booleanValue()));
-	}
-
-	// private void listenerOverseer1NameTextField() {
-	// overseer1NameTextField.focusedProperty().addListener(
-	// (observable, oldValue, newValue) ->
-	// overseer1NameTextFieldFocused(newValue.booleanValue()));
-	// }
-	//
-	// private void listenerOverseer1WifeTextField() {
-	// overseer1WifeTextField.focusedProperty().addListener(
-	// (observable, oldValue, newValue) ->
-	// overseer1WifeTextFieldFocused(newValue.booleanValue()));
-	// }
-	//
-	// private void listenerOverseer2NameTextField() {
-	// overseer2NameTextField.focusedProperty().addListener(
-	// (observable, oldValue, newValue) ->
-	// overseer2NameTextFieldFocused(newValue.booleanValue()));
-	// }
-	//
-	// private void listenerOverseer2WifeTextField() {
-	// overseer2WifeTextField.focusedProperty().addListener(
-	// (observable, oldValue, newValue) ->
-	// overseer2WifeTextFieldFocused(newValue.booleanValue()));
-	// }
-
-	private void congrTextFieldFocused(boolean focused) {
-		if (focused)
-			bufferCongr = congrTextField.getText();
-		else {
-			String newText = congrTextField.getText();
-			if (!newText.equals(bufferCongr))
-				Info.runAction(EnumActions.SAVE, Info.KEYS.CONGR,
-						Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings, ownerStage);
-		}
-	}
-
-	// private void overseer1NameTextFieldFocused(boolean focused) {
-	// if (focused)
-	// bufferOverseer1 = overseer1NameTextField.getText();
-	// else {
-	// String newText = overseer1NameTextField.getText();
-	// if (!newText.equals(bufferOverseer1))
-	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1,
-	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
-	// ownerStage);
-	// }
-	// }
-	//
-	// private void overseer1WifeTextFieldFocused(boolean focused) {
-	// if (focused)
-	// bufferOverseer1Wife = overseer1WifeTextField.getText();
-	// else {
-	// String newText = overseer1WifeTextField.getText();
-	// if (!newText.equals(bufferOverseer1Wife))
-	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER1WIFE,
-	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
-	// ownerStage);
-	// }
-	// }
-	//
-	// private void overseer2NameTextFieldFocused(boolean focused) {
-	// if (focused)
-	// bufferOverseer2 = overseer2NameTextField.getText();
-	// else {
-	// String newText = overseer2NameTextField.getText();
-	// if (!newText.equals(bufferOverseer2))
-	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2,
-	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
-	// ownerStage);
-	// }
-	// }
-	//
-	// private void overseer2WifeTextFieldFocused(boolean focused) {
-	// if (focused)
-	// bufferOverseer2Wife = overseer2WifeTextField.getText();
-	// else {
-	// String newText = overseer2WifeTextField.getText();
-	// if (!newText.equals(bufferOverseer2Wife))
-	// Info.runAction(EnumActions.SAVE, Info.KEYS.OVERSEER2WIFE,
-	// Crypt.encrypt(newText, settings.getDatabaseSecretKey()), settings,
-	// ownerStage);
-	// }
-	// }
 
 	private void listenerMembersTableView() {
 		membersTableView.setRowFactory(param -> {
@@ -545,12 +477,16 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				newMemberTab.getStyleClass().add("tab_001");
 				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
 
-				ctrl.setCongrTabPane(congrTabPane);
-				ctrl.setMembersTab(membersTab);
+				// ctrl.setCongrTabPane(congrTabPane);
+				// ctrl.setMembersTab(membersTab);
+				ctrl.setCongrTabPane(this.memberTabPane);
+				ctrl.setMembersTab(this.memberListTab);
 				ctrl.setNewMemberTab(newMemberTab);
 
-				congrTabPane.getTabs().add(newMemberTab);
-				congrTabPane.getSelectionModel().select(newMemberTab);
+//				congrTabPane.getTabs().add(newMemberTab);
+//				congrTabPane.getSelectionModel().select(newMemberTab);
+				this.memberTabPane.getTabs().add(newMemberTab);
+				this.memberTabPane.getSelectionModel().select(newMemberTab);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -639,20 +575,21 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void print() {
 
-		if (membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			Member member = membersTableView.getSelectionModel().getSelectedItem();
-			String spInf47 = member.getSpInf47();
-			if (!spInf47.isEmpty()) {
 
-				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
-						EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
+			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+					EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
 
-				if (selectedLayout != null) {
+			if (selectedLayout != null) {
 
-					switch (selectedLayout) {
+				switch (selectedLayout) {
 
-					case MEMBER_PASSWORD_MONITOR:
+				case MEMBER_PASSWORD_MONITOR:
+
+					String spInf47 = member.getSpInf47();
+					if (!spInf47.isEmpty()) {
 
 						String dbUrl = this.settings.getDatabaseUrl();
 						int indexOf = dbUrl.indexOf("exchange.php");
@@ -666,15 +603,24 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 							Actions.printMonitorPassword(memberName, spInf47, link, settings, ownerStage, language);
 						}
+					} else {
 
-						break;
+						String header = member.getNameStyle1();
 
-					default:
-						break;
+						this.application.getAlertBuilder2().error(this.ownerStage, header,
+								this.language.getString("congregation.members.print.nopasswordmonitor"));
 					}
+
+					break;
+
+				default:
+					break;
 				}
 			}
-		}
+		} else
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.members.print.noselect"));
+
 	}
 
 	public Settings getSettings() {
@@ -699,5 +645,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	public void setMembersList(ObservableList<Member> membersList) {
 		this.membersList = membersList;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
 	}
 }

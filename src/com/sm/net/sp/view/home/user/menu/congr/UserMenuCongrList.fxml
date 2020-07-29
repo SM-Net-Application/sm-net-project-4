@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -52,107 +51,105 @@
             </StackPane>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <TabPane fx:id="congrTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="congrTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab fx:id="generalTab" text="general">
-                           <content>
-                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <children>
-                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <HBox>
-                                             <children>
-                                                <StackPane alignment="TOP_LEFT">
-                                                   <children>
-                                                      <Label fx:id="congrLabel" text="congregazione">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="TOP_LEFT" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <TextField fx:id="congrTextField" maxWidth="1.7976931348623157E308">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </TextField>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
                       <Tab fx:id="membersTab" text="componenti">
                         <content>
                           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                  <children>
-                                    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="445.0" prefWidth="258.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <TableView fx:id="membersTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                                  <columns>
-                                                    <TableColumn fx:id="memberIDTableColumn" prefWidth="75.0" text="C1" />
-                                                    <TableColumn fx:id="memberSurnameTableColumn" prefWidth="75.0" text="C2" />
-                                                      <TableColumn fx:id="memberNameTableColumn" prefWidth="75.0" text="C3" />
-                                                  </columns>
-                                                   <columnResizePolicy>
-                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                   </columnResizePolicy>
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </TableView>
-                                             </children>
-                                          </StackPane>
-                                          <HBox alignment="CENTER_RIGHT">
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT">
+                                    <TabPane fx:id="memberTabPane" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <tabs>
+                                          <Tab fx:id="memberListTab" closable="false" text="elenc">
+                                             <content>
+                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                                    <children>
-                                                      <Button fx:id="membersUpdateButton" mnemonicParsing="false" text="aggiorna">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
+                                                      <StackPane>
+                                                         <children>
+                                                            <Separator>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Separator>
+                                                         </children>
+                                                      </StackPane>
+                                                      <HBox alignment="CENTER_RIGHT">
+                                                         <children>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="memberAddButton" mnemonicParsing="false" text="aggiungi">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="memberDeleteButton" mnemonicParsing="false" text="elimina">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="membersUpdateButton" mnemonicParsing="false" text="aggiorna">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Button fx:id="memberMonitorPrintButton" mnemonicParsing="false" text="print">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </HBox>
+                                                      <StackPane>
+                                                         <children>
+                                                            <Separator>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Separator>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <TableView fx:id="membersTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                                              <columns>
+                                                                <TableColumn fx:id="memberIDTableColumn" prefWidth="75.0" text="id" />
+                                                                  <TableColumn fx:id="memberIconTableColumn" prefWidth="75.0" text="simbolo" />
+                                                                <TableColumn fx:id="memberSurnameTableColumn" prefWidth="75.0" text="cognome" />
+                                                                  <TableColumn fx:id="memberSurname2TableColumn" prefWidth="75.0" text="cognome2" />
+                                                                  <TableColumn fx:id="memberNameTableColumn" prefWidth="75.0" text="nome" />
+                                                                  <TableColumn fx:id="memberName2TableColumn" prefWidth="75.0" text="nome2" />
+                                                                  <TableColumn fx:id="memberAgeTableColumn" prefWidth="75.0" text="eta" />
+                                                                  <TableColumn fx:id="memberNumberTableColumn" prefWidth="75.0" text="cellulare" />
+                                                                  <TableColumn fx:id="memberMailTableColumn" prefWidth="75.0" text="email" />
+                                                              </columns>
+                                                               <columnResizePolicy>
+                                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                               </columnResizePolicy>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TableView>
+                                                         </children>
+                                                      </StackPane>
                                                    </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Button fx:id="memberMonitorPrintButton" mnemonicParsing="false" text="Button">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="memberAddButton" mnemonicParsing="false" text="aggiungi">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="memberDeleteButton" mnemonicParsing="false" text="elimina">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
+                                                </VBox>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
                                  </children>
                               </AnchorPane>
                         </content>

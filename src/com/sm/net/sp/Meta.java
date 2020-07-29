@@ -168,7 +168,8 @@ public class Meta {
 				.getResource("MenuDateAndTimeAdd.fxml");
 		public static final URL HOME_USER_MENU_PLACES = HomeUserMenuPlaces.class.getResource("HomeUserMenuPlaces.fxml");
 		public static final URL HOME_USER_MENU_PLACES_ADD = PlacesAdd.class.getResource("PlacesAdd.fxml");
-		public static final URL HOME_USER_MENU_GENERALINFO = UserMenuGeneralInfo.class.getResource("UserMenuGeneralInfo.fxml");
+		public static final URL HOME_USER_MENU_GENERALINFO = UserMenuGeneralInfo.class
+				.getResource("UserMenuGeneralInfo.fxml");
 		public static final URL HOME_USER_MENU_CONFIG = UserMenuConfig.class.getResource("UserMenuConfig.fxml");
 	}
 
@@ -202,6 +203,9 @@ public class Meta {
 		public static final String MEMBER = "person_35x35.png";
 		public static final String MEMBER_ADD = "person_add_50x50.png";
 		public static final String MEMBER_DEL = "person_delete_50x50.png";
+		public static final String LIST = "list.png";
+		public static final String MALE = "male.png";
+		public static final String FEMALE = "female.png";
 		public static final String FAMILY = "family2_35x35.png";
 		public static final String FAMILY_ADD = "family2_add_50x50.png";
 		public static final String FAMILY_DEL = "family2_delete_50x50.png";
