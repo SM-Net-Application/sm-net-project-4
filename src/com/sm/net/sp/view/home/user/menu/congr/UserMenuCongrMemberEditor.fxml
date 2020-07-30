@@ -18,9 +18,27 @@
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <StackPane alignment="CENTER_LEFT">
+               <children>
+                  <Button fx:id="saveButton" mnemonicParsing="false" text="salva">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <Separator>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Separator>
+               </children>
+            </StackPane>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <TabPane fx:id="memberTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="memberTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab fx:id="memberPersonalTab" text="Untitled Tab 1">
                         <content>
@@ -134,7 +152,7 @@
                                                                      <children>
                                                                         <CheckBox fx:id="genderFemaleCheckBox" mnemonicParsing="false" text="CheckBox">
                                                                            <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                              <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
                                                                         </CheckBox>
                                                                      </children>
@@ -150,6 +168,9 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
                               </AnchorPane>
                         </content>
                       </Tab>
@@ -161,16 +182,6 @@
                                        <children>
                                           <VBox>
                                              <children>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="generalLabel" text="Label">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <Separator />
                                                 <StackPane alignment="CENTER_LEFT">
                                                    <children>
                                                       <CheckBox fx:id="studentCheckBox" mnemonicParsing="false" text="student">
@@ -200,9 +211,18 @@
                                                 </StackPane>
                                              </children>
                                           </VBox>
+                                          <StackPane>
+                                             <children>
+                                                <Separator>
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
                                           <StackPane alignment="TOP_LEFT" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <TabPane fx:id="memberInfoTabPane" tabClosingPolicy="UNAVAILABLE">
+                                                <TabPane fx:id="memberInfoTabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE">
                                                   <tabs>
                                                     <Tab fx:id="assignmentsTab" text="Untitled Tab 1">
                                                       <content>
@@ -341,6 +361,9 @@
                                                                            </children>
                                                                         </HBox>
                                                                      </children>
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
                                                                   </AnchorPane>
                                                                </content>
                                                             </ScrollPane>
@@ -781,6 +804,9 @@
                                                                            </children>
                                                                         </HBox>
                                                                      </children>
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
                                                                   </AnchorPane>
                                                                </content>
                                                             </ScrollPane>
@@ -831,6 +857,9 @@
                                                                      </children>
                                                                   </VBox>
                                                                </children>
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
                                                             </AnchorPane>
                                                          </content>
                                                       </Tab>
@@ -870,6 +899,9 @@
                                                                      </children>
                                                                   </VBox>
                                                                </children>
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
                                                             </AnchorPane>
                                                          </content>
                                                       </Tab>
@@ -883,6 +915,9 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
                               </AnchorPane>
                           </content>
                         </Tab>
@@ -912,15 +947,6 @@
                                                       </Label>
                                                    </children>
                                                 </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="monitorLabel" text="Label">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
                                              </children>
                                           </VBox>
                                           <VBox HBox.hgrow="ALWAYS">
@@ -943,6 +969,38 @@
                                                       </TextField>
                                                    </children>
                                                 </StackPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab fx:id="memberMonitorTab" text="monitor">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="monitorLabel" text="Label">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </VBox>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
                                                 <StackPane>
                                                    <children>
                                                       <TextField fx:id="monitorTextField" maxWidth="1.7976931348623157E308">
@@ -957,6 +1015,9 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
                               </AnchorPane>
                           </content>
                         </Tab>
@@ -965,15 +1026,6 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </TabPane>
-               </children>
-            </StackPane>
-            <StackPane alignment="CENTER_RIGHT">
-               <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" text="salva">
-                     <StackPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </StackPane.margin>
-                  </Button>
                </children>
             </StackPane>
          </children>

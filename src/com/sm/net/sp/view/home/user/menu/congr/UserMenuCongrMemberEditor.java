@@ -17,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class UserMenuCongrMemberEditor {
@@ -55,8 +56,6 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private Tab memberAppointmentAndPrivilegeTab;
 
-	@FXML
-	private Label generalLabel;
 	@FXML
 	private CheckBox studentCheckBox;
 	@FXML
@@ -201,6 +200,9 @@ public class UserMenuCongrMemberEditor {
 	private TextField emailTextField;
 
 	@FXML
+	private Tab memberMonitorTab;
+
+	@FXML
 	private Label monitorLabel;
 	@FXML
 	private TextField monitorTextField;
@@ -217,6 +219,8 @@ public class UserMenuCongrMemberEditor {
 	private UserMenuCongrList ownerCtrl;
 	private Member selectedMember;
 
+	private boolean listenerCheckFields;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -227,8 +231,8 @@ public class UserMenuCongrMemberEditor {
 		assignmentsScrollPane.getStyleClass().add("scroll_pane_001");
 		privilegeScrollPane.getStyleClass().add("scroll_pane_001");
 
-		memberTabPane.getStyleClass().add("tab_pane_002");
-		memberInfoTabPane.getStyleClass().add("tab_pane_002");
+		this.memberTabPane.getStyleClass().add("tab_pane_003");
+		this.memberInfoTabPane.getStyleClass().add("tab_pane_003");
 
 		memberPersonalTab.getStyleClass().add("tab_001");
 		memberAppointmentAndPrivilegeTab.getStyleClass().add("tab_001");
@@ -237,6 +241,7 @@ public class UserMenuCongrMemberEditor {
 		appointmentTab.getStyleClass().add("tab_001");
 		onthersTab.getStyleClass().add("tab_001");
 		memberContactsTab.getStyleClass().add("tab_001");
+		memberMonitorTab.getStyleClass().add("tab_001");
 
 		surnameLabel.getStyleClass().add("label_set_001");
 		nameLabel.getStyleClass().add("label_set_001");
@@ -244,7 +249,6 @@ public class UserMenuCongrMemberEditor {
 		singlenessLabel.getStyleClass().add("label_set_001");
 		genderLabel.getStyleClass().add("label_set_001");
 
-		generalLabel.getStyleClass().add("label_002");
 		treasuresLabel.getStyleClass().add("label_002");
 		ministryLabel.getStyleClass().add("label_002");
 		christiansLabel.getStyleClass().add("label_002");
@@ -274,8 +278,8 @@ public class UserMenuCongrMemberEditor {
 		emailTextField.getStyleClass().add("text_field_001");
 		monitorTextField.getStyleClass().add("text_field_001");
 
-		genderMaleCheckBox.getStyleClass().add("check_box_001");
-		genderFemaleCheckBox.getStyleClass().add("check_box_001");
+		genderMaleCheckBox.getStyleClass().add("check_box_set_001");
+		genderFemaleCheckBox.getStyleClass().add("check_box_set_001");
 		studentCheckBox.getStyleClass().add("check_box_001");
 		unbaptizedPublisherCheckBox.getStyleClass().add("check_box_001");
 		baptizedPublisherCheckBox.getStyleClass().add("check_box_001");
@@ -319,9 +323,14 @@ public class UserMenuCongrMemberEditor {
 	}
 
 	public void objectInitialize() {
+
+		this.listenerCheckFields = false;
+
 		initValue();
 		viewUpdate();
 		listeners();
+
+		this.listenerCheckFields = true;
 	}
 
 	private void initValue() {
@@ -399,14 +408,47 @@ public class UserMenuCongrMemberEditor {
 	}
 
 	private void listeners() {
+
 		listenerNameTextField();
-		listenerGenderMaleCheckBox();
-		listenerGenderFemaleCheckBox();
+
+		this.genderMaleCheckBox.selectedProperty().addListener(
+				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.genderMaleCheckBox, this.genderFemaleCheckBox));
+		this.genderFemaleCheckBox.selectedProperty().addListener(
+				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.genderFemaleCheckBox, this.genderMaleCheckBox));
+
+		this.studentCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
+				this.studentCheckBox, this.unbaptizedPublisherCheckBox, this.baptizedPublisherCheckBox));
+
+		this.unbaptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
+				this.unbaptizedPublisherCheckBox, this.studentCheckBox, this.baptizedPublisherCheckBox));
+
+		this.baptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
+				this.baptizedPublisherCheckBox, this.studentCheckBox, this.unbaptizedPublisherCheckBox));
+
 		listenerSaveButton();
 	}
 
 	private void listenerSaveButton() {
 		saveButton.setOnAction(event -> saveMember());
+	}
+
+	private void checkBoxGroups(Boolean newV, Boolean notNull, CheckBox edited, CheckBox... others) {
+
+		if (this.listenerCheckFields) {
+
+			this.listenerCheckFields = false;
+
+			if (newV) {
+				for (CheckBox cb : others)
+					if (cb.isSelected())
+						cb.setSelected(false);
+			} else {
+				if (notNull)
+					edited.setSelected(true);
+			}
+
+			this.listenerCheckFields = true;
+		}
 	}
 
 	private void saveMember() {
@@ -543,24 +585,6 @@ public class UserMenuCongrMemberEditor {
 		return status;
 	}
 
-	private void listenerGenderMaleCheckBox() {
-		this.genderMaleCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue)
-				this.genderFemaleCheckBox.setSelected(false);
-			else
-				this.genderFemaleCheckBox.setSelected(true);
-		});
-	}
-
-	private void listenerGenderFemaleCheckBox() {
-		this.genderFemaleCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue)
-				this.genderMaleCheckBox.setSelected(false);
-			else
-				this.genderMaleCheckBox.setSelected(true);
-		});
-	}
-
 	private void listenerNameTextField() {
 
 		nameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -578,29 +602,46 @@ public class UserMenuCongrMemberEditor {
 
 		this.language = settings.getLanguage();
 
-		memberPersonalTab.setText(language.getString("TEXT0016"));
-		memberPersonalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
+		this.memberTabPane.setTabMinHeight(75);
+		this.memberTabPane.setTabMaxHeight(75);
+
+		Tooltip memberPersonalTooltip = new Tooltip(
+				this.language.getString("congregation.memberseditor.tooltip.personal"));
+		memberPersonalTooltip.getStyleClass().add("tooltip_001");
+		this.memberPersonalTab.setTooltip(memberPersonalTooltip);
+		this.memberPersonalTab.setText("");
+		this.memberPersonalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
 
 		surnameLabel.setText(language.getString("TEXT0013"));
 		nameLabel.setText(language.getString("TEXT0014"));
 		nameShortLabel.setText(language.getString("TEXT0018"));
 		singlenessLabel.setText(language.getString("TEXT0065"));
 		genderLabel.setText(language.getString("TEXT0019"));
-		genderMaleCheckBox.setText(language.getString("TEXT0020"));
-		genderFemaleCheckBox.setText(language.getString("TEXT0021"));
 
-		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
+		this.genderMaleCheckBox.setText(language.getString("TEXT0020"));
+		this.genderMaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MALE));
+		this.genderFemaleCheckBox.setText(language.getString("TEXT0021"));
+		this.genderFemaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
 
-		memberAppointmentAndPrivilegeTab.setText(language.getString("TEXT0042"));
-		memberAppointmentAndPrivilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PRIVILEGES));
+		Tooltip saveTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveButton.setTooltip(saveTooltip);
+		this.saveButton.setText("");
+		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
-		generalLabel.setText(language.getString("TEXT0043"));
+		Tooltip memberAppointmentAndPrivilegeTooltip = new Tooltip(
+				this.language.getString("congregation.memberseditor.tooltip.appointmentundprivileges"));
+		memberAppointmentAndPrivilegeTooltip.getStyleClass().add("tooltip_001");
+		this.memberAppointmentAndPrivilegeTab.setTooltip(memberAppointmentAndPrivilegeTooltip);
+		this.memberAppointmentAndPrivilegeTab.setText("");
+		this.memberAppointmentAndPrivilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PRIVILEGES));
+
 		studentCheckBox.setText(language.getString("TEXT0044"));
 		unbaptizedPublisherCheckBox.setText(language.getString("TEXT0045"));
 		baptizedPublisherCheckBox.setText(language.getString("TEXT0046"));
 
-		assignmentsTab.setText(language.getString("TEXT0104"));
+		// assignmentsTab.setText(language.getString("TEXT0104"));
+
 		treasuresLabel.setText(language.getString("TEXT0080"));
 		ministryLabel.setText(language.getString("TEXT0081"));
 		christiansLabel.setText(language.getString("TEXT0082"));
@@ -613,7 +654,8 @@ public class UserMenuCongrMemberEditor {
 		talkCheckBox.setText(language.getString("TEXT0051"));
 		christiansCheckBox.setText(language.getString("TEXT0082"));
 
-		privilegeTab.setText(language.getString("TEXT0052"));
+		// privilegeTab.setText(language.getString("TEXT0052"));
+
 		conductorLabel.setText(language.getString("TEXT0105"));
 		soundSystemLabel.setText(language.getString("TEXT0053"));
 		privilegeLabel.setText(language.getString("TEXT0052"));
@@ -651,26 +693,49 @@ public class UserMenuCongrMemberEditor {
 		attendantMidweekCheckBox.setText("");
 		attendantWeekendCheckBox.setText("");
 
-		appointmentTab.setText(language.getString("TEXT0066"));
+		// appointmentTab.setText(language.getString("TEXT0066"));
 
 		ministerialServantCheckBox.setText(language.getString("TEXT0067"));
 		elderCheckBox.setText(language.getString("TEXT0068"));
 		regularPioneerCheckBox.setText(language.getString("TEXT0069"));
 		specialPioneerCheckBox.setText(language.getString("TEXT0070"));
 
-		onthersTab.setText(language.getString("TEXT0071"));
+		// onthersTab.setText(language.getString("TEXT0071"));
 
 		inactiveCheckBox.setText(language.getString("TEXT0064"));
 		markedCheckBox.setText(language.getString("TEXT0072"));
 		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
 
-		memberContactsTab.setText(language.getString("TEXT0106"));
-		memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
+		Tooltip memberContactsTooltip = new Tooltip(
+				this.language.getString("congregation.memberseditor.tooltip.contacts"));
+		memberContactsTooltip.getStyleClass().add("tooltip_001");
+		this.memberContactsTab.setTooltip(memberContactsTooltip);
+		this.memberContactsTab.setText("");
+		this.memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
 
 		smartphoneLabel.setText(language.getString("TEXT0107"));
 		emailLabel.setText(language.getString("TEXT0108"));
 
+		Tooltip memberMonitorTooltip = new Tooltip(
+				this.language.getString("congregation.memberseditor.tooltip.monitor"));
+		memberMonitorTooltip.getStyleClass().add("tooltip_001");
+		this.memberMonitorTab.setTooltip(memberMonitorTooltip);
+		this.memberMonitorTab.setText("");
+		this.memberMonitorTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MONITOR));
+
 		monitorLabel.setText(language.getString("sp.congr.member.monitorpass"));
+
+		this.memberInfoTabPane.setTabMinHeight(75);
+		this.memberInfoTabPane.setTabMaxHeight(75);
+
+		this.assignmentsTab.setText("");
+		this.privilegeTab.setText("");
+		this.appointmentTab.setText("");
+		this.onthersTab.setText("");
+		this.assignmentsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ASSIGNEMENTS));
+		this.privilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PRIVILEGIES));
+		this.appointmentTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ROLES));
+		this.onthersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.OTHERS));
 	}
 
 	public Settings getSettings() {

@@ -128,10 +128,10 @@
                                                                 <TableColumn fx:id="memberIDTableColumn" prefWidth="75.0" text="id" />
                                                                   <TableColumn fx:id="memberIconTableColumn" prefWidth="75.0" text="simbolo" />
                                                                 <TableColumn fx:id="memberSurnameTableColumn" prefWidth="75.0" text="cognome" />
-                                                                  <TableColumn fx:id="memberSurname2TableColumn" prefWidth="75.0" text="cognome2" />
                                                                   <TableColumn fx:id="memberNameTableColumn" prefWidth="75.0" text="nome" />
                                                                   <TableColumn fx:id="memberName2TableColumn" prefWidth="75.0" text="nome2" />
                                                                   <TableColumn fx:id="memberAgeTableColumn" prefWidth="75.0" text="eta" />
+                                                                  <TableColumn fx:id="memberSurname2TableColumn" prefWidth="75.0" text="cognome2" />
                                                                   <TableColumn fx:id="memberNumberTableColumn" prefWidth="75.0" text="cellulare" />
                                                                   <TableColumn fx:id="memberMailTableColumn" prefWidth="75.0" text="email" />
                                                               </columns>

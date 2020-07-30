@@ -210,9 +210,9 @@ public class Meta {
 		public static final String FAMILY_ADD = "family2_add_50x50.png";
 		public static final String FAMILY_DEL = "family2_delete_50x50.png";
 		public static final String PLUS = "plus_35x35.png";
-		public static final String MEMBER_PERSONAL_INFO = "personal_info_45x35.png";
-		public static final String MEMBER_PRIVILEGES = "privilege2_45x35.png";
-		public static final String CONTACTS = "contacts_45x35.png";
+		public static final String MEMBER_PERSONAL_INFO = "personal_info.png";
+		public static final String MEMBER_PRIVILEGES = "privileges.png";
+		public static final String CONTACTS = "contacts.png";
 		public static final String SAVE = "save_50x50.png";
 		public static final String UPDATE = "update.png";
 		public static final String ARROW_BACK = "arrow_back2_50x50.png";
@@ -223,7 +223,7 @@ public class Meta {
 		public static final String SERVICEGROUPS_DEL = "sergroup_del_50x50.png";
 		public static final String USER_MENU_MEETINGS = "meetings.png";
 		public static final String USER_MENU_CIRCUITOVERSEER = "overseer.png";
-		public static final String USER_MENU_MONITOR = "monitor.png";
+		public static final String USER_MENU_MONITOR = "monitor_new.png";
 		public static final String USER_MENU_NATURALDISASTER = "naturaldis.png";
 		public static final String INFO = "info.png";
 		public static final String WOL = "wol.png";
@@ -260,6 +260,11 @@ public class Meta {
 		public static final String MEMORIAL = "memorial.png";
 		public static final String CONVENTIONS = "conventions.png";
 		public static final String HELP = "help.png";
+
+		public static final String ASSIGNEMENTS = "duties.png";
+		public static final String PRIVILEGIES = "privilegies.png";
+		public static final String ROLES = "servant.png";
+		public static final String OTHERS = "others.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

@@ -163,6 +163,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberTabPane.getStyleClass().add("tab_pane_001");
 		this.memberListTab.getStyleClass().add("tab_001");
 
+		this.memberIDTableColumn.getStyleClass().add("table_column_002");
+		this.memberIconTableColumn.getStyleClass().add("table_column_002");
+
 		membersTableView.getStyleClass().add("table_view_001");
 		familiesTableView.getStyleClass().add("table_view_001");
 
@@ -230,8 +233,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberNameTableColumn.setText(this.language.getString("TEXT0014"));
 
 		this.memberName2TableColumn.setText("");
-		this.memberName2TableColumn.setMinWidth(50);
-		this.memberName2TableColumn.setMaxWidth(50);
+		this.memberName2TableColumn.setMinWidth(75);
+		this.memberName2TableColumn.setMaxWidth(75);
 		this.memberName2TableColumn.setResizable(false);
 
 		this.memberAgeTableColumn.setText(this.language.getString("congregation.members.column.age"));
@@ -475,7 +478,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				Tab newMemberTab = new Tab(member.getNameStyle1(), layout);
 				newMemberTab.setClosable(true);
 				newMemberTab.getStyleClass().add("tab_001");
-				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
+
+				if (member.getSpInf4() == 0)
+					newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MALE));
+				else if (member.getSpInf4() == 1)
+					newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FEMALE));
 
 				// ctrl.setCongrTabPane(congrTabPane);
 				// ctrl.setMembersTab(membersTab);
