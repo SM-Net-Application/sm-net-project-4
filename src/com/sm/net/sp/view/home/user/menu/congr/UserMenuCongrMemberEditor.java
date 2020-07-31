@@ -728,13 +728,29 @@ public class UserMenuCongrMemberEditor {
 		this.memberInfoTabPane.setTabMinHeight(75);
 		this.memberInfoTabPane.setTabMaxHeight(75);
 
+		Tooltip assignmentsTooltip = new Tooltip(
+				this.language.getString("congregation.memberseditor.tooltip.assignments"));
+		assignmentsTooltip.getStyleClass().add("tooltip_001");
+		this.assignmentsTab.setTooltip(assignmentsTooltip);
 		this.assignmentsTab.setText("");
-		this.privilegeTab.setText("");
-		this.appointmentTab.setText("");
-		this.onthersTab.setText("");
 		this.assignmentsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ASSIGNEMENTS));
+
+		Tooltip privilegeTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.privilege"));
+		privilegeTooltip.getStyleClass().add("tooltip_001");
+		this.privilegeTab.setTooltip(privilegeTooltip);
+		this.privilegeTab.setText("");
 		this.privilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PRIVILEGIES));
+
+		Tooltip appointmentTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.appointment"));
+		appointmentTooltip.getStyleClass().add("tooltip_001");
+		this.appointmentTab.setTooltip(appointmentTooltip);
+		this.appointmentTab.setText("");
 		this.appointmentTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ROLES));
+		
+		Tooltip onthersTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.onthers"));
+		onthersTooltip.getStyleClass().add("tooltip_001");
+		this.onthersTab.setTooltip(onthersTooltip);
+		this.onthersTab.setText("");
 		this.onthersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.OTHERS));
 	}
 

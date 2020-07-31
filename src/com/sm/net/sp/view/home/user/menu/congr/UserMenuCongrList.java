@@ -1,6 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.congr;
 
 import java.io.IOException;
+import java.util.stream.StreamSupport;
 
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
@@ -15,6 +16,7 @@ import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -106,6 +109,21 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	@FXML
 	private Button memberMonitorPrintButton;
 
+	@FXML
+	private TextField filterMemberTextField;
+	@FXML
+	private ImageView totalImageView;
+	@FXML
+	private ImageView totalMaleImageView;
+	@FXML
+	private ImageView totalFemaleImageView;
+	@FXML
+	private TextField totalTextField;
+	@FXML
+	private TextField totalMaleTextField;
+	@FXML
+	private TextField totalFemaleTextField;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -178,6 +196,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familiesUpdateButton.getStyleClass().add("button_image_001");
 
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
+
+		this.filterMemberTextField.getStyleClass().add("text_field_001");
+		this.totalTextField.getStyleClass().add("text_field_001");
+		this.totalMaleTextField.getStyleClass().add("text_field_001");
+		this.totalFemaleTextField.getStyleClass().add("text_field_001");
 	}
 
 	public void objectInitialize() {
@@ -284,6 +307,26 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familiesUpdateButton.setText("");
 		familiesUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
 
+		this.totalImageView.setFitWidth(25);
+		this.totalImageView.setFitHeight(25);
+		this.totalImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.USER_MENU_CONGR, 25, 25));
+		this.totalTextField.setMinWidth(50);
+		this.totalTextField.setMaxWidth(50);
+		this.totalTextField.setEditable(false);
+
+		this.totalMaleImageView.setFitWidth(25);
+		this.totalMaleImageView.setFitHeight(25);
+		this.totalMaleImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.MALE, 25, 25));
+		this.totalMaleTextField.setMinWidth(50);
+		this.totalMaleTextField.setMaxWidth(50);
+		this.totalMaleTextField.setEditable(false);
+
+		this.totalFemaleImageView.setFitWidth(25);
+		this.totalFemaleImageView.setFitHeight(25);
+		this.totalFemaleImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.FEMALE, 25, 25));
+		this.totalFemaleTextField.setMinWidth(50);
+		this.totalFemaleTextField.setMaxWidth(50);
+		this.totalFemaleTextField.setEditable(false);
 	}
 
 	private void initInfo() {
@@ -305,6 +348,39 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		listenerFamiliesTableView();
 
 		listenerMemberMonitorPrintButton();
+
+		this.filterMemberTextField.textProperty().addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
+	}
+
+	private void updateFilterMember(String newValue) {
+
+		if (newValue.isEmpty())
+			this.membersTableView.setItems(this.membersList);
+		else {
+			ObservableList<Member> filteredMemberList = buildListMember(newValue);
+			this.membersTableView.setItems(filteredMemberList);
+		}
+
+		this.membersTableView.refresh();
+	}
+
+	private ObservableList<Member> buildListMember(String filter) {
+
+		ObservableList<Member> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.membersList.spliterator(), false).filter(obj -> matchFilterMember(obj, filter))
+				.forEach(obj -> list.add(obj));
+
+		return list;
+	}
+
+	private boolean matchFilterMember(Member obj, String match) {
+
+		String filter = match.toLowerCase();
+
+		return obj.getSpInf1Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf2Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf39Decrypted().toLowerCase().contains(filter);
 	}
 
 	private void listenerMemberMonitorPrintButton() {
@@ -565,10 +641,27 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	public void updateMembers(ObservableList<Member> list) {
 
 		this.membersList = list;
-		membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
+		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
 
-		membersTableView.setItems(membersList);
+		this.membersTableView.setItems(membersList);
+
+		// TOTALE
+		this.totalTextField.setText(String.valueOf(this.membersList.size()));
+
+		// MASCHI E FEMMINE
+		int male = 0;
+		int female = 0;
+
+		for (Member m : this.membersList) {
+			if (m.getSpInf4() == 0)
+				male++;
+			else if (m.getSpInf4() == 1)
+				female++;
+		}
+
+		this.totalMaleTextField.setText(String.valueOf(male));
+		this.totalFemaleTextField.setText(String.valueOf(female));
 	}
 
 	@Override
