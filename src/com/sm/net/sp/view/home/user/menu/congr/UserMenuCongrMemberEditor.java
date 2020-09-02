@@ -1,17 +1,21 @@
 package com.sm.net.sp.view.home.user.menu.congr;
 
-import com.sm.net.javafx.AlertDesigner;
+import java.time.LocalDate;
+
+import javax.crypto.SecretKey;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -210,14 +214,36 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private Button saveButton;
 
+	@FXML
+	private Label dateOfBirthLabel;
+	@FXML
+	private DatePicker dateOfBirthDatePicker;
+
+	@FXML
+	private CheckBox anointedCheckBox;
+	@FXML
+	private CheckBox otherSheepCheckBox;
+
+	@FXML
+	private CheckBox maidenNamePrintCheckBox;
+
+	@FXML
+	private CheckBox excludeFromNaturalDisastersListCheckBox;
+
+	@FXML
+	private Label dateOfBaptismLabel;
+	@FXML
+	private DatePicker dateOfBaptismDatePicker;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
-	private TabPane congrTabPane;
+	private TabPane parentTabPane;
 	private Tab newMemberTab;
 	private Tab membersTab;
 	private UserMenuCongrList ownerCtrl;
 	private Member selectedMember;
+	private SupportPlannerView application;
 
 	private boolean listenerCheckFields;
 
@@ -280,9 +306,11 @@ public class UserMenuCongrMemberEditor {
 
 		genderMaleCheckBox.getStyleClass().add("check_box_set_001");
 		genderFemaleCheckBox.getStyleClass().add("check_box_set_001");
-		studentCheckBox.getStyleClass().add("check_box_001");
-		unbaptizedPublisherCheckBox.getStyleClass().add("check_box_001");
-		baptizedPublisherCheckBox.getStyleClass().add("check_box_001");
+
+		this.studentCheckBox.getStyleClass().add("check_box_set_001");
+		this.unbaptizedPublisherCheckBox.getStyleClass().add("check_box_set_001");
+		this.baptizedPublisherCheckBox.getStyleClass().add("check_box_set_001");
+
 		treasuresTalkCheckBox.getStyleClass().add("check_box_001");
 		diggingCheckBox.getStyleClass().add("check_box_001");
 		bibleReadingCheckBox.getStyleClass().add("check_box_001");
@@ -320,6 +348,15 @@ public class UserMenuCongrMemberEditor {
 		disfellowshippedCheckBox.getStyleClass().add("check_box_001");
 
 		saveButton.getStyleClass().add("button_image_001");
+
+		this.maidenNamePrintCheckBox.getStyleClass().add("check_box_001");
+		this.dateOfBirthLabel.getStyleClass().add("label_set_001");
+		this.dateOfBirthDatePicker.getStyleClass().add("combo_box_001");
+		this.anointedCheckBox.getStyleClass().add("check_box_set_001");
+		this.otherSheepCheckBox.getStyleClass().add("check_box_set_001");
+		this.dateOfBaptismLabel.getStyleClass().add("label_set_001");
+		this.dateOfBaptismDatePicker.getStyleClass().add("combo_box_001");
+		this.excludeFromNaturalDisastersListCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -350,10 +387,24 @@ public class UserMenuCongrMemberEditor {
 			else
 				genderFemaleCheckBox.setSelected(true);
 
+			// DATA DI NASCITA
+
+			String spInf52 = this.selectedMember.getSpInf52Decrypted();
+			if (!spInf52.isEmpty())
+				this.dateOfBirthDatePicker.setValue(LocalDate.parse(spInf52));
+
+			// DATA DI BATTESIMO
+
+			String spInf53 = this.selectedMember.getSpInf53Decrypted();
+			if (!spInf53.isEmpty())
+				this.dateOfBaptismDatePicker.setValue(LocalDate.parse(spInf53));
+
 			setCheckBoxes();
 
-		} else
+		} else {
 			this.genderMaleCheckBox.setSelected(true);
+			this.otherSheepCheckBox.setSelected(true);
+		}
 	}
 
 	private void setCheckBoxes() {
@@ -405,6 +456,11 @@ public class UserMenuCongrMemberEditor {
 		this.watchtowerSubstituteStudyCheckBox.setSelected((selectedMember.getSpInf44() == 1));
 		this.publicSpeakerInternCheckBox.setSelected((selectedMember.getSpInf45() == 1));
 		this.publicSpeakerExternCheckBox.setSelected((selectedMember.getSpInf46() == 1));
+
+		this.otherSheepCheckBox.setSelected((this.selectedMember.getSpInf48() == 1));
+		this.anointedCheckBox.setSelected((this.selectedMember.getSpInf49() == 1));
+		this.maidenNamePrintCheckBox.setSelected((this.selectedMember.getSpInf50() == 1));
+		this.excludeFromNaturalDisastersListCheckBox.setSelected((this.selectedMember.getSpInf51() == 1));
 	}
 
 	private void listeners() {
@@ -424,6 +480,12 @@ public class UserMenuCongrMemberEditor {
 
 		this.baptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
 				this.baptizedPublisherCheckBox, this.studentCheckBox, this.unbaptizedPublisherCheckBox));
+
+		this.anointedCheckBox.selectedProperty().addListener(
+				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.anointedCheckBox, this.otherSheepCheckBox));
+
+		this.otherSheepCheckBox.selectedProperty().addListener(
+				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.otherSheepCheckBox, this.anointedCheckBox));
 
 		listenerSaveButton();
 	}
@@ -454,6 +516,8 @@ public class UserMenuCongrMemberEditor {
 	private void saveMember() {
 
 		if (checkFields()) {
+
+			SecretKey secretKey = this.settings.getDatabaseSecretKey();
 
 			String spInf1 = Crypt.encrypt(nameTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf2 = Crypt.encrypt(surnameTextField.getText(), settings.getDatabaseSecretKey());
@@ -510,22 +574,38 @@ public class UserMenuCongrMemberEditor {
 			String spInf46 = !this.publicSpeakerExternCheckBox.isSelected() ? "0" : "1";
 			String spInf47 = monitorTextField.getText();
 
+			String spInf48 = !this.otherSheepCheckBox.isSelected() ? "0" : "1";
+			String spInf49 = !this.anointedCheckBox.isSelected() ? "0" : "1";
+			String spInf50 = !this.maidenNamePrintCheckBox.isSelected() ? "0" : "1";
+			String spInf51 = !this.excludeFromNaturalDisastersListCheckBox.isSelected() ? "0" : "1";
+
+			LocalDate dateOfBirth = this.dateOfBirthDatePicker.getValue();
+			String spInf52 = dateOfBirth != null ? Crypt.encrypt(dateOfBirth.toString(), secretKey)
+					: Crypt.encrypt("", secretKey);
+
+			LocalDate dateOfBaptism = this.dateOfBaptismDatePicker.getValue();
+			String spInf53 = dateOfBaptism != null ? Crypt.encrypt(dateOfBaptism.toString(), secretKey)
+					: Crypt.encrypt("", secretKey);
+
 			if (selectedMember != null)
 				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-						spInf43, spInf44, spInf45, spInf46, spInf47);
+						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
+						spInf53);
 			else
 				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-						spInf43, spInf44, spInf45, spInf46, spInf47);
-		} else
-			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
+						spInf53);
+		}
+//		else
+//			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
+//					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+//					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -535,13 +615,15 @@ public class UserMenuCongrMemberEditor {
 			String spInf26, String spInf27, String spInf28, String spInf29, String spInf30, String spInf31,
 			String spInf32, String spInf33, String spInf34, String spInf35, String spInf36, String spInf37,
 			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
-			String spInf44, String spInf45, String spInf46, String spInf47) {
+			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
+			String spInf50, String spInf51, String spInf52, String spInf53) {
 
 		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", spInf6, spInf7, spInf8, spInf9, spInf10, spInf11,
 				spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 				spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33,
 				spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
-				spInf45, spInf46, spInf47, settings, ownerStage, congrTabPane, newMemberTab, membersTab, ownerCtrl);
+				spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, settings, ownerStage,
+				parentTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -551,38 +633,82 @@ public class UserMenuCongrMemberEditor {
 			String spInf26, String spInf27, String spInf28, String spInf29, String spInf30, String spInf31,
 			String spInf32, String spInf33, String spInf34, String spInf35, String spInf36, String spInf37,
 			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
-			String spInf44, String spInf45, String spInf46, String spInf47) {
+			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
+			String spInf50, String spInf51, String spInf52, String spInf53) {
 
 		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, spInf6,
 				spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 				spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
 				spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
-				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, settings, ownerStage, congrTabPane,
-				newMemberTab, membersTab, ownerCtrl);
+				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51,
+				spInf52, spInf53, settings, ownerStage, parentTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
 
-		boolean status = true;
+		if (surnameTextField.getText().isEmpty()) {
 
-		if (surnameTextField.getText().isEmpty())
-			status = false;
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.memberseditor.error.surname"));
 
-		if (status)
-			if (nameTextField.getText().isEmpty())
-				status = false;
+			return false;
+		}
 
-		if (status)
-			if (nameShortTextField.getText().isEmpty())
-				status = false;
+		if (nameTextField.getText().isEmpty()) {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.memberseditor.error.name"));
+
+			return false;
+		}
+
+		if (nameShortTextField.getText().isEmpty()) {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.memberseditor.error.nameshort"));
+
+			return false;
+		}
 
 		boolean male = genderMaleCheckBox.isSelected();
 		boolean female = genderFemaleCheckBox.isSelected();
 
-		if ((male && female) || (!male && !female))
-			status = false;
+		if ((male && female) || (!male && !female)) {
 
-		return status;
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.memberseditor.error.gender"));
+
+			return false;
+		}
+
+		if (!this.singlenessTextField.getText().isEmpty())
+			if (this.genderMaleCheckBox.isSelected()) {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("congregation.memberseditor.error.surname2"));
+
+				return false;
+			}
+
+		if (this.maidenNamePrintCheckBox.isSelected())
+			if (!this.genderFemaleCheckBox.isSelected()) {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("congregation.memberseditor.error.maidennameprint"));
+
+				return false;
+			}
+
+		if (this.dateOfBaptismDatePicker.getValue() != null)
+			if (!this.baptizedPublisherCheckBox.isSelected()) {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("congregation.memberseditor.error.dateofbaptism"));
+
+				return false;
+			}
+
+		return true;
 	}
 
 	private void listenerNameTextField() {
@@ -706,6 +832,14 @@ public class UserMenuCongrMemberEditor {
 		markedCheckBox.setText(language.getString("TEXT0072"));
 		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
 
+		this.maidenNamePrintCheckBox.setText(this.language.getString("congregation.memberseditor.maidennameprint"));
+		this.dateOfBirthLabel.setText(this.language.getString("congregation.memberseditor.dateofbirth"));
+		this.anointedCheckBox.setText(this.language.getString("congregation.memberseditor.anointed"));
+		this.otherSheepCheckBox.setText(this.language.getString("congregation.memberseditor.othersheep"));
+		this.dateOfBaptismLabel.setText(this.language.getString("congregation.memberseditor.dateofbaptism"));
+		this.excludeFromNaturalDisastersListCheckBox
+				.setText(this.language.getString("congregation.memberseditor.excludefromnaturaldisasters"));
+
 		Tooltip memberContactsTooltip = new Tooltip(
 				this.language.getString("congregation.memberseditor.tooltip.contacts"));
 		memberContactsTooltip.getStyleClass().add("tooltip_001");
@@ -741,12 +875,13 @@ public class UserMenuCongrMemberEditor {
 		this.privilegeTab.setText("");
 		this.privilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PRIVILEGIES));
 
-		Tooltip appointmentTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.appointment"));
+		Tooltip appointmentTooltip = new Tooltip(
+				this.language.getString("congregation.memberseditor.tooltip.appointment"));
 		appointmentTooltip.getStyleClass().add("tooltip_001");
 		this.appointmentTab.setTooltip(appointmentTooltip);
 		this.appointmentTab.setText("");
 		this.appointmentTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ROLES));
-		
+
 		Tooltip onthersTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.onthers"));
 		onthersTooltip.getStyleClass().add("tooltip_001");
 		this.onthersTab.setTooltip(onthersTooltip);
@@ -770,12 +905,12 @@ public class UserMenuCongrMemberEditor {
 		this.ownerStage = ownerStage;
 	}
 
-	public TabPane getCongrTabPane() {
-		return congrTabPane;
+	public TabPane getParentTabPane() {
+		return parentTabPane;
 	}
 
-	public void setCongrTabPane(TabPane congrTabPane) {
-		this.congrTabPane = congrTabPane;
+	public void setParentTabPane(TabPane parentTabPane) {
+		this.parentTabPane = parentTabPane;
 	}
 
 	public Tab getNewMemberTab() {
@@ -808,5 +943,13 @@ public class UserMenuCongrMemberEditor {
 
 	public void setSelectedMember(Member selectedMember) {
 		this.selectedMember = selectedMember;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
 	}
 }

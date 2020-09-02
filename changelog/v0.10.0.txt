@@ -87,3 +87,4 @@ Data di pubblicazione : ..-..-....
 		  CREATE TABLE sp_conf (id int(11) NOT NULL, keyInf varchar(250) NOT NULL, inf varchar(250) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=latin1;
           ALTER TABLE sp_conf ADD PRIMARY KEY (id);
           ALTER TABLE sp_conf MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+          ALTER TABLE sp_members ADD spInf48 INT NOT NULL AFTER spInf47, ADD spInf49 INT NOT NULL AFTER spInf48, ADD spInf50 INT NOT NULL AFTER spInf49, ADD spInf51 INT NOT NULL AFTER spInf50, ADD spInf52 VARCHAR(250) NOT NULL AFTER spInf51, ADD spInf53 VARCHAR(250) NOT NULL AFTER spInf52;

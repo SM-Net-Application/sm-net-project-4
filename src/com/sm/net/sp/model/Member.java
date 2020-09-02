@@ -70,6 +70,15 @@ public class Member {
 	private IntegerProperty spInf46;
 	private StringProperty spInf47;
 
+	private IntegerProperty spInf48;
+	private IntegerProperty spInf49;
+	private IntegerProperty spInf50;
+	private IntegerProperty spInf51;
+	private StringProperty spInf52Encrypted;
+	private StringProperty spInf52Decrypted;
+	private StringProperty spInf53Encrypted;
+	private StringProperty spInf53Decrypted;
+
 	public Member() {
 		super();
 	}
@@ -135,6 +144,14 @@ public class Member {
 		this.spInf45 = new SimpleIntegerProperty(jsonObject.getInt("spInf45"));
 		this.spInf46 = new SimpleIntegerProperty(jsonObject.getInt("spInf46"));
 		this.spInf47 = new SimpleStringProperty(jsonObject.getString("spInf47"));
+		this.spInf48 = new SimpleIntegerProperty(jsonObject.getInt("spInf48"));
+		this.spInf49 = new SimpleIntegerProperty(jsonObject.getInt("spInf49"));
+		this.spInf50 = new SimpleIntegerProperty(jsonObject.getInt("spInf50"));
+		this.spInf51 = new SimpleIntegerProperty(jsonObject.getInt("spInf51"));
+		this.spInf52Encrypted = new SimpleStringProperty(jsonObject.getString("spInf52"));
+		this.spInf52Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf52Encrypted.get(), secretKey));
+		this.spInf53Encrypted = new SimpleStringProperty(jsonObject.getString("spInf53"));
+		this.spInf53Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf53Encrypted.get(), secretKey));
 	}
 
 	public static Member emptyMember(Language language) {
@@ -195,6 +212,15 @@ public class Member {
 		member.spInf45 = new SimpleIntegerProperty(0);
 		member.spInf46 = new SimpleIntegerProperty(0);
 		member.spInf47 = new SimpleStringProperty("");
+		member.spInf48 = new SimpleIntegerProperty(0);
+		member.spInf49 = new SimpleIntegerProperty(0);
+		member.spInf50 = new SimpleIntegerProperty(0);
+		member.spInf51 = new SimpleIntegerProperty(0);
+		member.spInf52Encrypted = new SimpleStringProperty("");
+		member.spInf52Decrypted = new SimpleStringProperty("");
+		member.spInf53Encrypted = new SimpleStringProperty("");
+		member.spInf53Decrypted = new SimpleStringProperty("");
+
 		return member;
 	}
 
@@ -881,4 +907,99 @@ public class Member {
 		this.spInf47Property().set(spInf47);
 	}
 
+	public final IntegerProperty spInf48Property() {
+		return this.spInf48;
+	}
+
+	public final int getSpInf48() {
+		return this.spInf48Property().get();
+	}
+
+	public final void setSpInf48(final int spInf48) {
+		this.spInf48Property().set(spInf48);
+	}
+
+	public final IntegerProperty spInf49Property() {
+		return this.spInf49;
+	}
+
+	public final int getSpInf49() {
+		return this.spInf49Property().get();
+	}
+
+	public final void setSpInf49(final int spInf49) {
+		this.spInf49Property().set(spInf49);
+	}
+
+	public final IntegerProperty spInf50Property() {
+		return this.spInf50;
+	}
+
+	public final int getSpInf50() {
+		return this.spInf50Property().get();
+	}
+
+	public final void setSpInf50(final int spInf50) {
+		this.spInf50Property().set(spInf50);
+	}
+
+	public final IntegerProperty spInf51Property() {
+		return this.spInf51;
+	}
+
+	public final int getSpInf51() {
+		return this.spInf51Property().get();
+	}
+
+	public final void setSpInf51(final int spInf51) {
+		this.spInf51Property().set(spInf51);
+	}
+
+	public final StringProperty spInf52EncryptedProperty() {
+		return this.spInf52Encrypted;
+	}
+
+	public final String getSpInf52Encrypted() {
+		return this.spInf52EncryptedProperty().get();
+	}
+
+	public final void setSpInf52Encrypted(final String spInf52Encrypted) {
+		this.spInf52EncryptedProperty().set(spInf52Encrypted);
+	}
+
+	public final StringProperty spInf52DecryptedProperty() {
+		return this.spInf52Decrypted;
+	}
+
+	public final String getSpInf52Decrypted() {
+		return this.spInf52DecryptedProperty().get();
+	}
+
+	public final void setSpInf52Decrypted(final String spInf52Decrypted) {
+		this.spInf52DecryptedProperty().set(spInf52Decrypted);
+	}
+
+	public final StringProperty spInf53EncryptedProperty() {
+		return this.spInf53Encrypted;
+	}
+
+	public final String getSpInf53Encrypted() {
+		return this.spInf53EncryptedProperty().get();
+	}
+
+	public final void setSpInf53Encrypted(final String spInf53Encrypted) {
+		this.spInf53EncryptedProperty().set(spInf53Encrypted);
+	}
+
+	public final StringProperty spInf53DecryptedProperty() {
+		return this.spInf53Decrypted;
+	}
+
+	public final String getSpInf53Decrypted() {
+		return this.spInf53DecryptedProperty().get();
+	}
+
+	public final void setSpInf53Decrypted(final String spInf53Decrypted) {
+		this.spInf53DecryptedProperty().set(spInf53Decrypted);
+	}
 }

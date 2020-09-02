@@ -1,6 +1,8 @@
 package com.sm.net.sp.view.home.user.menu.congr;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.stream.StreamSupport;
 
 import com.sm.net.javafx.AlertDesigner;
@@ -12,6 +14,7 @@ import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 
@@ -71,11 +74,15 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<Member, String> memberName2TableColumn;
 	@FXML
-	private TableColumn<Member, String> memberAgeTableColumn;
+	private TableColumn<Member, BigDecimal> memberAgeTableColumn;
 	@FXML
 	private TableColumn<Member, String> memberNumberTableColumn;
 	@FXML
 	private TableColumn<Member, String> memberMailTableColumn;
+	@FXML
+	private TableColumn<Member, BigDecimal> memberAgeBaptismTableColumn;
+	@FXML
+	private TableColumn<Member, ImageView> memberMonitorTableColumn;
 
 	@FXML
 	private Button memberAddButton;
@@ -155,10 +162,32 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		});
 		this.memberSurname2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf39DecryptedProperty());
 		this.memberName2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
-		// this.memberAgeTableColumn.setCellValueFactory(cellData ->
-		// cellData.getValue().spMemberIDProperty().asObject());
+		this.memberAgeTableColumn.setCellValueFactory(cellData -> {
+
+			String spInf52 = cellData.getValue().getSpInf52Decrypted();
+			if (!spInf52.isEmpty())
+				return new SimpleObjectProperty<BigDecimal>(CommonUtils.calculateAge(LocalDate.parse(spInf52)));
+
+			return null;
+		});
 		this.memberNumberTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf40DecryptedProperty());
 		this.memberMailTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf41DecryptedProperty());
+		this.memberAgeBaptismTableColumn.setCellValueFactory(cellData -> {
+
+			String spInf53 = cellData.getValue().getSpInf53Decrypted();
+			if (!spInf53.isEmpty())
+				return new SimpleObjectProperty<BigDecimal>(CommonUtils.calculateAge(LocalDate.parse(spInf53)));
+
+			return null;
+		});
+		this.memberMonitorTableColumn.setCellValueFactory(cellData -> {
+
+			if (!cellData.getValue().getSpInf47().isEmpty())
+				return new SimpleObjectProperty<ImageView>(
+						Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MONITOR));
+
+			return null;
+		});
 
 		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
 		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
@@ -183,6 +212,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		this.memberIDTableColumn.getStyleClass().add("table_column_002");
 		this.memberIconTableColumn.getStyleClass().add("table_column_002");
+		this.memberMonitorTableColumn.getStyleClass().add("table_column_002");
 
 		membersTableView.getStyleClass().add("table_view_001");
 		familiesTableView.getStyleClass().add("table_view_001");
@@ -251,6 +281,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberIconTableColumn.setMaxWidth(50);
 		this.memberIconTableColumn.setResizable(false);
 
+		this.memberMonitorTableColumn.setText("");
+		this.memberMonitorTableColumn.setMinWidth(50);
+		this.memberMonitorTableColumn.setMaxWidth(50);
+		this.memberMonitorTableColumn.setResizable(false);
+
 		this.memberSurnameTableColumn.setText(this.language.getString("TEXT0013"));
 		this.memberSurname2TableColumn.setText(this.language.getString("congregation.members.column.surname2"));
 		this.memberNameTableColumn.setText(this.language.getString("TEXT0014"));
@@ -264,6 +299,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberAgeTableColumn.setMinWidth(50);
 		this.memberAgeTableColumn.setMaxWidth(50);
 		this.memberAgeTableColumn.setResizable(false);
+
+		this.memberAgeBaptismTableColumn.setText(this.language.getString("congregation.members.column.agebaptism"));
+		this.memberAgeBaptismTableColumn.setMinWidth(100);
+		this.memberAgeBaptismTableColumn.setMaxWidth(100);
+//		this.memberAgeBaptismTableColumn.setResizable(false);
 
 		Tooltip memberAddTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.add"));
 		memberAddTooltip.getStyleClass().add("tooltip_001");
@@ -349,7 +389,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		listenerMemberMonitorPrintButton();
 
-		this.filterMemberTextField.textProperty().addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
+		this.filterMemberTextField.textProperty()
+				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
 	}
 
 	private void updateFilterMember(String newValue) {
@@ -465,7 +506,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void newMember() {
 
-		if (!isAlreadyOpen(language.getString("TEXT0015"))) {
+		// if (!isAlreadyOpen(language.getString("TEXT0015"))) {
+		if (!isAlreadyOpen(this.memberTabPane, "")) {
 
 			try {
 
@@ -475,20 +517,24 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				UserMenuCongrMemberEditor ctrl = (UserMenuCongrMemberEditor) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
+				ctrl.setApplication(this.application);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 
-				Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
+				// Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
+				Tab newMemberTab = new Tab("", layout);
 				newMemberTab.setClosable(true);
 				newMemberTab.getStyleClass().add("tab_001");
 				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
 
-				ctrl.setCongrTabPane(congrTabPane);
+				ctrl.setParentTabPane(this.memberTabPane);
 				ctrl.setMembersTab(membersTab);
 				ctrl.setNewMemberTab(newMemberTab);
 
-				congrTabPane.getTabs().add(newMemberTab);
-				congrTabPane.getSelectionModel().select(newMemberTab);
+//				congrTabPane.getTabs().add(newMemberTab);
+//				congrTabPane.getSelectionModel().select(newMemberTab);
+				this.memberTabPane.getTabs().add(newMemberTab);
+				this.memberTabPane.getSelectionModel().select(newMemberTab);
 
 				ctrl.objectInitialize();
 
@@ -500,7 +546,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void newFamily() {
 
-		if (!isAlreadyOpen(language.getString("TEXT0015"))) {
+		if (!isAlreadyOpen(this.congrTabPane, language.getString("TEXT0015"))) {
 
 			try {
 
@@ -536,7 +582,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void editMember(Member member) {
 
-		if (!isAlreadyOpen(member.getNameStyle1())) {
+		if (!isAlreadyOpen(this.memberTabPane, member.getNameStyle1())) {
 
 			try {
 
@@ -546,6 +592,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				UserMenuCongrMemberEditor ctrl = (UserMenuCongrMemberEditor) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
+				ctrl.setApplication(this.application);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedMember(member);
@@ -562,7 +609,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 				// ctrl.setCongrTabPane(congrTabPane);
 				// ctrl.setMembersTab(membersTab);
-				ctrl.setCongrTabPane(this.memberTabPane);
+				ctrl.setParentTabPane(this.memberTabPane);
 				ctrl.setMembersTab(this.memberListTab);
 				ctrl.setNewMemberTab(newMemberTab);
 
@@ -580,7 +627,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void editFamily(Family family) {
 
-		if (!isAlreadyOpen(family.getSpInf1Decrypted())) {
+		if (!isAlreadyOpen(this.congrTabPane, family.getSpInf1Decrypted())) {
 
 			try {
 
@@ -616,11 +663,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	}
 
-	private boolean isAlreadyOpen(String label) {
+	private boolean isAlreadyOpen(TabPane tabPane, String label) {
 
-		for (Tab tab : congrTabPane.getTabs())
+		for (Tab tab : tabPane.getTabs())
 			if (tab.getText().equals(label)) {
-				congrTabPane.getSelectionModel().select(tab);
+				tabPane.getSelectionModel().select(tab);
 				return true;
 			}
 
@@ -645,6 +692,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
 
 		this.membersTableView.setItems(membersList);
+
+		// RESET FILTRO
+		this.filterMemberTextField.setText("");
 
 		// TOTALE
 		this.totalTextField.setText(String.valueOf(this.membersList.size()));
