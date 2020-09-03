@@ -59,6 +59,55 @@
                                  <children>
                                     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
+                                          <StackPane>
+                                             <children>
+                                                <Separator>
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
+                                          <HBox>
+                                             <children>
+                                                <StackPane>
+                                                   <children>
+                                                      <Button fx:id="serGroupsAddButton" mnemonicParsing="false" text="add">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Button>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <Button fx:id="serGroupsDeleteButton" mnemonicParsing="false" text="del">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Button>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Button fx:id="serGroupsUpdateButton" mnemonicParsing="false" text="update">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Button>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </HBox>
+                                          <StackPane>
+                                             <children>
+                                                <Separator>
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
                                           <StackPane VBox.vgrow="ALWAYS">
                                              <children>
                                                 <TableView fx:id="serGroupsTableView">
@@ -79,37 +128,6 @@
                                                 </TableView>
                                              </children>
                                           </StackPane>
-                                          <HBox>
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Button fx:id="serGroupsUpdateButton" mnemonicParsing="false" text="Button">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="serGroupsAddButton" mnemonicParsing="false" text="Button">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="serGroupsDeleteButton" mnemonicParsing="false" text="Button">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </HBox>
                                        </children>
                                     </VBox>
                                  </children>

@@ -16,6 +16,7 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.browser.Browser;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -60,6 +62,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private Tab memberListTab;
 
 	@FXML
+	private TabPane familyTabPane;
+	@FXML
+	private Tab familyListTab;
+
+	@FXML
 	private TableView<Member> membersTableView;
 	@FXML
 	private TableColumn<Member, Integer> memberIDTableColumn;
@@ -91,29 +98,6 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	@FXML
 	private Button membersUpdateButton;
 	@FXML
-	private TableView<Family> familiesTableView;
-	@FXML
-	private TableColumn<Family, Integer> familyIDTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyNameTableColumn;
-	@FXML
-	private TableColumn<Family, Integer> familyCountTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyStreetTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyNummerTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyPostCodeTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyCityTableColumn;
-	@FXML
-	private Button familyAddButton;
-	@FXML
-	private Button familyDeleteButton;
-	@FXML
-	private Button familiesUpdateButton;
-
-	@FXML
 	private Button memberMonitorPrintButton;
 
 	@FXML
@@ -130,6 +114,46 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private TextField totalMaleTextField;
 	@FXML
 	private TextField totalFemaleTextField;
+
+	@FXML
+	private TableView<Family> familiesTableView;
+	@FXML
+	private TableColumn<Family, Integer> familyIDTableColumn;
+	@FXML
+	private TableColumn<Family, ImageView> familyMapsTableColumn;
+	@FXML
+	private TableColumn<Family, String> familyNameTableColumn;
+	@FXML
+	private TableColumn<Family, Integer> familyCountTableColumn;
+	@FXML
+	private TableColumn<Family, String> familyStreetTableColumn;
+	@FXML
+	private TableColumn<Family, String> familyNummerTableColumn;
+	@FXML
+	private TableColumn<Family, String> familyPostCodeTableColumn;
+	@FXML
+	private TableColumn<Family, String> familyCityTableColumn;
+
+	@FXML
+	private Button familyAddButton;
+	@FXML
+	private Button familyDeleteButton;
+	@FXML
+	private Button familiesUpdateButton;
+	@FXML
+	private Button familiesMapsButton;
+
+	@FXML
+	private TextField filterFamilyTextField;
+	@FXML
+	private ImageView totalFamilyImageView;
+	@FXML
+	private TextField totalFamilyTextField;
+
+	@FXML
+	private ImageView totalFilteredFamilyImageView;
+	@FXML
+	private TextField totalFilteredFamilyTextField;
 
 	private Settings settings;
 	private Language language;
@@ -190,6 +214,15 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		});
 
 		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
+
+		this.familyMapsTableColumn.setCellValueFactory(cellData -> {
+
+			if (!cellData.getValue().getSpInf9Decrypted().isEmpty())
+				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS));
+
+			return null;
+		});
+
 		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
 		familyCountTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
 		familyStreetTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
@@ -210,6 +243,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberTabPane.getStyleClass().add("tab_pane_001");
 		this.memberListTab.getStyleClass().add("tab_001");
 
+		this.familyTabPane.getStyleClass().add("tab_pane_001");
+		this.familyListTab.getStyleClass().add("tab_001");
+
 		this.memberIDTableColumn.getStyleClass().add("table_column_002");
 		this.memberIconTableColumn.getStyleClass().add("table_column_002");
 		this.memberMonitorTableColumn.getStyleClass().add("table_column_002");
@@ -221,9 +257,12 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		memberDeleteButton.getStyleClass().add("button_image_001");
 		membersUpdateButton.getStyleClass().add("button_image_001");
 
+		this.familyMapsTableColumn.getStyleClass().add("table_column_002");
+
 		familyAddButton.getStyleClass().add("button_image_001");
 		familyDeleteButton.getStyleClass().add("button_image_001");
 		familiesUpdateButton.getStyleClass().add("button_image_001");
+		this.familiesMapsButton.getStyleClass().add("button_image_001");
 
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
 
@@ -231,6 +270,10 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.totalTextField.getStyleClass().add("text_field_001");
 		this.totalMaleTextField.getStyleClass().add("text_field_001");
 		this.totalFemaleTextField.getStyleClass().add("text_field_001");
+
+		this.filterFamilyTextField.getStyleClass().add("text_field_001");
+		this.totalFamilyTextField.getStyleClass().add("text_field_001");
+		this.totalFilteredFamilyTextField.getStyleClass().add("text_field_001");
 	}
 
 	public void objectInitialize() {
@@ -271,6 +314,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		this.memberListTab.setText(this.language.getString("congregation.members.list"));
 
+		this.familyListTab.setText(this.language.getString("congregation.family.list"));
+
 		memberIDTableColumn.setText(language.getString("TEXT0005"));
 		memberIDTableColumn.setMinWidth(50);
 		memberIDTableColumn.setMaxWidth(50);
@@ -289,6 +334,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberSurnameTableColumn.setText(this.language.getString("TEXT0013"));
 		this.memberSurname2TableColumn.setText(this.language.getString("congregation.members.column.surname2"));
 		this.memberNameTableColumn.setText(this.language.getString("TEXT0014"));
+
+		this.memberNumberTableColumn.setText(this.language.getString("congregation.members.column.number"));
+		this.memberMailTableColumn.setText(this.language.getString("congregation.members.column.mail"));
 
 		this.memberName2TableColumn.setText("");
 		this.memberName2TableColumn.setMinWidth(75);
@@ -333,6 +381,12 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familyIDTableColumn.setMinWidth(50);
 		familyIDTableColumn.setMaxWidth(50);
 		familyIDTableColumn.setResizable(false);
+
+		this.familyMapsTableColumn.setText("");
+		this.familyMapsTableColumn.setMinWidth(50);
+		this.familyMapsTableColumn.setMaxWidth(50);
+		this.familyMapsTableColumn.setResizable(false);
+
 		familyNameTableColumn.setText(language.getString("TEXT0025"));
 		familyCountTableColumn.setText(language.getString("TEXT0026"));
 		familyStreetTableColumn.setText(language.getString("TEXT0027"));
@@ -340,12 +394,29 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		familyPostCodeTableColumn.setText(language.getString("TEXT0029"));
 		familyCityTableColumn.setText(language.getString("TEXT0030"));
 
-		familyAddButton.setText("");
-		familyAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.FAMILY_ADD));
-		familyDeleteButton.setText("");
-		familyDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.FAMILY_DEL));
-		familiesUpdateButton.setText("");
-		familiesUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
+		Tooltip familyAddTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.add"));
+		familyAddTooltip.getStyleClass().add("tooltip_001");
+		this.familyAddButton.setTooltip(familyAddTooltip);
+		this.familyAddButton.setText("");
+		this.familyAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FAMILY_ADD));
+
+		Tooltip familyDeleteTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.delete"));
+		familyDeleteTooltip.getStyleClass().add("tooltip_001");
+		this.familyDeleteButton.setTooltip(familyDeleteTooltip);
+		this.familyDeleteButton.setText("");
+		this.familyDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FAMILY_DEL));
+
+		Tooltip familiesUpdateTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.update"));
+		familiesUpdateTooltip.getStyleClass().add("tooltip_001");
+		this.familiesUpdateButton.setTooltip(familiesUpdateTooltip);
+		this.familiesUpdateButton.setText("");
+		this.familiesUpdateButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
+
+		Tooltip familyMapsTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.maps"));
+		familyMapsTooltip.getStyleClass().add("tooltip_001");
+		this.familiesMapsButton.setTooltip(familyMapsTooltip);
+		this.familiesMapsButton.setText("");
+		this.familiesMapsButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS));
 
 		this.totalImageView.setFitWidth(25);
 		this.totalImageView.setFitHeight(25);
@@ -367,6 +438,20 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.totalFemaleTextField.setMinWidth(50);
 		this.totalFemaleTextField.setMaxWidth(50);
 		this.totalFemaleTextField.setEditable(false);
+
+		this.totalFamilyImageView.setFitWidth(25);
+		this.totalFamilyImageView.setFitHeight(25);
+		this.totalFamilyImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.FAMILY, 25, 25));
+		this.totalFamilyTextField.setMinWidth(50);
+		this.totalFamilyTextField.setMaxWidth(50);
+		this.totalFamilyTextField.setEditable(false);
+
+		this.totalFilteredFamilyImageView.setFitWidth(25);
+		this.totalFilteredFamilyImageView.setFitHeight(25);
+		this.totalFilteredFamilyImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.FILTER, 25, 25));
+		this.totalFilteredFamilyTextField.setMinWidth(50);
+		this.totalFilteredFamilyTextField.setMaxWidth(50);
+		this.totalFilteredFamilyTextField.setEditable(false);
 	}
 
 	private void initInfo() {
@@ -391,6 +476,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 		this.filterMemberTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
+
+		this.filterFamilyTextField.textProperty()
+				.addListener((observable, oldValue, newValue) -> updateFilterFamily(newValue));
+
+		this.familiesMapsButton.setOnAction(event -> viewMaps());
 	}
 
 	private void updateFilterMember(String newValue) {
@@ -405,11 +495,37 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.membersTableView.refresh();
 	}
 
+	private void updateFilterFamily(String newValue) {
+
+		if (newValue.isEmpty()) {
+			this.familiesTableView.setItems(this.familiesList);
+			// FILTRO
+			this.totalFilteredFamilyTextField.setText(String.valueOf(this.familiesList.size()));
+		} else {
+			ObservableList<Family> filteredMemberList = buildListFamily(newValue);
+			this.familiesTableView.setItems(filteredMemberList);
+			// FILTRO
+			this.totalFilteredFamilyTextField.setText(String.valueOf(filteredMemberList.size()));
+		}
+
+		this.familiesTableView.refresh();
+	}
+
 	private ObservableList<Member> buildListMember(String filter) {
 
 		ObservableList<Member> list = FXCollections.observableArrayList();
 
 		StreamSupport.stream(this.membersList.spliterator(), false).filter(obj -> matchFilterMember(obj, filter))
+				.forEach(obj -> list.add(obj));
+
+		return list;
+	}
+
+	private ObservableList<Family> buildListFamily(String filter) {
+
+		ObservableList<Family> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.familiesList.spliterator(), false).filter(obj -> matchFilterFamily(obj, filter))
 				.forEach(obj -> list.add(obj));
 
 		return list;
@@ -422,6 +538,18 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		return obj.getSpInf1Decrypted().toLowerCase().contains(filter)
 				|| obj.getSpInf2Decrypted().toLowerCase().contains(filter)
 				|| obj.getSpInf39Decrypted().toLowerCase().contains(filter);
+	}
+
+	private boolean matchFilterFamily(Family obj, String match) {
+
+		String filter = match.toLowerCase();
+
+		return obj.getSpInf1Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf2Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf3Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf4Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf5Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf7Decrypted().toLowerCase().contains(filter);
 	}
 
 	private void listenerMemberMonitorPrintButton() {
@@ -485,6 +613,11 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteMember(String.valueOf(member.getSpMemberID()), settings, ownerStage, this);
+		} else {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.members.error.delete"));
+
 		}
 
 	}
@@ -500,6 +633,12 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteFamily(String.valueOf(family.getSpFamID()), settings, ownerStage, this);
+
+		} else {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.family.error.delete"));
+
 		}
 
 	}
@@ -546,7 +685,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void newFamily() {
 
-		if (!isAlreadyOpen(this.congrTabPane, language.getString("TEXT0015"))) {
+		if (!isAlreadyOpen(this.familyTabPane, "")) {
 
 			try {
 
@@ -559,18 +698,18 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 
-				Tab newFamilyTab = new Tab(language.getString("TEXT0015"), layout);
+				Tab newFamilyTab = new Tab("", layout);
 				newFamilyTab.setClosable(true);
 				newFamilyTab.getStyleClass().add("tab_001");
 				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
 
-				ctrl.setCongrTabPane(congrTabPane);
+				ctrl.setParentTabPane(this.familyTabPane);
 				ctrl.setMembersTab(membersTab);
 				ctrl.setNewMemberTab(newFamilyTab);
 				ctrl.setMembersList(this.membersList);
 
-				congrTabPane.getTabs().add(newFamilyTab);
-				congrTabPane.getSelectionModel().select(newFamilyTab);
+				this.familyTabPane.getTabs().add(newFamilyTab);
+				this.familyTabPane.getSelectionModel().select(newFamilyTab);
 
 				ctrl.objectInitialize();
 
@@ -627,7 +766,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	private void editFamily(Family family) {
 
-		if (!isAlreadyOpen(this.congrTabPane, family.getSpInf1Decrypted())) {
+		if (!isAlreadyOpen(this.familyTabPane, family.getSpInf1Decrypted())) {
 
 			try {
 
@@ -646,13 +785,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				newFamilyTab.getStyleClass().add("tab_001");
 				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
 
-				ctrl.setCongrTabPane(congrTabPane);
+				ctrl.setParentTabPane(this.familyTabPane);
 				ctrl.setMembersTab(membersTab);
 				ctrl.setNewMemberTab(newFamilyTab);
 				ctrl.setMembersList(this.membersList);
 
-				congrTabPane.getTabs().add(newFamilyTab);
-				congrTabPane.getSelectionModel().select(newFamilyTab);
+				this.familyTabPane.getTabs().add(newFamilyTab);
+				this.familyTabPane.getSelectionModel().select(newFamilyTab);
 
 				ctrl.objectInitialize();
 
@@ -718,9 +857,18 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	public void updateFamilies(ObservableList<Family> list) {
 
 		this.familiesList = list;
-		familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
+		this.familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
 
-		familiesTableView.setItems(familiesList);
+		this.familiesTableView.setItems(familiesList);
+
+		// RESET FILTRO
+		this.filterFamilyTextField.setText("");
+
+		// TOTALE
+		this.totalFamilyTextField.setText(String.valueOf(this.familiesList.size()));
+
+		// FILTRO
+		this.totalFilteredFamilyTextField.setText(String.valueOf(this.familiesList.size()));
 	}
 
 	private void print() {
@@ -771,6 +919,56 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("congregation.members.print.noselect"));
 
+	}
+
+	private void viewMaps() {
+
+		if (this.familiesTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			Family family = this.familiesTableView.getSelectionModel().getSelectedItem();
+
+			String coord = family.getSpInf9Decrypted();
+			if (!coord.isEmpty()) {
+
+				String link = this.language.getString("supportplanner.googlemaps.pattern");
+				link = String.format(link, coord.replace(" ", "+"));
+
+				try {
+
+					FXMLLoader fxmlLoader = new FXMLLoader();
+					fxmlLoader.setLocation(Meta.Views.BROWSER);
+
+					AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+
+					Scene scene = new Scene(anchorPane);
+					scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+					Stage stage = new Stage();
+
+					stage.setScene(scene);
+					stage.setTitle(Meta.Application.getFullTitle());
+					stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
+					stage.initOwner(this.ownerStage);
+
+					stage.setMaximized(true);
+
+					Browser ctrl = fxmlLoader.getController();
+					ctrl.setLink(link);
+					ctrl.init();
+
+					stage.show();
+
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("congregation.family.error.coord"));
+			}
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.family.error.select"));
+		}
 	}
 
 	public Settings getSettings() {

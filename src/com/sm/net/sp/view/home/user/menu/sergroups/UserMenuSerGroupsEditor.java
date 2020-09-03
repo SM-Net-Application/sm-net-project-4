@@ -23,6 +23,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
@@ -150,12 +151,23 @@ public class UserMenuSerGroupsEditor extends UpdateDataAdapter {
 		serGroupsFamiliesNameTableColumn.setText(language.getString("TEXT0014"));
 		serGroupsFamiliesMembersTableColumn.setText(language.getString("TEXT0011"));
 
-		serGroupsAddFamily.setText("");
-		serGroupsAddFamily.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_FRONT));
-		serGroupsRemoveFamily.setText("");
-		serGroupsRemoveFamily.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
+		Tooltip serGroupsAddTooltip = new Tooltip(this.language.getString("servicegroupeditor.tooltip.add"));
+		serGroupsAddTooltip.getStyleClass().add("tooltip_001");
+		this.serGroupsAddFamily.setTooltip(serGroupsAddTooltip);
+		this.serGroupsAddFamily.setText("");
+		this.serGroupsAddFamily.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ARROW_FRONT));
+		
+		Tooltip serGroupsRemoveTooltip = new Tooltip(this.language.getString("servicegroupeditor.tooltip.delete"));
+		serGroupsRemoveTooltip.getStyleClass().add("tooltip_001");
+		this.serGroupsRemoveFamily.setTooltip(serGroupsRemoveTooltip);
+		this.serGroupsRemoveFamily.setText("");
+		this.serGroupsRemoveFamily.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ARROW_BACK));
+		
+		Tooltip saveTooltip = new Tooltip(this.language.getString("servicegroupeditor.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveButton.setTooltip(saveTooltip);
+		this.saveButton.setText("");
+		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 	}
 
 	private void initValue() {

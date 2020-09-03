@@ -8,12 +8,12 @@ Data di pubblicazione : ..-..-....
 			- Numero della congregazione
 
 	* Nuova sezione: Programmazione adunanze
-		- In questa sezione è possibile definire il giorno e l'ora delle adunanze a partire dalla settimana X
-		- Queste informazioni verrano utilizzate nella sezione Adunanze/Discorsi pubblici
+		In questa sezione è possibile definire il giorno e l'ora delle adunanze a partire dalla settimana X
+		Queste informazioni verrano utilizzate nella sezione Adunanze/Discorsi pubblici
 
 	* Nuova sezione: Luoghi di adorazione
-		- In questa sezione è possibile definire i luoghi in cui si tengono le adunanze, i congressi o altri eventi
-		- Se una Sala del Regno viene settata come Predefinita, l'indirizzo viene pre-caricato nelle nuove adunanze
+		In questa sezione è possibile definire i luoghi in cui si tengono le adunanze, i congressi o altri eventi
+		- Se una Sala del Regno viene settata come Predefinita, l'indirizzo viene pre-caricato nelle nuove Adunanze/Discorsi pubblici
 
 	* Nuova sezione : Configurazione
 		In questa sezione vengono gestite informazioni relative alla configurazione del software.
@@ -40,9 +40,36 @@ Data di pubblicazione : ..-..-....
 			- Minuti del Discorso Pubblico
 			- Minuti dello Studio Torre di Guardia
 			- Solo preghiera iniziale (il Presidente adunanza del fine settimana diventa Preghiera iniziale sulla stampa del programma)
+		- WOL : I cantici e il tema della Torre di Guardia vengono ora automaticamente inseriti
 
 	* Sezione : Utenti
-		- Migliramento della GUI
+		- Modifica della GUI
+
+	* Sezione : Congregazione
+		- Modifica della GUI
+		- Componenti
+			- Aggiunte icone maschio/femmina
+			- Se la password monitor è definita, viene visualizzata un'icona
+			- Colonna: Età
+			- Colonna: Battesimo (anni)
+			- Filtro componenti
+			- Totale componenti (totale maschi/femmine)
+			- Solo un'opzione selezionabile tra Studente, Proclamatore non battezzato e Proclamatore battezzato
+			- Nuove informazioni
+				- Data di nascita
+				- Data di battesimo
+				- Altre pecore / Unto (solo un'opzione selezionabile)
+				- Utilizza cognome da nubile nei documenti generati
+				- Escludi dall'elenco Disastri Naturali
+		- Famiglie
+			- Filtro famiglie
+			- Totale famiglie
+			- Totale famiglie filtrate
+			- Pulizia semplificata diventa Escludi dall'elenco Gruppi di Servizio
+			- Nuove informazioni
+				- Coordinate GPS
+			- Se presenti le Coordinate GPS viene visualizzata un'icona
+			- Nuovo tasto : apri le coordinate GPS in Google Maps
 
 	* Layout : Programma adunanze
 		- Studio biblico di congregazione :
@@ -56,13 +83,6 @@ Data di pubblicazione : ..-..-....
 
 	* Fix
 		- Visualizzazione del menù contestuale (tasto destro) ottimizzata
-		 
-	* Nuova gestione della versione software
-		- Formato 0.0.0
-			- 0.x.x MAJOR UPDATE	: Il software non è più compatibile con la struttura delle versioni precedenti
-			- x.0.x MINOR UPDATE	: Aggiunta di nuove funzionalità
-			- x.x.0 PATCH			: Bug fix
-		- Pertanto questa versione diventa : 0.10.0 e verrà incrementato fino a quando non verrà ultimata la versione 1.0.0
 		
 	* Versione Linux
 		- Risolti diversi problemi grafici
@@ -76,6 +96,13 @@ Data di pubblicazione : ..-..-....
 		- Aggiunta la data odierna
 		- Le attività della settimana in corso e quelle delle prossime settimane vengono visualizzate in 2 tabelle diverse
 		
+	* Nuova gestione della versione software
+		- Formato 0.0.0
+			- 0.x.x MAJOR UPDATE	: Il software non è più compatibile con la struttura delle versioni precedenti
+			- x.0.x MINOR UPDATE	: Aggiunta di nuove funzionalità
+			- x.x.0 PATCH			: Bug fix
+		- Pertanto questa versione diventa : 0.10.0 e verrà incrementato fino a quando non verrà ultimata la versione 1.0.0
+		
 	* Database update
 		  
 		  CREATE TABLE sp_datetime ( spDateTimeID INT NOT NULL AUTO_INCREMENT , spInf1 DATE NOT NULL , spInf2 INT NOT NULL , spInf3 INT NOT NULL , spInf4 INT NOT NULL , spInf5 INT NOT NULL , spInf6 INT NOT NULL , spInf7 INT NOT NULL , PRIMARY KEY (spDateTimeID)) ENGINE = InnoDB;
@@ -88,3 +115,4 @@ Data di pubblicazione : ..-..-....
           ALTER TABLE sp_conf ADD PRIMARY KEY (id);
           ALTER TABLE sp_conf MODIFY id int(11) NOT NULL AUTO_INCREMENT;
           ALTER TABLE sp_members ADD spInf48 INT NOT NULL AFTER spInf47, ADD spInf49 INT NOT NULL AFTER spInf48, ADD spInf50 INT NOT NULL AFTER spInf49, ADD spInf51 INT NOT NULL AFTER spInf50, ADD spInf52 VARCHAR(250) NOT NULL AFTER spInf51, ADD spInf53 VARCHAR(250) NOT NULL AFTER spInf52;
+          ALTER TABLE sp_fam ADD spInf9 VARCHAR(250) NOT NULL AFTER spInf8;

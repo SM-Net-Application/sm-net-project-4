@@ -224,62 +224,143 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <StackPane VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <TableView fx:id="familiesTableView">
-                                                  <columns>
-                                                    <TableColumn fx:id="familyIDTableColumn" prefWidth="75.0" text="C1" />
-                                                    <TableColumn fx:id="familyNameTableColumn" prefWidth="75.0" text="C2" />
-                                                      <TableColumn fx:id="familyCountTableColumn" prefWidth="75.0" text="C2" />
-                                                      <TableColumn fx:id="familyStreetTableColumn" prefWidth="75.0" text="C2" />
-                                                      <TableColumn fx:id="familyNummerTableColumn" prefWidth="75.0" text="C2" />
-                                                      <TableColumn fx:id="familyPostCodeTableColumn" prefWidth="75.0" text="C2" />
-                                                      <TableColumn fx:id="familyCityTableColumn" prefWidth="75.0" text="C2" />
-                                                  </columns>
-                                                   <columnResizePolicy>
-                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                   </columnResizePolicy>
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </TableView>
-                                             </children>
-                                          </StackPane>
-                                          <HBox>
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                    <TabPane fx:id="familyTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <tabs>
+                                          <Tab fx:id="familyListTab" closable="false" text="elenc">
+                                             <content>
+                                                <VBox>
                                                    <children>
-                                                      <Button fx:id="familiesUpdateButton" mnemonicParsing="false" text="aggiorna">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
+                                                      <StackPane>
+                                                         <children>
+                                                            <Separator>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Separator>
+                                                         </children>
+                                                      </StackPane>
+                                                      <HBox>
+                                                         <children>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="familyAddButton" mnemonicParsing="false" text="aggiungi">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="familyDeleteButton" mnemonicParsing="false" text="elimina">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="familiesUpdateButton" mnemonicParsing="false" text="aggiorna">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="familiesMapsButton" mnemonicParsing="false" text="maps">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <TextField fx:id="filterFamilyTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <ImageView fx:id="totalFamilyImageView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </ImageView>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <TextField fx:id="totalFamilyTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <ImageView fx:id="totalFilteredFamilyImageView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </ImageView>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <TextField fx:id="totalFilteredFamilyTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </HBox>
+                                                      <StackPane>
+                                                         <children>
+                                                            <Separator>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Separator>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <TableView fx:id="familiesTableView">
+                                                              <columns>
+                                                                <TableColumn fx:id="familyIDTableColumn" prefWidth="75.0" text="id" />
+                                                                  <TableColumn fx:id="familyMapsTableColumn" prefWidth="75.0" text="maps" />
+                                                                <TableColumn fx:id="familyNameTableColumn" prefWidth="75.0" text="C2" />
+                                                                  <TableColumn fx:id="familyCountTableColumn" prefWidth="75.0" text="C2" />
+                                                                  <TableColumn fx:id="familyStreetTableColumn" prefWidth="75.0" text="C2" />
+                                                                  <TableColumn fx:id="familyNummerTableColumn" prefWidth="75.0" text="C2" />
+                                                                  <TableColumn fx:id="familyPostCodeTableColumn" prefWidth="75.0" text="C2" />
+                                                                  <TableColumn fx:id="familyCityTableColumn" prefWidth="75.0" text="C2" />
+                                                              </columns>
+                                                               <columnResizePolicy>
+                                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                               </columnResizePolicy>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TableView>
+                                                         </children>
+                                                      </StackPane>
                                                    </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="familyAddButton" mnemonicParsing="false" text="aggiungi">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="familyDeleteButton" mnemonicParsing="false" text="elimina">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
+                                                </VBox>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
                                  </children>
                               </AnchorPane>
                         </content>

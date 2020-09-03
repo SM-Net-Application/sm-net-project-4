@@ -8,6 +8,7 @@ import com.sm.net.path.PathBuilder;
 import com.sm.net.project.Project;
 import com.sm.net.sp.view.SupportPlannerMenu;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.browser.Browser;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.home.access.HomeAccess;
@@ -162,6 +163,7 @@ public class Meta {
 				.getResource("ChristiansPartEditor.fxml");
 		public static final URL HISTORY = History.class.getResource("History.fxml");
 		public static final URL WOLBROWSER = WOLBrowser.class.getResource("WOLBrowser.fxml");
+		public static final URL BROWSER = Browser.class.getResource("Browser.fxml");
 		public static final URL HOME_USER_MENU_DATEANDTIME = HomeUserMenuDateAndTime.class
 				.getResource("HomeUserMenuDateAndTime.fxml");
 		public static final URL HOME_USER_MENU_DATEANDTIME_ADD = MenuDateAndTimeAdd.class
@@ -265,6 +267,9 @@ public class Meta {
 		public static final String PRIVILEGIES = "privilegies.png";
 		public static final String ROLES = "servant.png";
 		public static final String OTHERS = "others.png";
+
+		public static final String MAPS = "maps.png";
+		public static final String FILTER = "filter.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

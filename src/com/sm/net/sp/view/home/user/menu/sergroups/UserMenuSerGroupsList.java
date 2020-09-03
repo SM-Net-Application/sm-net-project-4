@@ -24,6 +24,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -130,12 +131,23 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		serGroupsFamiliesTableColumn.setText(language.getString("TEXT0012"));
 		serGroupsMembersTableColumn.setText(language.getString("TEXT0011"));
 
-		serGroupsAddButton.setText("");
-		serGroupsAddButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SERVICEGROUPS_ADD));
-		serGroupsDeleteButton.setText("");
-		serGroupsDeleteButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SERVICEGROUPS_DEL));
-		serGroupsUpdateButton.setText("");
-		serGroupsUpdateButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
+		Tooltip serGroupsAddTooltip = new Tooltip(this.language.getString("servicegroup.tooltip.add"));
+		serGroupsAddTooltip.getStyleClass().add("tooltip_001");
+		this.serGroupsAddButton.setTooltip(serGroupsAddTooltip);
+		this.serGroupsAddButton.setText("");
+		this.serGroupsAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SERVICEGROUPS_ADD));
+
+		Tooltip serGroupsDeleteTooltip = new Tooltip(this.language.getString("servicegroup.tooltip.delete"));
+		serGroupsDeleteTooltip.getStyleClass().add("tooltip_001");
+		this.serGroupsDeleteButton.setTooltip(serGroupsDeleteTooltip);
+		this.serGroupsDeleteButton.setText("");
+		this.serGroupsDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SERVICEGROUPS_DEL));
+
+		Tooltip serGroupsUpdateTooltip = new Tooltip(this.language.getString("servicegroup.tooltip.update"));
+		serGroupsUpdateTooltip.getStyleClass().add("tooltip_001");
+		this.serGroupsUpdateButton.setTooltip(serGroupsUpdateTooltip);
+		this.serGroupsUpdateButton.setText("");
+		this.serGroupsUpdateButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
 	}
 
 	private void listeners() {
@@ -175,7 +187,8 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 			SerGroup serGroup = serGroupsTableView.getSelectionModel().getSelectedItem();
 
 			Alert alert = new AlertDesigner(language.getString("TEXT0074"), serGroup.getSpInf1Decrypted(), ownerStage,
-					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
+					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 
 			if (alert.showAndWait().get() == ButtonType.OK)
 				Actions.deleteSerGroup(String.valueOf(serGroup.getSpSerGrID()), settings, ownerStage, this);

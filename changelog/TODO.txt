@@ -1,13 +1,12 @@
-	
-	- Adunanze:
-		- WOL : Ottenere i cantici e il tema della Torre di Guardia
-		
-	- Discorsi pubblici
-		- Filtro : Presidente / Oratore / Congregazione / Tema
 
-	- Disastri Naturali
-		- Stampare l'elenco per Gruppo di Servizio
-		- Filtro : Componenti / Famiglie
+	- Gruppi di servizio
+		- Creare layout di stampa Gruppi di servizio (il layout viene determinato in base al numero di gruppi creati)
+		- Creare layout per numero di gruppi da 1 a 6
+		- Tasti piccoli e in alto
+	
+	- Sorvegliante:
+		- Mostra solo le settimane presenti nel database
+		- Eliminare settimana
 			
 	- Commemorazione
 		- Mostra solo le settimane presenti nel database
@@ -15,30 +14,13 @@
 		
 	- Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
-		
-	- Sorvegliante:
-		- Mostra solo le settimane presenti nel database
-		- Eliminare settimana
-		
-	- Gruppi di servizio
-		- Creare layout di stampa Gruppi di servizio (il layout viene determinato in base al numero di gruppi creati)
-		- Creare layout per numero di gruppi da 1 a 6
-		- Tasti piccoli e in alto
-		
-	- Congregazione
-		- Rimuovere il tab Generali e spostarlo nella nuova sezione Configurazione
-		- Filtro Componenti : Nome / Cognome / Cognome da nubile / Cellulare / E-Mail
-		- Filtro Famiglie : Nome famiglia / Strada / Civico / CAP / Città
-		- Tasti piccoli e in alto
-		
-		- Componenti:
-			- Nuova informazione : Data di nascita
-			- Spostare Password monitor in un altro Tab (non centra con Contatti)
-			- Nuovo CheckBox : "Non visualizzare nell'elenco Disastri Naturali"
-		
-		- Famiglie :
-			- il CheckBox Pulizia semplificata diventa "Non visualizzare nell'elenco Gruppi di Servizio"
-			- Creare un TabPane, al momento solo con il Tab "Altro"
+			
+	- Discorsi pubblici
+		- Filtro : Presidente / Oratore / Congregazione / Tema
+
+	- Disastri Naturali
+		- Stampare l'elenco per Gruppo di Servizio
+		- Filtro : Componenti / Famiglie
 		
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)

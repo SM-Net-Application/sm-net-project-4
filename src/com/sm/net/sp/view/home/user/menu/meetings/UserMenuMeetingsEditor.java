@@ -2,12 +2,20 @@ package com.sm.net.sp.view.home.user.menu.meetings;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.jw.wol.MinistryType;
 import com.sm.net.jw.wol.MinistryTypeTranslated;
 import com.sm.net.jw.wol.ScheduleForMeeting;
 import com.sm.net.jw.wol.ScheduleForMeetingHTML;
+import com.sm.net.jw.wol.WatchtowerOnlineLibrary;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -28,6 +36,7 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.utils.DateAndTimeUtils;
 import com.sm.net.sp.utils.PlaceUtils;
+import com.sm.net.sp.utils.WOLUtils;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
@@ -1950,8 +1959,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
 
 		if (alert.showAndWait().get() == ButtonType.OK) {
+
 			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
 					selectedWeek.getFrom());
+
 			scheduleForMeetingHTML.download();
 
 			if (scheduleForMeetingHTML != null) {
@@ -2006,6 +2017,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 						song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
 
+						getWOLNewInfo();
+
 					} else {
 						new AlertDesigner(language.getString("sp.meetings.wol.error"), ownerStage, AlertType.ERROR,
 								Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
@@ -2015,6 +2028,77 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			}
 		}
 
+	}
+
+	private void getWOLNewInfo() {
+
+		try {
+
+			Document document = Jsoup
+					.connect(WatchtowerOnlineLibrary.createLink(this.language, this.selectedWeek.getFrom())).get();
+
+			Elements groupTOCs = document.getElementsByClass("groupTOC");
+			if (groupTOCs.size() > 0) {
+
+				Element first = groupTOCs.get(0);
+
+				Elements tags = first.getElementsByTag("a");
+				if (tags.size() > 0) {
+
+					Element firstTag = tags.get(0);
+
+					// TITOLO DELLA TORRE DI GUARDIA
+					this.watchtowerStudyThemeTextField.setText(firstTag.text());
+
+					Elements attributes = firstTag.getElementsByAttribute("href");
+
+					if (attributes.size() > 0) {
+
+						String attr = attributes.attr("href");
+
+						String watchtowerLink = WOLUtils.ADDRESS + attr;
+						getWOLWatchtowerSongs(watchtowerLink);
+					}
+
+				}
+
+			}
+
+		} catch (IOException e) {
+			this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+		}
+	}
+
+	private void getWOLWatchtowerSongs(String watchtowerLink) throws IOException {
+
+		Document document = Jsoup.connect(watchtowerLink).get();
+
+		Elements pubRefs = document.getElementsByClass("pubRefs");
+		if (pubRefs.size() > 0) {
+
+			String song1 = "";
+			String song2 = "";
+
+			for (Element a : pubRefs) {
+
+				String text = a.text();
+
+				Matcher matcher = Pattern.compile("\\d+").matcher(text);
+				if (matcher.find()) {
+
+					String group = matcher.group();
+
+					if (!song1.isEmpty())
+						song2 = group;
+					else
+						song1 = group;
+
+				}
+			}
+
+			this.watchtowerStudySong2TextField.setText(song1);
+			this.watchtowerStudySong3TextField.setText(song2);
+		}
 	}
 
 	private void listenerMinistryPartAddButton() {

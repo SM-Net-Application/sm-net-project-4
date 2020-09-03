@@ -1,6 +1,6 @@
 <?php
 // Update family
-if (isset ( $jsonObj ["spFamID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["spInf8"] ) && isset ( $jsonObj ["idToRemove"] ) && isset ( $jsonObj ["idToSet"] )) {
+if (isset ( $jsonObj ["spFamID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["spInf8"] ) && isset ( $jsonObj ["spInf9"] ) && isset ( $jsonObj ["idToRemove"] ) && isset ( $jsonObj ["idToSet"] )) {
 	if (! empty ( $jsonObj ["spInf1"] )) {
 		require_once dirname(__DIR__, 1) . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
@@ -16,7 +16,8 @@ if (isset ( $jsonObj ["spFamID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $
 			$query .= " spInf4='" . $jsonObj ["spInf4"] . "',";
 			$query .= " spInf5='" . $jsonObj ["spInf5"] . "',";
 			$query .= " spInf7='" . $jsonObj ["spInf7"] . "',";
-			$query .= " spInf8=" . $jsonObj ["spInf8"];
+			$query .= " spInf8=" . $jsonObj ["spInf8"] . ",";
+            $query .= " spInf9='" . $jsonObj ["spInf9"] . "'";
 			$query .= " WHERE spFamID=" . $jsonObj ["spFamID"];
 			
 			if ($database->query ( $query ) === TRUE) {

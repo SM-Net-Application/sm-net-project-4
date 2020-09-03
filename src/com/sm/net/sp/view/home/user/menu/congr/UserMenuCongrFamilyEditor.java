@@ -21,6 +21,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class UserMenuCongrFamilyEditor {
@@ -52,7 +53,7 @@ public class UserMenuCongrFamilyEditor {
 	@FXML
 	private Label familyPrivilegeLabel;
 	@FXML
-	private CheckBox familyCleaningCheckBox;
+	private CheckBox familyExcludeFromServiceGroupCheckBox;
 	@FXML
 	private Label membersLabel;
 	@FXML
@@ -80,10 +81,20 @@ public class UserMenuCongrFamilyEditor {
 	@FXML
 	private Button saveButton;
 
+	@FXML
+	private Label familyCoordLabel;
+	@FXML
+	private TextField familyCoordTextField;
+
+	@FXML
+	private TabPane privilegiesTabPane;
+	@FXML
+	private Tab othersTab;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
-	private TabPane congrTabPane;
+	private TabPane parentTabPane;
 	private Tab newFamilyTab;
 	private Tab familiesTab;
 	private UserMenuCongrList ownerCtrl;
@@ -120,6 +131,7 @@ public class UserMenuCongrFamilyEditor {
 		membersLabel.getStyleClass().add("label_001");
 		familyMembersLabel.getStyleClass().add("label_001");
 		familyPhoneLabel.getStyleClass().add("label_001");
+		this.familyCoordLabel.getStyleClass().add("label_001");
 
 		familyNameTextField.getStyleClass().add("text_field_001");
 		familyStreetTextField.getStyleClass().add("text_field_001");
@@ -127,9 +139,10 @@ public class UserMenuCongrFamilyEditor {
 		familyPostCodeTextField.getStyleClass().add("text_field_001");
 		familyCityTextField.getStyleClass().add("text_field_001");
 		familyPhoneTextField.getStyleClass().add("text_field_001");
+		this.familyCoordTextField.getStyleClass().add("text_field_001");
 
 		familyPrivilegeLabel.getStyleClass().add("label_002");
-		familyCleaningCheckBox.getStyleClass().add("check_box_001");
+		familyExcludeFromServiceGroupCheckBox.getStyleClass().add("check_box_001");
 
 		membersTableView.getStyleClass().add("table_view_001");
 		familyMembersTableView.getStyleClass().add("table_view_001");
@@ -137,6 +150,9 @@ public class UserMenuCongrFamilyEditor {
 		familyAddMember.getStyleClass().add("button_image_001");
 		familyRemoveMember.getStyleClass().add("button_image_001");
 		saveButton.getStyleClass().add("button_image_001");
+
+		this.privilegiesTabPane.getStyleClass().add("tab_pane_003");
+		this.othersTab.getStyleClass().add("tab_001");
 	}
 
 	public void objectInitialize() {
@@ -156,8 +172,12 @@ public class UserMenuCongrFamilyEditor {
 		familyCityLabel.setText(language.getString("TEXT0030"));
 		familyPhoneLabel.setText(language.getString("TEXT0109"));
 
+		this.familyCoordLabel.setText(language.getString("congregation.family.editor.label.coord"));
+
 		familyPrivilegeLabel.setText(language.getString("TEXT0052"));
-		familyCleaningCheckBox.setText(language.getString("sp.congr.family.cleaning"));
+
+		this.familyExcludeFromServiceGroupCheckBox
+				.setText(language.getString("congregation.family.editor.checkbox.excludeservicegroup"));
 
 		membersLabel.setText(language.getString("TEXT0032"));
 		memberIDTableColumn.setText(language.getString("TEXT0005"));
@@ -174,12 +194,32 @@ public class UserMenuCongrFamilyEditor {
 		familyMemberSurnameTableColumn.setText(language.getString("TEXT0013"));
 		familyMemberNameTableColumn.setText(language.getString("TEXT0014"));
 
-		familyAddMember.setText("");
-		familyAddMember.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_FRONT));
-		familyRemoveMember.setText("");
-		familyRemoveMember.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.ARROW_BACK));
-		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
+		Tooltip familyAddTooltip = new Tooltip(this.language.getString("congregation.family.editor.tooltip.add"));
+		familyAddTooltip.getStyleClass().add("tooltip_001");
+		this.familyAddMember.setTooltip(familyAddTooltip);
+		this.familyAddMember.setText("");
+		this.familyAddMember.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ARROW_FRONT));
+
+		Tooltip familyRemoveTooltip = new Tooltip(this.language.getString("congregation.family.editor.tooltip.remove"));
+		familyRemoveTooltip.getStyleClass().add("tooltip_001");
+		this.familyRemoveMember.setTooltip(familyRemoveTooltip);
+		this.familyRemoveMember.setText("");
+		this.familyRemoveMember.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ARROW_BACK));
+
+		Tooltip saveTooltip = new Tooltip(this.language.getString("congregation.family.editor.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveButton.setTooltip(saveTooltip);
+		this.saveButton.setText("");
+		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
+
+		this.privilegiesTabPane.setTabMinHeight(75);
+		this.privilegiesTabPane.setTabMaxHeight(75);
+
+		Tooltip othersTooltip = new Tooltip(this.language.getString("congregation.family.editor.tooltip.others"));
+		othersTooltip.getStyleClass().add("tooltip_001");
+		this.othersTab.setTooltip(othersTooltip);
+		this.othersTab.setText("");
+		this.othersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.OTHERS));
 	}
 
 	private void initValue() {
@@ -195,7 +235,8 @@ public class UserMenuCongrFamilyEditor {
 			this.familyPostCodeTextField.setText(selectedFamily.getSpInf4Decrypted());
 			this.familyCityTextField.setText(selectedFamily.getSpInf5Decrypted());
 			this.familyPhoneTextField.setText(selectedFamily.getSpInf7Decrypted());
-			this.familyCleaningCheckBox.setSelected((selectedFamily.getSpInf8() == 1));
+			this.familyExcludeFromServiceGroupCheckBox.setSelected((selectedFamily.getSpInf8() == 1));
+			this.familyCoordTextField.setText(selectedFamily.getSpInf9Decrypted());
 		}
 	}
 
@@ -285,7 +326,9 @@ public class UserMenuCongrFamilyEditor {
 			String spInf4 = Crypt.encrypt(familyPostCodeTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf5 = Crypt.encrypt(familyCityTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf7 = Crypt.encrypt(familyPhoneTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf8 = !familyCleaningCheckBox.isSelected() ? "0" : "1";
+			String spInf8 = !familyExcludeFromServiceGroupCheckBox.isSelected() ? "0" : "1";
+
+			String spInf9 = Crypt.encrypt(this.familyCoordTextField.getText(), this.settings.getDatabaseSecretKey());
 
 			String idToRemove = "";
 
@@ -300,27 +343,28 @@ public class UserMenuCongrFamilyEditor {
 					idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " + member.getSpMemberID();
 
 			if (selectedFamily != null)
-				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, idToRemove, idToSet);
+				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, spInf9, idToRemove, idToSet);
 			else
-				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, spInf8, idToRemove, idToSet);
+				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, spInf8, spInf9, idToRemove, idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf6,
-			String spInf7, String spInf8, String idToRemove, String idToSet) {
+			String spInf7, String spInf8, String spInf9, String idToRemove, String idToSet) {
 
-		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, idToRemove, idToSet,
-				settings, ownerStage, congrTabPane, newFamilyTab, familiesTab, ownerCtrl);
+		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, idToRemove,
+				idToSet, settings, ownerStage, parentTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 
 	private void editFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf7,
-			String spInf8, String idToRemove, String idToSet) {
+			String spInf8, String spInf9, String idToRemove, String idToSet) {
 
 		Actions.updateFamily(String.valueOf(selectedFamily.getSpFamID()), spInf1, spInf2, spInf3, spInf4, spInf5,
-				spInf7, spInf8, idToRemove, idToSet, settings, ownerStage, congrTabPane, newFamilyTab, familiesTab,
-				ownerCtrl);
+				spInf7, spInf8, spInf9, idToRemove, idToSet, settings, ownerStage, parentTabPane, newFamilyTab,
+				familiesTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
@@ -353,12 +397,12 @@ public class UserMenuCongrFamilyEditor {
 		this.ownerStage = ownerStage;
 	}
 
-	public TabPane getCongrTabPane() {
-		return congrTabPane;
+	public TabPane getParentTabPane() {
+		return parentTabPane;
 	}
 
-	public void setCongrTabPane(TabPane congrTabPane) {
-		this.congrTabPane = congrTabPane;
+	public void setParentTabPane(TabPane parentTabPane) {
+		this.parentTabPane = parentTabPane;
 	}
 
 	public Tab getNewMemberTab() {

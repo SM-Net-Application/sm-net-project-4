@@ -972,8 +972,9 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void insertFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
-			String spInf6, String spInf7, String spInf8, String idToRemove, String idToSet, Settings settings,
-			Stage ownerStage, TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+			String spInf6, String spInf7, String spInf8, String spInf9, String idToRemove, String idToSet,
+			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab,
+			UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1018,7 +1019,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.INSERT_FAMILY(spInf1, spInf2,
-						spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, idToRemove, idToSet));
+						spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, idToRemove, idToSet));
 			}
 		};
 
@@ -1111,8 +1112,9 @@ public class Actions {
 	 * @param ownerCtrl
 	 */
 	public static void updateFamily(String spFamID, String spInf1, String spInf2, String spInf3, String spInf4,
-			String spInf5, String spInf7, String spInf8, String idToRemove, String idToSet, Settings settings,
-			Stage ownerStage, TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab, UserMenuCongrList ownerCtrl) {
+			String spInf5, String spInf7, String spInf8, String spInf9, String idToRemove, String idToSet,
+			Settings settings, Stage ownerStage, TabPane congrTabPane, Tab newFamilyTab, Tab familiesTab,
+			UserMenuCongrList ownerCtrl) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1155,7 +1157,7 @@ public class Actions {
 			@Override
 			protected JSONObject call() throws Exception {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_FAMILY(spFamID, spInf1,
-						spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, idToRemove, idToSet));
+						spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, spInf9, idToRemove, idToSet));
 			}
 		};
 
