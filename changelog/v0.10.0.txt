@@ -71,6 +71,10 @@ Data di pubblicazione : ..-..-....
 			- Se presenti le Coordinate GPS viene visualizzata un'icona
 			- Nuovo tasto : apri le coordinate GPS in Google Maps
 
+	* Sezione : Gruppi di Servizio di campo
+		- Modifica della GUI
+		- Layout di stampa Gruppi di Servizio (al momento solo per 5 gruppi)
+
 	* Layout : Programma adunanze
 		- Studio biblico di congregazione :
 			- se il lettore non viene inserito, non viene stampata la dicitura "Lettore"

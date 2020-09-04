@@ -14,7 +14,11 @@ public enum EnumPrintLayouts {
 	
 	NATURAL_DISASTER_LIST("sp.printlayout.naturaldisaster"),
 
-	MEMBER_PASSWORD_MONITOR("sp.printlayout.passwordmonitor");
+	MEMBER_PASSWORD_MONITOR("sp.printlayout.passwordmonitor"),
+	
+	SERVICE_GROUP("sp.printlayout.servicegroup"),
+	
+	SERVICE_GROUP_WITHOUT_EXCLUSIONS("sp.printlayout.servicegroupexcl");
 
 	private String key;
 

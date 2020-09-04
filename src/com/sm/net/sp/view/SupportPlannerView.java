@@ -503,6 +503,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				UserMenuSerGroupsList ctrl = (UserMenuSerGroupsList) fxmlLoader.getController();
+				ctrl.setApplication(this);
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.objectInitialize();

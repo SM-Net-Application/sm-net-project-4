@@ -17,6 +17,7 @@ public class Jasper {
 	public static final String LAYOUT_MEETINGS = "sm-net-meetings";
 	public static final String LAYOUT_NATURALDISASTER = "sm-net-naturaldisaster";
 	public static final String LAYOUT_MONITOR = "sm-net-monitor";
+	public static final String LAYOUT_SERVICEGROUP = "sm-net-servicegroup";
 
 	public static final String FILE_USERS_LOGO = "iconSP";
 	public static final String FILE_USERS_USERS = "spUsers";
@@ -31,6 +32,7 @@ public class Jasper {
 	public static final String FILE_NATURAL_DISASTER_FAMILY = "spNaturalDisasterFamilyRow";
 	public static final String FILE_NATURAL_DISASTER_MEMBER = "spNaturalDisasterMemberRow";
 	public static final String FILE_MONITOR = "spMonitor";
+	public static final String FILE_SERVICE_GROUP5 = "spServiceGroup5";
 
 	public static class Layouts {
 
@@ -62,6 +64,8 @@ public class Jasper {
 				FILE_NATURAL_DISASTER_MEMBER);
 
 		public static final File SM_NET_MONITOR = getLayout(TYPE_SM_NET, LAYOUT_MONITOR, FILE_MONITOR);
+
+		public static final File SM_NET_SERVICE_GROUP5 = getLayout(TYPE_SM_NET, LAYOUT_SERVICEGROUP, FILE_SERVICE_GROUP5);
 
 		public static File getLayout(String layoutType, String layoutName, String layoutFileName) {
 

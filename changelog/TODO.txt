@@ -1,8 +1,8 @@
 
-	- Gruppi di servizio
-		- Creare layout di stampa Gruppi di servizio (il layout viene determinato in base al numero di gruppi creati)
-		- Creare layout per numero di gruppi da 1 a 6
-		- Tasti piccoli e in alto
+	- Disastri Naturali
+		- Verificare l'UPDATE delle informazioni
+		- Stampare l'elenco per Gruppo di Servizio
+		- Filtro : Componenti / Famiglie
 	
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database
@@ -16,11 +16,8 @@
 		- Mostra solo le settimane presenti nel database
 			
 	- Discorsi pubblici
+		- Verificare l'UPDATE/INSERT delle informazioni
 		- Filtro : Presidente / Oratore / Congregazione / Tema
-
-	- Disastri Naturali
-		- Stampare l'elenco per Gruppo di Servizio
-		- Filtro : Componenti / Famiglie
 		
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)

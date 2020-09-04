@@ -6,9 +6,17 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.EnumPrintLayouts;
+import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.Info;
+import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.sergroups.task.ServiceGroupPrintTask;
+import com.sm.net.sp.view.printlayout.PrintLayout;
+import com.smnet.core.task.TaskManager;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,11 +68,19 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 	@FXML
 	private Button serGroupsUpdateButton;
 
+	@FXML
+	private Button serGroupsPrintButton;
+
+	private SupportPlannerView application;
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
 
+	private String congregationName;
+
 	private ObservableList<SerGroup> serGroupsList;
+	private ObservableList<Member> membersList;
+	private ObservableList<Family> familiesList;
 
 	@FXML
 	private void initialize() {
@@ -97,6 +113,8 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		serGroupsAddButton.getStyleClass().add("button_image_001");
 		serGroupsDeleteButton.getStyleClass().add("button_image_001");
 		serGroupsUpdateButton.getStyleClass().add("button_image_001");
+
+		this.serGroupsPrintButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -148,6 +166,12 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		this.serGroupsUpdateButton.setTooltip(serGroupsUpdateTooltip);
 		this.serGroupsUpdateButton.setText("");
 		this.serGroupsUpdateButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
+
+		Tooltip serGroupsPrintTooltip = new Tooltip(this.language.getString("servicegroup.tooltip.print"));
+		serGroupsPrintTooltip.getStyleClass().add("tooltip_001");
+		this.serGroupsPrintButton.setTooltip(serGroupsPrintTooltip);
+		this.serGroupsPrintButton.setText("");
+		this.serGroupsPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 	}
 
 	private void listeners() {
@@ -155,6 +179,51 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		listenerSerGroupsDeleteButton();
 		listenerSerGroupsUpdateButton();
 		listenerSerGroupsTableView();
+
+		this.serGroupsPrintButton.setOnAction(event -> print());
+	}
+
+	private void print() {
+
+		if (this.serGroupsList.size() > 0) {
+
+			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, this.language,
+					EnumPrintLayouts.SERVICE_GROUP, EnumPrintLayouts.SERVICE_GROUP_WITHOUT_EXCLUSIONS);
+
+			if (selectedLayout != null) {
+
+				String waitMessage = "";
+				switch (selectedLayout) {
+
+				case SERVICE_GROUP:
+
+					waitMessage = this.language.getString("servicegroup.print.wait");
+					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+							new ServiceGroupPrintTask(this.application.getAlertBuilder2(), this.settings,
+									this.ownerStage, this.congregationName, this.membersList, this.familiesList,
+									this.serGroupsList, false));
+
+					break;
+
+				case SERVICE_GROUP_WITHOUT_EXCLUSIONS:
+
+					waitMessage = this.language.getString("servicegroup.print.wait");
+					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+							new ServiceGroupPrintTask(this.application.getAlertBuilder2(), this.settings,
+									this.ownerStage, this.congregationName, this.membersList, this.familiesList,
+									this.serGroupsList, true));
+
+					break;
+
+				default:
+					break;
+				}
+
+			}
+		} else
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("servicegroup.print.error.empty"));
+
 	}
 
 	private void listenerSerGroupsTableView() {
@@ -288,6 +357,36 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		serGroupsList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
 
 		serGroupsTableView.setItems(serGroupsList);
+
+		// GENERAL INFO
+		Actions.getUserMenuMeetingsInfo(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateInfo(Info info) {
+		super.updateInfo(info);
+
+		this.congregationName = info.getCongr();
+
+		// FAMIGLIE
+		Actions.getAllFamilies(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateFamilies(ObservableList<Family> list) {
+		super.updateFamilies(list);
+
+		this.familiesList = list;
+
+		// MEMBRI
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembers(ObservableList<Member> list) {
+		super.updateMembers(list);
+
+		this.membersList = list;
 	}
 
 	public Settings getSettings() {
@@ -305,4 +404,13 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 	public void setOwnerStage(Stage ownerStage) {
 		this.ownerStage = ownerStage;
 	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
 }
