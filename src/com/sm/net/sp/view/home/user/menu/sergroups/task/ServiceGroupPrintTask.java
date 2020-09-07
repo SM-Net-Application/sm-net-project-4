@@ -3,7 +3,6 @@ package com.sm.net.sp.view.home.user.menu.sergroups.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.StreamSupport;
@@ -15,14 +14,12 @@ import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.view.home.user.menu.sergroups.task.ServiceGroupPrintTask.FamilyInfo;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -82,6 +79,10 @@ public class ServiceGroupPrintTask implements TaskInterface {
 				String congregationName = String.format(congregationNamePattern, this.congregationName);
 
 				String programmName = this.settings.getLanguage().getString("jasper.layout.servicegroup.programmname");
+
+				String programmType = this.complete
+						? this.settings.getLanguage().getString("jasper.layout.servicegroup.programmtype")
+						: "";
 
 				String printDateText = this.settings.getLanguage()
 						.getString("jasper.layout.servicegroup.printdatetext");
@@ -215,6 +216,7 @@ public class ServiceGroupPrintTask implements TaskInterface {
 				Map<String, Object> parameters = new HashMap<String, Object>();
 				parameters.put("congregationName", congregationName);
 				parameters.put("programmName", programmName);
+				parameters.put("programmType", programmType);
 				parameters.put("printDateText", printDateText);
 				parameters.put("printDateValue", printDateValue);
 
@@ -242,6 +244,21 @@ public class ServiceGroupPrintTask implements TaskInterface {
 				parameters.put("familyText", familyText);
 				parameters.put("familyNumText", familyNumText);
 
+				String familyFooterPattern = this.settings.getLanguage()
+						.getString("jasper.layout.servicegroup.familyfooterpattern");
+
+				parameters.put("familyGroup1", String.format(familyFooterPattern, familiesGroup1.size()));
+				parameters.put("familyGroup2", String.format(familyFooterPattern, familiesGroup2.size()));
+				parameters.put("familyGroup3", String.format(familyFooterPattern, familiesGroup3.size()));
+				parameters.put("familyGroup4", String.format(familyFooterPattern, familiesGroup4.size()));
+				parameters.put("familyGroup5", String.format(familyFooterPattern, familiesGroup5.size()));
+
+				parameters.put("familyNumGroup1", getTotal(familiesGroup1));
+				parameters.put("familyNumGroup2", getTotal(familiesGroup2));
+				parameters.put("familyNumGroup3", getTotal(familiesGroup3));
+				parameters.put("familyNumGroup4", getTotal(familiesGroup4));
+				parameters.put("familyNumGroup5", getTotal(familiesGroup5));
+
 //				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReportServiceGroup, parameters,
 //						new JREmptyDataSource());
 
@@ -260,6 +277,16 @@ public class ServiceGroupPrintTask implements TaskInterface {
 		} else {
 			hashMap.put("status", "0");
 		}
+	}
+
+	private String getTotal(ArrayList<FamilyInfo> familiesGroup) {
+
+		int total = 0;
+
+		for (FamilyInfo fi : familiesGroup)
+			total += fi.getFamilyNum();
+
+		return String.valueOf(total);
 	}
 
 	private ArrayList<JRServiceGroupRow> buildJRServiceGroupRows(ArrayList<FamilyInfo> f1, ArrayList<FamilyInfo> f2,
@@ -353,8 +380,14 @@ public class ServiceGroupPrintTask implements TaskInterface {
 
 		String familyName = family.getSpInf1Decrypted();
 		int familyNum = checkFamilyMembers(family.getSpFamID());
-		FamilyInfo familyInfo = new FamilyInfo(familyName, familyNum);
-		list.add(familyInfo);
+
+		if (checkFamilyMembersInactive(family.getSpFamID()))
+			familyName += "*";
+
+		if (familyNum > 0) {
+			FamilyInfo familyInfo = new FamilyInfo(familyName, familyNum);
+			list.add(familyInfo);
+		}
 	}
 
 	private int checkFamilyMembers(int familyID) {
@@ -363,9 +396,20 @@ public class ServiceGroupPrintTask implements TaskInterface {
 
 		for (Member m : this.membersList)
 			if (m.getSpInf5() == familyID)
-				count++;
+				if (m.getSpInf7() == 1 || m.getSpInf8() == 1) // Proclamatore
+					count++;
 
 		return count;
+	}
+
+	private boolean checkFamilyMembersInactive(int familyID) {
+
+		for (Member m : this.membersList)
+			if (m.getSpInf5() == familyID)
+				if (m.getSpInf38() == 1) // Inattivo
+					return true;
+
+		return false;
 	}
 
 	@Override
