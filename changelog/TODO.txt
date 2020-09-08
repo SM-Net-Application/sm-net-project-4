@@ -1,23 +1,19 @@
 
-	- Disastri Naturali
-		- Verificare l'UPDATE delle informazioni
-		- Stampare l'elenco per Gruppo di Servizio
-		- Filtro : Componenti / Famiglie
-	
-	- Sorvegliante:
-		- Mostra solo le settimane presenti nel database
-		- Eliminare settimana
-			
 	- Commemorazione
 		- Mostra solo le settimane presenti nel database
 		- La stampa del programma poi deve rimuovere solo 1 adunanza (infrasettimanale o del fine settimana)
 		
 	- Assemblee / Congressi
 		- Mostra solo le settimane presenti nel database
-			
-	- Discorsi pubblici
-		- Verificare l'UPDATE/INSERT delle informazioni
-		- Filtro : Presidente / Oratore / Congregazione / Tema
+
+	- Sorvegliante:
+		- Mostra solo le settimane presenti nel database
+		- Eliminare settimana
+
+	- Disastri Naturali
+		- Verificare l'UPDATE delle informazioni
+		- Stampare l'elenco per Gruppo di Servizio
+		- Filtro : Componenti / Famiglie
 		
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)

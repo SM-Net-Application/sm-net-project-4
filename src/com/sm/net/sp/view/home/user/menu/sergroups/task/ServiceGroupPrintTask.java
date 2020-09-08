@@ -217,6 +217,8 @@ public class ServiceGroupPrintTask implements TaskInterface {
 				parameters.put("congregationName", congregationName);
 				parameters.put("programmName", programmName);
 				parameters.put("programmType", programmType);
+				parameters.put("programmComplete", this.complete);
+				
 				parameters.put("printDateText", printDateText);
 				parameters.put("printDateValue", printDateValue);
 

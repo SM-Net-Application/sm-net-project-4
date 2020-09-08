@@ -637,6 +637,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				AnchorPane layout = fxmlLoader.load();
 
 				UserMenuPublicMeetings ctrl = (UserMenuPublicMeetings) fxmlLoader.getController();
+				ctrl.setApplication(this);
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.setAlertBuilder(this.alertBuilder);

@@ -2,22 +2,24 @@ package com.sm.net.sp.view.home.user.menu.publicmeetings;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.EnumPrintLayouts;
-import com.sm.net.sp.model.Info;
+import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
-import com.sm.net.sp.view.printlayout.PrintLayout;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.publicmeetings.task.PublicMeetingsInitDataLoadTask;
 import com.sm.net.util.DateUtil;
+import com.smnet.core.task.TaskManager;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -25,7 +27,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
@@ -33,6 +34,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -65,8 +67,11 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 	private TableColumn<Week, String> speakerCongregationColumn;
 	@FXML
 	private TableColumn<Week, String> talkColumn;
+//	@FXML
+//	private Button printButton;
+
 	@FXML
-	private Button printButton;
+	private TextField filterTextField;
 
 	private Settings settings;
 	private Language language;
@@ -77,7 +82,13 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 
 	private AlertBuilderOld alertBuilder;
 
-	private String congregationName;
+	private SupportPlannerView application;
+
+	private ObservableList<DateAndTime> dateAndTimeList;
+	private ObservableList<Place> placesList;
+	private HashMap<String, String> configs;
+
+//	private String congregationName;
 
 	@FXML
 	private void initialize() {
@@ -120,7 +131,9 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		calendarTab.getStyleClass().add("tab_001");
 		weekTableView.getStyleClass().add("table_view_001");
 
-		printButton.getStyleClass().add("button_image_001");
+		this.filterTextField.getStyleClass().add("text_field_001");
+
+//		printButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -163,27 +176,33 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		talkColumn.setText(language.getString("sp.meetings.publictalktheme"));
 		talkColumn.setMinWidth(300.0);
 
-		printButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		printButton.setText(null);
+//		printButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
+//		printButton.setText(null);
 	}
 
 	private void initData() {
 		this.weekTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		loadGeneralInfo();
+//		loadGeneralInfo();
 		loadCalendar();
 		updateMembers();
+
+		String waitMessage = this.language.getString("datetime.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new PublicMeetingsInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+						this));
 	}
 
-	private void loadGeneralInfo() {
-		Actions.getUserMenuMeetingsInfo(settings, ownerStage, this);
-	}
-
-	@Override
-	public void updateInfo(Info info) {
-		super.updateInfo(info);
-
-		this.congregationName = info.getCongr();
-	}
+//	private void loadGeneralInfo() {
+//		Actions.getUserMenuMeetingsInfo(settings, ownerStage, this);
+//	}
+//
+//	@Override
+//	public void updateInfo(Info info) {
+//		super.updateInfo(info);
+//
+//		this.congregationName = info.getCongr();
+//	}
 
 	private void loadCalendar() {
 
@@ -275,45 +294,102 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 	private void listeners() {
 
 		listenerWeekTableView();
-		listenerPrintButton();
+
+		this.filterTextField.textProperty().addListener((observable, oldValue, newValue) -> updateFilter(newValue));
+
+//		listenerPrintButton();
 	}
 
-	private void listenerPrintButton() {
-		this.printButton.setOnAction(event -> printWeeks());
+	private void updateFilter(String newValue) {
+
+		if (newValue.isEmpty())
+			this.weekTableView.setItems(this.calendar);
+		else {
+			ObservableList<Week> filteredList = buildList(newValue);
+			this.weekTableView.setItems(filteredList);
+		}
+
+		this.weekTableView.refresh();
 	}
 
-	private void printWeeks() {
+	private ObservableList<Week> buildList(String filter) {
 
-		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
+		ObservableList<Week> list = FXCollections.observableArrayList();
 
-			ArrayList<Week> printableWeeks = new ArrayList<>();
+		StreamSupport.stream(this.calendar.spliterator(), false).filter(obj -> matchFilter(obj, filter))
+				.forEach(obj -> list.add(obj));
 
-			ObservableList<Week> weeks = this.weekTableView.getSelectionModel().getSelectedItems();
-			for (Week week : weeks)
-				if (week.spWeekIDProperty() != null)
-					printableWeeks.add(week);
+		return list;
+	}
 
-			if (printableWeeks.size() > 0) {
+	private boolean matchFilter(Week obj, String match) {
 
-				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language);
+		String filter = match.toLowerCase();
 
-				if (selectedLayout != null) {
+		String president = "";
 
-//					switch (selectedLayout) {
+		if (obj.spWeekIDProperty() != null) {
+			if (obj.spInf30Property() != null) {
 
-//					case MEETING_COMPLETE_NAME_EXTENDED:
-//						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage,
-//								language, true);
-//						break;
+				int spInf30 = obj.getSpInf30();
+				if (this.membersList != null) {
 
-//					default:
-//						break;
-//					}
+					Optional<Member> find = StreamSupport.stream(this.membersList.spliterator(), false)
+							.filter(m -> m.getSpMemberID() == spInf30).findFirst();
 
+					if (find.isPresent())
+						president = find.get().getNameStyle1();
 				}
 			}
+
+			String talker = obj.getSpInf33();
+			String congregation = obj.getSpInf34();
+			String theme = obj.getSpInf32();
+
+			return president.toLowerCase().contains(filter) || talker.toLowerCase().contains(filter)
+					|| congregation.toLowerCase().contains(filter) || theme.toLowerCase().contains(filter);
+
 		}
+
+		return false;
 	}
+
+//	private void listenerPrintButton() {
+//		this.printButton.setOnAction(event -> printWeeks());
+//	}
+
+//	private void printWeeks() {
+//
+//		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
+//
+//			ArrayList<Week> printableWeeks = new ArrayList<>();
+//
+//			ObservableList<Week> weeks = this.weekTableView.getSelectionModel().getSelectedItems();
+//			for (Week week : weeks)
+//				if (week.spWeekIDProperty() != null)
+//					printableWeeks.add(week);
+//
+//			if (printableWeeks.size() > 0) {
+//
+//				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language);
+//
+//				if (selectedLayout != null) {
+//
+////					switch (selectedLayout) {
+//
+////					case MEETING_COMPLETE_NAME_EXTENDED:
+////						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage,
+////								language, true);
+////						break;
+//
+////					default:
+////						break;
+////					}
+//
+//				}
+//			}
+//		}
+//	}
 
 	private void listenerWeekTableView() {
 		weekTableView.setRowFactory(param -> {
@@ -415,13 +491,13 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		this.membersList = membersList;
 	}
 
-	public String getCongregationName() {
-		return congregationName;
-	}
-
-	public void setCongregationName(String congregationName) {
-		this.congregationName = congregationName;
-	}
+//	public String getCongregationName() {
+//		return congregationName;
+//	}
+//
+//	public void setCongregationName(String congregationName) {
+//		this.congregationName = congregationName;
+//	}
 
 	public ObservableList<Week> getDatabaseWeeks() {
 		return databaseWeeks;
@@ -438,4 +514,37 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
+	public ObservableList<DateAndTime> getDateAndTimeList() {
+		return dateAndTimeList;
+	}
+
+	public void setDateAndTimeList(ObservableList<DateAndTime> dateAndTimeList) {
+		this.dateAndTimeList = dateAndTimeList;
+	}
+
+	public ObservableList<Place> getPlacesList() {
+		return placesList;
+	}
+
+	public void setPlacesList(ObservableList<Place> placesList) {
+		this.placesList = placesList;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
+	}
+
 }

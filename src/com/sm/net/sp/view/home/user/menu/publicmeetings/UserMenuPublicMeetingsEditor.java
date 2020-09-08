@@ -1,17 +1,23 @@
 package com.sm.net.sp.view.home.user.menu.publicmeetings;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.EnumPlaceType;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
+import com.sm.net.sp.utils.DateAndTimeUtils;
+import com.sm.net.sp.utils.PlaceUtils;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.util.Crypt;
@@ -22,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -29,6 +36,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -63,6 +71,13 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	private Label publicTalkTalkerCongrLabel;
 	@FXML
 	private TextField publicTalkTalkerCongrTextField;
+
+	@FXML
+	private CheckBox presidentOnlyPrayPublicMeetingLabel;
+	@FXML
+	private Label publicTalkMinLabel;
+	@FXML
+	private TextField publicTalkMinTextField;
 
 	private Settings settings;
 	private Language language;
@@ -99,6 +114,10 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 		publicTalkTalkerCongrTextField.getStyleClass().add("text_field_001");
 
 		saveWeekButton.getStyleClass().add("button_image_001");
+
+		this.presidentOnlyPrayPublicMeetingLabel.getStyleClass().add("check_box_001");
+		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
+		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
 	}
 
 	private void viewUpdate() {
@@ -112,8 +131,15 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 		this.publicTalkTalkerLabel.setText(language.getString("sp.meetings.publictalktalker"));
 		this.publicTalkTalkerCongrLabel.setText(language.getString("sp.meetings.publictalktalkercongr"));
 
-		this.saveWeekButton.setText(null);
-		this.saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
+		Tooltip saveTooltip = new Tooltip(this.language.getString("publicmeeting.editor.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveWeekButton.setTooltip(saveTooltip);
+		this.saveWeekButton.setText("");
+		this.saveWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
+
+		this.presidentOnlyPrayPublicMeetingLabel
+				.setText(this.language.getString("meetings.presidentpublicmeeting.onlypray"));
+		this.publicTalkMinLabel.setText(this.language.getString("meetings.publictalk.min"));
 	}
 
 	public void objectInitialize() {
@@ -125,7 +151,8 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 	private void contextMenu() {
 
-		presidentPublicMeetingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRESIDENT));
+		this.presidentPublicMeetingComboBox
+				.setContextMenu(this.createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRESIDENT));
 	}
 
 	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
@@ -260,6 +287,18 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 				this.publicTalkThemeTextField.setText(this.selectedWeek.getSpInf32());
 				this.publicTalkTalkerTextField.setText(this.selectedWeek.getSpInf33());
 				this.publicTalkTalkerCongrTextField.setText(this.selectedWeek.getSpInf34());
+
+				this.presidentOnlyPrayPublicMeetingLabel.setSelected(this.selectedWeek.getSpInf41() == 1);
+				this.publicTalkMinTextField.setText(this.selectedWeek.getSpInf42());
+
+			} else {
+
+				// Minuti discorso pubblico
+				String publicTalkMin = this.ownerCtrl.getConfigs().get("inf2");
+				if (publicTalkMin != null) {
+					publicTalkMin = Crypt.decrypt(publicTalkMin, this.settings.getDatabaseSecretKey());
+					this.publicTalkMinTextField.setText(publicTalkMin);
+				}
 			}
 	}
 
@@ -334,6 +373,46 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 			String spInf39 = emptyTextEncrypted;
 			String spInf40 = "0";
 
+			int spInf41 = this.presidentOnlyPrayPublicMeetingLabel.isSelected() ? 1 : 0;
+
+			String spInf42 = Crypt.encrypt(this.publicTalkMinTextField.getText(), this.settings.getDatabaseSecretKey());
+
+			String spInf43 = emptyTextEncrypted;
+
+			int spInf44 = 1;
+			int spInf45 = 0;
+			int spInf46 = 0;
+
+			int spInf47 = 6;
+			int spInf48 = 0;
+			int spInf49 = 0;
+
+			ObservableList<DateAndTime> dateAndTimeList = this.ownerCtrl.getDateAndTimeList();
+			DateAndTime dateAndTime = DateAndTimeUtils.check(dateAndTimeList, this.selectedWeek.getFrom());
+
+			if (dateAndTime != null) {
+
+				spInf44 = dateAndTime.getDay1().get();
+				spInf45 = dateAndTime.getHour1().get();
+				spInf46 = dateAndTime.getMinute1().get();
+
+				spInf47 = dateAndTime.getDay2().get();
+				spInf48 = dateAndTime.getHour2().get();
+				spInf49 = dateAndTime.getMinute2().get();
+			}
+
+			String place = initPlace();
+
+			String spInf50 = place.isEmpty() ? emptyTextEncrypted
+					: Crypt.encrypt(place, this.settings.getDatabaseSecretKey());
+
+			int spInf51 = 0;
+
+			String spInf52 = place.isEmpty() ? emptyTextEncrypted
+					: Crypt.encrypt(place, this.settings.getDatabaseSecretKey());
+
+			int spInf53 = 0;
+
 			String spInfMinistryParts = "";
 			String spInfChristiansParts = "";
 
@@ -350,16 +429,47 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
 
-				// TODO : sistemare insert week anche per la maschera discorsi pubblici
-				
-//				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
-//						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
-//						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
-//						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
-//						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
-//						ownerCtrl);
+				Actions.insertWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
+						spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
+						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
+						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
+						spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50,
+						spInf51, spInf52, spInf53, spInfMinistryParts, spInfChristiansParts, settings, ownerStage,
+						ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
+	}
+
+	private String initPlace() {
+
+		ObservableList<Place> placesList = this.ownerCtrl.getPlacesList();
+		Place found = null;
+		for (Place place : placesList)
+			if (place.getType().get() == EnumPlaceType.KINGDOMHALL)
+				if (place.getDef().get()) {
+					found = place;
+					break;
+				}
+
+		if (found != null)
+			return placeToText(found);
+
+		return "";
+	}
+
+	private String placeToText(Place found) {
+
+		String addr = "";
+
+		HashMap<String, String> configs = this.ownerCtrl.getConfigs();
+		String pattern = configs.get("inf1");
+		if (pattern != null) {
+			pattern = Crypt.decrypt(pattern, this.settings.getDatabaseSecretKey());
+			addr = PlaceUtils.toText(found, pattern);
+		} else
+			addr = PlaceUtils.toText(found);
+
+		return addr;
 	}
 
 	private boolean checkFields() {

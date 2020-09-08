@@ -74,6 +74,15 @@ Data di pubblicazione : ..-..-....
 	* Sezione : Gruppi di Servizio di campo
 		- Modifica della GUI
 		- Layout di stampa Gruppi di Servizio (al momento solo per 5 gruppi)
+			- Layout Elenco per tabella informazioni
+			- Layout Elenco completo (proclamatori e inattivi)
+
+	* Sezione : Discorsi pubblici
+		- Modifica della GUI
+		- Filtro discorsi
+		- Nuove informazioni:
+			- Solo preghiera
+			- Minuti discorso pubblico
 
 	* Layout : Programma adunanze
 		- Studio biblico di congregazione :
