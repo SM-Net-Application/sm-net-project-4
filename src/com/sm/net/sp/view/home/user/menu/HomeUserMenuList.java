@@ -218,8 +218,10 @@ public class HomeUserMenuList {
 			ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;
 		case CONVENTIONS:
+			this.ctrlSupportPlannerView.viewConventions();
 			break;
 		case MEMORIAL:
+			this.ctrlSupportPlannerView.viewMemorial();
 			break;
 		case MONITOR:
 			ctrlSupportPlannerView.viewHomeUserMenuMonitor();

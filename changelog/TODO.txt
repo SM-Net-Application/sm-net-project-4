@@ -21,6 +21,7 @@
 		- Nelle adunanze determinare il titolo in base al numero inserito
 		- Nel layout stampare anche il titolo
 				
+	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri

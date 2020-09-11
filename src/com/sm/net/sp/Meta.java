@@ -16,11 +16,14 @@ import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.config.UserMenuConfig;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.conven.Convention;
+import com.sm.net.sp.view.home.user.menu.conven.ConventionEditor;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.dateandtime.MenuDateAndTimeAdd;
 import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
+import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
@@ -173,6 +176,10 @@ public class Meta {
 		public static final URL HOME_USER_MENU_GENERALINFO = UserMenuGeneralInfo.class
 				.getResource("UserMenuGeneralInfo.fxml");
 		public static final URL HOME_USER_MENU_CONFIG = UserMenuConfig.class.getResource("UserMenuConfig.fxml");
+		public static final URL CONVENTIONS_FXML_URL = Convention.class.getResource("Convention.fxml");
+		public static final URL CONVENTIONS_EDITOR_FXML_URL = ConventionEditor.class
+				.getResource("ConventionEditor.fxml");
+		public static final URL MEMORIAL_FXML_URL = Memorial.class.getResource("Memorial.fxml");
 	}
 
 	public static class Themes {
@@ -270,6 +277,11 @@ public class Meta {
 
 		public static final String MAPS = "maps.png";
 		public static final String FILTER = "filter.png";
+		
+		public static final String ONE = "day1.png";
+		public static final String TWO = "day2.png";
+		public static final String THREE = "day3.png";
+		public static final String QUESTION = "questions.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

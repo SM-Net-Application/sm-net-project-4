@@ -29,10 +29,12 @@ import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.config.UserMenuConfig;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
+import com.sm.net.sp.view.home.user.menu.conven.Convention;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
+import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
@@ -823,7 +825,55 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			} catch (IOException e) {
 			}
 		}
+	}
 
+	public void viewConventions() {
+
+		if (this.center != 19) {
+
+			this.center = 19;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.CONVENTIONS_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				Convention ctrl = (Convention) fxmlLoader.getController();
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+
+	}
+
+	public void viewMemorial() {
+
+		if (this.center != 20) {
+
+			this.center = 20;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MEMORIAL_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				Memorial ctrl = (Memorial) fxmlLoader.getController();
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
 	}
 
 	@Override
