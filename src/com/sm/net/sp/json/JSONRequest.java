@@ -10,6 +10,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.util.enumeration.JSONStatus;
 
@@ -790,6 +791,100 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject CONVENTION_INSERT(WeekConvention convention) {
+
+		JSONObject jsonObj = create(Integer.valueOf(47));
+
+		jsonObj.put("spInf1", convention.getSpInf1());
+		jsonObj.put("spInf2", convention.getSpInf2());
+		jsonObj.put("spInf3", convention.getSpInf3());
+		jsonObj.put("spInf4", convention.getSpInf4());
+		jsonObj.put("spInf5", convention.getSpInf5());
+		jsonObj.put("spInf6", convention.getSpInf6());
+		jsonObj.put("spInf7", convention.getSpInf7());
+		jsonObj.put("spInf8", convention.getSpInf8());
+		jsonObj.put("spInf9", convention.getSpInf9());
+		jsonObj.put("spInf10", convention.getSpInf10());
+		jsonObj.put("spInf11", convention.getSpInf11());
+		jsonObj.put("spInf12", convention.getSpInf12());
+		jsonObj.put("spInf13", convention.getSpInf13());
+		jsonObj.put("spInf14", convention.getSpInf14());
+		jsonObj.put("spInf15", convention.getSpInf15());
+		jsonObj.put("spInf16", convention.getSpInf16());
+		jsonObj.put("spInf17", convention.getSpInf17());
+		jsonObj.put("spInf18", convention.getSpInf18());
+		jsonObj.put("spInf19", convention.getSpInf19());
+		jsonObj.put("spInf20", convention.getSpInf20());
+		jsonObj.put("spInf21", convention.getSpInf21());
+		jsonObj.put("spInf22", convention.getSpInf22());
+		jsonObj.put("spInf23", convention.getSpInf23());
+		jsonObj.put("spInf24", convention.getSpInf24());
+		jsonObj.put("spInf25", convention.getSpInf25());
+		jsonObj.put("spInf26", convention.getSpInf26());
+		jsonObj.put("spInf27", convention.getSpInf27());
+		jsonObj.put("spInf28", convention.getSpInf28());
+		jsonObj.put("spInf29", convention.getSpInf29());
+		jsonObj.put("spInf30", convention.getSpInf30());
+		jsonObj.put("spInf31", convention.getSpInf31());
+
+		return jsonObj;
+	}
+
+	public static JSONObject CONVENTION_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(48));
+		return jsonObj;
+	}
+
+	public static JSONObject CONVENTION_UPDATE(WeekConvention convention) {
+
+		JSONObject jsonObj = create(Integer.valueOf(49));
+
+		jsonObj.put("spConvenID", convention.getConvenID());
+		jsonObj.put("spInf1", convention.getSpInf1());
+		jsonObj.put("spInf2", convention.getSpInf2());
+		jsonObj.put("spInf3", convention.getSpInf3());
+		jsonObj.put("spInf4", convention.getSpInf4());
+		jsonObj.put("spInf5", convention.getSpInf5());
+		jsonObj.put("spInf6", convention.getSpInf6());
+		jsonObj.put("spInf7", convention.getSpInf7());
+		jsonObj.put("spInf8", convention.getSpInf8());
+		jsonObj.put("spInf9", convention.getSpInf9());
+		jsonObj.put("spInf10", convention.getSpInf10());
+		jsonObj.put("spInf11", convention.getSpInf11());
+		jsonObj.put("spInf12", convention.getSpInf12());
+		jsonObj.put("spInf13", convention.getSpInf13());
+		jsonObj.put("spInf14", convention.getSpInf14());
+		jsonObj.put("spInf15", convention.getSpInf15());
+		jsonObj.put("spInf16", convention.getSpInf16());
+		jsonObj.put("spInf17", convention.getSpInf17());
+		jsonObj.put("spInf18", convention.getSpInf18());
+		jsonObj.put("spInf19", convention.getSpInf19());
+		jsonObj.put("spInf20", convention.getSpInf20());
+		jsonObj.put("spInf21", convention.getSpInf21());
+		jsonObj.put("spInf22", convention.getSpInf22());
+		jsonObj.put("spInf23", convention.getSpInf23());
+		jsonObj.put("spInf24", convention.getSpInf24());
+		jsonObj.put("spInf25", convention.getSpInf25());
+		jsonObj.put("spInf26", convention.getSpInf26());
+		jsonObj.put("spInf27", convention.getSpInf27());
+		jsonObj.put("spInf28", convention.getSpInf28());
+		jsonObj.put("spInf29", convention.getSpInf29());
+		jsonObj.put("spInf30", convention.getSpInf30());
+		jsonObj.put("spInf31", convention.getSpInf31());
+
+		return jsonObj;
+	}
+
+	public static JSONObject CONVENTION_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(50));
+
+		jsonObj.put("spConvenID", id);
+
+		return jsonObj;
+	}
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();
@@ -835,4 +930,5 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
+
 }

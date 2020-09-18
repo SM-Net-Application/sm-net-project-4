@@ -1,19 +1,31 @@
 package com.sm.net.sp.view.home.user.menu.conven;
 
+import java.time.LocalDate;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.EnumConventionType;
+import com.sm.net.sp.model.EnumDays;
 import com.sm.net.sp.model.UpdateDataAdapter;
-import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.conven.task.WeekConventionSaveTask;
+import com.smnet.core.task.TaskManager;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class ConventionEditor extends UpdateDataAdapter {
 
@@ -33,6 +45,147 @@ public class ConventionEditor extends UpdateDataAdapter {
 	@FXML
 	private Tab questionsTab;
 
+	@FXML
+	private Label typeLabel;
+	@FXML
+	private Label yearLabel;
+	@FXML
+	private Label themeLabel;
+
+	@FXML
+	private ComboBox<EnumConventionType> typeComboBox;
+	@FXML
+	private TextField yearTextField;
+	@FXML
+	private TextField themeTextField;
+
+	@FXML
+	private Label day1CircuitAssemblyLabel;
+	@FXML
+	private Label day1RegionalConventionLabel;
+	@FXML
+	private Label day2RegionalConventionLabel;
+	@FXML
+	private Label day3RegionalConventionLabel;
+	@FXML
+	private Label questionsCircuitAssemblyLabel;
+
+	@FXML
+	private Label scriptureDay1Label;
+	@FXML
+	private Label dayLabel;
+	@FXML
+	private Label timeDay1Label;
+	@FXML
+	private Label timeSeparator1Day1Label;
+	@FXML
+	private Label timeSeparator2Day1Label;
+	@FXML
+	private Label timeSeparator3Day1Label;
+
+	@FXML
+	private TextField scriptureDay1TextField;
+	@FXML
+	private ComboBox<EnumDays> dayComboBox;
+	@FXML
+	private ComboBox<Integer> startHourDay1ComboBox;
+	@FXML
+	private ComboBox<Integer> startMinuteDay1ComboBox;
+	@FXML
+	private ComboBox<Integer> endHourDay1ComboBox;
+	@FXML
+	private ComboBox<Integer> endMinuteDay1ComboBox;
+
+	@FXML
+	private Label scriptureDay2Label;
+	@FXML
+	private Label timeDay2Label;
+	@FXML
+	private Label timeSeparator1Day2Label;
+	@FXML
+	private Label timeSeparator2Day2Label;
+	@FXML
+	private Label timeSeparator3Day2Label;
+
+	@FXML
+	private TextField scriptureDay2TextField;
+	@FXML
+	private ComboBox<Integer> startHourDay2ComboBox;
+	@FXML
+	private ComboBox<Integer> startMinuteDay2ComboBox;
+	@FXML
+	private ComboBox<Integer> endHourDay2ComboBox;
+	@FXML
+	private ComboBox<Integer> endMinuteDay2ComboBox;
+
+	@FXML
+	private Label scriptureDay3Label;
+	@FXML
+	private Label timeDay3Label;
+	@FXML
+	private Label timeSeparator1Day3Label;
+	@FXML
+	private Label timeSeparator2Day3Label;
+	@FXML
+	private Label timeSeparator3Day3Label;
+
+	@FXML
+	private TextField scriptureDay3TextField;
+	@FXML
+	private ComboBox<Integer> startHourDay3ComboBox;
+	@FXML
+	private ComboBox<Integer> startMinuteDay3ComboBox;
+	@FXML
+	private ComboBox<Integer> endHourDay3ComboBox;
+	@FXML
+	private ComboBox<Integer> endMinuteDay3ComboBox;
+
+	@FXML
+	private Label questionHeaderLabel;
+	@FXML
+	private Label question1Label;
+	@FXML
+	private Label question2Label;
+	@FXML
+	private Label question3Label;
+	@FXML
+	private Label question4Label;
+	@FXML
+	private Label question5Label;
+	@FXML
+	private Label question6Label;
+	@FXML
+	private Label question7Label;
+	@FXML
+	private Label question8Label;
+	@FXML
+	private Label question9Label;
+	@FXML
+	private Label question10Label;
+
+	@FXML
+	private TextField questionHeaderTextField;
+	@FXML
+	private TextField question1TextField;
+	@FXML
+	private TextField question2TextField;
+	@FXML
+	private TextField question3TextField;
+	@FXML
+	private TextField question4TextField;
+	@FXML
+	private TextField question5TextField;
+	@FXML
+	private TextField question6TextField;
+	@FXML
+	private TextField question7TextField;
+	@FXML
+	private TextField question8TextField;
+	@FXML
+	private TextField question9TextField;
+	@FXML
+	private TextField question10TextField;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -44,6 +197,8 @@ public class ConventionEditor extends UpdateDataAdapter {
 	private Tab thisTab;
 
 	private ObservableList<WeekConvention> calendar;
+
+	private SupportPlannerView application;
 
 	@FXML
 	private void initialize() {
@@ -60,6 +215,82 @@ public class ConventionEditor extends UpdateDataAdapter {
 		this.day3Tab.getStyleClass().add("tab_001");
 		this.questionsTab.getStyleClass().add("tab_001");
 
+		this.typeLabel.getStyleClass().add("label_set_001");
+		this.yearLabel.getStyleClass().add("label_set_001");
+		this.themeLabel.getStyleClass().add("label_set_001");
+
+		this.typeComboBox.getStyleClass().add("combo_box_002");
+		this.yearTextField.getStyleClass().add("text_field_002");
+		this.themeTextField.getStyleClass().add("text_field_001");
+
+		this.day1CircuitAssemblyLabel.getStyleClass().add("label_001");
+		this.day1RegionalConventionLabel.getStyleClass().add("label_001");
+		this.day2RegionalConventionLabel.getStyleClass().add("label_001");
+		this.day3RegionalConventionLabel.getStyleClass().add("label_001");
+		this.questionsCircuitAssemblyLabel.getStyleClass().add("label_001");
+
+		this.scriptureDay1Label.getStyleClass().add("label_set_001");
+		this.dayLabel.getStyleClass().add("label_set_001");
+		this.timeDay1Label.getStyleClass().add("label_set_001");
+		this.timeSeparator1Day1Label.getStyleClass().add("label_001");
+		this.timeSeparator2Day1Label.getStyleClass().add("label_001");
+		this.timeSeparator3Day1Label.getStyleClass().add("label_001");
+
+		this.scriptureDay1TextField.getStyleClass().add("text_field_001");
+		this.dayComboBox.getStyleClass().add("combo_box_001");
+		this.startHourDay1ComboBox.getStyleClass().add("combo_box_002");
+		this.startMinuteDay1ComboBox.getStyleClass().add("combo_box_002");
+		this.endHourDay1ComboBox.getStyleClass().add("combo_box_002");
+		this.endMinuteDay1ComboBox.getStyleClass().add("combo_box_002");
+
+		this.scriptureDay2Label.getStyleClass().add("label_set_001");
+		this.timeDay2Label.getStyleClass().add("label_set_001");
+		this.timeSeparator1Day2Label.getStyleClass().add("label_001");
+		this.timeSeparator2Day2Label.getStyleClass().add("label_001");
+		this.timeSeparator3Day2Label.getStyleClass().add("label_001");
+
+		this.scriptureDay2TextField.getStyleClass().add("text_field_001");
+		this.startHourDay2ComboBox.getStyleClass().add("combo_box_002");
+		this.startMinuteDay2ComboBox.getStyleClass().add("combo_box_002");
+		this.endHourDay2ComboBox.getStyleClass().add("combo_box_002");
+		this.endMinuteDay2ComboBox.getStyleClass().add("combo_box_002");
+
+		this.scriptureDay3Label.getStyleClass().add("label_set_001");
+		this.timeDay3Label.getStyleClass().add("label_set_001");
+		this.timeSeparator1Day3Label.getStyleClass().add("label_001");
+		this.timeSeparator2Day3Label.getStyleClass().add("label_001");
+		this.timeSeparator3Day3Label.getStyleClass().add("label_001");
+
+		this.scriptureDay3TextField.getStyleClass().add("text_field_001");
+		this.startHourDay3ComboBox.getStyleClass().add("combo_box_002");
+		this.startMinuteDay3ComboBox.getStyleClass().add("combo_box_002");
+		this.endHourDay3ComboBox.getStyleClass().add("combo_box_002");
+		this.endMinuteDay3ComboBox.getStyleClass().add("combo_box_002");
+
+		this.questionHeaderLabel.getStyleClass().add("label_set_001");
+		this.question1Label.getStyleClass().add("label_set_001");
+		this.question2Label.getStyleClass().add("label_set_001");
+		this.question3Label.getStyleClass().add("label_set_001");
+		this.question4Label.getStyleClass().add("label_set_001");
+		this.question5Label.getStyleClass().add("label_set_001");
+		this.question6Label.getStyleClass().add("label_set_001");
+		this.question7Label.getStyleClass().add("label_set_001");
+		this.question8Label.getStyleClass().add("label_set_001");
+		this.question9Label.getStyleClass().add("label_set_001");
+		this.question10Label.getStyleClass().add("label_set_001");
+
+		this.questionHeaderTextField.getStyleClass().add("text_field_001");
+		this.question1TextField.getStyleClass().add("text_field_001");
+		this.question2TextField.getStyleClass().add("text_field_001");
+		this.question3TextField.getStyleClass().add("text_field_001");
+		this.question4TextField.getStyleClass().add("text_field_001");
+		this.question5TextField.getStyleClass().add("text_field_001");
+		this.question6TextField.getStyleClass().add("text_field_001");
+		this.question7TextField.getStyleClass().add("text_field_001");
+		this.question8TextField.getStyleClass().add("text_field_001");
+		this.question9TextField.getStyleClass().add("text_field_001");
+		this.question10TextField.getStyleClass().add("text_field_001");
+
 		this.saveButton.getStyleClass().add("button_image_001");
 	}
 
@@ -69,6 +300,80 @@ public class ConventionEditor extends UpdateDataAdapter {
 
 		this.tabPane.setTabMinHeight(75);
 		this.tabPane.setTabMaxHeight(75);
+
+		this.typeLabel.setText(this.language.getString("conventioneditor.type"));
+		this.yearLabel.setText(this.language.getString("conventioneditor.year"));
+		this.themeLabel.setText(this.language.getString("conventioneditor.theme"));
+
+		this.day1CircuitAssemblyLabel
+				.setText(this.language.getString("conventioneditor.circuitassembly").toUpperCase());
+		this.day1RegionalConventionLabel
+				.setText(this.language.getString("conventioneditor.regionalconvention").toUpperCase());
+		this.day2RegionalConventionLabel
+				.setText(this.language.getString("conventioneditor.regionalconvention").toUpperCase());
+		this.day3RegionalConventionLabel
+				.setText(this.language.getString("conventioneditor.regionalconvention").toUpperCase());
+		this.questionsCircuitAssemblyLabel
+				.setText(this.language.getString("conventioneditor.circuitassembly").toUpperCase());
+
+		this.scriptureDay1Label.setText(this.language.getString("conventioneditor.scripture"));
+		this.dayLabel.setText(this.language.getString("conventioneditor.day"));
+		this.timeDay1Label.setText(this.language.getString("conventioneditor.time"));
+		this.timeSeparator1Day1Label.setText(this.language.getString("conventioneditor.separator1"));
+		this.timeSeparator2Day1Label.setText(this.language.getString("conventioneditor.separator2"));
+		this.timeSeparator3Day1Label.setText(this.language.getString("conventioneditor.separator1"));
+
+		this.scriptureDay2Label.setText(this.language.getString("conventioneditor.scripture"));
+		this.timeDay2Label.setText(this.language.getString("conventioneditor.time"));
+		this.timeSeparator1Day2Label.setText(this.language.getString("conventioneditor.separator1"));
+		this.timeSeparator2Day2Label.setText(this.language.getString("conventioneditor.separator2"));
+		this.timeSeparator3Day2Label.setText(this.language.getString("conventioneditor.separator1"));
+
+		this.scriptureDay3Label.setText(this.language.getString("conventioneditor.scripture"));
+		this.timeDay3Label.setText(this.language.getString("conventioneditor.time"));
+		this.timeSeparator1Day3Label.setText(this.language.getString("conventioneditor.separator1"));
+		this.timeSeparator2Day3Label.setText(this.language.getString("conventioneditor.separator2"));
+		this.timeSeparator3Day3Label.setText(this.language.getString("conventioneditor.separator1"));
+
+		this.questionHeaderLabel.setText(this.language.getString("conventioneditor.questionheader"));
+		this.question1Label.setText(this.language.getString("conventioneditor.question1"));
+		this.question2Label.setText(this.language.getString("conventioneditor.question2"));
+		this.question3Label.setText(this.language.getString("conventioneditor.question3"));
+		this.question4Label.setText(this.language.getString("conventioneditor.question4"));
+		this.question5Label.setText(this.language.getString("conventioneditor.question5"));
+		this.question6Label.setText(this.language.getString("conventioneditor.question6"));
+		this.question7Label.setText(this.language.getString("conventioneditor.question7"));
+		this.question8Label.setText(this.language.getString("conventioneditor.question8"));
+		this.question9Label.setText(this.language.getString("conventioneditor.question9"));
+		this.question10Label.setText(this.language.getString("conventioneditor.question10"));
+
+		this.typeComboBox.setMinWidth(550);
+
+		int width = 100;
+		this.startHourDay1ComboBox.setMinWidth(width);
+		this.startHourDay2ComboBox.setMinWidth(width);
+		this.startHourDay3ComboBox.setMinWidth(width);
+		this.endHourDay1ComboBox.setMinWidth(width);
+		this.endHourDay2ComboBox.setMinWidth(width);
+		this.endHourDay3ComboBox.setMinWidth(width);
+		this.startMinuteDay1ComboBox.setMinWidth(width);
+		this.startMinuteDay2ComboBox.setMinWidth(width);
+		this.startMinuteDay3ComboBox.setMinWidth(width);
+		this.endMinuteDay1ComboBox.setMinWidth(width);
+		this.endMinuteDay2ComboBox.setMinWidth(width);
+		this.endMinuteDay3ComboBox.setMinWidth(width);
+		this.startHourDay1ComboBox.setMaxWidth(width);
+		this.startHourDay2ComboBox.setMaxWidth(width);
+		this.startHourDay3ComboBox.setMaxWidth(width);
+		this.endHourDay1ComboBox.setMaxWidth(width);
+		this.endHourDay2ComboBox.setMaxWidth(width);
+		this.endHourDay3ComboBox.setMaxWidth(width);
+		this.startMinuteDay1ComboBox.setMaxWidth(width);
+		this.startMinuteDay2ComboBox.setMaxWidth(width);
+		this.startMinuteDay3ComboBox.setMaxWidth(width);
+		this.endMinuteDay1ComboBox.setMaxWidth(width);
+		this.endMinuteDay2ComboBox.setMaxWidth(width);
+		this.endMinuteDay3ComboBox.setMaxWidth(width);
 
 		Tooltip generalTabTooltip = new Tooltip(this.language.getString("conventioneditor.tooltip.tab.general"));
 		generalTabTooltip.getStyleClass().add("tooltip_001");
@@ -114,147 +419,243 @@ public class ConventionEditor extends UpdateDataAdapter {
 	}
 
 	private void initData() {
+
+		initFields();
 		loadSelectedWeek();
+	}
+
+	private void initFields() {
+
+		Callback<ListView<EnumConventionType>, ListCell<EnumConventionType>> callbackConventionType = callbackForConventionTypeComboBox();
+		this.typeComboBox.setButtonCell(callbackConventionType.call(null));
+		this.typeComboBox.setCellFactory(callbackConventionType);
+
+		this.typeComboBox.getItems().addAll(EnumConventionType.values());
+		this.typeComboBox.getSelectionModel().selectFirst();
+
+		this.yearTextField.setText(String.valueOf(LocalDate.now().getYear()));
+
+		Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackDay = callbackForDayComboBox();
+		this.dayComboBox.setButtonCell(callbackDay.call(null));
+		this.dayComboBox.setCellFactory(callbackDay);
+
+		this.dayComboBox.getItems().addAll(EnumDays.EMPTY, EnumDays.SAB, EnumDays.DOM);
+		this.dayComboBox.getSelectionModel().selectFirst();
+
+		this.initIntegers(this.startHourDay1ComboBox, 24);
+		this.initIntegers(this.startHourDay2ComboBox, 24);
+		this.initIntegers(this.startHourDay3ComboBox, 24);
+		this.initIntegers(this.endHourDay1ComboBox, 24);
+		this.initIntegers(this.endHourDay2ComboBox, 24);
+		this.initIntegers(this.endHourDay3ComboBox, 24);
+
+		this.initIntegers(this.startMinuteDay1ComboBox, 60);
+		this.initIntegers(this.startMinuteDay2ComboBox, 60);
+		this.initIntegers(this.startMinuteDay3ComboBox, 60);
+		this.initIntegers(this.endMinuteDay1ComboBox, 60);
+		this.initIntegers(this.endMinuteDay2ComboBox, 60);
+		this.initIntegers(this.endMinuteDay3ComboBox, 60);
+
+		this.startHourDay1ComboBox.getSelectionModel().selectFirst();
+		this.startHourDay2ComboBox.getSelectionModel().selectFirst();
+		this.startHourDay3ComboBox.getSelectionModel().selectFirst();
+		this.endHourDay1ComboBox.getSelectionModel().selectFirst();
+		this.endHourDay2ComboBox.getSelectionModel().selectFirst();
+		this.endHourDay3ComboBox.getSelectionModel().selectFirst();
+
+		this.startMinuteDay1ComboBox.getSelectionModel().selectFirst();
+		this.startMinuteDay2ComboBox.getSelectionModel().selectFirst();
+		this.startMinuteDay3ComboBox.getSelectionModel().selectFirst();
+		this.endMinuteDay1ComboBox.getSelectionModel().selectFirst();
+		this.endMinuteDay2ComboBox.getSelectionModel().selectFirst();
+		this.endMinuteDay3ComboBox.getSelectionModel().selectFirst();
+	}
+
+	private void initIntegers(ComboBox<Integer> cb, int size) {
+
+		for (int i = 0; i < size; i++)
+			cb.getItems().add(i);
+	}
+
+	private Callback<ListView<EnumConventionType>, ListCell<EnumConventionType>> callbackForConventionTypeComboBox() {
+		return param -> new EnumConventionTypeComboBoxListCell(this.getSettings().getLanguage());
+	}
+
+	private Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackForDayComboBox() {
+		return param -> new EnumDaysComboBoxListCell(this.getSettings().getLanguage());
 	}
 
 	private void loadSelectedWeek() {
 
 		if (this.selectedWeek != null)
-			if (this.selectedWeek.spWeekOvIDProperty() != null) {
+			if (this.selectedWeek.spConvenIDProperty() != null) {
 
-//				this.visitNumberTextField.setText(this.selectedWeek.getVisitNumber());
-//				this.overseerNameTextField.setText(this.selectedWeek.getSpInf3());
-//				this.overseerShortNameTextField.setText(this.selectedWeek.getSpInf4());
-//				this.overseerSurnameTextField.setText(this.selectedWeek.getSpInf5());
-//				this.wifeNameTextField.setText(this.selectedWeek.getSpInf6());
-//				this.wifeShortNameTextField.setText(this.selectedWeek.getSpInf7());
-//				this.talk1SongTextField.setText(this.selectedWeek.getSpInf8());
-//				this.talk1MinTextField.setText(this.selectedWeek.getSpInf9());
-//				this.talk1ThemeTextField.setText(this.selectedWeek.getSpInf10());
-//				this.talk2SongTextField.setText(this.selectedWeek.getSpInf11());
-//				this.talk2MinTextField.setText(this.selectedWeek.getSpInf12());
-//				this.talk2ThemeTextField.setText(this.selectedWeek.getSpInf13());
-//				this.talk3MinTextField.setText(this.selectedWeek.getSpInf14());
-//				this.talk3ThemeTextField.setText(this.selectedWeek.getSpInf15());
-//
-//				this.phoneOverseerTextField.setText(this.selectedWeek.getSpInf16());
-//				this.mailOverseerTextField.setText(this.selectedWeek.getSpInf17());
-//				this.phoneWifeTextField.setText(this.selectedWeek.getSpInf18());
-//				this.mailWifeTextField.setText(this.selectedWeek.getSpInf19());
-//
-//				this.substituteCheckBox.setSelected((this.selectedWeek.getSpInf20() == 1));
+				this.yearTextField.setText(String.valueOf(this.selectedWeek.getSpInf2()));
 
-			} else {
+				int spInf1 = this.selectedWeek.getSpInf1();
+				EnumConventionType type = EnumConventionType.getByID(spInf1);
+				if (type != null)
+					this.typeComboBox.getSelectionModel().select(type);
 
-				// TODO : Aggiungere le altre informazioni
+				this.themeTextField.setText(this.selectedWeek.getSpInf3());
 
-				int visitNumber = 1;
-				String overseerName = "";
-				String overseerShortName = "";
-				String overseerSurname = "";
-				String wifeName = "";
-				String wifeShortName = "";
-				String phoneOverseer = "";
-				String mailOverseer = "";
-				String phoneWife = "";
-				String mailWife = "";
+				this.startHourDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf8());
+				this.startMinuteDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf9());
+				this.endHourDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf10());
+				this.endMinuteDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf11());
 
-				for (WeekConvention wo : this.calendar) {
+				EnumDays day = EnumDays.getByID(this.selectedWeek.getSpInf7());
+				this.dayComboBox.getSelectionModel().select(day);
 
-					if (wo.spWeekOvIDProperty() != null) {
+				this.scriptureDay1TextField.setText(this.selectedWeek.getSpInf4());
 
-						visitNumber = wo.getSpInf2();
-						if (wo.getSpInf20() == 0) {
+				this.startHourDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf12());
+				this.startMinuteDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf13());
+				this.endHourDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf14());
+				this.endMinuteDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf15());
 
-							overseerName = wo.getSpInf3();
-							overseerShortName = wo.getSpInf4();
-							overseerSurname = wo.getSpInf5();
-							wifeName = wo.getSpInf6();
-							wifeShortName = wo.getSpInf7();
+				this.scriptureDay2TextField.setText(this.selectedWeek.getSpInf5());
 
-							phoneOverseer = wo.getSpInf16();
-							mailOverseer = wo.getSpInf17();
-							phoneWife = wo.getSpInf18();
-							mailWife = wo.getSpInf19();
-						}
-					}
-				}
+				this.startHourDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf16());
+				this.startMinuteDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf17());
+				this.endHourDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf18());
+				this.endMinuteDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf19());
 
-				visitNumber = (visitNumber == 6) ? 1 : (visitNumber + 1);
+				this.scriptureDay3TextField.setText(this.selectedWeek.getSpInf6());
 
-//				this.visitNumberTextField.setText(String.valueOf(visitNumber));
-//				this.overseerNameTextField.setText(overseerName);
-//				this.overseerShortNameTextField.setText(overseerShortName);
-//				this.overseerSurnameTextField.setText(overseerSurname);
-//				this.wifeNameTextField.setText(wifeName);
-//				this.wifeShortNameTextField.setText(wifeShortName);
-//
-//				this.phoneOverseerTextField.setText(phoneOverseer);
-//				this.mailOverseerTextField.setText(mailOverseer);
-//				this.phoneWifeTextField.setText(phoneWife);
-//				this.mailWifeTextField.setText(mailWife);
+				this.questionHeaderTextField.setText(this.selectedWeek.getSpInf20());
+				this.question1TextField.setText(this.selectedWeek.getSpInf21());
+				this.question2TextField.setText(this.selectedWeek.getSpInf22());
+				this.question3TextField.setText(this.selectedWeek.getSpInf23());
+				this.question4TextField.setText(this.selectedWeek.getSpInf24());
+				this.question5TextField.setText(this.selectedWeek.getSpInf25());
+				this.question6TextField.setText(this.selectedWeek.getSpInf26());
+				this.question7TextField.setText(this.selectedWeek.getSpInf27());
+				this.question8TextField.setText(this.selectedWeek.getSpInf28());
+				this.question9TextField.setText(this.selectedWeek.getSpInf29());
+				this.question10TextField.setText(this.selectedWeek.getSpInf30());
 			}
 	}
 
 	private void listeners() {
 
-		this.saveButton.setOnAction(event -> saveWeek());
+		this.saveButton.setOnAction(event -> save());
 	}
 
-	private void saveWeek() {
+	private void save() {
 
 		if (checkFields()) {
 
-//			String spInf2 = visitNumberTextField.getText();
-//			String spInf3 = Crypt.encrypt(overseerNameTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf4 = Crypt.encrypt(overseerShortNameTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf5 = Crypt.encrypt(overseerSurnameTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf6 = Crypt.encrypt(wifeNameTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf7 = Crypt.encrypt(wifeShortNameTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf8 = Crypt.encrypt(talk1SongTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf9 = Crypt.encrypt(talk1MinTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf10 = Crypt.encrypt(talk1ThemeTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf11 = Crypt.encrypt(talk2SongTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf12 = Crypt.encrypt(talk2MinTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf13 = Crypt.encrypt(talk2ThemeTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf14 = Crypt.encrypt(talk3MinTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf15 = Crypt.encrypt(talk3ThemeTextField.getText(), settings.getDatabaseSecretKey());
-//
-//			String spInf16 = Crypt.encrypt(phoneOverseerTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf17 = Crypt.encrypt(mailOverseerTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf18 = Crypt.encrypt(phoneWifeTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf19 = Crypt.encrypt(mailWifeTextField.getText(), settings.getDatabaseSecretKey());
-//
-//			String spInf20 = !this.substituteCheckBox.isSelected() ? "0" : "1";
+			if (this.selectedWeek.spConvenIDProperty() != null) {
 
-			if (this.selectedWeek.spWeekOvIDProperty() != null) {
 				// editWeek
 
-				String spWeekOvID = String.valueOf(selectedWeek.getSpWeekOvID());
-				String spInf1 = String.valueOf(selectedWeek.getSpInf1());
+				WeekConvention weekConvention = WeekConvention.newInstanceByView(this);
+				weekConvention.setConvenID(this.selectedWeek.getConvenID());
 
-//				Actions.updateOverseerWeek(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
-//						spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
-//						spInf19, spInf20, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+				String waitMessage = this.language.getString("datetime.new.wait.save");
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new WeekConventionSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								weekConvention, this.ownerCtrl, this.thisTab));
 
 			} else {
+
 				// newWeek
 
-				String spInf1 = Week.buildKey(this.selectedWeek.getTo());
+				WeekConvention weekConvention = WeekConvention.newInstanceByView(this);
 
-//				Actions.insertOverseerWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
-//						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
-//						spInf20, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+				String waitMessage = this.language.getString("datetime.new.wait.save");
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new WeekConventionSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								weekConvention, this.ownerCtrl, this.thisTab));
 			}
 		}
 	}
 
 	private boolean checkFields() {
 
-		// TODO: Check all fields
-		boolean status = true;
+		try {
+			new Integer(this.yearTextField.getText());
+		} catch (Exception e) {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("conventioneditor.error.year"));
+			return false;
+		}
 
-		return status;
+		EnumConventionType type = this.typeComboBox.getSelectionModel().getSelectedItem();
+		switch (type) {
+		case CIRCUITASSEMBLY_BRANCH:
+		case CIRCUITASSEMBLY_OVERSEER:
+
+			String scr1 = this.scriptureDay1TextField.getText();
+			String scr2 = this.scriptureDay2TextField.getText();
+			String scr3 = this.scriptureDay3TextField.getText();
+
+			if (!scr1.isEmpty() || !scr2.isEmpty() || !scr3.isEmpty()) {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("conventioneditor.error.circuitassembly.scriptures"));
+				return false;
+			}
+
+			Integer startHourDay2 = this.startHourDay2ComboBox.getSelectionModel().getSelectedItem();
+			Integer startHourDay3 = this.startHourDay3ComboBox.getSelectionModel().getSelectedItem();
+			Integer startMinuteDay2 = this.startMinuteDay2ComboBox.getSelectionModel().getSelectedItem();
+			Integer startMinuteDay3 = this.startMinuteDay3ComboBox.getSelectionModel().getSelectedItem();
+			Integer endHourDay2 = this.startHourDay2ComboBox.getSelectionModel().getSelectedItem();
+			Integer endHourDay3 = this.startHourDay3ComboBox.getSelectionModel().getSelectedItem();
+			Integer endMinuteDay2 = this.startMinuteDay2ComboBox.getSelectionModel().getSelectedItem();
+			Integer endMinuteDay3 = this.startMinuteDay3ComboBox.getSelectionModel().getSelectedItem();
+
+			if (startHourDay2 > 0 || startHourDay3 > 0 || startMinuteDay2 > 0 || startMinuteDay3 > 0 || endHourDay2 > 0
+					|| endHourDay3 > 0 || endMinuteDay2 > 0 || endMinuteDay3 > 0) {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("conventioneditor.error.circuitassembly.times"));
+				return false;
+			}
+
+			break;
+
+		case REGIONALCONVENTION:
+
+			EnumDays day = this.dayComboBox.getSelectionModel().getSelectedItem();
+			switch (day) {
+			case SAB:
+			case DOM:
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("conventioneditor.error.regionalconvention.day"));
+				return false;
+
+			default:
+				break;
+			}
+
+			String qheader = this.questionHeaderTextField.getText();
+			String q1 = this.question1TextField.getText();
+			String q2 = this.question2TextField.getText();
+			String q3 = this.question3TextField.getText();
+			String q4 = this.question4TextField.getText();
+			String q5 = this.question5TextField.getText();
+			String q6 = this.question6TextField.getText();
+			String q7 = this.question7TextField.getText();
+			String q8 = this.question8TextField.getText();
+			String q9 = this.question9TextField.getText();
+			String q10 = this.question10TextField.getText();
+
+			if (!qheader.isEmpty() || !q1.isEmpty() || !q2.isEmpty() || !q3.isEmpty() || !q4.isEmpty() || !q5.isEmpty()
+					|| !q6.isEmpty() || !q7.isEmpty() || !q8.isEmpty() || !q9.isEmpty() || !q10.isEmpty()) {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("conventioneditor.error.regionalconvention.questions"));
+				return false;
+			}
+
+			break;
+		}
+
+		return true;
 	}
 
 	public Settings getSettings() {
@@ -319,5 +720,589 @@ public class ConventionEditor extends UpdateDataAdapter {
 
 	public void setCalendar(ObservableList<WeekConvention> calendar) {
 		this.calendar = calendar;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
+	public Button getSaveButton() {
+		return saveButton;
+	}
+
+	public TabPane getTabPane() {
+		return tabPane;
+	}
+
+	public Tab getGeneralTab() {
+		return generalTab;
+	}
+
+	public Tab getDay1Tab() {
+		return day1Tab;
+	}
+
+	public Tab getDay2Tab() {
+		return day2Tab;
+	}
+
+	public Tab getDay3Tab() {
+		return day3Tab;
+	}
+
+	public Tab getQuestionsTab() {
+		return questionsTab;
+	}
+
+	public Label getTypeLabel() {
+		return typeLabel;
+	}
+
+	public Label getYearLabel() {
+		return yearLabel;
+	}
+
+	public Label getThemeLabel() {
+		return themeLabel;
+	}
+
+	public ComboBox<EnumConventionType> getTypeComboBox() {
+		return typeComboBox;
+	}
+
+	public TextField getYearTextField() {
+		return yearTextField;
+	}
+
+	public TextField getThemeTextField() {
+		return themeTextField;
+	}
+
+	public Label getDay1CircuitAssemblyLabel() {
+		return day1CircuitAssemblyLabel;
+	}
+
+	public Label getDay1RegionalConventionLabel() {
+		return day1RegionalConventionLabel;
+	}
+
+	public Label getDay2RegionalConventionLabel() {
+		return day2RegionalConventionLabel;
+	}
+
+	public Label getDay3RegionalConventionLabel() {
+		return day3RegionalConventionLabel;
+	}
+
+	public Label getQuestionsCircuitAssemblyLabel() {
+		return questionsCircuitAssemblyLabel;
+	}
+
+	public Label getScriptureDay1Label() {
+		return scriptureDay1Label;
+	}
+
+	public Label getDayLabel() {
+		return dayLabel;
+	}
+
+	public Label getTimeDay1Label() {
+		return timeDay1Label;
+	}
+
+	public Label getTimeSeparator1Day1Label() {
+		return timeSeparator1Day1Label;
+	}
+
+	public Label getTimeSeparator2Day1Label() {
+		return timeSeparator2Day1Label;
+	}
+
+	public Label getTimeSeparator3Day1Label() {
+		return timeSeparator3Day1Label;
+	}
+
+	public TextField getScriptureDay1TextField() {
+		return scriptureDay1TextField;
+	}
+
+	public ComboBox<EnumDays> getDayComboBox() {
+		return dayComboBox;
+	}
+
+	public ComboBox<Integer> getStartHourDay1ComboBox() {
+		return startHourDay1ComboBox;
+	}
+
+	public ComboBox<Integer> getStartMinuteDay1ComboBox() {
+		return startMinuteDay1ComboBox;
+	}
+
+	public ComboBox<Integer> getEndHourDay1ComboBox() {
+		return endHourDay1ComboBox;
+	}
+
+	public ComboBox<Integer> getEndMinuteDay1ComboBox() {
+		return endMinuteDay1ComboBox;
+	}
+
+	public Label getScriptureDay2Label() {
+		return scriptureDay2Label;
+	}
+
+	public Label getTimeDay2Label() {
+		return timeDay2Label;
+	}
+
+	public Label getTimeSeparator1Day2Label() {
+		return timeSeparator1Day2Label;
+	}
+
+	public Label getTimeSeparator2Day2Label() {
+		return timeSeparator2Day2Label;
+	}
+
+	public Label getTimeSeparator3Day2Label() {
+		return timeSeparator3Day2Label;
+	}
+
+	public TextField getScriptureDay2TextField() {
+		return scriptureDay2TextField;
+	}
+
+	public ComboBox<Integer> getStartHourDay2ComboBox() {
+		return startHourDay2ComboBox;
+	}
+
+	public ComboBox<Integer> getStartMinuteDay2ComboBox() {
+		return startMinuteDay2ComboBox;
+	}
+
+	public ComboBox<Integer> getEndHourDay2ComboBox() {
+		return endHourDay2ComboBox;
+	}
+
+	public ComboBox<Integer> getEndMinuteDay2ComboBox() {
+		return endMinuteDay2ComboBox;
+	}
+
+	public Label getScriptureDay3Label() {
+		return scriptureDay3Label;
+	}
+
+	public Label getTimeDay3Label() {
+		return timeDay3Label;
+	}
+
+	public Label getTimeSeparator1Day3Label() {
+		return timeSeparator1Day3Label;
+	}
+
+	public Label getTimeSeparator2Day3Label() {
+		return timeSeparator2Day3Label;
+	}
+
+	public Label getTimeSeparator3Day3Label() {
+		return timeSeparator3Day3Label;
+	}
+
+	public TextField getScriptureDay3TextField() {
+		return scriptureDay3TextField;
+	}
+
+	public ComboBox<Integer> getStartHourDay3ComboBox() {
+		return startHourDay3ComboBox;
+	}
+
+	public ComboBox<Integer> getStartMinuteDay3ComboBox() {
+		return startMinuteDay3ComboBox;
+	}
+
+	public ComboBox<Integer> getEndHourDay3ComboBox() {
+		return endHourDay3ComboBox;
+	}
+
+	public ComboBox<Integer> getEndMinuteDay3ComboBox() {
+		return endMinuteDay3ComboBox;
+	}
+
+	public Label getQuestionHeaderLabel() {
+		return questionHeaderLabel;
+	}
+
+	public Label getQuestion1Label() {
+		return question1Label;
+	}
+
+	public Label getQuestion2Label() {
+		return question2Label;
+	}
+
+	public Label getQuestion3Label() {
+		return question3Label;
+	}
+
+	public Label getQuestion4Label() {
+		return question4Label;
+	}
+
+	public Label getQuestion5Label() {
+		return question5Label;
+	}
+
+	public Label getQuestion6Label() {
+		return question6Label;
+	}
+
+	public Label getQuestion7Label() {
+		return question7Label;
+	}
+
+	public Label getQuestion8Label() {
+		return question8Label;
+	}
+
+	public Label getQuestion9Label() {
+		return question9Label;
+	}
+
+	public Label getQuestion10Label() {
+		return question10Label;
+	}
+
+	public TextField getQuestionHeaderTextField() {
+		return questionHeaderTextField;
+	}
+
+	public TextField getQuestion1TextField() {
+		return question1TextField;
+	}
+
+	public TextField getQuestion2TextField() {
+		return question2TextField;
+	}
+
+	public TextField getQuestion3TextField() {
+		return question3TextField;
+	}
+
+	public TextField getQuestion4TextField() {
+		return question4TextField;
+	}
+
+	public TextField getQuestion5TextField() {
+		return question5TextField;
+	}
+
+	public TextField getQuestion6TextField() {
+		return question6TextField;
+	}
+
+	public TextField getQuestion7TextField() {
+		return question7TextField;
+	}
+
+	public TextField getQuestion8TextField() {
+		return question8TextField;
+	}
+
+	public TextField getQuestion9TextField() {
+		return question9TextField;
+	}
+
+	public TextField getQuestion10TextField() {
+		return question10TextField;
+	}
+
+	public void setSaveButton(Button saveButton) {
+		this.saveButton = saveButton;
+	}
+
+	public void setTabPane(TabPane tabPane) {
+		this.tabPane = tabPane;
+	}
+
+	public void setGeneralTab(Tab generalTab) {
+		this.generalTab = generalTab;
+	}
+
+	public void setDay1Tab(Tab day1Tab) {
+		this.day1Tab = day1Tab;
+	}
+
+	public void setDay2Tab(Tab day2Tab) {
+		this.day2Tab = day2Tab;
+	}
+
+	public void setDay3Tab(Tab day3Tab) {
+		this.day3Tab = day3Tab;
+	}
+
+	public void setQuestionsTab(Tab questionsTab) {
+		this.questionsTab = questionsTab;
+	}
+
+	public void setTypeLabel(Label typeLabel) {
+		this.typeLabel = typeLabel;
+	}
+
+	public void setYearLabel(Label yearLabel) {
+		this.yearLabel = yearLabel;
+	}
+
+	public void setThemeLabel(Label themeLabel) {
+		this.themeLabel = themeLabel;
+	}
+
+	public void setTypeComboBox(ComboBox<EnumConventionType> typeComboBox) {
+		this.typeComboBox = typeComboBox;
+	}
+
+	public void setYearTextField(TextField yearTextField) {
+		this.yearTextField = yearTextField;
+	}
+
+	public void setThemeTextField(TextField themeTextField) {
+		this.themeTextField = themeTextField;
+	}
+
+	public void setDay1CircuitAssemblyLabel(Label day1CircuitAssemblyLabel) {
+		this.day1CircuitAssemblyLabel = day1CircuitAssemblyLabel;
+	}
+
+	public void setDay1RegionalConventionLabel(Label day1RegionalConventionLabel) {
+		this.day1RegionalConventionLabel = day1RegionalConventionLabel;
+	}
+
+	public void setDay2RegionalConventionLabel(Label day2RegionalConventionLabel) {
+		this.day2RegionalConventionLabel = day2RegionalConventionLabel;
+	}
+
+	public void setDay3RegionalConventionLabel(Label day3RegionalConventionLabel) {
+		this.day3RegionalConventionLabel = day3RegionalConventionLabel;
+	}
+
+	public void setQuestionsCircuitAssemblyLabel(Label questionsCircuitAssemblyLabel) {
+		this.questionsCircuitAssemblyLabel = questionsCircuitAssemblyLabel;
+	}
+
+	public void setScriptureDay1Label(Label scriptureDay1Label) {
+		this.scriptureDay1Label = scriptureDay1Label;
+	}
+
+	public void setDayLabel(Label dayLabel) {
+		this.dayLabel = dayLabel;
+	}
+
+	public void setTimeDay1Label(Label timeDay1Label) {
+		this.timeDay1Label = timeDay1Label;
+	}
+
+	public void setTimeSeparator1Day1Label(Label timeSeparator1Day1Label) {
+		this.timeSeparator1Day1Label = timeSeparator1Day1Label;
+	}
+
+	public void setTimeSeparator2Day1Label(Label timeSeparator2Day1Label) {
+		this.timeSeparator2Day1Label = timeSeparator2Day1Label;
+	}
+
+	public void setTimeSeparator3Day1Label(Label timeSeparator3Day1Label) {
+		this.timeSeparator3Day1Label = timeSeparator3Day1Label;
+	}
+
+	public void setScriptureDay1TextField(TextField scriptureDay1TextField) {
+		this.scriptureDay1TextField = scriptureDay1TextField;
+	}
+
+	public void setDayComboBox(ComboBox<EnumDays> dayComboBox) {
+		this.dayComboBox = dayComboBox;
+	}
+
+	public void setStartHourDay1ComboBox(ComboBox<Integer> startHourDay1ComboBox) {
+		this.startHourDay1ComboBox = startHourDay1ComboBox;
+	}
+
+	public void setStartMinuteDay1ComboBox(ComboBox<Integer> startMinuteDay1ComboBox) {
+		this.startMinuteDay1ComboBox = startMinuteDay1ComboBox;
+	}
+
+	public void setEndHourDay1ComboBox(ComboBox<Integer> endHourDay1ComboBox) {
+		this.endHourDay1ComboBox = endHourDay1ComboBox;
+	}
+
+	public void setEndMinuteDay1ComboBox(ComboBox<Integer> endMinuteDay1ComboBox) {
+		this.endMinuteDay1ComboBox = endMinuteDay1ComboBox;
+	}
+
+	public void setScriptureDay2Label(Label scriptureDay2Label) {
+		this.scriptureDay2Label = scriptureDay2Label;
+	}
+
+	public void setTimeDay2Label(Label timeDay2Label) {
+		this.timeDay2Label = timeDay2Label;
+	}
+
+	public void setTimeSeparator1Day2Label(Label timeSeparator1Day2Label) {
+		this.timeSeparator1Day2Label = timeSeparator1Day2Label;
+	}
+
+	public void setTimeSeparator2Day2Label(Label timeSeparator2Day2Label) {
+		this.timeSeparator2Day2Label = timeSeparator2Day2Label;
+	}
+
+	public void setTimeSeparator3Day2Label(Label timeSeparator3Day2Label) {
+		this.timeSeparator3Day2Label = timeSeparator3Day2Label;
+	}
+
+	public void setScriptureDay2TextField(TextField scriptureDay2TextField) {
+		this.scriptureDay2TextField = scriptureDay2TextField;
+	}
+
+	public void setStartHourDay2ComboBox(ComboBox<Integer> startHourDay2ComboBox) {
+		this.startHourDay2ComboBox = startHourDay2ComboBox;
+	}
+
+	public void setStartMinuteDay2ComboBox(ComboBox<Integer> startMinuteDay2ComboBox) {
+		this.startMinuteDay2ComboBox = startMinuteDay2ComboBox;
+	}
+
+	public void setEndHourDay2ComboBox(ComboBox<Integer> endHourDay2ComboBox) {
+		this.endHourDay2ComboBox = endHourDay2ComboBox;
+	}
+
+	public void setEndMinuteDay2ComboBox(ComboBox<Integer> endMinuteDay2ComboBox) {
+		this.endMinuteDay2ComboBox = endMinuteDay2ComboBox;
+	}
+
+	public void setScriptureDay3Label(Label scriptureDay3Label) {
+		this.scriptureDay3Label = scriptureDay3Label;
+	}
+
+	public void setTimeDay3Label(Label timeDay3Label) {
+		this.timeDay3Label = timeDay3Label;
+	}
+
+	public void setTimeSeparator1Day3Label(Label timeSeparator1Day3Label) {
+		this.timeSeparator1Day3Label = timeSeparator1Day3Label;
+	}
+
+	public void setTimeSeparator2Day3Label(Label timeSeparator2Day3Label) {
+		this.timeSeparator2Day3Label = timeSeparator2Day3Label;
+	}
+
+	public void setTimeSeparator3Day3Label(Label timeSeparator3Day3Label) {
+		this.timeSeparator3Day3Label = timeSeparator3Day3Label;
+	}
+
+	public void setScriptureDay3TextField(TextField scriptureDay3TextField) {
+		this.scriptureDay3TextField = scriptureDay3TextField;
+	}
+
+	public void setStartHourDay3ComboBox(ComboBox<Integer> startHourDay3ComboBox) {
+		this.startHourDay3ComboBox = startHourDay3ComboBox;
+	}
+
+	public void setStartMinuteDay3ComboBox(ComboBox<Integer> startMinuteDay3ComboBox) {
+		this.startMinuteDay3ComboBox = startMinuteDay3ComboBox;
+	}
+
+	public void setEndHourDay3ComboBox(ComboBox<Integer> endHourDay3ComboBox) {
+		this.endHourDay3ComboBox = endHourDay3ComboBox;
+	}
+
+	public void setEndMinuteDay3ComboBox(ComboBox<Integer> endMinuteDay3ComboBox) {
+		this.endMinuteDay3ComboBox = endMinuteDay3ComboBox;
+	}
+
+	public void setQuestionHeaderLabel(Label questionHeaderLabel) {
+		this.questionHeaderLabel = questionHeaderLabel;
+	}
+
+	public void setQuestion1Label(Label question1Label) {
+		this.question1Label = question1Label;
+	}
+
+	public void setQuestion2Label(Label question2Label) {
+		this.question2Label = question2Label;
+	}
+
+	public void setQuestion3Label(Label question3Label) {
+		this.question3Label = question3Label;
+	}
+
+	public void setQuestion4Label(Label question4Label) {
+		this.question4Label = question4Label;
+	}
+
+	public void setQuestion5Label(Label question5Label) {
+		this.question5Label = question5Label;
+	}
+
+	public void setQuestion6Label(Label question6Label) {
+		this.question6Label = question6Label;
+	}
+
+	public void setQuestion7Label(Label question7Label) {
+		this.question7Label = question7Label;
+	}
+
+	public void setQuestion8Label(Label question8Label) {
+		this.question8Label = question8Label;
+	}
+
+	public void setQuestion9Label(Label question9Label) {
+		this.question9Label = question9Label;
+	}
+
+	public void setQuestion10Label(Label question10Label) {
+		this.question10Label = question10Label;
+	}
+
+	public void setQuestionHeaderTextField(TextField questionHeaderTextField) {
+		this.questionHeaderTextField = questionHeaderTextField;
+	}
+
+	public void setQuestion1TextField(TextField question1TextField) {
+		this.question1TextField = question1TextField;
+	}
+
+	public void setQuestion2TextField(TextField question2TextField) {
+		this.question2TextField = question2TextField;
+	}
+
+	public void setQuestion3TextField(TextField question3TextField) {
+		this.question3TextField = question3TextField;
+	}
+
+	public void setQuestion4TextField(TextField question4TextField) {
+		this.question4TextField = question4TextField;
+	}
+
+	public void setQuestion5TextField(TextField question5TextField) {
+		this.question5TextField = question5TextField;
+	}
+
+	public void setQuestion6TextField(TextField question6TextField) {
+		this.question6TextField = question6TextField;
+	}
+
+	public void setQuestion7TextField(TextField question7TextField) {
+		this.question7TextField = question7TextField;
+	}
+
+	public void setQuestion8TextField(TextField question8TextField) {
+		this.question8TextField = question8TextField;
+	}
+
+	public void setQuestion9TextField(TextField question9TextField) {
+		this.question9TextField = question9TextField;
+	}
+
+	public void setQuestion10TextField(TextField question10TextField) {
+		this.question10TextField = question10TextField;
 	}
 }

@@ -207,6 +207,7 @@ public class Meta {
 		public static final String USER_MENU_USERS_DEL = "deleteUser_50x50.png";
 		public static final String ADD = "add.png";
 		public static final String REMOVE = "remove.png";
+		public static final String DELETE = "delete.png";
 		public static final String SUPERUSER = "superuser.png";
 		public static final String SUPERUSER_PRINT = "superuserPrint.png";
 		public static final String MEMBER = "person_35x35.png";
@@ -277,7 +278,7 @@ public class Meta {
 
 		public static final String MAPS = "maps.png";
 		public static final String FILTER = "filter.png";
-		
+
 		public static final String ONE = "day1.png";
 		public static final String TWO = "day2.png";
 		public static final String THREE = "day3.png";

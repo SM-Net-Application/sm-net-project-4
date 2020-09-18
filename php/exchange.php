@@ -155,6 +155,18 @@ if (! empty($jsonObjPar)) {
                         case 46:
                             include 'query/sp_q46.php';
                             break;
+                        case 47:
+                            include 'query/sp_q47.php';
+                            break;
+                        case 48:
+                            include 'query/sp_q48.php';
+                            break;
+                        case 49:
+                            include 'query/sp_q49.php';
+                            break;
+                        case 50:
+                            include 'query/sp_q50.php';
+                            break;
                     }
 
                 } else {
@@ -175,6 +187,7 @@ if (! empty($jsonObjPar)) {
 
 } else {
     $response["status"] = 1;
+    $response["error"] = "JSON data not send!";
 }
 
 echo json_encode($response);

@@ -25,6 +25,9 @@ Data di pubblicazione : ..-..-....
 		- Studio Torre di Guardia
 			- Durata da preimpostare (minuti)
 
+	* Nuova sezione : Congressi e assemblee
+		In questa sezione possono essere definite le settimane dei congressi e delle assemblee
+
 	* Sezione : Adunanze
 		- Modifica della GUI
 		- Nuove informazioni disponibili :
