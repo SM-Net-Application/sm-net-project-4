@@ -119,9 +119,9 @@ public class Memorial {
 
 		this.headerImageView.setFitWidth(50);
 		this.headerImageView.setFitHeight(50);
-		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.CONVENTIONS, 50, 50));
+		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MEMORIAL, 50, 50));
 
-		this.headerLabel.setText(this.language.getString("convention.header"));
+		this.headerLabel.setText(this.language.getString("memorial.header"));
 
 		this.calendarTab.setText(this.language.getString("TEXT0075"));
 		this.calendarTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CALENDAR));
@@ -207,8 +207,8 @@ public class Memorial {
 
 		String waitMessage = this.language.getString("convention.task.load");
 
-		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-				new WeekConventionLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//				new WeekConventionLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 
 	}
 
@@ -232,9 +232,9 @@ public class Memorial {
 
 					String waitMessage = this.language.getString("convention.task.delete");
 
-					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-							new WeekConventionDeleteTask(this.application.getAlertBuilder2(), this.settings,
-									this.ownerStage, this, id));
+//					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//							new WeekConventionDeleteTask(this.application.getAlertBuilder2(), this.settings,
+//									this.ownerStage, this, id));
 				}
 			} else {
 
@@ -270,7 +270,7 @@ public class Memorial {
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.CONVENTIONS_EDITOR_FXML_URL);
+				fxmlLoader.setLocation(Meta.Views.MEMORIAL_EDITOR_FXML_URL);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				MemorialEditor ctrl = (MemorialEditor) fxmlLoader.getController();

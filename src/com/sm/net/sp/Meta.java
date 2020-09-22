@@ -24,6 +24,7 @@ import com.sm.net.sp.view.home.user.menu.dateandtime.MenuDateAndTimeAdd;
 import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
+import com.sm.net.sp.view.home.user.menu.memorial.MemorialEditor;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
@@ -180,6 +181,7 @@ public class Meta {
 		public static final URL CONVENTIONS_EDITOR_FXML_URL = ConventionEditor.class
 				.getResource("ConventionEditor.fxml");
 		public static final URL MEMORIAL_FXML_URL = Memorial.class.getResource("Memorial.fxml");
+		public static final URL MEMORIAL_EDITOR_FXML_URL = MemorialEditor.class.getResource("MemorialEditor.fxml");
 	}
 
 	public static class Themes {
@@ -283,6 +285,10 @@ public class Meta {
 		public static final String TWO = "day2.png";
 		public static final String THREE = "day3.png";
 		public static final String QUESTION = "questions.png";
+		
+		public static final String PODIUM = "podium.png";
+		public static final String EMBLEMS = "emblems.png";
+		public static final String EMBLEMSBROTHER = "emblemsbrothers.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 
