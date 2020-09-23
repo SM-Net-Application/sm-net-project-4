@@ -709,7 +709,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother1Label" text="fratello1">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -718,7 +718,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother2Label" text="fratello2">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -727,7 +727,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother3Label" text="fratello3">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -736,7 +736,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother4Label" text="fratello4">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -745,7 +745,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother5Label" text="fratello5">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -754,7 +754,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother6Label" text="fratello6">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -763,7 +763,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother7Label" text="fratello7">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -772,7 +772,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother8Label" text="fratello8">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -781,7 +781,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother9Label" text="fratello9">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
@@ -790,7 +790,7 @@
                                                    <children>
                                                       <Label fx:id="emblemsBrother10Label" text="fratello10">
                                                          <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                          </StackPane.margin>
                                                       </Label>
                                                    </children>
