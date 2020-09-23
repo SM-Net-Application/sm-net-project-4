@@ -289,6 +289,9 @@ public class Meta {
 		public static final String PODIUM = "podium.png";
 		public static final String EMBLEMS = "emblems.png";
 		public static final String EMBLEMSBROTHER = "emblemsbrothers.png";
+		
+		public static final String LOCK_OPEN = "lock_open.png";
+		public static final String LOCK_CLOSE = "lock_close.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 
