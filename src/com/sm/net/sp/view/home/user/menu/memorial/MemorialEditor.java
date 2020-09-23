@@ -12,6 +12,7 @@ import com.sm.net.sp.view.SupportPlannerView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -82,6 +83,8 @@ public class MemorialEditor extends UpdateDataAdapter {
 	@FXML
 	private ComboBox<Member> prayStartComboBox;
 	@FXML
+	private CheckBox prayStartPresidentCheckBox;
+	@FXML
 	private ComboBox<Member> presidentComboBox;
 	@FXML
 	private TextField talkMinTextField;
@@ -97,6 +100,98 @@ public class MemorialEditor extends UpdateDataAdapter {
 	private TextField songEndTextField;
 	@FXML
 	private ComboBox<Member> prayEndComboBox;
+
+	@FXML
+	private Label breadHeaderLabel;
+	@FXML
+	private Label breadFamily1Label;
+	@FXML
+	private Label breadFamily2Label;
+	@FXML
+	private Label breadFamily3Label;
+	@FXML
+	private Label breadFamily4Label;
+	@FXML
+	private Label breadFamily5Label;
+
+	@FXML
+	private ComboBox<Member> breadFamily1ComboBox;
+	@FXML
+	private ComboBox<Member> breadFamily2ComboBox;
+	@FXML
+	private ComboBox<Member> breadFamily3ComboBox;
+	@FXML
+	private ComboBox<Member> breadFamily4ComboBox;
+	@FXML
+	private ComboBox<Member> breadFamily5ComboBox;
+
+	@FXML
+	private Label wineHeaderLabel;
+	@FXML
+	private Label wineFamily1Label;
+	@FXML
+	private Label wineFamily2Label;
+	@FXML
+	private Label wineFamily3Label;
+	@FXML
+	private Label wineFamily4Label;
+	@FXML
+	private Label wineFamily5Label;
+
+	@FXML
+	private ComboBox<Member> wineFamily1ComboBox;
+	@FXML
+	private ComboBox<Member> wineFamily2ComboBox;
+	@FXML
+	private ComboBox<Member> wineFamily3ComboBox;
+	@FXML
+	private ComboBox<Member> wineFamily4ComboBox;
+	@FXML
+	private ComboBox<Member> wineFamily5ComboBox;
+
+	@FXML
+	private Label emblemsBrothersHeaderLabel;
+	@FXML
+	private Label emblemsBrother1Label;
+	@FXML
+	private Label emblemsBrother2Label;
+	@FXML
+	private Label emblemsBrother3Label;
+	@FXML
+	private Label emblemsBrother4Label;
+	@FXML
+	private Label emblemsBrother5Label;
+	@FXML
+	private Label emblemsBrother6Label;
+	@FXML
+	private Label emblemsBrother7Label;
+	@FXML
+	private Label emblemsBrother8Label;
+	@FXML
+	private Label emblemsBrother9Label;
+	@FXML
+	private Label emblemsBrother10Label;
+
+	@FXML
+	private ComboBox<Member> emblemsBrother1ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother2ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother3ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother4ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother5ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother6ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother7ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother8ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother9ComboBox;
+	@FXML
+	private ComboBox<Member> emblemsBrother10ComboBox;
 
 	private Settings settings;
 	private Language language;
@@ -137,46 +232,80 @@ public class MemorialEditor extends UpdateDataAdapter {
 		this.placeTextField.getStyleClass().add("text_field_001");
 		this.placeSelectButton.getStyleClass().add("button_image_001");
 
-//		this.day1CircuitAssemblyLabel.getStyleClass().add("label_001");
-//		this.day1RegionalConventionLabel.getStyleClass().add("label_001");
-//		this.day2RegionalConventionLabel.getStyleClass().add("label_001");
-//		this.day3RegionalConventionLabel.getStyleClass().add("label_001");
+		this.songStartLabel.getStyleClass().add("label_set_001");
+		this.prayStartLabel.getStyleClass().add("label_set_001");
+		this.presidentLabel.getStyleClass().add("label_set_001");
+		this.talkMinLabel.getStyleClass().add("label_set_001");
+		this.talkThemeLabel.getStyleClass().add("label_set_001");
+		this.talkBrotherLabel.getStyleClass().add("label_set_001");
+		this.prayBreadLabel.getStyleClass().add("label_set_001");
+		this.prayWineLabel.getStyleClass().add("label_set_001");
+		this.songEndLabel.getStyleClass().add("label_set_001");
+		this.prayEndLabel.getStyleClass().add("label_set_001");
 
-//		this.scriptureDay1Label.getStyleClass().add("label_set_001");
-//		this.timeDay1Label.getStyleClass().add("label_set_001");
-//		this.timeSeparator1Day1Label.getStyleClass().add("label_001");
-//		this.timeSeparator2Day1Label.getStyleClass().add("label_001");
-//		this.timeSeparator3Day1Label.getStyleClass().add("label_001");
+		this.songStartTextField.getStyleClass().add("text_field_002");
+		this.talkMinTextField.getStyleClass().add("text_field_002");
+		this.talkThemeTextField.getStyleClass().add("text_field_001");
+		this.songEndTextField.getStyleClass().add("text_field_002");
 
-//		this.scriptureDay1TextField.getStyleClass().add("text_field_001");
-//		this.startHourDay1ComboBox.getStyleClass().add("combo_box_002");
-//		this.startMinuteDay1ComboBox.getStyleClass().add("combo_box_002");
-//		this.endHourDay1ComboBox.getStyleClass().add("combo_box_002");
-//		this.endMinuteDay1ComboBox.getStyleClass().add("combo_box_002");
+		this.prayStartPresidentCheckBox.getStyleClass().add("check_box_001");
 
-//		this.scriptureDay2Label.getStyleClass().add("label_set_001");
-//		this.timeDay2Label.getStyleClass().add("label_set_001");
-//		this.timeSeparator1Day2Label.getStyleClass().add("label_001");
-//		this.timeSeparator2Day2Label.getStyleClass().add("label_001");
-//		this.timeSeparator3Day2Label.getStyleClass().add("label_001");
-//
-//		this.scriptureDay2TextField.getStyleClass().add("text_field_001");
-//		this.startHourDay2ComboBox.getStyleClass().add("combo_box_002");
-//		this.startMinuteDay2ComboBox.getStyleClass().add("combo_box_002");
-//		this.endHourDay2ComboBox.getStyleClass().add("combo_box_002");
-//		this.endMinuteDay2ComboBox.getStyleClass().add("combo_box_002");
-//
-//		this.scriptureDay3Label.getStyleClass().add("label_set_001");
-//		this.timeDay3Label.getStyleClass().add("label_set_001");
-//		this.timeSeparator1Day3Label.getStyleClass().add("label_001");
-//		this.timeSeparator2Day3Label.getStyleClass().add("label_001");
-//		this.timeSeparator3Day3Label.getStyleClass().add("label_001");
-//
-//		this.scriptureDay3TextField.getStyleClass().add("text_field_001");
-//		this.startHourDay3ComboBox.getStyleClass().add("combo_box_002");
-//		this.startMinuteDay3ComboBox.getStyleClass().add("combo_box_002");
-//		this.endHourDay3ComboBox.getStyleClass().add("combo_box_002");
-//		this.endMinuteDay3ComboBox.getStyleClass().add("combo_box_002");
+		this.prayStartComboBox.getStyleClass().add("combo_box_001");
+		this.presidentComboBox.getStyleClass().add("combo_box_001");
+		this.talkBrotherComboBox.getStyleClass().add("combo_box_001");
+		this.prayBreadComboBox.getStyleClass().add("combo_box_001");
+		this.prayWineComboBox.getStyleClass().add("combo_box_001");
+		this.prayEndComboBox.getStyleClass().add("combo_box_001");
+
+		this.breadHeaderLabel.getStyleClass().add("label_002");
+		this.wineHeaderLabel.getStyleClass().add("label_002");
+
+		this.breadFamily1Label.getStyleClass().add("label_set_001");
+		this.breadFamily2Label.getStyleClass().add("label_set_001");
+		this.breadFamily3Label.getStyleClass().add("label_set_001");
+		this.breadFamily4Label.getStyleClass().add("label_set_001");
+		this.breadFamily5Label.getStyleClass().add("label_set_001");
+
+		this.wineFamily1Label.getStyleClass().add("label_set_001");
+		this.wineFamily2Label.getStyleClass().add("label_set_001");
+		this.wineFamily3Label.getStyleClass().add("label_set_001");
+		this.wineFamily4Label.getStyleClass().add("label_set_001");
+		this.wineFamily5Label.getStyleClass().add("label_set_001");
+
+		this.breadFamily1ComboBox.getStyleClass().add("combo_box_001");
+		this.breadFamily2ComboBox.getStyleClass().add("combo_box_001");
+		this.breadFamily3ComboBox.getStyleClass().add("combo_box_001");
+		this.breadFamily4ComboBox.getStyleClass().add("combo_box_001");
+		this.breadFamily5ComboBox.getStyleClass().add("combo_box_001");
+
+		this.wineFamily1ComboBox.getStyleClass().add("combo_box_001");
+		this.wineFamily2ComboBox.getStyleClass().add("combo_box_001");
+		this.wineFamily3ComboBox.getStyleClass().add("combo_box_001");
+		this.wineFamily4ComboBox.getStyleClass().add("combo_box_001");
+		this.wineFamily5ComboBox.getStyleClass().add("combo_box_001");
+
+		this.emblemsBrothersHeaderLabel.getStyleClass().add("label_002");
+		this.emblemsBrother1Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother2Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother3Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother4Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother5Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother6Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother7Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother8Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother9Label.getStyleClass().add("label_set_001");
+		this.emblemsBrother10Label.getStyleClass().add("label_set_001");
+
+		this.emblemsBrother1ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother2ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother3ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother4ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother5ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother6ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother7ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother8ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother9ComboBox.getStyleClass().add("combo_box_001");
+		this.emblemsBrother10ComboBox.getStyleClass().add("combo_box_001");
 
 		this.saveButton.getStyleClass().add("button_image_001");
 	}
@@ -202,57 +331,45 @@ public class MemorialEditor extends UpdateDataAdapter {
 		this.placeSelectButton.setText(null);
 		this.placeSelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
 
-//		this.day1CircuitAssemblyLabel
-//				.setText(this.language.getString("conventioneditor.circuitassembly").toUpperCase());
-//		this.day1RegionalConventionLabel
-//				.setText(this.language.getString("conventioneditor.regionalconvention").toUpperCase());
-//		this.day2RegionalConventionLabel
-//				.setText(this.language.getString("conventioneditor.regionalconvention").toUpperCase());
-//		this.day3RegionalConventionLabel
-//				.setText(this.language.getString("conventioneditor.regionalconvention").toUpperCase());
-//
-//		this.scriptureDay1Label.setText(this.language.getString("conventioneditor.scripture"));
-//		this.timeDay1Label.setText(this.language.getString("conventioneditor.time"));
-//		this.timeSeparator1Day1Label.setText(this.language.getString("conventioneditor.separator1"));
-//		this.timeSeparator2Day1Label.setText(this.language.getString("conventioneditor.separator2"));
-//		this.timeSeparator3Day1Label.setText(this.language.getString("conventioneditor.separator1"));
-//
-//		this.scriptureDay2Label.setText(this.language.getString("conventioneditor.scripture"));
-//		this.timeDay2Label.setText(this.language.getString("conventioneditor.time"));
-//		this.timeSeparator1Day2Label.setText(this.language.getString("conventioneditor.separator1"));
-//		this.timeSeparator2Day2Label.setText(this.language.getString("conventioneditor.separator2"));
-//		this.timeSeparator3Day2Label.setText(this.language.getString("conventioneditor.separator1"));
-//
-//		this.scriptureDay3Label.setText(this.language.getString("conventioneditor.scripture"));
-//		this.timeDay3Label.setText(this.language.getString("conventioneditor.time"));
-//		this.timeSeparator1Day3Label.setText(this.language.getString("conventioneditor.separator1"));
-//		this.timeSeparator2Day3Label.setText(this.language.getString("conventioneditor.separator2"));
-//		this.timeSeparator3Day3Label.setText(this.language.getString("conventioneditor.separator1"));
-//
-//		this.startHourDay1ComboBox.setMinWidth(width);
-//		this.startHourDay2ComboBox.setMinWidth(width);
-//		this.startHourDay3ComboBox.setMinWidth(width);
-//		this.endHourDay1ComboBox.setMinWidth(width);
-//		this.endHourDay2ComboBox.setMinWidth(width);
-//		this.endHourDay3ComboBox.setMinWidth(width);
-//		this.startMinuteDay1ComboBox.setMinWidth(width);
-//		this.startMinuteDay2ComboBox.setMinWidth(width);
-//		this.startMinuteDay3ComboBox.setMinWidth(width);
-//		this.endMinuteDay1ComboBox.setMinWidth(width);
-//		this.endMinuteDay2ComboBox.setMinWidth(width);
-//		this.endMinuteDay3ComboBox.setMinWidth(width);
-//		this.startHourDay1ComboBox.setMaxWidth(width);
-//		this.startHourDay2ComboBox.setMaxWidth(width);
-//		this.startHourDay3ComboBox.setMaxWidth(width);
-//		this.endHourDay1ComboBox.setMaxWidth(width);
-//		this.endHourDay2ComboBox.setMaxWidth(width);
-//		this.endHourDay3ComboBox.setMaxWidth(width);
-//		this.startMinuteDay1ComboBox.setMaxWidth(width);
-//		this.startMinuteDay2ComboBox.setMaxWidth(width);
-//		this.startMinuteDay3ComboBox.setMaxWidth(width);
-//		this.endMinuteDay1ComboBox.setMaxWidth(width);
-//		this.endMinuteDay2ComboBox.setMaxWidth(width);
-//		this.endMinuteDay3ComboBox.setMaxWidth(width);
+		this.prayStartComboBox.setMinWidth(200);
+
+		this.songStartLabel.setText(this.language.getString("memorialeditor.songstart"));
+		this.prayStartLabel.setText(this.language.getString("memorialeditor.praystart"));
+		this.prayStartPresidentCheckBox.setText(this.language.getString("memorialeditor.praystartpresident"));
+		this.presidentLabel.setText(this.language.getString("memorialeditor.president"));
+		this.talkMinLabel.setText(this.language.getString("memorialeditor.talkmin"));
+		this.talkBrotherLabel.setText(this.language.getString("memorialeditor.talkbrother"));
+		this.talkThemeLabel.setText(this.language.getString("memorialeditor.talktheme"));
+		this.songEndLabel.setText(this.language.getString("memorialeditor.songend"));
+		this.prayEndLabel.setText(this.language.getString("memorialeditor.prayend"));
+		this.prayBreadLabel.setText(this.language.getString("memorialeditor.praybread"));
+		this.prayWineLabel.setText(this.language.getString("memorialeditor.praywine"));
+
+		this.breadHeaderLabel.setText(this.language.getString("memorialeditor.breadheader"));
+		this.breadFamily1Label.setText(this.language.getString("memorialeditor.breadfamily1"));
+		this.breadFamily2Label.setText(this.language.getString("memorialeditor.breadfamily2"));
+		this.breadFamily3Label.setText(this.language.getString("memorialeditor.breadfamily3"));
+		this.breadFamily4Label.setText(this.language.getString("memorialeditor.breadfamily4"));
+		this.breadFamily5Label.setText(this.language.getString("memorialeditor.breadfamily5"));
+
+		this.wineHeaderLabel.setText(this.language.getString("memorialeditor.wineheader"));
+		this.wineFamily1Label.setText(this.language.getString("memorialeditor.winefamily1"));
+		this.wineFamily2Label.setText(this.language.getString("memorialeditor.winefamily2"));
+		this.wineFamily3Label.setText(this.language.getString("memorialeditor.winefamily3"));
+		this.wineFamily4Label.setText(this.language.getString("memorialeditor.winefamily4"));
+		this.wineFamily5Label.setText(this.language.getString("memorialeditor.winefamily5"));
+
+		this.emblemsBrothersHeaderLabel.setText(this.language.getString("memorialeditor.emblemsbrothersheader"));
+		this.emblemsBrother1Label.setText(this.language.getString("memorialeditor.emblemsbrother1"));
+		this.emblemsBrother2Label.setText(this.language.getString("memorialeditor.emblemsbrother2"));
+		this.emblemsBrother3Label.setText(this.language.getString("memorialeditor.emblemsbrother3"));
+		this.emblemsBrother4Label.setText(this.language.getString("memorialeditor.emblemsbrother4"));
+		this.emblemsBrother5Label.setText(this.language.getString("memorialeditor.emblemsbrother5"));
+		this.emblemsBrother6Label.setText(this.language.getString("memorialeditor.emblemsbrother6"));
+		this.emblemsBrother7Label.setText(this.language.getString("memorialeditor.emblemsbrother7"));
+		this.emblemsBrother8Label.setText(this.language.getString("memorialeditor.emblemsbrother8"));
+		this.emblemsBrother9Label.setText(this.language.getString("memorialeditor.emblemsbrother9"));
+		this.emblemsBrother10Label.setText(this.language.getString("memorialeditor.emblemsbrother10"));
 
 		Tooltip generalTabTooltip = new Tooltip(this.language.getString("memorialeditor.tooltip.tab.general"));
 		generalTabTooltip.getStyleClass().add("tooltip_001");
