@@ -11,6 +11,7 @@ import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekConvention;
+import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.util.enumeration.JSONStatus;
 
@@ -889,6 +890,97 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject MEMORIAL_INSERT(WeekMemorial memorial) {
+
+		JSONObject jsonObj = create(Integer.valueOf(51));
+
+		jsonObj.put("spInf1", memorial.getSpInf1());
+		jsonObj.put("spInf2", memorial.getSpInf2());
+		jsonObj.put("spInf3", memorial.getSpInf3());
+		jsonObj.put("spInf4", memorial.getSpInf4());
+		jsonObj.put("spInf5", memorial.getSpInf5());
+		jsonObj.put("spInf6", memorial.getSpInf6());
+		jsonObj.put("spInf7", memorial.getSpInf7());
+		jsonObj.put("spInf8", memorial.getSpInf8());
+		jsonObj.put("spInf9", memorial.getSpInf9());
+		jsonObj.put("spInf10", memorial.getSpInf10());
+		jsonObj.put("spInf11", memorial.getSpInf11());
+		jsonObj.put("spInf12", memorial.getSpInf12());
+		jsonObj.put("spInf13", memorial.getSpInf13());
+		jsonObj.put("spInf14", memorial.getSpInf14());
+		jsonObj.put("spInf15", memorial.getSpInf15());
+		jsonObj.put("spInf16", memorial.getSpInf16());
+		jsonObj.put("spInf17", memorial.getSpInf17());
+		jsonObj.put("spInf18", memorial.getSpInf18());
+		jsonObj.put("spInf19", memorial.getSpInf19());
+		jsonObj.put("spInf20", memorial.getSpInf20());
+		jsonObj.put("spInf21", memorial.getSpInf21());
+		jsonObj.put("spInf22", memorial.getSpInf22());
+		jsonObj.put("spInf23", memorial.getSpInf23());
+		jsonObj.put("spInf24", memorial.getSpInf24());
+		jsonObj.put("spInf25", memorial.getSpInf25());
+		jsonObj.put("spInf26", memorial.getSpInf26());
+		jsonObj.put("spInf27", memorial.getSpInf27());
+		jsonObj.put("spInf28", memorial.getSpInf28());
+		jsonObj.put("spInf29", memorial.getSpInf29());
+		jsonObj.put("spInf30", memorial.getSpInf30());
+		jsonObj.put("spInf31", memorial.getSpInf31());
+		jsonObj.put("spInf32", memorial.getSpInf32());
+		jsonObj.put("spInf33", memorial.getSpInf33());
+		jsonObj.put("spInf34", memorial.getSpInf34());
+
+		return jsonObj;
+	}
+
+	public static JSONObject MEMORIAL_UPDATE(WeekMemorial memorial) {
+
+		JSONObject jsonObj = create(Integer.valueOf(52));
+
+		jsonObj.put("spMemorialID", memorial.getMemorialID());
+		jsonObj.put("spInf1", memorial.getSpInf1());
+		jsonObj.put("spInf2", memorial.getSpInf2());
+		jsonObj.put("spInf3", memorial.getSpInf3());
+		jsonObj.put("spInf4", memorial.getSpInf4());
+		jsonObj.put("spInf5", memorial.getSpInf5());
+		jsonObj.put("spInf6", memorial.getSpInf6());
+		jsonObj.put("spInf7", memorial.getSpInf7());
+		jsonObj.put("spInf8", memorial.getSpInf8());
+		jsonObj.put("spInf9", memorial.getSpInf9());
+		jsonObj.put("spInf10", memorial.getSpInf10());
+		jsonObj.put("spInf11", memorial.getSpInf11());
+		jsonObj.put("spInf12", memorial.getSpInf12());
+		jsonObj.put("spInf13", memorial.getSpInf13());
+		jsonObj.put("spInf14", memorial.getSpInf14());
+		jsonObj.put("spInf15", memorial.getSpInf15());
+		jsonObj.put("spInf16", memorial.getSpInf16());
+		jsonObj.put("spInf17", memorial.getSpInf17());
+		jsonObj.put("spInf18", memorial.getSpInf18());
+		jsonObj.put("spInf19", memorial.getSpInf19());
+		jsonObj.put("spInf20", memorial.getSpInf20());
+		jsonObj.put("spInf21", memorial.getSpInf21());
+		jsonObj.put("spInf22", memorial.getSpInf22());
+		jsonObj.put("spInf23", memorial.getSpInf23());
+		jsonObj.put("spInf24", memorial.getSpInf24());
+		jsonObj.put("spInf25", memorial.getSpInf25());
+		jsonObj.put("spInf26", memorial.getSpInf26());
+		jsonObj.put("spInf27", memorial.getSpInf27());
+		jsonObj.put("spInf28", memorial.getSpInf28());
+		jsonObj.put("spInf29", memorial.getSpInf29());
+		jsonObj.put("spInf30", memorial.getSpInf30());
+		jsonObj.put("spInf31", memorial.getSpInf31());
+		jsonObj.put("spInf32", memorial.getSpInf32());
+		jsonObj.put("spInf33", memorial.getSpInf33());
+		jsonObj.put("spInf34", memorial.getSpInf34());
+
+		return jsonObj;
+	}
+
+	public static JSONObject MEMORIAL_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(53));
+		return jsonObj;
+	}
+	
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

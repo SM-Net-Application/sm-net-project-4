@@ -7,21 +7,18 @@ import java.util.HashMap;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.EnumConventionType;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
-import com.sm.net.sp.model.WeekConvention;
+import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.meetings.task.MeetingsInitDataLoadTask;
 import com.sm.net.sp.view.home.user.menu.memorial.task.MemorialInitDataLoadTask;
+import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialLoadTask;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,17 +46,17 @@ public class Memorial extends UpdateDataAdapter {
 	@FXML
 	private Tab calendarTab;
 	@FXML
-	private TableView<WeekConvention> weekTableView;
+	private TableView<WeekMemorial> weekTableView;
 	@FXML
-	private TableColumn<WeekConvention, Integer> weekTableColumn;
+	private TableColumn<WeekMemorial, Integer> weekTableColumn;
 	@FXML
-	private TableColumn<WeekConvention, LocalDate> fromTableColumn;
+	private TableColumn<WeekMemorial, LocalDate> fromTableColumn;
 	@FXML
-	private TableColumn<WeekConvention, LocalDate> toTableColumn;
+	private TableColumn<WeekMemorial, LocalDate> toTableColumn;
 	@FXML
-	private TableColumn<WeekConvention, String> typeColumn;
+	private TableColumn<WeekMemorial, String> typeColumn;
 	@FXML
-	private TableColumn<WeekConvention, String> themeColumn;
+	private TableColumn<WeekMemorial, String> themeColumn;
 	@FXML
 	private Button deleteWeekButton;
 
@@ -69,7 +66,7 @@ public class Memorial extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 
-	private ObservableList<WeekConvention> calendar;
+	private ObservableList<WeekMemorial> calendar;
 
 	private ObservableList<Member> membersList;
 	private ObservableList<Family> familiesList;
@@ -87,17 +84,8 @@ public class Memorial extends UpdateDataAdapter {
 		this.weekTableColumn.setCellValueFactory(cellData -> cellData.getValue().weekProperty().asObject());
 		this.fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		this.toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
-		this.typeColumn.setCellValueFactory(cellData -> {
-			IntegerProperty spInf1Property = cellData.getValue().spInf1Property();
-			if (spInf1Property != null) {
-
-				EnumConventionType type = EnumConventionType.getByID(spInf1Property.get());
-				if (type != null)
-					return new SimpleStringProperty(language.getString(type.getKey()));
-			}
-			return null;
-		});
-		this.themeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3Property());
+		this.typeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
+		this.themeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
 	}
 
 	private void styleClasses() {
@@ -242,11 +230,11 @@ public class Memorial extends UpdateDataAdapter {
 			int currentMonth = day.getMonthValue();
 
 			if (lastMonth == currentMonth)
-				this.calendar.add(new WeekConvention(day.plusDays(6), this.language));
+				this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
 			else {
 				countMonth = countMonth + 1;
 				if (countMonth < monthsToGenerate)
-					this.calendar.add(new WeekConvention(day.plusDays(6), this.language));
+					this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
 			}
 
 		} while (countMonth < monthsToGenerate);
@@ -256,10 +244,10 @@ public class Memorial extends UpdateDataAdapter {
 
 	public void updateWeeksData() {
 
-		String waitMessage = this.language.getString("convention.task.load");
+		String waitMessage = this.language.getString("memorial.task.load");
 
-//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//				new WeekConventionLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new WeekMemorialLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 
 	}
 
@@ -273,13 +261,13 @@ public class Memorial extends UpdateDataAdapter {
 
 		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			WeekConvention item = this.weekTableView.getSelectionModel().getSelectedItem();
-			if (item.spConvenIDProperty() != null) {
+			WeekMemorial item = this.weekTableView.getSelectionModel().getSelectedItem();
+			if (item.spMemorialIDProperty() != null) {
 
 				if (this.application.getAlertBuilder2().confirm(this.ownerStage,
 						this.language.getString("convention.delete.confirm"))) {
 
-					int id = item.getConvenID();
+					int id = item.getMemorialID();
 
 					String waitMessage = this.language.getString("convention.task.delete");
 
@@ -304,7 +292,7 @@ public class Memorial extends UpdateDataAdapter {
 
 		this.weekTableView.setRowFactory(param -> {
 
-			TableRow<WeekConvention> row = new TableRow<>();
+			TableRow<WeekMemorial> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
 					editWeek(row.getItem());
@@ -314,7 +302,7 @@ public class Memorial extends UpdateDataAdapter {
 		});
 	}
 
-	private void editWeek(WeekConvention week) {
+	private void editWeek(WeekMemorial week) {
 
 		if (!isAlreadyOpen(week.getFrom().toString())) {
 
@@ -389,11 +377,11 @@ public class Memorial extends UpdateDataAdapter {
 		this.ownerStage = ownerStage;
 	}
 
-	public ObservableList<WeekConvention> getCalendar() {
+	public ObservableList<WeekMemorial> getCalendar() {
 		return calendar;
 	}
 
-	public void setCalendar(ObservableList<WeekConvention> calendar) {
+	public void setCalendar(ObservableList<WeekMemorial> calendar) {
 		this.calendar = calendar;
 	}
 
@@ -421,27 +409,27 @@ public class Memorial extends UpdateDataAdapter {
 		return calendarTab;
 	}
 
-	public TableView<WeekConvention> getWeekTableView() {
+	public TableView<WeekMemorial> getWeekTableView() {
 		return weekTableView;
 	}
 
-	public TableColumn<WeekConvention, Integer> getWeekTableColumn() {
+	public TableColumn<WeekMemorial, Integer> getWeekTableColumn() {
 		return weekTableColumn;
 	}
 
-	public TableColumn<WeekConvention, LocalDate> getFromTableColumn() {
+	public TableColumn<WeekMemorial, LocalDate> getFromTableColumn() {
 		return fromTableColumn;
 	}
 
-	public TableColumn<WeekConvention, LocalDate> getToTableColumn() {
+	public TableColumn<WeekMemorial, LocalDate> getToTableColumn() {
 		return toTableColumn;
 	}
 
-	public TableColumn<WeekConvention, String> getOverseerColumn() {
+	public TableColumn<WeekMemorial, String> getOverseerColumn() {
 		return typeColumn;
 	}
 
-	public TableColumn<WeekConvention, String> getVisitNumberColumn() {
+	public TableColumn<WeekMemorial, String> getVisitNumberColumn() {
 		return themeColumn;
 	}
 
@@ -461,27 +449,27 @@ public class Memorial extends UpdateDataAdapter {
 		this.calendarTab = calendarTab;
 	}
 
-	public void setWeekTableView(TableView<WeekConvention> weekTableView) {
+	public void setWeekTableView(TableView<WeekMemorial> weekTableView) {
 		this.weekTableView = weekTableView;
 	}
 
-	public void setWeekTableColumn(TableColumn<WeekConvention, Integer> weekTableColumn) {
+	public void setWeekTableColumn(TableColumn<WeekMemorial, Integer> weekTableColumn) {
 		this.weekTableColumn = weekTableColumn;
 	}
 
-	public void setFromTableColumn(TableColumn<WeekConvention, LocalDate> fromTableColumn) {
+	public void setFromTableColumn(TableColumn<WeekMemorial, LocalDate> fromTableColumn) {
 		this.fromTableColumn = fromTableColumn;
 	}
 
-	public void setToTableColumn(TableColumn<WeekConvention, LocalDate> toTableColumn) {
+	public void setToTableColumn(TableColumn<WeekMemorial, LocalDate> toTableColumn) {
 		this.toTableColumn = toTableColumn;
 	}
 
-	public void setOverseerColumn(TableColumn<WeekConvention, String> overseerColumn) {
+	public void setOverseerColumn(TableColumn<WeekMemorial, String> overseerColumn) {
 		this.typeColumn = overseerColumn;
 	}
 
-	public void setVisitNumberColumn(TableColumn<WeekConvention, String> visitNumberColumn) {
+	public void setVisitNumberColumn(TableColumn<WeekMemorial, String> visitNumberColumn) {
 		this.themeColumn = visitNumberColumn;
 	}
 
