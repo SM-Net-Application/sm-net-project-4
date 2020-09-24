@@ -4,6 +4,7 @@ import javax.crypto.SecretKey;
 
 import org.json.JSONObject;
 
+import com.sm.net.project.Language;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.property.IntegerProperty;
@@ -37,9 +38,14 @@ public class Family {
 	private StringProperty spInf9Encrypted;
 	private StringProperty spInf9Decrypted;
 
+	private IntegerProperty spInf10;
+
 	public Family(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
+	}
+
+	public Family() {
 	}
 
 	private void defaultCostructor(JSONObject jsonObject, SecretKey secretKey) {
@@ -69,6 +75,39 @@ public class Family {
 
 		this.spInf9Encrypted = new SimpleStringProperty(jsonObject.getString("spInf9"));
 		this.spInf9Decrypted = new SimpleStringProperty(Crypt.decrypt(this.spInf9Encrypted.get(), secretKey));
+
+		this.spInf10 = new SimpleIntegerProperty(jsonObject.getInt("spInf10"));
+	}
+
+	public static Family emptyFamily(Language language) {
+
+		Family family = new Family();
+
+		family.spFamID = new SimpleIntegerProperty(0);
+		family.spInf1Encrypted = new SimpleStringProperty("");
+		family.spInf1Decrypted = new SimpleStringProperty(language.getString("TEXT0096"));
+		family.spInf2Encrypted = new SimpleStringProperty("");
+		family.spInf2Decrypted = new SimpleStringProperty("");
+		family.spInf3Encrypted = new SimpleStringProperty("");
+		family.spInf3Decrypted = new SimpleStringProperty("");
+		family.spInf4Encrypted = new SimpleStringProperty("");
+		family.spInf4Decrypted = new SimpleStringProperty("");
+		family.spInf5Encrypted = new SimpleStringProperty("");
+		family.spInf5Decrypted = new SimpleStringProperty("");
+		family.spInf6 = new SimpleIntegerProperty(0);
+		family.spInf7Encrypted = new SimpleStringProperty("");
+		family.spInf7Decrypted = new SimpleStringProperty("");
+		family.spInf8 = new SimpleIntegerProperty(0);
+		family.spInf9Encrypted = new SimpleStringProperty("");
+		family.spInf9Decrypted = new SimpleStringProperty("");
+		family.spInf10 = new SimpleIntegerProperty(0);
+
+		return family;
+	}
+
+	@Override
+	public String toString() {
+		return this.getSpInf1Decrypted();
 	}
 
 	public final IntegerProperty spFamIDProperty() {
@@ -286,4 +325,17 @@ public class Family {
 	public final void setSpInf9Decrypted(final String spInf9Decrypted) {
 		this.spInf9DecryptedProperty().set(spInf9Decrypted);
 	}
+
+	public final IntegerProperty spInf10Property() {
+		return this.spInf10;
+	}
+
+	public final int getSpInf10() {
+		return this.spInf10Property().get();
+	}
+
+	public final void setSpInf10(final int spInf10) {
+		this.spInf10Property().set(spInf10);
+	}
+
 }

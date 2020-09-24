@@ -90,6 +90,11 @@ public class UserMenuCongrFamilyEditor {
 	private TabPane privilegiesTabPane;
 	@FXML
 	private Tab othersTab;
+	@FXML
+	private Tab memorialTab;
+
+	@FXML
+	private CheckBox memorialEmblemsCheckBox;
 
 	private Settings settings;
 	private Language language;
@@ -153,6 +158,9 @@ public class UserMenuCongrFamilyEditor {
 
 		this.privilegiesTabPane.getStyleClass().add("tab_pane_003");
 		this.othersTab.getStyleClass().add("tab_001");
+		this.memorialTab.getStyleClass().add("tab_001");
+
+		this.memorialEmblemsCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -178,6 +186,8 @@ public class UserMenuCongrFamilyEditor {
 
 		this.familyExcludeFromServiceGroupCheckBox
 				.setText(language.getString("congregation.family.editor.checkbox.excludeservicegroup"));
+
+		this.memorialEmblemsCheckBox.setText(language.getString("congregation.family.editor.checkbox.memorialemblems"));
 
 		membersLabel.setText(language.getString("TEXT0032"));
 		memberIDTableColumn.setText(language.getString("TEXT0005"));
@@ -220,6 +230,12 @@ public class UserMenuCongrFamilyEditor {
 		this.othersTab.setTooltip(othersTooltip);
 		this.othersTab.setText("");
 		this.othersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.OTHERS));
+
+		Tooltip memorialTooltip = new Tooltip(this.language.getString("congregation.family.editor.tooltip.memorial"));
+		memorialTooltip.getStyleClass().add("tooltip_001");
+		this.memorialTab.setTooltip(memorialTooltip);
+		this.memorialTab.setText("");
+		this.memorialTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMORIAL));
 	}
 
 	private void initValue() {
@@ -237,6 +253,7 @@ public class UserMenuCongrFamilyEditor {
 			this.familyPhoneTextField.setText(selectedFamily.getSpInf7Decrypted());
 			this.familyExcludeFromServiceGroupCheckBox.setSelected((selectedFamily.getSpInf8() == 1));
 			this.familyCoordTextField.setText(selectedFamily.getSpInf9Decrypted());
+			this.memorialEmblemsCheckBox.setSelected((selectedFamily.getSpInf10() == 1));
 		}
 	}
 
@@ -330,6 +347,8 @@ public class UserMenuCongrFamilyEditor {
 
 			String spInf9 = Crypt.encrypt(this.familyCoordTextField.getText(), this.settings.getDatabaseSecretKey());
 
+			String spInf10 = !this.memorialEmblemsCheckBox.isSelected() ? "0" : "1";
+
 			String idToRemove = "";
 
 			for (Member member : membersAvailableList)
@@ -343,9 +362,11 @@ public class UserMenuCongrFamilyEditor {
 					idToSet += idToSet.isEmpty() ? member.getSpMemberID() : ", " + member.getSpMemberID();
 
 			if (selectedFamily != null)
-				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, spInf9, idToRemove, idToSet);
+				editFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf7, spInf8, spInf9, spInf10, idToRemove,
+						idToSet);
 			else
-				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, spInf8, spInf9, idToRemove, idToSet);
+				newFamily(spInf1, spInf2, spInf3, spInf4, spInf5, "-1", spInf7, spInf8, spInf9, spInf10, idToRemove,
+						idToSet);
 		} else
 			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
 					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
@@ -353,17 +374,17 @@ public class UserMenuCongrFamilyEditor {
 	}
 
 	private void newFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf6,
-			String spInf7, String spInf8, String spInf9, String idToRemove, String idToSet) {
+			String spInf7, String spInf8, String spInf9, String spInf10, String idToRemove, String idToSet) {
 
-		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, idToRemove,
-				idToSet, settings, ownerStage, parentTabPane, newFamilyTab, familiesTab, ownerCtrl);
+		Actions.insertFamily(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
+				idToRemove, idToSet, settings, ownerStage, parentTabPane, newFamilyTab, familiesTab, ownerCtrl);
 	}
 
 	private void editFamily(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5, String spInf7,
-			String spInf8, String spInf9, String idToRemove, String idToSet) {
+			String spInf8, String spInf9, String spInf10, String idToRemove, String idToSet) {
 
 		Actions.updateFamily(String.valueOf(selectedFamily.getSpFamID()), spInf1, spInf2, spInf3, spInf4, spInf5,
-				spInf7, spInf8, spInf9, idToRemove, idToSet, settings, ownerStage, parentTabPane, newFamilyTab,
+				spInf7, spInf8, spInf9, spInf10, idToRemove, idToSet, settings, ownerStage, parentTabPane, newFamilyTab,
 				familiesTab, ownerCtrl);
 	}
 

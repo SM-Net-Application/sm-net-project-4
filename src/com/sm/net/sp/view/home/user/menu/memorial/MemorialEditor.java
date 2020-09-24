@@ -1,25 +1,38 @@
 package com.sm.net.sp.view.home.user.menu.memorial;
 
+import java.util.HashMap;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.dialogs.place.PlaceDialog;
 import com.sm.net.sp.model.EnumDays;
+import com.sm.net.sp.model.EnumPlaceType;
+import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.utils.PlaceUtils;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.conven.EnumDaysComboBoxListCell;
+import com.sm.net.util.Crypt;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class MemorialEditor extends UpdateDataAdapter {
 
@@ -115,15 +128,15 @@ public class MemorialEditor extends UpdateDataAdapter {
 	private Label breadFamily5Label;
 
 	@FXML
-	private ComboBox<Member> breadFamily1ComboBox;
+	private ComboBox<Family> breadFamily1ComboBox;
 	@FXML
-	private ComboBox<Member> breadFamily2ComboBox;
+	private ComboBox<Family> breadFamily2ComboBox;
 	@FXML
-	private ComboBox<Member> breadFamily3ComboBox;
+	private ComboBox<Family> breadFamily3ComboBox;
 	@FXML
-	private ComboBox<Member> breadFamily4ComboBox;
+	private ComboBox<Family> breadFamily4ComboBox;
 	@FXML
-	private ComboBox<Member> breadFamily5ComboBox;
+	private ComboBox<Family> breadFamily5ComboBox;
 
 	@FXML
 	private Label wineHeaderLabel;
@@ -139,15 +152,15 @@ public class MemorialEditor extends UpdateDataAdapter {
 	private Label wineFamily5Label;
 
 	@FXML
-	private ComboBox<Member> wineFamily1ComboBox;
+	private ComboBox<Family> wineFamily1ComboBox;
 	@FXML
-	private ComboBox<Member> wineFamily2ComboBox;
+	private ComboBox<Family> wineFamily2ComboBox;
 	@FXML
-	private ComboBox<Member> wineFamily3ComboBox;
+	private ComboBox<Family> wineFamily3ComboBox;
 	@FXML
-	private ComboBox<Member> wineFamily4ComboBox;
+	private ComboBox<Family> wineFamily4ComboBox;
 	@FXML
-	private ComboBox<Member> wineFamily5ComboBox;
+	private ComboBox<Family> wineFamily5ComboBox;
 
 	@FXML
 	private Label emblemsBrothersHeaderLabel;
@@ -196,6 +209,9 @@ public class MemorialEditor extends UpdateDataAdapter {
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
+
+	private ObservableList<Member> membersList;
+	private ObservableList<Family> familiesList;
 
 	private Memorial ownerCtrl;
 	private WeekConvention selectedWeek;
@@ -352,12 +368,24 @@ public class MemorialEditor extends UpdateDataAdapter {
 		this.breadFamily4Label.setText(this.language.getString("memorialeditor.breadfamily4"));
 		this.breadFamily5Label.setText(this.language.getString("memorialeditor.breadfamily5"));
 
+		this.breadFamily1ComboBox.setMinWidth(200);
+		this.breadFamily2ComboBox.setMinWidth(200);
+		this.breadFamily3ComboBox.setMinWidth(200);
+		this.breadFamily4ComboBox.setMinWidth(200);
+		this.breadFamily5ComboBox.setMinWidth(200);
+
 		this.wineHeaderLabel.setText(this.language.getString("memorialeditor.wineheader"));
 		this.wineFamily1Label.setText(this.language.getString("memorialeditor.winefamily1"));
 		this.wineFamily2Label.setText(this.language.getString("memorialeditor.winefamily2"));
 		this.wineFamily3Label.setText(this.language.getString("memorialeditor.winefamily3"));
 		this.wineFamily4Label.setText(this.language.getString("memorialeditor.winefamily4"));
 		this.wineFamily5Label.setText(this.language.getString("memorialeditor.winefamily5"));
+
+		this.wineFamily1ComboBox.setMinWidth(200);
+		this.wineFamily2ComboBox.setMinWidth(200);
+		this.wineFamily3ComboBox.setMinWidth(200);
+		this.wineFamily4ComboBox.setMinWidth(200);
+		this.wineFamily5ComboBox.setMinWidth(200);
 
 		this.emblemsBrothersHeaderLabel.setText(this.language.getString("memorialeditor.emblemsbrothersheader"));
 		this.emblemsBrother1Label.setText(this.language.getString("memorialeditor.emblemsbrother1"));
@@ -420,9 +448,9 @@ public class MemorialEditor extends UpdateDataAdapter {
 //		this.typeComboBox.setButtonCell(callbackConventionType.call(null));
 //		this.typeComboBox.setCellFactory(callbackConventionType);
 
-//		Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackDay = callbackForDayComboBox();
-//		this.dayComboBox.setButtonCell(callbackDay.call(null));
-//		this.dayComboBox.setCellFactory(callbackDay);
+		Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackDay = callbackForDayComboBox();
+		this.dayComboBox.setButtonCell(callbackDay.call(null));
+		this.dayComboBox.setCellFactory(callbackDay);
 
 		this.dayComboBox.getItems().addAll(EnumDays.LUN, EnumDays.MAR, EnumDays.MER, EnumDays.GIO, EnumDays.VEN,
 				EnumDays.SAB, EnumDays.DOM);
@@ -434,6 +462,149 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 		this.hourComboBox.getSelectionModel().selectFirst();
 		this.minuteComboBox.getSelectionModel().selectFirst();
+
+		initMembers();
+		initFamilies();
+		initPlace();
+
+		this.placeSelectButton.setOnAction(e -> selectPlace());
+	}
+
+	private void initFamilies() {
+
+		ObservableList<Family> list = FXCollections.observableArrayList();
+		for (Family f : this.familiesList)
+			if (f.getSpInf10() == 1)
+				list.add(f);
+
+		list.add(0, Family.emptyFamily(this.language));
+
+		this.breadFamily1ComboBox.setItems(list);
+		this.breadFamily2ComboBox.setItems(list);
+		this.breadFamily3ComboBox.setItems(list);
+		this.breadFamily4ComboBox.setItems(list);
+		this.breadFamily5ComboBox.setItems(list);
+
+		this.breadFamily1ComboBox.getSelectionModel().selectFirst();
+		this.breadFamily2ComboBox.getSelectionModel().selectFirst();
+		this.breadFamily3ComboBox.getSelectionModel().selectFirst();
+		this.breadFamily4ComboBox.getSelectionModel().selectFirst();
+		this.breadFamily5ComboBox.getSelectionModel().selectFirst();
+
+		this.wineFamily1ComboBox.setItems(list);
+		this.wineFamily2ComboBox.setItems(list);
+		this.wineFamily3ComboBox.setItems(list);
+		this.wineFamily4ComboBox.setItems(list);
+		this.wineFamily5ComboBox.setItems(list);
+
+		this.wineFamily1ComboBox.getSelectionModel().selectFirst();
+		this.wineFamily2ComboBox.getSelectionModel().selectFirst();
+		this.wineFamily3ComboBox.getSelectionModel().selectFirst();
+		this.wineFamily4ComboBox.getSelectionModel().selectFirst();
+		this.wineFamily5ComboBox.getSelectionModel().selectFirst();
+	}
+
+	private void initMembers() {
+
+		ObservableList<Member> list = FXCollections.observableArrayList();
+		for (Member m : this.membersList)
+			if (m.getSpInf9() == 1 || m.getSpInf10() == 1)
+				list.add(m);
+
+		list.add(0, Member.emptyMember(this.language));
+
+		this.prayStartComboBox.setItems(list);
+		this.prayStartComboBox.getSelectionModel().selectFirst();
+
+		this.presidentComboBox.setItems(list);
+		this.presidentComboBox.getSelectionModel().selectFirst();
+
+		this.talkBrotherComboBox.setItems(list);
+		this.talkBrotherComboBox.getSelectionModel().selectFirst();
+
+		this.prayEndComboBox.setItems(list);
+		this.prayEndComboBox.getSelectionModel().selectFirst();
+
+		this.prayBreadComboBox.setItems(list);
+		this.prayBreadComboBox.getSelectionModel().selectFirst();
+
+		this.prayWineComboBox.setItems(list);
+		this.prayWineComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother1ComboBox.setItems(list);
+		this.emblemsBrother1ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother2ComboBox.setItems(list);
+		this.emblemsBrother2ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother3ComboBox.setItems(list);
+		this.emblemsBrother3ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother4ComboBox.setItems(list);
+		this.emblemsBrother4ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother5ComboBox.setItems(list);
+		this.emblemsBrother5ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother6ComboBox.setItems(list);
+		this.emblemsBrother6ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother7ComboBox.setItems(list);
+		this.emblemsBrother7ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother8ComboBox.setItems(list);
+		this.emblemsBrother8ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother9ComboBox.setItems(list);
+		this.emblemsBrother9ComboBox.getSelectionModel().selectFirst();
+
+		this.emblemsBrother10ComboBox.setItems(list);
+		this.emblemsBrother10ComboBox.getSelectionModel().selectFirst();
+	}
+
+	private void initPlace() {
+
+		ObservableList<Place> placesList = this.ownerCtrl.getPlacesList();
+		Place found = null;
+		for (Place place : placesList)
+			if (place.getType().get() == EnumPlaceType.KINGDOMHALL)
+				if (place.getDef().get()) {
+					found = place;
+					break;
+				}
+
+		if (found != null) {
+
+			String addr = placeToText(found);
+
+			this.placeTextField.setText(addr);
+		}
+	}
+
+	private String placeToText(Place found) {
+
+		String addr = "";
+
+		HashMap<String, String> configs = this.ownerCtrl.getConfigs();
+		String pattern = configs.get("inf1");
+		if (pattern != null) {
+
+			pattern = Crypt.decrypt(pattern, this.application.getSettings().getDatabaseSecretKey());
+			addr = PlaceUtils.toText(found, pattern);
+
+		} else
+
+			addr = PlaceUtils.toText(found);
+
+		return addr;
+	}
+
+	private void selectPlace() {
+
+		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList(),
+				EnumPlaceType.KINGDOMHALL);
+		if (place != null)
+			this.placeTextField.setText(placeToText(place));
 	}
 
 	private void initIntegers(ComboBox<Integer> cb, int size) {
@@ -446,9 +617,9 @@ public class MemorialEditor extends UpdateDataAdapter {
 //		return param -> new EnumConventionTypeComboBoxListCell(this.getSettings().getLanguage());
 //	}
 
-//	private Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackForDayComboBox() {
-//		return param -> new EnumDaysComboBoxListCell(this.getSettings().getLanguage());
-//	}
+	private Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackForDayComboBox() {
+		return param -> new EnumDaysComboBoxListCell(this.getSettings().getLanguage());
+	}
 
 	private void loadSelectedWeek() {
 
@@ -656,5 +827,21 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 	public void setDayComboBox(ComboBox<EnumDays> dayComboBox) {
 		this.dayComboBox = dayComboBox;
+	}
+
+	public ObservableList<Member> getMembersList() {
+		return membersList;
+	}
+
+	public void setMembersList(ObservableList<Member> membersList) {
+		this.membersList = membersList;
+	}
+
+	public ObservableList<Family> getFamiliesList() {
+		return familiesList;
+	}
+
+	public void setFamiliesList(ObservableList<Family> familiesList) {
+		this.familiesList = familiesList;
 	}
 }

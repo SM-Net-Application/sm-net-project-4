@@ -2,15 +2,21 @@ package com.sm.net.sp.view.home.user.menu.memorial;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.EnumConventionType;
+import com.sm.net.sp.model.Family;
+import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.conven.task.WeekConventionDeleteTask;
-import com.sm.net.sp.view.home.user.menu.conven.task.WeekConventionLoadTask;
+import com.sm.net.sp.view.home.user.menu.meetings.task.MeetingsInitDataLoadTask;
+import com.sm.net.sp.view.home.user.menu.memorial.task.MemorialInitDataLoadTask;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
@@ -32,7 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Memorial {
+public class Memorial extends UpdateDataAdapter {
 
 	@FXML
 	private ImageView headerImageView;
@@ -62,7 +68,13 @@ public class Memorial {
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
+
 	private ObservableList<WeekConvention> calendar;
+
+	private ObservableList<Member> membersList;
+	private ObservableList<Family> familiesList;
+	private ObservableList<Place> placesList;
+	private HashMap<String, String> configs;
 
 	@FXML
 	private void initialize() {
@@ -152,6 +164,45 @@ public class Memorial {
 
 		this.loadCalendar();
 		this.updateWeeksData();
+
+		this.membersList = FXCollections.observableArrayList();
+		this.familiesList = FXCollections.observableArrayList();
+
+		updateMembers();
+	}
+
+	@Override
+	public void updateMembers() {
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateFamilies() {
+		Actions.getAllFamilies(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembers(ObservableList<Member> list) {
+
+		this.membersList = list;
+		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
+				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
+
+		updateFamilies();
+	}
+
+	@Override
+	public void updateFamilies(ObservableList<Family> list) {
+
+		this.familiesList = list;
+		this.familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
+
+		// Carica programmazione e luoghi
+
+		String waitMessage = this.language.getString("memorial.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new MemorialInitDataLoadTask(
+				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void loadCalendar() {
@@ -280,6 +331,8 @@ public class Memorial {
 				ctrl.setSelectedWeek(week);
 				ctrl.setCalendar(this.calendar);
 				ctrl.setApplication(this.application);
+				ctrl.setMembersList(this.membersList);
+				ctrl.setFamiliesList(this.familiesList);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -430,6 +483,22 @@ public class Memorial {
 
 	public void setVisitNumberColumn(TableColumn<WeekConvention, String> visitNumberColumn) {
 		this.themeColumn = visitNumberColumn;
+	}
+
+	public ObservableList<Place> getPlacesList() {
+		return placesList;
+	}
+
+	public void setPlacesList(ObservableList<Place> placesList) {
+		this.placesList = placesList;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
 	}
 
 }

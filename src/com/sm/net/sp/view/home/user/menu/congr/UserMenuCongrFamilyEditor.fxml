@@ -225,6 +225,26 @@
                            <children>
                               <TabPane fx:id="privilegiesTabPane" side="LEFT">
                                  <tabs>
+                                    <Tab fx:id="memorialTab" closable="false" text="memorial">
+                                       <content>
+                                          <AnchorPane>
+                                             <children>
+                                                <StackPane alignment="TOP_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <CheckBox fx:id="memorialEmblemsCheckBox" mnemonicParsing="false" text="preparazioneemblemi">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </CheckBox>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
                                     <Tab fx:id="othersTab" closable="false" text="altro">
                                        <content>
                                           <AnchorPane>

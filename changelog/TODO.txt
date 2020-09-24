@@ -24,6 +24,8 @@
 	Stampare Layout Congressi e assemblee
 	Stampare Layout Commemorazione
 	Verificare la stampa del cognome da nubile
+	Famiglia privilegio Preparazione emblemi commemorazione
+	Configurazione : minuti discorso Commemorazione
 				
 	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia

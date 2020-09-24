@@ -31,7 +31,10 @@ public class PlaceDialog {
 	private Stage ownerStage;
 	private ObservableList<Place> placeList;
 
-	public static Place show(SupportPlannerView application, Stage ownerStage, ObservableList<Place> placeList) {
+	private EnumPlaceType selectedType;
+
+	public static Place show(SupportPlannerView application, Stage ownerStage, ObservableList<Place> placeList,
+			EnumPlaceType selectedType) {
 
 		try {
 
@@ -62,6 +65,8 @@ public class PlaceDialog {
 			ctrl.setApplication(application);
 			ctrl.setOwnerStage(ownerStage);
 			ctrl.setPlaceList(placeList);
+			ctrl.setSelectedType(selectedType);
+
 			ctrl.init();
 
 			dialogPane.setContent(content);
@@ -111,7 +116,7 @@ public class PlaceDialog {
 		ObservableList<Place> list = FXCollections.observableArrayList();
 
 		for (Place place : this.placeList)
-			if (place.getType().get() == EnumPlaceType.KINGDOMHALL || place.getType().get() == EnumPlaceType.OTHER)
+			if (place.getType().get() == this.selectedType || place.getType().get() == EnumPlaceType.OTHER)
 				list.add(place);
 
 		list.sort((o1, o2) -> {
@@ -164,5 +169,13 @@ public class PlaceDialog {
 
 	public void setPlaceList(ObservableList<Place> placeList) {
 		this.placeList = placeList;
+	}
+
+	public EnumPlaceType getSelectedType() {
+		return selectedType;
+	}
+
+	public void setSelectedType(EnumPlaceType selectedType) {
+		this.selectedType = selectedType;
 	}
 }

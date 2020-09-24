@@ -7,7 +7,7 @@ if (! $database) {
 	$response ["status"] = 4;
 	$response ["error"] = mysqli_connect_error ();
 } else {
-	$query = "SELECT sp_fam.spFamID, sp_fam.spInf1, sp_fam.spInf2, sp_fam.spInf3, sp_fam.spInf4, sp_fam.spInf5, sp_fam.spInf6, sp_fam.spInf7, sp_fam.spInf8, sp_fam.spInf9,";
+	$query = "SELECT sp_fam.spFamID, sp_fam.spInf1, sp_fam.spInf2, sp_fam.spInf3, sp_fam.spInf4, sp_fam.spInf5, sp_fam.spInf6, sp_fam.spInf7, sp_fam.spInf8, sp_fam.spInf9, sp_fam.spInf10,";
 	$query .= " COUNT(sp_members.spMemberID) AS spFamMembers";
 	$query .= " FROM sp_fam";
 	$query .= " INNER JOIN sp_members";
@@ -32,6 +32,7 @@ if (! $database) {
 			$row ["spInf7"] = $resultRow ["spInf7"];
 			$row ["spInf8"] = $resultRow ["spInf8"];
             $row ["spInf9"] = $resultRow ["spInf9"];
+            $row ["spInf10"] = $resultRow ["spInf10"];
 			$row ["spFamMembers"] = $resultRow ["spFamMembers"];
 			array_push ( $response ["result"], $row );
 		}

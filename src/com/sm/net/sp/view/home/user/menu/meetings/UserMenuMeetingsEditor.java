@@ -1538,13 +1538,15 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private void selectPlace1() {
 
-		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList());
+		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList(),
+				EnumPlaceType.KINGDOMHALL);
 		if (place != null)
 			this.place1TextField.setText(placeToText(place));
 	}
 
 	private void selectPlace2() {
-		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList());
+		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList(),
+				EnumPlaceType.KINGDOMHALL);
 		if (place != null)
 			this.place2TextField.setText(placeToText(place));
 	}
