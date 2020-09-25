@@ -562,6 +562,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				UserMenuCircuitOverseer ctrl = (UserMenuCircuitOverseer) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);

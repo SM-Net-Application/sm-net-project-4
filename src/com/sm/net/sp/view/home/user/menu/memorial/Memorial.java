@@ -7,6 +7,7 @@ import java.util.HashMap;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.EnumDays;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
@@ -15,10 +16,12 @@ import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.memorial.task.MemorialInitDataLoadTask;
+import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialDeleteTask;
 import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialLoadTask;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,7 +57,11 @@ public class Memorial extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<WeekMemorial, LocalDate> toTableColumn;
 	@FXML
-	private TableColumn<WeekMemorial, String> typeColumn;
+	private TableColumn<WeekMemorial, String> dayColumn;
+	@FXML
+	private TableColumn<WeekMemorial, String> placeColumn;
+	@FXML
+	private TableColumn<WeekMemorial, String> talkBrotherColumn;
 	@FXML
 	private TableColumn<WeekMemorial, String> themeColumn;
 	@FXML
@@ -84,7 +91,45 @@ public class Memorial extends UpdateDataAdapter {
 		this.weekTableColumn.setCellValueFactory(cellData -> cellData.getValue().weekProperty().asObject());
 		this.fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		this.toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
-		this.typeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
+
+		this.dayColumn.setCellValueFactory(cellData -> {
+
+			WeekMemorial memorial = cellData.getValue();
+
+			if (memorial.spMemorialIDProperty() != null) {
+
+				int dayID = memorial.getSpInf21();
+				int hour = memorial.getSpInf22();
+				int minute = memorial.getSpInf23();
+
+				EnumDays day = EnumDays.getByID(dayID);
+				String format = this.language.getString("memorial.tablecolumn.patternday");
+
+				return new SimpleStringProperty(
+						String.format(format, this.language.getString(day.getKey()), hour, minute));
+			}
+
+			return null;
+		});
+
+		this.placeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf24Property());
+		this.talkBrotherColumn.setCellValueFactory(cellData -> {
+
+			WeekMemorial memorial = cellData.getValue();
+
+			if (memorial.spMemorialIDProperty() != null) {
+
+				int talkBrotherID = memorial.getSpInf6();
+				if (talkBrotherID > 0)
+					for (Member m : this.membersList)
+						if (m.getSpMemberID() == talkBrotherID)
+							return new SimpleStringProperty(m.getNameStyle1());
+
+			}
+
+			return null;
+		});
+
 		this.themeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
 	}
 
@@ -100,6 +145,8 @@ public class Memorial extends UpdateDataAdapter {
 		this.weekTableColumn.getStyleClass().add("table_column_002");
 		this.fromTableColumn.getStyleClass().add("table_column_002");
 		this.toTableColumn.getStyleClass().add("table_column_002");
+
+		this.dayColumn.getStyleClass().add("table_column_002");
 
 		this.deleteWeekButton.getStyleClass().add("button_image_001");
 	}
@@ -138,10 +185,17 @@ public class Memorial extends UpdateDataAdapter {
 		this.toTableColumn.setMinWidth(100);
 		this.toTableColumn.setMaxWidth(100);
 
-		this.typeColumn.setText(this.language.getString("convention.tablecolumn.type"));
-		this.themeColumn.setText(this.language.getString("convention.tablecolumn.theme"));
+		this.dayColumn.setText(this.language.getString("memorial.tablecolumn.day"));
+		this.dayColumn.setMinWidth(150);
+		this.dayColumn.setMaxWidth(150);
 
-		Tooltip deleteTooltip = new Tooltip(language.getString("convention.tooltip.delete"));
+		this.placeColumn.setText(this.language.getString("memorial.tablecolumn.place"));
+
+		this.talkBrotherColumn.setText(this.language.getString("memorial.tablecolumn.talkbrother"));
+
+		this.themeColumn.setText(this.language.getString("memorial.tablecolumn.theme"));
+
+		Tooltip deleteTooltip = new Tooltip(language.getString("memorial.tooltip.delete"));
 		deleteTooltip.getStyleClass().add("tooltip_001");
 		this.deleteWeekButton.setTooltip(deleteTooltip);
 		this.deleteWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
@@ -265,15 +319,15 @@ public class Memorial extends UpdateDataAdapter {
 			if (item.spMemorialIDProperty() != null) {
 
 				if (this.application.getAlertBuilder2().confirm(this.ownerStage,
-						this.language.getString("convention.delete.confirm"))) {
+						this.language.getString("memorial.delete.confirm"))) {
 
 					int id = item.getMemorialID();
 
-					String waitMessage = this.language.getString("convention.task.delete");
+					String waitMessage = this.language.getString("memorial.task.delete");
 
-//					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//							new WeekConventionDeleteTask(this.application.getAlertBuilder2(), this.settings,
-//									this.ownerStage, this, id));
+					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+							new WeekMemorialDeleteTask(this.application.getAlertBuilder2(), this.settings,
+									this.ownerStage, this, id));
 				}
 			} else {
 
@@ -425,10 +479,6 @@ public class Memorial extends UpdateDataAdapter {
 		return toTableColumn;
 	}
 
-	public TableColumn<WeekMemorial, String> getOverseerColumn() {
-		return typeColumn;
-	}
-
 	public TableColumn<WeekMemorial, String> getVisitNumberColumn() {
 		return themeColumn;
 	}
@@ -463,10 +513,6 @@ public class Memorial extends UpdateDataAdapter {
 
 	public void setToTableColumn(TableColumn<WeekMemorial, LocalDate> toTableColumn) {
 		this.toTableColumn = toTableColumn;
-	}
-
-	public void setOverseerColumn(TableColumn<WeekMemorial, String> overseerColumn) {
-		this.typeColumn = overseerColumn;
 	}
 
 	public void setVisitNumberColumn(TableColumn<WeekMemorial, String> visitNumberColumn) {

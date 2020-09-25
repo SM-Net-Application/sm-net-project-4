@@ -93,8 +93,10 @@
                                                     <TableColumn fx:id="weekTableColumn" prefWidth="75.0" text="Week" />
                                                     <TableColumn fx:id="fromTableColumn" prefWidth="75.0" text="From" />
                                                       <TableColumn fx:id="toTableColumn" prefWidth="75.0" text="To" />
-                                                      <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Overseer" />
-                                                      <TableColumn fx:id="themeColumn" prefWidth="75.0" text="Visit number" />
+                                                      <TableColumn fx:id="dayColumn" prefWidth="75.0" text="day" />
+                                                      <TableColumn fx:id="placeColumn" prefWidth="75.0" text="place" />
+                                                      <TableColumn fx:id="talkBrotherColumn" prefWidth="75.0" text="talkbrother" />
+                                                      <TableColumn fx:id="themeColumn" prefWidth="75.0" text="theme" />
                                                   </columns>
                                                    <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

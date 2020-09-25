@@ -153,6 +153,34 @@ public class WeekOverseer {
 				this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
 
 				break;
+			} else {
+
+				this.spWeekOvID = null;
+				this.spInf1 = null;
+				this.spInf2 = null;
+
+				this.spInf3 = null;
+				this.spInf4 = null;
+				this.spInf5 = null;
+				this.spInf6 = null;
+				this.spInf7 = null;
+				this.spInf8 = null;
+				this.spInf9 = null;
+				this.spInf10 = null;
+				this.spInf11 = null;
+				this.spInf12 = null;
+				this.spInf13 = null;
+				this.spInf14 = null;
+				this.spInf15 = null;
+
+				this.spInf16 = null;
+				this.spInf17 = null;
+				this.spInf18 = null;
+				this.spInf19 = null;
+				this.spInf20 = null;
+
+				this.visitNumber = null;
+				this.overseer = null;
 			}
 	}
 

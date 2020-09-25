@@ -57,6 +57,8 @@ if (! $database) {
         $row ["spInf32"] = $resultRow ["spInf32"];
         $row ["spInf33"] = $resultRow ["spInf33"];
         $row ["spInf34"] = $resultRow ["spInf34"];
+        $row ["spInf35"] = $resultRow ["spInf35"];
+        $row ["spInf36"] = $resultRow ["spInf36"];
         
         array_push ( $response ["result"], $row );
         

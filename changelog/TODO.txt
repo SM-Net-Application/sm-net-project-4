@@ -1,7 +1,4 @@
 
-	- Congressi e assemblee
-		- Mi sono dimenticato il Luogo
-		
 	- Sorvegliante:
 		- Mostra solo le settimane presenti nel database
 		- Eliminare settimana

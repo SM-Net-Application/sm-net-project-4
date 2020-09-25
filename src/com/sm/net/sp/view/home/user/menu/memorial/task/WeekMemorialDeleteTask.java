@@ -8,45 +8,36 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
-import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
-public class WeekMemorialSaveTask implements TaskInterface {
+public class WeekMemorialDeleteTask implements TaskInterface {
 
-	private Memorial view;
 	private AlertBuilder alertBuilder;
 	private Settings settings;
 	private Stage viewStage;
-	private WeekMemorial weekMemorial;
-	private Tab thisTab;
+	private Memorial view;
+	private int id;
 
-	public WeekMemorialSaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage,
-			WeekMemorial weekMemorial, Memorial view, Tab thisTab) {
+	public WeekMemorialDeleteTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Memorial view,
+			int id) {
 		super();
 
-		this.view = view;
 		this.alertBuilder = alertBuilder;
 		this.settings = settings;
 		this.viewStage = viewStage;
-		this.weekMemorial = weekMemorial;
-		this.thisTab = thisTab;
+		this.view = view;
+		this.id = id;
 	}
 
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		JSONObject json = null;
-		if (this.weekMemorial.spMemorialIDProperty() != null)
-			json = JSONRequest.MEMORIAL_UPDATE(this.weekMemorial);
-		else
-			json = JSONRequest.MEMORIAL_INSERT(this.weekMemorial);
+		JSONObject json = JSONRequest.MEMORIAL_DELETE(this.id);
 
 		String url = this.settings.getDatabaseUrl();
 
@@ -76,9 +67,6 @@ public class WeekMemorialSaveTask implements TaskInterface {
 		if (status == 0) {
 
 			this.view.updateWeeksData();
-
-			TabPane tabPane = this.view.getTabPane();
-			tabPane.getTabs().remove(this.thisTab);
 
 		} else if (status == 1)
 			this.alertBuilder.error(this.viewStage, error);

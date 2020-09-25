@@ -831,6 +831,7 @@ public class JSONRequest {
 		jsonObj.put("spInf29", convention.getSpInf29());
 		jsonObj.put("spInf30", convention.getSpInf30());
 		jsonObj.put("spInf31", convention.getSpInf31());
+		jsonObj.put("spInf32", convention.getSpInf32());
 
 		return jsonObj;
 	}
@@ -877,6 +878,7 @@ public class JSONRequest {
 		jsonObj.put("spInf29", convention.getSpInf29());
 		jsonObj.put("spInf30", convention.getSpInf30());
 		jsonObj.put("spInf31", convention.getSpInf31());
+		jsonObj.put("spInf32", convention.getSpInf32());
 
 		return jsonObj;
 	}
@@ -928,6 +930,8 @@ public class JSONRequest {
 		jsonObj.put("spInf32", memorial.getSpInf32());
 		jsonObj.put("spInf33", memorial.getSpInf33());
 		jsonObj.put("spInf34", memorial.getSpInf34());
+		jsonObj.put("spInf35", memorial.getSpInf35());
+		jsonObj.put("spInf36", memorial.getSpInf36());
 
 		return jsonObj;
 	}
@@ -971,6 +975,8 @@ public class JSONRequest {
 		jsonObj.put("spInf32", memorial.getSpInf32());
 		jsonObj.put("spInf33", memorial.getSpInf33());
 		jsonObj.put("spInf34", memorial.getSpInf34());
+		jsonObj.put("spInf35", memorial.getSpInf35());
+		jsonObj.put("spInf36", memorial.getSpInf36());
 
 		return jsonObj;
 	}
@@ -980,7 +986,25 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(53));
 		return jsonObj;
 	}
-	
+
+	public static JSONObject MEMORIAL_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(54));
+
+		jsonObj.put("spMemorialID", id);
+
+		return jsonObj;
+	}
+
+	public static JSONObject OVERSEER_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(55));
+
+		jsonObj.put("spWeekOvID", id);
+
+		return jsonObj;
+	}
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

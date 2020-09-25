@@ -1,16 +1,22 @@
 package com.sm.net.sp.view.home.user.menu.conven;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.dialogs.place.PlaceDialog;
 import com.sm.net.sp.model.EnumConventionType;
 import com.sm.net.sp.model.EnumDays;
+import com.sm.net.sp.model.EnumPlaceType;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.utils.PlaceUtils;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.conven.task.WeekConventionSaveTask;
+import com.sm.net.util.Crypt;
 import com.smnet.core.task.TaskManager;
 
 import javafx.collections.ObservableList;
@@ -186,6 +192,13 @@ public class ConventionEditor extends UpdateDataAdapter {
 	@FXML
 	private TextField question10TextField;
 
+	@FXML
+	private Label placeLabel;
+	@FXML
+	private TextField placeTextField;
+	@FXML
+	private Button placeSelectButton;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -292,6 +305,10 @@ public class ConventionEditor extends UpdateDataAdapter {
 		this.question10TextField.getStyleClass().add("text_field_001");
 
 		this.saveButton.getStyleClass().add("button_image_001");
+
+		this.placeLabel.getStyleClass().add("label_set_001");
+		this.placeTextField.getStyleClass().add("text_field_001");
+		this.placeSelectButton.getStyleClass().add("button_image_001");
 	}
 
 	private void viewUpdate() {
@@ -410,6 +427,10 @@ public class ConventionEditor extends UpdateDataAdapter {
 		this.saveButton.setTooltip(saveButtonTooltip);
 		this.saveButton.setText("");
 		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
+
+		this.placeLabel.setText(this.language.getString("conventioneditor.place"));
+		this.placeSelectButton.setText(null);
+		this.placeSelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
 	}
 
 	public void objectInitialize() {
@@ -422,6 +443,7 @@ public class ConventionEditor extends UpdateDataAdapter {
 
 		initFields();
 		loadSelectedWeek();
+
 	}
 
 	private void initFields() {
@@ -469,6 +491,55 @@ public class ConventionEditor extends UpdateDataAdapter {
 		this.endMinuteDay1ComboBox.getSelectionModel().selectFirst();
 		this.endMinuteDay2ComboBox.getSelectionModel().selectFirst();
 		this.endMinuteDay3ComboBox.getSelectionModel().selectFirst();
+
+		initPlace();
+
+		this.placeSelectButton.setOnAction(e -> selectPlace());
+	}
+
+	private void initPlace() {
+
+		ObservableList<Place> placesList = this.ownerCtrl.getPlacesList();
+		Place found = null;
+		for (Place place : placesList)
+			if (place.getType().get() == EnumPlaceType.CONVENTIONS)
+				if (place.getDef().get()) {
+					found = place;
+					break;
+				}
+
+		if (found != null) {
+
+			String addr = placeToText(found);
+
+			this.placeTextField.setText(addr);
+		}
+	}
+
+	private String placeToText(Place found) {
+
+		String addr = "";
+
+		HashMap<String, String> configs = this.ownerCtrl.getConfigs();
+		String pattern = configs.get("inf1");
+		if (pattern != null) {
+
+			pattern = Crypt.decrypt(pattern, this.application.getSettings().getDatabaseSecretKey());
+			addr = PlaceUtils.toText(found, pattern);
+
+		} else
+
+			addr = PlaceUtils.toText(found);
+
+		return addr;
+	}
+
+	private void selectPlace() {
+
+		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList(),
+				EnumPlaceType.CONVENTIONS);
+		if (place != null)
+			this.placeTextField.setText(placeToText(place));
 	}
 
 	private void initIntegers(ComboBox<Integer> cb, int size) {
@@ -534,6 +605,8 @@ public class ConventionEditor extends UpdateDataAdapter {
 				this.question8TextField.setText(this.selectedWeek.getSpInf28());
 				this.question9TextField.setText(this.selectedWeek.getSpInf29());
 				this.question10TextField.setText(this.selectedWeek.getSpInf30());
+
+				this.placeTextField.setText(this.selectedWeek.getSpInf32());
 			}
 	}
 
@@ -1304,5 +1377,29 @@ public class ConventionEditor extends UpdateDataAdapter {
 
 	public void setQuestion10TextField(TextField question10TextField) {
 		this.question10TextField = question10TextField;
+	}
+
+	public Label getPlaceLabel() {
+		return placeLabel;
+	}
+
+	public TextField getPlaceTextField() {
+		return placeTextField;
+	}
+
+	public Button getPlaceSelectButton() {
+		return placeSelectButton;
+	}
+
+	public void setPlaceLabel(Label placeLabel) {
+		this.placeLabel = placeLabel;
+	}
+
+	public void setPlaceTextField(TextField placeTextField) {
+		this.placeTextField = placeTextField;
+	}
+
+	public void setPlaceSelectButton(Button placeSelectButton) {
+		this.placeSelectButton = placeSelectButton;
 	}
 }

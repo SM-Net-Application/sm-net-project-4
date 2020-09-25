@@ -61,6 +61,7 @@ public class WeekConvention {
 	private StringProperty spInf29;
 	private StringProperty spInf30;
 	private IntegerProperty spInf31;
+	private StringProperty spInf32;
 
 	public WeekConvention(LocalDate day, Language language) {
 		super();
@@ -118,7 +119,7 @@ public class WeekConvention {
 			String spInf6, int spInf7, int spInf8, int spInf9, int spInf10, int spInf11, int spInf12, int spInf13,
 			int spInf14, int spInf15, int spInf16, int spInf17, int spInf18, int spInf19, String spInf20,
 			String spInf21, String spInf22, String spInf23, String spInf24, String spInf25, String spInf26,
-			String spInf27, String spInf28, String spInf29, String spInf30, int spInf31) {
+			String spInf27, String spInf28, String spInf29, String spInf30, int spInf31, String spInf32) {
 
 		this.week = null;
 		this.from = null;
@@ -157,6 +158,7 @@ public class WeekConvention {
 		this.spInf29 = new SimpleStringProperty(spInf29);
 		this.spInf30 = new SimpleStringProperty(spInf30);
 		this.spInf31 = new SimpleIntegerProperty(spInf31);
+		this.spInf32 = new SimpleStringProperty(spInf32);
 	}
 
 	public static String buildKey(LocalDate date) {
@@ -243,6 +245,7 @@ public class WeekConvention {
 		String spInf29 = Crypt.encrypt(conventionEditor.getQuestion9TextField().getText(), secretKey);
 		String spInf30 = Crypt.encrypt(conventionEditor.getQuestion10TextField().getText(), secretKey);
 		int spInf31 = Integer.valueOf(conventionEditor.getSelectedWeek().getKey());
+		String spInf32 = Crypt.encrypt(conventionEditor.getPlaceTextField().getText(), secretKey);
 
 		WeekConvention weekConvention = new WeekConvention(selectedWeek.getFrom(), language);
 
@@ -281,6 +284,7 @@ public class WeekConvention {
 		weekConvention.setSpInf29(spInf29);
 		weekConvention.setSpInf30(spInf30);
 		weekConvention.setSpInf31(spInf31);
+		weekConvention.setSpInf32(spInf32);
 
 		return weekConvention;
 	}
@@ -319,10 +323,12 @@ public class WeekConvention {
 		String spInf29 = Crypt.decrypt(json.getString("spInf29"), secretKey);
 		String spInf30 = Crypt.decrypt(json.getString("spInf30"), secretKey);
 		int spInf31 = json.getInt("spInf31");
+		String spInf32 = Crypt.decrypt(json.getString("spInf32"), secretKey);
 
 		return new WeekConvention(spConvenID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 				spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
-				spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31);
+				spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31,
+				spInf32);
 	}
 
 	public void updateInfo(WeekConvention wc) {
@@ -359,6 +365,7 @@ public class WeekConvention {
 		this.setSpInf29(wc.getSpInf29());
 		this.setSpInf30(wc.getSpInf30());
 		this.setSpInf31(wc.getSpInf31());
+		this.setSpInf32(wc.getSpInf32());
 	}
 
 	public void deleteInfo() {
@@ -395,6 +402,7 @@ public class WeekConvention {
 		this.spInf29 = null;
 		this.spInf30 = null;
 		this.spInf31 = null;
+		this.spInf32 = null;
 	}
 
 	@Override
@@ -943,5 +951,20 @@ public class WeekConvention {
 			this.spInf31 = new SimpleIntegerProperty();
 
 		this.spInf31Property().set(spInf31);
+	}
+
+	public final StringProperty spInf32Property() {
+		return this.spInf32;
+	}
+
+	public final String getSpInf32() {
+		return this.spInf32Property().get();
+	}
+
+	public final void setSpInf32(final String spInf32) {
+		if (this.spInf32Property() == null)
+			this.spInf32 = new SimpleStringProperty();
+
+		this.spInf32Property().set(spInf32);
 	}
 }

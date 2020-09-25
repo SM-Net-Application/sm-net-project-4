@@ -2,13 +2,16 @@ package com.sm.net.sp.view.home.user.menu.conven;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.EnumConventionType;
+import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.conven.task.ConventionInitDataLoadTask;
 import com.sm.net.sp.view.home.user.menu.conven.task.WeekConventionDeleteTask;
 import com.sm.net.sp.view.home.user.menu.conven.task.WeekConventionLoadTask;
 import com.sm.net.util.DateUtil;
@@ -63,6 +66,9 @@ public class Convention {
 	private Language language;
 	private Stage ownerStage;
 	private ObservableList<WeekConvention> calendar;
+
+	private ObservableList<Place> placesList;
+	private HashMap<String, String> configs;
 
 	@FXML
 	private void initialize() {
@@ -152,6 +158,14 @@ public class Convention {
 
 		this.loadCalendar();
 		this.updateWeeksData();
+
+		// Carica programmazione e luoghi
+
+		String waitMessage = this.language.getString("memorial.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new ConventionInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+						this));
 	}
 
 	private void loadCalendar() {
@@ -432,4 +446,19 @@ public class Convention {
 		this.themeColumn = visitNumberColumn;
 	}
 
+	public ObservableList<Place> getPlacesList() {
+		return placesList;
+	}
+
+	public void setPlacesList(ObservableList<Place> placesList) {
+		this.placesList = placesList;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
+	}
 }

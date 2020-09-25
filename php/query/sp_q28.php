@@ -14,10 +14,10 @@ if (isset($jsonObj["keyStart"]) && isset($jsonObj["keyEnd"])) {
             $query .= "spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,";
             $query .= "spInf20";
             $query .= " FROM sp_week_ov";
-            $query .= " WHERE spInf1 BETWEEN";
-            $query .= " " . $jsonObj["keyStart"];
-            $query .= " AND";
-            $query .= " " . $jsonObj["keyEnd"];
+            // $query .= " WHERE spInf1 BETWEEN";
+            // $query .= " " . $jsonObj["keyStart"];
+            // $query .= " AND";
+            // $query .= " " . $jsonObj["keyEnd"];
 
             $result = mysqli_query($database, $query);
 

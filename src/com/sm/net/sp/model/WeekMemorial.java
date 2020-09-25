@@ -64,6 +64,8 @@ public class WeekMemorial {
 	private IntegerProperty spInf32;
 	private IntegerProperty spInf33;
 	private IntegerProperty spInf34;
+	private IntegerProperty spInf35;
+	private IntegerProperty spInf36;
 
 	public WeekMemorial(LocalDate day, Language language) {
 		super();
@@ -121,7 +123,7 @@ public class WeekMemorial {
 			String spInf7, String spInf8, int spInf9, int spInf10, int spInf11, int spInf12, int spInf13, int spInf14,
 			int spInf15, int spInf16, int spInf17, int spInf18, int spInf19, int spInf20, int spInf21, int spInf22,
 			int spInf23, String spInf24, int spInf25, int spInf26, int spInf27, int spInf28, int spInf29, int spInf30,
-			int spInf31, int spInf32, int spInf33, int spInf34) {
+			int spInf31, int spInf32, int spInf33, int spInf34, int spInf35, int spInf36) {
 
 		this.week = null;
 		this.from = null;
@@ -163,6 +165,8 @@ public class WeekMemorial {
 		this.spInf32 = new SimpleIntegerProperty(spInf32);
 		this.spInf33 = new SimpleIntegerProperty(spInf33);
 		this.spInf34 = new SimpleIntegerProperty(spInf34);
+		this.spInf35 = new SimpleIntegerProperty(spInf35);
+		this.spInf36 = new SimpleIntegerProperty(spInf36);
 
 	}
 
@@ -254,6 +258,8 @@ public class WeekMemorial {
 		int spInf33 = memorialEditor.getEmblemsBrother9ComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
 		int spInf34 = memorialEditor.getEmblemsBrother10ComboBox().getSelectionModel().getSelectedItem()
 				.getSpMemberID();
+		int spInf35 = memorialEditor.getPrayStartPresidentCheckBox().isSelected() ? 1 : 0;
+		int spInf36 = memorialEditor.getPrayEndComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
 
 		WeekMemorial weekMemorial = new WeekMemorial(selectedWeek.getFrom(), language);
 
@@ -295,6 +301,8 @@ public class WeekMemorial {
 		weekMemorial.setSpInf32(spInf32);
 		weekMemorial.setSpInf33(spInf33);
 		weekMemorial.setSpInf34(spInf34);
+		weekMemorial.setSpInf35(spInf35);
+		weekMemorial.setSpInf36(spInf36);
 
 		return weekMemorial;
 	}
@@ -342,11 +350,13 @@ public class WeekMemorial {
 		int spInf32 = json.getInt("spInf32");
 		int spInf33 = json.getInt("spInf33");
 		int spInf34 = json.getInt("spInf34");
+		int spInf35 = json.getInt("spInf35");
+		int spInf36 = json.getInt("spInf36");
 
 		return new WeekMemorial(spMemorialID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 				spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
 				spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31,
-				spInf32, spInf33, spInf34);
+				spInf32, spInf33, spInf34, spInf35, spInf36);
 	}
 
 	public void updateInfo(WeekMemorial wm) {
@@ -383,6 +393,11 @@ public class WeekMemorial {
 		this.setSpInf29(wm.getSpInf29());
 		this.setSpInf30(wm.getSpInf30());
 		this.setSpInf31(wm.getSpInf31());
+		this.setSpInf32(wm.getSpInf32());
+		this.setSpInf33(wm.getSpInf33());
+		this.setSpInf34(wm.getSpInf34());
+		this.setSpInf35(wm.getSpInf35());
+		this.setSpInf36(wm.getSpInf36());
 	}
 
 	public void deleteInfo() {
@@ -419,6 +434,11 @@ public class WeekMemorial {
 		this.spInf29 = null;
 		this.spInf30 = null;
 		this.spInf31 = null;
+		this.spInf32 = null;
+		this.spInf33 = null;
+		this.spInf34 = null;
+		this.spInf35 = null;
+		this.spInf36 = null;
 	}
 
 	@Override
@@ -1012,5 +1032,35 @@ public class WeekMemorial {
 			this.spInf34 = new SimpleIntegerProperty();
 
 		this.spInf34Property().set(spInf34);
+	}
+
+	public final IntegerProperty spInf35Property() {
+		return this.spInf35;
+	}
+
+	public final int getSpInf35() {
+		return this.spInf35Property().get();
+	}
+
+	public final void setSpInf35(final int spInf35) {
+		if (this.spInf35Property() == null)
+			this.spInf35 = new SimpleIntegerProperty();
+
+		this.spInf35Property().set(spInf35);
+	}
+
+	public final IntegerProperty spInf36Property() {
+		return this.spInf36;
+	}
+
+	public final int getSpInf36() {
+		return this.spInf36Property().get();
+	}
+
+	public final void setSpInf36(final int spInf36) {
+		if (this.spInf36Property() == null)
+			this.spInf36 = new SimpleIntegerProperty();
+
+		this.spInf36Property().set(spInf36);
 	}
 }

@@ -446,10 +446,6 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 	private void initFields() {
 
-//		Callback<ListView<EnumConventionType>, ListCell<EnumConventionType>> callbackConventionType = callbackForConventionTypeComboBox();
-//		this.typeComboBox.setButtonCell(callbackConventionType.call(null));
-//		this.typeComboBox.setCellFactory(callbackConventionType);
-
 		Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackDay = callbackForDayComboBox();
 		this.dayComboBox.setButtonCell(callbackDay.call(null));
 		this.dayComboBox.setCellFactory(callbackDay);
@@ -615,10 +611,6 @@ public class MemorialEditor extends UpdateDataAdapter {
 			cb.getItems().add(i);
 	}
 
-//	private Callback<ListView<EnumConventionType>, ListCell<EnumConventionType>> callbackForConventionTypeComboBox() {
-//		return param -> new EnumConventionTypeComboBoxListCell(this.getSettings().getLanguage());
-//	}
-
 	private Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackForDayComboBox() {
 		return param -> new EnumDaysComboBoxListCell(this.getSettings().getLanguage());
 	}
@@ -628,31 +620,84 @@ public class MemorialEditor extends UpdateDataAdapter {
 		if (this.selectedWeek != null)
 			if (this.selectedWeek.spMemorialIDProperty() != null) {
 
-//				this.startHourDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf8());
-//				this.startMinuteDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf9());
-//				this.endHourDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf10());
-//				this.endMinuteDay1ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf11());
-
 				EnumDays day = EnumDays.getByID(this.selectedWeek.getSpInf21());
 				this.dayComboBox.getSelectionModel().select(day);
 
-//				this.scriptureDay1TextField.setText(this.selectedWeek.getSpInf4());
-//
-//				this.startHourDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf12());
-//				this.startMinuteDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf13());
-//				this.endHourDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf14());
-//				this.endMinuteDay2ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf15());
-//
-//				this.scriptureDay2TextField.setText(this.selectedWeek.getSpInf5());
-//
-//				this.startHourDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf16());
-//				this.startMinuteDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf17());
-//				this.endHourDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf18());
-//				this.endMinuteDay3ComboBox.getSelectionModel().select(this.selectedWeek.getSpInf19());
-//
-//				this.scriptureDay3TextField.setText(this.selectedWeek.getSpInf6());
+				int hours = this.selectedWeek.getSpInf22();
+				int minutes = this.selectedWeek.getSpInf23();
 
+				this.hourComboBox.getSelectionModel().select(hours);
+				this.minuteComboBox.getSelectionModel().select(minutes);
+
+				String place = this.selectedWeek.getSpInf24();
+				this.placeTextField.setText(place);
+
+				this.songStartTextField.setText(this.selectedWeek.getSpInf2());
+				setComboBoxMember(this.prayStartComboBox, this.selectedWeek.getSpInf5());
+				setComboBoxMember(this.presidentComboBox, this.selectedWeek.getSpInf4());
+				this.prayStartPresidentCheckBox.setSelected(this.selectedWeek.getSpInf35() == 1);
+
+				this.talkMinTextField.setText(this.selectedWeek.getSpInf8());
+				setComboBoxMember(this.talkBrotherComboBox, this.selectedWeek.getSpInf6());
+				this.talkThemeTextField.setText(this.selectedWeek.getSpInf7());
+
+				this.songEndTextField.setText(this.selectedWeek.getSpInf3());
+				setComboBoxMember(this.prayEndComboBox, this.selectedWeek.getSpInf36());
+
+				setComboBoxMember(this.prayBreadComboBox, this.selectedWeek.getSpInf9());
+				setComboBoxMember(this.prayWineComboBox, this.selectedWeek.getSpInf10());
+
+				setComboBoxFamily(this.breadFamily1ComboBox, this.selectedWeek.getSpInf11());
+				setComboBoxFamily(this.breadFamily2ComboBox, this.selectedWeek.getSpInf12());
+				setComboBoxFamily(this.breadFamily3ComboBox, this.selectedWeek.getSpInf13());
+				setComboBoxFamily(this.breadFamily4ComboBox, this.selectedWeek.getSpInf14());
+				setComboBoxFamily(this.breadFamily5ComboBox, this.selectedWeek.getSpInf15());
+
+				setComboBoxFamily(this.wineFamily1ComboBox, this.selectedWeek.getSpInf16());
+				setComboBoxFamily(this.wineFamily2ComboBox, this.selectedWeek.getSpInf17());
+				setComboBoxFamily(this.wineFamily3ComboBox, this.selectedWeek.getSpInf18());
+				setComboBoxFamily(this.wineFamily4ComboBox, this.selectedWeek.getSpInf19());
+				setComboBoxFamily(this.wineFamily5ComboBox, this.selectedWeek.getSpInf20());
+
+				setComboBoxMember(this.emblemsBrother1ComboBox, this.selectedWeek.getSpInf25());
+				setComboBoxMember(this.emblemsBrother2ComboBox, this.selectedWeek.getSpInf26());
+				setComboBoxMember(this.emblemsBrother3ComboBox, this.selectedWeek.getSpInf27());
+				setComboBoxMember(this.emblemsBrother4ComboBox, this.selectedWeek.getSpInf28());
+				setComboBoxMember(this.emblemsBrother5ComboBox, this.selectedWeek.getSpInf29());
+				setComboBoxMember(this.emblemsBrother6ComboBox, this.selectedWeek.getSpInf30());
+				setComboBoxMember(this.emblemsBrother7ComboBox, this.selectedWeek.getSpInf31());
+				setComboBoxMember(this.emblemsBrother8ComboBox, this.selectedWeek.getSpInf32());
+				setComboBoxMember(this.emblemsBrother9ComboBox, this.selectedWeek.getSpInf33());
+				setComboBoxMember(this.emblemsBrother10ComboBox, this.selectedWeek.getSpInf34());
 			}
+	}
+
+	private void setComboBoxMember(ComboBox<Member> cb, int id) {
+
+		int found = 0;
+		for (int i = 0; i < cb.getItems().size(); i++) {
+			Member m = cb.getItems().get(i);
+			if (m.getSpMemberID() == id) {
+				found = i;
+				break;
+			}
+		}
+
+		cb.getSelectionModel().select(found);
+	}
+
+	private void setComboBoxFamily(ComboBox<Family> cb, int id) {
+
+		int found = 0;
+		for (int i = 0; i < cb.getItems().size(); i++) {
+			Family f = cb.getItems().get(i);
+			if (f.getSpFamID() == id) {
+				found = i;
+				break;
+			}
+		}
+
+		cb.getSelectionModel().select(found);
 	}
 
 	private void listeners() {
@@ -668,13 +713,13 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 				// editWeek
 
-//				WeekConvention weekConvention = WeekConvention.newInstanceByView(this);
-//				weekConvention.setConvenID(this.selectedWeek.getConvenID());
+				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
+				weekMemorial.setMemorialID(this.selectedWeek.getMemorialID());
 
-				String waitMessage = this.language.getString("datetime.new.wait.save");
-//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//						new WeekConventionSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-//								weekConvention, this.ownerCtrl, this.thisTab));
+				String waitMessage = this.language.getString("memorialeditor.wait.save");
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								weekMemorial, this.ownerCtrl, this.thisTab));
 
 			} else {
 
@@ -691,6 +736,48 @@ public class MemorialEditor extends UpdateDataAdapter {
 	}
 
 	private boolean checkFields() {
+
+		String songStart = this.songStartTextField.getText();
+		if (!songStart.isEmpty()) {
+			try {
+				new Integer(songStart);
+			} catch (Exception e) {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("memorialeditor.error.songstart"));
+				return false;
+			}
+		}
+
+		String songEnd = this.songEndTextField.getText();
+		if (!songEnd.isEmpty()) {
+			try {
+				new Integer(songEnd);
+			} catch (Exception e) {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("memorialeditor.error.songend"));
+				return false;
+			}
+		}
+
+		String talkMin = this.talkMinTextField.getText();
+		if (!talkMin.isEmpty()) {
+			try {
+				new Integer(talkMin);
+			} catch (Exception e) {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("memorialeditor.error.talkmin"));
+				return false;
+			}
+		}
+
+		int prayStartIndex = this.prayStartComboBox.getSelectionModel().getSelectedIndex();
+		boolean prayStartPresidentSelected = this.prayStartPresidentCheckBox.isSelected();
+
+		if (prayStartPresidentSelected && prayStartIndex > 0) {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("memorialeditor.error.praystartpresident"));
+			return false;
+		}
 
 		return true;
 	}

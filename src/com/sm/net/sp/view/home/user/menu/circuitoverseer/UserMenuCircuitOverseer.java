@@ -9,18 +9,23 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.circuitoverseer.task.WeekOverseerDeleteTask;
 import com.sm.net.util.DateUtil;
+import com.smnet.core.task.TaskManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -47,10 +52,13 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 	private TableColumn<WeekOverseer, String> overseerColumn;
 	@FXML
 	private TableColumn<WeekOverseer, String> visitNumberColumn;
+	@FXML
+	private Button deleteWeekButton;
 
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
+	private SupportPlannerView application;
 	private ObservableList<WeekOverseer> calendar;
 
 	@FXML
@@ -76,6 +84,12 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 		calendarTab.getStyleClass().add("tab_001");
 		weekTableView.getStyleClass().add("table_view_001");
+		
+		this.weekTableColumn.getStyleClass().add("table_column_002");
+		this.fromTableColumn.getStyleClass().add("table_column_002");
+		this.toTableColumn.getStyleClass().add("table_column_002");
+
+		this.deleteWeekButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -96,11 +110,30 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 		calendarTab.setText(language.getString("TEXT0075"));
 		calendarTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CALENDAR));
+
 		weekTableColumn.setText(language.getString("TEXT0076"));
+
 		fromTableColumn.setText(language.getString("TEXT0077"));
+
 		toTableColumn.setText(language.getString("TEXT0078"));
+
+		this.weekTableColumn.setMinWidth(100);
+		this.weekTableColumn.setMaxWidth(100);
+
+		this.fromTableColumn.setMinWidth(100);
+		this.fromTableColumn.setMaxWidth(100);
+
+		this.toTableColumn.setMinWidth(100);
+		this.toTableColumn.setMaxWidth(100);
+
 		overseerColumn.setText(language.getString("TEXT0037"));
 		visitNumberColumn.setText(language.getString("TEXT0139"));
+
+		Tooltip deleteTooltip = new Tooltip(language.getString("overseer.tooltip.delete"));
+		deleteTooltip.getStyleClass().add("tooltip_001");
+		this.deleteWeekButton.setTooltip(deleteTooltip);
+		this.deleteWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
+		this.deleteWeekButton.setText(null);
 	}
 
 	private void initData() {
@@ -176,6 +209,38 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 	private void listeners() {
 
 		listenerWeekTableView();
+		this.deleteWeekButton.setOnAction(event -> delete());
+	}
+
+	private void delete() {
+
+		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			WeekOverseer item = this.weekTableView.getSelectionModel().getSelectedItem();
+			if (item.spWeekOvIDProperty() != null) {
+
+				if (this.application.getAlertBuilder2().confirm(this.ownerStage,
+						this.language.getString("overseer.delete.confirm"))) {
+
+					int id = item.getSpWeekOvID();
+
+					String waitMessage = this.language.getString("overseer.task.delete");
+
+					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+							new WeekOverseerDeleteTask(this.application.getAlertBuilder2(), this.settings,
+									this.ownerStage, this, id));
+				}
+			} else {
+
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("overseer.delete.nooverseer"));
+
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("overseer.delete.noselection"));
+		}
 	}
 
 	private void listenerWeekTableView() {
@@ -267,5 +332,13 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 	public void setCalendar(ObservableList<WeekOverseer> calendar) {
 		this.calendar = calendar;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
 	}
 }
