@@ -110,6 +110,10 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 		serGroupsTableView.getStyleClass().add("table_view_001");
 
+		this.serGroupsIDTableColumn.getStyleClass().add("table_column_002");
+		this.serGroupsFamiliesTableColumn.getStyleClass().add("table_column_002");
+		this.serGroupsMembersTableColumn.getStyleClass().add("table_column_002");
+
 		serGroupsAddButton.getStyleClass().add("button_image_001");
 		serGroupsDeleteButton.getStyleClass().add("button_image_001");
 		serGroupsUpdateButton.getStyleClass().add("button_image_001");
@@ -146,8 +150,14 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 		serGroupsNameTableColumn.setText(language.getString("TEXT0036"));
 		serGroupsOverseerTableColumn.setText(language.getString("TEXT0037"));
 		serGroupsAssistantTableColumn.setText(language.getString("TEXT0038"));
-		serGroupsFamiliesTableColumn.setText(language.getString("TEXT0012"));
-		serGroupsMembersTableColumn.setText(language.getString("TEXT0011"));
+
+		this.serGroupsFamiliesTableColumn.setText(language.getString("TEXT0012"));
+		this.serGroupsFamiliesTableColumn.setMinWidth(150);
+		this.serGroupsFamiliesTableColumn.setMaxWidth(150);
+
+		this.serGroupsMembersTableColumn.setText(language.getString("TEXT0011"));
+		this.serGroupsMembersTableColumn.setMinWidth(150);
+		this.serGroupsMembersTableColumn.setMaxWidth(150);
 
 		Tooltip serGroupsAddTooltip = new Tooltip(this.language.getString("servicegroup.tooltip.add"));
 		serGroupsAddTooltip.getStyleClass().add("tooltip_001");

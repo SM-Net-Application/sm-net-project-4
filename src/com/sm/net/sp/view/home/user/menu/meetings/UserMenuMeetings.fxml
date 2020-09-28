@@ -93,6 +93,9 @@
                                                     <TableColumn fx:id="weekTableColumn" prefWidth="75.0" text="Week" />
                                                     <TableColumn fx:id="fromTableColumn" prefWidth="75.0" text="From" />
                                                       <TableColumn fx:id="toTableColumn" prefWidth="75.0" text="To" />
+                                                      <TableColumn fx:id="meeting1Column" prefWidth="75.0" text="infr" />
+                                                      <TableColumn fx:id="bibleChaptersColumn" prefWidth="75.0" text="bibbia" />
+                                                      <TableColumn fx:id="meeting2Column" prefWidth="75.0" text="fineset" />
                                                       <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
                                                   </columns>
                                                    <columnResizePolicy>

@@ -49,9 +49,15 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<WeekOverseer, LocalDate> toTableColumn;
 	@FXML
+	private TableColumn<WeekOverseer, String> visitNumberColumn;
+	@FXML
 	private TableColumn<WeekOverseer, String> overseerColumn;
 	@FXML
-	private TableColumn<WeekOverseer, String> visitNumberColumn;
+	private TableColumn<WeekOverseer, String> overseerPhoneColumn;
+	@FXML
+	private TableColumn<WeekOverseer, String> overseerWifeColumn;
+	@FXML
+	private TableColumn<WeekOverseer, String> overseerWifePhoneColumn;
 	@FXML
 	private Button deleteWeekButton;
 
@@ -72,8 +78,11 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 		weekTableColumn.setCellValueFactory(cellData -> cellData.getValue().weekProperty().asObject());
 		fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
-		overseerColumn.setCellValueFactory(cellData -> cellData.getValue().overseerProperty());
 		visitNumberColumn.setCellValueFactory(cellData -> cellData.getValue().visitNumberProperty());
+		overseerColumn.setCellValueFactory(cellData -> cellData.getValue().overseerProperty());
+		this.overseerPhoneColumn.setCellValueFactory(cellData -> cellData.getValue().spInf16Property());
+		this.overseerWifeColumn.setCellValueFactory(cellData -> cellData.getValue().overseerWifeProperty());
+		this.overseerWifePhoneColumn.setCellValueFactory(cellData -> cellData.getValue().spInf18Property());
 	}
 
 	private void styleClasses() {
@@ -84,10 +93,11 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 		calendarTab.getStyleClass().add("tab_001");
 		weekTableView.getStyleClass().add("table_view_001");
-		
+
 		this.weekTableColumn.getStyleClass().add("table_column_002");
 		this.fromTableColumn.getStyleClass().add("table_column_002");
 		this.toTableColumn.getStyleClass().add("table_column_002");
+		this.visitNumberColumn.getStyleClass().add("table_column_002");
 
 		this.deleteWeekButton.getStyleClass().add("button_image_001");
 	}
@@ -117,6 +127,11 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 		toTableColumn.setText(language.getString("TEXT0078"));
 
+		this.overseerPhoneColumn.setText(this.language.getString("overseer.tablecolumn.overseerphone"));
+
+		this.overseerWifeColumn.setText(this.language.getString("overseer.tablecolumn.overseerwife"));
+		this.overseerWifePhoneColumn.setText(this.language.getString("overseer.tablecolumn.overseerwifephone"));
+
 		this.weekTableColumn.setMinWidth(100);
 		this.weekTableColumn.setMaxWidth(100);
 
@@ -125,6 +140,9 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 		this.toTableColumn.setMinWidth(100);
 		this.toTableColumn.setMaxWidth(100);
+
+		this.visitNumberColumn.setMinWidth(150);
+		this.visitNumberColumn.setMaxWidth(150);
 
 		overseerColumn.setText(language.getString("TEXT0037"));
 		visitNumberColumn.setText(language.getString("TEXT0139"));

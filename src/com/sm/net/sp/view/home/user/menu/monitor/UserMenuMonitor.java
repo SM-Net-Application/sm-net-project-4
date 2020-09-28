@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -102,8 +103,11 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 		titleLabel.setText(language.getString("sp.menu.monitor"));
 		passwordLabel.setText(language.getString("sp.monitor.password"));
 
-		passwordButton.setText("");
-		passwordButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.UPDATE));
+		Tooltip passwordTooltip = new Tooltip(this.language.getString("monitor.tooltip.update"));
+		passwordTooltip.getStyleClass().add("tooltip_001");
+		this.passwordButton.setTooltip(passwordTooltip);
+		this.passwordButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
+		this.passwordButton.setText(null);
 
 		dateTableColumn.setMinWidth(150);
 		dateTableColumn.setMaxWidth(150);

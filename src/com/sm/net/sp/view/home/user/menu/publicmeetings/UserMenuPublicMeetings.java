@@ -131,6 +131,10 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		calendarTab.getStyleClass().add("tab_001");
 		weekTableView.getStyleClass().add("table_view_001");
 
+		this.weekTableColumn.getStyleClass().add("table_column_002");
+		this.fromTableColumn.getStyleClass().add("table_column_002");
+		this.toTableColumn.getStyleClass().add("table_column_002");
+		
 		this.filterTextField.getStyleClass().add("text_field_001");
 
 //		printButton.getStyleClass().add("button_image_001");

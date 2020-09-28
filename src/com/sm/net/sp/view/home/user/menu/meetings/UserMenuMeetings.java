@@ -9,6 +9,7 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.EnumDays;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
@@ -23,6 +24,7 @@ import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,6 +61,12 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<Week, LocalDate> toTableColumn;
 	@FXML
+	private TableColumn<Week, String> meeting1Column;
+	@FXML
+	private TableColumn<Week, String> bibleChaptersColumn;
+	@FXML
+	private TableColumn<Week, String> meeting2Column;
+	@FXML
 	private TableColumn<Week, String> typeColumn;
 	@FXML
 	private Button printButton;
@@ -90,6 +98,59 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		weekTableColumn.setCellValueFactory(cellData -> cellData.getValue().weekProperty().asObject());
 		fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
+
+		this.meeting1Column.setCellValueFactory(cellData -> {
+
+			Week week = cellData.getValue();
+
+			if (week.spWeekIDProperty() != null) {
+
+				int dayID = week.getSpInf44();
+				if (dayID > 0) {
+
+					EnumDays day = EnumDays.getByID(dayID);
+
+					int hour = week.getSpInf45();
+					int minute = week.getSpInf46();
+
+					String format = this.language.getString("meeting.tablecolumn.patternday");
+
+					return new SimpleStringProperty(
+							String.format(format, this.language.getString(day.getKey()), hour, minute));
+				}
+			}
+
+			return null;
+
+		});
+
+		this.meeting2Column.setCellValueFactory(cellData -> {
+
+			Week week = cellData.getValue();
+
+			if (week.spWeekIDProperty() != null) {
+
+				int dayID = week.getSpInf47();
+				if (dayID > 0) {
+
+					EnumDays day = EnumDays.getByID(dayID);
+
+					int hour = week.getSpInf48();
+					int minute = week.getSpInf49();
+
+					String format = this.language.getString("meeting.tablecolumn.patternday");
+
+					return new SimpleStringProperty(
+							String.format(format, this.language.getString(day.getKey()), hour, minute));
+				}
+			}
+
+			return null;
+
+		});
+
+		this.bibleChaptersColumn.setCellValueFactory(cellData -> cellData.getValue().spInf6Property());
+
 		typeColumn.setCellValueFactory(cellData -> cellData.getValue().getWeekTypeTranslated().nameProperty());
 	}
 
@@ -101,6 +162,10 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		calendarTab.getStyleClass().add("tab_001");
 		weekTableView.getStyleClass().add("table_view_001");
+
+		this.weekTableColumn.getStyleClass().add("table_column_002");
+		this.fromTableColumn.getStyleClass().add("table_column_002");
+		this.toTableColumn.getStyleClass().add("table_column_002");
 
 		printButton.getStyleClass().add("button_image_001");
 	}
@@ -126,7 +191,19 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		weekTableColumn.setText(language.getString("TEXT0076"));
 		fromTableColumn.setText(language.getString("TEXT0077"));
 		toTableColumn.setText(language.getString("TEXT0078"));
+		
+		this.meeting1Column.setText(this.language.getString("meetings.tablecolumn.meeting1"));
+		this.bibleChaptersColumn.setText(this.language.getString("meetings.tablecolumn.biblechapters"));
+		this.meeting2Column.setText(this.language.getString("meetings.tablecolumn.meeting2"));
+		
 		typeColumn.setText(language.getString("TEXT0091"));
+
+		this.weekTableColumn.setMinWidth(100);
+		this.weekTableColumn.setMaxWidth(100);
+		this.fromTableColumn.setMinWidth(100);
+		this.fromTableColumn.setMaxWidth(100);
+		this.toTableColumn.setMinWidth(100);
+		this.toTableColumn.setMaxWidth(100);
 
 		Tooltip printTooltip = new Tooltip(language.getString("meetings.tooltip.print"));
 		printTooltip.getStyleClass().add("tooltip_001");

@@ -18,6 +18,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
@@ -148,7 +149,7 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		tabPane.getStyleClass().add("tab_pane_002");
+		this.tabPane.getStyleClass().add("tab_pane_003");
 
 		generalTab.getStyleClass().add("tab_001");
 		contactsTab.getStyleClass().add("tab_001");
@@ -215,12 +216,26 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 		this.language = settings.getLanguage();
 
-		generalTab.setText(language.getString("TEXT0016"));
-		generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
-		contactsTab.setText(language.getString("TEXT0106"));
-		contactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
-		talksTab.setText(language.getString("TEXT0140"));
-		talksTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.TALKS));
+		this.tabPane.setTabMinHeight(75);
+		this.tabPane.setTabMaxHeight(75);
+
+		Tooltip generalTabTooltip = new Tooltip(this.language.getString("TEXT0016"));
+		generalTabTooltip.getStyleClass().add("tooltip_001");
+		this.generalTab.setTooltip(generalTabTooltip);
+		this.generalTab.setText("");
+		this.generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
+
+		Tooltip contactsTabTooltip = new Tooltip(this.language.getString("TEXT0106"));
+		contactsTabTooltip.getStyleClass().add("tooltip_001");
+		this.contactsTab.setTooltip(contactsTabTooltip);
+		this.contactsTab.setText("");
+		this.contactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
+
+		Tooltip talksTabTooltip = new Tooltip(this.language.getString("TEXT0140"));
+		talksTabTooltip.getStyleClass().add("tooltip_001");
+		this.talksTab.setTooltip(talksTabTooltip);
+		this.talksTab.setText("");
+		this.talksTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.TALKS));
 
 		visitNumberLabel.setText(language.getString("TEXT0139"));
 		overseerLabel.setText(language.getString("TEXT0037"));
@@ -251,8 +266,11 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 		substituteCheckBox.setText(language.getString("sp.overseer.substitute"));
 
-		saveWeekButton.setText(null);
-		saveWeekButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
+		Tooltip saveTooltip = new Tooltip(language.getString("overseer.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveWeekButton.setTooltip(saveTooltip);
+		this.saveWeekButton.setText(null);
+		this.saveWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 	}
 
 	public void objectInitialize() {

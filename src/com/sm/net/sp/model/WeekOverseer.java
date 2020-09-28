@@ -26,6 +26,7 @@ public class WeekOverseer {
 	private ObjectProperty<LocalDate> to;
 	private StringProperty key;
 	private StringProperty overseer;
+	private StringProperty overseerWife;
 	private StringProperty visitNumber;
 
 	private IntegerProperty spWeekOvID;
@@ -108,6 +109,7 @@ public class WeekOverseer {
 
 		this.setVisitNumber(String.valueOf(this.getSpInf2()));
 		this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
+		this.setOverseerWife(this.getSpInf5().concat(", ").concat(this.getSpInf6()));
 	}
 
 	public static String buildKey(LocalDate date) {
@@ -151,6 +153,7 @@ public class WeekOverseer {
 
 				this.setVisitNumber(String.valueOf(this.getSpInf2()));
 				this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
+				this.setOverseerWife(this.getSpInf5().concat(", ").concat(this.getSpInf6()));
 
 				break;
 			} else {
@@ -181,6 +184,7 @@ public class WeekOverseer {
 
 				this.visitNumber = null;
 				this.overseer = null;
+				this.overseerWife = null;
 			}
 	}
 
@@ -595,6 +599,21 @@ public class WeekOverseer {
 			this.overseer = new SimpleStringProperty();
 
 		this.overseerProperty().set(overseer);
+	}
+
+	public final StringProperty overseerWifeProperty() {
+		return this.overseerWife;
+	}
+
+	public final String getOverseerWife() {
+		return this.overseerWifeProperty().get();
+	}
+
+	public final void setOverseerWife(final String overseerWife) {
+		if (this.overseerWife == null)
+			this.overseerWife = new SimpleStringProperty();
+
+		this.overseerWifeProperty().set(overseerWife);
 	}
 
 }

@@ -90,6 +90,10 @@ Data di pubblicazione : ..-..-....
 			- Solo preghiera
 			- Minuti discorso pubblico
 
+	* Sezione : Sorvegliante
+		- Modifica della GUI
+		- Eliminare settimana
+
 	* Layout : Programma adunanze
 		- Studio biblico di congregazione :
 			- se il lettore non viene inserito, non viene stampata la dicitura "Lettore"

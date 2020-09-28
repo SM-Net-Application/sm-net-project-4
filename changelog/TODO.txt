@@ -1,8 +1,4 @@
 
-	- Sorvegliante:
-		- Mostra solo le settimane presenti nel database
-		- Eliminare settimana
-
 	- Disastri Naturali
 		- Verificare l'UPDATE delle informazioni
 		- Stampare l'elenco per Gruppo di Servizio
@@ -19,6 +15,8 @@
 	Verificare la stampa del cognome da nubile
 	Famiglia privilegio Preparazione emblemi commemorazione
 	Configurazione : minuti discorso Commemorazione
+	Preimpostazione minuti discorsi del sorvegliante come configurazione
+	Preimpostazione numero di visite del sorvegliante prima di riazzerare
 				
 	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia
