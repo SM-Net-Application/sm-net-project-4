@@ -74,7 +74,8 @@ public class JRNaturalDisasterFamily {
 
 		for (Member member : membersList)
 			if (member.getSpInf5() == spFamID)
-				this.members.add(new JRNaturalDisasterMember(member));
+				if (member.getSpInf51() == 0)
+					this.members.add(new JRNaturalDisasterMember(member));
 
 		this.jrMembersDataSource = new JRBeanCollectionDataSource(this.members);
 	}

@@ -1,19 +1,7 @@
 
-	- Disastri Naturali
-		- Verificare l'UPDATE delle informazioni
-		- Stampare l'elenco per Gruppo di Servizio
-		- Filtro : Componenti / Famiglie
-		
-	- Cantici:
-		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
-		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
-		- Nelle adunanze determinare il titolo in base al numero inserito
-		- Nel layout stampare anche il titolo
-		
 	Stampare Layout Congressi e assemblee
 	Stampare Layout Commemorazione
-	Verificare la stampa del cognome da nubile
-	Famiglia privilegio Preparazione emblemi commemorazione
+	
 	Configurazione : minuti discorso Commemorazione
 	Preimpostazione minuti discorsi del sorvegliante come configurazione
 	Preimpostazione numero di visite del sorvegliante prima di riazzerare
@@ -24,5 +12,12 @@
 	- Nuova sezione: Uscieri
 	- Nuova sezione: Territori
 	- Nuova sezione: Letteratura
+	
+	- Cantici:
+		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
+		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
+		- Nelle adunanze determinare il titolo in base al numero inserito
+		- Nel layout stampare anche il titolo
+	
 	- Installer per MAC
 	- Dump/Ripristino del database per MAC 

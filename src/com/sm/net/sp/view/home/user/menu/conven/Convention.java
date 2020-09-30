@@ -161,7 +161,7 @@ public class Convention {
 
 		// Carica programmazione e luoghi
 
-		String waitMessage = this.language.getString("memorial.wait.load");
+		String waitMessage = this.language.getString("convention.wait.load");
 
 		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 				new ConventionInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,

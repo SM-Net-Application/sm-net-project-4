@@ -2569,7 +2569,7 @@ public class Actions {
 		taskThread.start();
 	}
 
-	public static void printNaturalDisaster(String overseerName, String overseerPhone, String overseerMail,
+	public static void printNaturalDisaster(String overseerName, String overseerPhone, String overseerMail, SerGroup sg,
 			ObservableList<Member> membersList, ObservableList<Family> familiesList, String congregationName,
 			Settings settings, Stage ownerStage, Language language) {
 
@@ -2612,9 +2612,16 @@ public class Actions {
 					ArrayList<JRNaturalDisasterFamily> jrFamilies = new ArrayList<>();
 
 					for (Family family : familiesList) {
+
+						if (sg != null)
+							if (family.getSpInf6() != sg.getSpSerGrID())
+								continue;
+
 						JRNaturalDisasterFamily jrFamily = new JRNaturalDisasterFamily(family, memberJasperReport,
 								membersList);
-						jrFamilies.add(jrFamily);
+
+						if (jrFamily.getMembers().size() > 0)
+							jrFamilies.add(jrFamily);
 					}
 
 					JRBeanCollectionDataSource jrFamiliesDataSource = new JRBeanCollectionDataSource(jrFamilies);
@@ -2646,8 +2653,15 @@ public class Actions {
 					parameters.put("overseerPhone", overseerPhone);
 					parameters.put("overseerMail", overseerMail);
 
-					parameters.put("programmName",
-							language.getString("jasper.layout.naturaldisaster.programm").toUpperCase());
+					parameters.put("serviceGroup", (sg != null));
+
+					if (sg != null)
+						parameters.put("programmName",
+								language.getString("jasper.layout.naturaldisaster.programm").toUpperCase() + " ("
+										+ sg.getSpInf1Decrypted() + ")");
+					else
+						parameters.put("programmName",
+								language.getString("jasper.layout.naturaldisaster.programm").toUpperCase());
 
 					parameters.put("familyJasperReport", familyJasperReport);
 					parameters.put("jrFamiliesDataSource", jrFamiliesDataSource);

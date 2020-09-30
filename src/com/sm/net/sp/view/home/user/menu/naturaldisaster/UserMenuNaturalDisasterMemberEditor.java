@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class UserMenuNaturalDisasterMemberEditor {
@@ -51,7 +52,7 @@ public class UserMenuNaturalDisasterMemberEditor {
 
 	private void styleClasses() {
 
-		memberTabPane.getStyleClass().add("tab_pane_002");
+		this.memberTabPane.getStyleClass().add("tab_pane_003");
 
 		memberContactsTab.getStyleClass().add("tab_001");
 
@@ -105,11 +106,21 @@ public class UserMenuNaturalDisasterMemberEditor {
 
 		this.language = settings.getLanguage();
 
-		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
+		Tooltip saveTabTooltip = new Tooltip(this.language.getString("naturaldisastermembereditor.tooltip.save"));
+		saveTabTooltip.getStyleClass().add("tooltip_001");
+		this.saveButton.setTooltip(saveTabTooltip);
+		this.saveButton.setText("");
+		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
-		memberContactsTab.setText(language.getString("TEXT0106"));
-		memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
+		this.memberTabPane.setTabMinHeight(75);
+		this.memberTabPane.setTabMaxHeight(75);
+
+		Tooltip memberContactsTabTooltip = new Tooltip(this.language.getString("TEXT0106"));
+		memberContactsTabTooltip.getStyleClass().add("tooltip_001");
+		this.memberContactsTab.setTooltip(memberContactsTabTooltip);
+		this.memberContactsTab.setText("");
+		this.memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
+		this.memberContactsTab.setText("");
 
 		smartphoneLabel.setText(language.getString("TEXT0107"));
 		emailLabel.setText(language.getString("TEXT0108"));

@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class UserMenuNaturalDisasterFamilyEditor {
@@ -97,8 +98,11 @@ public class UserMenuNaturalDisasterFamilyEditor {
 		familyCityLabel.setText(language.getString("TEXT0030"));
 		familyPhoneLabel.setText(language.getString("TEXT0109"));
 
-		saveButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.SAVE));
-		saveButton.setText(language.getString("TEXT0022"));
+		Tooltip saveTooltip = new Tooltip(this.language.getString("naturaldisasterfamilyeditor.tooltip.save"));
+		saveTooltip.getStyleClass().add("tooltip_001");
+		this.saveButton.setTooltip(saveTooltip);
+		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
+		this.saveButton.setText("");
 	}
 
 	private void initValue() {

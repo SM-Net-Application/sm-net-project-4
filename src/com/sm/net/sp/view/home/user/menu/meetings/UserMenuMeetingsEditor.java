@@ -43,7 +43,6 @@ import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.sp.view.wolbrowser.WOLBrowser;
 import com.sm.net.util.Crypt;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -1605,8 +1604,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				WeekOverseer weekOverseer = this.selectedWeek.getWeekOverseer();
 				if (weekOverseer != null)
 					addCircuitOverseerTab(weekOverseer, true);
-				else
-					Platform.runLater(() -> this.typeWeekListView.getSelectionModel().select(oldValue));
+//				else
+//					Platform.runLater(() -> this.typeWeekListView.getSelectionModel().select(oldValue));
 			}
 			break;
 
@@ -1635,7 +1634,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_MEETINGS_CIRCUITOVERSEER);
 			AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
-			this.circuitOverseerTab = new Tab(this.language.getString("TEXT0037"), layout);
+			this.circuitOverseerTab = new Tab("", layout);
 			this.circuitOverseerTab.getStyleClass().add("tab_001");
 			this.circuitOverseerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_CIRCUITOVERSEER));
 			this.tabPane.getTabs().add(this.circuitOverseerTab);
@@ -1660,8 +1659,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private void removeCircuitOverseerTab() {
 
-		this.tabPane.getTabs().remove(this.circuitOverseerTab);
-		this.circuitOverseerTab = null;
+		if (this.circuitOverseerTab != null) {
+			this.tabPane.getTabs().remove(this.circuitOverseerTab);
+			this.circuitOverseerTab = null;
+		}
 	}
 
 	private void listenerSaveWeekButton() {

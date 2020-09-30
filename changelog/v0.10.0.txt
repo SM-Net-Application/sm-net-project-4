@@ -14,6 +14,7 @@ Data di pubblicazione : ..-..-....
 	* Nuova sezione: Luoghi di adorazione
 		In questa sezione è possibile definire i luoghi in cui si tengono le adunanze, i congressi o altri eventi
 		- Se una Sala del Regno viene settata come Predefinita, l'indirizzo viene pre-caricato nelle nuove Adunanze/Discorsi pubblici
+		- Se una Sala Congressi viene settata come Predefinita, l'indirizzo viene pre-caricato nelle nuove Assemblee/Congressi
 
 	* Nuova sezione : Configurazione
 		In questa sezione vengono gestite informazioni relative alla configurazione del software.
@@ -30,6 +31,7 @@ Data di pubblicazione : ..-..-....
 
 	* Nuova sezione : Commemorazione
 		In questa sezione possono essere definite le settimane in cui si tiene la Commemorazione
+		- Preparazione emblemi : vengono visualizzate solo le famiglie a cui è stato settato il privilegio
 
 	* Sezione : Adunanze
 		- Modifica della GUI
@@ -74,6 +76,7 @@ Data di pubblicazione : ..-..-....
 			- Pulizia semplificata diventa Escludi dall'elenco Gruppi di Servizio
 			- Nuove informazioni
 				- Coordinate GPS
+				- Privilegio: preparazione emblemi commemorazione
 			- Se presenti le Coordinate GPS viene visualizzata un'icona
 			- Nuovo tasto : apri le coordinate GPS in Google Maps
 
@@ -92,7 +95,12 @@ Data di pubblicazione : ..-..-....
 
 	* Sezione : Sorvegliante
 		- Modifica della GUI
-		- Eliminare settimana
+		- Funzione: elimina settimana
+
+	* Sezione : Disastri Naturali
+		- Modifica della GUI
+			- Aggiunto possibilità di filtrare i componenti e le famiglie
+		- Stampa elenco per Gruppo di Servizio	
 
 	* Layout : Programma adunanze
 		- Studio biblico di congregazione :

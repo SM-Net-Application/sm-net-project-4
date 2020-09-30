@@ -294,7 +294,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		congrImageView.setFitHeight(50);
 		congrImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_CONGR, 50, 50));
 
-		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
+		this.congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
 		this.congrTabPane.setTabMinHeight(75);
 		this.congrTabPane.setTabMaxHeight(75);
 
@@ -877,7 +877,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 			Member member = membersTableView.getSelectionModel().getSelectedItem();
 
-			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
 					EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
 
 			if (selectedLayout != null) {

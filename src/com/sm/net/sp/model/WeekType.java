@@ -11,8 +11,20 @@ import javafx.collections.ObservableList;
 
 public enum WeekType {
 
-	EMPTY("TEXT0115", 0), STANDARD("TEXT0116", 1), CONVENTION("TEXT0117", 2), CIRCUIT_ASSEMBLY("TEXT0118",
-			3), CIRCUIT_OVERSEERS_VISIT("TEXT0119", 4), SPECIAL_PUBLIC_TALK("TEXT0120", 5), MEMORIAL("TEXT0121", 6);
+	EMPTY("TEXT0115", 0),
+	
+	STANDARD("TEXT0116", 1),
+	
+	CIRCUIT_OVERSEERS_VISIT("TEXT0119", 4),
+	
+	CONVENTION("TEXT0117", 2),
+	
+	MEMORIAL("TEXT0121", 6);
+	
+	// CIRCUIT_ASSEMBLY("TEXT0118",3),
+		
+	// SPECIAL_PUBLIC_TALK("TEXT0120", 5),
+	
 
 	private StringProperty name;
 	private IntegerProperty ordinal;

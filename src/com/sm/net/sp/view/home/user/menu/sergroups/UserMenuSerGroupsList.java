@@ -197,7 +197,7 @@ public class UserMenuSerGroupsList extends UpdateDataAdapter {
 
 		if (this.serGroupsList.size() > 0) {
 
-			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, this.language,
+			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, this.language, null,
 					EnumPrintLayouts.SERVICE_GROUP, EnumPrintLayouts.SERVICE_GROUP_WITHOUT_EXCLUSIONS);
 
 			if (selectedLayout != null) {

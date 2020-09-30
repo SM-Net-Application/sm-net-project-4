@@ -1,6 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.naturaldisaster;
 
 import java.io.IOException;
+import java.util.stream.StreamSupport;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -9,11 +10,13 @@ import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -45,6 +49,16 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	private Tab membersTab;
 	@FXML
 	private Tab familyTab;
+
+	@FXML
+	private TabPane memberListTabPane;
+	@FXML
+	private Tab memberListTab;
+
+	@FXML
+	private TabPane familyTabPane;
+	@FXML
+	private Tab familyListTab;
 
 	@FXML
 	private Label overseerLabel;
@@ -67,6 +81,10 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	private TableColumn<Member, String> memberSurnameTableColumn;
 	@FXML
 	private TableColumn<Member, String> memberNameTableColumn;
+	@FXML
+	private TableColumn<Member, String> memberShortNameTableColumn;
+	@FXML
+	private TableColumn<Member, String> memberSurname2TableColumn;
 	@FXML
 	private TableColumn<Member, String> memberPhoneTableColumn;
 	@FXML
@@ -92,11 +110,12 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 	private TableColumn<Family, String> familyPhoneTableColumn;
 
 	@FXML
+	private TextField filterMembers;
+	@FXML
+	private TextField filterFamilies;
+
+	@FXML
 	private Button printButton1;
-	@FXML
-	private Button printButton2;
-	@FXML
-	private Button printButton3;
 
 	private String congregationName;
 
@@ -106,6 +125,7 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 
 	private ObservableList<Member> membersList;
 	private ObservableList<Family> familiesList;
+	private ObservableList<SerGroup> servGroupList;
 
 	@FXML
 	private void initialize() {
@@ -121,6 +141,9 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		memberPhoneTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf40DecryptedProperty());
 		memberEmailTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf41DecryptedProperty());
 
+		this.memberSurname2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf39DecryptedProperty());
+		this.memberShortNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
+
 		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
 		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
 		familyCountTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
@@ -135,11 +158,25 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 
 		headerLabel.getStyleClass().add("label_header_001");
 
-		congrTabPane.getStyleClass().add("tab_pane_001");
+		this.congrTabPane.getStyleClass().add("tab_pane_003");
 
-		overseerTab.getStyleClass().add("tab_001");
-		membersTab.getStyleClass().add("tab_001");
-		familyTab.getStyleClass().add("tab_001");
+		this.memberListTabPane.getStyleClass().add("tab_pane_001");
+		this.familyTabPane.getStyleClass().add("tab_pane_001");
+
+		this.membersTab.getStyleClass().add("tab_001");
+		this.familyTab.getStyleClass().add("tab_001");
+		this.overseerTab.getStyleClass().add("tab_001");
+
+		this.memberListTab.getStyleClass().add("tab_001");
+		this.filterMembers.getStyleClass().add("text_field_001");
+
+		this.memberIDTableColumn.getStyleClass().add("table_column_002");
+		this.familyIDTableColumn.getStyleClass().add("table_column_002");
+
+		this.familyListTab.getStyleClass().add("tab_001");
+		this.filterFamilies.getStyleClass().add("text_field_001");
+
+		this.memberIDTableColumn.getStyleClass().add("table_column_002");
 
 		overseerLabel.getStyleClass().add("label_set_001");
 		overseerPhoneLabel.getStyleClass().add("label_set_001");
@@ -153,8 +190,6 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		familiesTableView.getStyleClass().add("table_view_001");
 
 		printButton1.getStyleClass().add("button_image_001");
-		printButton2.getStyleClass().add("button_image_001");
-		printButton3.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -164,6 +199,20 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		updateWeeksOverseer();
 		updateMembers();
 		updateFamilies();
+
+		updateSerGroups();
+	}
+
+	@Override
+	public void updateSerGroups() {
+		Actions.getAllSerGroups(this.settings, this.ownerStage, this);
+	}
+
+	@Override
+	public void updateSerGroups(ObservableList<SerGroup> list) {
+
+		this.servGroupList = list;
+		this.servGroupList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
 	}
 
 	@Override
@@ -195,19 +244,30 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		headerImageView.setFitHeight(50);
 		headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USER_MENU_NATURALDISASTER, 50, 50));
 
-		congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
+		this.congrTabPane.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
+		this.congrTabPane.setTabMinHeight(75);
+		this.congrTabPane.setTabMaxHeight(75);
 
-		overseerTab.setText(language.getString("sp.naturaldisaster.overseer"));
-		overseerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_CIRCUITOVERSEER));
-		overseerTab.setClosable(false);
+		Tooltip overseerTabTooltip = new Tooltip(this.language.getString("sp.naturaldisaster.overseer"));
+		overseerTabTooltip.getStyleClass().add("tooltip_001");
+		this.overseerTab.setTooltip(overseerTabTooltip);
+		this.overseerTab.setText("");
+		this.overseerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_CIRCUITOVERSEER));
+		this.overseerTab.setClosable(false);
 
-		membersTab.setText(language.getString("TEXT0011"));
-		membersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
-		membersTab.setClosable(false);
+		Tooltip memberTabTooltip = new Tooltip(language.getString("TEXT0011"));
+		memberTabTooltip.getStyleClass().add("tooltip_001");
+		this.membersTab.setTooltip(memberTabTooltip);
+		this.membersTab.setText("");
+		this.membersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
+		this.membersTab.setClosable(false);
 
-		familyTab.setText(language.getString("TEXT0012"));
-		familyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
-		familyTab.setClosable(false);
+		Tooltip familyTabTooltip = new Tooltip(language.getString("TEXT0012"));
+		familyTabTooltip.getStyleClass().add("tooltip_001");
+		this.familyTab.setTooltip(familyTabTooltip);
+		this.familyTab.setText("");
+		this.familyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
+		this.familyTab.setClosable(false);
 
 		overseerLabel.setText(language.getString("sp.naturaldisaster.overseername"));
 		overseerPhoneLabel.setText(language.getString("sp.naturaldisaster.phone"));
@@ -222,6 +282,13 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		memberPhoneTableColumn.setText(language.getString("TEXT0107"));
 		memberEmailTableColumn.setText(language.getString("TEXT0108"));
 
+		this.memberSurname2TableColumn.setText(this.language.getString("naturaldisaster.members.column.surname2"));
+
+		this.memberShortNameTableColumn.setText("");
+		this.memberShortNameTableColumn.setMinWidth(75);
+		this.memberShortNameTableColumn.setMaxWidth(75);
+		this.memberShortNameTableColumn.setResizable(false);
+
 		familyIDTableColumn.setText(language.getString("TEXT0005"));
 		familyIDTableColumn.setMinWidth(50);
 		familyIDTableColumn.setMaxWidth(50);
@@ -234,14 +301,14 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		familyCityTableColumn.setText(language.getString("TEXT0030"));
 		familyPhoneTableColumn.setText(language.getString("TEXT0109"));
 
-		printButton1.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		printButton1.setText(null);
+		Tooltip printTabTooltip = new Tooltip(this.language.getString("naturaldisaster.tooltip.print"));
+		printTabTooltip.getStyleClass().add("tooltip_001");
+		this.printButton1.setTooltip(printTabTooltip);
+		this.printButton1.setText("");
+		this.printButton1.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 
-		printButton2.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		printButton2.setText(null);
-
-		printButton3.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.PRINT));
-		printButton3.setText(null);
+		this.memberListTab.setText(this.language.getString("naturaldisaster.tab.memberlist"));
+		this.familyListTab.setText(this.language.getString("naturaldisaster.tab.familylist"));
 	}
 
 	private void listeners() {
@@ -250,6 +317,75 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 		listenerFamiliesTableView();
 
 		listenerPrintButton();
+
+		this.filterMembers.textProperty().addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
+		this.filterFamilies.textProperty()
+				.addListener((observable, oldValue, newValue) -> updateFilterFamily(newValue));
+	}
+
+	private void updateFilterFamily(String newValue) {
+
+		if (newValue.isEmpty()) {
+			this.familiesTableView.setItems(this.familiesList);
+		} else {
+			ObservableList<Family> filteredMemberList = buildListFamily(newValue);
+			this.familiesTableView.setItems(filteredMemberList);
+		}
+
+		this.familiesTableView.refresh();
+	}
+
+	private ObservableList<Family> buildListFamily(String filter) {
+
+		ObservableList<Family> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.familiesList.spliterator(), false).filter(obj -> matchFilterFamily(obj, filter))
+				.forEach(obj -> list.add(obj));
+
+		return list;
+	}
+
+	private boolean matchFilterFamily(Family obj, String match) {
+
+		String filter = match.toLowerCase();
+
+		return obj.getSpInf1Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf2Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf3Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf4Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf5Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf7Decrypted().toLowerCase().contains(filter);
+	}
+
+	private void updateFilterMember(String newValue) {
+
+		if (newValue.isEmpty())
+			this.membersTableView.setItems(this.membersList);
+		else {
+			ObservableList<Member> filteredMemberList = buildListMember(newValue);
+			this.membersTableView.setItems(filteredMemberList);
+		}
+
+		this.membersTableView.refresh();
+	}
+
+	private ObservableList<Member> buildListMember(String filter) {
+
+		ObservableList<Member> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.membersList.spliterator(), false).filter(obj -> matchFilterMember(obj, filter))
+				.forEach(obj -> list.add(obj));
+
+		return list;
+	}
+
+	private boolean matchFilterMember(Member obj, String match) {
+
+		String filter = match.toLowerCase();
+
+		return obj.getSpInf1Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf2Decrypted().toLowerCase().contains(filter)
+				|| obj.getSpInf39Decrypted().toLowerCase().contains(filter);
 	}
 
 	private void loadGeneralInfo() {
@@ -265,27 +401,86 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 
 	private void listenerPrintButton() {
 		this.printButton1.setOnAction(event -> print());
-		this.printButton2.setOnAction(event -> print());
-		this.printButton3.setOnAction(event -> print());
 	}
 
 	private void print() {
 
-		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
-				EnumPrintLayouts.NATURAL_DISASTER_LIST);
+		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, this.servGroupList,
+				EnumPrintLayouts.NATURAL_DISASTER_LIST, EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS);
 
 		if (selectedLayout != null) {
+
+			String overseerName = this.overseerTextField.getText();
+			String overseerPhone = this.overseerPhoneTextField.getText();
+			String overseerMail = this.overseerMailTextField.getText();
 
 			switch (selectedLayout) {
 
 			case NATURAL_DISASTER_LIST:
 
-				String overseerName = this.overseerTextField.getText();
-				String overseerPhone = this.overseerPhoneTextField.getText();
-				String overseerMail = this.overseerMailTextField.getText();
-
-				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.membersList,
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, null, this.membersList,
 						this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_1:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(0),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_2:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(1),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_3:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(2),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_4:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(3),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_5:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(4),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_6:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(5),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_7:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(6),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_8:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(7),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_9:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(8),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
+				break;
+
+			case NATURAL_DISASTER_SERVICEGROUPS_10:
+
+				Actions.printNaturalDisaster(overseerName, overseerPhone, overseerMail, this.servGroupList.get(9),
+						this.membersList, this.familiesList, this.congregationName, settings, ownerStage, language);
 				break;
 
 			default:
@@ -338,14 +533,18 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 				Tab newMemberTab = new Tab(member.getNameStyle1(), layout);
 				newMemberTab.setClosable(true);
 				newMemberTab.getStyleClass().add("tab_001");
-				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
 
-				ctrl.setCongrTabPane(congrTabPane);
-				ctrl.setMembersTab(membersTab);
+				if (member.getSpInf4() == 0)
+					newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MALE));
+				else if (member.getSpInf4() == 1)
+					newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FEMALE));
+
+				ctrl.setCongrTabPane(this.memberListTabPane);
+				ctrl.setMembersTab(this.memberListTab);
 				ctrl.setNewMemberTab(newMemberTab);
 
-				congrTabPane.getTabs().add(newMemberTab);
-				congrTabPane.getSelectionModel().select(newMemberTab);
+				this.memberListTabPane.getTabs().add(newMemberTab);
+				this.memberListTabPane.getSelectionModel().select(newMemberTab);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -376,12 +575,12 @@ public class UserMenuNaturalDisasterList extends UpdateDataAdapter {
 				newFamilyTab.getStyleClass().add("tab_001");
 				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
 
-				ctrl.setCongrTabPane(congrTabPane);
-				ctrl.setMembersTab(membersTab);
+				ctrl.setCongrTabPane(this.familyTabPane);
+				ctrl.setMembersTab(this.familyListTab);
 				ctrl.setNewMemberTab(newFamilyTab);
 
-				congrTabPane.getTabs().add(newFamilyTab);
-				congrTabPane.getSelectionModel().select(newFamilyTab);
+				this.familyTabPane.getTabs().add(newFamilyTab);
+				this.familyTabPane.getSelectionModel().select(newFamilyTab);
 
 				ctrl.objectInitialize();
 

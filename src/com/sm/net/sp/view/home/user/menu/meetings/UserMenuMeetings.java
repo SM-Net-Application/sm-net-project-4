@@ -16,6 +16,8 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekConvention;
+import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -82,6 +84,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private ObservableList<DateAndTime> dateAndTimeList;
 	private ObservableList<Place> placesList;
 	private HashMap<String, String> configs;
+	private ObservableList<WeekConvention> convention;
+	private ObservableList<WeekMemorial> memorial;
 
 	private SupportPlannerView application;
 
@@ -191,11 +195,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		weekTableColumn.setText(language.getString("TEXT0076"));
 		fromTableColumn.setText(language.getString("TEXT0077"));
 		toTableColumn.setText(language.getString("TEXT0078"));
-		
+
 		this.meeting1Column.setText(this.language.getString("meetings.tablecolumn.meeting1"));
 		this.bibleChaptersColumn.setText(this.language.getString("meetings.tablecolumn.biblechapters"));
 		this.meeting2Column.setText(this.language.getString("meetings.tablecolumn.meeting2"));
-		
+
 		typeColumn.setText(language.getString("TEXT0091"));
 
 		this.weekTableColumn.setMinWidth(100);
@@ -347,7 +351,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 			if (printableWeeks.size() > 0) {
 
-				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language,
+				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
 						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT,
 						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
 
@@ -541,4 +545,19 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		this.configs = configs;
 	}
 
+	public ObservableList<WeekConvention> getConvention() {
+		return convention;
+	}
+
+	public void setConvention(ObservableList<WeekConvention> convention) {
+		this.convention = convention;
+	}
+
+	public ObservableList<WeekMemorial> getMemorial() {
+		return memorial;
+	}
+
+	public void setMemorial(ObservableList<WeekMemorial> memorial) {
+		this.memorial = memorial;
+	}
 }

@@ -7,6 +7,7 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.PrintLayoutTranslated;
+import com.sm.net.sp.model.SerGroup;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +41,7 @@ public class PrintLayout {
 
 	private Language language;
 	private ObservableList<PrintLayoutTranslated> layouts;
+	private ObservableList<SerGroup> servGroupList;
 
 	@FXML
 	private void initialize() {
@@ -63,7 +65,52 @@ public class PrintLayout {
 		this.layouts = FXCollections.observableArrayList();
 
 		for (EnumPrintLayouts enuPrintLayout : layouts)
-			this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language, enuPrintLayout));
+			if (enuPrintLayout == EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS) {
+
+				if (this.servGroupList != null) {
+
+					if (this.servGroupList.size() > 0)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_1, this.servGroupList.get(0)));
+
+					if (this.servGroupList.size() > 1)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_2, this.servGroupList.get(1)));
+
+					if (this.servGroupList.size() > 2)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_3, this.servGroupList.get(2)));
+
+					if (this.servGroupList.size() > 3)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_4, this.servGroupList.get(3)));
+
+					if (this.servGroupList.size() > 4)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_5, this.servGroupList.get(4)));
+
+					if (this.servGroupList.size() > 5)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_6, this.servGroupList.get(5)));
+
+					if (this.servGroupList.size() > 6)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_7, this.servGroupList.get(6)));
+
+					if (this.servGroupList.size() > 7)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_8, this.servGroupList.get(7)));
+
+					if (this.servGroupList.size() > 8)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_9, this.servGroupList.get(8)));
+
+					if (this.servGroupList.size() > 9)
+						this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language,
+								EnumPrintLayouts.NATURAL_DISASTER_SERVICEGROUPS_10, this.servGroupList.get(9)));
+				}
+			} else
+				this.layouts.add(EnumPrintLayouts.getPrintLayoutTranslated(this.language, enuPrintLayout));
 
 		this.printLayoutListView.setItems(this.layouts);
 
@@ -89,7 +136,8 @@ public class PrintLayout {
 		return (item != null) ? item.getPrintLayout() : null;
 	}
 
-	public static EnumPrintLayouts dialogPrintLayout(Stage ownerStage, Language language, EnumPrintLayouts... layouts) {
+	public static EnumPrintLayouts dialogPrintLayout(Stage ownerStage, Language language,
+			ObservableList<SerGroup> servGroupList, EnumPrintLayouts... layouts) {
 
 		try {
 
@@ -114,6 +162,7 @@ public class PrintLayout {
 			AnchorPane content = (AnchorPane) fxmlLoader.load();
 			PrintLayout ctrl = (PrintLayout) fxmlLoader.getController();
 			ctrl.setLanguage(language);
+			ctrl.setServGroupList(servGroupList);
 			ctrl.objectInitialize(layouts);
 
 			dialogPane.setContent(content);
@@ -148,4 +197,11 @@ public class PrintLayout {
 		this.language = language;
 	}
 
+	public ObservableList<SerGroup> getServGroupList() {
+		return servGroupList;
+	}
+
+	public void setServGroupList(ObservableList<SerGroup> servGroupList) {
+		this.servGroupList = servGroupList;
+	}
 }

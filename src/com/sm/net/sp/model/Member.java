@@ -225,23 +225,31 @@ public class Member {
 	}
 
 	public final String getNameStyle1() {
-		return (!this.getSpInf1Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + ", " + this.getSpInf1Decrypted())
-				: this.getSpInf2Decrypted();
+		return (!this.getSpInf1Decrypted().isEmpty()) ? (this.checkSurname() + ", " + this.getSpInf1Decrypted())
+				: this.checkSurname();
 	}
 
 	public final String getNameStyle2() {
-		return (!this.getSpInf3Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + ", " + this.getSpInf3Decrypted())
-				: this.getSpInf2Decrypted();
+		return (!this.getSpInf3Decrypted().isEmpty()) ? (this.checkSurname() + ", " + this.getSpInf3Decrypted())
+				: this.checkSurname();
 	}
 
 	public final String getNameStyle3() {
-		return (!this.getSpInf1Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + " " + this.getSpInf1Decrypted())
-				: this.getSpInf2Decrypted();
+		return (!this.getSpInf1Decrypted().isEmpty()) ? (this.checkSurname() + " " + this.getSpInf1Decrypted())
+				: this.checkSurname();
 	}
 
 	public final String getNameStyle4() {
-		return (!this.getSpInf3Decrypted().isEmpty()) ? (this.getSpInf2Decrypted() + " " + this.getSpInf3Decrypted())
-				: this.getSpInf2Decrypted();
+		return (!this.getSpInf3Decrypted().isEmpty()) ? (this.checkSurname() + " " + this.getSpInf3Decrypted())
+				: this.checkSurname();
+	}
+
+	private String checkSurname() {
+
+		if (this.getSpInf50() == 1)
+			return this.getSpInf39Decrypted();
+
+		return this.getSpInf2Decrypted();
 	}
 
 	@Override

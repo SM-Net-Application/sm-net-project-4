@@ -11,6 +11,12 @@ public class PrintLayoutTranslated {
 		this.translatedName = translatedName;
 	}
 
+	public PrintLayoutTranslated(EnumPrintLayouts printLayout, String translatedName, SerGroup sg) {
+		super();
+		this.printLayout = printLayout;
+		this.translatedName = String.format(translatedName, sg.getSpInf1Decrypted());
+	}
+
 	@Override
 	public String toString() {
 		return this.getTranslatedName();
