@@ -129,6 +129,41 @@ public class JRWeek {
 	private String convQ9;
 	private String convQ10;
 
+	private boolean memPrintMidweek;
+	private boolean memPrintWeekend;
+
+	private String memDay;
+	private String memPlace;
+	private String memSong1Min;
+	private String memSong1;
+	private boolean memPrayPresident;
+	private String memPresidentName;
+	private String memPresidentNameText;
+	private String memPray1Name;
+	private String memPray1NameText;
+
+	private String memTalkMin;
+	private String memTalkTheme;
+	private String memTalkName;
+
+	private String memPrayBreadText;
+	private String memPrayBreadName;
+	private String memPrayWineText;
+	private String memPrayWineName;
+
+	private String memSong2Min;
+	private String memSong2;
+	private String memPray2Name;
+	private String memPray2NameText;
+
+	private String memFamilyEmblemsText;
+	private String memFamilyEmblemsList;
+
+	private String memMemberEmblemsText;
+	private String memMemberEmblemsList;
+
+	private String memPlaceText;
+
 	private String congregationName;
 	private String programmName;
 
@@ -224,6 +259,8 @@ public class JRWeek {
 			ObservableList<WeekConvention> convention, ObservableList<WeekMemorial> memorial, Language language,
 			boolean extendedName, boolean complete) throws JRException {
 
+		LocalDate weekFrom = week.getFrom();
+
 		JRWeek jrWeek = new JRWeek();
 
 		String ministryPartReport = Jasper.Layouts.SM_NET_MEETINGS_MINISTRY_PART_ROW.getAbsolutePath();
@@ -304,7 +341,6 @@ public class JRWeek {
 				// Data workflow
 
 				EnumConventionType convType = EnumConventionType.getByID(convTypeID);
-				LocalDate weekFrom = week.getFrom();
 
 				// Set data to JasperReports
 
@@ -516,6 +552,413 @@ public class JRWeek {
 
 				jrWeek.setConvTheme(convTheme);
 				jrWeek.setConvAddr(convAddr);
+			}
+		}
+
+		if (weekType == WeekType.MEMORIAL) {
+
+			WeekMemorial weekMemorial = null;
+			for (WeekMemorial m : memorial)
+				if (m.getSpInf1() == weekKey) {
+					weekMemorial = m;
+					break;
+				}
+
+			boolean memorialPrint = true;
+
+			if (weekMemorial != null) {
+
+				int dayID = weekMemorial.getSpInf21();
+				EnumDays memorialEnumDay = EnumDays.getByID(dayID);
+				switch (memorialEnumDay) {
+				case LUN:
+				case MAR:
+				case MER:
+				case GIO:
+				case VEN:
+
+					jrWeek.setMemPrintMidweek(true);
+					jrWeek.setMemPrintWeekend(false);
+
+					break;
+
+				case SAB:
+				case DOM:
+
+					jrWeek.setMemPrintMidweek(false);
+					jrWeek.setMemPrintWeekend(true);
+
+					break;
+
+				default:
+
+					jrWeek.setMemPrintMidweek(false);
+					jrWeek.setMemPrintWeekend(false);
+					memorialPrint = false;
+
+					break;
+				}
+
+				if (memorialPrint) {
+
+					String memDayText = language.getString(memorialEnumDay.getKey());
+					LocalDate memDayLocalDate = weekFrom.plus((dayID - 1), ChronoUnit.DAYS);
+					int memDayOfMonth = memDayLocalDate.getDayOfMonth();
+					int memDayMonth = memDayLocalDate.getMonthValue();
+					EnumMonths memDayMonthEnum = EnumMonths.getByID(memDayMonth);
+					String memDayMonthText = language.getString(memDayMonthEnum.getKey());
+					int memDayYear = memDayLocalDate.getYear();
+
+					int memDayHours = weekMemorial.getSpInf22();
+					int memDayMinute = weekMemorial.getSpInf23();
+
+					String memorialDayFormat = language.getString("jasper.memorial.day.format");
+
+					String memorialDayText = String.format(memorialDayFormat, memDayText, memDayOfMonth,
+							memDayMonthText, memDayYear, memDayHours, memDayMinute);
+
+					jrWeek.setMemDay(memorialDayText.toUpperCase());
+
+					String memPlace = weekMemorial.getSpInf24();
+					jrWeek.setMemPlace(memPlace);
+
+					String memSong1Min = language.getString("jasper.memorial.song1min");
+					jrWeek.setMemSong1Min(memSong1Min);
+
+					String memSong1Format = language.getString("jasper.memorial.song1format");
+					String memSong1 = weekMemorial.getSpInf2();
+					String memSong1Text = String.format(memSong1Format, memSong1);
+					jrWeek.setMemSong1(memSong1Text);
+
+					boolean memPrayPresident = weekMemorial.getSpInf35() == 1;
+					jrWeek.setMemPrayPresident(memPrayPresident);
+
+					String memPresidentNameText = language.getString("jasper.memorial.presidenttext");
+					jrWeek.setMemPresidentNameText(memPresidentNameText);
+
+					int memPresidentID = weekMemorial.getSpInf4();
+					String memPresidentName = "";
+					Member member = getMemberFromList(membersList, memPresidentID);
+					if (member != null)
+						if (extendedName)
+							memPresidentName = member.getNameStyle3();
+						else
+							memPresidentName = member.getNameStyle4();
+					jrWeek.setMemPresidentName(memPresidentName);
+
+					String memPray1NameText = language.getString("jasper.memorial.pray1text");
+					jrWeek.setMemPray1NameText(memPray1NameText);
+
+					int memPray1ID = weekMemorial.getSpInf5();
+					String memPray1Name = "";
+					member = getMemberFromList(membersList, memPray1ID);
+					if (member != null)
+						if (extendedName)
+							memPray1Name = member.getNameStyle3();
+						else
+							memPray1Name = member.getNameStyle4();
+					jrWeek.setMemPray1Name(memPray1Name);
+
+					String memTalkMin = weekMemorial.getSpInf8();
+					String memTalkMinFormat = language.getString("jasper.memorial.talkmin");
+					String memTalkMinText = String.format(memTalkMinFormat, memTalkMin);
+					jrWeek.setMemTalkMin(memTalkMinText);
+
+					String memTalkTheme = weekMemorial.getSpInf7();
+					jrWeek.setMemTalkTheme(memTalkTheme);
+
+					int memTalkID = weekMemorial.getSpInf6();
+					String memTalkName = "";
+					member = getMemberFromList(membersList, memTalkID);
+					if (member != null)
+						if (extendedName)
+							memTalkName = member.getNameStyle3();
+						else
+							memTalkName = member.getNameStyle4();
+					jrWeek.setMemTalkName(memTalkName);
+
+					String memPrayBreadText = language.getString("jasper.memorial.praybread");
+					jrWeek.setMemPrayBreadText(memPrayBreadText);
+
+					int memPrayBreadID = weekMemorial.getSpInf9();
+					String memPrayBreadName = "";
+					member = getMemberFromList(membersList, memPrayBreadID);
+					if (member != null)
+						if (extendedName)
+							memPrayBreadName = member.getNameStyle3();
+						else
+							memPrayBreadName = member.getNameStyle4();
+					jrWeek.setMemPrayBreadName(memPrayBreadName);
+
+					String memPrayWineText = language.getString("jasper.memorial.praywine");
+					jrWeek.setMemPrayWineText(memPrayWineText);
+
+					int memPrayWineID = weekMemorial.getSpInf10();
+					String memPrayWineName = "";
+					member = getMemberFromList(membersList, memPrayWineID);
+					if (member != null)
+						if (extendedName)
+							memPrayWineName = member.getNameStyle3();
+						else
+							memPrayWineName = member.getNameStyle4();
+					jrWeek.setMemPrayWineName(memPrayWineName);
+
+					String memSong2Min = language.getString("jasper.memorial.song2min");
+					jrWeek.setMemSong2Min(memSong2Min);
+
+					String memSong2Format = language.getString("jasper.memorial.song2format");
+					String memSong2 = weekMemorial.getSpInf3();
+					String memSong2Text = String.format(memSong2Format, memSong2);
+					jrWeek.setMemSong2(memSong2Text);
+
+					String memPray2NameText = language.getString("jasper.memorial.pray2text");
+					jrWeek.setMemPray2NameText(memPray2NameText);
+
+					int memPray2ID = weekMemorial.getSpInf36();
+					String memPray2Name = "";
+					member = getMemberFromList(membersList, memPray2ID);
+					if (member != null)
+						if (extendedName)
+							memPray2Name = member.getNameStyle3();
+						else
+							memPray2Name = member.getNameStyle4();
+					jrWeek.setMemPray2Name(memPray2Name);
+
+					String memFamilyEmblemsText = language.getString("jasper.memorial.familyemblems");
+					jrWeek.setMemFamilyEmblemsText(memFamilyEmblemsText);
+
+					int memBreadFamily1ID = weekMemorial.getSpInf11();
+					String memBreadFamily1Name = "";
+					Family family = getFamilyFromList(familiesList, memBreadFamily1ID);
+					if (family != null)
+						memBreadFamily1Name = family.getSpInf1Decrypted();
+
+					int memBreadFamily2ID = weekMemorial.getSpInf12();
+					String memBreadFamily2Name = "";
+					family = getFamilyFromList(familiesList, memBreadFamily2ID);
+					if (family != null)
+						memBreadFamily2Name = family.getSpInf1Decrypted();
+
+					int memBreadFamily3ID = weekMemorial.getSpInf13();
+					String memBreadFamily3Name = "";
+					family = getFamilyFromList(familiesList, memBreadFamily3ID);
+					if (family != null)
+						memBreadFamily3Name = family.getSpInf1Decrypted();
+
+					int memBreadFamily4ID = weekMemorial.getSpInf14();
+					String memBreadFamily4Name = "";
+					family = getFamilyFromList(familiesList, memBreadFamily4ID);
+					if (family != null)
+						memBreadFamily4Name = family.getSpInf1Decrypted();
+
+					int memBreadFamily5ID = weekMemorial.getSpInf15();
+					String memBreadFamily5Name = "";
+					family = getFamilyFromList(familiesList, memBreadFamily5ID);
+					if (family != null)
+						memBreadFamily5Name = family.getSpInf1Decrypted();
+
+					String memBreadFamilyList = "";
+					if (!memBreadFamily1Name.isEmpty())
+						memBreadFamilyList += memBreadFamilyList.isEmpty() ? memBreadFamily1Name
+								: ", " + memBreadFamily1Name;
+					if (!memBreadFamily2Name.isEmpty())
+						memBreadFamilyList += memBreadFamilyList.isEmpty() ? memBreadFamily2Name
+								: ", " + memBreadFamily2Name;
+					if (!memBreadFamily3Name.isEmpty())
+						memBreadFamilyList += memBreadFamilyList.isEmpty() ? memBreadFamily3Name
+								: ", " + memBreadFamily3Name;
+					if (!memBreadFamily4Name.isEmpty())
+						memBreadFamilyList += memBreadFamilyList.isEmpty() ? memBreadFamily4Name
+								: ", " + memBreadFamily4Name;
+					if (!memBreadFamily5Name.isEmpty())
+						memBreadFamilyList += memBreadFamilyList.isEmpty() ? memBreadFamily5Name
+								: ", " + memBreadFamily5Name;
+
+					int memWineFamily1ID = weekMemorial.getSpInf16();
+					String memWineFamily1Name = "";
+					family = getFamilyFromList(familiesList, memWineFamily1ID);
+					if (family != null)
+						memWineFamily1Name = family.getSpInf1Decrypted();
+
+					int memWineFamily2ID = weekMemorial.getSpInf17();
+					String memWineFamily2Name = "";
+					family = getFamilyFromList(familiesList, memWineFamily2ID);
+					if (family != null)
+						memWineFamily2Name = family.getSpInf1Decrypted();
+
+					int memWineFamily3ID = weekMemorial.getSpInf18();
+					String memWineFamily3Name = "";
+					family = getFamilyFromList(familiesList, memWineFamily3ID);
+					if (family != null)
+						memWineFamily3Name = family.getSpInf1Decrypted();
+
+					int memWineFamily4ID = weekMemorial.getSpInf19();
+					String memWineFamily4Name = "";
+					family = getFamilyFromList(familiesList, memWineFamily4ID);
+					if (family != null)
+						memWineFamily4Name = family.getSpInf1Decrypted();
+
+					int memWineFamily5ID = weekMemorial.getSpInf20();
+					String memWineFamily5Name = "";
+					family = getFamilyFromList(familiesList, memWineFamily5ID);
+					if (family != null)
+						memWineFamily5Name = family.getSpInf1Decrypted();
+
+					String memWineFamilyList = "";
+					if (!memWineFamily1Name.isEmpty())
+						memWineFamilyList += memWineFamilyList.isEmpty() ? memWineFamily1Name
+								: ", " + memWineFamily1Name;
+					if (!memWineFamily2Name.isEmpty())
+						memWineFamilyList += memWineFamilyList.isEmpty() ? memWineFamily2Name
+								: ", " + memWineFamily2Name;
+					if (!memWineFamily3Name.isEmpty())
+						memWineFamilyList += memWineFamilyList.isEmpty() ? memWineFamily3Name
+								: ", " + memWineFamily3Name;
+					if (!memWineFamily4Name.isEmpty())
+						memWineFamilyList += memWineFamilyList.isEmpty() ? memWineFamily4Name
+								: ", " + memWineFamily4Name;
+					if (!memWineFamily5Name.isEmpty())
+						memWineFamilyList += memWineFamilyList.isEmpty() ? memWineFamily5Name
+								: ", " + memWineFamily5Name;
+
+					String familyEmblemsText = "";
+					if (!(memBreadFamilyList.isEmpty() && memWineFamilyList.isEmpty())) {
+						String familyEmblemsTextFormat = language.getString("jasper.memorial.familyemblemstext");
+						familyEmblemsText = String.format(familyEmblemsTextFormat, memBreadFamilyList,
+								memWineFamilyList);
+						jrWeek.setMemFamilyEmblemsList(familyEmblemsText);
+					}
+
+					String memMemberEmblemsText = language.getString("jasper.memorial.memberemblems");
+					jrWeek.setMemMemberEmblemsText(memMemberEmblemsText);
+
+					int memEmblemsMember1ID = weekMemorial.getSpInf25();
+					String memEmblemsMember1Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember1ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember1Name = member.getNameStyle3();
+						else
+							memEmblemsMember1Name = member.getNameStyle4();
+
+					int memEmblemsMember2ID = weekMemorial.getSpInf26();
+					String memEmblemsMember2Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember2ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember2Name = member.getNameStyle3();
+						else
+							memEmblemsMember2Name = member.getNameStyle4();
+
+					int memEmblemsMember3ID = weekMemorial.getSpInf27();
+					String memEmblemsMember3Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember3ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember3Name = member.getNameStyle3();
+						else
+							memEmblemsMember3Name = member.getNameStyle4();
+
+					int memEmblemsMember4ID = weekMemorial.getSpInf28();
+					String memEmblemsMember4Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember4ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember4Name = member.getNameStyle3();
+						else
+							memEmblemsMember4Name = member.getNameStyle4();
+
+					int memEmblemsMember5ID = weekMemorial.getSpInf29();
+					String memEmblemsMember5Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember5ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember5Name = member.getNameStyle3();
+						else
+							memEmblemsMember5Name = member.getNameStyle4();
+
+					int memEmblemsMember6ID = weekMemorial.getSpInf30();
+					String memEmblemsMember6Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember6ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember6Name = member.getNameStyle3();
+						else
+							memEmblemsMember6Name = member.getNameStyle4();
+
+					int memEmblemsMember7ID = weekMemorial.getSpInf31();
+					String memEmblemsMember7Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember7ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember7Name = member.getNameStyle3();
+						else
+							memEmblemsMember7Name = member.getNameStyle4();
+
+					int memEmblemsMember8ID = weekMemorial.getSpInf32();
+					String memEmblemsMember8Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember8ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember8Name = member.getNameStyle3();
+						else
+							memEmblemsMember8Name = member.getNameStyle4();
+
+					int memEmblemsMember9ID = weekMemorial.getSpInf33();
+					String memEmblemsMember9Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember9ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember9Name = member.getNameStyle3();
+						else
+							memEmblemsMember9Name = member.getNameStyle4();
+
+					int memEmblemsMember10ID = weekMemorial.getSpInf34();
+					String memEmblemsMember10Name = "";
+					member = getMemberFromList(membersList, memEmblemsMember10ID);
+					if (member != null)
+						if (extendedName)
+							memEmblemsMember10Name = member.getNameStyle3();
+						else
+							memEmblemsMember10Name = member.getNameStyle4();
+
+					String memEmblemsMemberList = "";
+					if (!memEmblemsMember1Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember1Name
+								: ", " + memEmblemsMember1Name;
+					if (!memEmblemsMember2Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember2Name
+								: ", " + memEmblemsMember2Name;
+					if (!memEmblemsMember3Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember3Name
+								: ", " + memEmblemsMember3Name;
+					if (!memEmblemsMember4Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember4Name
+								: ", " + memEmblemsMember4Name;
+					if (!memEmblemsMember5Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember5Name
+								: ", " + memEmblemsMember5Name;
+					if (!memEmblemsMember6Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember6Name
+								: ", " + memEmblemsMember6Name;
+					if (!memEmblemsMember7Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember7Name
+								: ", " + memEmblemsMember7Name;
+					if (!memEmblemsMember8Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember8Name
+								: ", " + memEmblemsMember8Name;
+					if (!memEmblemsMember9Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember9Name
+								: ", " + memEmblemsMember9Name;
+					if (!memEmblemsMember10Name.isEmpty())
+						memEmblemsMemberList += memEmblemsMemberList.isEmpty() ? memEmblemsMember10Name
+								: ", " + memEmblemsMember10Name;
+
+					jrWeek.setMemMemberEmblemsList(memEmblemsMemberList);
+
+					String memPlaceText = language.getString("jasper.memorial.place");
+					jrWeek.setMemPlaceText(memPlaceText);
+				}
 			}
 		}
 
@@ -771,6 +1214,13 @@ public class JRWeek {
 			jrWeek.setPlace2(week.getSpInf52());
 
 		return jrWeek;
+	}
+
+	private static Family getFamilyFromList(ObservableList<Family> familiesList, int id) {
+		for (Family f : familiesList)
+			if (f.getSpFamID() == id)
+				return f;
+		return null;
 	}
 
 	private static Member getMemberFromList(ObservableList<Member> membersList, int id) {
@@ -1592,4 +2042,221 @@ public class JRWeek {
 	public void setConvQ10(String convQ10) {
 		this.convQ10 = convQ10;
 	}
+
+	public boolean isMemPrintMidweek() {
+		return memPrintMidweek;
+	}
+
+	public boolean isMemPrintWeekend() {
+		return memPrintWeekend;
+	}
+
+	public void setMemPrintMidweek(boolean memPrintMidweek) {
+		this.memPrintMidweek = memPrintMidweek;
+	}
+
+	public void setMemPrintWeekend(boolean memPrintWeekend) {
+		this.memPrintWeekend = memPrintWeekend;
+	}
+
+	public String getMemDay() {
+		return memDay;
+	}
+
+	public void setMemDay(String memDay) {
+		this.memDay = memDay;
+	}
+
+	public String getMemPlace() {
+		return memPlace;
+	}
+
+	public void setMemPlace(String memPlace) {
+		this.memPlace = memPlace;
+	}
+
+	public String getMemSong1Min() {
+		return memSong1Min;
+	}
+
+	public void setMemSong1Min(String memSong1Min) {
+		this.memSong1Min = memSong1Min;
+	}
+
+	public String getMemSong1() {
+		return memSong1;
+	}
+
+	public void setMemSong1(String memSong1) {
+		this.memSong1 = memSong1;
+	}
+
+	public boolean isMemPrayPresident() {
+		return memPrayPresident;
+	}
+
+	public String getMemPresidentName() {
+		return memPresidentName;
+	}
+
+	public String getMemPray1Name() {
+		return memPray1Name;
+	}
+
+	public void setMemPrayPresident(boolean memPrayPresident) {
+		this.memPrayPresident = memPrayPresident;
+	}
+
+	public void setMemPresidentName(String memPresidentName) {
+		this.memPresidentName = memPresidentName;
+	}
+
+	public void setMemPray1Name(String memPray1Name) {
+		this.memPray1Name = memPray1Name;
+	}
+
+	public String getMemPresidentNameText() {
+		return memPresidentNameText;
+	}
+
+	public String getMemPray1NameText() {
+		return memPray1NameText;
+	}
+
+	public void setMemPresidentNameText(String memPresidentNameText) {
+		this.memPresidentNameText = memPresidentNameText;
+	}
+
+	public void setMemPray1NameText(String memPray1NameText) {
+		this.memPray1NameText = memPray1NameText;
+	}
+
+	public String getMemTalkMin() {
+		return memTalkMin;
+	}
+
+	public String getMemTalkTheme() {
+		return memTalkTheme;
+	}
+
+	public String getMemTalkName() {
+		return memTalkName;
+	}
+
+	public void setMemTalkMin(String memTalkMin) {
+		this.memTalkMin = memTalkMin;
+	}
+
+	public void setMemTalkTheme(String memTalkTheme) {
+		this.memTalkTheme = memTalkTheme;
+	}
+
+	public void setMemTalkName(String memTalkName) {
+		this.memTalkName = memTalkName;
+	}
+
+	public String getMemPrayBreadText() {
+		return memPrayBreadText;
+	}
+
+	public String getMemPrayWineText() {
+		return memPrayWineText;
+	}
+
+	public void setMemPrayBreadText(String memPrayBreadText) {
+		this.memPrayBreadText = memPrayBreadText;
+	}
+
+	public void setMemPrayWineText(String memPrayWineText) {
+		this.memPrayWineText = memPrayWineText;
+	}
+
+	public String getMemPrayBreadName() {
+		return memPrayBreadName;
+	}
+
+	public String getMemPrayWineName() {
+		return memPrayWineName;
+	}
+
+	public void setMemPrayBreadName(String memPrayBreadName) {
+		this.memPrayBreadName = memPrayBreadName;
+	}
+
+	public void setMemPrayWineName(String memPrayWineName) {
+		this.memPrayWineName = memPrayWineName;
+	}
+
+	public String getMemSong2Min() {
+		return memSong2Min;
+	}
+
+	public String getMemSong2() {
+		return memSong2;
+	}
+
+	public String getMemPray2Name() {
+		return memPray2Name;
+	}
+
+	public String getMemPray2NameText() {
+		return memPray2NameText;
+	}
+
+	public void setMemSong2Min(String memSong2Min) {
+		this.memSong2Min = memSong2Min;
+	}
+
+	public void setMemSong2(String memSong2) {
+		this.memSong2 = memSong2;
+	}
+
+	public void setMemPray2Name(String memPray2Name) {
+		this.memPray2Name = memPray2Name;
+	}
+
+	public void setMemPray2NameText(String memPray2NameText) {
+		this.memPray2NameText = memPray2NameText;
+	}
+
+	public String getMemFamilyEmblemsText() {
+		return memFamilyEmblemsText;
+	}
+
+	public void setMemFamilyEmblemsText(String memFamilyEmblemsText) {
+		this.memFamilyEmblemsText = memFamilyEmblemsText;
+	}
+
+	public String getMemFamilyEmblemsList() {
+		return memFamilyEmblemsList;
+	}
+
+	public void setMemFamilyEmblemsList(String memFamilyEmblemsList) {
+		this.memFamilyEmblemsList = memFamilyEmblemsList;
+	}
+
+	public String getMemMemberEmblemsText() {
+		return memMemberEmblemsText;
+	}
+
+	public String getMemMemberEmblemsList() {
+		return memMemberEmblemsList;
+	}
+
+	public void setMemMemberEmblemsText(String memMemberEmblemsText) {
+		this.memMemberEmblemsText = memMemberEmblemsText;
+	}
+
+	public void setMemMemberEmblemsList(String memMemberEmblemsList) {
+		this.memMemberEmblemsList = memMemberEmblemsList;
+	}
+
+	public String getMemPlaceText() {
+		return memPlaceText;
+	}
+
+	public void setMemPlaceText(String memPlaceText) {
+		this.memPlaceText = memPlaceText;
+	}
+
 }
