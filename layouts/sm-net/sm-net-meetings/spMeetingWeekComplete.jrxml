@@ -88,6 +88,28 @@
 	<field name="overseerThemeTalk3" class="java.lang.String"/>
 	<field name="place1" class="java.lang.String"/>
 	<field name="place2" class="java.lang.String"/>
+	<field name="convPrintOneDay" class="java.lang.Boolean"/>
+	<field name="convPrintThreeDay" class="java.lang.Boolean"/>
+	<field name="convType" class="java.lang.String"/>
+	<field name="convTheme" class="java.lang.String"/>
+	<field name="convDay1" class="java.lang.String"/>
+	<field name="convDay2" class="java.lang.String"/>
+	<field name="convDay3" class="java.lang.String"/>
+	<field name="convScripture1" class="java.lang.String"/>
+	<field name="convScripture2" class="java.lang.String"/>
+	<field name="convScripture3" class="java.lang.String"/>
+	<field name="convAddr" class="java.lang.String"/>
+	<field name="convQHeader" class="java.lang.String"/>
+	<field name="convQ1" class="java.lang.String"/>
+	<field name="convQ2" class="java.lang.String"/>
+	<field name="convQ3" class="java.lang.String"/>
+	<field name="convQ4" class="java.lang.String"/>
+	<field name="convQ5" class="java.lang.String"/>
+	<field name="convQ6" class="java.lang.String"/>
+	<field name="convQ7" class="java.lang.String"/>
+	<field name="convQ8" class="java.lang.String"/>
+	<field name="convQ9" class="java.lang.String"/>
+	<field name="convQ10" class="java.lang.String"/>
 	<detail>
 		<band height="70">
 			<rectangle>
@@ -1805,26 +1827,281 @@
 				<textFieldExpression><![CDATA[$F{place2}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="720">
-			<printWhenExpression><![CDATA[$F{weekType}.intValue() != 1 && $F{weekType}.intValue() != 4]]></printWhenExpression>
-			<rectangle>
-				<reportElement x="0" y="20" width="555" height="700" forecolor="#000000" backcolor="#FFFFFF" uuid="df13fab9-c2ee-4433-b11b-b9813ccf4599">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+		<band height="75">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay}||$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="25" width="555" height="50" uuid="365d3e74-6420-443d-9b3a-f59e372cb7ed">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</rectangle>
-			<textField pattern="">
-				<reportElement x="5" y="20" width="545" height="690" forecolor="#000000" uuid="457aca74-0757-41bb-9ab2-f235cb968fb6">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="25" isBold="false"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="25" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{weekTypeText}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{convType}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay}||$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="555" height="50" uuid="dde919ce-6e21-4039-ada2-edd63682a302">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convTheme}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="75">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay}||$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="25" width="505" height="50" uuid="02fa6de6-8739-4331-baf3-c942942140ea">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convDay1}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<printWhenExpression><![CDATA[$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="0" width="480" height="50" uuid="9146c10a-711c-4ac3-8231-6520cdccb6c0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="15" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convScripture1}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="75">
+			<printWhenExpression><![CDATA[$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="25" width="505" height="50" uuid="4b9583bd-505d-4601-95a0-158191a33d9f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convDay2}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<printWhenExpression><![CDATA[$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="0" width="480" height="50" uuid="c6dd0960-37b6-4df5-a5c6-2ff21b3f729a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="15" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convScripture2}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="75">
+			<printWhenExpression><![CDATA[$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="25" width="505" height="50" uuid="a0b666c8-58c2-4757-9e42-2f8af4d512dc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convDay3}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<printWhenExpression><![CDATA[$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="0" width="480" height="50" uuid="68e71245-26f8-408a-80b7-89cd0e0a0966">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="15" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convScripture3}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQHeader}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="0" width="505" height="50" uuid="41e9fd52-5137-4fb9-8c4d-01d6691685e5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQHeader}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="30">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ1}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="10" width="480" height="20" uuid="ccc5e97d-4bb8-47a9-a14a-51f0f63ff2ac">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ1}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ2}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="b02cbaf4-6632-497e-9a9a-5f85e49a9f50">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ2}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ3}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="bdd948af-34cf-4ae3-9ed0-79b389df7c76">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ3}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ4}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="065cede9-1b70-4e39-83ee-e1db74e75630">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ4}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ5}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="6747a751-8e97-48dd-9a5a-d1ad9cecabc3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ5}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ6}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="a589a6f3-b460-4d9d-94e1-6b72ed5b16f9">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ6}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ7}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="c4269ad0-1bfc-4ed5-9c6b-b85de98f71b6">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ7}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ8}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="aa16ebd1-f27c-4fa3-84cc-1f8575ee6402">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ8}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ9}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="5d15595a-9f8b-493c-8386-c88c324e8695">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ9}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay} && !$F{convQ10}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="5" width="480" height="20" uuid="9997c797-4ffa-42fe-ba6b-2ff645f36e32">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convQ10}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="75">
+			<printWhenExpression><![CDATA[$F{convPrintOneDay}||$F{convPrintThreeDay}]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="25" width="505" height="50" forecolor="#DB403D" uuid="5348cd38-2d50-46af-9cfe-3a91ef99b2d3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{convAddr}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="1">

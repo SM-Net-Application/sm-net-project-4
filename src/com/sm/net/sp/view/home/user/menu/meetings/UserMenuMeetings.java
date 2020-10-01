@@ -11,6 +11,7 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.EnumDays;
 import com.sm.net.sp.model.EnumPrintLayouts;
+import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
@@ -86,6 +87,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private HashMap<String, String> configs;
 	private ObservableList<WeekConvention> convention;
 	private ObservableList<WeekMemorial> memorial;
+	private ObservableList<Family> familiesList;
 
 	private SupportPlannerView application;
 
@@ -291,6 +293,24 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 		else
 			this.membersList = FXCollections.observableArrayList();
 
+		updateFamilies();
+	}
+
+	@Override
+	public void updateFamilies() {
+		Actions.getAllFamilies(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateFamilies(ObservableList<Family> list) {
+
+		if (list != null) {
+
+			this.familiesList = list;
+			this.familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
+		} else
+			this.membersList = FXCollections.observableArrayList();
+
 		updateWeeks();
 	}
 
@@ -351,33 +371,36 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 			if (printableWeeks.size() > 0) {
 
+//				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
+//						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT,
+//						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
+
 				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
-						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT,
-						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
+						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT);
 
 				if (selectedLayout != null) {
 
 					switch (selectedLayout) {
 
 					case MEETING_COMPLETE_NAME_EXTENDED:
-						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage,
-								language, true);
+						Actions.printWeekComplete(printableWeeks, membersList, this.familiesList, this.convention,
+								this.memorial, congregationName, settings, ownerStage, language, true);
 						break;
 
 					case MEETING_COMPLETE_NAME_SHORT:
-						Actions.printWeekComplete(printableWeeks, membersList, congregationName, settings, ownerStage,
-								language, false);
+						Actions.printWeekComplete(printableWeeks, membersList, this.familiesList, this.convention,
+								this.memorial, congregationName, settings, ownerStage, language, false);
 						break;
 
-					case MEETING_MIDWEEK_NAME_EXTENDED:
-						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-								true);
-						break;
-
-					case MEETING_MIDWEEK_NAME_SHORT:
-						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-								false);
-						break;
+//					case MEETING_MIDWEEK_NAME_EXTENDED:
+//						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
+//								true);
+//						break;
+//
+//					case MEETING_MIDWEEK_NAME_SHORT:
+//						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
+//								false);
+//						break;
 
 					default:
 						break;

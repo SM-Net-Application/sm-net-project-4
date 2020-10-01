@@ -2,14 +2,21 @@ package com.sm.net.sp.jasper.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.jasper.Jasper;
 import com.sm.net.sp.model.ChristiansPart;
+import com.sm.net.sp.model.EnumConventionType;
+import com.sm.net.sp.model.EnumDays;
+import com.sm.net.sp.model.EnumMonths;
+import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekConvention;
+import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 
@@ -94,6 +101,33 @@ public class JRWeek {
 
 	private String place1;
 	private String place2;
+
+	private boolean convPrintOneDay;
+	private boolean convPrintThreeDay;
+	private String convType;
+	private String convTheme;
+
+	private String convDay1;
+	private String convDay2;
+	private String convDay3;
+
+	private String convScripture1;
+	private String convScripture2;
+	private String convScripture3;
+
+	private String convAddr;
+
+	private String convQHeader;
+	private String convQ1;
+	private String convQ2;
+	private String convQ3;
+	private String convQ4;
+	private String convQ5;
+	private String convQ6;
+	private String convQ7;
+	private String convQ8;
+	private String convQ9;
+	private String convQ10;
 
 	private String congregationName;
 	private String programmName;
@@ -186,7 +220,8 @@ public class JRWeek {
 		this.jrDataSourceChristiansPart = null;
 	}
 
-	public static JRWeek newObject(Week week, ObservableList<Member> membersList, Language language,
+	public static JRWeek newObject(Week week, ObservableList<Member> membersList, ObservableList<Family> familiesList,
+			ObservableList<WeekConvention> convention, ObservableList<WeekMemorial> memorial, Language language,
 			boolean extendedName, boolean complete) throws JRException {
 
 		JRWeek jrWeek = new JRWeek();
@@ -208,15 +243,285 @@ public class JRWeek {
 		jrWeek.setJasperReportMinistryPart(JasperCompileManager.compileReport(ministryPartReport));
 		jrWeek.setJasperReportChristiansPart(JasperCompileManager.compileReport(christiansPartReport));
 
-		int spInf2 = week.getSpInf2();
-		jrWeek.setWeekType(spInf2);
+		int weekTypeID = week.getSpInf2();
+		jrWeek.setWeekType(weekTypeID);
 
-		WeekType weekType = WeekType.getFromOrdinal(spInf2);
+		WeekType weekType = WeekType.getFromOrdinal(weekTypeID);
 		if (weekType != null)
 			jrWeek.setWeekTypeText(language.getString(weekType.getName()));
 
+		int weekKey = week.getSpInf1();
+
+		if (weekType == WeekType.CONVENTION) {
+
+			WeekConvention weekConvention = null;
+			for (WeekConvention c : convention)
+				if (c.getSpInf31() == weekKey) {
+					weekConvention = c;
+					break;
+				}
+			if (weekConvention != null) {
+
+				// Week convention data
+
+				int convTypeID = weekConvention.getSpInf1();
+				int convYear = weekConvention.getSpInf2();
+				String convTheme = weekConvention.getSpInf3();
+				String convScripture1 = weekConvention.getSpInf4();
+				String convScripture2 = weekConvention.getSpInf5();
+				String convScripture3 = weekConvention.getSpInf6();
+
+				int convOneDay = weekConvention.getSpInf7();
+				int convDay1HourStart = weekConvention.getSpInf8();
+				int convDay1MinuteStart = weekConvention.getSpInf9();
+				int convDay1HourEnd = weekConvention.getSpInf10();
+				int convDay1MinuteEnd = weekConvention.getSpInf11();
+
+				int convDay2HourStart = weekConvention.getSpInf12();
+				int convDay2MinuteStart = weekConvention.getSpInf13();
+				int convDay2HourEnd = weekConvention.getSpInf14();
+				int convDay2MinuteEnd = weekConvention.getSpInf15();
+
+				int convDay3HourStart = weekConvention.getSpInf16();
+				int convDay3MinuteStart = weekConvention.getSpInf17();
+				int convDay3HourEnd = weekConvention.getSpInf18();
+				int convDay3MinuteEnd = weekConvention.getSpInf19();
+
+				String convQHeader = weekConvention.getSpInf20();
+				String convQ1 = weekConvention.getSpInf21();
+				String convQ2 = weekConvention.getSpInf22();
+				String convQ3 = weekConvention.getSpInf23();
+				String convQ4 = weekConvention.getSpInf24();
+				String convQ5 = weekConvention.getSpInf25();
+				String convQ6 = weekConvention.getSpInf26();
+				String convQ7 = weekConvention.getSpInf27();
+				String convQ8 = weekConvention.getSpInf28();
+				String convQ9 = weekConvention.getSpInf29();
+				String convQ10 = weekConvention.getSpInf30();
+
+				String convAddr = weekConvention.getSpInf32();
+
+				// Data workflow
+
+				EnumConventionType convType = EnumConventionType.getByID(convTypeID);
+				LocalDate weekFrom = week.getFrom();
+
+				// Set data to JasperReports
+
+				String convTypeCircuit = "";
+				String convTypeFormat = "";
+				String convTypeFormatText = "";
+				String convTypeDayFormat = "";
+
+				LocalDate convDay1 = null;
+				LocalDate convDay2 = null;
+				LocalDate convDay3 = null;
+
+				EnumDays convDay1Enum = EnumDays.LUN;
+				EnumDays convDay2Enum = EnumDays.LUN;
+				EnumDays convDay3Enum = EnumDays.LUN;
+
+				String convDay1EnumText = "";
+				String convDay2EnumText = "";
+				String convDay3EnumText = "";
+
+				int convDay1DayOfMonth = 0;
+				int convDay2DayOfMonth = 0;
+				int convDay3DayOfMonth = 0;
+
+				int convDay1Month = 0;
+				int convDay2Month = 0;
+				int convDay3Month = 0;
+
+				int convDay1Year = 0;
+				int convDay2Year = 0;
+				int convDay3Year = 0;
+
+				String convDay1Text = "";
+				String convDay2Text = "";
+				String convDay3Text = "";
+
+				EnumMonths convDay1MonthEnum = EnumMonths.GEN;
+				EnumMonths convDay2MonthEnum = EnumMonths.GEN;
+				EnumMonths convDay3MonthEnum = EnumMonths.GEN;
+
+				String convDay1MonthText = "";
+				String convDay2MonthText = "";
+				String convDay3MonthText = "";
+
+				switch (convType) {
+				case CIRCUITASSEMBLY_BRANCH:
+
+					jrWeek.setConvPrintOneDay(true);
+					jrWeek.setConvPrintThreeDay(false);
+
+					convTypeCircuit = language.getString("jasper.convention.type.circuit");
+					String convTypeBranch = language.getString("jasper.convention.type.branch");
+
+					convTypeFormat = language.getString("jasper.convention.type.circuit.format");
+
+					convTypeFormatText = String.format(convTypeFormat, convTypeCircuit, convYear, (convYear + 1),
+							convTypeBranch);
+
+					jrWeek.setConvType(convTypeFormatText);
+
+					convDay1 = weekFrom.plus((convOneDay - 1), ChronoUnit.DAYS);
+					convDay1Enum = EnumDays.getByID(convDay1.getDayOfWeek().getValue());
+
+					convDay1EnumText = language.getString(convDay1Enum.getKey());
+					convDay1DayOfMonth = convDay1.getDayOfMonth();
+					convDay1Month = convDay1.getMonthValue();
+					convDay1MonthEnum = EnumMonths.getByID(convDay1Month);
+					convDay1MonthText = language.getString(convDay1MonthEnum.getKey());
+					convDay1Year = convDay1.getYear();
+
+					convTypeDayFormat = language.getString("jasper.convention.type.day.format");
+
+					convDay1Text = String.format(convTypeDayFormat, convDay1EnumText, convDay1DayOfMonth,
+							convDay1MonthText, convDay1Year, convDay1HourStart, convDay1MinuteStart, convDay1HourEnd,
+							convDay1MinuteEnd);
+
+					jrWeek.setConvDay1(convDay1Text);
+
+					jrWeek.setConvQHeader(convQHeader);
+					jrWeek.setConvQ1(convQ1);
+					jrWeek.setConvQ2(convQ2);
+					jrWeek.setConvQ3(convQ3);
+					jrWeek.setConvQ4(convQ4);
+					jrWeek.setConvQ5(convQ5);
+					jrWeek.setConvQ6(convQ6);
+					jrWeek.setConvQ7(convQ7);
+					jrWeek.setConvQ8(convQ8);
+					jrWeek.setConvQ9(convQ9);
+					jrWeek.setConvQ10(convQ10);
+
+					break;
+				case CIRCUITASSEMBLY_OVERSEER:
+
+					jrWeek.setConvPrintOneDay(true);
+					jrWeek.setConvPrintThreeDay(false);
+
+					convTypeCircuit = language.getString("jasper.convention.type.circuit");
+					String convTypeOverseer = language.getString("jasper.convention.type.overseer");
+
+					convTypeFormat = language.getString("jasper.convention.type.circuit.format");
+					convTypeFormatText = String.format(convTypeFormat, convTypeCircuit, convYear, (convYear + 1),
+							convTypeOverseer);
+
+					jrWeek.setConvType(convTypeFormatText);
+
+					convDay1 = weekFrom.plus((convOneDay - 1), ChronoUnit.DAYS);
+					convDay1Enum = EnumDays.getByID(convDay1.getDayOfWeek().getValue());
+
+					convDay1EnumText = language.getString(convDay1Enum.getKey());
+					convDay1DayOfMonth = convDay1.getDayOfMonth();
+					convDay1Month = convDay1.getMonthValue();
+					convDay1MonthEnum = EnumMonths.getByID(convDay1Month);
+					convDay1MonthText = language.getString(convDay1MonthEnum.getKey());
+					convDay1Year = convDay1.getYear();
+
+					convTypeDayFormat = language.getString("jasper.convention.type.day.format");
+
+					convDay1Text = String.format(convTypeDayFormat, convDay1EnumText, convDay1DayOfMonth,
+							convDay1MonthText, convDay1Year, convDay1HourStart, convDay1MinuteStart, convDay1HourEnd,
+							convDay1MinuteEnd);
+
+					jrWeek.setConvDay1(convDay1Text);
+
+					jrWeek.setConvQHeader(convQHeader);
+					jrWeek.setConvQ1(convQ1);
+					jrWeek.setConvQ2(convQ2);
+					jrWeek.setConvQ3(convQ3);
+					jrWeek.setConvQ4(convQ4);
+					jrWeek.setConvQ5(convQ5);
+					jrWeek.setConvQ6(convQ6);
+					jrWeek.setConvQ7(convQ7);
+					jrWeek.setConvQ8(convQ8);
+					jrWeek.setConvQ9(convQ9);
+					jrWeek.setConvQ10(convQ10);
+
+					break;
+				case REGIONALCONVENTION:
+
+					jrWeek.setConvPrintOneDay(false);
+					jrWeek.setConvPrintThreeDay(true);
+
+					String convTypeRegional = language.getString("jasper.convention.type.regional");
+					convTypeFormat = language.getString("jasper.convention.type.regional.format");
+
+					convTypeFormatText = String.format(convTypeFormat, convTypeRegional, convYear);
+
+					jrWeek.setConvType(convTypeFormatText);
+
+					convDay1 = weekFrom.plus(4, ChronoUnit.DAYS);
+					convDay2 = weekFrom.plus(5, ChronoUnit.DAYS);
+					convDay3 = weekFrom.plus(6, ChronoUnit.DAYS);
+
+					convDay1Enum = EnumDays.getByID(convDay1.getDayOfWeek().getValue());
+					convDay2Enum = EnumDays.getByID(convDay2.getDayOfWeek().getValue());
+					convDay3Enum = EnumDays.getByID(convDay3.getDayOfWeek().getValue());
+
+					convDay1EnumText = language.getString(convDay1Enum.getKey());
+					convDay2EnumText = language.getString(convDay2Enum.getKey());
+					convDay3EnumText = language.getString(convDay3Enum.getKey());
+
+					convDay1DayOfMonth = convDay1.getDayOfMonth();
+					convDay2DayOfMonth = convDay2.getDayOfMonth();
+					convDay3DayOfMonth = convDay3.getDayOfMonth();
+
+					convDay1Month = convDay1.getMonthValue();
+					convDay2Month = convDay2.getMonthValue();
+					convDay3Month = convDay3.getMonthValue();
+
+					convDay1MonthEnum = EnumMonths.getByID(convDay1Month);
+					convDay2MonthEnum = EnumMonths.getByID(convDay2Month);
+					convDay3MonthEnum = EnumMonths.getByID(convDay3Month);
+
+					convDay1MonthText = language.getString(convDay1MonthEnum.getKey());
+					convDay2MonthText = language.getString(convDay2MonthEnum.getKey());
+					convDay3MonthText = language.getString(convDay3MonthEnum.getKey());
+
+					convDay1Year = convDay1.getYear();
+					convDay2Year = convDay2.getYear();
+					convDay3Year = convDay3.getYear();
+
+					convTypeDayFormat = language.getString("jasper.convention.type.day.format");
+
+					convDay1Text = String.format(convTypeDayFormat, convDay1EnumText, convDay1DayOfMonth,
+							convDay1MonthText, convDay1Year, convDay1HourStart, convDay1MinuteStart, convDay1HourEnd,
+							convDay1MinuteEnd);
+					convDay2Text = String.format(convTypeDayFormat, convDay2EnumText, convDay2DayOfMonth,
+							convDay2MonthText, convDay2Year, convDay2HourStart, convDay2MinuteStart, convDay2HourEnd,
+							convDay2MinuteEnd);
+					convDay3Text = String.format(convTypeDayFormat, convDay3EnumText, convDay3DayOfMonth,
+							convDay3MonthText, convDay3Year, convDay3HourStart, convDay3MinuteStart, convDay3HourEnd,
+							convDay3MinuteEnd);
+
+					jrWeek.setConvDay1(convDay1Text);
+					jrWeek.setConvDay2(convDay2Text);
+					jrWeek.setConvDay3(convDay3Text);
+
+					jrWeek.setConvScripture1(convScripture1);
+					jrWeek.setConvScripture2(convScripture2);
+					jrWeek.setConvScripture3(convScripture3);
+
+					break;
+				default:
+
+					jrWeek.setConvPrintOneDay(false);
+					jrWeek.setConvPrintThreeDay(false);
+
+					break;
+				}
+
+				jrWeek.setConvTheme(convTheme);
+				jrWeek.setConvAddr(convAddr);
+			}
+		}
+
 		// Circuit overseer
-		if (spInf2 == 4) {
+		if (weekTypeID == 4) {
+
 			WeekOverseer weekOverseer = week.getWeekOverseer();
 			if (weekOverseer != null) {
 				String overseerName = weekOverseer.getSpInf3();
@@ -258,7 +563,7 @@ public class JRWeek {
 			}
 		}
 
-		jrWeek.setWeekHeader(checkMidweekHeader(week, spInf2, language, complete));
+		jrWeek.setWeekHeader(checkMidweekHeader(week, weekTypeID, language, complete));
 
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
@@ -357,7 +662,7 @@ public class JRWeek {
 				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle4());
 
 		// Add reader to Congregation Study Bible
-		if (spInf2 == 1) {
+		if (weekTypeID == 1) {
 
 			if (!jrWeek.getChristiansBibleStudyReaderName().isEmpty()) {
 
@@ -387,7 +692,7 @@ public class JRWeek {
 
 		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
-		jrWeek.setWeekHeader2(checkWeekendHeader(week, spInf2, language));
+		jrWeek.setWeekHeader2(checkWeekendHeader(week, weekTypeID, language));
 		jrWeek.setPublicTalkHeader(language.getString("jasper.layout.meeting.weekend.publictalk").toUpperCase());
 
 		jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
@@ -443,7 +748,7 @@ public class JRWeek {
 				jrWeek.setWatchtowerStudyReaderName(member.getNameStyle4());
 
 		// Add reader to Watchtower Study
-		if (spInf2 == 1) {
+		if (weekTypeID == 1) {
 
 			if (!jrWeek.getWatchtowerStudyReaderName().isEmpty()) {
 
@@ -1112,4 +1417,179 @@ public class JRWeek {
 		this.place2 = place2;
 	}
 
+	public boolean isConvPrintOneDay() {
+		return convPrintOneDay;
+	}
+
+	public boolean isConvPrintThreeDay() {
+		return convPrintThreeDay;
+	}
+
+	public void setConvPrintOneDay(boolean convPrintOneDay) {
+		this.convPrintOneDay = convPrintOneDay;
+	}
+
+	public void setConvPrintThreeDay(boolean convPrintThreeDay) {
+		this.convPrintThreeDay = convPrintThreeDay;
+	}
+
+	public String getConvType() {
+		return convType;
+	}
+
+	public void setConvType(String convType) {
+		this.convType = convType;
+	}
+
+	public String getConvTheme() {
+		return convTheme;
+	}
+
+	public void setConvTheme(String convTheme) {
+		this.convTheme = convTheme;
+	}
+
+	public String getConvDay1() {
+		return convDay1;
+	}
+
+	public String getConvDay2() {
+		return convDay2;
+	}
+
+	public String getConvDay3() {
+		return convDay3;
+	}
+
+	public void setConvDay1(String convDay1) {
+		this.convDay1 = convDay1;
+	}
+
+	public void setConvDay2(String convDay2) {
+		this.convDay2 = convDay2;
+	}
+
+	public void setConvDay3(String convDay3) {
+		this.convDay3 = convDay3;
+	}
+
+	public String getConvScripture1() {
+		return convScripture1;
+	}
+
+	public String getConvScripture2() {
+		return convScripture2;
+	}
+
+	public String getConvScripture3() {
+		return convScripture3;
+	}
+
+	public void setConvScripture1(String convScripture1) {
+		this.convScripture1 = convScripture1;
+	}
+
+	public void setConvScripture2(String convScripture2) {
+		this.convScripture2 = convScripture2;
+	}
+
+	public void setConvScripture3(String convScripture3) {
+		this.convScripture3 = convScripture3;
+	}
+
+	public String getConvAddr() {
+		return convAddr;
+	}
+
+	public void setConvAddr(String convAddr) {
+		this.convAddr = convAddr;
+	}
+
+	public String getConvQHeader() {
+		return convQHeader;
+	}
+
+	public String getConvQ1() {
+		return convQ1;
+	}
+
+	public String getConvQ2() {
+		return convQ2;
+	}
+
+	public String getConvQ3() {
+		return convQ3;
+	}
+
+	public String getConvQ4() {
+		return convQ4;
+	}
+
+	public String getConvQ5() {
+		return convQ5;
+	}
+
+	public String getConvQ6() {
+		return convQ6;
+	}
+
+	public String getConvQ7() {
+		return convQ7;
+	}
+
+	public String getConvQ8() {
+		return convQ8;
+	}
+
+	public String getConvQ9() {
+		return convQ9;
+	}
+
+	public String getConvQ10() {
+		return convQ10;
+	}
+
+	public void setConvQHeader(String convQHeader) {
+		this.convQHeader = convQHeader;
+	}
+
+	public void setConvQ1(String convQ1) {
+		this.convQ1 = convQ1;
+	}
+
+	public void setConvQ2(String convQ2) {
+		this.convQ2 = convQ2;
+	}
+
+	public void setConvQ3(String convQ3) {
+		this.convQ3 = convQ3;
+	}
+
+	public void setConvQ4(String convQ4) {
+		this.convQ4 = convQ4;
+	}
+
+	public void setConvQ5(String convQ5) {
+		this.convQ5 = convQ5;
+	}
+
+	public void setConvQ6(String convQ6) {
+		this.convQ6 = convQ6;
+	}
+
+	public void setConvQ7(String convQ7) {
+		this.convQ7 = convQ7;
+	}
+
+	public void setConvQ8(String convQ8) {
+		this.convQ8 = convQ8;
+	}
+
+	public void setConvQ9(String convQ9) {
+		this.convQ9 = convQ9;
+	}
+
+	public void setConvQ10(String convQ10) {
+		this.convQ10 = convQ10;
+	}
 }
