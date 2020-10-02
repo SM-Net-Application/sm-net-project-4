@@ -28,10 +28,12 @@ Data di pubblicazione : ..-..-....
 
 	* Nuova sezione : Congressi e assemblee
 		In questa sezione possono essere definite le settimane dei congressi e delle assemblee
+		Creato Layout di stampa
 
 	* Nuova sezione : Commemorazione
 		In questa sezione possono essere definite le settimane in cui si tiene la Commemorazione
 		- Preparazione emblemi : vengono visualizzate solo le famiglie a cui è stato settato il privilegio
+		Creato Layout di stampa
 
 	* Sezione : Adunanze
 		- Modifica della GUI

@@ -1,7 +1,5 @@
-
-	Stampare Layout Congressi e assemblee
-	Stampare Layout Commemorazione
 	
+	Bug fix: Non riconosce più la visita ulteriore e la segna come Trattazione
 	Configurazione : minuti discorso Commemorazione
 	Preimpostazione minuti discorsi del sorvegliante come configurazione
 	Preimpostazione numero di visite del sorvegliante prima di riazzerare

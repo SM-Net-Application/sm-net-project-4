@@ -146,10 +146,8 @@ public class JRWeek {
 	private String memTalkTheme;
 	private String memTalkName;
 
-	private String memPrayBreadText;
-	private String memPrayBreadName;
-	private String memPrayWineText;
-	private String memPrayWineName;
+	private String memPrayEmblemsText;
+	private String memPrayEmblemsName;
 
 	private String memSong2Min;
 	private String memSong2;
@@ -163,6 +161,13 @@ public class JRWeek {
 	private String memMemberEmblemsList;
 
 	private String memPlaceText;
+
+	private boolean printStandardMidweek;
+	private boolean printStandardWeekend;
+	private boolean printOverseerMidweek;
+	private boolean printOverseerWeekend;
+
+	private String bibleWeek;
 
 	private String congregationName;
 	private String programmName;
@@ -289,7 +294,30 @@ public class JRWeek {
 
 		int weekKey = week.getSpInf1();
 
+		if (weekType == WeekType.STANDARD) {
+
+			jrWeek.setPrintStandardMidweek(true);
+			jrWeek.setPrintStandardWeekend(true);
+			jrWeek.setPrintOverseerMidweek(false);
+			jrWeek.setPrintOverseerWeekend(false);
+
+		}
+
+		if (weekType == WeekType.CIRCUIT_OVERSEERS_VISIT) {
+
+			jrWeek.setPrintStandardMidweek(true);
+			jrWeek.setPrintStandardWeekend(true);
+			jrWeek.setPrintOverseerMidweek(true);
+			jrWeek.setPrintOverseerWeekend(true);
+
+		}
+
 		if (weekType == WeekType.CONVENTION) {
+
+			jrWeek.setPrintStandardMidweek(false);
+			jrWeek.setPrintStandardWeekend(false);
+			jrWeek.setPrintOverseerMidweek(false);
+			jrWeek.setPrintOverseerWeekend(false);
 
 			WeekConvention weekConvention = null;
 			for (WeekConvention c : convention)
@@ -580,6 +608,11 @@ public class JRWeek {
 					jrWeek.setMemPrintMidweek(true);
 					jrWeek.setMemPrintWeekend(false);
 
+					jrWeek.setPrintStandardMidweek(false);
+					jrWeek.setPrintStandardWeekend(true);
+					jrWeek.setPrintOverseerMidweek(false);
+					jrWeek.setPrintOverseerWeekend(false);
+
 					break;
 
 				case SAB:
@@ -588,6 +621,11 @@ public class JRWeek {
 					jrWeek.setMemPrintMidweek(false);
 					jrWeek.setMemPrintWeekend(true);
 
+					jrWeek.setPrintStandardMidweek(true);
+					jrWeek.setPrintStandardWeekend(false);
+					jrWeek.setPrintOverseerMidweek(false);
+					jrWeek.setPrintOverseerWeekend(false);
+
 					break;
 
 				default:
@@ -595,6 +633,11 @@ public class JRWeek {
 					jrWeek.setMemPrintMidweek(false);
 					jrWeek.setMemPrintWeekend(false);
 					memorialPrint = false;
+
+					jrWeek.setPrintStandardMidweek(false);
+					jrWeek.setPrintStandardWeekend(false);
+					jrWeek.setPrintOverseerMidweek(false);
+					jrWeek.setPrintOverseerWeekend(false);
 
 					break;
 				}
@@ -677,8 +720,12 @@ public class JRWeek {
 							memTalkName = member.getNameStyle4();
 					jrWeek.setMemTalkName(memTalkName);
 
-					String memPrayBreadText = language.getString("jasper.memorial.praybread");
-					jrWeek.setMemPrayBreadText(memPrayBreadText);
+					// PRAY EMBLEMS
+
+					String memPrayEmblemsText = language.getString("jasper.memorial.prayemblems");
+					jrWeek.setMemPrayEmblemsText(memPrayEmblemsText);
+
+					String memPrayEmblemsFormat = language.getString("jasper.memorial.prayemblemsformat");
 
 					int memPrayBreadID = weekMemorial.getSpInf9();
 					String memPrayBreadName = "";
@@ -688,10 +735,6 @@ public class JRWeek {
 							memPrayBreadName = member.getNameStyle3();
 						else
 							memPrayBreadName = member.getNameStyle4();
-					jrWeek.setMemPrayBreadName(memPrayBreadName);
-
-					String memPrayWineText = language.getString("jasper.memorial.praywine");
-					jrWeek.setMemPrayWineText(memPrayWineText);
 
 					int memPrayWineID = weekMemorial.getSpInf10();
 					String memPrayWineName = "";
@@ -701,7 +744,9 @@ public class JRWeek {
 							memPrayWineName = member.getNameStyle3();
 						else
 							memPrayWineName = member.getNameStyle4();
-					jrWeek.setMemPrayWineName(memPrayWineName);
+
+					String memPrayEmblemsName = String.format(memPrayEmblemsFormat, memPrayBreadName, memPrayWineName);
+					jrWeek.setMemPrayEmblemsName(memPrayEmblemsName);
 
 					String memSong2Min = language.getString("jasper.memorial.song2min");
 					jrWeek.setMemSong2Min(memSong2Min);
@@ -963,10 +1008,16 @@ public class JRWeek {
 		}
 
 		// Circuit overseer
-		if (weekTypeID == 4) {
+		if (weekType == WeekType.CIRCUIT_OVERSEERS_VISIT) {
+
+			jrWeek.setPrintStandardMidweek(true);
+			jrWeek.setPrintStandardWeekend(true);
+			jrWeek.setPrintOverseerMidweek(true);
+			jrWeek.setPrintOverseerWeekend(true);
 
 			WeekOverseer weekOverseer = week.getWeekOverseer();
 			if (weekOverseer != null) {
+
 				String overseerName = weekOverseer.getSpInf3();
 				String overseerShortName = weekOverseer.getSpInf4();
 				String overseerSurname = weekOverseer.getSpInf5();
@@ -1005,6 +1056,8 @@ public class JRWeek {
 					jrWeek.setOverseerName(overseerSurname + " " + overseerShortName);
 			}
 		}
+
+		jrWeek.setBibleWeek(week.getSpInf6().toUpperCase());
 
 		jrWeek.setWeekHeader(checkMidweekHeader(week, weekTypeID, language, complete));
 
@@ -1105,7 +1158,7 @@ public class JRWeek {
 				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle4());
 
 		// Add reader to Congregation Study Bible
-		if (weekTypeID == 1) {
+		if (weekType == WeekType.STANDARD) {
 
 			if (!jrWeek.getChristiansBibleStudyReaderName().isEmpty()) {
 
@@ -1166,11 +1219,7 @@ public class JRWeek {
 		jrWeek.setWatchtowerStudySong2(
 				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf35()));
 
-		// if (spInf2 == 4)
 		jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf43()));
-		// else
-		// jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"),
-		// "60"));
 
 		jrWeek.setWatchtowerStudyTheme(week.getSpInf36());
 
@@ -1191,7 +1240,7 @@ public class JRWeek {
 				jrWeek.setWatchtowerStudyReaderName(member.getNameStyle4());
 
 		// Add reader to Watchtower Study
-		if (weekTypeID == 1) {
+		if (weekType == WeekType.STANDARD) {
 
 			if (!jrWeek.getWatchtowerStudyReaderName().isEmpty()) {
 
@@ -1232,17 +1281,32 @@ public class JRWeek {
 
 	private static String checkMidweekHeader(Week week, int spInf2, Language language, boolean complete) {
 
-		if (spInf2 == 1 || spInf2 == 4) {
+		LocalDate weekFrom = week.getFrom();
 
-			if (complete)
-				return String.format(language.getString("jasper.layout.meeting.midweek.withbible"), week.getSpInf6());
-			else
-				return String.format(language.getString("jasper.layout.meeting.weekheader.with.bible"),
-						checkWeekFromText(week, spInf2, language), week.getSpInf6());
+		int dayID = week.getSpInf44();
+		int hours = week.getSpInf45();
+		int minute = week.getSpInf46();
 
-		} else {
-			return checkWeekFromText(week, spInf2, language);
-		}
+		EnumDays enumDay = EnumDays.getByID(dayID);
+		String dayText = language.getString(enumDay.getKey());
+
+		LocalDate dayLocalDate = weekFrom.plus((dayID - 1), ChronoUnit.DAYS);
+
+		int dayOfMonth = dayLocalDate.getDayOfMonth();
+		int dayMonth = dayLocalDate.getMonthValue();
+		EnumMonths dayMonthEnum = EnumMonths.getByID(dayMonth);
+		String dayMonthText = language.getString(dayMonthEnum.getKey());
+
+		int dayYear = dayLocalDate.getYear();
+
+		String dayFormat = language.getString("jasper.layout.meeting.midweek");
+
+		WeekType weekType = WeekType.getFromOrdinal(spInf2);
+
+		String header = String.format(dayFormat, dayText, dayOfMonth, dayMonthText, dayYear, hours, minute);
+
+		return (weekType == WeekType.STANDARD || weekType == WeekType.CIRCUIT_OVERSEERS_VISIT
+				|| weekType == WeekType.MEMORIAL) ? header.toUpperCase() : "";
 	}
 
 	public static String getProgrammNameHeader(Week week, Language language) {
@@ -1253,9 +1317,32 @@ public class JRWeek {
 
 	private static String checkWeekendHeader(Week week, int spInf2, Language language) {
 
-		return (spInf2 == 1 || spInf2 == 4)
-				? String.format(language.getString("jasper.layout.meeting.weekend"), week.getSpInf6())
-				: "";
+		LocalDate weekFrom = week.getFrom();
+
+		int dayID = week.getSpInf47();
+		int hours = week.getSpInf48();
+		int minute = week.getSpInf49();
+
+		EnumDays enumDay = EnumDays.getByID(dayID);
+		String dayText = language.getString(enumDay.getKey());
+
+		LocalDate dayLocalDate = weekFrom.plus((dayID - 1), ChronoUnit.DAYS);
+
+		int dayOfMonth = dayLocalDate.getDayOfMonth();
+		int dayMonth = dayLocalDate.getMonthValue();
+		EnumMonths dayMonthEnum = EnumMonths.getByID(dayMonth);
+		String dayMonthText = language.getString(dayMonthEnum.getKey());
+
+		int dayYear = dayLocalDate.getYear();
+
+		String dayFormat = language.getString("jasper.layout.meeting.weekend");
+
+		WeekType weekType = WeekType.getFromOrdinal(spInf2);
+
+		String header = String.format(dayFormat, dayText, dayOfMonth, dayMonthText, dayYear, hours, minute);
+
+		return (weekType == WeekType.STANDARD || weekType == WeekType.CIRCUIT_OVERSEERS_VISIT
+				|| weekType == WeekType.MEMORIAL) ? header.toUpperCase() : "";
 	}
 
 	private static String checkWeekFromText(Week week, int spInf2, Language language) {
@@ -2155,38 +2242,6 @@ public class JRWeek {
 		this.memTalkName = memTalkName;
 	}
 
-	public String getMemPrayBreadText() {
-		return memPrayBreadText;
-	}
-
-	public String getMemPrayWineText() {
-		return memPrayWineText;
-	}
-
-	public void setMemPrayBreadText(String memPrayBreadText) {
-		this.memPrayBreadText = memPrayBreadText;
-	}
-
-	public void setMemPrayWineText(String memPrayWineText) {
-		this.memPrayWineText = memPrayWineText;
-	}
-
-	public String getMemPrayBreadName() {
-		return memPrayBreadName;
-	}
-
-	public String getMemPrayWineName() {
-		return memPrayWineName;
-	}
-
-	public void setMemPrayBreadName(String memPrayBreadName) {
-		this.memPrayBreadName = memPrayBreadName;
-	}
-
-	public void setMemPrayWineName(String memPrayWineName) {
-		this.memPrayWineName = memPrayWineName;
-	}
-
 	public String getMemSong2Min() {
 		return memSong2Min;
 	}
@@ -2257,6 +2312,62 @@ public class JRWeek {
 
 	public void setMemPlaceText(String memPlaceText) {
 		this.memPlaceText = memPlaceText;
+	}
+
+	public String getMemPrayEmblemsText() {
+		return memPrayEmblemsText;
+	}
+
+	public String getMemPrayEmblemsName() {
+		return memPrayEmblemsName;
+	}
+
+	public void setMemPrayEmblemsText(String memPrayEmblemsText) {
+		this.memPrayEmblemsText = memPrayEmblemsText;
+	}
+
+	public void setMemPrayEmblemsName(String memPrayEmblemsName) {
+		this.memPrayEmblemsName = memPrayEmblemsName;
+	}
+
+	public boolean isPrintStandardMidweek() {
+		return printStandardMidweek;
+	}
+
+	public boolean isPrintStandardWeekend() {
+		return printStandardWeekend;
+	}
+
+	public void setPrintStandardMidweek(boolean printStandardMidweek) {
+		this.printStandardMidweek = printStandardMidweek;
+	}
+
+	public void setPrintStandardWeekend(boolean printStandardWeekend) {
+		this.printStandardWeekend = printStandardWeekend;
+	}
+
+	public boolean isPrintOverseerMidweek() {
+		return printOverseerMidweek;
+	}
+
+	public boolean isPrintOverseerWeekend() {
+		return printOverseerWeekend;
+	}
+
+	public void setPrintOverseerMidweek(boolean printOverseerMidweek) {
+		this.printOverseerMidweek = printOverseerMidweek;
+	}
+
+	public void setPrintOverseerWeekend(boolean printOverseerWeekend) {
+		this.printOverseerWeekend = printOverseerWeekend;
+	}
+
+	public String getBibleWeek() {
+		return bibleWeek;
+	}
+
+	public void setBibleWeek(String bibleWeek) {
+		this.bibleWeek = bibleWeek;
 	}
 
 }
