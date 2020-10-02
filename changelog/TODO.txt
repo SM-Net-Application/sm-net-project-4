@@ -1,4 +1,6 @@
-	
+
+	Caricare GoogleMaps anche se presente solo l'indirizzo
+	Migliorare al Configurazione (non si comprende bene l'informazione da inserire, forse basta una label header)
 	Bug fix: Non riconosce più la visita ulteriore e la segna come Trattazione
 	Configurazione : minuti discorso Commemorazione
 	Preimpostazione minuti discorsi del sorvegliante come configurazione

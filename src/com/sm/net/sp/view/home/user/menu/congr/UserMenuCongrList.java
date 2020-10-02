@@ -1,7 +1,9 @@
 package com.sm.net.sp.view.home.user.menu.congr;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.stream.StreamSupport;
 
@@ -16,7 +18,6 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.browser.Browser;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,7 +25,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -933,34 +933,43 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				String link = this.language.getString("supportplanner.googlemaps.pattern");
 				link = String.format(link, coord.replace(" ", "+"));
 
-				try {
-
-					FXMLLoader fxmlLoader = new FXMLLoader();
-					fxmlLoader.setLocation(Meta.Views.BROWSER);
-
-					AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
-
-					Scene scene = new Scene(anchorPane);
-					scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
-
-					Stage stage = new Stage();
-
-					stage.setScene(scene);
-					stage.setTitle(Meta.Application.getFullTitle());
-					stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
-					stage.initOwner(this.ownerStage);
-
-					stage.setMaximized(true);
-
-					Browser ctrl = fxmlLoader.getController();
-					ctrl.setLink(link);
-					ctrl.init();
-
-					stage.show();
-
-				} catch (IOException e) {
-					System.out.println(e.getMessage());
+				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+				if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+					try {
+						desktop.browse(new URI(link));
+					} catch (Exception e) {
+						this.application.getAlertBuilder().error(this.ownerStage, e.getMessage()).show();
+					}
 				}
+
+//				try {
+//
+//					FXMLLoader fxmlLoader = new FXMLLoader();
+//					fxmlLoader.setLocation(Meta.Views.BROWSER);
+//
+//					AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+//
+//					Scene scene = new Scene(anchorPane);
+//					scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+//
+//					Stage stage = new Stage();
+//
+//					stage.setScene(scene);
+//					stage.setTitle(Meta.Application.getFullTitle());
+//					stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
+//					stage.initOwner(this.ownerStage);
+//
+//					stage.setMaximized(true);
+//
+//					Browser ctrl = fxmlLoader.getController();
+//					ctrl.setLink(link);
+//					ctrl.init();
+//
+//					stage.show();
+//
+//				} catch (IOException e) {
+//					System.out.println(e.getMessage());
+//				}
 			} else {
 				this.application.getAlertBuilder2().error(this.ownerStage,
 						this.language.getString("congregation.family.error.coord"));

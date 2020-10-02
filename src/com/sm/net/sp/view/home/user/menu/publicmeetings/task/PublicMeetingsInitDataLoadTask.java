@@ -12,7 +12,6 @@ import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
@@ -84,25 +83,29 @@ public class PublicMeetingsInitDataLoadTask implements TaskInterface {
 		ObservableList<Place> places = FXCollections.observableArrayList();
 
 		JSONObject response = (JSONObject) hashMap.get("responsePlaces");
-		int status = response.getInt("status");
 
-		if (status == 0) {
+		if (response != null) {
 
-			JSONArray result = (JSONArray) response.get("result");
-			for (Object obj : result) {
+			int status = response.getInt("status");
 
-				JSONObject json = (JSONObject) obj;
-				Place place = Place.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
-				places.add(place);
+			if (status == 0) {
+
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
+
+					JSONObject json = (JSONObject) obj;
+					Place place = Place.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
+					places.add(place);
+				}
+
+			} else if (status == 1) {
+
+				String error = response.getString("error");
+				this.alertBuilder.error(this.stage, error);
+
 			}
 
-		} else if (status == 1) {
-
-			String error = response.getString("error");
-			this.alertBuilder.error(this.stage, error);
-
 		}
-
 		return places;
 	}
 
@@ -111,25 +114,28 @@ public class PublicMeetingsInitDataLoadTask implements TaskInterface {
 		ObservableList<DateAndTime> dateAndTimeList = FXCollections.observableArrayList();
 
 		JSONObject response = (JSONObject) hashMap.get("responseDateAndTime");
-		int status = response.getInt("status");
 
-		if (status == 0) {
+		if (response != null) {
 
-			JSONArray result = (JSONArray) response.get("result");
-			for (Object obj : result) {
+			int status = response.getInt("status");
 
-				JSONObject json = (JSONObject) obj;
-				DateAndTime dateAndTime = DateAndTime.newInstanceByJSONObject(json);
-				dateAndTimeList.add(dateAndTime);
+			if (status == 0) {
+
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
+
+					JSONObject json = (JSONObject) obj;
+					DateAndTime dateAndTime = DateAndTime.newInstanceByJSONObject(json);
+					dateAndTimeList.add(dateAndTime);
+				}
+
+			} else if (status == 1) {
+
+				String error = response.getString("error");
+				this.alertBuilder.error(this.stage, error);
+
 			}
-
-		} else if (status == 1) {
-
-			String error = response.getString("error");
-			this.alertBuilder.error(this.stage, error);
-
 		}
-
 		return dateAndTimeList;
 	}
 
@@ -138,19 +144,23 @@ public class PublicMeetingsInitDataLoadTask implements TaskInterface {
 		HashMap<String, String> configs = new HashMap<>();
 
 		JSONObject response = (JSONObject) hashMap.get("responseConfig");
-		int status = response.getInt("status");
 
-		if (status == 0) {
+		if (response != null) {
 
-			JSONArray result = (JSONArray) response.get("result");
-			for (Object obj : result) {
+			int status = response.getInt("status");
 
-				JSONObject jsonObj = (JSONObject) obj;
+			if (status == 0) {
 
-				String key = jsonObj.getString("keyInf");
-				String value = jsonObj.getString("inf");
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
 
-				configs.put(key, value);
+					JSONObject jsonObj = (JSONObject) obj;
+
+					String key = jsonObj.getString("keyInf");
+					String value = jsonObj.getString("inf");
+
+					configs.put(key, value);
+				}
 			}
 		}
 
