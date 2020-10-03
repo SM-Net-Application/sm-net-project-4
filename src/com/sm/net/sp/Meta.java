@@ -193,6 +193,8 @@ public class Meta {
 
 		public static final String RESOURCES = "resources";
 
+		public static final String THEME = "theme.css";
+		
 		public static final String ICON = "iconSP.png";
 		public static final String PRINT = "print.png";
 		public static final String MENU_APP = "menu_app.png";

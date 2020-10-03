@@ -1,4 +1,8 @@
 
+	Eliminare AlertBuilder vecchio.
+	
+	Creare modo per stampare un'adunanza del fine settimana con Studio Torre di Guardia ed Evento dopo il cantico finale (Intestazione + Testo)
+	
 	Caricare GoogleMaps anche se presente solo l'indirizzo
 	Migliorare al Configurazione (non si comprende bene l'informazione da inserire, forse basta una label header)
 	Bug fix: Non riconosce più la visita ulteriore e la segna come Trattazione

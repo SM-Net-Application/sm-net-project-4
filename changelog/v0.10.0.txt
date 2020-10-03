@@ -1,4 +1,4 @@
-Data di pubblicazione : ..-..-....
+Data di pubblicazione : 03-10-2020
 
 	* Nuova sezione : Informazioni generali
 		In questa sezione vengono gestite alcune informazioni generali.

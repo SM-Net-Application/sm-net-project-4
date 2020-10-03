@@ -2,7 +2,6 @@ package com.sm.net.sp.view;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.crypto.SecretKey;
 
@@ -15,7 +14,6 @@ import com.sm.net.file.FileUtils;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.SupportPlannerMain;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.settings.SettingsConf;
@@ -84,17 +82,12 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void objectInitialize() {
 
 		this.alertBuilder2 = new AlertBuilder(Meta.Application.getFullTitle());
-		try {
 
-			File css = new File(SupportPlannerMain.class.getResource("theme.css").toURI());
-			File icon = new File(Meta.Resources.RESOURCES, Meta.Resources.ICON);
+		File css = new File(Meta.Resources.RESOURCES, Meta.Resources.THEME);
+		File icon = new File(Meta.Resources.RESOURCES, Meta.Resources.ICON);
 
-			this.alertBuilder2.setCSS(css, "alert_001");
-			this.alertBuilder2.setIcon(icon);
-
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+		this.alertBuilder2.setCSS(css, "alert_001");
+		this.alertBuilder2.setIcon(icon);
 
 		this.system = OperatingSystemUtils.getOperatingSystem();
 		this.architecture = OperatingSystemUtils.getOperatingSystemArchitecture();

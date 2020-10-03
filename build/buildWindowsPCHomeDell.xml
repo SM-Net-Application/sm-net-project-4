@@ -199,6 +199,16 @@
 				<filename name="javax.inject-1.jar" />
 			</fileset>
 		</copy>
+		<copy todir="externalLibs">
+					<fileset dir="${projectPath}\lib">
+						<filename name="poi-4.1.0.jar" />
+					</fileset>
+				</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${projectPath}\lib">
+				<filename name="jsoup-1.11.3.jar" />
+			</fileset>
+		</copy>
 
 		<mkdir dir="project" />
 		<copy todir="project">
@@ -251,6 +261,8 @@
 				<include name="jfreechart-1.0.19.jar" />
 				<include name="jasperreports-6.8.0.jar" />
 				<include name="castor-core-1.4.1.jar" />
+				<include name="poi-4.1.0.jar" />
+				<include name="jsoup-1.11.3.jar" />
 			</fileset>
 		</copy>
 
