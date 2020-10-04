@@ -1,4 +1,8 @@
 
+	Assegnare Vita cristiana dallo storico
+	
+	Elimina settimama sorvegliante...messaggio sbagliato quando vuoto
+	
 	Eliminare AlertBuilder vecchio.
 	
 	Creare modo per stampare un'adunanza del fine settimana con Studio Torre di Guardia ed Evento dopo il cantico finale (Intestazione + Testo)
