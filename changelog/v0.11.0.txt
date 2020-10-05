@@ -1,4 +1,10 @@
 Data di pubblicazione : ..-..-....
+
+	Adunanze:
+		- Si può ora assegnare una parte vita cristiana al fratello selezionato dallo storico
 			
+	Fix:
+		- Sorvegliante : Corretto messaggio quando si cerca di eliminare una settimana che non presentava informazioni.
+
 	* Database update
 		  

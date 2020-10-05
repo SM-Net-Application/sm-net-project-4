@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.EnumPlaceType;
 import com.sm.net.sp.model.Member;
@@ -506,6 +507,12 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 		cb.getSelectionModel().select(index);
 	}
 
+	@Override
+	public void updateSelectedChristianPart(ChristiansPart christiansPart, int memberID) {
+
+		// Public Meeting non contiene la tabella Vita Cristiana
+	}
+
 	public Settings getSettings() {
 		return settings;
 	}
@@ -589,4 +596,5 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
+
 }

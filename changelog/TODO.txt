@@ -1,8 +1,4 @@
 
-	Assegnare Vita cristiana dallo storico
-	
-	Elimina settimama sorvegliante...messaggio sbagliato quando vuoto
-	
 	Eliminare AlertBuilder vecchio.
 	
 	Creare modo per stampare un'adunanza del fine settimana con Studio Torre di Guardia ed Evento dopo il cantico finale (Intestazione + Testo)
@@ -13,7 +9,12 @@
 	Configurazione : minuti discorso Commemorazione
 	Preimpostazione minuti discorsi del sorvegliante come configurazione
 	Preimpostazione numero di visite del sorvegliante prima di riazzerare
-				
+	
+	Monitor
+	Il colore della commemorazione deve essere diverso dal blu usato di solito
+	
+	Impostare i colori del Layout
+	
 	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica

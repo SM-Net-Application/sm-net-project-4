@@ -73,6 +73,8 @@ public class History {
 
 	private AlertBuilderOld alertBuilder;
 
+	private ChristiansPart christiansPart;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -157,7 +159,12 @@ public class History {
 	private void selectionConfirmed(MemberHistory member) {
 
 		int memberID = member.getMember().getSpMemberID();
-		this.editor.updateSelectedComboBox(this.privilege, memberID);
+
+		if (this.christiansPart != null)
+			this.editor.updateSelectedChristianPart(this.christiansPart, memberID);
+		else
+			this.editor.updateSelectedComboBox(this.privilege, memberID);
+
 		this.thisStage.close();
 	}
 
@@ -469,5 +476,13 @@ public class History {
 
 	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
+	}
+
+	public ChristiansPart getChristiansPart() {
+		return christiansPart;
+	}
+
+	public void setChristiansPart(ChristiansPart christiansPart) {
+		this.christiansPart = christiansPart;
 	}
 }

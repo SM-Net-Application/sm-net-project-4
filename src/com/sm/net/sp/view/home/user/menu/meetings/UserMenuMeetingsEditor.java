@@ -945,7 +945,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		congregationBibleStudyComboBox
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CONGRBIBLESTUDY));
 		pray2ComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_PRAY_END));
-		christiansPartTableView.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CHRISTIAN_LIFE));
+
+		this.christiansPartTableView.setContextMenu(
+				createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CHRISTIAN_LIFE, this.christiansPartTableView));
+
 		congregationBibleStudyReaderComboBox
 				.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_CONGRBIBLESTUDY_READER));
 		presidentPublicMeetingComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_PRESIDENT));
@@ -957,6 +960,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	}
 
 	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
+		return createPrivilegeRegisterContextMenu(privilege, null);
+	}
+
+	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege,
+			TableView<ChristiansPart> tableViewCP) {
 
 		String menuItemText = String.format(language.getString("sp.meetings.history"),
 				privilege.getTranslatedName(language));
@@ -968,14 +976,34 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		MenuItem menuItem = new MenuItem(menuItemText, graphic);
 		menuItem.getStyleClass().add("menu_item_001");
-		menuItem.setOnAction(event -> openHistory(privilege, historyTitle));
+		menuItem.setOnAction(event -> openHistory(privilege, historyTitle, tableViewCP));
 
 		ContextMenu contextMenu = new ContextMenu(menuItem);
 
 		return contextMenu;
 	}
 
-	private void openHistory(Privileges privilege, String title) {
+	private void openHistory(Privileges privilege, String title, TableView<ChristiansPart> tableViewCP) {
+
+		ChristiansPart christiansPart = null;
+
+		if (tableViewCP != null)
+			if (tableViewCP.getSelectionModel().getSelectedIndex() > -1) {
+
+				christiansPart = tableViewCP.getSelectionModel().getSelectedItem();
+
+				if (!this.application.getAlertBuilder2().confirm(this.ownerStage,
+						this.language.getString("meetings.christianlife.confirm.assignpart"),
+						christiansPart.getTheme())) {
+
+					return;
+
+				}
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("meetings.christianlife.error.noselection"));
+				return;
+			}
 
 		try {
 
@@ -1007,6 +1035,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			ctrl.setEditor(this);
 			ctrl.setThisStage(stage);
 			ctrl.setAlertBuilder(this.alertBuilder);
+			ctrl.setChristiansPart(christiansPart);
 
 			ctrl.objectInitialize();
 
@@ -1015,6 +1044,17 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void updateSelectedChristianPart(ChristiansPart christiansPart, int memberID) {
+
+		for (Member m : this.memberList)
+			if (m.getSpMemberID() == memberID) {
+				christiansPart.setTeacher(m);
+				this.christiansPartTableView.refresh();
+				break;
+			}
 
 	}
 
@@ -2519,4 +2559,5 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
 	}
+
 }
