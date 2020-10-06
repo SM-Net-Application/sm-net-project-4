@@ -24,11 +24,14 @@ if (file_exists("languages/" . $langIni)) {
 
     $language = parse_ini_file("languages/" . $langIni);
 
+    // Bug : icona del presidente seconda sala non veniva riconosciuta
+
     $president2icon = $language['MINISTRY_PRESIDENTICON'];
 
     // Password monitor
     if (isset($_GET["pwmon"])) {
         if (! empty($_GET["pwmon"])) {
+
             $pwmon = $_GET["pwmon"];
 
             // Weekcode
@@ -71,7 +74,8 @@ if (file_exists("languages/" . $langIni)) {
                     // Weeks
 
                     $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28,";
-                    $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40";
+                    $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40, spInf44, spInf45, spInf46, spInf47,";
+                    $query_week .= " spInf48, spInf49";
                     $query_week .= " FROM sp_week";
                     $query_week .= " WHERE spInf1 >=";
                     $query_week .= " " . $weekcode;
@@ -100,6 +104,12 @@ if (file_exists("languages/" . $langIni)) {
                             $row["spInf37"] = $resultRow_week["spInf37"];
                             $row["spInf38"] = $resultRow_week["spInf38"];
                             $row["spInf40"] = $resultRow_week["spInf40"];
+                            $row["spInf44"] = $resultRow_week["spInf44"];
+                            $row["spInf45"] = $resultRow_week["spInf45"];
+                            $row["spInf46"] = $resultRow_week["spInf46"];
+                            $row["spInf47"] = $resultRow_week["spInf47"];
+                            $row["spInf48"] = $resultRow_week["spInf48"];
+                            $row["spInf49"] = $resultRow_week["spInf49"];
 
                             array_push($weeks, $row);
                         }
@@ -162,11 +172,43 @@ if (file_exists("languages/" . $langIni)) {
 
                 foreach ($weeks as $week) {
 
+                    // Week Code -> Settimana del (lunedi)
+
                     $row_weekcode = $week['spInf1'];
 
                     $year = substr($row_weekcode, 0, 4);
                     $weeknr = substr($row_weekcode, 4, 2);
                     $date = date("Y-m-d", strtotime($year . "W" . $weeknr . "1"));
+
+                    // Giorno
+                    $midweek_day = $week["spInf44"];
+                    $midweek_day_diff = $midweek_day - 1;
+                    $format_day = 'day%d';
+                    $key_day = sprintf($format_day, $midweek_day);
+                    $midweek_day_text = $language[$key_day];
+                    // Ora
+                    $midweek_hours = $week["spInf45"];
+                    // Minuto
+                    $midweek_minute = $week["spInf46"];
+                    // Orario
+                    $format_time = '%02d:%02d';
+                    $midweek_time_text = sprintf($format_time, $midweek_hours, $midweek_minute);
+                    // Data adunanza infrasettimanale
+                    $midweek = date('Y-m-d', strtotime( "$date + $midweek_day_diff day" ));
+                    // Giorno numero nel mese
+                    $midweek_day_number = date('j', strtotime( "$midweek" ));
+                    // Mese
+                    $midweek_month = date('n', strtotime( "$midweek" ));
+                    $format_month = 'month%d';
+                    $key_month = sprintf($format_month, $midweek_month);
+                    $midweek_month_text = $language[$key_month];
+                    // Anno
+                    $midweek_year = date('Y', strtotime( "$midweek" ));
+                    // Testo data adunanza infrasettimanale
+                    $midweek_text = $midweek_day_text . " " . $midweek_day_number . " " . $midweek_month_text . " " . $midweek_year . " " . $midweek_time_text;
+
+                    echo "Data:".$midweek_text." - ";
+                    
 
                     if ($memberID == $week["spInf3"]) {
                         array_push($activities, add_activity($row_weekcode, $date, $language['PRESIDENT_MIDWEEK'], $language['PRESIDENT_MIDWEEK_ICON']));
