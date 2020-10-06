@@ -992,12 +992,15 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 				christiansPart = tableViewCP.getSelectionModel().getSelectedItem();
 
-				if (!this.application.getAlertBuilder2().confirm(this.ownerStage,
-						this.language.getString("meetings.christianlife.confirm.assignpart"),
-						christiansPart.getTheme())) {
+				if (!(tableViewCP.getItems().size() == 1)) {
 
-					return;
+					if (!this.application.getAlertBuilder2().confirm(this.ownerStage,
+							this.language.getString("meetings.christianlife.confirm.assignpart"),
+							christiansPart.getTheme())) {
 
+						return;
+
+					}
 				}
 			} else {
 				this.application.getAlertBuilder2().error(this.ownerStage,

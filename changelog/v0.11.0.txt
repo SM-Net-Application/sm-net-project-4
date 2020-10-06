@@ -5,6 +5,7 @@ Data di pubblicazione : ..-..-....
 			
 	Fix:
 		- Sorvegliante : Corretto messaggio quando si cerca di eliminare una settimana che non presentava informazioni.
+		- Adunanze : Le parti Visita ulteriore vengono ora di nuovo riconosciute e non più inserite come Trattazione
 
 	* Database update
 		  
