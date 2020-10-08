@@ -1,5 +1,9 @@
 
-	Monitor
+	- Gestione delle seguenti situazioni
+		- Evento dopo l'adunanza del fine settimana (intestazione + testo)
+		- Adunanza del fine settimana senza discorso pubblico
+		- Non stampare l'adunanza infrasettimanale
+		- Inserire queste impostazioni sotto la tabella tipo di adunanza
 
 	Configurazione:
 		- Migliorare al Configurazione (non si comprende bene l'informazione da inserire, forse basta una label header)
@@ -10,19 +14,21 @@
 		-Sorvegliante
 			- Minuti discorsi del sorvegliante
 			- Numero di visite del sorvegliante prima di riazzerare
-
-	Eliminare AlertBuilder vecchio.
-	
-	Creare modo per stampare un'adunanza del fine settimana con Studio Torre di Guardia ed Evento dopo il cantico finale (Intestazione + Testo)
 	
 	Caricare GoogleMaps anche se presente solo l'indirizzo
 	
+	Monitor-Software:
+		- Aggiungere il giorno e l'orario preciso delle adunanze in cui si hanno gli incarichi
+	
+	- Gestione nuovo incarico : Sorvegliante della scuola seconda sala
 	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
 	- Nuova sezione: Territori
 	- Nuova sezione: Letteratura
+	
+	Eliminare AlertBuilder vecchio.
 	
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)

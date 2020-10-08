@@ -2,6 +2,9 @@ Data di pubblicazione : ..-..-....
 
 	Adunanze:
 		- Si può ora assegnare una parte vita cristiana al fratello selezionato dallo storico
+
+	Monitor-Online:
+		- Il formato della data ora è completo e viene indicato il giorno e l'orario dell'adunanza dell'incarico
 			
 	Fix:
 		- Sorvegliante : Corretto messaggio quando si cerca di eliminare una settimana che non presentava informazioni.
