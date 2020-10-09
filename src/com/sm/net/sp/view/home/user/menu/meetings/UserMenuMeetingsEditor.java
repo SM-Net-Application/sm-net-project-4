@@ -405,6 +405,30 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	@FXML
 	private Label publicTalkOnlyPray1Label;
 
+	@FXML
+	private Label conductorSecondHallLabel;
+	@FXML
+	private ComboBox<Member> conductorSecondHallComboBox;
+
+	@FXML
+	private Label midweekSettingsLabel;
+	@FXML
+	private CheckBox midweekNoPrintCheckBox;
+	@FXML
+	private Label weekendSettingsLabel;
+	@FXML
+	private CheckBox weekendOnlyWatchtowerStudyCheckBox;
+	@FXML
+	private Label weekendEventExtraLabel;
+	@FXML
+	private Label weekendEventExtraHeaderLabel;
+	@FXML
+	private Label weekendEventExtraContentLabel;
+	@FXML
+	private TextField weekendEventExtraHeaderTextField;
+	@FXML
+	private TextField weekendEventExtraContentTextField;
+
 	private SupportPlannerView application;
 
 	private Settings settings;
@@ -443,6 +467,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private AlertBuilderOld alertBuilder;
 
 	private boolean listenerCheckFields;
+
+	private ObservableList<Member> conductorSecondHallList;
 
 	@FXML
 	private void initialize() {
@@ -642,6 +668,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.watchtowerStudyMinLabel.getStyleClass().add("label_set_001");
 		this.watchtowerStudyMinTextField.getStyleClass().add("text_field_002");
+
+		this.midweekSettingsLabel.getStyleClass().add("label_002");
+		this.midweekNoPrintCheckBox.getStyleClass().add("check_box_001");
+		this.weekendSettingsLabel.getStyleClass().add("label_002");
+		this.weekendOnlyWatchtowerStudyCheckBox.getStyleClass().add("check_box_001");
+		this.weekendEventExtraLabel.getStyleClass().add("label_002");
+		this.weekendEventExtraHeaderLabel.getStyleClass().add("label_set_001");
+		this.weekendEventExtraContentLabel.getStyleClass().add("label_set_001");
+		this.weekendEventExtraHeaderTextField.getStyleClass().add("text_field_001");
+		this.weekendEventExtraContentTextField.getStyleClass().add("text_field_001");
+
+		this.conductorSecondHallLabel.getStyleClass().add("label_001");
+		this.conductorSecondHallComboBox.getStyleClass().add("combo_box_001");
 	}
 
 	private void viewUpdate() {
@@ -829,6 +868,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.place2SelectButton.setText(null);
 		this.place2SelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
+
+		this.midweekSettingsLabel.setText(this.language.getString("meetings.editor.midweeksettings"));
+		this.midweekNoPrintCheckBox.setText(this.language.getString("meetings.editor.midweeksettings.noprint"));
+		this.weekendSettingsLabel.setText(this.language.getString("meetings.editor.weekendsettings"));
+		this.weekendOnlyWatchtowerStudyCheckBox
+				.setText(this.language.getString("meetings.editor.weekendsettings.onlywatchtowerstudy"));
+		this.weekendEventExtraLabel.setText(this.language.getString("meetings.editor.weekendsettings.eventextra"));
+		this.weekendEventExtraHeaderLabel
+				.setText(this.language.getString("meetings.editor.weekendsettings.eventextraheader"));
+		this.weekendEventExtraContentLabel
+				.setText(this.language.getString("meetings.editor.weekendsettings.eventextracontent"));
+
+		this.conductorSecondHallLabel.setText(this.language.getString("meetings.editor.conductorsecondhall"));
 	}
 
 	private void cellValueFactory() {
@@ -1113,6 +1165,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		congregationBibleStudyReaderList = FXCollections.observableArrayList();
 
+		this.conductorSecondHallList = FXCollections.observableArrayList();
+
 		addEmptyMember();
 
 		presidentComboBox.setItems(presidentList);
@@ -1130,6 +1184,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		watchtowerStudyPray2ComboBox.setItems(prayEndPublicMeetingList);
 
 		congregationBibleStudyReaderComboBox.setItems(congregationBibleStudyReaderList);
+
+		this.conductorSecondHallComboBox.setItems(this.conductorSecondHallList);
 
 		selectFirst();
 
@@ -1191,6 +1247,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		watchtowerStudyPray2ComboBox.getSelectionModel().selectFirst();
 
 		congregationBibleStudyReaderComboBox.getSelectionModel().selectFirst();
+
+		this.conductorSecondHallComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void setLists() {
@@ -1221,6 +1279,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				this.prayEndPublicMeetingList.add(member);
 			if (member.getSpInf26() == 1)
 				this.congregationBibleStudyReaderList.add(member);
+
+			if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
+				this.conductorSecondHallList.add(member);
 		}
 
 		orderLists();
@@ -1243,9 +1304,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.congregationBibleStudyReaderList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 
 		this.watchtowerStudyList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+
+		this.conductorSecondHallList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 	}
 
 	private void addEmptyMember() {
+
 		this.presidentList.add(Member.emptyMember(language));
 		this.prayStartList.add(Member.emptyMember(language));
 		this.talkList.add(Member.emptyMember(language));
@@ -1260,9 +1324,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.prayEndPublicMeetingList.add(Member.emptyMember(language));
 
 		this.congregationBibleStudyReaderList.add(Member.emptyMember(language));
+
+		this.conductorSecondHallList.add(Member.emptyMember(this.language));
 	}
 
 	private void resetLists() {
+
 		this.presidentList.clear();
 		this.prayStartList.clear();
 		this.talkList.clear();
@@ -1277,6 +1344,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.prayEndPublicMeetingList.clear();
 
 		this.congregationBibleStudyReaderList.clear();
+		this.conductorSecondHallList.clear();
 	}
 
 	private void loadSelectedWeek() {
@@ -2561,6 +2629,14 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
+	}
+
+	public ObservableList<Member> getConductorSecondHallList() {
+		return conductorSecondHallList;
+	}
+
+	public void setConductorSecondHallList(ObservableList<Member> conductorSecondHallList) {
+		this.conductorSecondHallList = conductorSecondHallList;
 	}
 
 }

@@ -12,3 +12,4 @@ Data di pubblicazione : ..-..-....
 
 	* Database update
 		  
+		ALTER TABLE sp_week ADD spInf54 VARCHAR(250) NOT NULL AFTER spInf53, ADD spInf55 VARCHAR(250) NOT NULL AFTER spInf54, ADD spInf56 INT NOT NULL AFTER spInf55, ADD spInf57 INT NOT NULL AFTER spInf56, ADD spInf58 INT NOT NULL AFTER spInf57;
