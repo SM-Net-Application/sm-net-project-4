@@ -39,6 +39,10 @@ public class UserMenuConfig {
 	private Tab publicTalkTab;
 	@FXML
 	private Tab watchtowerTab;
+	@FXML
+	private Tab overseerTab;
+	@FXML
+	private Tab memorialTab;
 
 	@FXML
 	private ScrollPane placesScrollPane;
@@ -48,11 +52,32 @@ public class UserMenuConfig {
 	private ScrollPane watchtowerScrollPane;
 
 	@FXML
+	private Label placesHeaderLabel;
+	@FXML
+	private Label publicTalkHeaderLabel;
+	@FXML
+	private Label watchtowerHeaderLabel;
+	@FXML
+	private Label overseerHeaderLabel;
+	@FXML
+	private Label memorialHeaderLabel;
+
+	@FXML
 	private Label placesPatternLabel;
 	@FXML
 	private Label publicTalkMinLabel;
 	@FXML
 	private Label watchtowerMinLabel;
+	@FXML
+	private Label overseerTalk1MinLabel;
+	@FXML
+	private Label overseerTalk2MinLabel;
+	@FXML
+	private Label overseerTalk3MinLabel;
+	@FXML
+	private Label overseerVisitCounterLabel;
+	@FXML
+	private Label memorialTalkMinLabel;
 
 	@FXML
 	private TextField placesPatternTextField;
@@ -60,6 +85,16 @@ public class UserMenuConfig {
 	private TextField publicTalkMinTextField;
 	@FXML
 	private TextField watchtowerMinTextField;
+	@FXML
+	private TextField overseerTalk1MinTextField;
+	@FXML
+	private TextField overseerTalk2MinTextField;
+	@FXML
+	private TextField overseerTalk3MinTextField;
+	@FXML
+	private TextField overseerVisitCounterTextField;
+	@FXML
+	private TextField memorialTalkMinTextField;
 
 	@FXML
 	private Button placesPatternButton;
@@ -106,6 +141,10 @@ public class UserMenuConfig {
 
 		this.placesPatternButton.getStyleClass().add("button_image_001");
 		this.saveButton.getStyleClass().add("button_image_001");
+
+		this.placesHeaderLabel.getStyleClass().add("label_002");
+		this.publicTalkHeaderLabel.getStyleClass().add("label_002");
+		this.watchtowerHeaderLabel.getStyleClass().add("label_002");
 	}
 
 	private void viewUpdate() {
@@ -155,6 +194,9 @@ public class UserMenuConfig {
 		this.saveButton.setText(null);
 		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
+		this.placesHeaderLabel.setText(language.getString("conf.label.places.header"));
+		this.publicTalkHeaderLabel.setText(language.getString("conf.label.publictalk.header"));
+		this.watchtowerHeaderLabel.setText(language.getString("conf.label.watchtower.header"));
 	}
 
 	private void initData() {

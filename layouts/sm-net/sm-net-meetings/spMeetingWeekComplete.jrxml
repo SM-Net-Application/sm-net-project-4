@@ -140,6 +140,9 @@
 	<field name="printOverseerMidweek" class="java.lang.Boolean"/>
 	<field name="printOverseerWeekend" class="java.lang.Boolean"/>
 	<field name="bibleWeek" class="java.lang.String"/>
+	<field name="printOnlyWatchtower" class="java.lang.Boolean"/>
+	<field name="weekendExtraHeader" class="java.lang.String"/>
+	<field name="weekendExtraContent" class="java.lang.String"/>
 	<detail>
 		<band height="70">
 			<rectangle>
@@ -2270,7 +2273,7 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[$F{printStandardWeekend}||$F{printOverseerWeekend}]]></printWhenExpression>
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}||$F{printOverseerWeekend})&&!$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="17" backcolor="#A6A6A6" uuid="280931ee-8d82-4596-bc3d-fa5b9e56735e">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2295,7 +2298,32 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[$F{printStandardWeekend}&&!$F{printOverseerWeekend}]]></printWhenExpression>
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}||$F{printOverseerWeekend})&&$F{printOnlyWatchtower}]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="17" backcolor="#DEA900" uuid="04cb7b88-bfec-4f79-9100-55e411abf243">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="75990d4e-93de-4ec3-8d98-508765e4d2a6">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{watchtowerStudyHeader}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="17">
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}&&!$F{printOverseerWeekend})&&!$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
 				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="5c7d7373-9c61-4627-adc8-857f5ddd7199">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -2469,7 +2497,94 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[$F{printStandardWeekend}&&!$F{printOverseerWeekend}]]></printWhenExpression>
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}&&!$F{printOverseerWeekend})&&$F{printOnlyWatchtower}]]></printWhenExpression>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="df940c0c-4fa1-4a78-9cc0-5b03bc9fc70b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement mode="Transparent" x="5" y="0" width="50" height="17" forecolor="#000000" uuid="451bf022-9e29-41c5-80bd-d7782cb37ad5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{publicTalkMinSong1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="55" y="0" width="1" height="17" uuid="a5528869-dae4-4910-9d35-b9b7183c2685">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="295efa13-b2f6-45b6-b1f5-adc3c17b060e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{watchtowerStudySong2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="277" y="0" width="1" height="17" uuid="7bda5441-3438-4fe0-b7cb-49fa6f1291fc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="8347fdc8-7884-47e5-8c1b-87f7b0f701b9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{publicTalkPresidentText}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="416" y="0" width="1" height="17" uuid="41b6d1fb-91f4-4afc-a6f3-3b66918724bb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="421" y="0" width="134" height="17" forecolor="#000000" uuid="75c3dca3-fe93-4a6f-9ec7-1143a7c3aaa4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{publicTalkPresident}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="17">
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}&&!$F{printOverseerWeekend})&&!$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
 				<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="555" height="17" uuid="93bf298f-f8a5-4ad9-ad72-dffbe0bb6861">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -2595,7 +2710,7 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[$F{printStandardWeekend}||$F{printOverseerWeekend}]]></printWhenExpression>
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}||$F{printOverseerWeekend})&&!$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="17" backcolor="#DEA900" uuid="105b5217-505e-497f-b6bd-7a21c945c06d">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2620,7 +2735,7 @@
 			</textField>
 		</band>
 		<band height="17">
-			<printWhenExpression><![CDATA[$F{printStandardWeekend}||$F{printOverseerWeekend}]]></printWhenExpression>
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}||$F{printOverseerWeekend})&&!$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="ccee1e00-de24-4140-9219-270b8910a83e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -2957,6 +3072,53 @@
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{overseerName}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="17">
+			<printWhenExpression><![CDATA[!$F{weekendExtraHeader}.isEmpty()]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="17" backcolor="#920000" uuid="a1364513-d623-4644-af53-bc1b70e1e064">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="0" width="550" height="17" forecolor="#FFFFFF" uuid="b69d4274-8cce-4a8d-840f-7defcc1b7c48">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{weekendExtraHeader}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="17">
+			<printWhenExpression><![CDATA[!$F{weekendExtraContent}.isEmpty()]]></printWhenExpression>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="cd8959ec-42fb-4817-86cc-706c3cfc71f4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement mode="Transparent" x="5" y="0" width="550" height="17" forecolor="#000000" uuid="63cb798e-b703-4792-9c66-c3f3f176da81">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{weekendExtraContent}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="17">

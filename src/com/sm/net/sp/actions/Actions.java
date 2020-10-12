@@ -1487,8 +1487,9 @@ public class Actions {
 			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
 			String spInf37, String spInf38, String spInf39, String spInf40, int spInf41, String spInf42, String spInf43,
 			int spInf44, int spInf45, int spInf46, int spInf47, int spInf48, int spInf49, String spInf50, int spInf51,
-			String spInf52, int spInf53, String spInfMinistryParts, String spInfChristiansParts, Settings settings,
-			Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
+			String spInf52, int spInf53, String spInf54, String spInf55, int spInf56, int spInf57, int spInf58,
+			String spInfMinistryParts, String spInfChristiansParts, Settings settings, Stage ownerStage,
+			TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1536,8 +1537,8 @@ public class Actions {
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
 								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
 								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
-								spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53,
-								spInfMinistryParts, spInfChristiansParts));
+								spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54,
+								spInf55, spInf56, spInf57, spInf58, spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 
@@ -1555,9 +1556,9 @@ public class Actions {
 			String spInf30, String spInf31, String spInf32, String spInf33, String spInf34, String spInf35,
 			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, int spInf41, String spInf42,
 			String spInf43, int spInf44, int spInf45, int spInf46, int spInf47, int spInf48, int spInf49,
-			String spInf50, int spInf51, String spInf52, int spInf53, String spInfMinistryParts,
-			String spInfChristiansParts, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
-			UpdateData callback) {
+			String spInf50, int spInf51, String spInf52, int spInf53, String spInf54, String spInf55, int spInf56,
+			int spInf57, int spInf58, String spInfMinistryParts, String spInfChristiansParts, Settings settings,
+			Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1606,7 +1607,7 @@ public class Actions {
 								spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35,
 								spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
 								spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53,
-								spInfMinistryParts, spInfChristiansParts));
+								spInf54, spInf55, spInf56, spInf57, spInf58, spInfMinistryParts, spInfChristiansParts));
 			}
 		};
 

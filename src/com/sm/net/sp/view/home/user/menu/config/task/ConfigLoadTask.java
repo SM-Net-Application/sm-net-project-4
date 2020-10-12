@@ -56,26 +56,29 @@ public class ConfigLoadTask implements TaskInterface {
 		HashMap<String, String> configs = new HashMap<String, String>();
 
 		JSONObject response = (JSONObject) hashMap.get("response");
-		int status = response.getInt("status");
+		if (response != null) {
 
-		if (status == 0) {
+			int status = response.getInt("status");
 
-			JSONArray result = (JSONArray) response.get("result");
-			for (Object obj : result) {
+			if (status == 0) {
 
-				JSONObject jsonObj = (JSONObject) obj;
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
 
-				String key = jsonObj.getString("keyInf");
-				String value = jsonObj.getString("inf");
+					JSONObject jsonObj = (JSONObject) obj;
 
-				configs.put(key, value);
+					String key = jsonObj.getString("keyInf");
+					String value = jsonObj.getString("inf");
+
+					configs.put(key, value);
+				}
+
+			} else if (status == 1) {
+
+				String error = response.getString("error");
+				this.alertBuilder.error(this.viewStage, error);
+
 			}
-
-		} else if (status == 1) {
-
-			String error = response.getString("error");
-			this.alertBuilder.error(this.viewStage, error);
-
 		}
 
 		this.view.setConfigs(configs);

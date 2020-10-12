@@ -172,6 +172,10 @@ public class JRWeek {
 	private String congregationName;
 	private String programmName;
 
+	private boolean printOnlyWatchtower;
+	private String weekendExtraHeader;
+	private String weekendExtraContent;
+
 	private JasperReport jasperReportMinistryPart;
 	private JasperReport jasperReportChristiansPart;
 	private JRBeanCollectionDataSource jrDataSourceMinistryPart;
@@ -292,12 +296,20 @@ public class JRWeek {
 		if (weekType != null)
 			jrWeek.setWeekTypeText(language.getString(weekType.getName()));
 
+		jrWeek.setPrintOnlyWatchtower(week.getSpInf56() == 1);
+
 		int weekKey = week.getSpInf1();
 
 		if (weekType == WeekType.STANDARD) {
 
-			jrWeek.setPrintStandardMidweek(true);
+			// No print midweek
+			if (week.getSpInf57() == 0)
+				jrWeek.setPrintStandardMidweek(true);
+			else
+				jrWeek.setPrintStandardMidweek(false);
+
 			jrWeek.setPrintStandardWeekend(true);
+
 			jrWeek.setPrintOverseerMidweek(false);
 			jrWeek.setPrintOverseerWeekend(false);
 
@@ -305,9 +317,18 @@ public class JRWeek {
 
 		if (weekType == WeekType.CIRCUIT_OVERSEERS_VISIT) {
 
-			jrWeek.setPrintStandardMidweek(true);
+			if (week.getSpInf57() == 0)
+				jrWeek.setPrintStandardMidweek(true);
+			else
+				jrWeek.setPrintStandardMidweek(false);
+
 			jrWeek.setPrintStandardWeekend(true);
-			jrWeek.setPrintOverseerMidweek(true);
+
+			if (week.getSpInf57() == 0)
+				jrWeek.setPrintOverseerMidweek(true);
+			else
+				jrWeek.setPrintOverseerMidweek(false);
+
 			jrWeek.setPrintOverseerWeekend(true);
 
 		}
@@ -621,7 +642,11 @@ public class JRWeek {
 					jrWeek.setMemPrintMidweek(false);
 					jrWeek.setMemPrintWeekend(true);
 
-					jrWeek.setPrintStandardMidweek(true);
+					if (week.getSpInf57() == 0)
+						jrWeek.setPrintStandardMidweek(true);
+					else
+						jrWeek.setPrintStandardMidweek(false);
+
 					jrWeek.setPrintStandardWeekend(false);
 					jrWeek.setPrintOverseerMidweek(false);
 					jrWeek.setPrintOverseerWeekend(false);
@@ -1261,6 +1286,10 @@ public class JRWeek {
 			jrWeek.setPlace1(week.getSpInf50());
 		if (week.getSpInf53() == 1)
 			jrWeek.setPlace2(week.getSpInf52());
+
+		// Weekend Extra
+		jrWeek.setWeekendExtraHeader(week.getSpInf54().toUpperCase());
+		jrWeek.setWeekendExtraContent(week.getSpInf55());
 
 		return jrWeek;
 	}
@@ -2368,6 +2397,30 @@ public class JRWeek {
 
 	public void setBibleWeek(String bibleWeek) {
 		this.bibleWeek = bibleWeek;
+	}
+
+	public boolean isPrintOnlyWatchtower() {
+		return printOnlyWatchtower;
+	}
+
+	public void setPrintOnlyWatchtower(boolean printOnlyWatchtower) {
+		this.printOnlyWatchtower = printOnlyWatchtower;
+	}
+
+	public String getWeekendExtraHeader() {
+		return weekendExtraHeader;
+	}
+
+	public String getWeekendExtraContent() {
+		return weekendExtraContent;
+	}
+
+	public void setWeekendExtraHeader(String weekendExtraHeader) {
+		this.weekendExtraHeader = weekendExtraHeader;
+	}
+
+	public void setWeekendExtraContent(String weekendExtraContent) {
+		this.weekendExtraContent = weekendExtraContent;
 	}
 
 }

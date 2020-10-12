@@ -17,7 +17,8 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
             $query .= " sp_week.spInf29, sp_week.spInf30, sp_week.spInf31, sp_week.spInf32, sp_week.spInf33, sp_week.spInf34,";
             $query .= " sp_week.spInf35, sp_week.spInf36, sp_week.spInf37, sp_week.spInf38, sp_week.spInf39, sp_week.spInf40,";
             $query .= " sp_week.spInf41, sp_week.spInf42, sp_week.spInf43, sp_week.spInf44, sp_week.spInf45, sp_week.spInf46,";
-            $query .= " sp_week.spInf47, sp_week.spInf48, sp_week.spInf49, sp_week.spInf50, sp_week.spInf51, sp_week.spInf52, sp_week.spInf53,";
+			$query .= " sp_week.spInf47, sp_week.spInf48, sp_week.spInf49, sp_week.spInf50, sp_week.spInf51, sp_week.spInf52, sp_week.spInf53,";
+			$query .= " sp_week.spInf54, sp_week.spInf55, sp_week.spInf56, sp_week.spInf57, sp_week.spInf58,";
 			$query .= " sp_week_ov.spWeekOvID, sp_week_ov.spInf1 as spInf1_ov, sp_week_ov.spInf2 as spInf2_ov, sp_week_ov.spInf3 as spInf3_ov,";
 			$query .= " sp_week_ov.spInf4 as spInf4_ov, sp_week_ov.spInf5 as spInf5_ov, sp_week_ov.spInf6 as spInf6_ov,";
 			$query .= " sp_week_ov.spInf7 as spInf7_ov, sp_week_ov.spInf8 as spInf8_ov, sp_week_ov.spInf9 as spInf9_ov,";
@@ -99,7 +100,13 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
                     $row ["spInf50"] = $resultRow ["spInf50"];
                     $row ["spInf51"] = $resultRow ["spInf51"];
                     $row ["spInf52"] = $resultRow ["spInf52"];
-                    $row ["spInf53"] = $resultRow ["spInf53"];
+					$row ["spInf53"] = $resultRow ["spInf53"];
+					
+					$row ["spInf54"] = $resultRow ["spInf54"];
+					$row ["spInf55"] = $resultRow ["spInf55"];
+					$row ["spInf56"] = $resultRow ["spInf56"];
+					$row ["spInf57"] = $resultRow ["spInf57"];
+					$row ["spInf58"] = $resultRow ["spInf58"];
 					
 					// Circuit Overseer
 					$row ["spWeekOvID"] = $resultRow ["spWeekOvID"];

@@ -87,6 +87,12 @@ public class Week {
 	private StringProperty spInf52;
 	private IntegerProperty spInf53;
 
+	private StringProperty spInf54;
+	private StringProperty spInf55;
+	private IntegerProperty spInf56;
+	private IntegerProperty spInf57;
+	private IntegerProperty spInf58;
+
 	private ObjectProperty<ObservableList<MinistryPart>> ministryPartList;
 	private ObjectProperty<ObservableList<ChristiansPart>> christiansPartList;
 
@@ -165,6 +171,12 @@ public class Week {
 		this.spInf51 = new SimpleIntegerProperty(jsonObject.getInt("spInf51"));
 		this.spInf52 = new SimpleStringProperty(jsonObject.getString("spInf52"));
 		this.spInf53 = new SimpleIntegerProperty(jsonObject.getInt("spInf53"));
+
+		this.spInf54 = new SimpleStringProperty(jsonObject.getString("spInf54"));
+		this.spInf55 = new SimpleStringProperty(jsonObject.getString("spInf55"));
+		this.spInf56 = new SimpleIntegerProperty(jsonObject.getInt("spInf56"));
+		this.spInf57 = new SimpleIntegerProperty(jsonObject.getInt("spInf57"));
+		this.spInf58 = new SimpleIntegerProperty(jsonObject.getInt("spInf58"));
 
 		this.ministryPartList = new SimpleObjectProperty<ObservableList<MinistryPart>>(
 				getMinistryPartsList(jsonObject, language, settings, membersList));
@@ -291,6 +303,12 @@ public class Week {
 				this.setSpInf51(week.getSpInf51());
 				this.setSpInf52(Crypt.decrypt(week.getSpInf52(), settings.getDatabaseSecretKey()));
 				this.setSpInf53(week.getSpInf53());
+
+				this.setSpInf54(Crypt.decrypt(week.getSpInf54(), settings.getDatabaseSecretKey()));
+				this.setSpInf55(Crypt.decrypt(week.getSpInf55(), settings.getDatabaseSecretKey()));
+				this.setSpInf56(week.getSpInf56());
+				this.setSpInf57(week.getSpInf57());
+				this.setSpInf58(week.getSpInf58());
 				
 				this.weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 						new WeekTypeTranslated(WeekType.getFromOrdinal(week.getSpInf2()), language));
@@ -1298,5 +1316,80 @@ public class Week {
 
 	public void setWeekOverseer(WeekOverseer weekOverseer) {
 		this.weekOverseer = weekOverseer;
+	}
+
+	public final StringProperty spInf54Property() {
+		return this.spInf54;
+	}
+
+	public final String getSpInf54() {
+		return this.spInf54Property().get();
+	}
+
+	public final void setSpInf54(final String spInf54) {
+		if (this.spInf54Property() == null)
+			this.spInf54 = new SimpleStringProperty();
+
+		this.spInf54Property().set(spInf54);
+	}
+
+	public final StringProperty spInf55Property() {
+		return this.spInf55;
+	}
+
+	public final String getSpInf55() {
+		return this.spInf55Property().get();
+	}
+
+	public final void setSpInf55(final String spInf55) {
+		if (this.spInf55Property() == null)
+			this.spInf55 = new SimpleStringProperty();
+
+		this.spInf55Property().set(spInf55);
+	}
+
+	public final IntegerProperty spInf56Property() {
+		return this.spInf56;
+	}
+
+	public final int getSpInf56() {
+		return this.spInf56Property().get();
+	}
+
+	public final void setSpInf56(final int spInf56) {
+		if (this.spInf56Property() == null)
+			this.spInf56 = new SimpleIntegerProperty();
+
+		this.spInf56Property().set(spInf56);
+	}
+
+	public final IntegerProperty spInf57Property() {
+		return this.spInf57;
+	}
+
+	public final int getSpInf57() {
+		return this.spInf57Property().get();
+	}
+
+	public final void setSpInf57(final int spInf57) {
+		if (this.spInf57Property() == null)
+			this.spInf57 = new SimpleIntegerProperty();
+
+		this.spInf57Property().set(spInf57);
+	}
+
+	public final IntegerProperty spInf58Property() {
+		return this.spInf58;
+	}
+
+	public final int getSpInf58() {
+		return this.spInf58Property().get();
+	}
+
+	public final void setSpInf58(final int spInf58) {
+		if (this.spInf58Property() == null)
+			this.spInf58 = new SimpleIntegerProperty();
+
+		this.spInf58Property().set(spInf58);
 	}
 }

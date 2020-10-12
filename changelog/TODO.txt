@@ -1,33 +1,33 @@
 
-	- Gestione delle seguenti situazioni
-		- Evento dopo l'adunanza del fine settimana (intestazione + testo)
-		- Adunanza del fine settimana senza discorso pubblico
-		- Non stampare l'adunanza infrasettimanale
-		- Inserire queste impostazioni sotto la tabella tipo di adunanza
-		- Gestione nuovo incarico : Sorvegliante della scuola seconda sala
-
 	Configurazione:
-		- Migliorare al Configurazione (non si comprende bene l'informazione da inserire, forse basta una label header)
 		- Commemorazione
 			- Minuti discorso Commemorazione
-			- Il colore intestazione Layout
 		-Sorvegliante
 			- Minuti discorsi del sorvegliante
 			- Numero di visite del sorvegliante prima di riazzerare
-		
-		- Impostare i colori del Layout
-	
+
 	Caricare GoogleMaps anche se presente solo l'indirizzo
 	
 	Monitor-Software:
 		- Aggiungere il giorno e l'orario preciso delle adunanze in cui si hanno gli incarichi
+
+	Monitor-Online:
+		- Aggiungere Conduttore scuola seconda sala
 	
 	- Nuova sezione: Acustica
 	- Nuova sezione: Uscieri
+	
+	- Cambiare l'icona Luoghi di adorazione
+	
+	------------------------------------------------------------------
+	
 	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia
 	- Nuova sezione: Territori
 	- Nuova sezione: Letteratura
+	
+	Configurazione:
+		- Impostare i colori del Layout
 	
 	Eliminare AlertBuilder vecchio.
 	

@@ -2,6 +2,15 @@ Data di pubblicazione : ..-..-....
 
 	Adunanze:
 		- Si può ora assegnare una parte vita cristiana al fratello selezionato dallo storico
+		- Nuovo incarico : Sorvegliante della Scuola (Seconda sala) -> Al momento non stampato nel Layout e non visualizzato nel monitor online
+		- Nuove funzioni:
+			- Non stampare l'adunanza infrasettimanale
+			- Aggiungi Evento Extra (Intestazione + Contenuto), dopo l'adunanza del fine settimana
+			- Adunanza del fine settimana SENZA discorso pubblico
+
+	Configurazione:
+		- Migliorata GUI
+		
 
 	Monitor-Online:
 		- Il formato della data ora è completo e viene indicato il giorno e l'orario dell'adunanza dell'incarico
