@@ -1,21 +1,12 @@
-
-	Configurazione:
-		- Commemorazione
-			- Minuti discorso Commemorazione
-		-Sorvegliante
-			- Minuti discorsi del sorvegliante
-			- Numero di visite del sorvegliante prima di riazzerare
-
-	Caricare GoogleMaps anche se presente solo l'indirizzo
+	
+	- Nuova sezione: Acustica
+	- Nuova sezione: Uscieri
 	
 	Monitor-Software:
 		- Aggiungere il giorno e l'orario preciso delle adunanze in cui si hanno gli incarichi
 
 	Monitor-Online:
 		- Aggiungere Conduttore scuola seconda sala
-	
-	- Nuova sezione: Acustica
-	- Nuova sezione: Uscieri
 	
 	- Cambiare l'icona Luoghi di adorazione
 	

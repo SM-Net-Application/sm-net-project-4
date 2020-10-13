@@ -1,5 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.circuitoverseer;
 
+import java.util.HashMap;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -141,6 +143,7 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	private Tab thisTab;
 
 	private ObservableList<WeekOverseer> calendar;
+	private HashMap<String, String> configs;
 
 	@FXML
 	private void initialize() {
@@ -346,7 +349,13 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 					}
 				}
 
-				visitNumber = (visitNumber == 6) ? 1 : (visitNumber + 1);
+				String visitCounter = this.configs.get("inf7");
+				String visitCounterDecrypted = Crypt.decrypt(visitCounter, this.settings.getDatabaseSecretKey());
+				int visitMax = 6;
+				if (!visitCounterDecrypted.isEmpty())
+					visitMax = Integer.valueOf(visitCounterDecrypted);
+
+				visitNumber = (visitNumber == visitMax) ? 1 : (visitNumber + 1);
 
 				this.visitNumberTextField.setText(String.valueOf(visitNumber));
 				this.overseerNameTextField.setText(overseerName);
@@ -359,6 +368,18 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 				this.mailOverseerTextField.setText(mailOverseer);
 				this.phoneWifeTextField.setText(phoneWife);
 				this.mailWifeTextField.setText(mailWife);
+
+				String talk1Min = this.configs.get("inf4");
+				String talk1MinDecrypted = Crypt.decrypt(talk1Min, this.settings.getDatabaseSecretKey());
+				this.talk1MinTextField.setText(talk1MinDecrypted);
+
+				String talk2Min = this.configs.get("inf5");
+				String talk2MinDecrypted = Crypt.decrypt(talk2Min, this.settings.getDatabaseSecretKey());
+				this.talk2MinTextField.setText(talk2MinDecrypted);
+
+				String talk3Min = this.configs.get("inf6");
+				String talk3MinDecrypted = Crypt.decrypt(talk3Min, this.settings.getDatabaseSecretKey());
+				this.talk3MinTextField.setText(talk3MinDecrypted);
 			}
 	}
 
@@ -514,5 +535,13 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 	public void setCalendar(ObservableList<WeekOverseer> calendar) {
 		this.calendar = calendar;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
 	}
 }

@@ -927,11 +927,33 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 			Family family = this.familiesTableView.getSelectionModel().getSelectedItem();
 
+			String link = "";
+
 			String coord = family.getSpInf9Decrypted();
 			if (!coord.isEmpty()) {
 
-				String link = this.language.getString("supportplanner.googlemaps.pattern");
+				link = this.language.getString("supportplanner.googlemaps.pattern");
 				link = String.format(link, coord.replace(" ", "+"));
+
+			} else {
+
+				String spInf2 = family.getSpInf2Decrypted();
+				String spInf3 = family.getSpInf3Decrypted();
+				String spInf4 = family.getSpInf4Decrypted();
+				String spInf5 = family.getSpInf5Decrypted();
+
+				if (!spInf2.isEmpty() && !spInf3.isEmpty() && !spInf4.isEmpty() && !spInf5.isEmpty()) {
+
+					String addr = String.format("%s %s, %s %s", spInf2, spInf3, spInf4, spInf5);
+					addr = addr.replace(" ", "+");
+
+					link = this.language.getString("supportplanner.googlemaps.pattern");
+					link = String.format(link, addr);
+				}
+
+			}
+
+			if (!link.isEmpty()) {
 
 				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 				if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
@@ -941,36 +963,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 						this.application.getAlertBuilder().error(this.ownerStage, e.getMessage()).show();
 					}
 				}
-
-//				try {
-//
-//					FXMLLoader fxmlLoader = new FXMLLoader();
-//					fxmlLoader.setLocation(Meta.Views.BROWSER);
-//
-//					AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
-//
-//					Scene scene = new Scene(anchorPane);
-//					scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
-//
-//					Stage stage = new Stage();
-//
-//					stage.setScene(scene);
-//					stage.setTitle(Meta.Application.getFullTitle());
-//					stage.getIcons().add(Meta.Resources.getImageApplicationIcon());
-//					stage.initOwner(this.ownerStage);
-//
-//					stage.setMaximized(true);
-//
-//					Browser ctrl = fxmlLoader.getController();
-//					ctrl.setLink(link);
-//					ctrl.init();
-//
-//					stage.show();
-//
-//				} catch (IOException e) {
-//					System.out.println(e.getMessage());
-//				}
 			} else {
+
 				this.application.getAlertBuilder2().error(this.ownerStage,
 						this.language.getString("congregation.family.error.coord"));
 			}

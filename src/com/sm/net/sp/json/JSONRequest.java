@@ -521,7 +521,7 @@ public class JSONRequest {
 		jsonObj.put("spInf56", spInf56);
 		jsonObj.put("spInf57", spInf57);
 		jsonObj.put("spInf58", spInf58);
-		
+
 		jsonObj.put("spInfMP", spInfMinistryParts);
 		jsonObj.put("spInfCP", spInfChristiansParts);
 
@@ -789,7 +789,8 @@ public class JSONRequest {
 	}
 
 	public static JSONObject CONFIG_UPDATE(String placesPatternEncrypted, String publicTalkMinEncrypted,
-			String watchtowerMinEncrypted) {
+			String watchtowerMinEncrypted, String overseerTalk1MinEncrypted, String overseerTalk2MinEncrypted,
+			String overseerTalk3MinEncrypted, String overseerVisitCounterEncrypted, String memorialTalkMinEncrypted) {
 
 		JSONObject jsonObj = create(Integer.valueOf(45));
 
@@ -797,6 +798,11 @@ public class JSONRequest {
 		jsonArray.put(createJSONKeyValue("inf1", placesPatternEncrypted));
 		jsonArray.put(createJSONKeyValue("inf2", publicTalkMinEncrypted));
 		jsonArray.put(createJSONKeyValue("inf3", watchtowerMinEncrypted));
+		jsonArray.put(createJSONKeyValue("inf4", overseerTalk1MinEncrypted));
+		jsonArray.put(createJSONKeyValue("inf5", overseerTalk2MinEncrypted));
+		jsonArray.put(createJSONKeyValue("inf6", overseerTalk3MinEncrypted));
+		jsonArray.put(createJSONKeyValue("inf7", overseerVisitCounterEncrypted));
+		jsonArray.put(createJSONKeyValue("inf8", memorialTalkMinEncrypted));
 
 		jsonObj.put("infos", jsonArray);
 

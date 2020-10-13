@@ -2,6 +2,7 @@ package com.sm.net.sp.view.home.user.menu.circuitoverseer;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -10,6 +11,7 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.circuitoverseer.task.OverseerInitDataLoadTask;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.task.WeekOverseerDeleteTask;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
@@ -66,6 +68,7 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 	private Stage ownerStage;
 	private SupportPlannerView application;
 	private ObservableList<WeekOverseer> calendar;
+	private HashMap<String, String> configs;
 
 	@FXML
 	private void initialize() {
@@ -222,6 +225,11 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 			this.weekTableView.refresh();
 		}
+
+		String waitMessage = this.language.getString("overseer.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new OverseerInitDataLoadTask(
+				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void listeners() {
@@ -288,6 +296,7 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedWeek(week);
 				ctrl.setCalendar(this.calendar);
+				ctrl.setConfigs(this.configs);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -358,5 +367,13 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
 	}
 }

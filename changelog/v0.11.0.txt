@@ -1,5 +1,8 @@
 Data di pubblicazione : ..-..-....
 
+	Congregazione:
+		- L'indirizzo di una famiglia viene caricato su Google Maps anche senza coordinate
+
 	Adunanze:
 		- Si può ora assegnare una parte vita cristiana al fratello selezionato dallo storico
 		- Nuovo incarico : Sorvegliante della Scuola (Seconda sala) -> Al momento non stampato nel Layout e non visualizzato nel monitor online
@@ -10,7 +13,14 @@ Data di pubblicazione : ..-..-....
 
 	Configurazione:
 		- Migliorata GUI
-		
+		- Nuove configurazioni:
+			- Commemorazione
+				- Minuti discorso Commemorazione
+			-Sorvegliante
+				- Minuti Primo Discorso
+				- Minuti Discorso Pubblico
+				- Minuti Discorso Finale
+				- Azzera contatore visite dopo ...
 
 	Monitor-Online:
 		- Il formato della data ora è completo e viene indicato il giorno e l'orario dell'adunanza dell'incarico

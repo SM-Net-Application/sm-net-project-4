@@ -375,6 +375,7 @@ public class Memorial extends UpdateDataAdapter {
 				ctrl.setApplication(this.application);
 				ctrl.setMembersList(this.membersList);
 				ctrl.setFamiliesList(this.familiesList);
+				ctrl.setConfigs(this.configs);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);

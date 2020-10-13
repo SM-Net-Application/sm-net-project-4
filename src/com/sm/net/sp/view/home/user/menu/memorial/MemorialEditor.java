@@ -222,6 +222,7 @@ public class MemorialEditor extends UpdateDataAdapter {
 	private Tab thisTab;
 
 	private ObservableList<WeekMemorial> calendar;
+	private HashMap<String, String> configs;
 
 	private SupportPlannerView application;
 
@@ -669,6 +670,13 @@ public class MemorialEditor extends UpdateDataAdapter {
 				setComboBoxMember(this.emblemsBrother8ComboBox, this.selectedWeek.getSpInf32());
 				setComboBoxMember(this.emblemsBrother9ComboBox, this.selectedWeek.getSpInf33());
 				setComboBoxMember(this.emblemsBrother10ComboBox, this.selectedWeek.getSpInf34());
+
+			} else {
+
+				String talkMin = this.configs.get("inf8");
+				String talkMinDecrypted = Crypt.decrypt(talkMin, this.settings.getDatabaseSecretKey());
+				this.talkMinTextField.setText(talkMinDecrypted);
+
 			}
 	}
 
@@ -1524,5 +1532,13 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 	public void setEmblemsBrother10ComboBox(ComboBox<Member> emblemsBrother10ComboBox) {
 		this.emblemsBrother10ComboBox = emblemsBrother10ComboBox;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
 	}
 }

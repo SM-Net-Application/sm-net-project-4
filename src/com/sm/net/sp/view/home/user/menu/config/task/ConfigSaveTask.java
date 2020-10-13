@@ -24,8 +24,17 @@ public class ConfigSaveTask implements TaskInterface {
 	private String publicTalkMinEncrypted;
 	private String watchtowerMinEncrypted;
 
+	private String overseerTalk1MinEncrypted;
+	private String overseerTalk2MinEncrypted;
+	private String overseerTalk3MinEncrypted;
+	private String overseerVisitCounterEncrypted;
+	private String memorialTalkMinEncrypted;
+
 	public ConfigSaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, String placesPatternEncrypted,
-			String publicTalkMinEncrypted, String watchtowerMinEncrypted) {
+			String publicTalkMinEncrypted, String watchtowerMinEncrypted, String overseerTalk1MinEncrypted,
+			String overseerTalk2MinEncrypted, String overseerTalk3MinEncrypted, String overseerVisitCounterEncrypted,
+			String memorialTalkMinEncrypted) {
+
 		super();
 
 		this.alertBuilder = alertBuilder;
@@ -35,13 +44,19 @@ public class ConfigSaveTask implements TaskInterface {
 		this.placesPatternEncrypted = placesPatternEncrypted;
 		this.publicTalkMinEncrypted = publicTalkMinEncrypted;
 		this.watchtowerMinEncrypted = watchtowerMinEncrypted;
+		this.overseerTalk1MinEncrypted = overseerTalk1MinEncrypted;
+		this.overseerTalk2MinEncrypted = overseerTalk2MinEncrypted;
+		this.overseerTalk3MinEncrypted = overseerTalk3MinEncrypted;
+		this.overseerVisitCounterEncrypted = overseerVisitCounterEncrypted;
+		this.memorialTalkMinEncrypted = memorialTalkMinEncrypted;
 	}
 
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
 		JSONObject json = JSONRequest.CONFIG_UPDATE(this.placesPatternEncrypted, this.publicTalkMinEncrypted,
-				this.watchtowerMinEncrypted);
+				this.watchtowerMinEncrypted, this.overseerTalk1MinEncrypted, this.overseerTalk2MinEncrypted,
+				this.overseerTalk3MinEncrypted, this.overseerVisitCounterEncrypted, this.memorialTalkMinEncrypted);
 
 		String url = this.settings.getDatabaseUrl();
 
@@ -66,8 +81,7 @@ public class ConfigSaveTask implements TaskInterface {
 		String error = response.getString("error");
 
 		if (status == 0) {
-			this.alertBuilder.information(this.viewStage,
-					this.settings.getLanguage().getString("conf.save.completed"));
+			this.alertBuilder.information(this.viewStage, this.settings.getLanguage().getString("conf.save.completed"));
 		} else if (status == 1)
 			this.alertBuilder.error(this.viewStage, error);
 	}

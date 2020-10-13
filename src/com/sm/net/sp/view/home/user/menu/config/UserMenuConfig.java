@@ -50,6 +50,10 @@ public class UserMenuConfig {
 	private ScrollPane publicTalkScrollPane;
 	@FXML
 	private ScrollPane watchtowerScrollPane;
+	@FXML
+	private ScrollPane overseerScrollPane;
+	@FXML
+	private ScrollPane memorialScrollPane;
 
 	@FXML
 	private Label placesHeaderLabel;
@@ -126,18 +130,32 @@ public class UserMenuConfig {
 		this.placesTab.getStyleClass().add("tab_001");
 		this.publicTalkTab.getStyleClass().add("tab_001");
 		this.watchtowerTab.getStyleClass().add("tab_001");
+		this.overseerTab.getStyleClass().add("tab_001");
+		this.memorialTab.getStyleClass().add("tab_001");
 
 		this.placesScrollPane.getStyleClass().add("scroll_pane_001");
 		this.publicTalkScrollPane.getStyleClass().add("scroll_pane_001");
 		this.watchtowerScrollPane.getStyleClass().add("scroll_pane_001");
+		this.overseerScrollPane.getStyleClass().add("scroll_pane_001");
+		this.memorialScrollPane.getStyleClass().add("scroll_pane_001");
 
 		this.placesPatternLabel.getStyleClass().add("label_set_001");
 		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
 		this.watchtowerMinLabel.getStyleClass().add("label_set_001");
+		this.overseerTalk1MinLabel.getStyleClass().add("label_set_001");
+		this.overseerTalk2MinLabel.getStyleClass().add("label_set_001");
+		this.overseerTalk3MinLabel.getStyleClass().add("label_set_001");
+		this.overseerVisitCounterLabel.getStyleClass().add("label_set_001");
+		this.memorialTalkMinLabel.getStyleClass().add("label_set_001");
 
 		this.placesPatternTextField.getStyleClass().add("text_field_001");
-		this.publicTalkMinTextField.getStyleClass().add("text_field_001");
-		this.watchtowerMinTextField.getStyleClass().add("text_field_001");
+		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
+		this.watchtowerMinTextField.getStyleClass().add("text_field_002");
+		this.overseerTalk1MinTextField.getStyleClass().add("text_field_002");
+		this.overseerTalk2MinTextField.getStyleClass().add("text_field_002");
+		this.overseerTalk3MinTextField.getStyleClass().add("text_field_002");
+		this.overseerVisitCounterTextField.getStyleClass().add("text_field_002");
+		this.memorialTalkMinTextField.getStyleClass().add("text_field_002");
 
 		this.placesPatternButton.getStyleClass().add("button_image_001");
 		this.saveButton.getStyleClass().add("button_image_001");
@@ -145,6 +163,8 @@ public class UserMenuConfig {
 		this.placesHeaderLabel.getStyleClass().add("label_002");
 		this.publicTalkHeaderLabel.getStyleClass().add("label_002");
 		this.watchtowerHeaderLabel.getStyleClass().add("label_002");
+		this.overseerHeaderLabel.getStyleClass().add("label_002");
+		this.memorialHeaderLabel.getStyleClass().add("label_002");
 	}
 
 	private void viewUpdate() {
@@ -178,9 +198,17 @@ public class UserMenuConfig {
 		this.watchtowerTab.setText("");
 		this.watchtowerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.WOL));
 
-		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
-		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
-		this.watchtowerMinLabel.setText(language.getString("conf.label.watchtower.min"));
+		Tooltip overseerTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.overseer"));
+		overseerTabTooltip.getStyleClass().add("tooltip_001");
+		this.overseerTab.setTooltip(overseerTabTooltip);
+		this.overseerTab.setText("");
+		this.overseerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_CIRCUITOVERSEER));
+
+		Tooltip memorialTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.memorial"));
+		memorialTabTooltip.getStyleClass().add("tooltip_001");
+		this.memorialTab.setTooltip(memorialTabTooltip);
+		this.memorialTab.setText("");
+		this.memorialTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMORIAL));
 
 		Tooltip placesPatternHelpTooltip = new Tooltip(language.getString("conf.tooltip.places.pattern.help"));
 		placesPatternHelpTooltip.getStyleClass().add("tooltip_001");
@@ -197,6 +225,17 @@ public class UserMenuConfig {
 		this.placesHeaderLabel.setText(language.getString("conf.label.places.header"));
 		this.publicTalkHeaderLabel.setText(language.getString("conf.label.publictalk.header"));
 		this.watchtowerHeaderLabel.setText(language.getString("conf.label.watchtower.header"));
+		this.overseerHeaderLabel.setText(language.getString("conf.label.overseer.header"));
+		this.memorialHeaderLabel.setText(language.getString("conf.label.memorial.header"));
+
+		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
+		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
+		this.watchtowerMinLabel.setText(language.getString("conf.label.watchtower.min"));
+		this.overseerTalk1MinLabel.setText(language.getString("conf.label.overseer.talk1min"));
+		this.overseerTalk2MinLabel.setText(language.getString("conf.label.overseer.talk2min"));
+		this.overseerTalk3MinLabel.setText(language.getString("conf.label.overseer.talk3min"));
+		this.overseerVisitCounterLabel.setText(language.getString("conf.label.overseer.visitcounter"));
+		this.memorialTalkMinLabel.setText(language.getString("conf.label.memorial.talkmin"));
 	}
 
 	private void initData() {
@@ -229,6 +268,33 @@ public class UserMenuConfig {
 		if (watchtowerMin != null)
 			this.watchtowerMinTextField
 					.setText(Crypt.decrypt(watchtowerMin, this.application.getSettings().getDatabaseSecretKey()));
+
+		// ----------------
+
+		String overseerTalk1Min = this.configs.get("inf4");
+		if (overseerTalk1Min != null)
+			this.overseerTalk1MinTextField
+					.setText(Crypt.decrypt(overseerTalk1Min, this.application.getSettings().getDatabaseSecretKey()));
+
+		String overseerTalk2Min = this.configs.get("inf5");
+		if (overseerTalk2Min != null)
+			this.overseerTalk2MinTextField
+					.setText(Crypt.decrypt(overseerTalk2Min, this.application.getSettings().getDatabaseSecretKey()));
+
+		String overseerTalk3Min = this.configs.get("inf6");
+		if (overseerTalk3Min != null)
+			this.overseerTalk3MinTextField
+					.setText(Crypt.decrypt(overseerTalk3Min, this.application.getSettings().getDatabaseSecretKey()));
+
+		String overseerVisitCounter = this.configs.get("inf7");
+		if (overseerVisitCounter != null)
+			this.overseerVisitCounterTextField.setText(
+					Crypt.decrypt(overseerVisitCounter, this.application.getSettings().getDatabaseSecretKey()));
+
+		String memorialTalkMin = this.configs.get("inf8");
+		if (memorialTalkMin != null)
+			this.memorialTalkMinTextField
+					.setText(Crypt.decrypt(memorialTalkMin, this.application.getSettings().getDatabaseSecretKey()));
 
 	}
 
@@ -263,11 +329,33 @@ public class UserMenuConfig {
 			String watchtowerMinEncrypted = Crypt.encrypt(watchtowerMin,
 					this.application.getSettings().getDatabaseSecretKey());
 
+			String overseerTalk1Min = this.overseerTalk1MinTextField.getText();
+			String overseerTalk1MinEncrypted = Crypt.encrypt(overseerTalk1Min,
+					this.application.getSettings().getDatabaseSecretKey());
+
+			String overseerTalk2Min = this.overseerTalk2MinTextField.getText();
+			String overseerTalk2MinEncrypted = Crypt.encrypt(overseerTalk2Min,
+					this.application.getSettings().getDatabaseSecretKey());
+
+			String overseerTalk3Min = this.overseerTalk3MinTextField.getText();
+			String overseerTalk3MinEncrypted = Crypt.encrypt(overseerTalk3Min,
+					this.application.getSettings().getDatabaseSecretKey());
+
+			String overseerVisitCounter = this.overseerVisitCounterTextField.getText();
+			String overseerVisitCounterEncrypted = Crypt.encrypt(overseerVisitCounter,
+					this.application.getSettings().getDatabaseSecretKey());
+
+			String memorialTalkMin = this.memorialTalkMinTextField.getText();
+			String memorialTalkMinEncrypted = Crypt.encrypt(memorialTalkMin,
+					this.application.getSettings().getDatabaseSecretKey());
+
 			String waitMessage = this.application.getSettings().getLanguage().getString("conf.save.wait");
 
 			TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
 					new ConfigSaveTask(this.application.getAlertBuilder2(), this.application.getSettings(),
-							this.ownerStage, placesPatternEncrypted, publicTalkMinEncrypted, watchtowerMinEncrypted));
+							this.ownerStage, placesPatternEncrypted, publicTalkMinEncrypted, watchtowerMinEncrypted,
+							overseerTalk1MinEncrypted, overseerTalk2MinEncrypted, overseerTalk3MinEncrypted,
+							overseerVisitCounterEncrypted, memorialTalkMinEncrypted));
 		}
 	}
 
