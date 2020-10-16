@@ -20,6 +20,8 @@
 	Configurazione:
 		- Impostare i colori del Layout
 	
+	Non so se capitera mai: settimana del sorvegliante senza adunanza infrasettimanale.
+	
 	Eliminare AlertBuilder vecchio.
 	
 	- Cantici:

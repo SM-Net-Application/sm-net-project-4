@@ -12,6 +12,7 @@ import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -43,6 +44,10 @@ public class UserMenuConfig {
 	private Tab overseerTab;
 	@FXML
 	private Tab memorialTab;
+	@FXML
+	private Tab audioTab;
+	@FXML
+	private Tab usciereTab;
 
 	@FXML
 	private ScrollPane placesScrollPane;
@@ -54,6 +59,10 @@ public class UserMenuConfig {
 	private ScrollPane overseerScrollPane;
 	@FXML
 	private ScrollPane memorialScrollPane;
+	@FXML
+	private ScrollPane audioScrollPane;
+	@FXML
+	private ScrollPane usciereScrollPane;
 
 	@FXML
 	private Label placesHeaderLabel;
@@ -65,6 +74,10 @@ public class UserMenuConfig {
 	private Label overseerHeaderLabel;
 	@FXML
 	private Label memorialHeaderLabel;
+	@FXML
+	private Label audioHeaderLabel;
+	@FXML
+	private Label usciereHeaderLabel;
 
 	@FXML
 	private Label placesPatternLabel;
@@ -82,6 +95,18 @@ public class UserMenuConfig {
 	private Label overseerVisitCounterLabel;
 	@FXML
 	private Label memorialTalkMinLabel;
+	@FXML
+	private Label audioPos1NameLabel;
+	@FXML
+	private Label audioPos2NameLabel;
+	@FXML
+	private Label audioPos3NameLabel;
+	@FXML
+	private Label usciereZone1NameLabel;
+	@FXML
+	private Label usciereZone2NameLabel;
+	@FXML
+	private Label usciereZone3NameLabel;
 
 	@FXML
 	private TextField placesPatternTextField;
@@ -99,6 +124,26 @@ public class UserMenuConfig {
 	private TextField overseerVisitCounterTextField;
 	@FXML
 	private TextField memorialTalkMinTextField;
+
+	@FXML
+	private TextField audioPos1NameTextField;
+	@FXML
+	private TextField audioPos2NameTextField;
+	@FXML
+	private TextField audioPos3NameTextField;
+	@FXML
+	private TextField usciereZone1NameTextField;
+	@FXML
+	private TextField usciereZone2NameTextField;
+	@FXML
+	private TextField usciereZone3NameTextField;
+
+	@FXML
+	private CheckBox usciereZone1WeekendCheckBox;
+	@FXML
+	private CheckBox usciereZone2WeekendCheckBox;
+	@FXML
+	private CheckBox usciereZone3WeekendCheckBox;
 
 	@FXML
 	private Button placesPatternButton;
@@ -132,12 +177,16 @@ public class UserMenuConfig {
 		this.watchtowerTab.getStyleClass().add("tab_001");
 		this.overseerTab.getStyleClass().add("tab_001");
 		this.memorialTab.getStyleClass().add("tab_001");
+		this.audioTab.getStyleClass().add("tab_001");
+		this.usciereTab.getStyleClass().add("tab_001");
 
 		this.placesScrollPane.getStyleClass().add("scroll_pane_001");
 		this.publicTalkScrollPane.getStyleClass().add("scroll_pane_001");
 		this.watchtowerScrollPane.getStyleClass().add("scroll_pane_001");
 		this.overseerScrollPane.getStyleClass().add("scroll_pane_001");
 		this.memorialScrollPane.getStyleClass().add("scroll_pane_001");
+		this.audioScrollPane.getStyleClass().add("scroll_pane_001");
+		this.usciereScrollPane.getStyleClass().add("scroll_pane_001");
 
 		this.placesPatternLabel.getStyleClass().add("label_set_001");
 		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
@@ -147,6 +196,12 @@ public class UserMenuConfig {
 		this.overseerTalk3MinLabel.getStyleClass().add("label_set_001");
 		this.overseerVisitCounterLabel.getStyleClass().add("label_set_001");
 		this.memorialTalkMinLabel.getStyleClass().add("label_set_001");
+		this.audioPos1NameLabel.getStyleClass().add("label_set_001");
+		this.audioPos2NameLabel.getStyleClass().add("label_set_001");
+		this.audioPos3NameLabel.getStyleClass().add("label_set_001");
+		this.usciereZone1NameLabel.getStyleClass().add("label_set_001");
+		this.usciereZone2NameLabel.getStyleClass().add("label_set_001");
+		this.usciereZone3NameLabel.getStyleClass().add("label_set_001");
 
 		this.placesPatternTextField.getStyleClass().add("text_field_001");
 		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
@@ -156,6 +211,12 @@ public class UserMenuConfig {
 		this.overseerTalk3MinTextField.getStyleClass().add("text_field_002");
 		this.overseerVisitCounterTextField.getStyleClass().add("text_field_002");
 		this.memorialTalkMinTextField.getStyleClass().add("text_field_002");
+		this.audioPos1NameTextField.getStyleClass().add("text_field_001");
+		this.audioPos2NameTextField.getStyleClass().add("text_field_001");
+		this.audioPos3NameTextField.getStyleClass().add("text_field_001");
+		this.usciereZone1NameTextField.getStyleClass().add("text_field_001");
+		this.usciereZone2NameTextField.getStyleClass().add("text_field_001");
+		this.usciereZone3NameTextField.getStyleClass().add("text_field_001");
 
 		this.placesPatternButton.getStyleClass().add("button_image_001");
 		this.saveButton.getStyleClass().add("button_image_001");
@@ -165,6 +226,12 @@ public class UserMenuConfig {
 		this.watchtowerHeaderLabel.getStyleClass().add("label_002");
 		this.overseerHeaderLabel.getStyleClass().add("label_002");
 		this.memorialHeaderLabel.getStyleClass().add("label_002");
+		this.audioHeaderLabel.getStyleClass().add("label_002");
+		this.usciereHeaderLabel.getStyleClass().add("label_002");
+
+		this.usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone2WeekendCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone3WeekendCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	private void viewUpdate() {
@@ -179,6 +246,18 @@ public class UserMenuConfig {
 
 		this.tabPane.setTabMinHeight(75);
 		this.tabPane.setTabMaxHeight(75);
+
+		Tooltip audioTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.audio"));
+		audioTabTooltip.getStyleClass().add("tooltip_001");
+		this.audioTab.setTooltip(audioTabTooltip);
+		this.audioTab.setText("");
+		this.audioTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.AUDIO));
+
+		Tooltip usciereTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.usciere"));
+		usciereTabTooltip.getStyleClass().add("tooltip_001");
+		this.usciereTab.setTooltip(usciereTabTooltip);
+		this.usciereTab.setText("");
+		this.usciereTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USCIERE));
 
 		Tooltip placesTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.places"));
 		placesTabTooltip.getStyleClass().add("tooltip_001");
@@ -227,6 +306,8 @@ public class UserMenuConfig {
 		this.watchtowerHeaderLabel.setText(language.getString("conf.label.watchtower.header"));
 		this.overseerHeaderLabel.setText(language.getString("conf.label.overseer.header"));
 		this.memorialHeaderLabel.setText(language.getString("conf.label.memorial.header"));
+		
+		// TODO: here
 
 		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
 		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
