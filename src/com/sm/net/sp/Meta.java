@@ -276,6 +276,7 @@ public class Meta {
 		public static final String HELP = "help.png";
 		public static final String AUDIO = "audio.png";
 		public static final String USCIERE = "usciere.png";
+		public static final String PRAY = "pray.png";
 
 		public static final String ASSIGNEMENTS = "duties.png";
 		public static final String PRIVILEGIES = "privilegies.png";

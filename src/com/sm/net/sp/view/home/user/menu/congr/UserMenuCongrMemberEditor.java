@@ -1,6 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.congr;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 import javax.crypto.SecretKey;
 
@@ -103,25 +104,17 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private Label conductorLabel;
 	@FXML
-	private Label soundSystemLabel;
-	@FXML
 	private Label privilegeLabel;
 	@FXML
 	private Label prayStartLabel;
 	@FXML
 	private Label prayEndLabel;
-	@FXML
-	private Label soundSystemMicrophoneHandlerLabel;
-	@FXML
-	private Label soundSystemMixerLabel;
-	@FXML
-	private Label soundSystemPCLabel;
-	@FXML
-	private Label meetingLabel;
-	@FXML
-	private Label meetingMidweekLabel;
-	@FXML
-	private Label meetingWeekendLabel;
+//	@FXML
+//	private Label meetingLabel;
+//	@FXML
+//	private Label meetingMidweekLabel;
+//	@FXML
+//	private Label meetingWeekendLabel;
 	@FXML
 	private CheckBox presidentMidweekCheckBox;
 	@FXML
@@ -132,18 +125,6 @@ public class UserMenuCongrMemberEditor {
 	private CheckBox watchtowerStudyCheckBox;
 	@FXML
 	private CheckBox watchtowerSubstituteStudyCheckBox;
-	@FXML
-	private CheckBox microphoneHandlerMidweekCheckBox;
-	@FXML
-	private CheckBox microphoneHandlerWeekendCheckBox;
-	@FXML
-	private CheckBox soundSystemMixerMidweekCheckBox;
-	@FXML
-	private CheckBox soundSystemMixerWeekendCheckBox;
-	@FXML
-	private CheckBox soundSystemPCMidweekCheckBox;
-	@FXML
-	private CheckBox soundSystemPCWeekendCheckBox;
 	@FXML
 	private CheckBox prayStartMidweekCheckBox;
 	@FXML
@@ -162,12 +143,6 @@ public class UserMenuCongrMemberEditor {
 	private CheckBox publicSpeakerInternCheckBox;
 	@FXML
 	private CheckBox publicSpeakerExternCheckBox;
-	@FXML
-	private Label attendantLabel;
-	@FXML
-	private CheckBox attendantMidweekCheckBox;
-	@FXML
-	private CheckBox attendantWeekendCheckBox;
 
 	@FXML
 	private Tab appointmentTab;
@@ -235,6 +210,79 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private DatePicker dateOfBaptismDatePicker;
 
+	@FXML
+	private TabPane memberAssignmentTabPane;
+
+	@FXML
+	private Tab prayTab;
+	@FXML
+	private Label prayLabel;
+	@FXML
+	private Label prayMidweekLabel;
+	@FXML
+	private Label prayWeekendLabel;
+
+	@FXML
+	private Tab audioTab;
+	@FXML
+	private Label audioLabel;
+	@FXML
+	private Label audioMidweekLabel;
+	@FXML
+	private Label audioWeekendLabel;
+	@FXML
+	private Label audioMicLabel;
+	@FXML
+	private Label audioPos1Label;
+	@FXML
+	private Label audioPos2Label;
+	@FXML
+	private Label audioPos3Label;
+
+	@FXML
+	private CheckBox audioMicMidweekCheckBox;
+	@FXML
+	private CheckBox audioMicWeekendCheckBox;
+	@FXML
+	private CheckBox audioPos1MidweekCheckBox;
+	@FXML
+	private CheckBox audioPos1WeekendCheckBox;
+	@FXML
+	private CheckBox audioPos2MidweekCheckBox;
+	@FXML
+	private CheckBox audioPos2WeekendCheckBox;
+	@FXML
+	private CheckBox audioPos3MidweekCheckBox;
+	@FXML
+	private CheckBox audioPos3WeekendCheckBox;
+
+	@FXML
+	private Tab usciereTab;
+	@FXML
+	private Label usciereLabel;
+	@FXML
+	private Label usciereMidweekLabel;
+	@FXML
+	private Label usciereWeekendLabel;
+	@FXML
+	private Label usciereZone1Label;
+	@FXML
+	private Label usciereZone2Label;
+	@FXML
+	private Label usciereZone3Label;
+	@FXML
+	private CheckBox usciereZone1MidweekCheckBox;
+	@FXML
+	private CheckBox usciereZone1WeekendCheckBox;
+	@FXML
+	private CheckBox usciereZone2MidweekCheckBox;
+	@FXML
+	private CheckBox usciereZone2WeekendCheckBox;
+	@FXML
+	private CheckBox usciereZone3MidweekCheckBox;
+	@FXML
+	private CheckBox usciereZone3WeekendCheckBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -246,6 +294,8 @@ public class UserMenuCongrMemberEditor {
 	private SupportPlannerView application;
 
 	private boolean listenerCheckFields;
+
+	private HashMap<String, String> configs;
 
 	@FXML
 	private void initialize() {
@@ -280,18 +330,11 @@ public class UserMenuCongrMemberEditor {
 		christiansLabel.getStyleClass().add("label_002");
 		conductorLabel.getStyleClass().add("label_002");
 		privilegeLabel.getStyleClass().add("label_002");
-		meetingLabel.getStyleClass().add("label_002");
-		meetingMidweekLabel.getStyleClass().add("label_002");
-		meetingWeekendLabel.getStyleClass().add("label_002");
+//		meetingLabel.getStyleClass().add("label_002");
+//		meetingMidweekLabel.getStyleClass().add("label_002");
+//		meetingWeekendLabel.getStyleClass().add("label_002");
 		readerLabel.getStyleClass().add("label_002");
 		publicSpeakerLabel.getStyleClass().add("label_002");
-		soundSystemLabel.getStyleClass().add("label_001");
-		prayStartLabel.getStyleClass().add("label_001");
-		prayEndLabel.getStyleClass().add("label_001");
-		soundSystemMicrophoneHandlerLabel.getStyleClass().add("label_001");
-		soundSystemMixerLabel.getStyleClass().add("label_001");
-		soundSystemPCLabel.getStyleClass().add("label_001");
-		attendantLabel.getStyleClass().add("label_001");
 		smartphoneLabel.getStyleClass().add("label_set_001");
 		emailLabel.getStyleClass().add("label_set_001");
 		monitorLabel.getStyleClass().add("label_set_001");
@@ -323,22 +366,13 @@ public class UserMenuCongrMemberEditor {
 		bibleStudyCongregationCheckBox.getStyleClass().add("check_box_001");
 		watchtowerStudyCheckBox.getStyleClass().add("check_box_001");
 		watchtowerSubstituteStudyCheckBox.getStyleClass().add("check_box_001");
-		microphoneHandlerMidweekCheckBox.getStyleClass().add("check_box_001");
-		microphoneHandlerWeekendCheckBox.getStyleClass().add("check_box_001");
-		soundSystemMixerMidweekCheckBox.getStyleClass().add("check_box_001");
-		soundSystemMixerWeekendCheckBox.getStyleClass().add("check_box_001");
-		soundSystemPCMidweekCheckBox.getStyleClass().add("check_box_001");
-		soundSystemPCWeekendCheckBox.getStyleClass().add("check_box_001");
-		prayStartMidweekCheckBox.getStyleClass().add("check_box_001");
 		presidentWeekendCheckBox.getStyleClass().add("check_box_001");
-		prayEndMidweekCheckBox.getStyleClass().add("check_box_001");
-		prayEndWeekendCheckBox.getStyleClass().add("check_box_001");
 		readerCongregationBibleStudyCheckBox.getStyleClass().add("check_box_001");
 		readerWatchtowerCheckBox.getStyleClass().add("check_box_001");
 		publicSpeakerInternCheckBox.getStyleClass().add("check_box_001");
 		publicSpeakerExternCheckBox.getStyleClass().add("check_box_001");
-		attendantMidweekCheckBox.getStyleClass().add("check_box_001");
-		attendantWeekendCheckBox.getStyleClass().add("check_box_001");
+		usciereZone1MidweekCheckBox.getStyleClass().add("check_box_001");
+		usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
 		ministerialServantCheckBox.getStyleClass().add("check_box_001");
 		elderCheckBox.getStyleClass().add("check_box_001");
 		regularPioneerCheckBox.getStyleClass().add("check_box_001");
@@ -357,6 +391,49 @@ public class UserMenuCongrMemberEditor {
 		this.dateOfBaptismLabel.getStyleClass().add("label_set_001");
 		this.dateOfBaptismDatePicker.getStyleClass().add("combo_box_001");
 		this.excludeFromNaturalDisastersListCheckBox.getStyleClass().add("check_box_001");
+
+		this.prayTab.getStyleClass().add("tab_001");
+		this.audioTab.getStyleClass().add("tab_001");
+		this.usciereTab.getStyleClass().add("tab_001");
+
+		this.prayLabel.getStyleClass().add("label_002");
+		this.prayStartLabel.getStyleClass().add("label_001");
+		this.prayEndLabel.getStyleClass().add("label_001");
+		this.prayMidweekLabel.getStyleClass().add("label_001");
+		this.prayWeekendLabel.getStyleClass().add("label_001");
+		this.prayStartMidweekCheckBox.getStyleClass().add("check_box_001");
+		this.prayEndMidweekCheckBox.getStyleClass().add("check_box_001");
+		this.prayEndWeekendCheckBox.getStyleClass().add("check_box_001");
+
+		this.audioLabel.getStyleClass().add("label_002");
+		this.audioMidweekLabel.getStyleClass().add("label_001");
+		this.audioWeekendLabel.getStyleClass().add("label_001");
+		this.audioPos1Label.getStyleClass().add("label_001");
+		this.audioPos2Label.getStyleClass().add("label_001");
+		this.audioPos3Label.getStyleClass().add("label_001");
+		this.audioMicLabel.getStyleClass().add("label_001");
+		this.audioMicMidweekCheckBox.getStyleClass().add("check_box_001");
+		this.audioMicWeekendCheckBox.getStyleClass().add("check_box_001");
+		this.audioPos1MidweekCheckBox.getStyleClass().add("check_box_001");
+		this.audioPos1WeekendCheckBox.getStyleClass().add("check_box_001");
+		this.audioPos2MidweekCheckBox.getStyleClass().add("check_box_001");
+		this.audioPos2WeekendCheckBox.getStyleClass().add("check_box_001");
+		this.audioPos3MidweekCheckBox.getStyleClass().add("check_box_001");
+		this.audioPos3WeekendCheckBox.getStyleClass().add("check_box_001");
+
+		this.usciereLabel.getStyleClass().add("label_002");
+		this.usciereMidweekLabel.getStyleClass().add("label_001");
+		this.usciereWeekendLabel.getStyleClass().add("label_001");
+		this.usciereZone1Label.getStyleClass().add("label_001");
+		this.usciereZone2Label.getStyleClass().add("label_001");
+		this.usciereZone3Label.getStyleClass().add("label_001");
+		this.usciereZone1MidweekCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone2MidweekCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone2WeekendCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone3MidweekCheckBox.getStyleClass().add("check_box_001");
+		this.usciereZone3WeekendCheckBox.getStyleClass().add("check_box_001");
+
 	}
 
 	public void objectInitialize() {
@@ -427,18 +504,18 @@ public class UserMenuCongrMemberEditor {
 		this.markedCheckBox.setSelected((selectedMember.getSpInf18() == 1));
 		this.disfellowshippedCheckBox.setSelected((selectedMember.getSpInf19() == 1));
 
-		this.microphoneHandlerMidweekCheckBox.setSelected((selectedMember.getSpInf20() == 1));
-		this.microphoneHandlerWeekendCheckBox.setSelected((selectedMember.getSpInf21() == 1));
-		this.soundSystemMixerMidweekCheckBox.setSelected((selectedMember.getSpInf22() == 1));
-		this.soundSystemMixerWeekendCheckBox.setSelected((selectedMember.getSpInf23() == 1));
-		this.soundSystemPCMidweekCheckBox.setSelected((selectedMember.getSpInf24() == 1));
-		this.soundSystemPCWeekendCheckBox.setSelected((selectedMember.getSpInf25() == 1));
+		this.audioMicMidweekCheckBox.setSelected((selectedMember.getSpInf20() == 1));
+		this.audioMicWeekendCheckBox.setSelected((selectedMember.getSpInf21() == 1));
+		this.audioPos1MidweekCheckBox.setSelected((selectedMember.getSpInf22() == 1));
+		this.audioPos1WeekendCheckBox.setSelected((selectedMember.getSpInf23() == 1));
+		this.audioPos2MidweekCheckBox.setSelected((selectedMember.getSpInf24() == 1));
+		this.audioPos2WeekendCheckBox.setSelected((selectedMember.getSpInf25() == 1));
 
 		this.readerCongregationBibleStudyCheckBox.setSelected((selectedMember.getSpInf26() == 1));
 		this.readerWatchtowerCheckBox.setSelected((selectedMember.getSpInf27() == 1));
 
-		this.attendantMidweekCheckBox.setSelected((selectedMember.getSpInf28() == 1));
-		this.attendantWeekendCheckBox.setSelected((selectedMember.getSpInf29() == 1));
+		this.usciereZone1MidweekCheckBox.setSelected((selectedMember.getSpInf28() == 1));
+		this.usciereZone1WeekendCheckBox.setSelected((selectedMember.getSpInf29() == 1));
 
 		this.treasuresTalkCheckBox.setSelected((selectedMember.getSpInf30() == 1));
 		this.diggingCheckBox.setSelected((selectedMember.getSpInf31() == 1));
@@ -542,18 +619,18 @@ public class UserMenuCongrMemberEditor {
 			String spInf18 = !this.markedCheckBox.isSelected() ? "0" : "1";
 			String spInf19 = !this.disfellowshippedCheckBox.isSelected() ? "0" : "1";
 
-			String spInf20 = !this.microphoneHandlerMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf21 = !this.microphoneHandlerWeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf22 = !this.soundSystemMixerMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf23 = !this.soundSystemMixerWeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf24 = !this.soundSystemPCMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf25 = !this.soundSystemPCWeekendCheckBox.isSelected() ? "0" : "1";
+			String spInf20 = !this.audioMicMidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf21 = !this.audioMicWeekendCheckBox.isSelected() ? "0" : "1";
+			String spInf22 = !this.audioPos1MidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf23 = !this.audioPos1WeekendCheckBox.isSelected() ? "0" : "1";
+			String spInf24 = !this.audioPos2MidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf25 = !this.audioPos2WeekendCheckBox.isSelected() ? "0" : "1";
 
 			String spInf26 = !this.readerCongregationBibleStudyCheckBox.isSelected() ? "0" : "1";
 			String spInf27 = !this.readerWatchtowerCheckBox.isSelected() ? "0" : "1";
 
-			String spInf28 = !this.attendantMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf29 = !this.attendantWeekendCheckBox.isSelected() ? "0" : "1";
+			String spInf28 = !this.usciereZone1MidweekCheckBox.isSelected() ? "0" : "1";
+			String spInf29 = !this.usciereZone1WeekendCheckBox.isSelected() ? "0" : "1";
 
 			String spInf30 = !this.treasuresTalkCheckBox.isSelected() ? "0" : "1";
 			String spInf31 = !this.diggingCheckBox.isSelected() ? "0" : "1";
@@ -783,29 +860,21 @@ public class UserMenuCongrMemberEditor {
 		// privilegeTab.setText(language.getString("TEXT0052"));
 
 		conductorLabel.setText(language.getString("TEXT0105"));
-		soundSystemLabel.setText(language.getString("TEXT0053"));
-		privilegeLabel.setText(language.getString("TEXT0052"));
+		privilegeLabel.setText(this.language.getString("congregation.memberseditor.assignments"));
 		prayStartLabel.setText(language.getString("TEXT0084"));
 		prayEndLabel.setText(language.getString("TEXT0102"));
-		soundSystemMicrophoneHandlerLabel.setText(language.getString("TEXT0054"));
-		soundSystemMixerLabel.setText(language.getString("TEXT0056"));
-		soundSystemPCLabel.setText(language.getString("TEXT0058"));
+//		audioPos1Label.setText(language.getString("TEXT0056"));
+//		audioPos2Label.setText(language.getString("TEXT0058"));
 
-		meetingLabel.setText(language.getString("TEXT0055"));
-		meetingMidweekLabel.setText(language.getString("TEXT0057"));
-		meetingWeekendLabel.setText(language.getString("TEXT0059"));
+//		meetingLabel.setText(language.getString("TEXT0055"));
+//		meetingMidweekLabel.setText(language.getString("TEXT0057"));
+//		meetingWeekendLabel.setText(language.getString("TEXT0059"));
 
 		presidentMidweekCheckBox.setText(language.getString("TEXT0083"));
 		presidentWeekendCheckBox.setText(language.getString("TEXT0110"));
 		bibleStudyCongregationCheckBox.setText(language.getString("TEXT0061"));
 		watchtowerStudyCheckBox.setText(language.getString("TEXT0062"));
 		watchtowerSubstituteStudyCheckBox.setText(language.getString("TEXT0111"));
-		microphoneHandlerMidweekCheckBox.setText("");
-		microphoneHandlerWeekendCheckBox.setText("");
-		soundSystemMixerMidweekCheckBox.setText("");
-		soundSystemMixerWeekendCheckBox.setText("");
-		soundSystemPCMidweekCheckBox.setText("");
-		soundSystemPCWeekendCheckBox.setText("");
 		prayStartMidweekCheckBox.setText("");
 		prayEndMidweekCheckBox.setText("");
 		prayEndWeekendCheckBox.setText("");
@@ -815,9 +884,6 @@ public class UserMenuCongrMemberEditor {
 		publicSpeakerLabel.setText(language.getString("TEXT0112"));
 		publicSpeakerInternCheckBox.setText(language.getString("TEXT0113"));
 		publicSpeakerExternCheckBox.setText(language.getString("TEXT0114"));
-		attendantLabel.setText(language.getString("TEXT0063"));
-		attendantMidweekCheckBox.setText("");
-		attendantWeekendCheckBox.setText("");
 
 		// appointmentTab.setText(language.getString("TEXT0066"));
 
@@ -887,6 +953,99 @@ public class UserMenuCongrMemberEditor {
 		this.onthersTab.setTooltip(onthersTooltip);
 		this.onthersTab.setText("");
 		this.onthersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.OTHERS));
+
+		this.memberAssignmentTabPane.setTabMinHeight(75);
+		this.memberAssignmentTabPane.setTabMaxHeight(75);
+
+		Tooltip prayTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.pray"));
+		prayTabTooltip.getStyleClass().add("tooltip_001");
+		this.prayTab.setTooltip(prayTabTooltip);
+		this.prayTab.setText("");
+		this.prayTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PRAY));
+
+		Tooltip audioTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.audio"));
+		audioTabTooltip.getStyleClass().add("tooltip_001");
+		this.audioTab.setTooltip(audioTabTooltip);
+		this.audioTab.setText("");
+		this.audioTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.AUDIO));
+
+		Tooltip usciereTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.usciere"));
+		usciereTabTooltip.getStyleClass().add("tooltip_001");
+		this.usciereTab.setTooltip(usciereTabTooltip);
+		this.usciereTab.setText("");
+		this.usciereTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USCIERE));
+
+		this.prayLabel.setText(this.language.getString("congregation.memberseditor.assignments.pray"));
+		this.prayMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
+		this.prayWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
+		this.prayStartMidweekCheckBox.setText("");
+		this.prayEndMidweekCheckBox.setText("");
+		this.prayEndWeekendCheckBox.setText("");
+
+		this.audioLabel.setText(this.language.getString("congregation.memberseditor.audio"));
+		this.audioMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
+		this.audioWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
+
+		String noconfig = this.language.getString("congregation.memberseditor.assignments.noconfig");
+		String audioFormat = this.language.getString("congregation.memberseditor.assignments.audiopos");
+		String usciereFormat = this.language.getString("congregation.memberseditor.assignments.uscierezone");
+
+		String inf9 = this.configs.get("inf9");
+		if (inf9 == null || inf9.isEmpty())
+			this.audioPos1Label.setText(String.format(audioFormat, noconfig));
+		else
+			this.audioPos1Label.setText(String.format(audioFormat, inf9));
+
+		String inf10 = this.configs.get("inf10");
+		if (inf10 == null || inf10.isEmpty())
+			this.audioPos2Label.setText(String.format(audioFormat, noconfig));
+		else
+			this.audioPos2Label.setText(String.format(audioFormat, inf10));
+
+		String inf11 = this.configs.get("inf11");
+		if (inf11 == null || inf11.isEmpty())
+			this.audioPos3Label.setText(String.format(audioFormat, noconfig));
+		else
+			this.audioPos3Label.setText(String.format(audioFormat, inf11));
+
+		this.audioMicLabel.setText(this.language.getString("congregation.memberseditor.audio.mic"));
+		this.audioMicMidweekCheckBox.setText("");
+		this.audioMicWeekendCheckBox.setText("");
+		this.audioPos1MidweekCheckBox.setText("");
+		this.audioPos1WeekendCheckBox.setText("");
+		this.audioPos2MidweekCheckBox.setText("");
+		this.audioPos2WeekendCheckBox.setText("");
+		this.audioPos3MidweekCheckBox.setText("");
+		this.audioPos3WeekendCheckBox.setText("");
+
+		this.usciereLabel.setText(this.language.getString("congregation.memberseditor.usciere"));
+		this.usciereMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
+		this.usciereWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
+
+		String inf12 = this.configs.get("inf12");
+		if (inf12 == null || inf12.isEmpty())
+			this.usciereZone1Label.setText(String.format(usciereFormat, noconfig));
+		else
+			this.usciereZone1Label.setText(String.format(usciereFormat, inf12));
+
+		String inf13 = this.configs.get("inf13");
+		if (inf13 == null || inf13.isEmpty())
+			this.usciereZone2Label.setText(String.format(usciereFormat, noconfig));
+		else
+			this.usciereZone2Label.setText(String.format(usciereFormat, inf13));
+
+		String inf14 = this.configs.get("inf14");
+		if (inf14 == null || inf14.isEmpty())
+			this.usciereZone3Label.setText(String.format(usciereFormat, noconfig));
+		else
+			this.usciereZone3Label.setText(String.format(usciereFormat, inf14));
+
+		this.usciereZone1MidweekCheckBox.setText("");
+		this.usciereZone1WeekendCheckBox.setText("");
+		this.usciereZone2MidweekCheckBox.setText("");
+		this.usciereZone2WeekendCheckBox.setText("");
+		this.usciereZone3MidweekCheckBox.setText("");
+		this.usciereZone3WeekendCheckBox.setText("");
 	}
 
 	public Settings getSettings() {
@@ -952,4 +1111,13 @@ public class UserMenuCongrMemberEditor {
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
 	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
+	}
+
 }

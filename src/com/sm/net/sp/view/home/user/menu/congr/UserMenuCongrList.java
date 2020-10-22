@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.stream.StreamSupport;
 
 import com.sm.net.javafx.AlertDesigner;
@@ -18,7 +19,9 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.congr.task.CongrInitDataLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
+import com.smnet.core.task.TaskManager;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -164,6 +167,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private ObservableList<Member> membersList;
 	private ObservableList<Family> familiesList;
 
+	private HashMap<String, String> configs;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -282,6 +287,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		initInfo();
 		updateMembers();
 		updateFamilies();
+
+		// Carica programmazione e luoghi
+
+		String waitMessage = this.language.getString("congregation.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new CongrInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void viewUpdate() {
@@ -669,6 +681,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				ctrl.setParentTabPane(this.memberTabPane);
 				ctrl.setMembersTab(membersTab);
 				ctrl.setNewMemberTab(newMemberTab);
+				ctrl.setConfigs(this.configs);
 
 //				congrTabPane.getTabs().add(newMemberTab);
 //				congrTabPane.getSelectionModel().select(newMemberTab);
@@ -735,6 +748,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedMember(member);
+				ctrl.setConfigs(this.configs);
 				ctrl.objectInitialize();
 
 				Tab newMemberTab = new Tab(member.getNameStyle1(), layout);
@@ -1004,5 +1018,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
 	}
 }

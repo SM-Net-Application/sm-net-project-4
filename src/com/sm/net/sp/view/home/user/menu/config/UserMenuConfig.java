@@ -306,8 +306,9 @@ public class UserMenuConfig {
 		this.watchtowerHeaderLabel.setText(language.getString("conf.label.watchtower.header"));
 		this.overseerHeaderLabel.setText(language.getString("conf.label.overseer.header"));
 		this.memorialHeaderLabel.setText(language.getString("conf.label.memorial.header"));
-		
-		// TODO: here
+
+		this.audioHeaderLabel.setText(language.getString("conf.label.audio.header"));
+		this.usciereHeaderLabel.setText(language.getString("conf.label.usciere.header"));
 
 		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
 		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
@@ -317,14 +318,26 @@ public class UserMenuConfig {
 		this.overseerTalk3MinLabel.setText(language.getString("conf.label.overseer.talk3min"));
 		this.overseerVisitCounterLabel.setText(language.getString("conf.label.overseer.visitcounter"));
 		this.memorialTalkMinLabel.setText(language.getString("conf.label.memorial.talkmin"));
+
+		this.audioPos1NameLabel.setText(language.getString("conf.label.audio.pos1name"));
+		this.audioPos2NameLabel.setText(language.getString("conf.label.audio.pos2name"));
+		this.audioPos3NameLabel.setText(language.getString("conf.label.audio.pos3name"));
+
+		this.usciereZone1NameLabel.setText(language.getString("conf.label.usciere.zone1name"));
+		this.usciereZone2NameLabel.setText(language.getString("conf.label.usciere.zone2name"));
+		this.usciereZone3NameLabel.setText(language.getString("conf.label.usciere.zone3name"));
+
+		this.usciereZone1WeekendCheckBox.setText(language.getString("conf.label.usciere.zone1weekend"));
+		this.usciereZone2WeekendCheckBox.setText(language.getString("conf.label.usciere.zone2weekend"));
+		this.usciereZone3WeekendCheckBox.setText(language.getString("conf.label.usciere.zone3weekend"));
 	}
 
 	private void initData() {
 
-		generalInfoLoad();
+		configLoad();
 	}
 
-	private void generalInfoLoad() {
+	private void configLoad() {
 
 		String waitMessage = this.application.getSettings().getLanguage().getString("conf.load.wait");
 
@@ -376,6 +389,48 @@ public class UserMenuConfig {
 		if (memorialTalkMin != null)
 			this.memorialTalkMinTextField
 					.setText(Crypt.decrypt(memorialTalkMin, this.application.getSettings().getDatabaseSecretKey()));
+
+		String audio1 = this.configs.get("inf9");
+		if (audio1 != null)
+			this.audioPos1NameTextField.setText(audio1);
+
+		String audio2 = this.configs.get("inf10");
+		if (audio2 != null)
+			this.audioPos2NameTextField.setText(audio2);
+
+		String audio3 = this.configs.get("inf11");
+		if (audio3 != null)
+			this.audioPos3NameTextField.setText(audio3);
+
+		String usciere1 = this.configs.get("inf12");
+		if (usciere1 != null)
+			this.usciereZone1NameTextField.setText(usciere1);
+
+		String usciere2 = this.configs.get("inf13");
+		if (usciere2 != null)
+			this.usciereZone2NameTextField.setText(usciere2);
+
+		String usciere3 = this.configs.get("inf14");
+		if (usciere3 != null)
+			this.usciereZone3NameTextField.setText(usciere3);
+
+		String usciere1equals = this.configs.get("inf15");
+		if (usciere1equals != null) {
+			usciere1equals = Crypt.decrypt(usciere1equals, this.application.getSettings().getDatabaseSecretKey());
+			this.usciereZone1WeekendCheckBox.setSelected(usciere1equals.equals("1"));
+		}
+
+		String usciere2equals = this.configs.get("inf16");
+		if (usciere2equals != null) {
+			usciere2equals = Crypt.decrypt(usciere2equals, this.application.getSettings().getDatabaseSecretKey());
+			this.usciereZone2WeekendCheckBox.setSelected(usciere2equals.equals("1"));
+		}
+
+		String usciere3equals = this.configs.get("inf17");
+		if (usciere3equals != null) {
+			usciere3equals = Crypt.decrypt(usciere3equals, this.application.getSettings().getDatabaseSecretKey());
+			this.usciereZone3WeekendCheckBox.setSelected(usciere3equals.equals("1"));
+		}
 
 	}
 
@@ -430,13 +485,31 @@ public class UserMenuConfig {
 			String memorialTalkMinEncrypted = Crypt.encrypt(memorialTalkMin,
 					this.application.getSettings().getDatabaseSecretKey());
 
+			String audio1 = this.audioPos1NameTextField.getText();
+			String audio2 = this.audioPos2NameTextField.getText();
+			String audio3 = this.audioPos3NameTextField.getText();
+
+			String usciere1 = this.usciereZone1NameTextField.getText();
+			String usciere2 = this.usciereZone2NameTextField.getText();
+			String usciere3 = this.usciereZone3NameTextField.getText();
+
+			String usciere1equals = this.usciereZone1WeekendCheckBox.isSelected() ? "1" : "0";
+			usciere1equals = Crypt.encrypt(usciere1equals, this.application.getSettings().getDatabaseSecretKey());
+			String usciere2equals = this.usciereZone2WeekendCheckBox.isSelected() ? "1" : "0";
+			usciere2equals = Crypt.encrypt(usciere2equals, this.application.getSettings().getDatabaseSecretKey());
+			String usciere3equals = this.usciereZone3WeekendCheckBox.isSelected() ? "1" : "0";
+			usciere3equals = Crypt.encrypt(usciere3equals, this.application.getSettings().getDatabaseSecretKey());
+
+			// ------------------------------------------
+
 			String waitMessage = this.application.getSettings().getLanguage().getString("conf.save.wait");
 
 			TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
 					new ConfigSaveTask(this.application.getAlertBuilder2(), this.application.getSettings(),
 							this.ownerStage, placesPatternEncrypted, publicTalkMinEncrypted, watchtowerMinEncrypted,
 							overseerTalk1MinEncrypted, overseerTalk2MinEncrypted, overseerTalk3MinEncrypted,
-							overseerVisitCounterEncrypted, memorialTalkMinEncrypted));
+							overseerVisitCounterEncrypted, memorialTalkMinEncrypted, audio1, audio2, audio3, usciere1,
+							usciere2, usciere3, usciere1equals, usciere2equals, usciere3equals));
 		}
 	}
 

@@ -790,7 +790,9 @@ public class JSONRequest {
 
 	public static JSONObject CONFIG_UPDATE(String placesPatternEncrypted, String publicTalkMinEncrypted,
 			String watchtowerMinEncrypted, String overseerTalk1MinEncrypted, String overseerTalk2MinEncrypted,
-			String overseerTalk3MinEncrypted, String overseerVisitCounterEncrypted, String memorialTalkMinEncrypted) {
+			String overseerTalk3MinEncrypted, String overseerVisitCounterEncrypted, String memorialTalkMinEncrypted,
+			String audio1, String audio2, String audio3, String usciere1, String usciere2, String usciere3,
+			String usciere1equals, String usciere2equals, String usciere3equals) {
 
 		JSONObject jsonObj = create(Integer.valueOf(45));
 
@@ -803,6 +805,18 @@ public class JSONRequest {
 		jsonArray.put(createJSONKeyValue("inf6", overseerTalk3MinEncrypted));
 		jsonArray.put(createJSONKeyValue("inf7", overseerVisitCounterEncrypted));
 		jsonArray.put(createJSONKeyValue("inf8", memorialTalkMinEncrypted));
+
+		jsonArray.put(createJSONKeyValue("inf9", audio1));
+		jsonArray.put(createJSONKeyValue("inf10", audio2));
+		jsonArray.put(createJSONKeyValue("inf11", audio3));
+
+		jsonArray.put(createJSONKeyValue("inf12", usciere1));
+		jsonArray.put(createJSONKeyValue("inf13", usciere2));
+		jsonArray.put(createJSONKeyValue("inf14", usciere3));
+
+		jsonArray.put(createJSONKeyValue("inf15", usciere1equals));
+		jsonArray.put(createJSONKeyValue("inf16", usciere2equals));
+		jsonArray.put(createJSONKeyValue("inf17", usciere3equals));
 
 		jsonObj.put("infos", jsonArray);
 
