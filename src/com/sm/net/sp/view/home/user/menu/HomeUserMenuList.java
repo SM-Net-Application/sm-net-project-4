@@ -135,9 +135,6 @@ public class HomeUserMenuList {
 
 	private String setMenuLabel() {
 
-		// String menuLabel = language.getString("USERMENU000");
-		// menuLabel += ": " + user.getUsername();
-
 		String menuLabel = user.getUsername();
 
 		if (user.isSpUserSU())
@@ -147,8 +144,6 @@ public class HomeUserMenuList {
 	}
 
 	private void buildMenuList() {
-
-		// TODO : Gestire le autorizzazioni degli utenti
 
 		if (this.user.isSpUserSU())
 			menuListView.getItems().addAll(EnumHomeUserMenuList.values());
@@ -187,8 +182,6 @@ public class HomeUserMenuList {
 	}
 
 	private void loadSettings() {
-
-		// TODO : Aggiungere il metodo per caricare l'opzione selezionata
 
 		EnumHomeUserMenuList menuItem = menuListView.getSelectionModel().getSelectedItem();
 

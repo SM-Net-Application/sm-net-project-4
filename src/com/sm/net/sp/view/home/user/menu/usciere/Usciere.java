@@ -243,8 +243,8 @@ public class Usciere extends UpdateDataAdapter {
 
 		String waitMessage = this.language.getString("memorial.wait.load");
 
-		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new MemorialInitDataLoadTask(
-				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new MemorialInitDataLoadTask(
+//				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void loadCalendar() {
@@ -300,8 +300,8 @@ public class Usciere extends UpdateDataAdapter {
 
 		String waitMessage = this.language.getString("memorial.task.load");
 
-		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-				new WeekMemorialLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//				new WeekMemorialLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 
 	}
 
@@ -325,9 +325,9 @@ public class Usciere extends UpdateDataAdapter {
 
 					String waitMessage = this.language.getString("memorial.task.delete");
 
-					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-							new WeekMemorialDeleteTask(this.application.getAlertBuilder2(), this.settings,
-									this.ownerStage, this, id));
+//					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//							new WeekMemorialDeleteTask(this.application.getAlertBuilder2(), this.settings,
+//									this.ownerStage, this, id));
 				}
 			} else {
 

@@ -2,19 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.memorial.MemorialEditor">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.audio.AudioEditor">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -49,861 +45,311 @@
                   </Separator>
                </children>
             </StackPane>
-            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-              <tabs>
-                <Tab fx:id="generalTab" text="info">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0">
-                           <children>
-                              <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <VBox>
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="dayLabel" text="day">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="timeLabel" text="time">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="placeLabel" text="place">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                       </children>
-                                    </VBox>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <ComboBox fx:id="dayComboBox">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </ComboBox>
-                                             </children>
-                                          </StackPane>
-                                          <VBox>
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="hourComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane>
-                                                         <children>
-                                                            <Label fx:id="timeSeparatorLabel" text=":" />
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="minuteComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                          <HBox>
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <TextField fx:id="placeTextField">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </TextField>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane>
-                                                   <children>
-                                                      <Button fx:id="placeSelectButton" mnemonicParsing="false" text="placeSelect">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                  <Tab fx:id="podiumTab" text="programma">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0">
-                           <children>
-                              <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <VBox>
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="songStartLabel" text="cantico iniziale">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="prayStartLabel" text="preghiera iniziale">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="presidentLabel" text="presidente">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="talkMinLabel" text="min">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets top="25.0" />
-                                             </VBox.margin>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="talkBrotherLabel" text="oratore">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="talkThemeLabel" text="tema">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                       </children>
-                                    </VBox>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <TextField fx:id="songStartTextField">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </TextField>
-                                             </children>
-                                          </StackPane>
-                                          <HBox>
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="prayStartComboBox" prefWidth="150.0">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <CheckBox fx:id="prayStartPresidentCheckBox" mnemonicParsing="false" text="fatta dal presidente">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </CheckBox>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </HBox>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <ComboBox fx:id="presidentComboBox" prefWidth="150.0">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </ComboBox>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <TextField fx:id="talkMinTextField">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </TextField>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets top="25.0" />
-                                             </VBox.margin>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <ComboBox fx:id="talkBrotherComboBox" prefWidth="150.0">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </ComboBox>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <TextField fx:id="talkThemeTextField">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </TextField>
-                                             </children>
-                                          </StackPane>
-                                       </children>
-                                    </VBox>
-                                    <StackPane>
-                                       <children>
-                                          <Separator orientation="VERTICAL">
-                                             <StackPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </StackPane.margin>
-                                          </Separator>
-                                       </children>
-                                    </StackPane>
-                                    <VBox>
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="songEndLabel" text="cantico finale">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="prayEndLabel" text="preghiera finale">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="prayBreadLabel" text="preghiera pane">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets top="60.0" />
-                                             </VBox.margin>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="prayWineLabel" text="preghiera vino">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                       </children>
-                                    </VBox>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <TextField fx:id="songEndTextField">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </TextField>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <ComboBox fx:id="prayEndComboBox" prefWidth="150.0">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </ComboBox>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <ComboBox fx:id="prayBreadComboBox" prefWidth="150.0">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </ComboBox>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets top="60.0" />
-                                             </VBox.margin>
-                                          </StackPane>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <ComboBox fx:id="prayWineComboBox" prefWidth="150.0">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </ComboBox>
-                                             </children>
-                                          </StackPane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="emblemsTab" text="emblemi">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0">
-                           <children>
-                              <HBox layoutX="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="breadHeaderLabel" text="pane">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane>
-                                             <children>
-                                                <Separator>
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Separator>
-                                             </children>
-                                          </StackPane>
-                                          <HBox>
-                                             <children>
-                                                <VBox>
-                                                   <children>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="breadFamily1Label" text="famiglia1">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="breadFamily2Label" text="famiglia2">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="breadFamily3Label" text="famiglia3">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="breadFamily4Label" text="famiglia4">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="breadFamily5Label" text="famiglia5">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                   </children>
-                                                </VBox>
-                                                <VBox HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="breadFamily1ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="breadFamily2ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="breadFamily3ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="breadFamily4ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="breadFamily5ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                    <StackPane>
-                                       <children>
-                                          <Separator orientation="VERTICAL">
-                                             <StackPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </StackPane.margin>
-                                          </Separator>
-                                       </children>
-                                    </StackPane>
-                                    <VBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <StackPane alignment="CENTER_LEFT">
-                                             <children>
-                                                <Label fx:id="wineHeaderLabel" text="vino">
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Label>
-                                             </children>
-                                          </StackPane>
-                                          <StackPane>
-                                             <children>
-                                                <Separator>
-                                                   <StackPane.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </StackPane.margin>
-                                                </Separator>
-                                             </children>
-                                          </StackPane>
-                                          <HBox>
-                                             <children>
-                                                <VBox>
-                                                   <children>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="wineFamily1Label" text="famiglia1">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="wineFamily2Label" text="famiglia2">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="wineFamily3Label" text="famiglia3">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="wineFamily4Label" text="famiglia4">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <Label fx:id="wineFamily5Label" text="famiglia5">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                   </children>
-                                                </VBox>
-                                                <VBox HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="wineFamily1ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="wineFamily2ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="wineFamily3ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="wineFamily4ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <ComboBox fx:id="wineFamily5ComboBox">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </ComboBox>
-                                                         </children>
-                                                      </StackPane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="emblemsBrothersTab" text="passaggio">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0">
-                           <children>
-                              <VBox layoutX="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <StackPane alignment="CENTER_LEFT">
-                                       <children>
-                                          <Label fx:id="emblemsBrothersHeaderLabel" text="passaggio emblemi">
-                                             <StackPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </StackPane.margin>
-                                          </Label>
-                                       </children>
-                                    </StackPane>
-                                    <StackPane>
-                                       <children>
-                                          <Separator>
-                                             <StackPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </StackPane.margin>
-                                          </Separator>
-                                       </children>
-                                    </StackPane>
-                                    <HBox VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <VBox>
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother1Label" text="fratello1">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother2Label" text="fratello2">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother3Label" text="fratello3">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother4Label" text="fratello4">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother5Label" text="fratello5">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother6Label" text="fratello6">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother7Label" text="fratello7">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother8Label" text="fratello8">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother9Label" text="fratello9">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Label fx:id="emblemsBrother10Label" text="fratello10">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Label>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </VBox>
-                                          <VBox HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother1ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother2ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother3ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother4ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother5ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother6ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother7ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother8ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother9ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <ComboBox fx:id="emblemsBrother10ComboBox">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </ComboBox>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-              </tabs>
+            <VBox VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets />
                </VBox.margin>
-            </TabPane>
+               <children>
+                  <StackPane alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="midweekLabel" text="midweek">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="pos1MidweekLabel" text="pos1">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="pos2MidweekLabel" text="pos2">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="pos3MidweekLabel" text="pos3">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="pos1MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="pos2MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="pos3MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="mic1MidweekLabel" text="mic1">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="mic2MidweekLabel" text="mic2">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="mic3MidweekLabel" text="mic3">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="mic1MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="mic2MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="mic3MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <StackPane>
+                     <children>
+                        <Separator>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Separator>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </StackPane>
+                  <StackPane alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="weekendLabel" text="weekend">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="pos1WeekendLabel" text="pos1">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="pos2WeekendLabel" text="pos2">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="pos3WeekendLabel" text="pos3">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="pos1WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="pos2WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="pos3WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="mic1WeekendLabel" text="mic1">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="mic2WeekendLabel" text="mic2">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="mic3WeekendLabel" text="mic3">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="mic1WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="mic2WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane alignment="CENTER_LEFT">
+                                 <children>
+                                    <ComboBox fx:id="mic3WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>

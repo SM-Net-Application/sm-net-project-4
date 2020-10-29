@@ -143,6 +143,8 @@
 	<field name="printOnlyWatchtower" class="java.lang.Boolean"/>
 	<field name="weekendExtraHeader" class="java.lang.String"/>
 	<field name="weekendExtraContent" class="java.lang.String"/>
+	<field name="audioMidweek" class="java.lang.String"/>
+	<field name="audioWeekend" class="java.lang.String"/>
 	<detail>
 		<band height="70">
 			<rectangle>
@@ -1695,6 +1697,22 @@
 				<textFieldExpression><![CDATA[$F{place1}]]></textFieldExpression>
 			</textField>
 		</band>
+		<band height="27">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[($F{printStandardMidweek}||$F{printOverseerMidweek}) && !$F{audioMidweek}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="5" width="545" height="17" uuid="66faee17-820d-4aff-a970-aa88b12e07e7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement markup="html">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{audioMidweek}]]></textFieldExpression>
+			</textField>
+		</band>
 		<band height="37">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}]]></printWhenExpression>
 			<rectangle>
@@ -3133,6 +3151,22 @@
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{place2}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="27">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[($F{printStandardWeekend}||$F{printOverseerWeekend})&&!$F{audioWeekend}.isEmpty()]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="5" width="545" height="17" uuid="a0fdd6e5-118f-40e7-b475-2c3cfe21dda7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement markup="html">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{audioWeekend}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="75">

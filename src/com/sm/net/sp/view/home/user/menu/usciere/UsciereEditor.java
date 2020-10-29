@@ -721,24 +721,24 @@ public class UsciereEditor extends UpdateDataAdapter {
 
 				// editWeek
 
-				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
-				weekMemorial.setMemorialID(this.selectedWeek.getMemorialID());
-
-				String waitMessage = this.language.getString("memorialeditor.wait.save");
-				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-								weekMemorial, this.ownerCtrl, this.thisTab));
+//				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
+//				weekMemorial.setMemorialID(this.selectedWeek.getMemorialID());
+//
+//				String waitMessage = this.language.getString("memorialeditor.wait.save");
+//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+//								weekMemorial, this.ownerCtrl, this.thisTab));
 
 			} else {
 
 				// newWeek
 
-				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
-
-				String waitMessage = this.language.getString("memorialeditor.wait.save");
-				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-								weekMemorial, this.ownerCtrl, this.thisTab));
+//				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
+//
+//				String waitMessage = this.language.getString("memorialeditor.wait.save");
+//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+//								weekMemorial, this.ownerCtrl, this.thisTab));
 			}
 		}
 	}

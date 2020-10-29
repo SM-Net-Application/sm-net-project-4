@@ -11,6 +11,7 @@ import org.jsoup.nodes.Document;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
@@ -48,12 +49,14 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		JSONObject jsonConfig = JSONRequest.CONFIG_LOAD();
 		JSONObject jsonConvention = JSONRequest.CONVENTION_LOAD();
 		JSONObject jsonMemorial = JSONRequest.MEMORIAL_LOAD();
+		JSONObject jsonAudio = JSONRequest.AUDIO_LOAD();
 
 		post(hashMap, url, jsonDateAndTime, "responseDateAndTime");
 		post(hashMap, url, jsonPlaces, "responsePlaces");
 		post(hashMap, url, jsonConfig, "responseConfig");
 		post(hashMap, url, jsonConvention, "responseConvention");
 		post(hashMap, url, jsonMemorial, "responseMemorial");
+		post(hashMap, url, jsonAudio, "responseAudio");
 
 	}
 
@@ -79,12 +82,14 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		HashMap<String, String> configs = configFeedback(hashMap);
 		ObservableList<WeekConvention> convention = conventionFeedback(hashMap);
 		ObservableList<WeekMemorial> memorial = memorialFeedback(hashMap);
+		ObservableList<WeekAudio> audio = audioFeedback(hashMap);
 
 		this.view.setDateAndTimeList(dateAndTimeList);
 		this.view.setPlacesList(placesList);
 		this.view.setConfigs(configs);
 		this.view.setConvention(convention);
 		this.view.setMemorial(memorial);
+		this.view.setAudio(audio);
 	}
 
 	private ObservableList<WeekMemorial> memorialFeedback(HashMap<String, Object> hashMap) {
@@ -105,6 +110,31 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 					WeekMemorial convention = WeekMemorial.newInstanceByJSONObject(json,
 							this.settings.getDatabaseSecretKey());
 					list.add(convention);
+				}
+
+			}
+		}
+
+		return list;
+	}
+
+	private ObservableList<WeekAudio> audioFeedback(HashMap<String, Object> hashMap) {
+
+		ObservableList<WeekAudio> list = FXCollections.observableArrayList();
+
+		JSONObject response = (JSONObject) hashMap.get("responseAudio");
+		if (response != null) {
+
+			int status = response.getInt("status");
+
+			if (status == 0) {
+
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
+
+					JSONObject json = (JSONObject) obj;
+					WeekAudio w = WeekAudio.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
+					list.add(w);
 				}
 
 			}

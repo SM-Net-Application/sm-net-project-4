@@ -4,37 +4,24 @@ import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.dialogs.place.PlaceDialog;
-import com.sm.net.sp.model.EnumDays;
-import com.sm.net.sp.model.EnumPlaceType;
-import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
-import com.sm.net.sp.model.WeekMemorial;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.utils.PlaceUtils;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.conven.EnumDaysComboBoxListCell;
-import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialSaveTask;
-import com.sm.net.util.Crypt;
+import com.sm.net.sp.view.home.user.menu.audio.task.WeekAudioSaveTask;
 import com.smnet.core.task.TaskManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class AudioEditor extends UpdateDataAdapter {
 
@@ -42,186 +29,89 @@ public class AudioEditor extends UpdateDataAdapter {
 	private Button saveButton;
 
 	@FXML
-	private TabPane tabPane;
+	private Label midweekLabel;
 	@FXML
-	private Tab generalTab;
-	@FXML
-	private Tab podiumTab;
-	@FXML
-	private Tab emblemsTab;
-	@FXML
-	private Tab emblemsBrothersTab;
+	private Label weekendLabel;
 
 	@FXML
-	private Label dayLabel;
+	private Label pos1MidweekLabel;
 	@FXML
-	private Label timeLabel;
+	private Label pos2MidweekLabel;
 	@FXML
-	private Label timeSeparatorLabel;
-	@FXML
-	private Label placeLabel;
+	private Label pos3MidweekLabel;
 
 	@FXML
-	private ComboBox<EnumDays> dayComboBox;
+	private ComboBox<Member> pos1MidweekComboBox;
 	@FXML
-	private ComboBox<Integer> hourComboBox;
+	private ComboBox<Member> pos2MidweekComboBox;
 	@FXML
-	private ComboBox<Integer> minuteComboBox;
-	@FXML
-	private TextField placeTextField;
-	@FXML
-	private Button placeSelectButton;
+	private ComboBox<Member> pos3MidweekComboBox;
 
 	@FXML
-	private Label songStartLabel;
+	private Label mic1MidweekLabel;
 	@FXML
-	private Label prayStartLabel;
+	private Label mic2MidweekLabel;
 	@FXML
-	private Label presidentLabel;
-	@FXML
-	private Label talkMinLabel;
-	@FXML
-	private Label talkThemeLabel;
-	@FXML
-	private Label talkBrotherLabel;
-	@FXML
-	private Label prayBreadLabel;
-	@FXML
-	private Label prayWineLabel;
-	@FXML
-	private Label songEndLabel;
-	@FXML
-	private Label prayEndLabel;
+	private Label mic3MidweekLabel;
 
 	@FXML
-	private TextField songStartTextField;
+	private ComboBox<Member> mic1MidweekComboBox;
 	@FXML
-	private ComboBox<Member> prayStartComboBox;
+	private ComboBox<Member> mic2MidweekComboBox;
 	@FXML
-	private CheckBox prayStartPresidentCheckBox;
-	@FXML
-	private ComboBox<Member> presidentComboBox;
-	@FXML
-	private TextField talkMinTextField;
-	@FXML
-	private TextField talkThemeTextField;
-	@FXML
-	private ComboBox<Member> talkBrotherComboBox;
-	@FXML
-	private ComboBox<Member> prayBreadComboBox;
-	@FXML
-	private ComboBox<Member> prayWineComboBox;
-	@FXML
-	private TextField songEndTextField;
-	@FXML
-	private ComboBox<Member> prayEndComboBox;
+	private ComboBox<Member> mic3MidweekComboBox;
 
 	@FXML
-	private Label breadHeaderLabel;
+	private Label pos1WeekendLabel;
 	@FXML
-	private Label breadFamily1Label;
+	private Label pos2WeekendLabel;
 	@FXML
-	private Label breadFamily2Label;
-	@FXML
-	private Label breadFamily3Label;
-	@FXML
-	private Label breadFamily4Label;
-	@FXML
-	private Label breadFamily5Label;
+	private Label pos3WeekendLabel;
 
 	@FXML
-	private ComboBox<Family> breadFamily1ComboBox;
+	private ComboBox<Member> pos1WeekendComboBox;
 	@FXML
-	private ComboBox<Family> breadFamily2ComboBox;
+	private ComboBox<Member> pos2WeekendComboBox;
 	@FXML
-	private ComboBox<Family> breadFamily3ComboBox;
-	@FXML
-	private ComboBox<Family> breadFamily4ComboBox;
-	@FXML
-	private ComboBox<Family> breadFamily5ComboBox;
+	private ComboBox<Member> pos3WeekendComboBox;
 
 	@FXML
-	private Label wineHeaderLabel;
+	private Label mic1WeekendLabel;
 	@FXML
-	private Label wineFamily1Label;
+	private Label mic2WeekendLabel;
 	@FXML
-	private Label wineFamily2Label;
-	@FXML
-	private Label wineFamily3Label;
-	@FXML
-	private Label wineFamily4Label;
-	@FXML
-	private Label wineFamily5Label;
+	private Label mic3WeekendLabel;
 
 	@FXML
-	private ComboBox<Family> wineFamily1ComboBox;
+	private ComboBox<Member> mic1WeekendComboBox;
 	@FXML
-	private ComboBox<Family> wineFamily2ComboBox;
+	private ComboBox<Member> mic2WeekendComboBox;
 	@FXML
-	private ComboBox<Family> wineFamily3ComboBox;
-	@FXML
-	private ComboBox<Family> wineFamily4ComboBox;
-	@FXML
-	private ComboBox<Family> wineFamily5ComboBox;
-
-	@FXML
-	private Label emblemsBrothersHeaderLabel;
-	@FXML
-	private Label emblemsBrother1Label;
-	@FXML
-	private Label emblemsBrother2Label;
-	@FXML
-	private Label emblemsBrother3Label;
-	@FXML
-	private Label emblemsBrother4Label;
-	@FXML
-	private Label emblemsBrother5Label;
-	@FXML
-	private Label emblemsBrother6Label;
-	@FXML
-	private Label emblemsBrother7Label;
-	@FXML
-	private Label emblemsBrother8Label;
-	@FXML
-	private Label emblemsBrother9Label;
-	@FXML
-	private Label emblemsBrother10Label;
-
-	@FXML
-	private ComboBox<Member> emblemsBrother1ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother2ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother3ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother4ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother5ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother6ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother7ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother8ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother9ComboBox;
-	@FXML
-	private ComboBox<Member> emblemsBrother10ComboBox;
+	private ComboBox<Member> mic3WeekendComboBox;
 
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
 
 	private ObservableList<Member> membersList;
-	private ObservableList<Family> familiesList;
+
+	private ObservableList<Member> pos1MidweekList;
+	private ObservableList<Member> pos2MidweekList;
+	private ObservableList<Member> pos3MidweekList;
+	private ObservableList<Member> micMidweekList;
+
+	private ObservableList<Member> pos1WeekendList;
+	private ObservableList<Member> pos2WeekendList;
+	private ObservableList<Member> pos3WeekendList;
+	private ObservableList<Member> micWeekendList;
 
 	private Audio ownerCtrl;
-	private WeekMemorial selectedWeek;
+	private WeekAudio selectedWeek;
 
 	private TabPane ownerTabPane;
 	private Tab thisTab;
 
-	private ObservableList<WeekMemorial> calendar;
+	private ObservableList<WeekAudio> calendar;
 	private HashMap<String, String> configs;
 
 	private SupportPlannerView application;
@@ -233,98 +123,36 @@ public class AudioEditor extends UpdateDataAdapter {
 
 	private void styleClasses() {
 
-		this.tabPane.getStyleClass().add("tab_pane_003");
+		this.midweekLabel.getStyleClass().add("label_002");
+		this.weekendLabel.getStyleClass().add("label_002");
 
-		this.generalTab.getStyleClass().add("tab_001");
-		this.podiumTab.getStyleClass().add("tab_001");
-		this.emblemsTab.getStyleClass().add("tab_001");
-		this.emblemsBrothersTab.getStyleClass().add("tab_001");
+		this.pos1MidweekLabel.getStyleClass().add("label_set_001");
+		this.pos2MidweekLabel.getStyleClass().add("label_set_001");
+		this.pos3MidweekLabel.getStyleClass().add("label_set_001");
+		this.mic1MidweekLabel.getStyleClass().add("label_set_001");
+		this.mic2MidweekLabel.getStyleClass().add("label_set_001");
+		this.mic3MidweekLabel.getStyleClass().add("label_set_001");
 
-		this.dayLabel.getStyleClass().add("label_set_001");
-		this.timeLabel.getStyleClass().add("label_set_001");
-		this.timeSeparatorLabel.getStyleClass().add("label_001");
-		this.placeLabel.getStyleClass().add("label_set_001");
+		this.pos1MidweekComboBox.getStyleClass().add("combo_box_001");
+		this.pos2MidweekComboBox.getStyleClass().add("combo_box_001");
+		this.pos3MidweekComboBox.getStyleClass().add("combo_box_001");
+		this.mic1MidweekComboBox.getStyleClass().add("combo_box_001");
+		this.mic2MidweekComboBox.getStyleClass().add("combo_box_001");
+		this.mic3MidweekComboBox.getStyleClass().add("combo_box_001");
 
-		this.dayComboBox.getStyleClass().add("combo_box_001");
-		this.hourComboBox.getStyleClass().add("combo_box_002");
-		this.minuteComboBox.getStyleClass().add("combo_box_002");
-		this.placeTextField.getStyleClass().add("text_field_001");
-		this.placeSelectButton.getStyleClass().add("button_image_001");
+		this.pos1WeekendLabel.getStyleClass().add("label_set_001");
+		this.pos2WeekendLabel.getStyleClass().add("label_set_001");
+		this.pos3WeekendLabel.getStyleClass().add("label_set_001");
+		this.mic1WeekendLabel.getStyleClass().add("label_set_001");
+		this.mic2WeekendLabel.getStyleClass().add("label_set_001");
+		this.mic3WeekendLabel.getStyleClass().add("label_set_001");
 
-		this.songStartLabel.getStyleClass().add("label_set_001");
-		this.prayStartLabel.getStyleClass().add("label_set_001");
-		this.presidentLabel.getStyleClass().add("label_set_001");
-		this.talkMinLabel.getStyleClass().add("label_set_001");
-		this.talkThemeLabel.getStyleClass().add("label_set_001");
-		this.talkBrotherLabel.getStyleClass().add("label_set_001");
-		this.prayBreadLabel.getStyleClass().add("label_set_001");
-		this.prayWineLabel.getStyleClass().add("label_set_001");
-		this.songEndLabel.getStyleClass().add("label_set_001");
-		this.prayEndLabel.getStyleClass().add("label_set_001");
-
-		this.songStartTextField.getStyleClass().add("text_field_002");
-		this.talkMinTextField.getStyleClass().add("text_field_002");
-		this.talkThemeTextField.getStyleClass().add("text_field_001");
-		this.songEndTextField.getStyleClass().add("text_field_002");
-
-		this.prayStartPresidentCheckBox.getStyleClass().add("check_box_001");
-
-		this.prayStartComboBox.getStyleClass().add("combo_box_001");
-		this.presidentComboBox.getStyleClass().add("combo_box_001");
-		this.talkBrotherComboBox.getStyleClass().add("combo_box_001");
-		this.prayBreadComboBox.getStyleClass().add("combo_box_001");
-		this.prayWineComboBox.getStyleClass().add("combo_box_001");
-		this.prayEndComboBox.getStyleClass().add("combo_box_001");
-
-		this.breadHeaderLabel.getStyleClass().add("label_002");
-		this.wineHeaderLabel.getStyleClass().add("label_002");
-
-		this.breadFamily1Label.getStyleClass().add("label_set_001");
-		this.breadFamily2Label.getStyleClass().add("label_set_001");
-		this.breadFamily3Label.getStyleClass().add("label_set_001");
-		this.breadFamily4Label.getStyleClass().add("label_set_001");
-		this.breadFamily5Label.getStyleClass().add("label_set_001");
-
-		this.wineFamily1Label.getStyleClass().add("label_set_001");
-		this.wineFamily2Label.getStyleClass().add("label_set_001");
-		this.wineFamily3Label.getStyleClass().add("label_set_001");
-		this.wineFamily4Label.getStyleClass().add("label_set_001");
-		this.wineFamily5Label.getStyleClass().add("label_set_001");
-
-		this.breadFamily1ComboBox.getStyleClass().add("combo_box_001");
-		this.breadFamily2ComboBox.getStyleClass().add("combo_box_001");
-		this.breadFamily3ComboBox.getStyleClass().add("combo_box_001");
-		this.breadFamily4ComboBox.getStyleClass().add("combo_box_001");
-		this.breadFamily5ComboBox.getStyleClass().add("combo_box_001");
-
-		this.wineFamily1ComboBox.getStyleClass().add("combo_box_001");
-		this.wineFamily2ComboBox.getStyleClass().add("combo_box_001");
-		this.wineFamily3ComboBox.getStyleClass().add("combo_box_001");
-		this.wineFamily4ComboBox.getStyleClass().add("combo_box_001");
-		this.wineFamily5ComboBox.getStyleClass().add("combo_box_001");
-
-		this.emblemsBrothersHeaderLabel.getStyleClass().add("label_002");
-		this.emblemsBrother1Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother2Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother3Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother4Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother5Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother6Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother7Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother8Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother9Label.getStyleClass().add("label_set_001");
-		this.emblemsBrother10Label.getStyleClass().add("label_set_001");
-
-		this.emblemsBrother1ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother2ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother3ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother4ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother5ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother6ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother7ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother8ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother9ComboBox.getStyleClass().add("combo_box_001");
-		this.emblemsBrother10ComboBox.getStyleClass().add("combo_box_001");
+		this.pos1WeekendComboBox.getStyleClass().add("combo_box_001");
+		this.pos2WeekendComboBox.getStyleClass().add("combo_box_001");
+		this.pos3WeekendComboBox.getStyleClass().add("combo_box_001");
+		this.mic1WeekendComboBox.getStyleClass().add("combo_box_001");
+		this.mic2WeekendComboBox.getStyleClass().add("combo_box_001");
+		this.mic3WeekendComboBox.getStyleClass().add("combo_box_001");
 
 		this.saveButton.getStyleClass().add("button_image_001");
 	}
@@ -333,100 +161,48 @@ public class AudioEditor extends UpdateDataAdapter {
 
 		this.language = settings.getLanguage();
 
-		this.tabPane.setTabMinHeight(75);
-		this.tabPane.setTabMaxHeight(75);
+		this.midweekLabel.setText(this.language.getString("audioeditor.midweek"));
+		this.weekendLabel.setText(this.language.getString("audioeditor.weekend"));
 
-		this.dayLabel.setText(this.language.getString("memorialeditor.day"));
-		this.timeLabel.setText(this.language.getString("memorialeditor.time"));
-		this.timeSeparatorLabel.setText(this.language.getString("memorialeditor.timeseparator"));
-		this.placeLabel.setText(this.language.getString("memorialeditor.place"));
+		String audioFormat = this.language.getString("audioeditor.pos");
+		String noconfig = this.language.getString("audioeditor.noconfig");
+		String pos1 = this.configs.get("inf9");
+		String pos2 = this.configs.get("inf10");
+		String pos3 = this.configs.get("inf11");
 
-		int width = 100;
-		this.hourComboBox.setMinWidth(width);
-		this.hourComboBox.setMaxWidth(width);
-		this.minuteComboBox.setMinWidth(width);
-		this.minuteComboBox.setMaxWidth(width);
+		if (pos1 == null || pos1.isEmpty()) {
+			this.pos1MidweekLabel.setText(String.format(audioFormat, noconfig));
+			this.pos1WeekendLabel.setText(String.format(audioFormat, noconfig));
+		} else {
+			this.pos1MidweekLabel.setText(String.format(audioFormat, pos1));
+			this.pos1WeekendLabel.setText(String.format(audioFormat, pos1));
+		}
 
-		this.placeSelectButton.setText(null);
-		this.placeSelectButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SEARCH));
+		if (pos2 == null || pos2.isEmpty()) {
+			this.pos2MidweekLabel.setText(String.format(audioFormat, noconfig));
+			this.pos2WeekendLabel.setText(String.format(audioFormat, noconfig));
+		} else {
+			this.pos2MidweekLabel.setText(String.format(audioFormat, pos2));
+			this.pos2WeekendLabel.setText(String.format(audioFormat, pos2));
+		}
 
-		this.prayStartComboBox.setMinWidth(200);
+		if (pos3 == null || pos3.isEmpty()) {
+			this.pos3MidweekLabel.setText(String.format(audioFormat, noconfig));
+			this.pos3WeekendLabel.setText(String.format(audioFormat, noconfig));
+		} else {
+			this.pos3MidweekLabel.setText(String.format(audioFormat, pos3));
+			this.pos3WeekendLabel.setText(String.format(audioFormat, pos3));
+		}
 
-		this.songStartLabel.setText(this.language.getString("memorialeditor.songstart"));
-		this.prayStartLabel.setText(this.language.getString("memorialeditor.praystart"));
-		this.prayStartPresidentCheckBox.setText(this.language.getString("memorialeditor.praystartpresident"));
-		this.presidentLabel.setText(this.language.getString("memorialeditor.president"));
-		this.talkMinLabel.setText(this.language.getString("memorialeditor.talkmin"));
-		this.talkBrotherLabel.setText(this.language.getString("memorialeditor.talkbrother"));
-		this.talkThemeLabel.setText(this.language.getString("memorialeditor.talktheme"));
-		this.songEndLabel.setText(this.language.getString("memorialeditor.songend"));
-		this.prayEndLabel.setText(this.language.getString("memorialeditor.prayend"));
-		this.prayBreadLabel.setText(this.language.getString("memorialeditor.praybread"));
-		this.prayWineLabel.setText(this.language.getString("memorialeditor.praywine"));
+		this.mic1MidweekLabel.setText(this.language.getString("audioeditor.mic1"));
+		this.mic2MidweekLabel.setText(this.language.getString("audioeditor.mic2"));
+		this.mic3MidweekLabel.setText(this.language.getString("audioeditor.mic3"));
 
-		this.breadHeaderLabel.setText(this.language.getString("memorialeditor.breadheader"));
-		this.breadFamily1Label.setText(this.language.getString("memorialeditor.breadfamily1"));
-		this.breadFamily2Label.setText(this.language.getString("memorialeditor.breadfamily2"));
-		this.breadFamily3Label.setText(this.language.getString("memorialeditor.breadfamily3"));
-		this.breadFamily4Label.setText(this.language.getString("memorialeditor.breadfamily4"));
-		this.breadFamily5Label.setText(this.language.getString("memorialeditor.breadfamily5"));
+		this.mic1WeekendLabel.setText(this.language.getString("audioeditor.mic1"));
+		this.mic2WeekendLabel.setText(this.language.getString("audioeditor.mic2"));
+		this.mic3WeekendLabel.setText(this.language.getString("audioeditor.mic3"));
 
-		this.breadFamily1ComboBox.setMinWidth(200);
-		this.breadFamily2ComboBox.setMinWidth(200);
-		this.breadFamily3ComboBox.setMinWidth(200);
-		this.breadFamily4ComboBox.setMinWidth(200);
-		this.breadFamily5ComboBox.setMinWidth(200);
-
-		this.wineHeaderLabel.setText(this.language.getString("memorialeditor.wineheader"));
-		this.wineFamily1Label.setText(this.language.getString("memorialeditor.winefamily1"));
-		this.wineFamily2Label.setText(this.language.getString("memorialeditor.winefamily2"));
-		this.wineFamily3Label.setText(this.language.getString("memorialeditor.winefamily3"));
-		this.wineFamily4Label.setText(this.language.getString("memorialeditor.winefamily4"));
-		this.wineFamily5Label.setText(this.language.getString("memorialeditor.winefamily5"));
-
-		this.wineFamily1ComboBox.setMinWidth(200);
-		this.wineFamily2ComboBox.setMinWidth(200);
-		this.wineFamily3ComboBox.setMinWidth(200);
-		this.wineFamily4ComboBox.setMinWidth(200);
-		this.wineFamily5ComboBox.setMinWidth(200);
-
-		this.emblemsBrothersHeaderLabel.setText(this.language.getString("memorialeditor.emblemsbrothersheader"));
-		this.emblemsBrother1Label.setText(this.language.getString("memorialeditor.emblemsbrother1"));
-		this.emblemsBrother2Label.setText(this.language.getString("memorialeditor.emblemsbrother2"));
-		this.emblemsBrother3Label.setText(this.language.getString("memorialeditor.emblemsbrother3"));
-		this.emblemsBrother4Label.setText(this.language.getString("memorialeditor.emblemsbrother4"));
-		this.emblemsBrother5Label.setText(this.language.getString("memorialeditor.emblemsbrother5"));
-		this.emblemsBrother6Label.setText(this.language.getString("memorialeditor.emblemsbrother6"));
-		this.emblemsBrother7Label.setText(this.language.getString("memorialeditor.emblemsbrother7"));
-		this.emblemsBrother8Label.setText(this.language.getString("memorialeditor.emblemsbrother8"));
-		this.emblemsBrother9Label.setText(this.language.getString("memorialeditor.emblemsbrother9"));
-		this.emblemsBrother10Label.setText(this.language.getString("memorialeditor.emblemsbrother10"));
-
-		Tooltip generalTabTooltip = new Tooltip(this.language.getString("memorialeditor.tooltip.tab.general"));
-		generalTabTooltip.getStyleClass().add("tooltip_001");
-		this.generalTab.setTooltip(generalTabTooltip);
-		this.generalTab.setText("");
-		this.generalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
-
-		Tooltip day1TabTooltip = new Tooltip(this.language.getString("memorialeditor.tooltip.tab.podium"));
-		day1TabTooltip.getStyleClass().add("tooltip_001");
-		this.podiumTab.setTooltip(day1TabTooltip);
-		this.podiumTab.setText("");
-		this.podiumTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PODIUM));
-
-		Tooltip day2TabTooltip = new Tooltip(this.language.getString("memorialeditor.tooltip.tab.emblems"));
-		day2TabTooltip.getStyleClass().add("tooltip_001");
-		this.emblemsTab.setTooltip(day2TabTooltip);
-		this.emblemsTab.setText("");
-		this.emblemsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.EMBLEMS));
-
-		Tooltip day3TabTooltip = new Tooltip(this.language.getString("memorialeditor.tooltip.tab.emblemsbrothers"));
-		day3TabTooltip.getStyleClass().add("tooltip_001");
-		this.emblemsBrothersTab.setTooltip(day3TabTooltip);
-		this.emblemsBrothersTab.setText("");
-		this.emblemsBrothersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.EMBLEMSBROTHER));
-
-		Tooltip saveButtonTooltip = new Tooltip(this.language.getString("memorialeditor.tooltip.button.save"));
+		Tooltip saveButtonTooltip = new Tooltip(this.language.getString("audioeditor.tooltip.button.save"));
 		saveButtonTooltip.getStyleClass().add("tooltip_001");
 		this.saveButton.setTooltip(saveButtonTooltip);
 		this.saveButton.setText("");
@@ -447,235 +223,98 @@ public class AudioEditor extends UpdateDataAdapter {
 
 	private void initFields() {
 
-		Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackDay = callbackForDayComboBox();
-		this.dayComboBox.setButtonCell(callbackDay.call(null));
-		this.dayComboBox.setCellFactory(callbackDay);
-
-		this.dayComboBox.getItems().addAll(EnumDays.LUN, EnumDays.MAR, EnumDays.MER, EnumDays.GIO, EnumDays.VEN,
-				EnumDays.SAB, EnumDays.DOM);
-
-		this.dayComboBox.getSelectionModel().selectFirst();
-
-		this.initIntegers(this.hourComboBox, 24);
-		this.initIntegers(this.minuteComboBox, 60);
-
-		this.hourComboBox.getSelectionModel().selectFirst();
-		this.minuteComboBox.getSelectionModel().selectFirst();
-
 		initMembers();
-		initFamilies();
-		initPlace();
-
-		this.placeSelectButton.setOnAction(e -> selectPlace());
-	}
-
-	private void initFamilies() {
-
-		ObservableList<Family> list = FXCollections.observableArrayList();
-		for (Family f : this.familiesList)
-			if (f.getSpInf10() == 1)
-				list.add(f);
-
-		list.add(0, Family.emptyFamily(this.language));
-
-		this.breadFamily1ComboBox.setItems(list);
-		this.breadFamily2ComboBox.setItems(list);
-		this.breadFamily3ComboBox.setItems(list);
-		this.breadFamily4ComboBox.setItems(list);
-		this.breadFamily5ComboBox.setItems(list);
-
-		this.breadFamily1ComboBox.getSelectionModel().selectFirst();
-		this.breadFamily2ComboBox.getSelectionModel().selectFirst();
-		this.breadFamily3ComboBox.getSelectionModel().selectFirst();
-		this.breadFamily4ComboBox.getSelectionModel().selectFirst();
-		this.breadFamily5ComboBox.getSelectionModel().selectFirst();
-
-		this.wineFamily1ComboBox.setItems(list);
-		this.wineFamily2ComboBox.setItems(list);
-		this.wineFamily3ComboBox.setItems(list);
-		this.wineFamily4ComboBox.setItems(list);
-		this.wineFamily5ComboBox.setItems(list);
-
-		this.wineFamily1ComboBox.getSelectionModel().selectFirst();
-		this.wineFamily2ComboBox.getSelectionModel().selectFirst();
-		this.wineFamily3ComboBox.getSelectionModel().selectFirst();
-		this.wineFamily4ComboBox.getSelectionModel().selectFirst();
-		this.wineFamily5ComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void initMembers() {
 
-		ObservableList<Member> list = FXCollections.observableArrayList();
-		for (Member m : this.membersList)
-			if (m.getSpInf9() == 1 || m.getSpInf10() == 1)
-				list.add(m);
+		this.pos1MidweekList = FXCollections.observableArrayList();
+		this.pos2MidweekList = FXCollections.observableArrayList();
+		this.pos3MidweekList = FXCollections.observableArrayList();
+		this.micMidweekList = FXCollections.observableArrayList();
 
-		list.add(0, Member.emptyMember(this.language));
+		this.pos1WeekendList = FXCollections.observableArrayList();
+		this.pos2WeekendList = FXCollections.observableArrayList();
+		this.pos3WeekendList = FXCollections.observableArrayList();
+		this.micWeekendList = FXCollections.observableArrayList();
 
-		this.prayStartComboBox.setItems(list);
-		this.prayStartComboBox.getSelectionModel().selectFirst();
-
-		this.presidentComboBox.setItems(list);
-		this.presidentComboBox.getSelectionModel().selectFirst();
-
-		this.talkBrotherComboBox.setItems(list);
-		this.talkBrotherComboBox.getSelectionModel().selectFirst();
-
-		this.prayEndComboBox.setItems(list);
-		this.prayEndComboBox.getSelectionModel().selectFirst();
-
-		this.prayBreadComboBox.setItems(list);
-		this.prayBreadComboBox.getSelectionModel().selectFirst();
-
-		this.prayWineComboBox.setItems(list);
-		this.prayWineComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother1ComboBox.setItems(list);
-		this.emblemsBrother1ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother2ComboBox.setItems(list);
-		this.emblemsBrother2ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother3ComboBox.setItems(list);
-		this.emblemsBrother3ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother4ComboBox.setItems(list);
-		this.emblemsBrother4ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother5ComboBox.setItems(list);
-		this.emblemsBrother5ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother6ComboBox.setItems(list);
-		this.emblemsBrother6ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother7ComboBox.setItems(list);
-		this.emblemsBrother7ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother8ComboBox.setItems(list);
-		this.emblemsBrother8ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother9ComboBox.setItems(list);
-		this.emblemsBrother9ComboBox.getSelectionModel().selectFirst();
-
-		this.emblemsBrother10ComboBox.setItems(list);
-		this.emblemsBrother10ComboBox.getSelectionModel().selectFirst();
-	}
-
-	private void initPlace() {
-
-		ObservableList<Place> placesList = this.ownerCtrl.getPlacesList();
-		Place found = null;
-		for (Place place : placesList)
-			if (place.getType().get() == EnumPlaceType.KINGDOMHALL)
-				if (place.getDef().get()) {
-					found = place;
-					break;
-				}
-
-		if (found != null) {
-
-			String addr = placeToText(found);
-
-			this.placeTextField.setText(addr);
+		for (Member m : this.membersList) {
+			if (m.getSpInf22() == 1)
+				this.pos1MidweekList.add(m);
+			if (m.getSpInf23() == 1)
+				this.pos1WeekendList.add(m);
+			if (m.getSpInf24() == 1)
+				this.pos2MidweekList.add(m);
+			if (m.getSpInf25() == 1)
+				this.pos2WeekendList.add(m);
+			if (m.getSpInf54() == 1)
+				this.pos3MidweekList.add(m);
+			if (m.getSpInf55() == 1)
+				this.pos3WeekendList.add(m);
+			if (m.getSpInf20() == 1)
+				this.micMidweekList.add(m);
+			if (m.getSpInf21() == 1)
+				this.micWeekendList.add(m);
 		}
-	}
 
-	private String placeToText(Place found) {
+		this.pos1MidweekList.add(0, Member.emptyMember(this.language));
+		this.pos2MidweekList.add(0, Member.emptyMember(this.language));
+		this.pos3MidweekList.add(0, Member.emptyMember(this.language));
+		this.micMidweekList.add(0, Member.emptyMember(this.language));
+		this.pos1WeekendList.add(0, Member.emptyMember(this.language));
+		this.pos2WeekendList.add(0, Member.emptyMember(this.language));
+		this.pos3WeekendList.add(0, Member.emptyMember(this.language));
+		this.micWeekendList.add(0, Member.emptyMember(this.language));
 
-		String addr = "";
+		this.pos1MidweekComboBox.setItems(this.pos1MidweekList);
+		this.pos2MidweekComboBox.setItems(this.pos2MidweekList);
+		this.pos3MidweekComboBox.setItems(this.pos3MidweekList);
+		this.mic1MidweekComboBox.setItems(this.micMidweekList);
+		this.mic2MidweekComboBox.setItems(this.micMidweekList);
+		this.mic3MidweekComboBox.setItems(this.micMidweekList);
 
-		HashMap<String, String> configs = this.ownerCtrl.getConfigs();
-		String pattern = configs.get("inf1");
-		if (pattern != null) {
+		this.pos1WeekendComboBox.setItems(this.pos1WeekendList);
+		this.pos2WeekendComboBox.setItems(this.pos2WeekendList);
+		this.pos3WeekendComboBox.setItems(this.pos3WeekendList);
+		this.mic1WeekendComboBox.setItems(this.micWeekendList);
+		this.mic2WeekendComboBox.setItems(this.micWeekendList);
+		this.mic3WeekendComboBox.setItems(this.micWeekendList);
 
-			pattern = Crypt.decrypt(pattern, this.application.getSettings().getDatabaseSecretKey());
-			addr = PlaceUtils.toText(found, pattern);
+		this.pos1MidweekComboBox.getSelectionModel().selectFirst();
+		this.pos2MidweekComboBox.getSelectionModel().selectFirst();
+		this.pos3MidweekComboBox.getSelectionModel().selectFirst();
+		this.mic1MidweekComboBox.getSelectionModel().selectFirst();
+		this.mic2MidweekComboBox.getSelectionModel().selectFirst();
+		this.mic3MidweekComboBox.getSelectionModel().selectFirst();
 
-		} else
-
-			addr = PlaceUtils.toText(found);
-
-		return addr;
-	}
-
-	private void selectPlace() {
-
-		Place place = PlaceDialog.show(this.application, this.ownerStage, this.ownerCtrl.getPlacesList(),
-				EnumPlaceType.KINGDOMHALL);
-		if (place != null)
-			this.placeTextField.setText(placeToText(place));
-	}
-
-	private void initIntegers(ComboBox<Integer> cb, int size) {
-
-		for (int i = 0; i < size; i++)
-			cb.getItems().add(i);
-	}
-
-	private Callback<ListView<EnumDays>, ListCell<EnumDays>> callbackForDayComboBox() {
-		return param -> new EnumDaysComboBoxListCell(this.getSettings().getLanguage());
+		this.pos1WeekendComboBox.getSelectionModel().selectFirst();
+		this.pos2WeekendComboBox.getSelectionModel().selectFirst();
+		this.pos3WeekendComboBox.getSelectionModel().selectFirst();
+		this.mic1WeekendComboBox.getSelectionModel().selectFirst();
+		this.mic2WeekendComboBox.getSelectionModel().selectFirst();
+		this.mic3WeekendComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void loadSelectedWeek() {
 
 		if (this.selectedWeek != null)
-			if (this.selectedWeek.spMemorialIDProperty() != null) {
+			if (this.selectedWeek.spAudioIDProperty() != null) {
 
-				EnumDays day = EnumDays.getByID(this.selectedWeek.getSpInf21());
-				this.dayComboBox.getSelectionModel().select(day);
+				setComboBoxMember(this.pos1MidweekComboBox, this.selectedWeek.getSpInf2());
+				setComboBoxMember(this.pos2MidweekComboBox, this.selectedWeek.getSpInf3());
+				setComboBoxMember(this.pos3MidweekComboBox, this.selectedWeek.getSpInf4());
 
-				int hours = this.selectedWeek.getSpInf22();
-				int minutes = this.selectedWeek.getSpInf23();
+				setComboBoxMember(this.mic1MidweekComboBox, this.selectedWeek.getSpInf5());
+				setComboBoxMember(this.mic2MidweekComboBox, this.selectedWeek.getSpInf6());
+				setComboBoxMember(this.mic3MidweekComboBox, this.selectedWeek.getSpInf7());
 
-				this.hourComboBox.getSelectionModel().select(hours);
-				this.minuteComboBox.getSelectionModel().select(minutes);
+				setComboBoxMember(this.pos1WeekendComboBox, this.selectedWeek.getSpInf8());
+				setComboBoxMember(this.pos2WeekendComboBox, this.selectedWeek.getSpInf9());
+				setComboBoxMember(this.pos3WeekendComboBox, this.selectedWeek.getSpInf10());
 
-				String place = this.selectedWeek.getSpInf24();
-				this.placeTextField.setText(place);
-
-				this.songStartTextField.setText(this.selectedWeek.getSpInf2());
-				setComboBoxMember(this.prayStartComboBox, this.selectedWeek.getSpInf5());
-				setComboBoxMember(this.presidentComboBox, this.selectedWeek.getSpInf4());
-				this.prayStartPresidentCheckBox.setSelected(this.selectedWeek.getSpInf35() == 1);
-
-				this.talkMinTextField.setText(this.selectedWeek.getSpInf8());
-				setComboBoxMember(this.talkBrotherComboBox, this.selectedWeek.getSpInf6());
-				this.talkThemeTextField.setText(this.selectedWeek.getSpInf7());
-
-				this.songEndTextField.setText(this.selectedWeek.getSpInf3());
-				setComboBoxMember(this.prayEndComboBox, this.selectedWeek.getSpInf36());
-
-				setComboBoxMember(this.prayBreadComboBox, this.selectedWeek.getSpInf9());
-				setComboBoxMember(this.prayWineComboBox, this.selectedWeek.getSpInf10());
-
-				setComboBoxFamily(this.breadFamily1ComboBox, this.selectedWeek.getSpInf11());
-				setComboBoxFamily(this.breadFamily2ComboBox, this.selectedWeek.getSpInf12());
-				setComboBoxFamily(this.breadFamily3ComboBox, this.selectedWeek.getSpInf13());
-				setComboBoxFamily(this.breadFamily4ComboBox, this.selectedWeek.getSpInf14());
-				setComboBoxFamily(this.breadFamily5ComboBox, this.selectedWeek.getSpInf15());
-
-				setComboBoxFamily(this.wineFamily1ComboBox, this.selectedWeek.getSpInf16());
-				setComboBoxFamily(this.wineFamily2ComboBox, this.selectedWeek.getSpInf17());
-				setComboBoxFamily(this.wineFamily3ComboBox, this.selectedWeek.getSpInf18());
-				setComboBoxFamily(this.wineFamily4ComboBox, this.selectedWeek.getSpInf19());
-				setComboBoxFamily(this.wineFamily5ComboBox, this.selectedWeek.getSpInf20());
-
-				setComboBoxMember(this.emblemsBrother1ComboBox, this.selectedWeek.getSpInf25());
-				setComboBoxMember(this.emblemsBrother2ComboBox, this.selectedWeek.getSpInf26());
-				setComboBoxMember(this.emblemsBrother3ComboBox, this.selectedWeek.getSpInf27());
-				setComboBoxMember(this.emblemsBrother4ComboBox, this.selectedWeek.getSpInf28());
-				setComboBoxMember(this.emblemsBrother5ComboBox, this.selectedWeek.getSpInf29());
-				setComboBoxMember(this.emblemsBrother6ComboBox, this.selectedWeek.getSpInf30());
-				setComboBoxMember(this.emblemsBrother7ComboBox, this.selectedWeek.getSpInf31());
-				setComboBoxMember(this.emblemsBrother8ComboBox, this.selectedWeek.getSpInf32());
-				setComboBoxMember(this.emblemsBrother9ComboBox, this.selectedWeek.getSpInf33());
-				setComboBoxMember(this.emblemsBrother10ComboBox, this.selectedWeek.getSpInf34());
-
-			} else {
-
-				String talkMin = this.configs.get("inf8");
-				String talkMinDecrypted = Crypt.decrypt(talkMin, this.settings.getDatabaseSecretKey());
-				this.talkMinTextField.setText(talkMinDecrypted);
+				setComboBoxMember(this.mic1WeekendComboBox, this.selectedWeek.getSpInf11());
+				setComboBoxMember(this.mic2WeekendComboBox, this.selectedWeek.getSpInf12());
+				setComboBoxMember(this.mic3WeekendComboBox, this.selectedWeek.getSpInf13());
 
 			}
 	}
@@ -694,20 +333,6 @@ public class AudioEditor extends UpdateDataAdapter {
 		cb.getSelectionModel().select(found);
 	}
 
-	private void setComboBoxFamily(ComboBox<Family> cb, int id) {
-
-		int found = 0;
-		for (int i = 0; i < cb.getItems().size(); i++) {
-			Family f = cb.getItems().get(i);
-			if (f.getSpFamID() == id) {
-				found = i;
-				break;
-			}
-		}
-
-		cb.getSelectionModel().select(found);
-	}
-
 	private void listeners() {
 
 		this.saveButton.setOnAction(event -> save());
@@ -717,75 +342,33 @@ public class AudioEditor extends UpdateDataAdapter {
 
 		if (checkFields()) {
 
-			if (this.selectedWeek.spMemorialIDProperty() != null) {
+			if (this.selectedWeek.spAudioIDProperty() != null) {
 
 				// editWeek
 
-				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
-				weekMemorial.setMemorialID(this.selectedWeek.getMemorialID());
+				WeekAudio week = WeekAudio.newInstanceByView(this);
+				week.setAudioID(this.selectedWeek.getAudioID());
 
 				String waitMessage = this.language.getString("memorialeditor.wait.save");
 				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-								weekMemorial, this.ownerCtrl, this.thisTab));
+						new WeekAudioSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, week,
+								this.ownerCtrl, this.thisTab));
 
 			} else {
 
 				// newWeek
 
-				WeekMemorial weekMemorial = WeekMemorial.newInstanceByView(this);
+				WeekAudio week = WeekAudio.newInstanceByView(this);
 
 				String waitMessage = this.language.getString("memorialeditor.wait.save");
 				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new WeekMemorialSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-								weekMemorial, this.ownerCtrl, this.thisTab));
+						new WeekAudioSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, week,
+								this.ownerCtrl, this.thisTab));
 			}
 		}
 	}
 
 	private boolean checkFields() {
-
-		String songStart = this.songStartTextField.getText();
-		if (!songStart.isEmpty()) {
-			try {
-				new Integer(songStart);
-			} catch (Exception e) {
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("memorialeditor.error.songstart"));
-				return false;
-			}
-		}
-
-		String songEnd = this.songEndTextField.getText();
-		if (!songEnd.isEmpty()) {
-			try {
-				new Integer(songEnd);
-			} catch (Exception e) {
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("memorialeditor.error.songend"));
-				return false;
-			}
-		}
-
-		String talkMin = this.talkMinTextField.getText();
-		if (!talkMin.isEmpty()) {
-			try {
-				new Integer(talkMin);
-			} catch (Exception e) {
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("memorialeditor.error.talkmin"));
-				return false;
-			}
-		}
-
-		int prayStartIndex = this.prayStartComboBox.getSelectionModel().getSelectedIndex();
-		boolean prayStartPresidentSelected = this.prayStartPresidentCheckBox.isSelected();
-
-		if (prayStartPresidentSelected && prayStartIndex > 0) {
-			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("memorialeditor.error.praystartpresident"));
-			return false;
-		}
 
 		return true;
 	}
@@ -822,11 +405,11 @@ public class AudioEditor extends UpdateDataAdapter {
 		this.ownerCtrl = ownerCtrl;
 	}
 
-	public WeekMemorial getSelectedWeek() {
+	public WeekAudio getSelectedWeek() {
 		return selectedWeek;
 	}
 
-	public void setSelectedWeek(WeekMemorial selectedWeek) {
+	public void setSelectedWeek(WeekAudio selectedWeek) {
 		this.selectedWeek = selectedWeek;
 	}
 
@@ -846,11 +429,11 @@ public class AudioEditor extends UpdateDataAdapter {
 		this.thisTab = thisTab;
 	}
 
-	public ObservableList<WeekMemorial> getCalendar() {
+	public ObservableList<WeekAudio> getCalendar() {
 		return calendar;
 	}
 
-	public void setCalendar(ObservableList<WeekMemorial> calendar) {
+	public void setCalendar(ObservableList<WeekAudio> calendar) {
 		this.calendar = calendar;
 	}
 
@@ -866,64 +449,8 @@ public class AudioEditor extends UpdateDataAdapter {
 		return saveButton;
 	}
 
-	public TabPane getTabPane() {
-		return tabPane;
-	}
-
-	public Tab getGeneralTab() {
-		return generalTab;
-	}
-
-	public Tab getDay1Tab() {
-		return podiumTab;
-	}
-
-	public Tab getDay2Tab() {
-		return emblemsTab;
-	}
-
-	public Tab getDay3Tab() {
-		return emblemsBrothersTab;
-	}
-
-	public Label getDayLabel() {
-		return dayLabel;
-	}
-
-	public ComboBox<EnumDays> getDayComboBox() {
-		return dayComboBox;
-	}
-
 	public void setSaveButton(Button saveButton) {
 		this.saveButton = saveButton;
-	}
-
-	public void setTabPane(TabPane tabPane) {
-		this.tabPane = tabPane;
-	}
-
-	public void setGeneralTab(Tab generalTab) {
-		this.generalTab = generalTab;
-	}
-
-	public void setDay1Tab(Tab day1Tab) {
-		this.podiumTab = day1Tab;
-	}
-
-	public void setDay2Tab(Tab day2Tab) {
-		this.emblemsTab = day2Tab;
-	}
-
-	public void setDay3Tab(Tab day3Tab) {
-		this.emblemsBrothersTab = day3Tab;
-	}
-
-	public void setDayLabel(Label dayLabel) {
-		this.dayLabel = dayLabel;
-	}
-
-	public void setDayComboBox(ComboBox<EnumDays> dayComboBox) {
-		this.dayComboBox = dayComboBox;
 	}
 
 	public ObservableList<Member> getMembersList() {
@@ -934,606 +461,6 @@ public class AudioEditor extends UpdateDataAdapter {
 		this.membersList = membersList;
 	}
 
-	public ObservableList<Family> getFamiliesList() {
-		return familiesList;
-	}
-
-	public void setFamiliesList(ObservableList<Family> familiesList) {
-		this.familiesList = familiesList;
-	}
-
-	public Tab getPodiumTab() {
-		return podiumTab;
-	}
-
-	public Tab getEmblemsTab() {
-		return emblemsTab;
-	}
-
-	public Tab getEmblemsBrothersTab() {
-		return emblemsBrothersTab;
-	}
-
-	public Label getTimeLabel() {
-		return timeLabel;
-	}
-
-	public Label getTimeSeparatorLabel() {
-		return timeSeparatorLabel;
-	}
-
-	public Label getPlaceLabel() {
-		return placeLabel;
-	}
-
-	public ComboBox<Integer> getHourComboBox() {
-		return hourComboBox;
-	}
-
-	public ComboBox<Integer> getMinuteComboBox() {
-		return minuteComboBox;
-	}
-
-	public TextField getPlaceTextField() {
-		return placeTextField;
-	}
-
-	public Button getPlaceSelectButton() {
-		return placeSelectButton;
-	}
-
-	public Label getSongStartLabel() {
-		return songStartLabel;
-	}
-
-	public Label getPrayStartLabel() {
-		return prayStartLabel;
-	}
-
-	public Label getPresidentLabel() {
-		return presidentLabel;
-	}
-
-	public Label getTalkMinLabel() {
-		return talkMinLabel;
-	}
-
-	public Label getTalkThemeLabel() {
-		return talkThemeLabel;
-	}
-
-	public Label getTalkBrotherLabel() {
-		return talkBrotherLabel;
-	}
-
-	public Label getPrayBreadLabel() {
-		return prayBreadLabel;
-	}
-
-	public Label getPrayWineLabel() {
-		return prayWineLabel;
-	}
-
-	public Label getSongEndLabel() {
-		return songEndLabel;
-	}
-
-	public Label getPrayEndLabel() {
-		return prayEndLabel;
-	}
-
-	public TextField getSongStartTextField() {
-		return songStartTextField;
-	}
-
-	public ComboBox<Member> getPrayStartComboBox() {
-		return prayStartComboBox;
-	}
-
-	public CheckBox getPrayStartPresidentCheckBox() {
-		return prayStartPresidentCheckBox;
-	}
-
-	public ComboBox<Member> getPresidentComboBox() {
-		return presidentComboBox;
-	}
-
-	public TextField getTalkMinTextField() {
-		return talkMinTextField;
-	}
-
-	public TextField getTalkThemeTextField() {
-		return talkThemeTextField;
-	}
-
-	public ComboBox<Member> getTalkBrotherComboBox() {
-		return talkBrotherComboBox;
-	}
-
-	public ComboBox<Member> getPrayBreadComboBox() {
-		return prayBreadComboBox;
-	}
-
-	public ComboBox<Member> getPrayWineComboBox() {
-		return prayWineComboBox;
-	}
-
-	public TextField getSongEndTextField() {
-		return songEndTextField;
-	}
-
-	public ComboBox<Member> getPrayEndComboBox() {
-		return prayEndComboBox;
-	}
-
-	public Label getBreadHeaderLabel() {
-		return breadHeaderLabel;
-	}
-
-	public Label getBreadFamily1Label() {
-		return breadFamily1Label;
-	}
-
-	public Label getBreadFamily2Label() {
-		return breadFamily2Label;
-	}
-
-	public Label getBreadFamily3Label() {
-		return breadFamily3Label;
-	}
-
-	public Label getBreadFamily4Label() {
-		return breadFamily4Label;
-	}
-
-	public Label getBreadFamily5Label() {
-		return breadFamily5Label;
-	}
-
-	public ComboBox<Family> getBreadFamily1ComboBox() {
-		return breadFamily1ComboBox;
-	}
-
-	public ComboBox<Family> getBreadFamily2ComboBox() {
-		return breadFamily2ComboBox;
-	}
-
-	public ComboBox<Family> getBreadFamily3ComboBox() {
-		return breadFamily3ComboBox;
-	}
-
-	public ComboBox<Family> getBreadFamily4ComboBox() {
-		return breadFamily4ComboBox;
-	}
-
-	public ComboBox<Family> getBreadFamily5ComboBox() {
-		return breadFamily5ComboBox;
-	}
-
-	public Label getWineHeaderLabel() {
-		return wineHeaderLabel;
-	}
-
-	public Label getWineFamily1Label() {
-		return wineFamily1Label;
-	}
-
-	public Label getWineFamily2Label() {
-		return wineFamily2Label;
-	}
-
-	public Label getWineFamily3Label() {
-		return wineFamily3Label;
-	}
-
-	public Label getWineFamily4Label() {
-		return wineFamily4Label;
-	}
-
-	public Label getWineFamily5Label() {
-		return wineFamily5Label;
-	}
-
-	public ComboBox<Family> getWineFamily1ComboBox() {
-		return wineFamily1ComboBox;
-	}
-
-	public ComboBox<Family> getWineFamily2ComboBox() {
-		return wineFamily2ComboBox;
-	}
-
-	public ComboBox<Family> getWineFamily3ComboBox() {
-		return wineFamily3ComboBox;
-	}
-
-	public ComboBox<Family> getWineFamily4ComboBox() {
-		return wineFamily4ComboBox;
-	}
-
-	public ComboBox<Family> getWineFamily5ComboBox() {
-		return wineFamily5ComboBox;
-	}
-
-	public Label getEmblemsBrothersHeaderLabel() {
-		return emblemsBrothersHeaderLabel;
-	}
-
-	public Label getEmblemsBrother1Label() {
-		return emblemsBrother1Label;
-	}
-
-	public Label getEmblemsBrother2Label() {
-		return emblemsBrother2Label;
-	}
-
-	public Label getEmblemsBrother3Label() {
-		return emblemsBrother3Label;
-	}
-
-	public Label getEmblemsBrother4Label() {
-		return emblemsBrother4Label;
-	}
-
-	public Label getEmblemsBrother5Label() {
-		return emblemsBrother5Label;
-	}
-
-	public Label getEmblemsBrother6Label() {
-		return emblemsBrother6Label;
-	}
-
-	public Label getEmblemsBrother7Label() {
-		return emblemsBrother7Label;
-	}
-
-	public Label getEmblemsBrother8Label() {
-		return emblemsBrother8Label;
-	}
-
-	public Label getEmblemsBrother9Label() {
-		return emblemsBrother9Label;
-	}
-
-	public Label getEmblemsBrother10Label() {
-		return emblemsBrother10Label;
-	}
-
-	public ComboBox<Member> getEmblemsBrother1ComboBox() {
-		return emblemsBrother1ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother2ComboBox() {
-		return emblemsBrother2ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother3ComboBox() {
-		return emblemsBrother3ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother4ComboBox() {
-		return emblemsBrother4ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother5ComboBox() {
-		return emblemsBrother5ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother6ComboBox() {
-		return emblemsBrother6ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother7ComboBox() {
-		return emblemsBrother7ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother8ComboBox() {
-		return emblemsBrother8ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother9ComboBox() {
-		return emblemsBrother9ComboBox;
-	}
-
-	public ComboBox<Member> getEmblemsBrother10ComboBox() {
-		return emblemsBrother10ComboBox;
-	}
-
-	public void setPodiumTab(Tab podiumTab) {
-		this.podiumTab = podiumTab;
-	}
-
-	public void setEmblemsTab(Tab emblemsTab) {
-		this.emblemsTab = emblemsTab;
-	}
-
-	public void setEmblemsBrothersTab(Tab emblemsBrothersTab) {
-		this.emblemsBrothersTab = emblemsBrothersTab;
-	}
-
-	public void setTimeLabel(Label timeLabel) {
-		this.timeLabel = timeLabel;
-	}
-
-	public void setTimeSeparatorLabel(Label timeSeparatorLabel) {
-		this.timeSeparatorLabel = timeSeparatorLabel;
-	}
-
-	public void setPlaceLabel(Label placeLabel) {
-		this.placeLabel = placeLabel;
-	}
-
-	public void setHourComboBox(ComboBox<Integer> hourComboBox) {
-		this.hourComboBox = hourComboBox;
-	}
-
-	public void setMinuteComboBox(ComboBox<Integer> minuteComboBox) {
-		this.minuteComboBox = minuteComboBox;
-	}
-
-	public void setPlaceTextField(TextField placeTextField) {
-		this.placeTextField = placeTextField;
-	}
-
-	public void setPlaceSelectButton(Button placeSelectButton) {
-		this.placeSelectButton = placeSelectButton;
-	}
-
-	public void setSongStartLabel(Label songStartLabel) {
-		this.songStartLabel = songStartLabel;
-	}
-
-	public void setPrayStartLabel(Label prayStartLabel) {
-		this.prayStartLabel = prayStartLabel;
-	}
-
-	public void setPresidentLabel(Label presidentLabel) {
-		this.presidentLabel = presidentLabel;
-	}
-
-	public void setTalkMinLabel(Label talkMinLabel) {
-		this.talkMinLabel = talkMinLabel;
-	}
-
-	public void setTalkThemeLabel(Label talkThemeLabel) {
-		this.talkThemeLabel = talkThemeLabel;
-	}
-
-	public void setTalkBrotherLabel(Label talkBrotherLabel) {
-		this.talkBrotherLabel = talkBrotherLabel;
-	}
-
-	public void setPrayBreadLabel(Label prayBreadLabel) {
-		this.prayBreadLabel = prayBreadLabel;
-	}
-
-	public void setPrayWineLabel(Label prayWineLabel) {
-		this.prayWineLabel = prayWineLabel;
-	}
-
-	public void setSongEndLabel(Label songEndLabel) {
-		this.songEndLabel = songEndLabel;
-	}
-
-	public void setPrayEndLabel(Label prayEndLabel) {
-		this.prayEndLabel = prayEndLabel;
-	}
-
-	public void setSongStartTextField(TextField songStartTextField) {
-		this.songStartTextField = songStartTextField;
-	}
-
-	public void setPrayStartComboBox(ComboBox<Member> prayStartComboBox) {
-		this.prayStartComboBox = prayStartComboBox;
-	}
-
-	public void setPrayStartPresidentCheckBox(CheckBox prayStartPresidentCheckBox) {
-		this.prayStartPresidentCheckBox = prayStartPresidentCheckBox;
-	}
-
-	public void setPresidentComboBox(ComboBox<Member> presidentComboBox) {
-		this.presidentComboBox = presidentComboBox;
-	}
-
-	public void setTalkMinTextField(TextField talkMinTextField) {
-		this.talkMinTextField = talkMinTextField;
-	}
-
-	public void setTalkThemeTextField(TextField talkThemeTextField) {
-		this.talkThemeTextField = talkThemeTextField;
-	}
-
-	public void setTalkBrotherComboBox(ComboBox<Member> talkBrotherComboBox) {
-		this.talkBrotherComboBox = talkBrotherComboBox;
-	}
-
-	public void setPrayBreadComboBox(ComboBox<Member> prayBreadComboBox) {
-		this.prayBreadComboBox = prayBreadComboBox;
-	}
-
-	public void setPrayWineComboBox(ComboBox<Member> prayWineComboBox) {
-		this.prayWineComboBox = prayWineComboBox;
-	}
-
-	public void setSongEndTextField(TextField songEndTextField) {
-		this.songEndTextField = songEndTextField;
-	}
-
-	public void setPrayEndComboBox(ComboBox<Member> prayEndComboBox) {
-		this.prayEndComboBox = prayEndComboBox;
-	}
-
-	public void setBreadHeaderLabel(Label breadHeaderLabel) {
-		this.breadHeaderLabel = breadHeaderLabel;
-	}
-
-	public void setBreadFamily1Label(Label breadFamily1Label) {
-		this.breadFamily1Label = breadFamily1Label;
-	}
-
-	public void setBreadFamily2Label(Label breadFamily2Label) {
-		this.breadFamily2Label = breadFamily2Label;
-	}
-
-	public void setBreadFamily3Label(Label breadFamily3Label) {
-		this.breadFamily3Label = breadFamily3Label;
-	}
-
-	public void setBreadFamily4Label(Label breadFamily4Label) {
-		this.breadFamily4Label = breadFamily4Label;
-	}
-
-	public void setBreadFamily5Label(Label breadFamily5Label) {
-		this.breadFamily5Label = breadFamily5Label;
-	}
-
-	public void setBreadFamily1ComboBox(ComboBox<Family> breadFamily1ComboBox) {
-		this.breadFamily1ComboBox = breadFamily1ComboBox;
-	}
-
-	public void setBreadFamily2ComboBox(ComboBox<Family> breadFamily2ComboBox) {
-		this.breadFamily2ComboBox = breadFamily2ComboBox;
-	}
-
-	public void setBreadFamily3ComboBox(ComboBox<Family> breadFamily3ComboBox) {
-		this.breadFamily3ComboBox = breadFamily3ComboBox;
-	}
-
-	public void setBreadFamily4ComboBox(ComboBox<Family> breadFamily4ComboBox) {
-		this.breadFamily4ComboBox = breadFamily4ComboBox;
-	}
-
-	public void setBreadFamily5ComboBox(ComboBox<Family> breadFamily5ComboBox) {
-		this.breadFamily5ComboBox = breadFamily5ComboBox;
-	}
-
-	public void setWineHeaderLabel(Label wineHeaderLabel) {
-		this.wineHeaderLabel = wineHeaderLabel;
-	}
-
-	public void setWineFamily1Label(Label wineFamily1Label) {
-		this.wineFamily1Label = wineFamily1Label;
-	}
-
-	public void setWineFamily2Label(Label wineFamily2Label) {
-		this.wineFamily2Label = wineFamily2Label;
-	}
-
-	public void setWineFamily3Label(Label wineFamily3Label) {
-		this.wineFamily3Label = wineFamily3Label;
-	}
-
-	public void setWineFamily4Label(Label wineFamily4Label) {
-		this.wineFamily4Label = wineFamily4Label;
-	}
-
-	public void setWineFamily5Label(Label wineFamily5Label) {
-		this.wineFamily5Label = wineFamily5Label;
-	}
-
-	public void setWineFamily1ComboBox(ComboBox<Family> wineFamily1ComboBox) {
-		this.wineFamily1ComboBox = wineFamily1ComboBox;
-	}
-
-	public void setWineFamily2ComboBox(ComboBox<Family> wineFamily2ComboBox) {
-		this.wineFamily2ComboBox = wineFamily2ComboBox;
-	}
-
-	public void setWineFamily3ComboBox(ComboBox<Family> wineFamily3ComboBox) {
-		this.wineFamily3ComboBox = wineFamily3ComboBox;
-	}
-
-	public void setWineFamily4ComboBox(ComboBox<Family> wineFamily4ComboBox) {
-		this.wineFamily4ComboBox = wineFamily4ComboBox;
-	}
-
-	public void setWineFamily5ComboBox(ComboBox<Family> wineFamily5ComboBox) {
-		this.wineFamily5ComboBox = wineFamily5ComboBox;
-	}
-
-	public void setEmblemsBrothersHeaderLabel(Label emblemsBrothersHeaderLabel) {
-		this.emblemsBrothersHeaderLabel = emblemsBrothersHeaderLabel;
-	}
-
-	public void setEmblemsBrother1Label(Label emblemsBrother1Label) {
-		this.emblemsBrother1Label = emblemsBrother1Label;
-	}
-
-	public void setEmblemsBrother2Label(Label emblemsBrother2Label) {
-		this.emblemsBrother2Label = emblemsBrother2Label;
-	}
-
-	public void setEmblemsBrother3Label(Label emblemsBrother3Label) {
-		this.emblemsBrother3Label = emblemsBrother3Label;
-	}
-
-	public void setEmblemsBrother4Label(Label emblemsBrother4Label) {
-		this.emblemsBrother4Label = emblemsBrother4Label;
-	}
-
-	public void setEmblemsBrother5Label(Label emblemsBrother5Label) {
-		this.emblemsBrother5Label = emblemsBrother5Label;
-	}
-
-	public void setEmblemsBrother6Label(Label emblemsBrother6Label) {
-		this.emblemsBrother6Label = emblemsBrother6Label;
-	}
-
-	public void setEmblemsBrother7Label(Label emblemsBrother7Label) {
-		this.emblemsBrother7Label = emblemsBrother7Label;
-	}
-
-	public void setEmblemsBrother8Label(Label emblemsBrother8Label) {
-		this.emblemsBrother8Label = emblemsBrother8Label;
-	}
-
-	public void setEmblemsBrother9Label(Label emblemsBrother9Label) {
-		this.emblemsBrother9Label = emblemsBrother9Label;
-	}
-
-	public void setEmblemsBrother10Label(Label emblemsBrother10Label) {
-		this.emblemsBrother10Label = emblemsBrother10Label;
-	}
-
-	public void setEmblemsBrother1ComboBox(ComboBox<Member> emblemsBrother1ComboBox) {
-		this.emblemsBrother1ComboBox = emblemsBrother1ComboBox;
-	}
-
-	public void setEmblemsBrother2ComboBox(ComboBox<Member> emblemsBrother2ComboBox) {
-		this.emblemsBrother2ComboBox = emblemsBrother2ComboBox;
-	}
-
-	public void setEmblemsBrother3ComboBox(ComboBox<Member> emblemsBrother3ComboBox) {
-		this.emblemsBrother3ComboBox = emblemsBrother3ComboBox;
-	}
-
-	public void setEmblemsBrother4ComboBox(ComboBox<Member> emblemsBrother4ComboBox) {
-		this.emblemsBrother4ComboBox = emblemsBrother4ComboBox;
-	}
-
-	public void setEmblemsBrother5ComboBox(ComboBox<Member> emblemsBrother5ComboBox) {
-		this.emblemsBrother5ComboBox = emblemsBrother5ComboBox;
-	}
-
-	public void setEmblemsBrother6ComboBox(ComboBox<Member> emblemsBrother6ComboBox) {
-		this.emblemsBrother6ComboBox = emblemsBrother6ComboBox;
-	}
-
-	public void setEmblemsBrother7ComboBox(ComboBox<Member> emblemsBrother7ComboBox) {
-		this.emblemsBrother7ComboBox = emblemsBrother7ComboBox;
-	}
-
-	public void setEmblemsBrother8ComboBox(ComboBox<Member> emblemsBrother8ComboBox) {
-		this.emblemsBrother8ComboBox = emblemsBrother8ComboBox;
-	}
-
-	public void setEmblemsBrother9ComboBox(ComboBox<Member> emblemsBrother9ComboBox) {
-		this.emblemsBrother9ComboBox = emblemsBrother9ComboBox;
-	}
-
-	public void setEmblemsBrother10ComboBox(ComboBox<Member> emblemsBrother10ComboBox) {
-		this.emblemsBrother10ComboBox = emblemsBrother10ComboBox;
-	}
-
 	public HashMap<String, String> getConfigs() {
 		return configs;
 	}
@@ -1541,4 +468,277 @@ public class AudioEditor extends UpdateDataAdapter {
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
 	}
+
+	public Label getMidweekLabel() {
+		return midweekLabel;
+	}
+
+	public Label getWeekendLabel() {
+		return weekendLabel;
+	}
+
+	public Label getPos1MidweekLabel() {
+		return pos1MidweekLabel;
+	}
+
+	public Label getPos2MidweekLabel() {
+		return pos2MidweekLabel;
+	}
+
+	public Label getPos3MidweekLabel() {
+		return pos3MidweekLabel;
+	}
+
+	public ComboBox<Member> getPos1MidweekComboBox() {
+		return pos1MidweekComboBox;
+	}
+
+	public ComboBox<Member> getPos2MidweekComboBox() {
+		return pos2MidweekComboBox;
+	}
+
+	public ComboBox<Member> getPos3MidweekComboBox() {
+		return pos3MidweekComboBox;
+	}
+
+	public Label getMic1MidweekLabel() {
+		return mic1MidweekLabel;
+	}
+
+	public Label getMic2MidweekLabel() {
+		return mic2MidweekLabel;
+	}
+
+	public Label getMic3MidweekLabel() {
+		return mic3MidweekLabel;
+	}
+
+	public ComboBox<Member> getMic1MidweekComboBox() {
+		return mic1MidweekComboBox;
+	}
+
+	public ComboBox<Member> getMic2MidweekComboBox() {
+		return mic2MidweekComboBox;
+	}
+
+	public ComboBox<Member> getMic3MidweekComboBox() {
+		return mic3MidweekComboBox;
+	}
+
+	public Label getPos1WeekendLabel() {
+		return pos1WeekendLabel;
+	}
+
+	public Label getPos2WeekendLabel() {
+		return pos2WeekendLabel;
+	}
+
+	public Label getPos3WeekendLabel() {
+		return pos3WeekendLabel;
+	}
+
+	public ComboBox<Member> getPos1WeekendComboBox() {
+		return pos1WeekendComboBox;
+	}
+
+	public ComboBox<Member> getPos2WeekendComboBox() {
+		return pos2WeekendComboBox;
+	}
+
+	public ComboBox<Member> getPos3WeekendComboBox() {
+		return pos3WeekendComboBox;
+	}
+
+	public Label getMic1WeekendLabel() {
+		return mic1WeekendLabel;
+	}
+
+	public Label getMic2WeekendLabel() {
+		return mic2WeekendLabel;
+	}
+
+	public Label getMic3WeekendLabel() {
+		return mic3WeekendLabel;
+	}
+
+	public ComboBox<Member> getMic1WeekendComboBox() {
+		return mic1WeekendComboBox;
+	}
+
+	public ComboBox<Member> getMic2WeekendComboBox() {
+		return mic2WeekendComboBox;
+	}
+
+	public ComboBox<Member> getMic3WeekendComboBox() {
+		return mic3WeekendComboBox;
+	}
+
+	public ObservableList<Member> getPos1MidweekList() {
+		return pos1MidweekList;
+	}
+
+	public ObservableList<Member> getPos2MidweekList() {
+		return pos2MidweekList;
+	}
+
+	public ObservableList<Member> getPos3MidweekList() {
+		return pos3MidweekList;
+	}
+
+	public ObservableList<Member> getMicMidweekList() {
+		return micMidweekList;
+	}
+
+	public ObservableList<Member> getPos1WeekendList() {
+		return pos1WeekendList;
+	}
+
+	public ObservableList<Member> getPos2WeekendList() {
+		return pos2WeekendList;
+	}
+
+	public ObservableList<Member> getPos3WeekendList() {
+		return pos3WeekendList;
+	}
+
+	public ObservableList<Member> getMicWeekendList() {
+		return micWeekendList;
+	}
+
+	public void setMidweekLabel(Label midweekLabel) {
+		this.midweekLabel = midweekLabel;
+	}
+
+	public void setWeekendLabel(Label weekendLabel) {
+		this.weekendLabel = weekendLabel;
+	}
+
+	public void setPos1MidweekLabel(Label pos1MidweekLabel) {
+		this.pos1MidweekLabel = pos1MidweekLabel;
+	}
+
+	public void setPos2MidweekLabel(Label pos2MidweekLabel) {
+		this.pos2MidweekLabel = pos2MidweekLabel;
+	}
+
+	public void setPos3MidweekLabel(Label pos3MidweekLabel) {
+		this.pos3MidweekLabel = pos3MidweekLabel;
+	}
+
+	public void setPos1MidweekComboBox(ComboBox<Member> pos1MidweekComboBox) {
+		this.pos1MidweekComboBox = pos1MidweekComboBox;
+	}
+
+	public void setPos2MidweekComboBox(ComboBox<Member> pos2MidweekComboBox) {
+		this.pos2MidweekComboBox = pos2MidweekComboBox;
+	}
+
+	public void setPos3MidweekComboBox(ComboBox<Member> pos3MidweekComboBox) {
+		this.pos3MidweekComboBox = pos3MidweekComboBox;
+	}
+
+	public void setMic1MidweekLabel(Label mic1MidweekLabel) {
+		this.mic1MidweekLabel = mic1MidweekLabel;
+	}
+
+	public void setMic2MidweekLabel(Label mic2MidweekLabel) {
+		this.mic2MidweekLabel = mic2MidweekLabel;
+	}
+
+	public void setMic3MidweekLabel(Label mic3MidweekLabel) {
+		this.mic3MidweekLabel = mic3MidweekLabel;
+	}
+
+	public void setMic1MidweekComboBox(ComboBox<Member> mic1MidweekComboBox) {
+		this.mic1MidweekComboBox = mic1MidweekComboBox;
+	}
+
+	public void setMic2MidweekComboBox(ComboBox<Member> mic2MidweekComboBox) {
+		this.mic2MidweekComboBox = mic2MidweekComboBox;
+	}
+
+	public void setMic3MidweekComboBox(ComboBox<Member> mic3MidweekComboBox) {
+		this.mic3MidweekComboBox = mic3MidweekComboBox;
+	}
+
+	public void setPos1WeekendLabel(Label pos1WeekendLabel) {
+		this.pos1WeekendLabel = pos1WeekendLabel;
+	}
+
+	public void setPos2WeekendLabel(Label pos2WeekendLabel) {
+		this.pos2WeekendLabel = pos2WeekendLabel;
+	}
+
+	public void setPos3WeekendLabel(Label pos3WeekendLabel) {
+		this.pos3WeekendLabel = pos3WeekendLabel;
+	}
+
+	public void setPos1WeekendComboBox(ComboBox<Member> pos1WeekendComboBox) {
+		this.pos1WeekendComboBox = pos1WeekendComboBox;
+	}
+
+	public void setPos2WeekendComboBox(ComboBox<Member> pos2WeekendComboBox) {
+		this.pos2WeekendComboBox = pos2WeekendComboBox;
+	}
+
+	public void setPos3WeekendComboBox(ComboBox<Member> pos3WeekendComboBox) {
+		this.pos3WeekendComboBox = pos3WeekendComboBox;
+	}
+
+	public void setMic1WeekendLabel(Label mic1WeekendLabel) {
+		this.mic1WeekendLabel = mic1WeekendLabel;
+	}
+
+	public void setMic2WeekendLabel(Label mic2WeekendLabel) {
+		this.mic2WeekendLabel = mic2WeekendLabel;
+	}
+
+	public void setMic3WeekendLabel(Label mic3WeekendLabel) {
+		this.mic3WeekendLabel = mic3WeekendLabel;
+	}
+
+	public void setMic1WeekendComboBox(ComboBox<Member> mic1WeekendComboBox) {
+		this.mic1WeekendComboBox = mic1WeekendComboBox;
+	}
+
+	public void setMic2WeekendComboBox(ComboBox<Member> mic2WeekendComboBox) {
+		this.mic2WeekendComboBox = mic2WeekendComboBox;
+	}
+
+	public void setMic3WeekendComboBox(ComboBox<Member> mic3WeekendComboBox) {
+		this.mic3WeekendComboBox = mic3WeekendComboBox;
+	}
+
+	public void setPos1MidweekList(ObservableList<Member> pos1MidweekList) {
+		this.pos1MidweekList = pos1MidweekList;
+	}
+
+	public void setPos2MidweekList(ObservableList<Member> pos2MidweekList) {
+		this.pos2MidweekList = pos2MidweekList;
+	}
+
+	public void setPos3MidweekList(ObservableList<Member> pos3MidweekList) {
+		this.pos3MidweekList = pos3MidweekList;
+	}
+
+	public void setMicMidweekList(ObservableList<Member> micMidweekList) {
+		this.micMidweekList = micMidweekList;
+	}
+
+	public void setPos1WeekendList(ObservableList<Member> pos1WeekendList) {
+		this.pos1WeekendList = pos1WeekendList;
+	}
+
+	public void setPos2WeekendList(ObservableList<Member> pos2WeekendList) {
+		this.pos2WeekendList = pos2WeekendList;
+	}
+
+	public void setPos3WeekendList(ObservableList<Member> pos3WeekendList) {
+		this.pos3WeekendList = pos3WeekendList;
+	}
+
+	public void setMicWeekendList(ObservableList<Member> micWeekendList) {
+		this.micWeekendList = micWeekendList;
+	}
+
 }

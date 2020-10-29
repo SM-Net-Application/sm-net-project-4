@@ -31,6 +31,7 @@ import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateData;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
@@ -2356,8 +2357,8 @@ public class Actions {
 
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
 					for (Week week : weeks)
-						jrWeeks.add(
-								JRWeek.newObject(week, membersList, null, null, null, language, extendedName, false));
+						jrWeeks.add(JRWeek.newObject(week, membersList, null, null, null, null, null, language,
+								extendedName, false));
 
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
@@ -2391,8 +2392,8 @@ public class Actions {
 
 	public static void printWeekComplete(ArrayList<Week> weeks, ObservableList<Member> membersList,
 			ObservableList<Family> familiesList, ObservableList<WeekConvention> convention,
-			ObservableList<WeekMemorial> memorial, String congregationName, Settings settings, Stage ownerStage,
-			Language language, boolean extendedName) {
+			ObservableList<WeekMemorial> memorial, ObservableList<WeekAudio> audio, HashMap<String, String> configs,
+			String congregationName, Settings settings, Stage ownerStage, Language language, boolean extendedName) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -2432,7 +2433,7 @@ public class Actions {
 					for (Week week : weeks) {
 
 						JRWeek newJRWeek = JRWeek.newObject(week, membersList, familiesList, convention, memorial,
-								language, extendedName, true);
+								audio, configs, language, extendedName, true);
 
 						String congregationNameHeader = String
 								.format(language.getString("jasper.layout.meeting.congregation"), congregationName);

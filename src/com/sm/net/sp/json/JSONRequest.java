@@ -10,6 +10,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
@@ -252,7 +253,7 @@ public class JSONRequest {
 		jsonObj.put("spInf57", spInf57);
 		jsonObj.put("spInf58", spInf58);
 		jsonObj.put("spInf59", spInf59);
-		
+
 		return jsonObj;
 	}
 
@@ -1052,6 +1053,64 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject AUDIO_INSERT(WeekAudio w) {
+
+		JSONObject jsonObj = create(Integer.valueOf(56));
+
+		jsonObj.put("spInf1", w.getSpInf1());
+		jsonObj.put("spInf2", w.getSpInf2());
+		jsonObj.put("spInf3", w.getSpInf3());
+		jsonObj.put("spInf4", w.getSpInf4());
+		jsonObj.put("spInf5", w.getSpInf5());
+		jsonObj.put("spInf6", w.getSpInf6());
+		jsonObj.put("spInf7", w.getSpInf7());
+		jsonObj.put("spInf8", w.getSpInf8());
+		jsonObj.put("spInf9", w.getSpInf9());
+		jsonObj.put("spInf10", w.getSpInf10());
+		jsonObj.put("spInf11", w.getSpInf11());
+		jsonObj.put("spInf12", w.getSpInf12());
+		jsonObj.put("spInf13", w.getSpInf13());
+
+		return jsonObj;
+	}
+
+	public static JSONObject AUDIO_UPDATE(WeekAudio w) {
+
+		JSONObject jsonObj = create(Integer.valueOf(57));
+
+		jsonObj.put("spAudioID", w.getAudioID());
+		jsonObj.put("spInf1", w.getSpInf1());
+		jsonObj.put("spInf2", w.getSpInf2());
+		jsonObj.put("spInf3", w.getSpInf3());
+		jsonObj.put("spInf4", w.getSpInf4());
+		jsonObj.put("spInf5", w.getSpInf5());
+		jsonObj.put("spInf6", w.getSpInf6());
+		jsonObj.put("spInf7", w.getSpInf7());
+		jsonObj.put("spInf8", w.getSpInf8());
+		jsonObj.put("spInf9", w.getSpInf9());
+		jsonObj.put("spInf10", w.getSpInf10());
+		jsonObj.put("spInf11", w.getSpInf11());
+		jsonObj.put("spInf12", w.getSpInf12());
+		jsonObj.put("spInf13", w.getSpInf13());
+
+		return jsonObj;
+	}
+
+	public static JSONObject AUDIO_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(58));
+		return jsonObj;
+	}
+
+	public static JSONObject AUDIO_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(59));
+
+		jsonObj.put("spAudioID", id);
+
+		return jsonObj;
+	}
+	
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

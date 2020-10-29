@@ -17,6 +17,7 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
@@ -88,6 +89,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private ObservableList<WeekConvention> convention;
 	private ObservableList<WeekMemorial> memorial;
 	private ObservableList<Family> familiesList;
+	private ObservableList<WeekAudio> audio;
 
 	private SupportPlannerView application;
 
@@ -371,10 +373,6 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 			if (printableWeeks.size() > 0) {
 
-//				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
-//						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT,
-//						EnumPrintLayouts.MEETING_MIDWEEK_NAME_EXTENDED, EnumPrintLayouts.MEETING_MIDWEEK_NAME_SHORT);
-
 				EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
 						EnumPrintLayouts.MEETING_COMPLETE_NAME_EXTENDED, EnumPrintLayouts.MEETING_COMPLETE_NAME_SHORT);
 
@@ -384,28 +382,19 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 					case MEETING_COMPLETE_NAME_EXTENDED:
 						Actions.printWeekComplete(printableWeeks, membersList, this.familiesList, this.convention,
-								this.memorial, congregationName, settings, ownerStage, language, true);
+								this.memorial, this.audio, this.configs, congregationName, settings, ownerStage,
+								language, true);
 						break;
 
 					case MEETING_COMPLETE_NAME_SHORT:
 						Actions.printWeekComplete(printableWeeks, membersList, this.familiesList, this.convention,
-								this.memorial, congregationName, settings, ownerStage, language, false);
+								this.memorial, this.audio, this.configs, congregationName, settings, ownerStage,
+								language, false);
 						break;
-
-//					case MEETING_MIDWEEK_NAME_EXTENDED:
-//						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-//								true);
-//						break;
-//
-//					case MEETING_MIDWEEK_NAME_SHORT:
-//						Actions.printWeek(printableWeeks, membersList, congregationName, settings, ownerStage, language,
-//								false);
-//						break;
 
 					default:
 						break;
 					}
-
 				}
 			}
 		}
@@ -582,5 +571,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setMemorial(ObservableList<WeekMemorial> memorial) {
 		this.memorial = memorial;
+	}
+
+	public ObservableList<WeekAudio> getAudio() {
+		return audio;
+	}
+
+	public void setAudio(ObservableList<WeekAudio> audio) {
+		this.audio = audio;
 	}
 }

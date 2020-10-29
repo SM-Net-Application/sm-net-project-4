@@ -24,6 +24,7 @@ import com.sm.net.sp.utils.OperatingSystemUtils;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
+import com.sm.net.sp.view.home.user.menu.audio.Audio;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.config.UserMenuConfig;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
@@ -38,6 +39,7 @@ import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisaster
 import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
+import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.connection.SettingConnection;
@@ -880,9 +882,9 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.MEMORIAL_FXML_URL);
+				fxmlLoader.setLocation(Meta.Views.AUDIO_FXML_URL);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-				Memorial ctrl = (Memorial) fxmlLoader.getController();
+				Audio ctrl = (Audio) fxmlLoader.getController();
 				ctrl.setApplication(this);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.objectInitialize();
@@ -893,7 +895,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			}
 		}
 	}
-	
+
 	public void viewUsciere() {
 
 		if (this.center != 22) {
@@ -904,9 +906,9 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.MEMORIAL_FXML_URL);
+				fxmlLoader.setLocation(Meta.Views.USCIERE_FXML_URL);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-				Memorial ctrl = (Memorial) fxmlLoader.getController();
+				Usciere ctrl = (Usciere) fxmlLoader.getController();
 				ctrl.setApplication(this);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
 				ctrl.objectInitialize();
@@ -917,7 +919,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			}
 		}
 	}
-	
+
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());

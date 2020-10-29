@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.jasper.Jasper;
@@ -15,6 +16,7 @@ import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
@@ -169,6 +171,9 @@ public class JRWeek {
 
 	private String bibleWeek;
 
+	private String audioMidweek;
+	private String audioWeekend;
+
 	private String congregationName;
 	private String programmName;
 
@@ -265,8 +270,9 @@ public class JRWeek {
 	}
 
 	public static JRWeek newObject(Week week, ObservableList<Member> membersList, ObservableList<Family> familiesList,
-			ObservableList<WeekConvention> convention, ObservableList<WeekMemorial> memorial, Language language,
-			boolean extendedName, boolean complete) throws JRException {
+			ObservableList<WeekConvention> convention, ObservableList<WeekMemorial> memorial,
+			ObservableList<WeekAudio> audio, HashMap<String, String> configs, Language language, boolean extendedName,
+			boolean complete) throws JRException {
 
 		LocalDate weekFrom = week.getFrom();
 
@@ -1290,6 +1296,110 @@ public class JRWeek {
 		// Weekend Extra
 		jrWeek.setWeekendExtraHeader(week.getSpInf54().toUpperCase());
 		jrWeek.setWeekendExtraContent(week.getSpInf55());
+
+		// Audio/Video
+		WeekAudio weekAudio = null;
+		for (WeekAudio w : audio)
+			if (w.getSpInf1() == weekKey) {
+				weekAudio = w;
+				break;
+			}
+		if (weekAudio != null) {
+
+			String pos1Name = configs.get("inf9");
+			String pos2Name = configs.get("inf10");
+			String pos3Name = configs.get("inf11");
+
+			String audioPosFormat = language.getString("jasper.layout.meeting.audio.pos");
+			String micText = language.getString("jasper.layout.meeting.audio.mic");
+
+			String memberPos1Midweek = "";
+			String memberPos2Midweek = "";
+			String memberPos3Midweek = "";
+			String memberPos1Weekend = "";
+			String memberPos2Weekend = "";
+			String memberPos3Weekend = "";
+
+			member = getMemberFromList(membersList, weekAudio.getSpInf2());
+			if (member != null)
+				if (extendedName)
+					memberPos1Midweek = member.getNameStyle3();
+				else
+					memberPos1Midweek = member.getNameStyle4();
+
+			member = getMemberFromList(membersList, weekAudio.getSpInf3());
+			if (member != null)
+				if (extendedName)
+					memberPos2Midweek = member.getNameStyle3();
+				else
+					memberPos2Midweek = member.getNameStyle4();
+
+			member = getMemberFromList(membersList, weekAudio.getSpInf4());
+			if (member != null)
+				if (extendedName)
+					memberPos3Midweek = member.getNameStyle3();
+				else
+					memberPos3Midweek = member.getNameStyle4();
+
+			String nameListMicMidweek = weekAudio.nameListMicMidweek(membersList, extendedName);
+
+			member = getMemberFromList(membersList, weekAudio.getSpInf8());
+			if (member != null)
+				if (extendedName)
+					memberPos1Weekend = member.getNameStyle3();
+				else
+					memberPos1Weekend = member.getNameStyle4();
+
+			member = getMemberFromList(membersList, weekAudio.getSpInf9());
+			if (member != null)
+				if (extendedName)
+					memberPos2Weekend = member.getNameStyle3();
+				else
+					memberPos2Weekend = member.getNameStyle4();
+
+			member = getMemberFromList(membersList, weekAudio.getSpInf10());
+			if (member != null)
+				if (extendedName)
+					memberPos3Weekend = member.getNameStyle3();
+				else
+					memberPos3Weekend = member.getNameStyle4();
+
+			String nameListMicWeekend = weekAudio.nameListMicWeekend(membersList, extendedName);
+
+			String audioMidweek = "";
+			if (!pos1Name.isEmpty())
+				audioMidweek = String.format(audioPosFormat, pos1Name, memberPos1Midweek);
+
+			if (!pos2Name.isEmpty())
+				audioMidweek += "<br>" + String.format(audioPosFormat, pos2Name, memberPos2Midweek);
+
+			if (!pos3Name.isEmpty())
+				audioMidweek += "<br>" + String.format(audioPosFormat, pos3Name, memberPos3Midweek);
+
+			if (!nameListMicMidweek.isEmpty())
+				audioMidweek += "<br>" + String.format(audioPosFormat, micText, nameListMicMidweek);
+
+			jrWeek.setAudioMidweek(audioMidweek);
+
+			String audioWeekend = "";
+			if (!pos1Name.isEmpty())
+				audioWeekend = String.format(audioPosFormat, pos1Name, memberPos1Weekend);
+
+			if (!pos2Name.isEmpty())
+				audioWeekend += "<br>" + String.format(audioPosFormat, pos2Name, memberPos2Weekend);
+
+			if (!pos3Name.isEmpty())
+				audioWeekend += "<br>" + String.format(audioPosFormat, pos3Name, memberPos3Weekend);
+
+			if (!nameListMicWeekend.isEmpty())
+				audioWeekend += "<br>" + String.format(audioPosFormat, micText, nameListMicWeekend);
+
+			jrWeek.setAudioWeekend(audioWeekend);
+
+		} else {
+			jrWeek.setAudioMidweek("");
+			jrWeek.setAudioWeekend("");
+		}
 
 		return jrWeek;
 	}
@@ -2421,6 +2531,22 @@ public class JRWeek {
 
 	public void setWeekendExtraContent(String weekendExtraContent) {
 		this.weekendExtraContent = weekendExtraContent;
+	}
+
+	public String getAudioMidweek() {
+		return audioMidweek;
+	}
+
+	public String getAudioWeekend() {
+		return audioWeekend;
+	}
+
+	public void setAudioMidweek(String audioMidweek) {
+		this.audioMidweek = audioMidweek;
+	}
+
+	public void setAudioWeekend(String audioWeekend) {
+		this.audioWeekend = audioWeekend;
 	}
 
 }

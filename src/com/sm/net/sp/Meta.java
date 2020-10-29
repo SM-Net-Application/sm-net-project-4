@@ -13,6 +13,8 @@ import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
+import com.sm.net.sp.view.home.user.menu.audio.Audio;
+import com.sm.net.sp.view.home.user.menu.audio.AudioEditor;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.UserMenuCircuitOverseer;
 import com.sm.net.sp.view.home.user.menu.config.UserMenuConfig;
 import com.sm.net.sp.view.home.user.menu.congr.UserMenuCongrList;
@@ -31,6 +33,8 @@ import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
 import com.sm.net.sp.view.home.user.menu.places.PlacesAdd;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
+import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
+import com.sm.net.sp.view.home.user.menu.usciere.UsciereEditor;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
 import com.sm.net.sp.view.menu.settings.SettingsList;
@@ -182,6 +186,12 @@ public class Meta {
 				.getResource("ConventionEditor.fxml");
 		public static final URL MEMORIAL_FXML_URL = Memorial.class.getResource("Memorial.fxml");
 		public static final URL MEMORIAL_EDITOR_FXML_URL = MemorialEditor.class.getResource("MemorialEditor.fxml");
+		
+		public static final URL AUDIO_FXML_URL = Audio.class.getResource("Audio.fxml");
+		public static final URL AUDIO_EDITOR_FXML_URL = AudioEditor.class.getResource("AudioEditor.fxml");
+		
+		public static final URL USCIERE_FXML_URL = Usciere.class.getResource("Usciere.fxml");
+		public static final URL USCIERE_EDITOR_FXML_URL = UsciereEditor.class.getResource("UsciereEditor.fxml");
 	}
 
 	public static class Themes {
