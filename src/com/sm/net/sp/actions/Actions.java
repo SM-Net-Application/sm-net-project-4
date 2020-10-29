@@ -651,7 +651,8 @@ public class Actions {
 			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
 			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
 			String spInf43, String spInf44, String spInf45, String spInf46, String spInf47, String spInf48,
-			String spInf49, String spInf50, String spInf51, String spInf52, String spInf53, Settings settings,
+			String spInf49, String spInf50, String spInf51, String spInf52, String spInf53, String spInf54,
+			String spInf55, String spInf56, String spInf57, String spInf58, String spInf59, Settings settings,
 			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
@@ -699,7 +700,8 @@ public class Actions {
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
 								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
 								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
-								spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53));
+								spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54,
+								spInf55, spInf56, spInf57, spInf58, spInf59));
 			}
 		};
 
@@ -782,7 +784,8 @@ public class Actions {
 			String spInf31, String spInf32, String spInf33, String spInf34, String spInf35, String spInf36,
 			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
 			String spInf43, String spInf44, String spInf45, String spInf46, String spInf47, String spInf48,
-			String spInf49, String spInf50, String spInf51, String spInf52, String spInf53, Settings settings,
+			String spInf49, String spInf50, String spInf51, String spInf52, String spInf53, String spInf54,
+			String spInf55, String spInf56, String spInf57, String spInf58, String spInf59, Settings settings,
 			Stage ownerStage, TabPane congrTabPane, Tab newMemberTab, Tab membersTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
@@ -830,7 +833,8 @@ public class Actions {
 								spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27,
 								spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36,
 								spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45,
-								spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53));
+								spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54,
+								spInf55, spInf56, spInf57, spInf58, spInf59));
 			}
 		};
 

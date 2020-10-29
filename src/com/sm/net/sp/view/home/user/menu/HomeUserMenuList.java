@@ -167,6 +167,10 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.SERVICEGROUPS);
 			if (this.user.isSpInf4())
 				menuListView.getItems().add(EnumHomeUserMenuList.MEETINGS);
+			if (this.user.isSpInf14())
+				menuListView.getItems().add(EnumHomeUserMenuList.AUDIO);
+			if (this.user.isSpInf15())
+				menuListView.getItems().add(EnumHomeUserMenuList.USCIERE);
 			if (this.user.isSpInf8())
 				menuListView.getItems().add(EnumHomeUserMenuList.PUBLIC_TALK);
 			if (this.user.isSpInf5())

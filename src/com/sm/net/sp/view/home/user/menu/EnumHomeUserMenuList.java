@@ -17,6 +17,10 @@ public enum EnumHomeUserMenuList {
 	SERVICEGROUPS("USERMENU003", Meta.Resources.USER_MENU_SERVICEGROUPS),
 
 	MEETINGS("USERMENU004", Meta.Resources.USER_MENU_MEETINGS),
+	
+	AUDIO("sp.menu.audio", Meta.Resources.AUDIO),
+	
+	USCIERE("sp.menu.usciere", Meta.Resources.USCIERE),
 
 	PUBLIC_TALK("sp.menu.publictalk", Meta.Resources.PUBLIC_TALK),
 

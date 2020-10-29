@@ -77,22 +77,11 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private CheckBox authGeneralInfoCheckBox;
 
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnUsers;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnCongregations;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnServiceGroups;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnMeetings;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnPublicTalk;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnOverseer;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnNaturalDisaster;
-//	@FXML
-//	private TableColumn<User, Boolean> userTableColumnMonitor;
+	@FXML
+	private CheckBox authAudioCheckBox;
+	@FXML
+	private CheckBox authUsciereCheckBox;
+
 	@FXML
 	private Button userAddButton;
 	@FXML
@@ -109,32 +98,12 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private void initialize() {
 		styleClasses();
-//		tableColumnsCellFactory();
 		tableColumnsCellValueFactory();
 	}
-
-//	private void tableColumnsCellFactory() {
-//		userTableColumnUsers.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnUsers));
-//		userTableColumnCongregations.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnCongregations));
-//		userTableColumnServiceGroups.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnServiceGroups));
-//		userTableColumnMeetings.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMeetings));
-//		userTableColumnOverseer.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnOverseer));
-//		userTableColumnNaturalDisaster.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnNaturalDisaster));
-//		userTableColumnMonitor.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnMonitor));
-//		userTableColumnPublicTalk.setCellFactory(CheckBoxTableCell.forTableColumn(userTableColumnPublicTalk));
-//	}
 
 	private void tableColumnsCellValueFactory() {
 		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
 		userTableColumnName.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
-//		userTableColumnUsers.setCellValueFactory(cellData -> cellData.getValue().spInf1Property());
-//		userTableColumnCongregations.setCellValueFactory(cellData -> cellData.getValue().spInf2Property());
-//		userTableColumnServiceGroups.setCellValueFactory(cellData -> cellData.getValue().spInf3Property());
-//		userTableColumnMeetings.setCellValueFactory(cellData -> cellData.getValue().spInf4Property());
-//		userTableColumnOverseer.setCellValueFactory(cellData -> cellData.getValue().spInf5Property());
-//		userTableColumnNaturalDisaster.setCellValueFactory(cellData -> cellData.getValue().spInf6Property());
-//		userTableColumnMonitor.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
-//		userTableColumnPublicTalk.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
 	}
 
 	private void styleClasses() {
@@ -172,14 +141,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authGeneralInfoCheckBox.getStyleClass().add("check_box_001");
 
-//		userTableColumnUsers.getStyleClass().add("check_box_001");
-//		userTableColumnCongregations.getStyleClass().add("check_box_001");
-//		userTableColumnServiceGroups.getStyleClass().add("check_box_001");
-//		userTableColumnMeetings.getStyleClass().add("check_box_001");
-//		userTableColumnOverseer.getStyleClass().add("check_box_001");
-//		userTableColumnNaturalDisaster.getStyleClass().add("check_box_001");
-//		userTableColumnMonitor.getStyleClass().add("check_box_001");
-//		userTableColumnPublicTalk.getStyleClass().add("check_box_001");
+		this.authAudioCheckBox.getStyleClass().add("check_box_001");
+		this.authUsciereCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -198,29 +161,11 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		userTableColumnID.setText(language.getString("TEXT0005"));
 		userTableColumnName.setText(language.getString("VIEW007LAB002"));
-//		userTableColumnUsers.setText(language.getString("USERMENU001"));
-//		userTableColumnCongregations.setText(language.getString("USERMENU002"));
-//		userTableColumnServiceGroups.setText(language.getString("USERMENU003"));
-//		userTableColumnMeetings.setText(language.getString("USERMENU004"));
-//		userTableColumnOverseer.setText(language.getString("USERMENU005"));
-//		userTableColumnNaturalDisaster.setText(language.getString("sp.menu.naturaldisaster"));
-//		userTableColumnMonitor.setText(language.getString("sp.menu.monitor"));
-//		userTableColumnPublicTalk.setText(language.getString("sp.menu.publictalk"));
 
 		userTableView.setEditable(true);
 		userTableColumnID.setMinWidth(50);
 		userTableColumnID.setMaxWidth(50);
 		userTableColumnID.setResizable(false);
-//		userTableColumnName.setMinWidth(350);
-//		userTableColumnName.setMaxWidth(350);
-//		userTableColumnName.setResizable(false);
-//		userTableColumnUsers.setEditable(true);
-//		userTableColumnCongregations.setEditable(true);
-//		userTableColumnServiceGroups.setEditable(true);
-//		userTableColumnMeetings.setEditable(true);
-//		userTableColumnNaturalDisaster.setEditable(true);
-//		userTableColumnMonitor.setEditable(true);
-//		userTableColumnPublicTalk.setEditable(true);
 
 		Tooltip userAddTooltip = new Tooltip(this.language.getString("users.tooltip.add"));
 		userAddTooltip.getStyleClass().add("tooltip_001");
@@ -286,6 +231,12 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authGeneralInfoCheckBox.setText(language.getString("users.auth.generalinfo"));
 		this.authGeneralInfoCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.GENERALINFO));
+		
+		this.authAudioCheckBox.setText(language.getString("users.auth.audio"));
+		this.authAudioCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.AUDIO));
+		
+		this.authUsciereCheckBox.setText(language.getString("users.auth.usciere"));
+		this.authUsciereCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USCIERE));
 	}
 
 	@Override
@@ -328,6 +279,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				this.authMemorialCheckBox.setSelected(user.isSpInf12());
 
 				this.authGeneralInfoCheckBox.setSelected(user.isSpInf13());
+				
+				this.authAudioCheckBox.setSelected(user.isSpInf14());
+				this.authUsciereCheckBox.setSelected(user.isSpInf15());
 			}
 
 		});
@@ -361,8 +315,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				int spInf11 = this.authConventionsCheckBox.isSelected() ? 1 : 0;
 				int spInf12 = this.authMemorialCheckBox.isSelected() ? 1 : 0;
 				int spInf13 = this.authGeneralInfoCheckBox.isSelected() ? 1 : 0;
-				int spInf14 = 0;
-				int spInf15 = 0;
+				int spInf14 = this.authAudioCheckBox.isSelected() ? 1 : 0;
+				int spInf15 = this.authUsciereCheckBox.isSelected() ? 1 : 0;
 				int spInf16 = 0;
 				int spInf17 = 0;
 				int spInf18 = 0;
@@ -399,6 +353,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authMemorialCheckBox.setSelected(false);
 
 		this.authGeneralInfoCheckBox.setSelected(false);
+		
+		this.authAudioCheckBox.setSelected(false);
+		this.authUsciereCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {

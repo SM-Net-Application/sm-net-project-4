@@ -202,6 +202,24 @@
                         </StackPane>
                         <StackPane alignment="CENTER_LEFT">
                            <children>
+                              <CheckBox fx:id="authAudioCheckBox" mnemonicParsing="false" text="audio">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </CheckBox>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <CheckBox fx:id="authUsciereCheckBox" mnemonicParsing="false" text="usciere">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </CheckBox>
+                           </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
                               <CheckBox fx:id="authPublicTalkCheckBox" mnemonicParsing="false" text="publictalk">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

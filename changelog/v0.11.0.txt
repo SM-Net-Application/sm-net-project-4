@@ -1,6 +1,9 @@
 Data di pubblicazione : ..-..-....
 
 	Congregazione:
+		- Ottimizzata GUI per l'assegnazione degli incarichi
+			- Aggiunto incarico Audio/Video (3 Postazioni (vedi Configurazione))
+			- Aggiunto incarico Usciere (3 Zone (vedi Configurazione))
 		- L'indirizzo di una famiglia viene caricato su Google Maps anche senza coordinate
 
 	Adunanze:
@@ -14,6 +17,14 @@ Data di pubblicazione : ..-..-....
 	Configurazione:
 		- Migliorata GUI
 		- Nuove configurazioni:
+			- Audio/Video
+				- Nome Postazione 1
+				- Nome Postazione 2
+				- Nome Postazione 3
+			- Usciere
+				- Nome Zona 1
+				- Nome Zona 2
+				- Nome Zona 3
 			- Commemorazione
 				- Minuti discorso Commemorazione
 			-Sorvegliante
@@ -32,3 +43,6 @@ Data di pubblicazione : ..-..-....
 	* Database update
 		  
 		ALTER TABLE sp_week ADD spInf54 VARCHAR(250) NOT NULL AFTER spInf53, ADD spInf55 VARCHAR(250) NOT NULL AFTER spInf54, ADD spInf56 INT NOT NULL AFTER spInf55, ADD spInf57 INT NOT NULL AFTER spInf56, ADD spInf58 INT NOT NULL AFTER spInf57;
+		ALTER TABLE sp_members ADD spInf54 INT NOT NULL AFTER spInf53, ADD spInf55 INT NOT NULL AFTER spInf54, ADD spInf56 INT NOT NULL AFTER spInf55, ADD spInf57 INT NOT NULL AFTER spInf56, ADD spInf58 INT NOT NULL AFTER spInf57, ADD spInf59 INT NOT NULL AFTER spInf58;
+		CREATE TABLE sp_audio ( spAudioID INT NOT NULL AUTO_INCREMENT , spInf1 INT NOT NULL , spInf2 INT NOT NULL , spInf3 INT NOT NULL , spInf4 INT NOT NULL , spInf5 INT NOT NULL , spInf6 INT NOT NULL , spInf7 INT NOT NULL , spInf8 INT NOT NULL , spInf9 INT NOT NULL , spInf10 INT NOT NULL , spInf11 INT NOT NULL , spInf12 INT NOT NULL , spInf13 INT NOT NULL , PRIMARY KEY (spAudioID)) ENGINE = InnoDB;
+		CREATE TABLE sp_usc ( spUscID INT NOT NULL AUTO_INCREMENT , spInf1 INT NOT NULL , spInf2 INT NOT NULL , spInf3 INT NOT NULL , spInf4 INT NOT NULL , spInf5 INT NOT NULL , spInf6 INT NOT NULL , spInf7 INT NOT NULL , spInf8 INT NOT NULL , spInf9 INT NOT NULL , spInf10 INT NOT NULL , spInf11 INT NOT NULL , spInf12 INT NOT NULL , spInf13 INT NOT NULL , spInf14 INT NOT NULL , spInf15 INT NOT NULL , spInf16 INT NOT NULL , spInf17 INT NOT NULL , spInf18 INT NOT NULL , spInf19 INT NOT NULL , PRIMARY KEY (spUscID)) ENGINE = InnoDB;

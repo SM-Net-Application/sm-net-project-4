@@ -26,6 +26,8 @@
 	
 	Eliminare AlertBuilder vecchio.
 	
+	Commemorazione mostra solo Febbraio, Marzo, Aprile e Maggio
+	
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
 		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)

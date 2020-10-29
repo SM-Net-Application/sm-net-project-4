@@ -12,6 +12,7 @@ if (! $database) {
 	$query .= ", spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31";
 	$query .= ", spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42";
 	$query .= ", spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53";
+	$query .= ", spInf54, spInf55, spInf56, spInf57, spInf58, spInf59";
 	$query .= " FROM sp_members";
 	$result = mysqli_query ( $database, $query );
 	
@@ -74,7 +75,13 @@ if (! $database) {
             $row ["spInf50"] = $resultRow ["spInf50"];
             $row ["spInf51"] = $resultRow ["spInf51"];
             $row ["spInf52"] = $resultRow ["spInf52"];
-            $row ["spInf53"] = $resultRow ["spInf53"];
+			$row ["spInf53"] = $resultRow ["spInf53"];
+			$row ["spInf54"] = $resultRow ["spInf54"];
+			$row ["spInf55"] = $resultRow ["spInf55"];
+			$row ["spInf56"] = $resultRow ["spInf56"];
+			$row ["spInf57"] = $resultRow ["spInf57"];
+			$row ["spInf58"] = $resultRow ["spInf58"];
+			$row ["spInf59"] = $resultRow ["spInf59"];
 			
 			array_push ( $response ["result"], $row );
 		}
