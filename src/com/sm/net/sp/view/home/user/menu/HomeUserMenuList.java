@@ -215,6 +215,12 @@ public class HomeUserMenuList {
 		case MEETINGS:
 			ctrlSupportPlannerView.viewHomeUserMenuMeetings();
 			break;
+		case AUDIO:
+			ctrlSupportPlannerView.viewAudio();
+			break;
+		case USCIERE:
+			ctrlSupportPlannerView.viewUsciere();
+			break;
 		case PUBLIC_TALK:
 			ctrlSupportPlannerView.viewHomeUserMenuPublicMeetings();
 			break;

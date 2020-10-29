@@ -870,6 +870,54 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 	}
 
+	public void viewAudio() {
+
+		if (this.center != 21) {
+
+			this.center = 21;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MEMORIAL_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				Memorial ctrl = (Memorial) fxmlLoader.getController();
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+	
+	public void viewUsciere() {
+
+		if (this.center != 22) {
+
+			this.center = 22;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MEMORIAL_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				Memorial ctrl = (Memorial) fxmlLoader.getController();
+				ctrl.setApplication(this);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+	
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());
