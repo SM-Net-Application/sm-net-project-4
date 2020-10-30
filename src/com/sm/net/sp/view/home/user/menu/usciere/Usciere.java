@@ -7,21 +7,17 @@ import java.util.HashMap;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.EnumDays;
-import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
-import com.sm.net.sp.model.WeekMemorial;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.memorial.task.MemorialInitDataLoadTask;
-import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialDeleteTask;
-import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialLoadTask;
+import com.sm.net.sp.view.home.user.menu.usciere.task.UsciereInitDataLoadTask;
+import com.sm.net.sp.view.home.user.menu.usciere.task.WeekUsciereDeleteTask;
+import com.sm.net.sp.view.home.user.menu.usciere.task.WeekUsciereLoadTask;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,21 +45,21 @@ public class Usciere extends UpdateDataAdapter {
 	@FXML
 	private Tab calendarTab;
 	@FXML
-	private TableView<WeekMemorial> weekTableView;
+	private TableView<WeekUsciere> weekTableView;
 	@FXML
-	private TableColumn<WeekMemorial, Integer> weekTableColumn;
+	private TableColumn<WeekUsciere, Integer> weekTableColumn;
 	@FXML
-	private TableColumn<WeekMemorial, LocalDate> fromTableColumn;
+	private TableColumn<WeekUsciere, LocalDate> fromTableColumn;
 	@FXML
-	private TableColumn<WeekMemorial, LocalDate> toTableColumn;
+	private TableColumn<WeekUsciere, LocalDate> toTableColumn;
 	@FXML
-	private TableColumn<WeekMemorial, String> dayColumn;
+	private TableColumn<WeekUsciere, String> posMidweekColumn;
 	@FXML
-	private TableColumn<WeekMemorial, String> placeColumn;
+	private TableColumn<WeekUsciere, String> micMidweekColumn;
 	@FXML
-	private TableColumn<WeekMemorial, String> talkBrotherColumn;
+	private TableColumn<WeekUsciere, String> posWeekendColumn;
 	@FXML
-	private TableColumn<WeekMemorial, String> themeColumn;
+	private TableColumn<WeekUsciere, String> micWeekendColumn;
 	@FXML
 	private Button deleteWeekButton;
 
@@ -73,11 +69,9 @@ public class Usciere extends UpdateDataAdapter {
 	private Language language;
 	private Stage ownerStage;
 
-	private ObservableList<WeekMemorial> calendar;
+	private ObservableList<WeekUsciere> calendar;
 
 	private ObservableList<Member> membersList;
-	private ObservableList<Family> familiesList;
-	private ObservableList<Place> placesList;
 	private HashMap<String, String> configs;
 
 	@FXML
@@ -92,45 +86,12 @@ public class Usciere extends UpdateDataAdapter {
 		this.fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		this.toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
 
-		this.dayColumn.setCellValueFactory(cellData -> {
-
-			WeekMemorial memorial = cellData.getValue();
-
-			if (memorial.spMemorialIDProperty() != null) {
-
-				int dayID = memorial.getSpInf21();
-				int hour = memorial.getSpInf22();
-				int minute = memorial.getSpInf23();
-
-				EnumDays day = EnumDays.getByID(dayID);
-				String format = this.language.getString("memorial.tablecolumn.patternday");
-
-				return new SimpleStringProperty(
-						String.format(format, this.language.getString(day.getKey()), hour, minute));
-			}
-
-			return null;
-		});
-
-		this.placeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf24Property());
-		this.talkBrotherColumn.setCellValueFactory(cellData -> {
-
-			WeekMemorial memorial = cellData.getValue();
-
-			if (memorial.spMemorialIDProperty() != null) {
-
-				int talkBrotherID = memorial.getSpInf6();
-				if (talkBrotherID > 0)
-					for (Member m : this.membersList)
-						if (m.getSpMemberID() == talkBrotherID)
-							return new SimpleStringProperty(m.getNameStyle1());
-
-			}
-
-			return null;
-		});
-
-		this.themeColumn.setCellValueFactory(cellData -> cellData.getValue().spInf7Property());
+		this.posMidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z1MidweekProperty());
+		this.micMidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z2MidweekProperty());
+		this.posWeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z3MidweekProperty());
+		this.micWeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z1WeekendProperty());
+		
+		//TODO altre 2 colonne
 	}
 
 	private void styleClasses() {
@@ -145,8 +106,6 @@ public class Usciere extends UpdateDataAdapter {
 		this.weekTableColumn.getStyleClass().add("table_column_002");
 		this.fromTableColumn.getStyleClass().add("table_column_002");
 		this.toTableColumn.getStyleClass().add("table_column_002");
-
-		this.dayColumn.getStyleClass().add("table_column_002");
 
 		this.deleteWeekButton.getStyleClass().add("button_image_001");
 	}
@@ -166,9 +125,9 @@ public class Usciere extends UpdateDataAdapter {
 
 		this.headerImageView.setFitWidth(50);
 		this.headerImageView.setFitHeight(50);
-		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.MEMORIAL, 50, 50));
+		this.headerImageView.setImage(Meta.Resources.getImageLogo(Meta.Resources.USCIERE, 50, 50));
 
-		this.headerLabel.setText(this.language.getString("memorial.header"));
+		this.headerLabel.setText(this.language.getString("usciere.header"));
 
 		this.calendarTab.setText(this.language.getString("TEXT0075"));
 		this.calendarTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CALENDAR));
@@ -185,15 +144,10 @@ public class Usciere extends UpdateDataAdapter {
 		this.toTableColumn.setMinWidth(100);
 		this.toTableColumn.setMaxWidth(100);
 
-		this.dayColumn.setText(this.language.getString("memorial.tablecolumn.day"));
-		this.dayColumn.setMinWidth(150);
-		this.dayColumn.setMaxWidth(150);
-
-		this.placeColumn.setText(this.language.getString("memorial.tablecolumn.place"));
-
-		this.talkBrotherColumn.setText(this.language.getString("memorial.tablecolumn.talkbrother"));
-
-		this.themeColumn.setText(this.language.getString("memorial.tablecolumn.theme"));
+		this.posMidweekColumn.setText(this.language.getString("audio.tablecolumn.pos"));
+		this.micMidweekColumn.setText(this.language.getString("audio.tablecolumn.mic"));
+		this.posWeekendColumn.setText(this.language.getString("audio.tablecolumn.pos"));
+		this.micWeekendColumn.setText(this.language.getString("audio.tablecolumn.mic"));
 
 		Tooltip deleteTooltip = new Tooltip(language.getString("memorial.tooltip.delete"));
 		deleteTooltip.getStyleClass().add("tooltip_001");
@@ -205,10 +159,7 @@ public class Usciere extends UpdateDataAdapter {
 	private void initData() {
 
 		this.loadCalendar();
-		this.updateWeeksData();
-
 		this.membersList = FXCollections.observableArrayList();
-		this.familiesList = FXCollections.observableArrayList();
 
 		updateMembers();
 	}
@@ -219,32 +170,15 @@ public class Usciere extends UpdateDataAdapter {
 	}
 
 	@Override
-	public void updateFamilies() {
-		Actions.getAllFamilies(settings, ownerStage, this);
-	}
-
-	@Override
 	public void updateMembers(ObservableList<Member> list) {
 
 		this.membersList = list;
 		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
 
-		updateFamilies();
-	}
-
-	@Override
-	public void updateFamilies(ObservableList<Family> list) {
-
-		this.familiesList = list;
-		this.familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
-
-		// Carica programmazione e luoghi
-
-		String waitMessage = this.language.getString("memorial.wait.load");
-
-//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new MemorialInitDataLoadTask(
-//				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+		String waitMessage = this.language.getString("audio.wait.load");
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new UsciereInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void loadCalendar() {
@@ -284,11 +218,11 @@ public class Usciere extends UpdateDataAdapter {
 			int currentMonth = day.getMonthValue();
 
 			if (lastMonth == currentMonth)
-				this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
+				this.calendar.add(new WeekUsciere(day.plusDays(6), this.language));
 			else {
 				countMonth = countMonth + 1;
 				if (countMonth < monthsToGenerate)
-					this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
+					this.calendar.add(new WeekUsciere(day.plusDays(6), this.language));
 			}
 
 		} while (countMonth < monthsToGenerate);
@@ -298,10 +232,10 @@ public class Usciere extends UpdateDataAdapter {
 
 	public void updateWeeksData() {
 
-		String waitMessage = this.language.getString("memorial.task.load");
+		String waitMessage = this.language.getString("audio.wait.load");
 
-//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//				new WeekMemorialLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new WeekUsciereLoadTask(
+				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this, this.membersList));
 
 	}
 
@@ -315,19 +249,19 @@ public class Usciere extends UpdateDataAdapter {
 
 		if (this.weekTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			WeekMemorial item = this.weekTableView.getSelectionModel().getSelectedItem();
-			if (item.spMemorialIDProperty() != null) {
+			WeekUsciere item = this.weekTableView.getSelectionModel().getSelectedItem();
+			if (item.spUscIDProperty() != null) {
 
 				if (this.application.getAlertBuilder2().confirm(this.ownerStage,
-						this.language.getString("memorial.delete.confirm"))) {
+						this.language.getString("audio.delete.confirm"))) {
 
-					int id = item.getMemorialID();
+					int id = item.getUscID();
 
-					String waitMessage = this.language.getString("memorial.task.delete");
+					String waitMessage = this.language.getString("audio.task.delete");
 
-//					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//							new WeekMemorialDeleteTask(this.application.getAlertBuilder2(), this.settings,
-//									this.ownerStage, this, id));
+					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+							new WeekUsciereDeleteTask(this.application.getAlertBuilder2(), this.settings,
+									this.ownerStage, this, id));
 				}
 			} else {
 
@@ -346,7 +280,7 @@ public class Usciere extends UpdateDataAdapter {
 
 		this.weekTableView.setRowFactory(param -> {
 
-			TableRow<WeekMemorial> row = new TableRow<>();
+			TableRow<WeekUsciere> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
 					editWeek(row.getItem());
@@ -356,14 +290,14 @@ public class Usciere extends UpdateDataAdapter {
 		});
 	}
 
-	private void editWeek(WeekMemorial week) {
+	private void editWeek(WeekUsciere week) {
 
 		if (!isAlreadyOpen(week.getFrom().toString())) {
 
 			try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.MEMORIAL_EDITOR_FXML_URL);
+				fxmlLoader.setLocation(Meta.Views.USCIERE_EDITOR_FXML_URL);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				UsciereEditor ctrl = (UsciereEditor) fxmlLoader.getController();
@@ -374,7 +308,6 @@ public class Usciere extends UpdateDataAdapter {
 				ctrl.setCalendar(this.calendar);
 				ctrl.setApplication(this.application);
 				ctrl.setMembersList(this.membersList);
-				ctrl.setFamiliesList(this.familiesList);
 				ctrl.setConfigs(this.configs);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
@@ -432,11 +365,11 @@ public class Usciere extends UpdateDataAdapter {
 		this.ownerStage = ownerStage;
 	}
 
-	public ObservableList<WeekMemorial> getCalendar() {
+	public ObservableList<WeekUsciere> getCalendar() {
 		return calendar;
 	}
 
-	public void setCalendar(ObservableList<WeekMemorial> calendar) {
+	public void setCalendar(ObservableList<WeekUsciere> calendar) {
 		this.calendar = calendar;
 	}
 
@@ -464,24 +397,20 @@ public class Usciere extends UpdateDataAdapter {
 		return calendarTab;
 	}
 
-	public TableView<WeekMemorial> getWeekTableView() {
+	public TableView<WeekUsciere> getWeekTableView() {
 		return weekTableView;
 	}
 
-	public TableColumn<WeekMemorial, Integer> getWeekTableColumn() {
+	public TableColumn<WeekUsciere, Integer> getWeekTableColumn() {
 		return weekTableColumn;
 	}
 
-	public TableColumn<WeekMemorial, LocalDate> getFromTableColumn() {
+	public TableColumn<WeekUsciere, LocalDate> getFromTableColumn() {
 		return fromTableColumn;
 	}
 
-	public TableColumn<WeekMemorial, LocalDate> getToTableColumn() {
+	public TableColumn<WeekUsciere, LocalDate> getToTableColumn() {
 		return toTableColumn;
-	}
-
-	public TableColumn<WeekMemorial, String> getVisitNumberColumn() {
-		return themeColumn;
 	}
 
 	public void setHeaderImageView(ImageView headerImageView) {
@@ -500,32 +429,20 @@ public class Usciere extends UpdateDataAdapter {
 		this.calendarTab = calendarTab;
 	}
 
-	public void setWeekTableView(TableView<WeekMemorial> weekTableView) {
+	public void setWeekTableView(TableView<WeekUsciere> weekTableView) {
 		this.weekTableView = weekTableView;
 	}
 
-	public void setWeekTableColumn(TableColumn<WeekMemorial, Integer> weekTableColumn) {
+	public void setWeekTableColumn(TableColumn<WeekUsciere, Integer> weekTableColumn) {
 		this.weekTableColumn = weekTableColumn;
 	}
 
-	public void setFromTableColumn(TableColumn<WeekMemorial, LocalDate> fromTableColumn) {
+	public void setFromTableColumn(TableColumn<WeekUsciere, LocalDate> fromTableColumn) {
 		this.fromTableColumn = fromTableColumn;
 	}
 
-	public void setToTableColumn(TableColumn<WeekMemorial, LocalDate> toTableColumn) {
+	public void setToTableColumn(TableColumn<WeekUsciere, LocalDate> toTableColumn) {
 		this.toTableColumn = toTableColumn;
-	}
-
-	public void setVisitNumberColumn(TableColumn<WeekMemorial, String> visitNumberColumn) {
-		this.themeColumn = visitNumberColumn;
-	}
-
-	public ObservableList<Place> getPlacesList() {
-		return placesList;
-	}
-
-	public void setPlacesList(ObservableList<Place> placesList) {
-		this.placesList = placesList;
 	}
 
 	public HashMap<String, String> getConfigs() {
@@ -535,5 +452,4 @@ public class Usciere extends UpdateDataAdapter {
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
 	}
-
 }

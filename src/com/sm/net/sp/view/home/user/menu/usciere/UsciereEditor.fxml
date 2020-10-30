@@ -52,7 +52,7 @@
                <children>
                   <StackPane alignment="CENTER_LEFT">
                      <children>
-                        <Label text="midweek">
+                        <Label fx:id="midweekLabel" text="midweek">
                            <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </StackPane.margin>
@@ -61,60 +61,47 @@
                   </StackPane>
                   <HBox>
                      <children>
-                        <VBox>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="pos1">
+                                    <Label fx:id="z1MidweekLabel" text="z1midweek">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="pos2">
+                                    <Separator>
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </Label>
+                                    </Separator>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="pos3">
-                                       <StackPane.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </StackPane.margin>
-                                    </Label>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <StackPane alignment="CENTER_LEFT">
-                                 <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z1u1MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z1u2MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z1u3MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
@@ -123,60 +110,96 @@
                               </StackPane>
                            </children>
                         </VBox>
-                        <VBox>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="mic1">
+                                    <Label fx:id="z2MidweekLabel" text="z2midweek">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="mic2">
+                                    <Separator>
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </Label>
+                                    </Separator>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="mic3">
+                                    <ComboBox fx:id="z2u1MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </Label>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <ComboBox fx:id="z2u2MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <ComboBox fx:id="z2u3MidweekComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
                                  </children>
                               </StackPane>
                            </children>
                         </VBox>
-                        <VBox>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <Label fx:id="z3MidweekLabel" text="z3midweek">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <Separator>
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Separator>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <ComboBox fx:id="z3u1MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z3u2MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z3u3MidweekComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
@@ -187,7 +210,7 @@
                         </VBox>
                      </children>
                      <VBox.margin>
-                        <Insets left="10.0" top="10.0" />
+                        <Insets left="25.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
                   <StackPane>
@@ -198,10 +221,13 @@
                            </StackPane.margin>
                         </Separator>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
                   </StackPane>
                   <StackPane alignment="CENTER_LEFT">
                      <children>
-                        <Label text="weekend">
+                        <Label fx:id="weekendLabel" text="weekend">
                            <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </StackPane.margin>
@@ -210,60 +236,47 @@
                   </StackPane>
                   <HBox>
                      <children>
-                        <VBox>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="pos1">
+                                    <Label fx:id="z1WeekendLabel" text="z1weekend">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="pos2">
+                                    <Separator>
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </Label>
+                                    </Separator>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="pos3">
-                                       <StackPane.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </StackPane.margin>
-                                    </Label>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <StackPane alignment="CENTER_LEFT">
-                                 <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z1u1WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z1u2WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z1u3WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
@@ -272,60 +285,96 @@
                               </StackPane>
                            </children>
                         </VBox>
-                        <VBox>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="mic1">
+                                    <Label fx:id="z2WeekendLabel" text="z2weekend">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </Label>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="mic2">
+                                    <Separator>
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </Label>
+                                    </Separator>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <Label text="mic3">
+                                    <ComboBox fx:id="z2u1WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
-                                    </Label>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <ComboBox fx:id="z2u2WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <ComboBox fx:id="z2u3WeekendComboBox">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </ComboBox>
                                  </children>
                               </StackPane>
                            </children>
                         </VBox>
-                        <VBox>
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <Label fx:id="z3WeekendLabel" text="z3weekend">
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <Separator>
+                                       <StackPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </Separator>
+                                 </children>
+                              </StackPane>
+                              <StackPane>
+                                 <children>
+                                    <ComboBox fx:id="z3u1WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z3u2WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
                                     </ComboBox>
                                  </children>
                               </StackPane>
-                              <StackPane alignment="CENTER_LEFT">
+                              <StackPane>
                                  <children>
-                                    <ComboBox>
+                                    <ComboBox fx:id="z3u3WeekendComboBox">
                                        <StackPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </StackPane.margin>
@@ -336,7 +385,7 @@
                         </VBox>
                      </children>
                      <VBox.margin>
-                        <Insets left="10.0" top="10.0" />
+                        <Insets left="25.0" top="10.0" />
                      </VBox.margin>
                   </HBox>
                </children>

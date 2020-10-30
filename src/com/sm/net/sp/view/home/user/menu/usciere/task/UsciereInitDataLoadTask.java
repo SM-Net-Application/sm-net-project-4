@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.home.user.menu.audio.task;
+package com.sm.net.sp.view.home.user.menu.usciere.task;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,19 +11,20 @@ import org.jsoup.nodes.Document;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.audio.Audio;
+import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
 import javafx.stage.Stage;
 
-public class AudioInitDataLoadTask implements TaskInterface {
+public class UsciereInitDataLoadTask implements TaskInterface {
 
-	private Audio view;
+	private Usciere view;
 	private AlertBuilder alertBuilder;
 	private Settings settings;
 	private Stage stage;
 
-	public AudioInitDataLoadTask(AlertBuilder alertBuilder, Settings settings, Stage stage, Audio view) {
+	public UsciereInitDataLoadTask(AlertBuilder alertBuilder, Settings settings, Stage stage, Usciere view) {
 		super();
 
 		this.view = view;

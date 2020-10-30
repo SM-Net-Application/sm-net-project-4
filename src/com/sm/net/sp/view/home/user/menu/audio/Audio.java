@@ -18,7 +18,6 @@ import com.sm.net.sp.view.home.user.menu.audio.task.WeekAudioLoadTask;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -87,22 +86,10 @@ public class Audio extends UpdateDataAdapter {
 		this.fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		this.toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
 
-		this.posMidweekColumn.setCellValueFactory(cellData -> {
-			String text = cellData.getValue().nameListPosMidweek(this.membersList, false);
-			return new SimpleStringProperty(text);
-		});
-		this.micMidweekColumn.setCellValueFactory(cellData -> {
-			String text = cellData.getValue().nameListMicMidweek(this.membersList, false);
-			return new SimpleStringProperty(text);
-		});
-		this.posWeekendColumn.setCellValueFactory(cellData -> {
-			String text = cellData.getValue().nameListPosWeekend(this.membersList, false);
-			return new SimpleStringProperty(text);
-		});
-		this.micWeekendColumn.setCellValueFactory(cellData -> {
-			String text = cellData.getValue().nameListMicWeekend(this.membersList, false);
-			return new SimpleStringProperty(text);
-		});
+		this.posMidweekColumn.setCellValueFactory(cellData -> cellData.getValue().posMidweekProperty());
+		this.micMidweekColumn.setCellValueFactory(cellData -> cellData.getValue().micMidweekProperty());
+		this.posWeekendColumn.setCellValueFactory(cellData -> cellData.getValue().posWeekendProperty());
+		this.micWeekendColumn.setCellValueFactory(cellData -> cellData.getValue().micWeekendProperty());
 	}
 
 	private void styleClasses() {
@@ -170,10 +157,8 @@ public class Audio extends UpdateDataAdapter {
 	private void initData() {
 
 		this.loadCalendar();
-		this.updateWeeksData();
-
 		this.membersList = FXCollections.observableArrayList();
-
+		
 		updateMembers();
 	}
 
@@ -247,8 +232,8 @@ public class Audio extends UpdateDataAdapter {
 
 		String waitMessage = this.language.getString("audio.wait.load");
 
-		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-				new WeekAudioLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new WeekAudioLoadTask(
+				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this, this.membersList));
 
 	}
 

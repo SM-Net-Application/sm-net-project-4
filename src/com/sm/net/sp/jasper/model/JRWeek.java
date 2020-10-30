@@ -171,6 +171,7 @@ public class JRWeek {
 
 	private String bibleWeek;
 
+	private String audioText;
 	private String audioMidweek;
 	private String audioWeekend;
 
@@ -1298,6 +1299,7 @@ public class JRWeek {
 		jrWeek.setWeekendExtraContent(week.getSpInf55());
 
 		// Audio/Video
+		// TODO
 		WeekAudio weekAudio = null;
 		for (WeekAudio w : audio)
 			if (w.getSpInf1() == weekKey) {
@@ -1306,6 +1308,8 @@ public class JRWeek {
 			}
 		if (weekAudio != null) {
 
+			jrWeek.setAudioText(language.getString("jasper.layout.meeting.audio.text"));
+			
 			String pos1Name = configs.get("inf9");
 			String pos2Name = configs.get("inf10");
 			String pos3Name = configs.get("inf11");
@@ -1371,10 +1375,10 @@ public class JRWeek {
 				audioMidweek = String.format(audioPosFormat, pos1Name, memberPos1Midweek);
 
 			if (!pos2Name.isEmpty())
-				audioMidweek += "<br>" + String.format(audioPosFormat, pos2Name, memberPos2Midweek);
+				audioMidweek += " " + String.format(audioPosFormat, pos2Name, memberPos2Midweek);
 
 			if (!pos3Name.isEmpty())
-				audioMidweek += "<br>" + String.format(audioPosFormat, pos3Name, memberPos3Midweek);
+				audioMidweek += " " + String.format(audioPosFormat, pos3Name, memberPos3Midweek);
 
 			if (!nameListMicMidweek.isEmpty())
 				audioMidweek += "<br>" + String.format(audioPosFormat, micText, nameListMicMidweek);
@@ -1386,10 +1390,10 @@ public class JRWeek {
 				audioWeekend = String.format(audioPosFormat, pos1Name, memberPos1Weekend);
 
 			if (!pos2Name.isEmpty())
-				audioWeekend += "<br>" + String.format(audioPosFormat, pos2Name, memberPos2Weekend);
+				audioWeekend += " " + String.format(audioPosFormat, pos2Name, memberPos2Weekend);
 
 			if (!pos3Name.isEmpty())
-				audioWeekend += "<br>" + String.format(audioPosFormat, pos3Name, memberPos3Weekend);
+				audioWeekend += " " + String.format(audioPosFormat, pos3Name, memberPos3Weekend);
 
 			if (!nameListMicWeekend.isEmpty())
 				audioWeekend += "<br>" + String.format(audioPosFormat, micText, nameListMicWeekend);
@@ -1397,6 +1401,7 @@ public class JRWeek {
 			jrWeek.setAudioWeekend(audioWeekend);
 
 		} else {
+			jrWeek.setAudioText("");
 			jrWeek.setAudioMidweek("");
 			jrWeek.setAudioWeekend("");
 		}
@@ -2547,6 +2552,14 @@ public class JRWeek {
 
 	public void setAudioWeekend(String audioWeekend) {
 		this.audioWeekend = audioWeekend;
+	}
+
+	public String getAudioText() {
+		return audioText;
+	}
+
+	public void setAudioText(String audioText) {
+		this.audioText = audioText;
 	}
 
 }

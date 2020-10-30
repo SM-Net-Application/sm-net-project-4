@@ -14,6 +14,7 @@ import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.util.enumeration.JSONStatus;
 
 /**
@@ -1110,7 +1111,77 @@ public class JSONRequest {
 
 		return jsonObj;
 	}
+
+	public static JSONObject USCIERE_INSERT(WeekUsciere w) {
+
+		JSONObject jsonObj = create(Integer.valueOf(60));
+
+		jsonObj.put("spInf1", w.getSpInf1());
+		jsonObj.put("spInf2", w.getSpInf2());
+		jsonObj.put("spInf3", w.getSpInf3());
+		jsonObj.put("spInf4", w.getSpInf4());
+		jsonObj.put("spInf5", w.getSpInf5());
+		jsonObj.put("spInf6", w.getSpInf6());
+		jsonObj.put("spInf7", w.getSpInf7());
+		jsonObj.put("spInf8", w.getSpInf8());
+		jsonObj.put("spInf9", w.getSpInf9());
+		jsonObj.put("spInf10", w.getSpInf10());
+		jsonObj.put("spInf11", w.getSpInf11());
+		jsonObj.put("spInf12", w.getSpInf12());
+		jsonObj.put("spInf13", w.getSpInf13());
+		jsonObj.put("spInf14", w.getSpInf14());
+		jsonObj.put("spInf15", w.getSpInf15());
+		jsonObj.put("spInf16", w.getSpInf16());
+		jsonObj.put("spInf17", w.getSpInf17());
+		jsonObj.put("spInf18", w.getSpInf18());
+		jsonObj.put("spInf19", w.getSpInf19());
+
+		return jsonObj;
+	}
 	
+	public static JSONObject USCIERE_UPDATE(WeekUsciere w) {
+
+		JSONObject jsonObj = create(Integer.valueOf(61));
+
+		jsonObj.put("spUscID", w.getUscID());
+		jsonObj.put("spInf1", w.getSpInf1());
+		jsonObj.put("spInf2", w.getSpInf2());
+		jsonObj.put("spInf3", w.getSpInf3());
+		jsonObj.put("spInf4", w.getSpInf4());
+		jsonObj.put("spInf5", w.getSpInf5());
+		jsonObj.put("spInf6", w.getSpInf6());
+		jsonObj.put("spInf7", w.getSpInf7());
+		jsonObj.put("spInf8", w.getSpInf8());
+		jsonObj.put("spInf9", w.getSpInf9());
+		jsonObj.put("spInf10", w.getSpInf10());
+		jsonObj.put("spInf11", w.getSpInf11());
+		jsonObj.put("spInf12", w.getSpInf12());
+		jsonObj.put("spInf13", w.getSpInf13());
+		jsonObj.put("spInf14", w.getSpInf14());
+		jsonObj.put("spInf15", w.getSpInf15());
+		jsonObj.put("spInf16", w.getSpInf16());
+		jsonObj.put("spInf17", w.getSpInf17());
+		jsonObj.put("spInf18", w.getSpInf18());
+		jsonObj.put("spInf19", w.getSpInf19());
+
+		return jsonObj;
+	}
+	
+	public static JSONObject USCIERE_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(62));
+		return jsonObj;
+	}
+	
+	public static JSONObject USCIERE_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(63));
+
+		jsonObj.put("spUscID", id);
+
+		return jsonObj;
+	}
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

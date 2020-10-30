@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.home.user.menu.audio.task;
+package com.sm.net.sp.view.home.user.menu.usciere.task;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.WeekAudio;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.view.home.user.menu.audio.Audio;
+import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
@@ -22,15 +22,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-public class WeekAudioLoadTask implements TaskInterface {
+public class WeekUsciereLoadTask implements TaskInterface {
 
-	private Audio view;
+	private Usciere view;
 	private AlertBuilder alertBuilder;
 	private Settings settings;
 	private Stage viewStage;
 	private ObservableList<Member> membersList;
 
-	public WeekAudioLoadTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Audio view,
+	public WeekUsciereLoadTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Usciere view,
 			ObservableList<Member> membersList) {
 		super();
 
@@ -44,7 +44,7 @@ public class WeekAudioLoadTask implements TaskInterface {
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		JSONObject json = JSONRequest.AUDIO_LOAD();
+		JSONObject json = JSONRequest.USCIERE_LOAD();
 		String url = this.settings.getDatabaseUrl();
 
 		try {
@@ -62,7 +62,7 @@ public class WeekAudioLoadTask implements TaskInterface {
 	@Override
 	public void feedback(HashMap<String, Object> hashMap) {
 
-		ObservableList<WeekAudio> list = FXCollections.observableArrayList();
+		ObservableList<WeekUsciere> list = FXCollections.observableArrayList();
 
 		JSONObject response = (JSONObject) hashMap.get("response");
 		int status = response.getInt("status");
@@ -73,7 +73,7 @@ public class WeekAudioLoadTask implements TaskInterface {
 			for (Object obj : result) {
 
 				JSONObject json = (JSONObject) obj;
-				WeekAudio w = WeekAudio.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
+				WeekUsciere w = WeekUsciere.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
 				w.updateText(this.membersList);
 				list.add(w);
 			}
@@ -85,18 +85,18 @@ public class WeekAudioLoadTask implements TaskInterface {
 
 		}
 
-		ObservableList<WeekAudio> calendar = this.view.getCalendar();
+		ObservableList<WeekUsciere> calendar = this.view.getCalendar();
 
 		calendar.forEach(c -> {
 
 			int key = Integer.valueOf(c.getKey());
 
-			Optional<WeekAudio> find = StreamSupport.stream(list.spliterator(), false)
+			Optional<WeekUsciere> find = StreamSupport.stream(list.spliterator(), false)
 					.filter(wc -> wc.getSpInf1() == key).findFirst();
 
 			if (find.isPresent()) {
 
-				WeekAudio w = find.get();
+				WeekUsciere w = find.get();
 				c.updateInfo(w);
 			} else {
 				c.deleteInfo();

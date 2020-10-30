@@ -27,6 +27,8 @@
 	Eliminare AlertBuilder vecchio.
 	
 	Commemorazione mostra solo Febbraio, Marzo, Aprile e Maggio
+	Commemorazione: non stampare Preparazione se non è stato selezionato nessuna famiglia
+	- Lo stesso per le altre sezioni, se vuote non stamparle
 	
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
