@@ -10,7 +10,6 @@ import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.settings.Settings;
-import com.sm.net.sp.view.home.user.menu.audio.Audio;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
@@ -65,6 +64,7 @@ public class UsciereInitDataLoadTask implements TaskInterface {
 
 		this.view.setConfigs(configs);
 		this.view.updateWeeksData();
+		this.view.viewUpdate();
 	}
 
 	private HashMap<String, String> configFeedback(HashMap<String, Object> hashMap) {

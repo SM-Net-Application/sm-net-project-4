@@ -21,6 +21,7 @@ import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
+import com.sm.net.sp.model.WeekUsciere;
 
 import javafx.collections.ObservableList;
 import net.sf.jasperreports.engine.JRException;
@@ -175,6 +176,10 @@ public class JRWeek {
 	private String audioMidweek;
 	private String audioWeekend;
 
+	private String usciereText;
+	private String usciereMidweek;
+	private String usciereWeekend;
+
 	private String congregationName;
 	private String programmName;
 
@@ -272,8 +277,8 @@ public class JRWeek {
 
 	public static JRWeek newObject(Week week, ObservableList<Member> membersList, ObservableList<Family> familiesList,
 			ObservableList<WeekConvention> convention, ObservableList<WeekMemorial> memorial,
-			ObservableList<WeekAudio> audio, HashMap<String, String> configs, Language language, boolean extendedName,
-			boolean complete) throws JRException {
+			ObservableList<WeekAudio> audio, ObservableList<WeekUsciere> usciere, HashMap<String, String> configs,
+			Language language, boolean extendedName, boolean complete) throws JRException {
 
 		LocalDate weekFrom = week.getFrom();
 
@@ -1299,7 +1304,6 @@ public class JRWeek {
 		jrWeek.setWeekendExtraContent(week.getSpInf55());
 
 		// Audio/Video
-		// TODO
 		WeekAudio weekAudio = null;
 		for (WeekAudio w : audio)
 			if (w.getSpInf1() == weekKey) {
@@ -1309,7 +1313,7 @@ public class JRWeek {
 		if (weekAudio != null) {
 
 			jrWeek.setAudioText(language.getString("jasper.layout.meeting.audio.text"));
-			
+
 			String pos1Name = configs.get("inf9");
 			String pos2Name = configs.get("inf10");
 			String pos3Name = configs.get("inf11");
@@ -1404,6 +1408,62 @@ public class JRWeek {
 			jrWeek.setAudioText("");
 			jrWeek.setAudioMidweek("");
 			jrWeek.setAudioWeekend("");
+		}
+
+		// Uscieri
+		WeekUsciere weekUsciere = null;
+		for (WeekUsciere w : usciere)
+			if (w.getSpInf1() == weekKey) {
+				weekUsciere = w;
+				break;
+			}
+		if (weekUsciere != null) {
+
+			jrWeek.setUsciereText(language.getString("jasper.layout.meeting.usciere.text"));
+
+			String z1Name = configs.get("inf12");
+			String z2Name = configs.get("inf13");
+			String z3Name = configs.get("inf14");
+
+			String usciereFormat = language.getString("jasper.layout.meeting.usciere.format");
+
+			String z1Midweek = weekUsciere.nameListZ1Midweek(membersList, extendedName);
+			String z2Midweek = weekUsciere.nameListZ2Midweek(membersList, extendedName);
+			String z3Midweek = weekUsciere.nameListZ3Midweek(membersList, extendedName);
+			String z1Weekend = weekUsciere.nameListZ1Weekend(membersList, extendedName);
+			String z2Weekend = weekUsciere.nameListZ2Weekend(membersList, extendedName);
+			String z3Weekend = weekUsciere.nameListZ3Weekend(membersList, extendedName);
+
+			String usciereMidweek = "";
+			
+			if (!z1Midweek.isEmpty())
+				usciereMidweek = String.format(usciereFormat, z1Name, z1Midweek);
+
+			if (!z2Midweek.isEmpty())
+				usciereMidweek += "<br>" + String.format(usciereFormat, z2Name, z2Midweek);
+
+			if (!z3Midweek.isEmpty())
+				usciereMidweek += "<br>" + String.format(usciereFormat, z3Name, z3Midweek);
+
+			jrWeek.setUsciereMidweek(usciereMidweek);
+
+			String usciereWeekend = "";
+			
+			if (!z1Weekend.isEmpty())
+				usciereWeekend = String.format(usciereFormat, z1Name, z1Weekend);
+
+			if (!z2Weekend.isEmpty())
+				usciereWeekend += "<br>" + String.format(usciereFormat, z2Name, z2Weekend);
+
+			if (!z3Weekend.isEmpty())
+				usciereWeekend += "<br>" + String.format(usciereFormat, z3Name, z3Weekend);
+
+			jrWeek.setUsciereWeekend(usciereWeekend);
+
+		} else {
+			jrWeek.setUsciereText("");
+			jrWeek.setUsciereMidweek("");
+			jrWeek.setUsciereWeekend("");
 		}
 
 		return jrWeek;
@@ -2560,6 +2620,30 @@ public class JRWeek {
 
 	public void setAudioText(String audioText) {
 		this.audioText = audioText;
+	}
+
+	public String getUsciereText() {
+		return usciereText;
+	}
+
+	public void setUsciereText(String usciereText) {
+		this.usciereText = usciereText;
+	}
+
+	public String getUsciereMidweek() {
+		return usciereMidweek;
+	}
+
+	public void setUsciereMidweek(String usciereMidweek) {
+		this.usciereMidweek = usciereMidweek;
+	}
+
+	public String getUsciereWeekend() {
+		return usciereWeekend;
+	}
+
+	public void setUsciereWeekend(String usciereWeekend) {
+		this.usciereWeekend = usciereWeekend;
 	}
 
 }

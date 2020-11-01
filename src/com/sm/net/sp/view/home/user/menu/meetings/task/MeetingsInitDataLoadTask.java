@@ -14,6 +14,7 @@ import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.smnet.core.dialog.AlertBuilder;
@@ -50,6 +51,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		JSONObject jsonConvention = JSONRequest.CONVENTION_LOAD();
 		JSONObject jsonMemorial = JSONRequest.MEMORIAL_LOAD();
 		JSONObject jsonAudio = JSONRequest.AUDIO_LOAD();
+		JSONObject jsonUsciere = JSONRequest.USCIERE_LOAD();
 
 		post(hashMap, url, jsonDateAndTime, "responseDateAndTime");
 		post(hashMap, url, jsonPlaces, "responsePlaces");
@@ -57,6 +59,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		post(hashMap, url, jsonConvention, "responseConvention");
 		post(hashMap, url, jsonMemorial, "responseMemorial");
 		post(hashMap, url, jsonAudio, "responseAudio");
+		post(hashMap, url, jsonUsciere, "responseUsciere");
 
 	}
 
@@ -83,6 +86,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		ObservableList<WeekConvention> convention = conventionFeedback(hashMap);
 		ObservableList<WeekMemorial> memorial = memorialFeedback(hashMap);
 		ObservableList<WeekAudio> audio = audioFeedback(hashMap);
+		ObservableList<WeekUsciere> usciere = usciereFeedback(hashMap);
 
 		this.view.setDateAndTimeList(dateAndTimeList);
 		this.view.setPlacesList(placesList);
@@ -90,6 +94,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		this.view.setConvention(convention);
 		this.view.setMemorial(memorial);
 		this.view.setAudio(audio);
+		this.view.setUsciere(usciere);
 	}
 
 	private ObservableList<WeekMemorial> memorialFeedback(HashMap<String, Object> hashMap) {
@@ -134,6 +139,31 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 
 					JSONObject json = (JSONObject) obj;
 					WeekAudio w = WeekAudio.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
+					list.add(w);
+				}
+
+			}
+		}
+
+		return list;
+	}
+
+	private ObservableList<WeekUsciere> usciereFeedback(HashMap<String, Object> hashMap) {
+
+		ObservableList<WeekUsciere> list = FXCollections.observableArrayList();
+
+		JSONObject response = (JSONObject) hashMap.get("responseUsciere");
+		if (response != null) {
+
+			int status = response.getInt("status");
+
+			if (status == 0) {
+
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
+
+					JSONObject json = (JSONObject) obj;
+					WeekUsciere w = WeekUsciere.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
 					list.add(w);
 				}
 

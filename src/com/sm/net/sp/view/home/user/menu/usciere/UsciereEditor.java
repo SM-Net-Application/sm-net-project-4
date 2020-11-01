@@ -117,12 +117,12 @@ public class UsciereEditor extends UpdateDataAdapter {
 		this.midweekLabel.getStyleClass().add("label_002");
 		this.weekendLabel.getStyleClass().add("label_002");
 
-		this.z1MidweekLabel.getStyleClass().add("label_001");
-		this.z2MidweekLabel.getStyleClass().add("label_001");
-		this.z3MidweekLabel.getStyleClass().add("label_001");
-		this.z1WeekendLabel.getStyleClass().add("label_001");
-		this.z2WeekendLabel.getStyleClass().add("label_001");
-		this.z3WeekendLabel.getStyleClass().add("label_001");
+		this.z1MidweekLabel.getStyleClass().add("label_002");
+		this.z2MidweekLabel.getStyleClass().add("label_002");
+		this.z3MidweekLabel.getStyleClass().add("label_002");
+		this.z1WeekendLabel.getStyleClass().add("label_002");
+		this.z2WeekendLabel.getStyleClass().add("label_002");
+		this.z3WeekendLabel.getStyleClass().add("label_002");
 
 		this.z1u1MidweekComboBox.getStyleClass().add("combo_box_001");
 		this.z1u2MidweekComboBox.getStyleClass().add("combo_box_001");

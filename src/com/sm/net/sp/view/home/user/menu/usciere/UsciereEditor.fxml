@@ -59,6 +59,15 @@
                         </Label>
                      </children>
                   </StackPane>
+                  <StackPane>
+                     <children>
+                        <Separator>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Separator>
+                     </children>
+                  </StackPane>
                   <HBox>
                      <children>
                         <VBox HBox.hgrow="ALWAYS">
@@ -110,6 +119,15 @@
                               </StackPane>
                            </children>
                         </VBox>
+                        <StackPane>
+                           <children>
+                              <Separator orientation="VERTICAL">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <StackPane>
@@ -159,6 +177,15 @@
                               </StackPane>
                            </children>
                         </VBox>
+                        <StackPane>
+                           <children>
+                              <Separator orientation="VERTICAL">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <StackPane>
@@ -222,7 +249,7 @@
                         </Separator>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </StackPane>
                   <StackPane alignment="CENTER_LEFT">
@@ -232,6 +259,15 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </StackPane.margin>
                         </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane>
+                     <children>
+                        <Separator>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Separator>
                      </children>
                   </StackPane>
                   <HBox>
@@ -285,6 +321,15 @@
                               </StackPane>
                            </children>
                         </VBox>
+                        <StackPane>
+                           <children>
+                              <Separator orientation="VERTICAL">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <StackPane>
@@ -334,6 +379,15 @@
                               </StackPane>
                            </children>
                         </VBox>
+                        <StackPane>
+                           <children>
+                              <Separator orientation="VERTICAL">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </StackPane.margin>
+                              </Separator>
+                           </children>
+                        </StackPane>
                         <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <StackPane>

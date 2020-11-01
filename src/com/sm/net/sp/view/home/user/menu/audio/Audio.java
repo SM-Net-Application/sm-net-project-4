@@ -147,7 +147,7 @@ public class Audio extends UpdateDataAdapter {
 		this.posWeekendColumn.setText(this.language.getString("audio.tablecolumn.pos"));
 		this.micWeekendColumn.setText(this.language.getString("audio.tablecolumn.mic"));
 
-		Tooltip deleteTooltip = new Tooltip(language.getString("memorial.tooltip.delete"));
+		Tooltip deleteTooltip = new Tooltip(language.getString("audio.tooltip.delete"));
 		deleteTooltip.getStyleClass().add("tooltip_001");
 		this.deleteWeekButton.setTooltip(deleteTooltip);
 		this.deleteWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
@@ -264,13 +264,13 @@ public class Audio extends UpdateDataAdapter {
 			} else {
 
 				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("convention.delete.noconvention"));
+						this.language.getString("audio.delete.nodata"));
 
 			}
 
 		} else {
 			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("convention.delete.noselection"));
+					this.language.getString("audio.delete.noselection"));
 		}
 	}
 

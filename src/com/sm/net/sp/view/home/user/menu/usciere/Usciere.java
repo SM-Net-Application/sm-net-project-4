@@ -53,13 +53,17 @@ public class Usciere extends UpdateDataAdapter {
 	@FXML
 	private TableColumn<WeekUsciere, LocalDate> toTableColumn;
 	@FXML
-	private TableColumn<WeekUsciere, String> posMidweekColumn;
+	private TableColumn<WeekUsciere, String> z1MidweekColumn;
 	@FXML
-	private TableColumn<WeekUsciere, String> micMidweekColumn;
+	private TableColumn<WeekUsciere, String> z2MidweekColumn;
 	@FXML
-	private TableColumn<WeekUsciere, String> posWeekendColumn;
+	private TableColumn<WeekUsciere, String> z3MidweekColumn;
 	@FXML
-	private TableColumn<WeekUsciere, String> micWeekendColumn;
+	private TableColumn<WeekUsciere, String> z1WeekendColumn;
+	@FXML
+	private TableColumn<WeekUsciere, String> z2WeekendColumn;
+	@FXML
+	private TableColumn<WeekUsciere, String> z3WeekendColumn;
 	@FXML
 	private Button deleteWeekButton;
 
@@ -86,12 +90,12 @@ public class Usciere extends UpdateDataAdapter {
 		this.fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
 		this.toTableColumn.setCellValueFactory(cellData -> cellData.getValue().toProperty());
 
-		this.posMidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z1MidweekProperty());
-		this.micMidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z2MidweekProperty());
-		this.posWeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z3MidweekProperty());
-		this.micWeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z1WeekendProperty());
-		
-		//TODO altre 2 colonne
+		this.z1MidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z1MidweekProperty());
+		this.z2MidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z2MidweekProperty());
+		this.z3MidweekColumn.setCellValueFactory(cellData -> cellData.getValue().z3MidweekProperty());
+		this.z1WeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z1WeekendProperty());
+		this.z2WeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z2WeekendProperty());
+		this.z3WeekendColumn.setCellValueFactory(cellData -> cellData.getValue().z3WeekendProperty());
 	}
 
 	private void styleClasses() {
@@ -113,15 +117,13 @@ public class Usciere extends UpdateDataAdapter {
 	public void objectInitialize() {
 
 		this.settings = this.application.getSettings();
-
-		viewUpdate();
+		this.language = settings.getLanguage();
+		
 		initData();
 		listeners();
 	}
 
-	private void viewUpdate() {
-
-		this.language = settings.getLanguage();
+	public void viewUpdate() {
 
 		this.headerImageView.setFitWidth(50);
 		this.headerImageView.setFitHeight(50);
@@ -144,12 +146,36 @@ public class Usciere extends UpdateDataAdapter {
 		this.toTableColumn.setMinWidth(100);
 		this.toTableColumn.setMaxWidth(100);
 
-		this.posMidweekColumn.setText(this.language.getString("audio.tablecolumn.pos"));
-		this.micMidweekColumn.setText(this.language.getString("audio.tablecolumn.mic"));
-		this.posWeekendColumn.setText(this.language.getString("audio.tablecolumn.pos"));
-		this.micWeekendColumn.setText(this.language.getString("audio.tablecolumn.mic"));
+		String noconfig = this.language.getString("usciereeditor.noconfig");
+		String z1 = this.configs.get("inf12");
+		String z2 = this.configs.get("inf13");
+		String z3 = this.configs.get("inf14");
 
-		Tooltip deleteTooltip = new Tooltip(language.getString("memorial.tooltip.delete"));
+		if (z1 == null || z1.isEmpty()) {
+			this.z1MidweekColumn.setText(noconfig);
+			this.z1WeekendColumn.setText(noconfig);
+		} else {
+			this.z1MidweekColumn.setText(z1);
+			this.z1WeekendColumn.setText(z1);
+		}
+
+		if (z2 == null || z2.isEmpty()) {
+			this.z2MidweekColumn.setText(noconfig);
+			this.z2WeekendColumn.setText(noconfig);
+		} else {
+			this.z2MidweekColumn.setText(z2);
+			this.z2WeekendColumn.setText(z2);
+		}
+
+		if (z3 == null || z3.isEmpty()) {
+			this.z3MidweekColumn.setText(noconfig);
+			this.z3WeekendColumn.setText(noconfig);
+		} else {
+			this.z3MidweekColumn.setText(z3);
+			this.z3WeekendColumn.setText(z3);
+		}
+
+		Tooltip deleteTooltip = new Tooltip(language.getString("usciere.tooltip.delete"));
 		deleteTooltip.getStyleClass().add("tooltip_001");
 		this.deleteWeekButton.setTooltip(deleteTooltip);
 		this.deleteWeekButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
@@ -176,7 +202,7 @@ public class Usciere extends UpdateDataAdapter {
 		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
 
-		String waitMessage = this.language.getString("audio.wait.load");
+		String waitMessage = this.language.getString("usciere.wait.load");
 		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 				new UsciereInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
@@ -232,7 +258,7 @@ public class Usciere extends UpdateDataAdapter {
 
 	public void updateWeeksData() {
 
-		String waitMessage = this.language.getString("audio.wait.load");
+		String waitMessage = this.language.getString("usciere.wait.load");
 
 		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new WeekUsciereLoadTask(
 				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this, this.membersList));
@@ -253,11 +279,11 @@ public class Usciere extends UpdateDataAdapter {
 			if (item.spUscIDProperty() != null) {
 
 				if (this.application.getAlertBuilder2().confirm(this.ownerStage,
-						this.language.getString("audio.delete.confirm"))) {
+						this.language.getString("usciere.delete.confirm"))) {
 
 					int id = item.getUscID();
 
-					String waitMessage = this.language.getString("audio.task.delete");
+					String waitMessage = this.language.getString("usciere.task.delete");
 
 					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 							new WeekUsciereDeleteTask(this.application.getAlertBuilder2(), this.settings,
@@ -266,13 +292,13 @@ public class Usciere extends UpdateDataAdapter {
 			} else {
 
 				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("convention.delete.noconvention"));
+						this.language.getString("usciere.delete.nodata"));
 
 			}
 
 		} else {
 			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("convention.delete.noselection"));
+					this.language.getString("usciere.delete.noselection"));
 		}
 	}
 

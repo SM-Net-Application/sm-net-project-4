@@ -93,10 +93,12 @@
                                                     <TableColumn fx:id="weekTableColumn" prefWidth="75.0" text="Week" />
                                                     <TableColumn fx:id="fromTableColumn" prefWidth="75.0" text="From" />
                                                       <TableColumn fx:id="toTableColumn" prefWidth="75.0" text="To" />
-                                                      <TableColumn fx:id="posMidweekColumn" prefWidth="75.0" text="posInfr" />
-                                                      <TableColumn fx:id="micMidweekColumn" prefWidth="75.0" text="micInfr" />
-                                                      <TableColumn fx:id="posWeekendColumn" prefWidth="75.0" text="posInfr" />
-                                                      <TableColumn fx:id="micWeekendColumn" prefWidth="75.0" text="posWeek" />
+                                                      <TableColumn fx:id="z1MidweekColumn" prefWidth="75.0" text="z1Infr" />
+                                                      <TableColumn fx:id="z2MidweekColumn" prefWidth="75.0" text="z2Infr" />
+                                                      <TableColumn fx:id="z3MidweekColumn" prefWidth="75.0" text="z3Infr" />
+                                                      <TableColumn fx:id="z1WeekendColumn" prefWidth="75.0" text="z1Week" />
+                                                      <TableColumn fx:id="z2WeekendColumn" prefWidth="75.0" text="z2Week" />
+                                                      <TableColumn fx:id="z3WeekendColumn" prefWidth="75.0" text="z3Week" />
                                                   </columns>
                                                    <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
