@@ -205,6 +205,41 @@ public class WeekAudio {
 		this.micWeekend = null;
 	}
 
+	public static WeekAudio buildEditorWeek(AudioEditor editor) {
+
+		WeekAudio editorSelectedWeek = editor.getSelectedWeek();
+		WeekAudio week = null;
+
+		if (editorSelectedWeek.spInf1Property() != null)
+			week = new WeekAudio(editorSelectedWeek);
+		else {
+			week = new WeekAudio(editorSelectedWeek.getFrom(), editor.getLanguage());
+			week.setSpInf1(Integer.valueOf(week.getKey()));
+		}
+
+		week.setSpInf2(editor.getPos1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf3(editor.getPos2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf4(editor.getPos3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf5(editor.getMic1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf6(editor.getMic2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf7(editor.getMic3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf8(editor.getPos1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf9(editor.getPos2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf10(editor.getPos3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf11(editor.getMic1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf12(editor.getMic1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf13(editor.getMic1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		return week;
+	}
+
+	public WeekAudio(WeekAudio editorSelectedWeek) {
+		this.spInf1 = new SimpleIntegerProperty(editorSelectedWeek.getSpInf1());
+	}
+
 	public String nameListPosMidweek(ObservableList<Member> members, boolean extendedName) {
 
 		return nameList(members, extendedName, this.spInf2, this.spInf3, this.spInf4);

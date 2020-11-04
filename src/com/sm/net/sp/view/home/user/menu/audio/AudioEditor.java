@@ -1,29 +1,45 @@
 package com.sm.net.sp.view.home.user.menu.audio;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.history.History;
+import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
+import com.sm.net.sp.view.historyaudio.HistoryAudio;
 import com.sm.net.sp.view.home.user.menu.audio.task.WeekAudioSaveTask;
 import com.smnet.core.task.TaskManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AudioEditor extends UpdateDataAdapter {
+public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBoxSelection {
 
 	@FXML
 	private Button saveButton;
@@ -115,6 +131,7 @@ public class AudioEditor extends UpdateDataAdapter {
 	private HashMap<String, String> configs;
 
 	private SupportPlannerView application;
+	private ObservableList<Week> databaseWeeks;
 
 	@FXML
 	private void initialize() {
@@ -211,8 +228,107 @@ public class AudioEditor extends UpdateDataAdapter {
 
 	public void objectInitialize() {
 		viewUpdate();
+		contextMenu();
 		initData();
 		listeners();
+	}
+
+	private void contextMenu() {
+
+		this.pos1MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_POS1));
+		this.pos1MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+	}
+
+	private void disableMouseSecondary(MouseEvent event) {
+		if (event.getButton() == MouseButton.SECONDARY)
+			event.consume();
+	}
+
+	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
+
+		String privilegeTranslatedName = privilege.getTranslatedName(this.language);
+
+		switch (privilege) {
+		case MIDWEEK_AUDIO_POS1:
+		case WEEKEND_AUDIO_POS1:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf9"));
+			break;
+		case MIDWEEK_AUDIO_POS2:
+		case WEEKEND_AUDIO_POS2:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf10"));
+			break;
+		case MIDWEEK_AUDIO_POS3:
+		case WEEKEND_AUDIO_POS3:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf11"));
+			break;
+		default:
+			break;
+		}
+
+		String menuItemText = String.format(language.getString("sp.meetings.history"), privilegeTranslatedName);
+
+		String historyTitle = String.format(language.getString("sp.history.title"), menuItemText,
+				this.selectedWeek.getFrom().toString());
+
+		StackPane graphic = Meta.Resources.imageInStackPaneForMenu(Meta.Resources.SEARCH);
+
+		MenuItem menuItem = new MenuItem(menuItemText, graphic);
+		menuItem.getStyleClass().add("menu_item_001");
+		menuItem.setOnAction(event -> openHistory(privilege, historyTitle));
+
+		ContextMenu contextMenu = new ContextMenu(menuItem);
+
+		return contextMenu;
+	}
+
+	private void openHistory(Privileges privilege, String title) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.HISTORYAUDIO);
+			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+			Scene scene = new Scene(layout);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(this.ownerStage);
+			stage.setTitle(title);
+			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
+
+			stage.setMinWidth(1050);
+			stage.setMinHeight(500);
+
+			HistoryAudio ctrl = (HistoryAudio) fxmlLoader.getController();
+			ctrl.setLayout(layout);
+			ctrl.setPrivilege(privilege);
+			ctrl.setMembers(this.membersList);
+			ctrl.setLanguage(this.language);
+			ctrl.setDatabaseWeeks(this.databaseWeeks);
+			ctrl.setSelectedWeek(this.selectedWeek);
+			ctrl.setEditorWeek(WeekAudio.buildEditorWeek(this));
+			ctrl.setEditor(this);
+			ctrl.setThisStage(stage);
+			ctrl.setApplication(this.application);
+
+			ctrl.objectInitialize();
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateSelectedComboBox(Privileges privilege, int memberID) {
+	}
+
+	@Override
+	public void updateSelectedChristianPart(ChristiansPart christiansPart, int memberID) {
 	}
 
 	private void initData() {
@@ -741,4 +857,11 @@ public class AudioEditor extends UpdateDataAdapter {
 		this.micWeekendList = micWeekendList;
 	}
 
+	public ObservableList<Week> getDatabaseWeeks() {
+		return databaseWeeks;
+	}
+
+	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
+		this.databaseWeeks = databaseWeeks;
+	}
 }

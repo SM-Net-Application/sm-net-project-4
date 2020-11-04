@@ -9,6 +9,7 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -70,6 +71,7 @@ public class Audio extends UpdateDataAdapter {
 	private Stage ownerStage;
 
 	private ObservableList<WeekAudio> calendar;
+	private ObservableList<Week> databaseWeeks;
 
 	private ObservableList<Member> membersList;
 	private HashMap<String, String> configs;
@@ -158,7 +160,7 @@ public class Audio extends UpdateDataAdapter {
 
 		this.loadCalendar();
 		this.membersList = FXCollections.observableArrayList();
-		
+
 		updateMembers();
 	}
 
@@ -173,6 +175,25 @@ public class Audio extends UpdateDataAdapter {
 		this.membersList = list;
 		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
+
+		updateWeeks();
+	}
+
+	@Override
+	public void updateWeeks() {
+		super.updateWeeks();
+
+		Week week = new Week(LocalDate.now(), this.language);
+		Actions.getAllWeeks(week, week, this.settings, this.ownerStage, this.membersList, this);
+	}
+
+	@Override
+	public void updateWeeks(ObservableList<Week> list) {
+		super.updateWeeks(list);
+
+		this.databaseWeeks = null;
+		if (list != null)
+			this.databaseWeeks = list;
 
 		String waitMessage = this.language.getString("audio.wait.load");
 		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
@@ -307,6 +328,7 @@ public class Audio extends UpdateDataAdapter {
 				ctrl.setApplication(this.application);
 				ctrl.setMembersList(this.membersList);
 				ctrl.setConfigs(this.configs);
+				ctrl.setDatabaseWeeks(this.databaseWeeks);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -449,5 +471,13 @@ public class Audio extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public ObservableList<Week> getDatabaseWeeks() {
+		return databaseWeeks;
+	}
+
+	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
+		this.databaseWeeks = databaseWeeks;
 	}
 }

@@ -38,7 +38,23 @@ public enum Privileges {
 
 	WEEKEND_WATCHTOWER_READER("sp.privileges.weekend.watchtower.reader", "talk.png"),
 
-	WEEKEND_PRAY_END("sp.privileges.weekend.prayend", "talk.png");
+	WEEKEND_PRAY_END("sp.privileges.weekend.prayend", "talk.png"),
+
+	MIDWEEK_AUDIO_POS1("sp.privileges.midweek.audiopos", "talk.png"),
+
+	MIDWEEK_AUDIO_POS2("sp.privileges.midweek.audiopos", "talk.png"),
+
+	MIDWEEK_AUDIO_POS3("sp.privileges.midweek.audiopos", "talk.png"),
+
+	MIDWEEK_AUDIO_MIC("sp.privileges.midweek.audiomic", "talk.png"),
+
+	WEEKEND_AUDIO_POS1("sp.privileges.weekend.audiopos", "talk.png"),
+
+	WEEKEND_AUDIO_POS2("sp.privileges.weekend.audiopos", "talk.png"),
+
+	WEEKEND_AUDIO_POS3("sp.privileges.weekend.audiopos", "talk.png"),
+
+	WEEKEND_AUDIO_MIC("sp.privileges.weekend.audiomic", "talk.png");
 
 	private String name;
 	private String imageName;
