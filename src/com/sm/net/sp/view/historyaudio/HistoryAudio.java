@@ -2,6 +2,7 @@ package com.sm.net.sp.view.historyaudio;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -9,12 +10,11 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.MemberHistory;
+import com.sm.net.sp.model.MemberAudioHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
-import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 
@@ -43,13 +43,13 @@ public class HistoryAudio {
 	private Label brotherLabel;
 
 	@FXML
-	private TableView<MemberHistory> membersTableView;
+	private TableView<MemberAudioHistory> membersTableView;
 	@FXML
-	private TableColumn<MemberHistory, String> memberNameTableColumn;
+	private TableColumn<MemberAudioHistory, String> memberNameTableColumn;
 	@FXML
-	private TableColumn<MemberHistory, String> memberLastDateTableColumn;
+	private TableColumn<MemberAudioHistory, String> memberLastDateTableColumn;
 	@FXML
-	private TableColumn<MemberHistory, ImageView> memberLastDateStatusTableColumn;
+	private TableColumn<MemberAudioHistory, ImageView> memberLastDateStatusTableColumn;
 
 	@FXML
 	private TableView<PrivilegeHistory> privilegesTableView;
@@ -65,10 +65,11 @@ public class HistoryAudio {
 
 	private Language language;
 	private ObservableList<Member> members;
-	private ObservableList<MemberHistory> membersPrivilege;
+	private ObservableList<MemberAudioHistory> membersPrivilege;
 	private ObservableList<PrivilegeHistory> memberPrivilegeHistory;
 	private Privileges privilege;
 	private ObservableList<Week> databaseWeeks;
+	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private WeekAudio selectedWeek;
 	private WeekAudio editorWeek;
 	private UpgradeableComboBoxSelection editor;
@@ -76,9 +77,7 @@ public class HistoryAudio {
 
 	private SupportPlannerView application;
 
-	private AlertBuilderOld alertBuilder;
-
-	private ChristiansPart christiansPart;
+	private HashMap<String, String> configs;
 
 	@FXML
 	private void initialize() {
@@ -87,36 +86,52 @@ public class HistoryAudio {
 	}
 
 	private void styleClasses() {
-		layout.getStyleClass().add("main_color_001");
 
-		titleLabel.getStyleClass().add("label_002");
-		brotherLabel.getStyleClass().add("label_002");
+		this.layout.getStyleClass().add("main_color_001");
 
-		membersTableView.getStyleClass().add("table_view_001");
-		privilegesTableView.getStyleClass().add("table_view_001");
+		this.titleLabel.getStyleClass().add("label_002");
+		this.brotherLabel.getStyleClass().add("label_002");
 
-		selectButton.getStyleClass().add("button_image_001");
+		this.membersTableView.getStyleClass().add("table_view_001");
+		this.privilegesTableView.getStyleClass().add("table_view_001");
+
+		this.selectButton.getStyleClass().add("button_image_001");
 	}
 
 	private void cellValueFactory() {
 
-		memberNameTableColumn.setCellValueFactory(
+		this.memberNameTableColumn.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getMember().getNameStyle1()));
-
-		memberLastDateTableColumn
+		this.memberLastDateTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
-
-		memberLastDateStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
+		this.memberLastDateStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
 				Meta.Resources.imageForTab(cellData.getValue().getStatus())));
 
-		privilegesDateTableColumn
+		this.privilegesDateTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
-
-		privilegesStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
+		this.privilegesStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
 				Meta.Resources.imageForTab(cellData.getValue().getStatus())));
+		this.privilegesNameTableColumn.setCellValueFactory(cellData -> {
 
-		privilegesNameTableColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(cellData.getValue().getPrivilege().getTranslatedName(language)));
+			Privileges pr = cellData.getValue().getPrivilege();
+
+			switch (pr) {
+			case MIDWEEK_AUDIO_POS1:
+			case WEEKEND_AUDIO_POS1:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf9")));
+			case MIDWEEK_AUDIO_POS2:
+			case WEEKEND_AUDIO_POS2:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf10")));
+			case MIDWEEK_AUDIO_POS3:
+			case WEEKEND_AUDIO_POS3:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf11")));
+			default:
+				return new SimpleStringProperty(pr.getTranslatedName(language));
+			}
+		});
 	}
 
 	public void objectInitialize() {
@@ -140,7 +155,7 @@ public class HistoryAudio {
 
 		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			MemberHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
+			MemberAudioHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
 
 			Optional<PrivilegeHistory> find = StreamSupport.stream(this.memberPrivilegeHistory.spliterator(), false)
 					.filter(ph -> ph.getStatus().equals(Meta.Resources.PRESENT)).findFirst();
@@ -151,9 +166,28 @@ public class HistoryAudio {
 
 				String header = String.format(this.language.getStringWithNewLine("sp.history.confirmselection"),
 						member.getMember().getNameStyle1());
-				String content = privilegeHistory.getPrivilege().getTranslatedName(this.language);
 
-				if (this.alertBuilder.confirm(thisStage, header, content))
+				Privileges pr = privilegeHistory.getPrivilege();
+				String privilegeTranslatedName = pr.getTranslatedName(this.language);
+				switch (pr) {
+				case MIDWEEK_AUDIO_POS1:
+				case WEEKEND_AUDIO_POS1:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf9"));
+					break;
+				case MIDWEEK_AUDIO_POS2:
+				case WEEKEND_AUDIO_POS2:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf10"));
+					break;
+				case MIDWEEK_AUDIO_POS3:
+				case WEEKEND_AUDIO_POS3:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf11"));
+					break;
+				default:
+					break;
+				}
+
+				String content = privilegeTranslatedName;
+				if (this.application.getAlertBuilder().confirm(thisStage, header, content))
 					selectionConfirmed(member);
 
 			} else
@@ -161,22 +195,20 @@ public class HistoryAudio {
 		}
 	}
 
-	private void selectionConfirmed(MemberHistory member) {
+	private void selectionConfirmed(MemberAudioHistory member) {
 
 		int memberID = member.getMember().getSpMemberID();
 
-		if (this.christiansPart != null)
-			this.editor.updateSelectedChristianPart(this.christiansPart, memberID);
-		else
-			this.editor.updateSelectedComboBox(this.privilege, memberID);
+		this.editor.updateSelectedComboBox(this.privilege, memberID);
 
 		this.thisStage.close();
 	}
 
 	private void listenerMembersTableView() {
-		membersTableView.getSelectionModel().selectedIndexProperty().addListener((ob, o, n) -> changeMember(n));
-		membersTableView.setRowFactory(param -> {
-			TableRow<MemberHistory> row = new TableRow<>();
+
+		this.membersTableView.getSelectionModel().selectedIndexProperty().addListener((ob, o, n) -> changeMember(n));
+		this.membersTableView.setRowFactory(param -> {
+			TableRow<MemberAudioHistory> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
 					selectMember();
@@ -187,30 +219,30 @@ public class HistoryAudio {
 
 	private void changeMember(Number n) {
 		if (n.intValue() > -1) {
-			MemberHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
+			MemberAudioHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
 			this.brotherLabel.setText(String.format(language.getString("sp.history.brotherselected"),
 					member.getMember().getNameStyle1()));
 
 			checkPrivilegeMember(member);
 
 		} else
-			brotherLabel.setText(language.getString("sp.history.select"));
+			this.brotherLabel.setText(language.getString("sp.history.select"));
 	}
 
-	private void checkPrivilegeMember(MemberHistory member) {
+	private void checkPrivilegeMember(MemberAudioHistory member) {
 
 		this.memberPrivilegeHistory = FXCollections.observableArrayList();
 
-		if (selectedWeek.spInf1Property() != null) {
+		if (this.selectedWeek.spInf1Property() != null) {
 
 			int memberID = member.getMember().getSpMemberID();
 			checkPrivilegeMemberDatabaseWeek(memberID);
-//			checkPrivilegeMemberWeek(memberID, this.editorWeek);
+			checkPrivilegeMemberWeekAudio(memberID, this.editorWeek);
 
 		} else
 			this.brotherLabel.setText(language.getString("sp.history.weeknotsaved"));
 
-		memberPrivilegeHistory.sort((o1, o2) -> o1.getLastDate().compareTo(o2.getLastDate()));
+		this.memberPrivilegeHistory.sort((o1, o2) -> o1.getLastDate().compareTo(o2.getLastDate()));
 		this.privilegesTableView.setItems(memberPrivilegeHistory);
 	}
 
@@ -219,51 +251,106 @@ public class HistoryAudio {
 		for (Week week : databaseWeeks)
 			if (week.getSpInf1() != this.selectedWeek.getSpInf1())
 				checkPrivilegeMemberWeek(memberID, week);
+
+		for (WeekAudio week : databaseWeeksAudio)
+			if (week.getSpInf1() != this.selectedWeek.getSpInf1())
+				checkPrivilegeMemberWeekAudio(memberID, week);
+	}
+
+	private void checkPrivilegeMemberWeekAudio(int memberID, WeekAudio week) {
+
+		if (memberID == week.getSpInf2())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS1, week);
+
+		if (memberID == week.getSpInf3())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS2, week);
+
+		if (memberID == week.getSpInf4())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS3, week);
+
+		if (memberID == week.getSpInf5() || memberID == week.getSpInf6() || memberID == week.getSpInf7()) {
+			if (memberID == week.getSpInf5()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf6()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC2, week);
+			} else if (memberID == week.getSpInf7()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC3, week);
+			}
+		}
+
+		if (memberID == week.getSpInf8())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS1, week);
+
+		if (memberID == week.getSpInf9())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS2, week);
+
+		if (memberID == week.getSpInf10())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS3, week);
+
+		if (memberID == week.getSpInf11() || memberID == week.getSpInf12() || memberID == week.getSpInf13()) {
+			if (memberID == week.getSpInf11()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf12()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf13()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			}
+		}
 	}
 
 	private void checkPrivilegeMemberWeek(int memberID, Week week) {
-//
-//		if (memberID == week.getSpInf3())
-//			checkPrivilege(Privileges.MIDWEEK_PRESIDENT, week);
-//
-//		if (memberID == week.getSpInf4() || memberID == week.getSpInf27() || memberID == week.getSpInf40()) {
-//
-//			if (memberID == week.getSpInf4())
-//				checkPrivilege(Privileges.MIDWEEK_PRAY_START, week);
-//			else if (memberID == week.getSpInf27())
-//				checkPrivilege(Privileges.MIDWEEK_PRAY_END, week);
-//			else if (memberID == week.getSpInf40())
-//				checkPrivilege(Privileges.WEEKEND_PRAY_END, week);
-//		}
-//
-//		if (memberID == week.getSpInf29() || memberID == week.getSpInf38()) {
-//
-//			if (memberID == week.getSpInf29())
-//				checkPrivilege(Privileges.MIDWEEK_CONGRBIBLESTUDY_READER, week);
-//			else if (memberID == week.getSpInf38())
-//				checkPrivilege(Privileges.WEEKEND_WATCHTOWER_READER, week);
-//		}
-//
-//		if (memberID == week.getSpInf30())
-//			checkPrivilege(Privileges.WEEKEND_PRESIDENT, week);
-//
-//		if (memberID == week.getSpInf37())
-//			checkPrivilege(Privileges.WEEKEND_WATCHTOWER, week);
-//
-//		if (memberID == week.getSpInf11())
-//			checkPrivilege(Privileges.MIDWEEK_TALK, week);
-//
-//		if (memberID == week.getSpInf14())
-//			checkPrivilege(Privileges.MIDWEEK_DIGGING, week);
-//
-//		if (memberID == week.getSpInf23())
-//			checkPrivilege(Privileges.MIDWEEK_CONGRBIBLESTUDY, week);
-//
-//		for (ChristiansPart cp : week.getChristiansPartList())
-//			if (memberID == cp.getTeacher().getSpMemberID()) {
-//				checkPrivilege(Privileges.MIDWEEK_CHRISTIAN_LIFE, week);
-//				break;
-//			}
+
+		if (memberID == week.getSpInf3())
+			checkPrivilege(Privileges.MIDWEEK_PRESIDENT, week);
+
+		if (memberID == week.getSpInf4() || memberID == week.getSpInf27() || memberID == week.getSpInf40()) {
+
+			if (memberID == week.getSpInf4())
+				checkPrivilege(Privileges.MIDWEEK_PRAY_START, week);
+			else if (memberID == week.getSpInf27())
+				checkPrivilege(Privileges.MIDWEEK_PRAY_END, week);
+			else if (memberID == week.getSpInf40())
+				checkPrivilege(Privileges.WEEKEND_PRAY_END, week);
+		}
+
+		if (memberID == week.getSpInf29() || memberID == week.getSpInf38()) {
+
+			if (memberID == week.getSpInf29())
+				checkPrivilege(Privileges.MIDWEEK_CONGRBIBLESTUDY_READER, week);
+			else if (memberID == week.getSpInf38())
+				checkPrivilege(Privileges.WEEKEND_WATCHTOWER_READER, week);
+		}
+
+		if (memberID == week.getSpInf30())
+			checkPrivilege(Privileges.WEEKEND_PRESIDENT, week);
+
+		if (memberID == week.getSpInf37())
+			checkPrivilege(Privileges.WEEKEND_WATCHTOWER, week);
+
+		if (memberID == week.getSpInf11())
+			checkPrivilege(Privileges.MIDWEEK_TALK, week);
+
+		if (memberID == week.getSpInf14())
+			checkPrivilege(Privileges.MIDWEEK_DIGGING, week);
+
+		if (memberID == week.getSpInf23())
+			checkPrivilege(Privileges.MIDWEEK_CONGRBIBLESTUDY, week);
+
+		for (ChristiansPart cp : week.getChristiansPartList())
+			if (memberID == cp.getTeacher().getSpMemberID()) {
+				checkPrivilege(Privileges.MIDWEEK_CHRISTIAN_LIFE, week);
+				break;
+			}
+	}
+
+	private void checkPrivilegeAudio(Privileges privilege, WeekAudio week) {
+
+		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
+		if (checkPrivilegeHistory != null)
+			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
+		else
+			this.memberPrivilegeHistory
+					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
 	}
 
 	private void checkPrivilege(Privileges privilege, Week week) {
@@ -287,13 +374,13 @@ public class HistoryAudio {
 
 	private void setLastDates() {
 
-		membersPrivilege.forEach(mh -> mh.checkLastDate(this.databaseWeeks));
-//		membersPrivilege.forEach(mh -> mh.checkEditorLastDate(this.editorWeek));
+		this.membersPrivilege.forEach(mh -> mh.checkLastDate(this.databaseWeeksAudio));
+		this.membersPrivilege.forEach(mh -> mh.checkEditorLastDate(this.editorWeek));
 
-		membersPrivilege.sort(new Comparator<MemberHistory>() {
+		this.membersPrivilege.sort(new Comparator<MemberAudioHistory>() {
 
 			@Override
-			public int compare(MemberHistory o1, MemberHistory o2) {
+			public int compare(MemberAudioHistory o1, MemberAudioHistory o2) {
 
 				LocalDate lastDate = o1.getLastDate();
 				if (lastDate == null)
@@ -307,12 +394,30 @@ public class HistoryAudio {
 			}
 		});
 
-		membersTableView.refresh();
+		this.membersTableView.refresh();
 	}
 
 	private void viewUpdate() {
 
-		titleLabel.setText(privilege.getTranslatedName(language));
+		String privilegeTranslatedName = this.privilege.getTranslatedName(language);
+		switch (this.privilege) {
+		case MIDWEEK_AUDIO_POS1:
+		case WEEKEND_AUDIO_POS1:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf9"));
+			break;
+		case MIDWEEK_AUDIO_POS2:
+		case WEEKEND_AUDIO_POS2:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf10"));
+			break;
+		case MIDWEEK_AUDIO_POS3:
+		case WEEKEND_AUDIO_POS3:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf11"));
+			break;
+		default:
+			break;
+		}
+
+		titleLabel.setText(privilegeTranslatedName);
 		brotherLabel.setText(language.getString("sp.history.select"));
 
 		membersTableView.setMinWidth(500);
@@ -338,60 +443,48 @@ public class HistoryAudio {
 
 	private void createMembersPrivilegeList() {
 
-		membersPrivilege = FXCollections.observableArrayList();
-		members.forEach(member -> checkMemberPrivilege(member));
-		membersTableView.setItems(membersPrivilege);
+		this.membersPrivilege = FXCollections.observableArrayList();
+		this.members.forEach(member -> checkMemberPrivilege(member));
+		this.membersTableView.setItems(this.membersPrivilege);
 	}
 
 	private void checkMemberPrivilege(Member member) {
 
 		switch (this.privilege) {
-		case MIDWEEK_CONGRBIBLESTUDY_READER:
-			if (member.getSpInf26() == 1)
+		case MIDWEEK_AUDIO_MIC1:
+		case MIDWEEK_AUDIO_MIC2:
+		case MIDWEEK_AUDIO_MIC3:
+			if (member.getSpInf20() == 1)
 				addMember(member);
 			break;
-		case WEEKEND_WATCHTOWER_READER:
-			if (member.getSpInf27() == 1)
+		case WEEKEND_AUDIO_MIC1:
+		case WEEKEND_AUDIO_MIC2:
+		case WEEKEND_AUDIO_MIC3:
+			if (member.getSpInf21() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_TALK:
-			if (member.getSpInf30() == 1)
+		case MIDWEEK_AUDIO_POS1:
+			if (member.getSpInf22() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_DIGGING:
-			if (member.getSpInf31() == 1)
+		case WEEKEND_AUDIO_POS1:
+			if (member.getSpInf23() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_CHRISTIAN_LIFE:
-			if (member.getSpInf32() == 1)
+		case MIDWEEK_AUDIO_POS2:
+			if (member.getSpInf24() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_PRESIDENT:
-			if (member.getSpInf33() == 1)
+		case WEEKEND_AUDIO_POS2:
+			if (member.getSpInf25() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_PRAY_START:
-			if (member.getSpInf34() == 1)
+		case MIDWEEK_AUDIO_POS3:
+			if (member.getSpInf54() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_PRAY_END:
-			if (member.getSpInf35() == 1)
-				addMember(member);
-			break;
-		case WEEKEND_PRESIDENT:
-			if (member.getSpInf36() == 1)
-				addMember(member);
-			break;
-		case WEEKEND_PRAY_END:
-			if (member.getSpInf37() == 1)
-				addMember(member);
-			break;
-		case MIDWEEK_CONGRBIBLESTUDY:
-			if (member.getSpInf42() == 1)
-				addMember(member);
-			break;
-		case WEEKEND_WATCHTOWER:
-			if (member.getSpInf43() == 1 || member.getSpInf44() == 1)
+		case WEEKEND_AUDIO_POS3:
+			if (member.getSpInf55() == 1)
 				addMember(member);
 			break;
 		default:
@@ -400,7 +493,7 @@ public class HistoryAudio {
 	}
 
 	private void addMember(Member member) {
-//		this.membersPrivilege.add(new MemberHistory(member, privilege, selectedWeek));
+		this.membersPrivilege.add(new MemberAudioHistory(member, privilege, selectedWeek));
 	}
 
 	public AnchorPane getLayout() {
@@ -475,27 +568,27 @@ public class HistoryAudio {
 		this.thisStage = thisStage;
 	}
 
-	public AlertBuilderOld getAlertBuilder() {
-		return alertBuilder;
-	}
-
-	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
-		this.alertBuilder = alertBuilder;
-	}
-
-	public ChristiansPart getChristiansPart() {
-		return christiansPart;
-	}
-
-	public void setChristiansPart(ChristiansPart christiansPart) {
-		this.christiansPart = christiansPart;
-	}
-
 	public SupportPlannerView getApplication() {
 		return application;
 	}
 
 	public void setApplication(SupportPlannerView application) {
 		this.application = application;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
 	}
 }

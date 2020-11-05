@@ -72,6 +72,7 @@ public class Audio extends UpdateDataAdapter {
 
 	private ObservableList<WeekAudio> calendar;
 	private ObservableList<Week> databaseWeeks;
+	private ObservableList<WeekAudio> databaseWeeksAudio;
 
 	private ObservableList<Member> membersList;
 	private HashMap<String, String> configs;
@@ -329,6 +330,7 @@ public class Audio extends UpdateDataAdapter {
 				ctrl.setMembersList(this.membersList);
 				ctrl.setConfigs(this.configs);
 				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -479,5 +481,13 @@ public class Audio extends UpdateDataAdapter {
 
 	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
 		this.databaseWeeks = databaseWeeks;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
 	}
 }

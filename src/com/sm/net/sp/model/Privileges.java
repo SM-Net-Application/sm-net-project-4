@@ -46,7 +46,11 @@ public enum Privileges {
 
 	MIDWEEK_AUDIO_POS3("sp.privileges.midweek.audiopos", "talk.png"),
 
-	MIDWEEK_AUDIO_MIC("sp.privileges.midweek.audiomic", "talk.png"),
+	MIDWEEK_AUDIO_MIC1("sp.privileges.midweek.audiomic", "talk.png"),
+
+	MIDWEEK_AUDIO_MIC2("sp.privileges.midweek.audiomic", "talk.png"),
+
+	MIDWEEK_AUDIO_MIC3("sp.privileges.midweek.audiomic", "talk.png"),
 
 	WEEKEND_AUDIO_POS1("sp.privileges.weekend.audiopos", "talk.png"),
 
@@ -54,7 +58,11 @@ public enum Privileges {
 
 	WEEKEND_AUDIO_POS3("sp.privileges.weekend.audiopos", "talk.png"),
 
-	WEEKEND_AUDIO_MIC("sp.privileges.weekend.audiomic", "talk.png");
+	WEEKEND_AUDIO_MIC1("sp.privileges.weekend.audiomic", "talk.png"),
+
+	WEEKEND_AUDIO_MIC2("sp.privileges.weekend.audiomic", "talk.png"),
+
+	WEEKEND_AUDIO_MIC3("sp.privileges.weekend.audiomic", "talk.png");
 
 	private String name;
 	private String imageName;

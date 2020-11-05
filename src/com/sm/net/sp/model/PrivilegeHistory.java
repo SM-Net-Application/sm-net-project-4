@@ -18,6 +18,7 @@ public class PrivilegeHistory {
 
 	public PrivilegeHistory(Privileges privilege, int keyPrivilegeDate, int keyWeek) {
 		super();
+		
 		this.privilege = privilege;
 
 		LocalDate privilegeDate = keyWeekToLocalDate(keyPrivilegeDate);

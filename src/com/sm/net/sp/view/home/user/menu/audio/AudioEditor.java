@@ -13,7 +13,6 @@ import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.sp.view.historyaudio.HistoryAudio;
 import com.sm.net.sp.view.home.user.menu.audio.task.WeekAudioSaveTask;
@@ -132,6 +131,7 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 
 	private SupportPlannerView application;
 	private ObservableList<Week> databaseWeeks;
+	private ObservableList<WeekAudio> databaseWeeksAudio;
 
 	@FXML
 	private void initialize() {
@@ -237,6 +237,39 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 
 		this.pos1MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_POS1));
 		this.pos1MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.pos2MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_POS2));
+		this.pos2MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.pos3MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_POS3));
+		this.pos3MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.mic1MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_MIC1));
+		this.mic1MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.mic2MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_MIC2));
+		this.mic2MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.mic3MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_AUDIO_MIC3));
+		this.mic3MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.pos1WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_AUDIO_POS1));
+		this.pos1WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.pos2WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_AUDIO_POS2));
+		this.pos2WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.pos3WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_AUDIO_POS3));
+		this.pos3WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.mic1WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_AUDIO_MIC1));
+		this.mic1WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.mic2WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_AUDIO_MIC2));
+		this.mic2WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.mic3WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_AUDIO_MIC3));
+		this.mic3WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
 	}
 
 	private void disableMouseSecondary(MouseEvent event) {
@@ -308,11 +341,13 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 			ctrl.setMembers(this.membersList);
 			ctrl.setLanguage(this.language);
 			ctrl.setDatabaseWeeks(this.databaseWeeks);
+			ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
 			ctrl.setSelectedWeek(this.selectedWeek);
 			ctrl.setEditorWeek(WeekAudio.buildEditorWeek(this));
 			ctrl.setEditor(this);
 			ctrl.setThisStage(stage);
 			ctrl.setApplication(this.application);
+			ctrl.setConfigs(this.configs);
 
 			ctrl.objectInitialize();
 
@@ -325,6 +360,61 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 
 	@Override
 	public void updateSelectedComboBox(Privileges privilege, int memberID) {
+
+		switch (privilege) {
+		case MIDWEEK_AUDIO_POS1:
+			updateComboBox(this.pos1MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_AUDIO_POS2:
+			updateComboBox(this.pos2MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_AUDIO_POS3:
+			updateComboBox(this.pos3MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_AUDIO_MIC1:
+			updateComboBox(this.mic1MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_AUDIO_MIC2:
+			updateComboBox(this.mic2MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_AUDIO_MIC3:
+			updateComboBox(this.mic3MidweekComboBox, memberID);
+			break;
+		case WEEKEND_AUDIO_POS1:
+			updateComboBox(this.pos1WeekendComboBox, memberID);
+			break;
+		case WEEKEND_AUDIO_POS2:
+			updateComboBox(this.pos2WeekendComboBox, memberID);
+			break;
+		case WEEKEND_AUDIO_POS3:
+			updateComboBox(this.pos3WeekendComboBox, memberID);
+			break;
+		case WEEKEND_AUDIO_MIC1:
+			updateComboBox(this.mic1WeekendComboBox, memberID);
+			break;
+		case WEEKEND_AUDIO_MIC2:
+			updateComboBox(this.mic2WeekendComboBox, memberID);
+			break;
+		case WEEKEND_AUDIO_MIC3:
+			updateComboBox(this.mic3WeekendComboBox, memberID);
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void updateComboBox(ComboBox<Member> cb, int memberID) {
+
+		int index = -1;
+
+		for (int i = 0; i < cb.getItems().size(); i++) {
+			if (cb.getItems().get(i).getSpMemberID() == memberID) {
+				index = i;
+				break;
+			}
+		}
+
+		cb.getSelectionModel().select(index);
 	}
 
 	@Override
@@ -863,5 +953,13 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 
 	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
 		this.databaseWeeks = databaseWeeks;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
 	}
 }

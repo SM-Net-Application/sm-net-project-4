@@ -85,6 +85,7 @@ public class WeekAudioLoadTask implements TaskInterface {
 
 		}
 
+		this.view.setDatabaseWeeksAudio(list);
 		ObservableList<WeekAudio> calendar = this.view.getCalendar();
 
 		calendar.forEach(c -> {

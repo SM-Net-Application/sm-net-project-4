@@ -327,8 +327,8 @@ public class WeekAudio {
 
 		this.setPosMidweek(nameListPosMidweek(membersList, false));
 		this.setMicMidweek(nameListMicMidweek(membersList, false));
-		this.setPosWeekend(nameListPosMidweek(membersList, false));
-		this.setMicWeekend(nameListMicMidweek(membersList, false));
+		this.setPosWeekend(nameListPosWeekend(membersList, false));
+		this.setMicWeekend(nameListMicWeekend(membersList, false));
 	}
 
 	public final IntegerProperty weekProperty() {
