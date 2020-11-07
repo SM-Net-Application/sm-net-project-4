@@ -11,6 +11,7 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.audio.task.AudioInitDataLoadTask;
@@ -73,6 +74,7 @@ public class Audio extends UpdateDataAdapter {
 	private ObservableList<WeekAudio> calendar;
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
 	private ObservableList<Member> membersList;
 	private HashMap<String, String> configs;
@@ -209,7 +211,8 @@ public class Audio extends UpdateDataAdapter {
 		LocalDate now = LocalDate.now();
 
 		int month = now.getMonthValue();
-		int year = now.getYear();
+		int year = (month == 1) ? (now.getYear() - 1) : now.getYear();
+		month = (month == 1) ? 12 : (month - 1);
 
 		// Primo giorno del mese (determinato da now)
 		LocalDate day = LocalDate.of(year, month, 1);
@@ -331,6 +334,7 @@ public class Audio extends UpdateDataAdapter {
 				ctrl.setConfigs(this.configs);
 				ctrl.setDatabaseWeeks(this.databaseWeeks);
 				ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
+				ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -489,5 +493,13 @@ public class Audio extends UpdateDataAdapter {
 
 	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
 		this.databaseWeeksAudio = databaseWeeksAudio;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
 	}
 }

@@ -1,5 +1,14 @@
 Data di pubblicazione : ..-..-....
 
+	Nuova sezione: Audio/Video
+		- 3 Postazioni (1 fratello per postazione)
+		- 3 Microfonisti
+		- Storico
+		
+	Nuova sezione: Uscieri
+		- 3 Zone (3 fratelli per zona)
+		- Storico
+
 	Congregazione:
 		- Ottimizzata GUI per l'assegnazione degli incarichi
 			- Aggiunto incarico Audio/Video (3 Postazioni (vedi Configurazione))
@@ -13,6 +22,7 @@ Data di pubblicazione : ..-..-....
 			- Non stampare l'adunanza infrasettimanale
 			- Aggiungi Evento Extra (Intestazione + Contenuto), dopo l'adunanza del fine settimana
 			- Adunanza del fine settimana SENZA discorso pubblico
+		- Lo storico include gli incarichi Audio/Video e Uscieri
 
 	Configurazione:
 		- Migliorata GUI

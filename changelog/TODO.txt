@@ -1,12 +1,10 @@
-	
-	- Nuova sezione: Acustica
-	- Nuova sezione: Uscieri
+
+	Monitor-Online:
+		- Includere incarichi Audio/Video e Uscieri
+		- Aggiungere Conduttore scuola seconda sala
 	
 	Monitor-Software:
 		- Aggiungere il giorno e l'orario preciso delle adunanze in cui si hanno gli incarichi
-
-	Monitor-Online:
-		- Aggiungere Conduttore scuola seconda sala
 	
 	- Cambiare l'icona Luoghi di adorazione
 	

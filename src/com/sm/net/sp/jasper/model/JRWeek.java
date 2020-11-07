@@ -1376,13 +1376,16 @@ public class JRWeek {
 
 			String audioMidweek = "";
 			if (!pos1Name.isEmpty())
-				audioMidweek = String.format(audioPosFormat, pos1Name, memberPos1Midweek);
+				if (!memberPos1Midweek.isEmpty())
+					audioMidweek = String.format(audioPosFormat, pos1Name, memberPos1Midweek);
 
 			if (!pos2Name.isEmpty())
-				audioMidweek += " " + String.format(audioPosFormat, pos2Name, memberPos2Midweek);
+				if (!memberPos2Midweek.isEmpty())
+					audioMidweek += " " + String.format(audioPosFormat, pos2Name, memberPos2Midweek);
 
 			if (!pos3Name.isEmpty())
-				audioMidweek += " " + String.format(audioPosFormat, pos3Name, memberPos3Midweek);
+				if (!memberPos3Midweek.isEmpty())
+					audioMidweek += " " + String.format(audioPosFormat, pos3Name, memberPos3Midweek);
 
 			if (!nameListMicMidweek.isEmpty())
 				audioMidweek += "<br>" + String.format(audioPosFormat, micText, nameListMicMidweek);
@@ -1391,13 +1394,16 @@ public class JRWeek {
 
 			String audioWeekend = "";
 			if (!pos1Name.isEmpty())
-				audioWeekend = String.format(audioPosFormat, pos1Name, memberPos1Weekend);
+				if (!memberPos1Weekend.isEmpty())
+					audioWeekend = String.format(audioPosFormat, pos1Name, memberPos1Weekend);
 
 			if (!pos2Name.isEmpty())
-				audioWeekend += " " + String.format(audioPosFormat, pos2Name, memberPos2Weekend);
+				if (!memberPos2Weekend.isEmpty())
+					audioWeekend += " " + String.format(audioPosFormat, pos2Name, memberPos2Weekend);
 
 			if (!pos3Name.isEmpty())
-				audioWeekend += " " + String.format(audioPosFormat, pos3Name, memberPos3Weekend);
+				if (!memberPos3Weekend.isEmpty())
+					audioWeekend += " " + String.format(audioPosFormat, pos3Name, memberPos3Weekend);
 
 			if (!nameListMicWeekend.isEmpty())
 				audioWeekend += "<br>" + String.format(audioPosFormat, micText, nameListMicWeekend);
@@ -1435,7 +1441,7 @@ public class JRWeek {
 			String z3Weekend = weekUsciere.nameListZ3Weekend(membersList, extendedName);
 
 			String usciereMidweek = "";
-			
+
 			if (!z1Midweek.isEmpty())
 				usciereMidweek = String.format(usciereFormat, z1Name, z1Midweek);
 
@@ -1448,7 +1454,7 @@ public class JRWeek {
 			jrWeek.setUsciereMidweek(usciereMidweek);
 
 			String usciereWeekend = "";
-			
+
 			if (!z1Weekend.isEmpty())
 				usciereWeekend = String.format(usciereFormat, z1Name, z1Weekend);
 

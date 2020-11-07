@@ -62,7 +62,43 @@ public enum Privileges {
 
 	WEEKEND_AUDIO_MIC2("sp.privileges.weekend.audiomic", "talk.png"),
 
-	WEEKEND_AUDIO_MIC3("sp.privileges.weekend.audiomic", "talk.png");
+	WEEKEND_AUDIO_MIC3("sp.privileges.weekend.audiomic", "talk.png"),
+
+	MIDWEEK_USCIERE1_Z1("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE2_Z1("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE3_Z1("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE1_Z2("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE2_Z2("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE3_Z2("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE1_Z3("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE2_Z3("sp.privileges.midweek.usciere", "talk.png"),
+
+	MIDWEEK_USCIERE3_Z3("sp.privileges.midweek.usciere", "talk.png"),
+
+	WEEKEND_USCIERE1_Z1("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE2_Z1("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE3_Z1("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE1_Z2("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE2_Z2("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE3_Z2("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE1_Z3("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE2_Z3("sp.privileges.weekend.usciere", "talk.png"),
+
+	WEEKEND_USCIERE3_Z3("sp.privileges.weekend.usciere", "talk.png");
 
 	private String name;
 	private String imageName;

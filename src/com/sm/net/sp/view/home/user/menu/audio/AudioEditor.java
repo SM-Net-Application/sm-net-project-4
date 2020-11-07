@@ -11,6 +11,7 @@ import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
@@ -132,6 +133,7 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 	private SupportPlannerView application;
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
 	@FXML
 	private void initialize() {
@@ -348,6 +350,7 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 			ctrl.setThisStage(stage);
 			ctrl.setApplication(this.application);
 			ctrl.setConfigs(this.configs);
+			ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
 
 			ctrl.objectInitialize();
 
@@ -961,5 +964,13 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 
 	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
 		this.databaseWeeksAudio = databaseWeeksAudio;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
 	}
 }

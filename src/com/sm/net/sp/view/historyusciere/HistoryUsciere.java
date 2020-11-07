@@ -1,4 +1,4 @@
-package com.sm.net.sp.view.historyaudio;
+package com.sm.net.sp.view.historyusciere;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.MemberAudioHistory;
+import com.sm.net.sp.model.MemberUsciereHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
@@ -33,7 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class HistoryAudio {
+public class HistoryUsciere {
 
 	@FXML
 	private AnchorPane layout;
@@ -44,13 +44,13 @@ public class HistoryAudio {
 	private Label brotherLabel;
 
 	@FXML
-	private TableView<MemberAudioHistory> membersTableView;
+	private TableView<MemberUsciereHistory> membersTableView;
 	@FXML
-	private TableColumn<MemberAudioHistory, String> memberNameTableColumn;
+	private TableColumn<MemberUsciereHistory, String> memberNameTableColumn;
 	@FXML
-	private TableColumn<MemberAudioHistory, String> memberLastDateTableColumn;
+	private TableColumn<MemberUsciereHistory, String> memberLastDateTableColumn;
 	@FXML
-	private TableColumn<MemberAudioHistory, ImageView> memberLastDateStatusTableColumn;
+	private TableColumn<MemberUsciereHistory, ImageView> memberLastDateStatusTableColumn;
 
 	@FXML
 	private TableView<PrivilegeHistory> privilegesTableView;
@@ -66,20 +66,20 @@ public class HistoryAudio {
 
 	private Language language;
 	private ObservableList<Member> members;
-	private ObservableList<MemberAudioHistory> membersPrivilege;
+	private ObservableList<MemberUsciereHistory> membersPrivilege;
 	private ObservableList<PrivilegeHistory> memberPrivilegeHistory;
 	private Privileges privilege;
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
-	private WeekAudio selectedWeek;
-	private WeekAudio editorWeek;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
+	private WeekUsciere selectedWeek;
+	private WeekUsciere editorWeek;
 	private UpgradeableComboBoxSelection editor;
 	private Stage thisStage;
 
 	private SupportPlannerView application;
 
 	private HashMap<String, String> configs;
-	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
 	@FXML
 	private void initialize() {
@@ -181,7 +181,7 @@ public class HistoryAudio {
 
 		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			MemberAudioHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
+			MemberUsciereHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
 
 			Optional<PrivilegeHistory> find = StreamSupport.stream(this.memberPrivilegeHistory.spliterator(), false)
 					.filter(ph -> ph.getStatus().equals(Meta.Resources.PRESENT)).findFirst();
@@ -245,7 +245,7 @@ public class HistoryAudio {
 		}
 	}
 
-	private void selectionConfirmed(MemberAudioHistory member) {
+	private void selectionConfirmed(MemberUsciereHistory member) {
 
 		int memberID = member.getMember().getSpMemberID();
 
@@ -258,7 +258,7 @@ public class HistoryAudio {
 
 		this.membersTableView.getSelectionModel().selectedIndexProperty().addListener((ob, o, n) -> changeMember(n));
 		this.membersTableView.setRowFactory(param -> {
-			TableRow<MemberAudioHistory> row = new TableRow<>();
+			TableRow<MemberUsciereHistory> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
 					selectMember();
@@ -269,7 +269,7 @@ public class HistoryAudio {
 
 	private void changeMember(Number n) {
 		if (n.intValue() > -1) {
-			MemberAudioHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
+			MemberUsciereHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
 			this.brotherLabel.setText(String.format(language.getString("sp.history.brotherselected"),
 					member.getMember().getNameStyle1()));
 
@@ -279,7 +279,7 @@ public class HistoryAudio {
 			this.brotherLabel.setText(language.getString("sp.history.select"));
 	}
 
-	private void checkPrivilegeMember(MemberAudioHistory member) {
+	private void checkPrivilegeMember(MemberUsciereHistory member) {
 
 		this.memberPrivilegeHistory = FXCollections.observableArrayList();
 
@@ -287,7 +287,7 @@ public class HistoryAudio {
 
 			int memberID = member.getMember().getSpMemberID();
 			checkPrivilegeMemberDatabaseWeek(memberID);
-			checkPrivilegeMemberWeekAudio(memberID, this.editorWeek);
+			checkPrivilegeMemberWeekUsciere(memberID, this.editorWeek);
 
 		} else
 			this.brotherLabel.setText(language.getString("sp.history.weeknotsaved"));
@@ -298,18 +298,59 @@ public class HistoryAudio {
 
 	private void checkPrivilegeMemberDatabaseWeek(int memberID) {
 
-		for (WeekAudio week : databaseWeeksAudio)
+		for (WeekUsciere week : databaseWeeksUsciere)
 			if (week.getSpInf1() != this.selectedWeek.getSpInf1()) // La settimana dell'editor non deve essere
 																	// considerata dal database perche potrebbe
 																	// contenere modifiche che altrimenti non verrebbero
 																	// considerate
-				checkPrivilegeMemberWeekAudio(memberID, week);
+				checkPrivilegeMemberWeekUsciere(memberID, week);
+
+		for (WeekAudio week : databaseWeeksAudio)
+			checkPrivilegeMemberWeekAudio(memberID, week);
 
 		for (Week week : databaseWeeks)
 			checkPrivilegeMemberWeek(memberID, week);
+	}
 
-		for (WeekUsciere week : databaseWeeksUsciere)
-			checkPrivilegeMemberWeekUsciere(memberID, week);
+	private void checkPrivilegeMemberWeekAudio(int memberID, WeekAudio week) {
+
+		if (memberID == week.getSpInf2())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS1, week);
+
+		if (memberID == week.getSpInf3())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS2, week);
+
+		if (memberID == week.getSpInf4())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS3, week);
+
+		if (memberID == week.getSpInf5() || memberID == week.getSpInf6() || memberID == week.getSpInf7()) {
+			if (memberID == week.getSpInf5()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf6()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC2, week);
+			} else if (memberID == week.getSpInf7()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC3, week);
+			}
+		}
+
+		if (memberID == week.getSpInf8())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS1, week);
+
+		if (memberID == week.getSpInf9())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS2, week);
+
+		if (memberID == week.getSpInf10())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS3, week);
+
+		if (memberID == week.getSpInf11() || memberID == week.getSpInf12() || memberID == week.getSpInf13()) {
+			if (memberID == week.getSpInf11()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf12()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf13()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			}
+		}
 	}
 
 	private void checkPrivilegeMemberWeekUsciere(int memberID, WeekUsciere week) {
@@ -375,57 +416,6 @@ public class HistoryAudio {
 		}
 	}
 
-	private void checkPrivilegeUsciere(Privileges privilege, WeekUsciere week) {
-
-		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
-		if (checkPrivilegeHistory != null)
-			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
-		else
-			this.memberPrivilegeHistory
-					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
-	}
-
-	private void checkPrivilegeMemberWeekAudio(int memberID, WeekAudio week) {
-
-		if (memberID == week.getSpInf2())
-			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS1, week);
-
-		if (memberID == week.getSpInf3())
-			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS2, week);
-
-		if (memberID == week.getSpInf4())
-			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS3, week);
-
-		if (memberID == week.getSpInf5() || memberID == week.getSpInf6() || memberID == week.getSpInf7()) {
-			if (memberID == week.getSpInf5()) {
-				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC1, week);
-			} else if (memberID == week.getSpInf6()) {
-				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC2, week);
-			} else if (memberID == week.getSpInf7()) {
-				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC3, week);
-			}
-		}
-
-		if (memberID == week.getSpInf8())
-			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS1, week);
-
-		if (memberID == week.getSpInf9())
-			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS2, week);
-
-		if (memberID == week.getSpInf10())
-			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS3, week);
-
-		if (memberID == week.getSpInf11() || memberID == week.getSpInf12() || memberID == week.getSpInf13()) {
-			if (memberID == week.getSpInf11()) {
-				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
-			} else if (memberID == week.getSpInf12()) {
-				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
-			} else if (memberID == week.getSpInf13()) {
-				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
-			}
-		}
-	}
-
 	private void checkPrivilegeMemberWeek(int memberID, Week week) {
 
 		if (memberID == week.getSpInf3())
@@ -481,6 +471,16 @@ public class HistoryAudio {
 					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
 	}
 
+	private void checkPrivilegeUsciere(Privileges privilege, WeekUsciere week) {
+
+		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
+		if (checkPrivilegeHistory != null)
+			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
+		else
+			this.memberPrivilegeHistory
+					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
+	}
+
 	private void checkPrivilege(Privileges privilege, Week week) {
 
 		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
@@ -502,13 +502,13 @@ public class HistoryAudio {
 
 	private void setLastDates() {
 
-		this.membersPrivilege.forEach(mh -> mh.checkLastDate(this.databaseWeeksAudio));
+		this.membersPrivilege.forEach(mh -> mh.checkLastDate(this.databaseWeeksUsciere));
 		this.membersPrivilege.forEach(mh -> mh.checkEditorLastDate(this.editorWeek));
 
-		this.membersPrivilege.sort(new Comparator<MemberAudioHistory>() {
+		this.membersPrivilege.sort(new Comparator<MemberUsciereHistory>() {
 
 			@Override
-			public int compare(MemberAudioHistory o1, MemberAudioHistory o2) {
+			public int compare(MemberUsciereHistory o1, MemberUsciereHistory o2) {
 
 				LocalDate lastDate = o1.getLastDate();
 				if (lastDate == null)
@@ -540,6 +540,30 @@ public class HistoryAudio {
 		case MIDWEEK_AUDIO_POS3:
 		case WEEKEND_AUDIO_POS3:
 			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf11"));
+			break;
+		case MIDWEEK_USCIERE1_Z1:
+		case MIDWEEK_USCIERE2_Z1:
+		case MIDWEEK_USCIERE3_Z1:
+		case WEEKEND_USCIERE1_Z1:
+		case WEEKEND_USCIERE2_Z1:
+		case WEEKEND_USCIERE3_Z1:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf12"));
+			break;
+		case MIDWEEK_USCIERE1_Z2:
+		case MIDWEEK_USCIERE2_Z2:
+		case MIDWEEK_USCIERE3_Z2:
+		case WEEKEND_USCIERE1_Z2:
+		case WEEKEND_USCIERE2_Z2:
+		case WEEKEND_USCIERE3_Z2:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf13"));
+			break;
+		case MIDWEEK_USCIERE1_Z3:
+		case MIDWEEK_USCIERE2_Z3:
+		case MIDWEEK_USCIERE3_Z3:
+		case WEEKEND_USCIERE1_Z3:
+		case WEEKEND_USCIERE2_Z3:
+		case WEEKEND_USCIERE3_Z3:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf14"));
 			break;
 		default:
 			break;
@@ -579,40 +603,40 @@ public class HistoryAudio {
 	private void checkMemberPrivilege(Member member) {
 
 		switch (this.privilege) {
-		case MIDWEEK_AUDIO_MIC1:
-		case MIDWEEK_AUDIO_MIC2:
-		case MIDWEEK_AUDIO_MIC3:
-			if (member.getSpInf20() == 1)
+		case MIDWEEK_USCIERE1_Z1:
+		case MIDWEEK_USCIERE2_Z1:
+		case MIDWEEK_USCIERE3_Z1:
+			if (member.getSpInf28() == 1)
 				addMember(member);
 			break;
-		case WEEKEND_AUDIO_MIC1:
-		case WEEKEND_AUDIO_MIC2:
-		case WEEKEND_AUDIO_MIC3:
-			if (member.getSpInf21() == 1)
+		case WEEKEND_USCIERE1_Z1:
+		case WEEKEND_USCIERE2_Z1:
+		case WEEKEND_USCIERE3_Z1:
+			if (member.getSpInf29() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_AUDIO_POS1:
-			if (member.getSpInf22() == 1)
+		case MIDWEEK_USCIERE1_Z2:
+		case MIDWEEK_USCIERE2_Z2:
+		case MIDWEEK_USCIERE3_Z2:
+			if (member.getSpInf56() == 1)
 				addMember(member);
 			break;
-		case WEEKEND_AUDIO_POS1:
-			if (member.getSpInf23() == 1)
+		case WEEKEND_USCIERE1_Z2:
+		case WEEKEND_USCIERE2_Z2:
+		case WEEKEND_USCIERE3_Z2:
+			if (member.getSpInf57() == 1)
 				addMember(member);
 			break;
-		case MIDWEEK_AUDIO_POS2:
-			if (member.getSpInf24() == 1)
+		case MIDWEEK_USCIERE1_Z3:
+		case MIDWEEK_USCIERE2_Z3:
+		case MIDWEEK_USCIERE3_Z3:
+			if (member.getSpInf58() == 1)
 				addMember(member);
 			break;
-		case WEEKEND_AUDIO_POS2:
-			if (member.getSpInf25() == 1)
-				addMember(member);
-			break;
-		case MIDWEEK_AUDIO_POS3:
-			if (member.getSpInf54() == 1)
-				addMember(member);
-			break;
-		case WEEKEND_AUDIO_POS3:
-			if (member.getSpInf55() == 1)
+		case WEEKEND_USCIERE1_Z3:
+		case WEEKEND_USCIERE2_Z3:
+		case WEEKEND_USCIERE3_Z3:
+			if (member.getSpInf59() == 1)
 				addMember(member);
 			break;
 		default:
@@ -621,7 +645,7 @@ public class HistoryAudio {
 	}
 
 	private void addMember(Member member) {
-		this.membersPrivilege.add(new MemberAudioHistory(member, privilege, selectedWeek));
+		this.membersPrivilege.add(new MemberUsciereHistory(member, privilege, selectedWeek));
 	}
 
 	public AnchorPane getLayout() {
@@ -664,19 +688,19 @@ public class HistoryAudio {
 		this.databaseWeeks = databaseWeeks;
 	}
 
-	public WeekAudio getSelectedWeek() {
+	public WeekUsciere getSelectedWeek() {
 		return selectedWeek;
 	}
 
-	public void setSelectedWeek(WeekAudio selectedWeek) {
+	public void setSelectedWeek(WeekUsciere selectedWeek) {
 		this.selectedWeek = selectedWeek;
 	}
 
-	public WeekAudio getEditorWeek() {
+	public WeekUsciere getEditorWeek() {
 		return editorWeek;
 	}
 
-	public void setEditorWeek(WeekAudio editorWeek) {
+	public void setEditorWeek(WeekUsciere editorWeek) {
 		this.editorWeek = editorWeek;
 	}
 

@@ -12,6 +12,7 @@ import com.sm.net.sp.view.browser.Browser;
 import com.sm.net.sp.view.check.access.CheckAccess;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.historyaudio.HistoryAudio;
+import com.sm.net.sp.view.historyusciere.HistoryUsciere;
 import com.sm.net.sp.view.home.access.HomeAccess;
 import com.sm.net.sp.view.home.user.menu.HomeUserMenuList;
 import com.sm.net.sp.view.home.user.menu.audio.Audio;
@@ -172,6 +173,7 @@ public class Meta {
 				.getResource("ChristiansPartEditor.fxml");
 		public static final URL HISTORY = History.class.getResource("History.fxml");
 		public static final URL HISTORYAUDIO = HistoryAudio.class.getResource("HistoryAudio.fxml");
+		public static final URL HISTORYUSCIERE = HistoryUsciere.class.getResource("HistoryUsciere.fxml");
 		public static final URL WOLBROWSER = WOLBrowser.class.getResource("WOLBrowser.fxml");
 		public static final URL BROWSER = Browser.class.getResource("Browser.fxml");
 		public static final URL HOME_USER_MENU_DATEANDTIME = HomeUserMenuDateAndTime.class

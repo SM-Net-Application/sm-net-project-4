@@ -85,6 +85,7 @@ public class WeekUsciereLoadTask implements TaskInterface {
 
 		}
 
+		this.view.setDatabaseWeeksUsciere(list);
 		ObservableList<WeekUsciere> calendar = this.view.getCalendar();
 
 		calendar.forEach(c -> {

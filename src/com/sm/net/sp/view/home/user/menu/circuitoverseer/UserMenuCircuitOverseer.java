@@ -169,7 +169,8 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 		LocalDate now = LocalDate.now();
 
 		int month = now.getMonthValue();
-		int year = now.getYear();
+		int year = (month == 1) ? (now.getYear() - 1) : now.getYear();
+		month = (month == 1) ? 12 : (month - 1);
 
 		LocalDate day = LocalDate.of(year, month, 1);
 		LocalDate firstDayOfWeek = DateUtil.getFirstDayOfWeek(day);

@@ -90,9 +90,19 @@ public class WeekAudio {
 		NumberFormat nfYear = new DecimalFormat("0000");
 		NumberFormat nfMonth = new DecimalFormat("00");
 
-		return (date != null)
-				? String.format("%s%s", nfYear.format(date.getYear()), nfMonth.format(DateUtil.getWeekOfYears(date)))
-				: "";
+		int year = date.getYear();
+		int monthValue = date.getMonthValue();
+		int dayOfMonth = date.getDayOfMonth();
+
+		if (monthValue == 1)
+			if (dayOfMonth < 4)
+				year = year - 1;
+
+		String yearFormat = nfYear.format(year);
+		int weekOfYears = DateUtil.getWeekOfYears(date);
+		String weekOfYearsFormat = nfMonth.format(weekOfYears);
+
+		return (date != null) ? String.format("%s%s", yearFormat, weekOfYearsFormat) : "";
 	}
 
 	public static WeekAudio newInstanceByView(AudioEditor editor) {

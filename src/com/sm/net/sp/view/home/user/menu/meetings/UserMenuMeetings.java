@@ -430,6 +430,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedWeek(week);
 				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setAlertBuilder(this.alertBuilder);
+				ctrl.setApplication(this.application);
+				ctrl.setDatabaseWeeksAudio(this.audio);
+				ctrl.setDatabaseWeeksUsciere(this.usciere);
+				ctrl.setConfigs(this.configs);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -438,8 +443,6 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 				ctrl.setOwnerTabPane(tabPane);
 				ctrl.setThisTab(newTab);
-				ctrl.setAlertBuilder(this.alertBuilder);
-				ctrl.setApplication(this.application);
 
 				tabPane.getTabs().add(newTab);
 				tabPane.getSelectionModel().select(newTab);

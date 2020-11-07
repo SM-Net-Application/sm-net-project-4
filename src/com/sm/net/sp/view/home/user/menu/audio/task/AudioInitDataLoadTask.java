@@ -9,11 +9,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
+import com.sm.net.sp.model.WeekAudio;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.audio.Audio;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 public class AudioInitDataLoadTask implements TaskInterface {
@@ -38,8 +42,10 @@ public class AudioInitDataLoadTask implements TaskInterface {
 		String url = this.settings.getDatabaseUrl();
 
 		JSONObject jsonConfig = JSONRequest.CONFIG_LOAD();
+		JSONObject jsonUsciere = JSONRequest.USCIERE_LOAD();
 
 		post(hashMap, url, jsonConfig, "responseConfig");
+		post(hashMap, url, jsonUsciere, "responseUsciere");
 
 	}
 
@@ -61,8 +67,10 @@ public class AudioInitDataLoadTask implements TaskInterface {
 	public void feedback(HashMap<String, Object> hashMap) {
 
 		HashMap<String, String> configs = configFeedback(hashMap);
+		ObservableList<WeekUsciere> databaseWeeksUsciere = usciereFeedback(hashMap);
 
 		this.view.setConfigs(configs);
+		this.view.setDatabaseWeeksUsciere(databaseWeeksUsciere);
 		this.view.updateWeeksData();
 	}
 
@@ -90,5 +98,26 @@ public class AudioInitDataLoadTask implements TaskInterface {
 		}
 
 		return configs;
+	}
+
+	private ObservableList<WeekUsciere> usciereFeedback(HashMap<String, Object> hashMap) {
+
+		ObservableList<WeekUsciere> list = FXCollections.observableArrayList();
+
+		JSONObject response = (JSONObject) hashMap.get("responseUsciere");
+		int status = response.getInt("status");
+
+		if (status == 0) {
+
+			JSONArray result = (JSONArray) response.get("result");
+			for (Object obj : result) {
+
+				JSONObject json = (JSONObject) obj;
+				WeekUsciere w = WeekUsciere.newInstanceByJSONObject(json, this.settings.getDatabaseSecretKey());
+				list.add(w);
+			}
+		}
+
+		return list;
 	}
 }

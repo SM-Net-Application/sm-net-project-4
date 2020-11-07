@@ -107,9 +107,19 @@ public class WeekUsciere {
 		NumberFormat nfYear = new DecimalFormat("0000");
 		NumberFormat nfMonth = new DecimalFormat("00");
 
-		return (date != null)
-				? String.format("%s%s", nfYear.format(date.getYear()), nfMonth.format(DateUtil.getWeekOfYears(date)))
-				: "";
+		int year = date.getYear();
+		int monthValue = date.getMonthValue();
+		int dayOfMonth = date.getDayOfMonth();
+
+		if (monthValue == 1)
+			if (dayOfMonth < 4)
+				year = year - 1;
+
+		String yearFormat = nfYear.format(year);
+		int weekOfYears = DateUtil.getWeekOfYears(date);
+		String weekOfYearsFormat = nfMonth.format(weekOfYears);
+
+		return (date != null) ? String.format("%s%s", yearFormat, weekOfYearsFormat) : "";
 	}
 
 	public static WeekUsciere newInstanceByView(UsciereEditor editor) {
@@ -256,6 +266,49 @@ public class WeekUsciere {
 		this.z1Weekend = null;
 		this.z2Weekend = null;
 		this.z3Weekend = null;
+	}
+
+	public static WeekUsciere buildEditorWeek(UsciereEditor editor) {
+
+		WeekUsciere editorSelectedWeek = editor.getSelectedWeek();
+		WeekUsciere week = null;
+
+		if (editorSelectedWeek.spInf1Property() != null)
+			week = new WeekUsciere(editorSelectedWeek);
+		else {
+			week = new WeekUsciere(editorSelectedWeek.getFrom(), editor.getLanguage());
+			week.setSpInf1(Integer.valueOf(week.getKey()));
+		}
+
+		week.setSpInf2(editor.getZ1u1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf3(editor.getZ1u2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf4(editor.getZ1u3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf5(editor.getZ2u1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf6(editor.getZ2u2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf7(editor.getZ2u3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf8(editor.getZ3u1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf9(editor.getZ3u2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf10(editor.getZ3u3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf11(editor.getZ1u1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf12(editor.getZ1u2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf13(editor.getZ1u3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf14(editor.getZ2u1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf15(editor.getZ2u2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf16(editor.getZ2u3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		week.setSpInf17(editor.getZ3u1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf18(editor.getZ3u2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+		week.setSpInf19(editor.getZ3u3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID());
+
+		return week;
+	}
+
+	public WeekUsciere(WeekUsciere editorSelectedWeek) {
+		this.spInf1 = new SimpleIntegerProperty(editorSelectedWeek.getSpInf1());
 	}
 
 	public String nameListZ1Midweek(ObservableList<Member> members, boolean extendedName) {

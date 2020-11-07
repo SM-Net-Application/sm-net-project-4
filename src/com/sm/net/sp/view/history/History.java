@@ -2,6 +2,7 @@ package com.sm.net.sp.view.history;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -13,7 +14,10 @@ import com.sm.net.sp.model.MemberHistory;
 import com.sm.net.sp.model.PrivilegeHistory;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.utils.AlertBuilderOld;
+import com.sm.net.sp.view.SupportPlannerView;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -75,6 +79,12 @@ public class History {
 
 	private ChristiansPart christiansPart;
 
+	private ObservableList<WeekAudio> databaseWeeksAudio;
+	private SupportPlannerView application;
+	private HashMap<String, String> configs;
+
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -110,8 +120,54 @@ public class History {
 		privilegesStatusTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
 				Meta.Resources.imageForTab(cellData.getValue().getStatus())));
 
-		privilegesNameTableColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(cellData.getValue().getPrivilege().getTranslatedName(language)));
+//		privilegesNameTableColumn.setCellValueFactory(
+//				cellData -> new SimpleStringProperty(cellData.getValue().getPrivilege().getTranslatedName(language)));
+
+		this.privilegesNameTableColumn.setCellValueFactory(cellData -> {
+
+			Privileges pr = cellData.getValue().getPrivilege();
+
+			switch (pr) {
+			case MIDWEEK_AUDIO_POS1:
+			case WEEKEND_AUDIO_POS1:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf9")));
+			case MIDWEEK_AUDIO_POS2:
+			case WEEKEND_AUDIO_POS2:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf10")));
+			case MIDWEEK_AUDIO_POS3:
+			case WEEKEND_AUDIO_POS3:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf11")));
+			case MIDWEEK_USCIERE1_Z1:
+			case MIDWEEK_USCIERE2_Z1:
+			case MIDWEEK_USCIERE3_Z1:
+			case WEEKEND_USCIERE1_Z1:
+			case WEEKEND_USCIERE2_Z1:
+			case WEEKEND_USCIERE3_Z1:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf12")));
+			case MIDWEEK_USCIERE1_Z2:
+			case MIDWEEK_USCIERE2_Z2:
+			case MIDWEEK_USCIERE3_Z2:
+			case WEEKEND_USCIERE1_Z2:
+			case WEEKEND_USCIERE2_Z2:
+			case WEEKEND_USCIERE3_Z2:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf13")));
+			case MIDWEEK_USCIERE1_Z3:
+			case MIDWEEK_USCIERE2_Z3:
+			case MIDWEEK_USCIERE3_Z3:
+			case WEEKEND_USCIERE1_Z3:
+			case WEEKEND_USCIERE2_Z3:
+			case WEEKEND_USCIERE3_Z3:
+				return new SimpleStringProperty(
+						String.format(pr.getTranslatedName(language), this.configs.get("inf14")));
+			default:
+				return new SimpleStringProperty(pr.getTranslatedName(language));
+			}
+		});
 	}
 
 	public void objectInitialize() {
@@ -146,8 +202,53 @@ public class History {
 
 				String header = String.format(this.language.getStringWithNewLine("sp.history.confirmselection"),
 						member.getMember().getNameStyle1());
-				String content = privilegeHistory.getPrivilege().getTranslatedName(this.language);
+				// String content =
+				// privilegeHistory.getPrivilege().getTranslatedName(this.language);
 
+				Privileges pr = privilegeHistory.getPrivilege();
+				String privilegeTranslatedName = pr.getTranslatedName(this.language);
+				switch (pr) {
+				case MIDWEEK_AUDIO_POS1:
+				case WEEKEND_AUDIO_POS1:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf9"));
+					break;
+				case MIDWEEK_AUDIO_POS2:
+				case WEEKEND_AUDIO_POS2:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf10"));
+					break;
+				case MIDWEEK_AUDIO_POS3:
+				case WEEKEND_AUDIO_POS3:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf11"));
+					break;
+				case MIDWEEK_USCIERE1_Z1:
+				case MIDWEEK_USCIERE2_Z1:
+				case MIDWEEK_USCIERE3_Z1:
+				case WEEKEND_USCIERE1_Z1:
+				case WEEKEND_USCIERE2_Z1:
+				case WEEKEND_USCIERE3_Z1:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf12"));
+					break;
+				case MIDWEEK_USCIERE1_Z2:
+				case MIDWEEK_USCIERE2_Z2:
+				case MIDWEEK_USCIERE3_Z2:
+				case WEEKEND_USCIERE1_Z2:
+				case WEEKEND_USCIERE2_Z2:
+				case WEEKEND_USCIERE3_Z2:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf13"));
+					break;
+				case MIDWEEK_USCIERE1_Z3:
+				case MIDWEEK_USCIERE2_Z3:
+				case MIDWEEK_USCIERE3_Z3:
+				case WEEKEND_USCIERE1_Z3:
+				case WEEKEND_USCIERE2_Z3:
+				case WEEKEND_USCIERE3_Z3:
+					privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf14"));
+					break;
+				default:
+					break;
+				}
+
+				String content = privilegeTranslatedName;
 				if (this.alertBuilder.confirm(thisStage, header, content))
 					selectionConfirmed(member);
 
@@ -212,8 +313,90 @@ public class History {
 	private void checkPrivilegeMemberDatabaseWeek(int memberID) {
 
 		for (Week week : databaseWeeks)
-			if (week.getSpInf1() != this.selectedWeek.getSpInf1())
+			if (week.getSpInf1() != this.selectedWeek.getSpInf1()) // La settimana dell'editor non deve essere
+																	// considerata dal database perche potrebbe
+																	// contenere modifiche che altrimenti non verrebbero
+																	// considerate
 				checkPrivilegeMemberWeek(memberID, week);
+
+		for (WeekAudio week : databaseWeeksAudio)
+			checkPrivilegeMemberWeekAudio(memberID, week);
+
+		for (WeekUsciere week : databaseWeeksUsciere)
+			checkPrivilegeMemberWeekUsciere(memberID, week);
+	}
+
+	private void checkPrivilegeMemberWeekUsciere(int memberID, WeekUsciere week) {
+
+		if (memberID == week.getSpInf2() || memberID == week.getSpInf3() || memberID == week.getSpInf4()) {
+			if (memberID == week.getSpInf2()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE1_Z1, week);
+			} else if (memberID == week.getSpInf3()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE2_Z1, week);
+			} else if (memberID == week.getSpInf4()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE3_Z1, week);
+			}
+		}
+
+		if (memberID == week.getSpInf5() || memberID == week.getSpInf6() || memberID == week.getSpInf7()) {
+			if (memberID == week.getSpInf5()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE1_Z2, week);
+			} else if (memberID == week.getSpInf6()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE2_Z2, week);
+			} else if (memberID == week.getSpInf7()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE3_Z2, week);
+			}
+		}
+
+		if (memberID == week.getSpInf8() || memberID == week.getSpInf9() || memberID == week.getSpInf10()) {
+			if (memberID == week.getSpInf8()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE1_Z3, week);
+			} else if (memberID == week.getSpInf9()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE2_Z3, week);
+			} else if (memberID == week.getSpInf10()) {
+				checkPrivilegeUsciere(Privileges.MIDWEEK_USCIERE3_Z3, week);
+			}
+		}
+
+		if (memberID == week.getSpInf11() || memberID == week.getSpInf12() || memberID == week.getSpInf13()) {
+			if (memberID == week.getSpInf11()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE1_Z1, week);
+			} else if (memberID == week.getSpInf12()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE2_Z1, week);
+			} else if (memberID == week.getSpInf13()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE3_Z1, week);
+			}
+		}
+
+		if (memberID == week.getSpInf14() || memberID == week.getSpInf15() || memberID == week.getSpInf16()) {
+			if (memberID == week.getSpInf14()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE1_Z2, week);
+			} else if (memberID == week.getSpInf15()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE2_Z2, week);
+			} else if (memberID == week.getSpInf16()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE3_Z2, week);
+			}
+		}
+
+		if (memberID == week.getSpInf17() || memberID == week.getSpInf18() || memberID == week.getSpInf19()) {
+			if (memberID == week.getSpInf17()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE1_Z3, week);
+			} else if (memberID == week.getSpInf18()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE2_Z3, week);
+			} else if (memberID == week.getSpInf19()) {
+				checkPrivilegeUsciere(Privileges.WEEKEND_USCIERE3_Z3, week);
+			}
+		}
+	}
+
+	private void checkPrivilegeUsciere(Privileges privilege, WeekUsciere week) {
+
+		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
+		if (checkPrivilegeHistory != null)
+			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
+		else
+			this.memberPrivilegeHistory
+					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
 	}
 
 	private void checkPrivilegeMemberWeek(int memberID, Week week) {
@@ -261,7 +444,58 @@ public class History {
 			}
 	}
 
+	private void checkPrivilegeMemberWeekAudio(int memberID, WeekAudio week) {
+
+		if (memberID == week.getSpInf2())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS1, week);
+
+		if (memberID == week.getSpInf3())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS2, week);
+
+		if (memberID == week.getSpInf4())
+			checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_POS3, week);
+
+		if (memberID == week.getSpInf5() || memberID == week.getSpInf6() || memberID == week.getSpInf7()) {
+			if (memberID == week.getSpInf5()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf6()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC2, week);
+			} else if (memberID == week.getSpInf7()) {
+				checkPrivilegeAudio(Privileges.MIDWEEK_AUDIO_MIC3, week);
+			}
+		}
+
+		if (memberID == week.getSpInf8())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS1, week);
+
+		if (memberID == week.getSpInf9())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS2, week);
+
+		if (memberID == week.getSpInf10())
+			checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_POS3, week);
+
+		if (memberID == week.getSpInf11() || memberID == week.getSpInf12() || memberID == week.getSpInf13()) {
+			if (memberID == week.getSpInf11()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf12()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			} else if (memberID == week.getSpInf13()) {
+				checkPrivilegeAudio(Privileges.WEEKEND_AUDIO_MIC1, week);
+			}
+		}
+	}
+
 	private void checkPrivilege(Privileges privilege, Week week) {
+
+		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
+		if (checkPrivilegeHistory != null)
+			checkPrivilegeHistory.checkLastDate(week.getSpInf1(), selectedWeek.getSpInf1());
+		else
+			this.memberPrivilegeHistory
+					.add(new PrivilegeHistory(privilege, week.getSpInf1(), selectedWeek.getSpInf1()));
+	}
+
+	private void checkPrivilegeAudio(Privileges privilege, WeekAudio week) {
 
 		PrivilegeHistory checkPrivilegeHistory = privilegeHistoryContains(privilege);
 		if (checkPrivilegeHistory != null)
@@ -484,5 +718,37 @@ public class History {
 
 	public void setChristiansPart(ChristiansPart christiansPart) {
 		this.christiansPart = christiansPart;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
+	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
 	}
 }

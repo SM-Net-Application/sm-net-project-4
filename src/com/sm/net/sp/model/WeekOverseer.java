@@ -117,8 +117,16 @@ public class WeekOverseer {
 		NumberFormat nfYear = new DecimalFormat("0000");
 		NumberFormat nfMonth = new DecimalFormat("00");
 
+		int year = date.getYear();
+		int monthValue = date.getMonthValue();
+		int dayOfMonth = date.getDayOfMonth();
+
+		if (monthValue == 1)
+			if (dayOfMonth < 4)
+				year = year - 1;
+
 		return (date != null)
-				? String.format("%s%s", nfYear.format(date.getYear()), nfMonth.format(DateUtil.getWeekOfYears(date)))
+				? String.format("%s%s", nfYear.format(year), nfMonth.format(DateUtil.getWeekOfYears(date)))
 				: "";
 	}
 

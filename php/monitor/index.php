@@ -589,15 +589,12 @@ function Cmp_new($a, $b)
 
                     <?php
 
-                    $todayObj = new DateTime($today);
-                    $todayObj->setTime(23, 59);
-
                     foreach ($activities as $activity) {
 
                         if (strtotime($activity['date'])>$sunday) {
                             array_push($activities_nextweek, $activity);
                         } else {
-                            if (!(strtotime($activity['date'])<$todayObj)) {
+                            if (!(strtotime($activity['date'])<$today)) {
                                 array_push($activities_thisweek, $activity);
                             }
                         }

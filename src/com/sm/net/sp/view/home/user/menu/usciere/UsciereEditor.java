@@ -1,29 +1,45 @@
 package com.sm.net.sp.view.home.user.menu.usciere;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.ChristiansPart;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
+import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
+import com.sm.net.sp.view.historyusciere.HistoryUsciere;
 import com.sm.net.sp.view.home.user.menu.usciere.task.WeekUsciereSaveTask;
 import com.smnet.core.task.TaskManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UsciereEditor extends UpdateDataAdapter {
+public class UsciereEditor extends UpdateDataAdapter implements UpgradeableComboBoxSelection {
 
 	@FXML
 	private Button saveButton;
@@ -106,6 +122,10 @@ public class UsciereEditor extends UpdateDataAdapter {
 	private HashMap<String, String> configs;
 
 	private SupportPlannerView application;
+
+	private ObservableList<Week> databaseWeeks;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
+	private ObservableList<WeekAudio> databaseWeeksAudio;
 
 	@FXML
 	private void initialize() {
@@ -192,8 +212,165 @@ public class UsciereEditor extends UpdateDataAdapter {
 
 	public void objectInitialize() {
 		viewUpdate();
+		contextMenu();
 		initData();
 		listeners();
+	}
+
+	private void contextMenu() {
+
+		this.z1u1MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE1_Z1));
+		this.z1u1MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z1u2MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE2_Z1));
+		this.z1u2MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z1u3MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE3_Z1));
+		this.z1u3MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z2u1MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE1_Z2));
+		this.z2u1MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z2u2MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE2_Z2));
+		this.z2u2MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z2u3MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE3_Z2));
+		this.z2u3MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z3u1MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE1_Z3));
+		this.z3u1MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z3u2MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE2_Z3));
+		this.z3u2MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z3u3MidweekComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.MIDWEEK_USCIERE3_Z3));
+		this.z3u3MidweekComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z1u1WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE1_Z1));
+		this.z1u1WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z1u2WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE2_Z1));
+		this.z1u2WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z1u3WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE3_Z1));
+		this.z1u3WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z2u1WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE1_Z2));
+		this.z2u1WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z2u2WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE2_Z2));
+		this.z2u2WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z2u3WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE3_Z2));
+		this.z2u3WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z3u1WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE1_Z3));
+		this.z3u1WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z3u2WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE2_Z3));
+		this.z3u2WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+
+		this.z3u3WeekendComboBox.setContextMenu(createPrivilegeRegisterContextMenu(Privileges.WEEKEND_USCIERE3_Z3));
+		this.z3u3WeekendComboBox.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> disableMouseSecondary(event));
+	}
+
+	private void disableMouseSecondary(MouseEvent event) {
+		if (event.getButton() == MouseButton.SECONDARY)
+			event.consume();
+	}
+
+	private ContextMenu createPrivilegeRegisterContextMenu(Privileges privilege) {
+
+		String privilegeTranslatedName = privilege.getTranslatedName(this.language);
+
+		switch (privilege) {
+		case MIDWEEK_USCIERE1_Z1:
+		case MIDWEEK_USCIERE2_Z1:
+		case MIDWEEK_USCIERE3_Z1:
+		case WEEKEND_USCIERE1_Z1:
+		case WEEKEND_USCIERE2_Z1:
+		case WEEKEND_USCIERE3_Z1:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf12"));
+			break;
+		case MIDWEEK_USCIERE1_Z2:
+		case MIDWEEK_USCIERE2_Z2:
+		case MIDWEEK_USCIERE3_Z2:
+		case WEEKEND_USCIERE1_Z2:
+		case WEEKEND_USCIERE2_Z2:
+		case WEEKEND_USCIERE3_Z2:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf13"));
+			break;
+		case MIDWEEK_USCIERE1_Z3:
+		case MIDWEEK_USCIERE2_Z3:
+		case MIDWEEK_USCIERE3_Z3:
+		case WEEKEND_USCIERE1_Z3:
+		case WEEKEND_USCIERE2_Z3:
+		case WEEKEND_USCIERE3_Z3:
+			privilegeTranslatedName = String.format(privilegeTranslatedName, this.configs.get("inf14"));
+			break;
+		default:
+			break;
+		}
+
+		String menuItemText = String.format(language.getString("sp.meetings.history"), privilegeTranslatedName);
+
+		String historyTitle = String.format(language.getString("sp.history.title"), menuItemText,
+				this.selectedWeek.getFrom().toString());
+
+		StackPane graphic = Meta.Resources.imageInStackPaneForMenu(Meta.Resources.SEARCH);
+
+		MenuItem menuItem = new MenuItem(menuItemText, graphic);
+		menuItem.getStyleClass().add("menu_item_001");
+		menuItem.setOnAction(event -> openHistory(privilege, historyTitle));
+
+		ContextMenu contextMenu = new ContextMenu(menuItem);
+
+		return contextMenu;
+	}
+
+	private void openHistory(Privileges privilege, String title) {
+
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(Meta.Views.HISTORYUSCIERE);
+			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+			Scene scene = new Scene(layout);
+			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(this.ownerStage);
+			stage.setTitle(title);
+			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
+
+			stage.setMinWidth(1050);
+			stage.setMinHeight(500);
+
+			HistoryUsciere ctrl = (HistoryUsciere) fxmlLoader.getController();
+			ctrl.setLayout(layout);
+			ctrl.setPrivilege(privilege);
+			ctrl.setMembers(this.membersList);
+			ctrl.setLanguage(this.language);
+			ctrl.setDatabaseWeeks(this.databaseWeeks);
+			ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
+			ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
+			ctrl.setSelectedWeek(this.selectedWeek);
+			ctrl.setEditorWeek(WeekUsciere.buildEditorWeek(this));
+			ctrl.setEditor(this);
+			ctrl.setThisStage(stage);
+			ctrl.setApplication(this.application);
+			ctrl.setConfigs(this.configs);
+
+			ctrl.objectInitialize();
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initData() {
@@ -709,5 +886,109 @@ public class UsciereEditor extends UpdateDataAdapter {
 
 	public void setZ3WeekendList(ObservableList<Member> z3WeekendList) {
 		this.z3WeekendList = z3WeekendList;
+	}
+
+	public ObservableList<Week> getDatabaseWeeks() {
+		return databaseWeeks;
+	}
+
+	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
+		this.databaseWeeks = databaseWeeks;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
+	}
+
+	@Override
+	public void updateSelectedComboBox(Privileges privilege, int memberID) {
+		switch (privilege) {
+		case MIDWEEK_USCIERE1_Z1:
+			updateComboBox(this.z1u1MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE2_Z1:
+			updateComboBox(this.z1u2MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE3_Z1:
+			updateComboBox(this.z1u3MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE1_Z2:
+			updateComboBox(this.z2u1MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE2_Z2:
+			updateComboBox(this.z2u2MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE3_Z2:
+			updateComboBox(this.z2u3MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE1_Z3:
+			updateComboBox(this.z3u1MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE2_Z3:
+			updateComboBox(this.z3u2MidweekComboBox, memberID);
+			break;
+		case MIDWEEK_USCIERE3_Z3:
+			updateComboBox(this.z3u3MidweekComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE1_Z1:
+			updateComboBox(this.z1u1WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE2_Z1:
+			updateComboBox(this.z1u2WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE3_Z1:
+			updateComboBox(this.z1u3WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE1_Z2:
+			updateComboBox(this.z2u1WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE2_Z2:
+			updateComboBox(this.z2u2WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE3_Z2:
+			updateComboBox(this.z2u3WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE1_Z3:
+			updateComboBox(this.z3u1WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE2_Z3:
+			updateComboBox(this.z3u2WeekendComboBox, memberID);
+			break;
+		case WEEKEND_USCIERE3_Z3:
+			updateComboBox(this.z3u3WeekendComboBox, memberID);
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void updateComboBox(ComboBox<Member> cb, int memberID) {
+
+		int index = -1;
+
+		for (int i = 0; i < cb.getItems().size(); i++) {
+			if (cb.getItems().get(i).getSpMemberID() == memberID) {
+				index = i;
+				break;
+			}
+		}
+
+		cb.getSelectionModel().select(index);
+	}
+
+	@Override
+	public void updateSelectedChristianPart(ChristiansPart christiansPart, int memberID) {
 	}
 }

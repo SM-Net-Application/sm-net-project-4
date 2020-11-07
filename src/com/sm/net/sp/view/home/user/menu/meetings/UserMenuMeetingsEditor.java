@@ -29,9 +29,11 @@ import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekTypeTranslated;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.utils.DateAndTimeUtils;
@@ -469,6 +471,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private boolean listenerCheckFields;
 
 	private ObservableList<Member> conductorSecondHallList;
+
+	private ObservableList<WeekAudio> databaseWeeksAudio;
+	private HashMap<String, String> configs;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
 	@FXML
 	private void initialize() {
@@ -1091,6 +1097,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			ctrl.setThisStage(stage);
 			ctrl.setAlertBuilder(this.alertBuilder);
 			ctrl.setChristiansPart(christiansPart);
+			ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
+			ctrl.setApplication(this.application);
+			ctrl.setConfigs(this.configs);
+			ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
 
 			ctrl.objectInitialize();
 
@@ -1454,7 +1464,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				setMemberComboBoxIndex(this.conductorSecondHallComboBox, this.selectedWeek.getSpInf58());
 
 				// --------------------------------------------------------
-				
+
 				this.ministryPartList.addAll(this.selectedWeek.getMinistryPartList());
 				this.christiansPartList.addAll(this.selectedWeek.getChristiansPartList());
 
@@ -2660,4 +2670,27 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.conductorSecondHallList = conductorSecondHallList;
 	}
 
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
+	}
+
+	public HashMap<String, String> getConfigs() {
+		return configs;
+	}
+
+	public void setConfigs(HashMap<String, String> configs) {
+		this.configs = configs;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
+	}
 }

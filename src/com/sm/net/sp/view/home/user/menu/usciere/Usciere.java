@@ -9,6 +9,8 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.UpdateDataAdapter;
+import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -78,6 +80,10 @@ public class Usciere extends UpdateDataAdapter {
 	private ObservableList<Member> membersList;
 	private HashMap<String, String> configs;
 
+	private ObservableList<Week> databaseWeeks;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
+	private ObservableList<WeekAudio> databaseWeeksAudio;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -118,7 +124,7 @@ public class Usciere extends UpdateDataAdapter {
 
 		this.settings = this.application.getSettings();
 		this.language = settings.getLanguage();
-		
+
 		initData();
 		listeners();
 	}
@@ -202,6 +208,25 @@ public class Usciere extends UpdateDataAdapter {
 		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
 
+		updateWeeks();
+	}
+
+	@Override
+	public void updateWeeks() {
+		super.updateWeeks();
+
+		Week week = new Week(LocalDate.now(), this.language);
+		Actions.getAllWeeks(week, week, this.settings, this.ownerStage, this.membersList, this);
+	}
+
+	@Override
+	public void updateWeeks(ObservableList<Week> list) {
+		super.updateWeeks(list);
+
+		this.databaseWeeks = null;
+		if (list != null)
+			this.databaseWeeks = list;
+
 		String waitMessage = this.language.getString("usciere.wait.load");
 		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 				new UsciereInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
@@ -215,7 +240,8 @@ public class Usciere extends UpdateDataAdapter {
 		LocalDate now = LocalDate.now();
 
 		int month = now.getMonthValue();
-		int year = now.getYear();
+		int year = (month == 1) ? (now.getYear() - 1) : now.getYear();
+		month = (month == 1) ? 12 : (month - 1);
 
 		// Primo giorno del mese (determinato da now)
 		LocalDate day = LocalDate.of(year, month, 1);
@@ -335,6 +361,9 @@ public class Usciere extends UpdateDataAdapter {
 				ctrl.setApplication(this.application);
 				ctrl.setMembersList(this.membersList);
 				ctrl.setConfigs(this.configs);
+				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
+				ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -477,5 +506,29 @@ public class Usciere extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public ObservableList<Week> getDatabaseWeeks() {
+		return databaseWeeks;
+	}
+
+	public void setDatabaseWeeks(ObservableList<Week> databaseWeeks) {
+		this.databaseWeeks = databaseWeeks;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
 	}
 }
