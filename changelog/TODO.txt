@@ -1,7 +1,7 @@
 
+	Aggiungere preghiera finale se presente nell'adunanza del fine settimana
+
 	Monitor-Online:
-		- Includere incarichi Audio/Video e Uscieri
-		- Aggiungere Conduttore scuola seconda sala
 		- Il presidente dell'adunanza del fine settimana può avere la spunta che fa solo la preghiera iniziale, pertanto visualizzare come Preghiera iniziale
 	
 	Monitor-Software:
