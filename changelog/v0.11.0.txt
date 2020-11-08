@@ -3,11 +3,11 @@ Data di pubblicazione : ..-..-....
 	Nuova sezione: Audio/Video
 		- 3 Postazioni (1 fratello per postazione)
 		- 3 Microfonisti
-		- Storico
+		- Lo storico include gli incarichi Uscieri e Adunanze
 		
 	Nuova sezione: Uscieri
 		- 3 Zone (3 fratelli per zona)
-		- Storico
+		- Lo storico include gli incarichi Audio/Video e Adunanze
 
 	Congregazione:
 		- Ottimizzata GUI per l'assegnazione degli incarichi
@@ -17,7 +17,7 @@ Data di pubblicazione : ..-..-....
 
 	Adunanze:
 		- Si può ora assegnare una parte vita cristiana al fratello selezionato dallo storico
-		- Nuovo incarico : Sorvegliante della Scuola (Seconda sala) -> Al momento non stampato nel Layout e non visualizzato nel monitor online
+		- Nuovo incarico : Consigliere classe supplementare -> Al momento non stampato nel Layout ma solo visualizzato nel monitor online
 		- Nuove funzioni:
 			- Non stampare l'adunanza infrasettimanale
 			- Aggiungi Evento Extra (Intestazione + Contenuto), dopo l'adunanza del fine settimana
@@ -45,6 +45,7 @@ Data di pubblicazione : ..-..-....
 
 	Monitor-Online:
 		- Il formato della data ora è completo e viene indicato il giorno e l'orario dell'adunanza dell'incarico
+		- Include gli incarichi Audio/Video e Uscieri
 			
 	Fix:
 		- Sorvegliante : Corretto messaggio quando si cerca di eliminare una settimana che non presentava informazioni.

@@ -2316,6 +2316,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			ctrl.setMinistryTableView(ministryTableView);
 			ctrl.setMembersList(memberList);
 			ctrl.setMinistryTypeTranslatedList(ministryTypeTranslatedList);
+			ctrl.setConductor1(this.presidentComboBox.getSelectionModel().getSelectedItem());
+			ctrl.setConductor2(this.conductorSecondHallComboBox.getSelectionModel().getSelectedItem());
 			ctrl.objectInitialize();
 
 			stage.show();

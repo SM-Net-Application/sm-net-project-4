@@ -11,7 +11,6 @@
  * @version  GIT: @0.11.0@
  * @link     https://sm-netzwerk.com
  */
-
 $defaultLang = "it.ini";
 $langIni = $defaultLang;
 $pwmon = "";
@@ -22,25 +21,28 @@ $memberID = "";
 $weeks = array();
 $ministry = array();
 $christians = array();
+$audio = array();
+$usciere = array();
+
+$audio_pos1 = "";
+$audio_pos2 = "";
+$audio_pos3 = "";
+
+$usciere_z1 = "";
+$usciere_z2 = "";
+$usciere_z3 = "";
 
 $activities = array();
-
-$format_day = 'day%d';
-$format_month = 'month%d';
-$format_time = '%02d:%02d';
-$today = "";
-$today_text = "";
-$sunday = "";
 $activities_thisweek = array();
 $activities_nextweek = array();
 
 if (isset($_GET["lang"])) {
-    if (! empty($_GET["lang"])) {
+    if (!empty($_GET["lang"])) {
         $langIni = $_GET["lang"] . ".ini";
     }
 }
 
-if (! file_exists("languages/" . $langIni)) {
+if (!file_exists("languages/" . $langIni)) {
     $langIni = $defaultLang;
 }
 
@@ -48,54 +50,43 @@ if (file_exists("languages/" . $langIni)) {
 
     $language = parse_ini_file("languages/" . $langIni);
 
-    /**
-     * Bug
-     * L'icona del presidente seconda sala non viene riconosciuta
-     * Per tale motivo devo salvarla in una variabile ora
-     */
-    $president2icon = $language['MINISTRY_PRESIDENTICON'];
-
     // Password monitor
     if (isset($_GET["pwmon"])) {
-        if (! empty($_GET["pwmon"])) {
+        if (!empty($_GET["pwmon"])) {
 
             $pwmon = $_GET["pwmon"];
 
-            $today = time();
-            $today_day = date("j", $today); // 1 to 31
-            $today_day_key = sprintf($format_day, date("N", $today)); // 1 to 7
-            $today_day_text = $language[$today_day_key];
-            $today_month = date("n", $today); // 1 to 12
-            $today_month_key = sprintf($format_month, $today_month);
-            $today_month_text = $language[$today_month_key];
-            $today_year = date('Y', $today);                    
-            $today_time_text = sprintf($format_time, date('G', $today), date('i', $today));
-            $today_text = $today_day_text . " " . $today_day . " " . $today_month_text . " " . $today_year . " " . $today_time_text;
+            // OGGI
+            $objToday = new DateTime();
+            $today_text = dateTimeToText($language, $objToday);
 
-            // sunday -> Questa settimana -> Giorno DOMENICA
-            $sunday = strtotime("Next Sunday");
+            // DOMENICA
+            $objSunday = new DateTime();
+            $sunday_day_in_week = $objSunday->format('N');
+            if ($sunday_day_in_week != '7') {
+                $objSunday->modify('next sunday');
+            }
+            $sunday_day_in_month = $objSunday->format('j');
+            $sunday_month_nr = $objSunday->format('n');
+            $sunday_year = $objSunday->format('Y');
 
-            $day = date("j", $sunday);
-            $month = date("n", $sunday);
-            $year = date("o", $sunday);
-
-            if ($month == 1) {
-                if ($day < 4) {
-                    $year = $year - 1;
+            // DOMENICA WEEK CODE
+            $sunday_week = $objSunday->format('W');
+            $sunday_year_key = $sunday_year;
+            if ($sunday_month_nr == 1) {
+                if ($sunday_day_in_month < 4) {
+                    $sunday_year_key = $sunday_year_key - 1;
                 }
             }
-                
-            $week = date("W", $sunday);
-
-            $weekcode = $year . $week;
+            $sunday_weekcode = $sunday_year_key . $sunday_week;
 
             // Database connection
-            //require_once dirname(__DIR__, 1) . '/config.php';
+            // require_once dirname(__DIR__, 1) . '/config.php';
             include_once dirname(__DIR__, 1) . '/config.php';
             // $database = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
             $database = mysqli_connect(constant("DB_SERVER"), constant("DB_USER"), constant("DB_PASSWORD"), constant("DB_DATABASE"));
             mysqli_set_charset($database, 'utf8');
-            if (! $database) {
+            if (!$database) {
                 $error = "Database connection error: " . mysqli_connect_error();
             } else {
 
@@ -113,14 +104,57 @@ if (file_exists("languages/" . $langIni)) {
 
                     $memberID = $resultRow_mem["spMemberID"];
 
+                    // Audio/Video : Nomi postazioni
+
+                    $query_conf = "SELECT  inf FROM sp_conf WHERE keyInf=\"inf9\"";
+                    $result_conf = mysqli_query($database, $query_conf);
+                    if (mysqli_num_rows($result_conf) > 0) {
+                        $resultRow_conf = $result_conf->fetch_assoc();
+                        $audio_pos1 = $resultRow_conf["inf"];
+                    }
+
+                    $query_conf = "SELECT  inf FROM sp_conf WHERE keyInf=\"inf10\"";
+                    $result_conf = mysqli_query($database, $query_conf);
+                    if (mysqli_num_rows($result_conf) > 0) {
+                        $resultRow_conf = $result_conf->fetch_assoc();
+                        $audio_pos2 = $resultRow_conf["inf"];
+                    }
+
+                    $query_conf = "SELECT  inf FROM sp_conf WHERE keyInf=\"inf11\"";
+                    $result_conf = mysqli_query($database, $query_conf);
+                    if (mysqli_num_rows($result_conf) > 0) {
+                        $resultRow_conf = $result_conf->fetch_assoc();
+                        $audio_pos3 = $resultRow_conf["inf"];
+                    }
+                    
+                    $query_conf = "SELECT  inf FROM sp_conf WHERE keyInf=\"inf12\"";
+                    $result_conf = mysqli_query($database, $query_conf);
+                    if (mysqli_num_rows($result_conf) > 0) {
+                        $resultRow_conf = $result_conf->fetch_assoc();
+                        $usciere_z1 = $resultRow_conf["inf"];
+                    }
+
+                    $query_conf = "SELECT  inf FROM sp_conf WHERE keyInf=\"inf13\"";
+                    $result_conf = mysqli_query($database, $query_conf);
+                    if (mysqli_num_rows($result_conf) > 0) {
+                        $resultRow_conf = $result_conf->fetch_assoc();
+                        $usciere_z2 = $resultRow_conf["inf"];
+                    }
+                    $query_conf = "SELECT  inf FROM sp_conf WHERE keyInf=\"inf14\"";
+                    $result_conf = mysqli_query($database, $query_conf);
+                    if (mysqli_num_rows($result_conf) > 0) {
+                        $resultRow_conf = $result_conf->fetch_assoc();
+                        $usciere_z3 = $resultRow_conf["inf"];
+                    }
+
                     // Weeks
 
                     $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28,";
                     $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40, spInf44, spInf45, spInf46, spInf47,";
-                    $query_week .= " spInf48, spInf49";
+                    $query_week .= " spInf48, spInf49, spInf58";
                     $query_week .= " FROM sp_week";
                     $query_week .= " WHERE spInf1 >=";
-                    $query_week .= " " . $weekcode;
+                    $query_week .= " " . $sunday_weekcode;
                     $query_week .= " ORDER BY spInf1 ASC";
 
                     $result_week = mysqli_query($database, $query_week);
@@ -152,6 +186,7 @@ if (file_exists("languages/" . $langIni)) {
                             $row["spInf47"] = $resultRow_week["spInf47"];
                             $row["spInf48"] = $resultRow_week["spInf48"];
                             $row["spInf49"] = $resultRow_week["spInf49"];
+                            $row["spInf58"] = $resultRow_week["spInf58"];
 
                             array_push($weeks, $row);
                         }
@@ -160,7 +195,7 @@ if (file_exists("languages/" . $langIni)) {
                     $query_ministry = "SELECT spInf1, spInf3, spInf7, spInf8, spInf9, spInf10";
                     $query_ministry .= " FROM sp_week_min";
                     $query_ministry .= " WHERE spInf1 >=";
-                    $query_ministry .= " " . $weekcode;
+                    $query_ministry .= " " . $sunday_weekcode;
                     $query_ministry .= " ORDER BY spInf1 ASC";
 
                     $result_ministry = mysqli_query($database, $query_ministry);
@@ -186,7 +221,7 @@ if (file_exists("languages/" . $langIni)) {
                     $query_christians = "SELECT spInf1, spInf6";
                     $query_christians .= " FROM sp_week_cr";
                     $query_christians .= " WHERE spInf1 >=";
-                    $query_christians .= " " . $weekcode;
+                    $query_christians .= " " . $sunday_weekcode;
                     $query_christians .= " ORDER BY spInf1 ASC";
 
                     $result_christians = mysqli_query($database, $query_christians);
@@ -206,202 +241,235 @@ if (file_exists("languages/" . $langIni)) {
                     }
                 }
 
+                $query_audio = "SELECT spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,";
+                $query_audio .= " spInf8, spInf9, spInf10, spInf11, spInf12, spInf13";
+                $query_audio .= " FROM sp_audio";
+                $query_audio .= " WHERE spInf1 >=";
+                $query_audio .= " " . $sunday_weekcode;
+                $query_audio .= " ORDER BY spInf1 ASC";
+
+                $result_audio = mysqli_query($database, $query_audio);
+
+                if (mysqli_num_rows($result_audio) > 0) {
+
+                    while ($resultRow_audio = $result_audio->fetch_assoc()) {
+
+                        $resultRow_audio = array_map("utf8_encode", $resultRow_audio);
+
+                        $row = array();
+                        $row["spInf1"] = $resultRow_audio["spInf1"];
+                        $row["spInf2"] = $resultRow_audio["spInf2"];
+                        $row["spInf3"] = $resultRow_audio["spInf3"];
+                        $row["spInf4"] = $resultRow_audio["spInf4"];
+                        $row["spInf5"] = $resultRow_audio["spInf5"];
+                        $row["spInf6"] = $resultRow_audio["spInf6"];
+                        $row["spInf7"] = $resultRow_audio["spInf7"];
+                        $row["spInf8"] = $resultRow_audio["spInf8"];
+                        $row["spInf9"] = $resultRow_audio["spInf9"];
+                        $row["spInf10"] = $resultRow_audio["spInf10"];
+                        $row["spInf11"] = $resultRow_audio["spInf11"];
+                        $row["spInf12"] = $resultRow_audio["spInf12"];
+                        $row["spInf13"] = $resultRow_audio["spInf13"];
+
+                        array_push($audio, $row);
+                    }
+                }
+
+                $query_usciere = "SELECT spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,";
+                $query_usciere .= " spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14,";
+                $query_usciere .= " spInf15, spInf16, spInf17, spInf18, spInf19";
+                $query_usciere .= " FROM sp_usc";
+                $query_usciere .= " WHERE spInf1 >=";
+                $query_usciere .= " " . $sunday_weekcode;
+                $query_usciere .= " ORDER BY spInf1 ASC";
+
+                $result_usciere = mysqli_query($database, $query_usciere);
+
+                if (mysqli_num_rows($result_usciere) > 0) {
+
+                    while ($resultRow_usciere = $result_usciere->fetch_assoc()) {
+
+                        $resultRow_usciere = array_map("utf8_encode", $resultRow_usciere);
+
+                        $row = array();
+                        $row["spInf1"] = $resultRow_usciere["spInf1"];
+                        $row["spInf2"] = $resultRow_usciere["spInf2"];
+                        $row["spInf3"] = $resultRow_usciere["spInf3"];
+                        $row["spInf4"] = $resultRow_usciere["spInf4"];
+                        $row["spInf5"] = $resultRow_usciere["spInf5"];
+                        $row["spInf6"] = $resultRow_usciere["spInf6"];
+                        $row["spInf7"] = $resultRow_usciere["spInf7"];
+                        $row["spInf8"] = $resultRow_usciere["spInf8"];
+                        $row["spInf9"] = $resultRow_usciere["spInf9"];
+                        $row["spInf10"] = $resultRow_usciere["spInf10"];
+                        $row["spInf11"] = $resultRow_usciere["spInf11"];
+                        $row["spInf12"] = $resultRow_usciere["spInf12"];
+                        $row["spInf13"] = $resultRow_usciere["spInf13"];
+                        $row["spInf14"] = $resultRow_usciere["spInf14"];
+                        $row["spInf15"] = $resultRow_usciere["spInf15"];
+                        $row["spInf16"] = $resultRow_usciere["spInf16"];
+                        $row["spInf17"] = $resultRow_usciere["spInf17"];
+                        $row["spInf18"] = $resultRow_usciere["spInf18"];
+                        $row["spInf19"] = $resultRow_usciere["spInf19"];
+
+                        array_push($usciere, $row);
+                    }
+                }
+
                 $result_mem->close();
                 $result_week->close();
                 $result_ministry->close();
                 $result_christians->close();
+                $result_audio->close();
+                $result_usciere->close();
                 mysqli_close($database);
 
                 foreach ($weeks as $week) {
 
-                    // date -> Settimana del (lunedi)
+                    // WEEKCODE DELLA RIGA DEL DATABASE
                     $row_weekcode = $week['spInf1'];
                     $year = substr($row_weekcode, 0, 4);
                     $weeknr = substr($row_weekcode, 4, 2);
-                    $date = date("Y-m-d", strtotime($year . "W" . $weeknr . "1"));
 
-                    // Giorno adunanza infrasettimanale
-                    $midweek_day = $week["spInf44"];
-                    $midweek_day_diff = $midweek_day - 1;
-                    $key_day = sprintf($format_day, $midweek_day);
-                    $midweek_day_text = $language[$key_day];
-                    // Ora adunanza infrasettimanale
+                    // LUNEDI DELLA WEEKCODE
+                    $thisMonday = new DateTime();
+                    $thisMonday->setISODate($year, $weeknr);
+
+                    // GIORNO ADUNANZA INFRASETTIMANALE
+                    $midweek_day = $week["spInf44"] - 1;
                     $midweek_hours = $week["spInf45"];
-                    // Minuto adunanza infrasettimanale
                     $midweek_minute = $week["spInf46"];
-                    // Orario adunanza infrasettimanale
-                    $midweek_time_text = sprintf($format_time, $midweek_hours, $midweek_minute);
-                    // Data adunanza infrasettimanale
-                    $midweek = date('Y-m-d', strtotime("$date + $midweek_day_diff day"));
-                    // Giorno numero nel mese adunanza infrasettimanale
-                    $midweek_day_number = date('j', strtotime("$midweek"));
-                    // Mese adunanza infrasettimanale
-                    $midweek_month = date('n', strtotime("$midweek"));
-                    $key_month = sprintf($format_month, $midweek_month);
-                    $midweek_month_text = $language[$key_month];
-                    // Anno adunanza infrasettimanale
-                    $midweek_year = date('Y', strtotime("$midweek"));
-                    // Testo data adunanza infrasettimanale
-                    $midweek_text = $midweek_day_text . " " . $midweek_day_number . " " . $midweek_month_text . " " . $midweek_year . " " . $midweek_time_text;
 
-                    // Giorno adunanza del fine settimana
-                    $weekend_day = $week["spInf47"];
-                    $weekend_day_diff = $weekend_day - 1;
-                    $key_day = sprintf($format_day, $weekend_day);
-                    $weekend_day_text = $language[$key_day];
-                    // Ora adunanza del fine settimana
+                    $midweek = clone $thisMonday;
+                    $midweek->add(new DateInterval("P" . $midweek_day . "D"));
+                    $midweek->setTime($midweek_hours, $midweek_minute);
+                    $midweek_text = dateTimeToText($language, $midweek);
+
+                    // GIORNO ADUNANZA DEL FINE SETTIMANA
+                    $weekend_day = $week["spInf47"] - 1;
                     $weekend_hours = $week["spInf48"];
-                    // Minuto adunanza del fine settimana
                     $weekend_minute = $week["spInf49"];
-                    // Orario adunanza del fine settimana
-                    $weekend_time_text = sprintf($format_time, $weekend_hours, $weekend_minute);
-                    // Data adunanza del fine settimana
-                    $weekend = date('Y-m-d', strtotime("$date + $weekend_day_diff day"));
-                    // Giorno numero nel mese adunanza del fine settimana
-                    $weekend_day_number = date('j', strtotime("$weekend"));
-                    // Mese adunanza del fine settimana
-                    $weekend_month = date('n', strtotime("$weekend"));
-                    $key_month = sprintf($format_month, $weekend_month);
-                    $weekend_month_text = $language[$key_month];
-                    // Anno adunanza del fine settimana
-                    $weekend_year = date('Y', strtotime("$weekend"));
-                    // Testo data adunanza del fine settimana
-                    $weekend_text = $weekend_day_text . " " . $weekend_day_number . " " . $weekend_month_text . " " . $weekend_year . " " . $weekend_time_text;
 
+                    $weekend = clone $thisMonday;
+                    $weekend->add(new DateInterval("P" . $weekend_day . "D"));
+                    $weekend->setTime($weekend_hours, $weekend_minute);
+                    $weekend_text = dateTimeToText($language, $weekend);
+
+                    // INCARICHI ADUNANZA INFRASETTIMANALE
                     if ($memberID == $week["spInf3"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['PRESIDENT_MIDWEEK'], $language['PRESIDENT_MIDWEEK_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['PRESIDENT_MIDWEEK'], $language['PRESIDENT_MIDWEEK_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_president'], $language['midweek_president_icon'], 0, ""));
                     }
-
                     if ($memberID == $week["spInf4"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['PRAY1_MIDWEEK'], $language['PRAY1_MIDWEEK_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['PRAY1_MIDWEEK'], $language['PRAY1_MIDWEEK_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_pray1'], $language['midweek_pray1_icon'], 0, ""));
                     }
-
                     if ($memberID == $week["spInf11"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['TALK_MIDWEEK'], $language['TALK_MIDWEEK_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['TALK_MIDWEEK'], $language['TALK_MIDWEEK_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_talk'], $language['midweek_talk_icon'], 0, ""));
                     }
-
                     if ($memberID == $week["spInf14"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['DIGGING_MIDWEEK'], $language['DIGGING_MIDWEEK_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['DIGGING_MIDWEEK'], $language['DIGGING_MIDWEEK_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_digging'], $language['midweek_digging_icon'], 0, ""));
                     }
-
                     if ($memberID == $week["spInf18"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['BIBLE_READING_A'], $language['BIBLE_READING_A_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['BIBLE_READING_A'], $language['BIBLE_READING_A_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_biblereading1'], $language['midweek_biblereading1_icon'], 0, ""));
                     }
-
-                    if ($memberID == $week["spInf23"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['CONGRBIBLESTUDY_MIDWEEK'], $language['CONGRBIBLESTUDY_MIDWEEK_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['CONGRBIBLESTUDY_MIDWEEK'], $language['CONGRBIBLESTUDY_MIDWEEK_ICON']));
-                    }
-
-                    if ($memberID == $week["spInf27"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['PRAY2_MIDWEEK'], $language['PRAY2_MIDWEEK_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['PRAY2_MIDWEEK'], $language['PRAY2_MIDWEEK_ICON']));
-                    }
-
                     if ($memberID == $week["spInf28"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['BIBLE_READING_B'], $language['BIBLE_READING_B_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['BIBLE_READING_B'], $language['BIBLE_READING_B_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_biblereading2'], $language['midweek_biblereading1_icon'], 0, ""));
                     }
-
+                    if ($memberID == $week["spInf23"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_congrbiblestudy'], $language['midweek_congrbiblestudy_icon'], 0, ""));
+                    }
                     if ($memberID == $week["spInf29"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['READER_CONGRBIBLESTUDY'], $language['READER_CONGRBIBLESTUDY_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($midweek, $midweek_text, $language['READER_CONGRBIBLESTUDY'], $language['READER_CONGRBIBLESTUDY_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_congrbiblestudyreader'], $language['midweek_congrbiblestudyreader_icon'], 0, ""));
+                    }
+                    if ($memberID == $week["spInf27"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_pray2'], $language['midweek_pray2_icon'], 0, ""));
+                    }
+                    if ($memberID == $week["spInf58"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_conductor2'], $language['midweek_conductor2_icon'], 0, ""));
                     }
 
+                    // INCARICHI ADUNANZA DEL FINE SETTIMANA
                     if ($memberID == $week["spInf30"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['PRESIDENT_WEEKEND'], $language['PRESIDENT_WEEKEND_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($weekend, $weekend_text, $language['PRESIDENT_WEEKEND'], $language['PRESIDENT_WEEKEND_ICON']));
+                        if ($week["spInf41"] == 1) {
+                            array_push($activities, newTask($weekend, $weekend_text, $language['weekend_pray1'], $language['weekend_pray1_icon'], 0, ""));
+                        } else {
+                            array_push($activities, newTask($weekend, $weekend_text, $language['weekend_president'], $language['weekend_president_icon'], 0, ""));
+                        }
                     }
-
                     if ($memberID == $week["spInf37"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['WATCHTOWER_WEEKEND'], $language['WATCHTOWER_WEEKEND_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($weekend, $weekend_text, $language['WATCHTOWER_WEEKEND'], $language['WATCHTOWER_WEEKEND_ICON']));
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_watchtower'], $language['weekend_watchtower_icon'], 0, ""));
                     }
-
                     if ($memberID == $week["spInf38"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['READER_WATCHTOWER'], $language['READER_WATCHTOWER_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($weekend, $weekend_text, $language['READER_WATCHTOWER'], $language['READER_WATCHTOWER_ICON']));
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_watchtowerreader'], $language['weekend_watchtowerreader_icon'], 0, ""));
                     }
-
                     if ($memberID == $week["spInf40"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['PRAY2_WEEKEND'], $language['PRAY2_WEEKEND_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($weekend, $weekend_text, $language['PRAY2_WEEKEND'], $language['PRAY2_WEEKEND_ICON']));
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_pray2'], $language['weekend_pray2_icon'], 0, ""));
                     }
                 }
-
                 // ***********************************
                 // ESERCITIAMOCI PER IL MINISTERO
                 // ***********************************
 
                 foreach ($ministry as $min) {
 
+                    // WEEKCODE DELLA RIGA DEL DATABASE
                     $row_weekcode = $min['spInf1'];
-
                     $year = substr($row_weekcode, 0, 4);
                     $weeknr = substr($row_weekcode, 4, 2);
-                    $date = date("Y-m-d", strtotime($year . "W" . $weeknr . "1"));
 
-                    $min_midweek = $date;
-                    $min_midweek_text = "";
+                    // LUNEDI DELLA WEEKCODE
+                    $thisMonday = new DateTime();
+                    $thisMonday->setISODate($year, $weeknr);
+
+                    $midweek = clone $thisMonday;
+                    $midweek_text = "";
+                    $weekend = clone $thisMonday;
+                    $weekend_text = "";
 
                     foreach ($weeks as $week) {
-                        if ($week['spInf1']==$row_weekcode) {
-                            
-                            $min_midweek_day=$week['spInf44'];
-                            $min_midweek_hour=$week['spInf45'];
-                            $min_midweek_minute=$week['spInf46'];
+                        if ($week['spInf1'] == $row_weekcode) {
 
-                            $min_midweek_day_diff = $min_midweek_day - 1;
-                            $min_midweek_day_key = sprintf($format_day, $min_midweek_day);
-                            $min_midweek_day_text = $language[$min_midweek_day_key];
-                            
-                            $min_midweek_time_text = sprintf($format_time, $min_midweek_hour, $min_midweek_minute);
+                            // GIORNO ADUNANZA INFRASETTIMANALE
+                            $midweek_day = $week["spInf44"] - 1;
+                            $midweek_hours = $week["spInf45"];
+                            $midweek_minute = $week["spInf46"];
 
-                            $min_midweek = date('Y-m-d', strtotime("$date + $min_midweek_day_diff day"));
+                            $midweek = clone $thisMonday;
+                            $midweek->add(new DateInterval("P" . $midweek_day . "D"));
+                            $midweek->setTime($midweek_hours, $midweek_minute);
+                            $midweek_text = dateTimeToText($language, $midweek);
 
-                            $min_midweek_day_number = date('j', strtotime("$min_midweek"));
+                            // GIORNO ADUNANZA DEL FINE SETTIMANA
+                            $weekend_day = $week["spInf47"] - 1;
+                            $weekend_hours = $week["spInf48"];
+                            $weekend_minute = $week["spInf49"];
 
-                            $min_midweek_month = date('n', strtotime("$min_midweek"));
-                            $min_midweek_month_key = sprintf($format_month, $min_midweek_month);
-                            $min_midweek_month_text = $language[$min_midweek_month_key];
-                            
-                            $min_midweek_year = date('Y', strtotime("$min_midweek"));
-                            
-                            $min_midweek_text = $min_midweek_day_text . " " . $min_midweek_day_number . " " . $min_midweek_month_text . " " . $min_midweek_year . " " . $min_midweek_time_text;
+                            $weekend = clone $thisMonday;
+                            $weekend->add(new DateInterval("P" . $weekend_day . "D"));
+                            $weekend->setTime($weekend_hours, $weekend_minute);
+                            $weekend_text = dateTimeToText($language, $weekend);
 
                             break;
                         }
                     }
 
                     if ($memberID == $min["spInf7"]) {
-                        //array_push($activities, Add_activity($row_weekcode, $date, $language['MINISTRY_STUDENT_1'], $language['MINISTRY_STUDENT_1_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($min_midweek, $min_midweek_text, $language['MINISTRY_STUDENT_1'], $language['MINISTRY_STUDENT_1_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1'], $language['midweek_ministrystudent1_icon'], 0, ""));
                     }
-
                     if ($memberID == $min["spInf8"]) {
-                        //array_push($activities, Add_activity($row_weekcode, $date, $language['MINISTRY_ASSISTANT_1'], $language['MINISTRY_ASSISTANT_1_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($min_midweek, $min_midweek_text, $language['MINISTRY_ASSISTANT_1'], $language['MINISTRY_ASSISTANT_1_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1'], $language['midweek_ministryassistant1_icon'], 0, ""));
                     }
-
                     if ($memberID == $min["spInf9"]) {
-
-                        if ($min["spInf3"] == 1) {
-                            // array_push($activities, Add_activity($row_weekcode, $date, $language['MINISTRY_PRESIDENT'], $president2icon, $timestamp, $midweek, $weekend));
-                            array_push($activities, Add_Activity_new($min_midweek, $min_midweek_text, $language['MINISTRY_PRESIDENT'], $president2icon));
-                        } else {
-                            // array_push($activities, Add_activity($row_weekcode, $date, $language['MINISTRY_STUDENT_2'], $language['MINISTRY_STUDENT_2_ICON'], $timestamp, $midweek, $weekend));
-                            array_push($activities, Add_Activity_new($min_midweek, $min_midweek_text, $language['MINISTRY_STUDENT_2'], $language['MINISTRY_STUDENT_2_ICON']));
+                        // if ($min["spInf3"] == 1) {
+                        //    array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrypresident'], $language['midweek_ministrypresident_icon'], 0, ""));
+                        // } else {
+                        //    array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
+                        // }
+                        if ($min["spInf3"] != 1) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
                         }
                     }
-
                     if ($memberID == $min["spInf10"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['MINISTRY_ASSISTANT_2'], $language['MINISTRY_ASSISTANT_2_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($min_midweek, $min_midweek_text, $language['MINISTRY_ASSISTANT_2'], $language['MINISTRY_ASSISTANT_2_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2'], $language['midweek_ministryassistant2_icon'], 0, ""));
                     }
                 }
 
@@ -411,291 +479,438 @@ if (file_exists("languages/" . $langIni)) {
 
                 foreach ($christians as $christian) {
 
+                    // WEEKCODE DELLA RIGA DEL DATABASE
                     $row_weekcode = $christian['spInf1'];
-
                     $year = substr($row_weekcode, 0, 4);
                     $weeknr = substr($row_weekcode, 4, 2);
-                    $date = date("Y-m-d", strtotime($year . "W" . $weeknr . "1"));
 
-                    $cr_midweek = $date;
-                    $cr_midweek_text = "";
+                    // LUNEDI DELLA WEEKCODE
+                    $thisMonday = new DateTime();
+                    $thisMonday->setISODate($year, $weeknr);
+
+                    $midweek = clone $thisMonday;
+                    $midweek_text = "";
+                    $weekend = clone $thisMonday;
+                    $weekend_text = "";
 
                     foreach ($weeks as $week) {
-                        if ($week['spInf1']==$row_weekcode) {
-                            
-                            $cr_midweek_day=$week['spInf44'];
-                            $cr_midweek_hour=$week['spInf45'];
-                            $cr_midweek_minute=$week['spInf46'];
+                        if ($week['spInf1'] == $row_weekcode) {
 
-                            $cr_midweek_day_diff = $cr_midweek_day - 1;
-                            $cr_midweek_day_key = sprintf($format_day, $cr_midweek_day);
-                            $cr_midweek_day_text = $language[$cr_midweek_day_key];
-                            
-                            $cr_midweek_time_text = sprintf($format_time, $cr_midweek_hour, $cr_midweek_minute);
+                            // GIORNO ADUNANZA INFRASETTIMANALE
+                            $midweek_day = $week["spInf44"] - 1;
+                            $midweek_hours = $week["spInf45"];
+                            $midweek_minute = $week["spInf46"];
 
-                            $cr_midweek = date('Y-m-d', strtotime("$date + $cr_midweek_day_diff day"));
+                            $midweek = clone $thisMonday;
+                            $midweek->add(new DateInterval("P" . $midweek_day . "D"));
+                            $midweek->setTime($midweek_hours, $midweek_minute);
+                            $midweek_text = dateTimeToText($language, $midweek);
 
-                            $cr_midweek_day_number = date('j', strtotime("$cr_midweek"));
+                            // GIORNO ADUNANZA DEL FINE SETTIMANA
+                            $weekend_day = $week["spInf47"] - 1;
+                            $weekend_hours = $week["spInf48"];
+                            $weekend_minute = $week["spInf49"];
 
-                            $cr_midweek_month = date('n', strtotime("$cr_midweek"));
-                            $cr_midweek_month_key = sprintf($format_month, $cr_midweek_month);
-                            $cr_midweek_month_text = $language[$cr_midweek_month_key];
-                            
-                            $cr_midweek_year = date('Y', strtotime("$cr_midweek"));
-                            
-                            $cr_midweek_text = $cr_midweek_day_text . " " . $cr_midweek_day_number . " " . $cr_midweek_month_text . " " . $cr_midweek_year . " " . $cr_midweek_time_text;
+                            $weekend = clone $thisMonday;
+                            $weekend->add(new DateInterval("P" . $weekend_day . "D"));
+                            $weekend->setTime($weekend_hours, $weekend_minute);
+                            $weekend_text = dateTimeToText($language, $weekend);
 
                             break;
                         }
                     }
 
                     if ($memberID == $christian["spInf6"]) {
-                        // array_push($activities, Add_activity($row_weekcode, $date, $language['CHRISTIAN_LIFE'], $language['CHRISTIAN_LIFE_ICON'], $timestamp, $midweek, $weekend));
-                        array_push($activities, Add_Activity_new($cr_midweek, $cr_midweek_text, $language['CHRISTIAN_LIFE'], $language['CHRISTIAN_LIFE_ICON']));
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_christianlife'], $language['midweek_christianlife_icon'], 0, ""));
                     }
                 }
 
-                uasort($activities, 'Cmp_new');
+                // ***********************************
+                // AUDIO VIDEO
+                // ***********************************
+
+                foreach ($audio as $aud) {
+
+                    // WEEKCODE DELLA RIGA DEL DATABASE
+                    $row_weekcode = $aud['spInf1'];
+                    $year = substr($row_weekcode, 0, 4);
+                    $weeknr = substr($row_weekcode, 4, 2);
+
+                    // LUNEDI DELLA WEEKCODE
+                    $thisMonday = new DateTime();
+                    $thisMonday->setISODate($year, $weeknr);
+
+                    $midweek = clone $thisMonday;
+                    $midweek_text = "";
+                    $weekend = clone $thisMonday;
+                    $weekend_text = "";
+
+                    foreach ($weeks as $week) {
+                        if ($week['spInf1'] == $row_weekcode) {
+
+                            // GIORNO ADUNANZA INFRASETTIMANALE
+                            $midweek_day = $week["spInf44"] - 1;
+                            $midweek_hours = $week["spInf45"];
+                            $midweek_minute = $week["spInf46"];
+
+                            $midweek = clone $thisMonday;
+                            $midweek->add(new DateInterval("P" . $midweek_day . "D"));
+                            $midweek->setTime($midweek_hours, $midweek_minute);
+                            $midweek_text = dateTimeToText($language, $midweek);
+
+                            // GIORNO ADUNANZA DEL FINE SETTIMANA
+                            $weekend_day = $week["spInf47"] - 1;
+                            $weekend_hours = $week["spInf48"];
+                            $weekend_minute = $week["spInf49"];
+
+                            $weekend = clone $thisMonday;
+                            $weekend->add(new DateInterval("P" . $weekend_day . "D"));
+                            $weekend->setTime($weekend_hours, $weekend_minute);
+                            $weekend_text = dateTimeToText($language, $weekend);
+
+                            break;
+                        }
+                    }
+
+                    if ($memberID == $aud["spInf2"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_audio1'], $language['midweek_audio1_icon'], 1, $audio_pos1));
+                    }
+                    if ($memberID == $aud["spInf3"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_audio2'], $language['midweek_audio2_icon'], 1, $audio_pos2));
+                    }
+                    if ($memberID == $aud["spInf4"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_audio3'], $language['midweek_audio3_icon'], 1, $audio_pos3));
+                    }
+                    if ($memberID == $aud["spInf5"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_audiomic'], $language['midweek_audiomic_icon'], 0, ""));
+                    }
+                    if ($memberID == $aud["spInf6"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_audiomic'], $language['midweek_audiomic_icon'], 0, ""));
+                    }
+                    if ($memberID == $aud["spInf7"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_audiomic'], $language['midweek_audiomic_icon'], 0, ""));
+                    }
+                    if ($memberID == $aud["spInf8"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_audio1'], $language['weekend_audio1_icon'], 1, $audio_pos1));
+                    }
+                    if ($memberID == $aud["spInf9"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_audio2'], $language['weekend_audio2_icon'], 1, $audio_pos2));
+                    }
+                    if ($memberID == $aud["spInf10"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_audio3'], $language['weekend_audio3_icon'], 1, $audio_pos3));
+                    }
+                    if ($memberID == $aud["spInf11"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_audiomic'], $language['weekend_audiomic_icon'], 0, ""));
+                    }
+                    if ($memberID == $aud["spInf12"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_audiomic'], $language['weekend_audiomic_icon'], 0, ""));
+                    }
+                    if ($memberID == $aud["spInf13"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_audiomic'], $language['weekend_audiomic_icon'], 0, ""));
+                    }
+                }
+
+                // ***********************************
+                // USCIERE
+                // ***********************************
+
+                foreach ($usciere as $usc) {
+
+                    // WEEKCODE DELLA RIGA DEL DATABASE
+                    $row_weekcode = $aud['spInf1'];
+                    $year = substr($row_weekcode, 0, 4);
+                    $weeknr = substr($row_weekcode, 4, 2);
+
+                    // LUNEDI DELLA WEEKCODE
+                    $thisMonday = new DateTime();
+                    $thisMonday->setISODate($year, $weeknr);
+
+                    $midweek = clone $thisMonday;
+                    $midweek_text = "";
+                    $weekend = clone $thisMonday;
+                    $weekend_text = "";
+
+                    foreach ($weeks as $week) {
+                        if ($week['spInf1'] == $row_weekcode) {
+
+                            // GIORNO ADUNANZA INFRASETTIMANALE
+                            $midweek_day = $week["spInf44"] - 1;
+                            $midweek_hours = $week["spInf45"];
+                            $midweek_minute = $week["spInf46"];
+
+                            $midweek = clone $thisMonday;
+                            $midweek->add(new DateInterval("P" . $midweek_day . "D"));
+                            $midweek->setTime($midweek_hours, $midweek_minute);
+                            $midweek_text = dateTimeToText($language, $midweek);
+
+                            // GIORNO ADUNANZA DEL FINE SETTIMANA
+                            $weekend_day = $week["spInf47"] - 1;
+                            $weekend_hours = $week["spInf48"];
+                            $weekend_minute = $week["spInf49"];
+
+                            $weekend = clone $thisMonday;
+                            $weekend->add(new DateInterval("P" . $weekend_day . "D"));
+                            $weekend->setTime($weekend_hours, $weekend_minute);
+                            $weekend_text = dateTimeToText($language, $weekend);
+
+                            break;
+                        }
+                    }
+
+                    if ($memberID == $usc["spInf2"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere1'], $language['midweek_usciere1_icon'], 1, $usciere_z1));
+                    }
+                    if ($memberID == $usc["spInf3"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere1'], $language['midweek_usciere1_icon'], 1, $usciere_z1));
+                    }
+                    if ($memberID == $usc["spInf4"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere1'], $language['midweek_usciere1_icon'], 1, $usciere_z1));
+                    }
+                    if ($memberID == $usc["spInf5"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere2'], $language['midweek_usciere2_icon'], 1, $usciere_z2));
+                    }
+                    if ($memberID == $usc["spInf6"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere2'], $language['midweek_usciere2_icon'], 1, $usciere_z2));
+                    }
+                    if ($memberID == $usc["spInf7"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere2'], $language['midweek_usciere2_icon'], 1, $usciere_z2));
+                    }
+                    if ($memberID == $usc["spInf8"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere3'], $language['midweek_usciere3_icon'], 1, $usciere_z3));
+                    }
+                    if ($memberID == $usc["spInf9"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere3'], $language['midweek_usciere3_icon'], 1, $usciere_z3));
+                    }
+                    if ($memberID == $usc["spInf10"]) {
+                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_usciere3'], $language['midweek_usciere3_icon'], 1, $usciere_z3));
+                    }
+                    if ($memberID == $usc["spInf11"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere1'], $language['weekend_usciere1_icon'], 1, $usciere_z1));
+                    }
+                    if ($memberID == $usc["spInf12"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere1'], $language['weekend_usciere1_icon'], 1, $usciere_z1));
+                    }
+                    if ($memberID == $usc["spInf13"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere1'], $language['weekend_usciere1_icon'], 1, $usciere_z1));
+                    }
+                    if ($memberID == $usc["spInf14"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere2'], $language['weekend_usciere2_icon'], 1, $usciere_z2));
+                    }
+                    if ($memberID == $usc["spInf15"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere2'], $language['weekend_usciere2_icon'], 1, $usciere_z2));
+                    }
+                    if ($memberID == $usc["spInf16"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere2'], $language['weekend_usciere2_icon'], 1, $usciere_z2));
+                    }
+                    if ($memberID == $usc["spInf17"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere3'], $language['weekend_usciere3_icon'], 1, $usciere_z3));
+                    }
+                    if ($memberID == $usc["spInf18"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere3'], $language['weekend_usciere3_icon'], 1, $usciere_z3));
+                    }
+                    if ($memberID == $usc["spInf19"]) {
+                        array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere3'], $language['weekend_usciere3_icon'], 1, $usciere_z3));
+                    }
+                }
+
+                uasort($activities, 'taskComp');
             }
         }
     }
 }
 
-/**
- * Add activity
- * 
- * @param string $row_weekcode  Weekcode
- * @param date   $date          Weekcode
- * @param string $activity_name Weekcode
- * @param string $activity_icon Weekcode
- * @param date   $sunday        Weekcode
- * @param date   $midweek       Weekcode
- * @param date   $weekend       Weekcode
- * 
- * @return activity_array
- */
-function Add_activity($row_weekcode, $date, $activity_name, $activity_icon, $sunday, $midweek, $weekend)
+function langKey1($format, $value)
 {
-    $activity_array = array();
-
-    $activity_array['weekcode'] = $row_weekcode;
-    $activity_array['date'] = $date;
-    $activity_array['name'] = $activity_name;
-    $activity_array['icon'] = $activity_icon;
-
-    $activity_array['sunday'] = $sunday;
-    $activity_array['midweek'] = $midweek;
-    $activity_array['weekend'] = $weekend;
-
-    return $activity_array;
+    return sprintf($format, $value);
 }
 
-/**
- * Add activity (NEW)
- * 
- * @param date   $date          Weekcode
- * @param string $date_text     Weekcode
- * @param string $activity_name Weekcode
- * @param string $activity_icon Weekcode
- * 
- * @return activity_array
- */
-function Add_Activity_new($date, $date_text, $activity_name, $activity_icon)
+function langKey2($format, $value1, $value2)
+{
+    return sprintf($format, $value1, $value2);
+}
+
+function dateTimeToText($language, $dateTime)
+{
+    $dateTime_day = $language[langKey1($language['dayFormat'], $dateTime->format('N'))];
+    $dateTime_month = $language[langKey1($language['monthFormat'], $dateTime->format('n'))];
+    $dateTime_year = $dateTime->format('Y');
+    $dateTime_time = langKey2($language['timeFormat'], $dateTime->format('G'), $dateTime->format('i'));
+
+    return $dateTime_day . " " . $dateTime->format('j') . " " . $dateTime_month . " " . $dateTime_year . " " . $dateTime_time;
+}
+
+function newTask($date, $date_text, $activity_name, $activity_icon, $inf, $inftext)
 {
     $activity_array = array();
 
     $activity_array['date'] = $date;
     $activity_array['date_text'] = $date_text;
-    $activity_array['name'] = $activity_name;
+    if($inf==0){
+        $activity_array['name'] = $activity_name;
+    } else {
+        $activity_array['name'] = sprintf($activity_name, $inftext);
+    }
     $activity_array['icon'] = $activity_icon;
 
     return $activity_array;
 }
 
-/**
- * Compare
- * 
- * @param string $a Weekcode A
- * @param string $b Weekcode B
- * 
- * @return compare_result
- */
-function cmp($a, $b)
-{
-    if ($a['weekcode'] == $b['weekcode']) {
-        return 0;
-    }
-    return ($a['weekcode'] < $b['weekcode']) ? - 1 : 1;
-}
-
-/**
- * Compare (New)
- * 
- * @param string $a Date A
- * @param string $b Date B
- * 
- * @return compare_result
- */
-function Cmp_new($a, $b)
+function taskComp($a, $b)
 {
     if ($a['date'] == $b['date']) {
         return 0;
     }
-    return ($a['date'] < $b['date']) ? - 1 : 1;
+    return ($a['date'] < $b['date']) ? -1 : 1;
 }
 
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<title>SM-Net: SupportPlanner - Monitor</title>
-<link rel="stylesheet" type="text/css"
-      href="bootstrap-4.3.1-dist/css/bootstrap.css">
-<script src="bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+    <title>SM-Net: SupportPlanner - Monitor</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.css">
+    <script src="bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 </head>
+
 <body class="bg-dark">
 
     <div class="container-fluid">
         <img src="images/logo.png" class="img-fluid" alt="SupportPlanner Logo">
     </div>
 
+    <?php
+
+    if (!isset($language) || empty($pwmon) || empty($memberID)) {
+
+    ?>
+
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center"><?php echo $language['error1'] ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    <?php
+
+    } else {
+
+    ?>
+
+        <!-- TODAY -->
+        <br>
+        <div class="p-3 mb-2 bg-secondary text-white"><?php echo $today_text; ?></div>
+        <br>
+
         <?php
-            
-        if (!isset($language) || empty($pwmon) || empty($memberID)) {
 
-            ?>
+        foreach ($activities as $activity) {
 
-<table class="table table-striped table-dark">
-<thead>
-<tr>
-<th scope="col" class="text-center"><?php echo $language['error1']?></th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-
-            <?php
-
-        } else {
-
-            ?>
-
-<!-- TODAY -->
-<br>
-<div class="p-3 mb-2 bg-secondary text-white"><?php echo $today_text;?></div>
-<br>
-
-                    <?php
-
-                    foreach ($activities as $activity) {
-
-                        if (strtotime($activity['date'])>$sunday) {
-                            array_push($activities_nextweek, $activity);
-                        } else {
-                            if (!(strtotime($activity['date'])<$today)) {
-                                array_push($activities_thisweek, $activity);
-                            }
-                        }
-
-                    }
-                            
-                    ?>
-                                
-<!-- THIS WEEK HEADER-->
-<table class="table table-striped table-dark">
-<thead>
-<tr>
-<th style="width: 48%"><?php echo $language['thisweek'];?></th>
-<th style="width: 4%"></th>
-<th style="width: 48%"><?php echo $language['activity'];?></th>
-</tr>
-</thead>
-<tbody>
-
-                    <?php
-
-                    if (empty($activities_thisweek)) {
-                        
-                        ?>
-                        
-<!-- NO ACTIVITY FOR THIS WEEK -->
-<tr>
-<td><?php echo $language['noactivity'];?></td>
-<td></td>
-<td></td>
-</tr>
-
-                        <?php
-
-                    } else {
-
-                        foreach ($activities_thisweek as $activity) {
-
-                            ?>
-
-<!-- ROW -->
-<tr>
-<td><?php echo $activity['date_text'];?></td>
-<td class="text-center"><img src="images/<?php echo $activity['icon'];?>" width="25" height="25" alt="Activity Icon"></td>
-<td><?php echo $activity['name'];?></td>
-</tr>
-
-                            <?php
-
-                        }
-                    }
-
-                    ?>
-
-<!-- CLOSE TABLE THIS WEEK -->
-</tbody>
-</table>
-<br>
-
-                    <?php
-
-                    if (!empty($activities_nextweek)) {
-                        
-                        ?>
-
-<!-- NEXT WEEK HEADER-->
-<table class="table table-striped table-dark">
-<thead>
-<tr>
-<th style="width: 48%"><?php echo $language['nextweek'];?></th>
-<th style="width: 4%"></th>
-<th style="width: 48%"><?php echo $language['activity'];?></th>
-</tr>
-</thead>
-<tbody>
-
-                        <?php
-
-                        foreach ($activities_nextweek as $activity) {
-
-                            ?>
-
-<!-- ROW -->
-<tr>
-<td><?php echo $activity['date_text'];?></td>
-<td class="text-center"><img src="images/<?php echo $activity['icon'];?>" width="25" height="25" alt="Activity Icon"></td>
-<td><?php echo $activity['name'];?></td>
-</tr>
-
-                            <?php
-
-                        }
-                    }
+            if ($activity['date'] > $objSunday) {
+                array_push($activities_nextweek, $activity);
+            } else {
+                array_push($activities_thisweek, $activity);
+            }
         }
-        
+
         ?>
 
-<!-- CLOSE TABLE THIS WEEK -->
-</tbody>
-</table>
-<br>
+        <!-- THIS WEEK HEADER-->
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th style="width: 48%"><?php echo $language['thisweek']; ?></th>
+                    <th style="width: 4%"></th>
+                    <th style="width: 48%"><?php echo $language['activity']; ?></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php
+
+                if (empty($activities_thisweek)) {
+
+                ?>
+
+                    <!-- NO ACTIVITY FOR THIS WEEK -->
+                    <tr>
+                        <td><?php echo $language['noactivity']; ?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <?php
+                } else {
+
+                    foreach ($activities_thisweek as $activity) {
+
+                    ?>
+
+                        <!-- ROW -->
+                        <tr>
+                            <td><?php echo $activity['date_text']; ?></td>
+                            <td class="text-center"><img src="images/<?php echo $activity['icon']; ?>" width="25" height="25" alt="Activity Icon"></td>
+                            <td><?php echo $activity['name']; ?></td>
+                        </tr>
+
+                <?php
+                    }
+                }
+
+                ?>
+
+                <!-- CLOSE TABLE THIS WEEK -->
+            </tbody>
+        </table>
+        <br>
+
+        <?php
+
+        if (!empty($activities_nextweek)) {
+
+        ?>
+
+            <!-- NEXT WEEK HEADER-->
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th style="width: 48%"><?php echo $language['nextweek']; ?></th>
+                        <th style="width: 4%"></th>
+                        <th style="width: 48%"><?php echo $language['activity']; ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php
+
+                    foreach ($activities_nextweek as $activity) {
+
+                    ?>
+
+                        <!-- ROW -->
+                        <tr>
+                            <td><?php echo $activity['date_text']; ?></td>
+                            <td class="text-center"><img src="images/<?php echo $activity['icon']; ?>" width="25" height="25" alt="Activity Icon"></td>
+                            <td><?php echo $activity['name']; ?></td>
+                        </tr>
+
+            <?php
+                    }
+                }
+            }
+
+            ?>
+
+            <!-- CLOSE TABLE THIS WEEK -->
+                </tbody>
+            </table>
+            <br>
 
 </body>
+
 </html>

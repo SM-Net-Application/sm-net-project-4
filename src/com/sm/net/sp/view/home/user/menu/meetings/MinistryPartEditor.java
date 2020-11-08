@@ -84,6 +84,9 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 	private ObservableList<Member> validMembersList;
 	private boolean initData;
 
+	private Member conductor1;
+	private Member conductor2;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -137,6 +140,23 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		selectMembers(this.assistantsListView, this.ministryPart.getAssistant());
 		selectMembers(this.students2ListView, this.ministryPart.getStudent2());
 		selectMembers(this.assistants2ListView, this.ministryPart.getAssistant2());
+
+		selectConductor(this.studentsListView, this.conductor1);
+		selectConductor(this.students2ListView, this.conductor2);
+	}
+
+	private void selectConductor(ListView<Member> lv, Member cond) {
+
+		if (lv.getSelectionModel().getSelectedIndex() < 1) {
+
+			ObservableList<Member> items = lv.getItems();
+			for (int i = 0; i < items.size(); i++) {
+				if (items.get(i).getSpMemberID() == cond.getSpMemberID()) {
+					lv.getSelectionModel().select(i);
+					break;
+				}
+			}
+		}
 	}
 
 	private void viewUpdate() {
@@ -212,16 +232,20 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		String material = materialTextField.getText();
 
 		Member student = (studentsListView.getSelectionModel().getSelectedIndex() > -1)
-				? studentsListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
+				? studentsListView.getSelectionModel().getSelectedItem()
+				: Member.emptyMember(language);
 
 		Member assistant = (assistantsListView.getSelectionModel().getSelectedIndex() > -1)
-				? assistantsListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
+				? assistantsListView.getSelectionModel().getSelectedItem()
+				: Member.emptyMember(language);
 
 		Member student2 = (students2ListView.getSelectionModel().getSelectedIndex() > -1)
-				? students2ListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
+				? students2ListView.getSelectionModel().getSelectedItem()
+				: Member.emptyMember(language);
 
 		Member assistant2 = (assistants2ListView.getSelectionModel().getSelectedIndex() > -1)
-				? assistants2ListView.getSelectionModel().getSelectedItem() : Member.emptyMember(language);
+				? assistants2ListView.getSelectionModel().getSelectedItem()
+				: Member.emptyMember(language);
 
 		ministryPart.setMinistryTypeTranslated(ministryTypeTranslated);
 		ministryPart.setMin(Integer.valueOf(min));
@@ -452,4 +476,19 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 		this.ministryTableView = ministryTableView;
 	}
 
+	public Member getConductor1() {
+		return conductor1;
+	}
+
+	public void setConductor1(Member conductor1) {
+		this.conductor1 = conductor1;
+	}
+
+	public Member getConductor2() {
+		return conductor2;
+	}
+
+	public void setConductor2(Member conductor2) {
+		this.conductor2 = conductor2;
+	}
 }

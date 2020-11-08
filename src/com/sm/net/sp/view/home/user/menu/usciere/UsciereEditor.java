@@ -17,6 +17,7 @@ import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.sp.view.historyusciere.HistoryUsciere;
 import com.sm.net.sp.view.home.user.menu.usciere.task.WeekUsciereSaveTask;
+import com.sm.net.util.Crypt;
 import com.smnet.core.task.TaskManager;
 
 import javafx.collections.FXCollections;
@@ -127,6 +128,11 @@ public class UsciereEditor extends UpdateDataAdapter implements UpgradeableCombo
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
 
+	private boolean activeListenerComboBox;
+	private String inf15;
+	private String inf16;
+	private String inf17;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -211,10 +217,19 @@ public class UsciereEditor extends UpdateDataAdapter implements UpgradeableCombo
 	}
 
 	public void objectInitialize() {
+
+		this.activeListenerComboBox = false;
+
+		this.inf15 = Crypt.decrypt(this.configs.get("inf15"), this.application.getSettings().getDatabaseSecretKey());
+		this.inf16 = Crypt.decrypt(this.configs.get("inf16"), this.application.getSettings().getDatabaseSecretKey());
+		this.inf17 = Crypt.decrypt(this.configs.get("inf17"), this.application.getSettings().getDatabaseSecretKey());
+
 		viewUpdate();
 		contextMenu();
 		initData();
 		listeners();
+
+		this.activeListenerComboBox = true;
 	}
 
 	private void contextMenu() {
@@ -498,7 +513,116 @@ public class UsciereEditor extends UpdateDataAdapter implements UpgradeableCombo
 
 	private void listeners() {
 
+		// USCIERI ZONA 1 INFRASETTIMANALE
+
+		this.z1u1MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z1u1MidweekComboBox, this.z1u1WeekendComboBox,
+						(this.inf15.equals("1")), newV));
+
+		this.z1u2MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z1u2MidweekComboBox, this.z1u2WeekendComboBox,
+						(this.inf15.equals("1")), newV));
+
+		this.z1u3MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z1u3MidweekComboBox, this.z1u3WeekendComboBox,
+						(this.inf15.equals("1")), newV));
+
+		// USCIERI ZONA 2 INFRASETTIMANALE
+
+		this.z2u1MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z2u1MidweekComboBox, this.z2u1WeekendComboBox,
+						(this.inf16.equals("1")), newV));
+
+		this.z2u2MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z2u2MidweekComboBox, this.z2u2WeekendComboBox,
+						(this.inf16.equals("1")), newV));
+
+		this.z2u3MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z2u3MidweekComboBox, this.z2u3WeekendComboBox,
+						(this.inf16.equals("1")), newV));
+
+		// USCIERI ZONA 3 INFRASETTIMANALE
+
+		this.z3u1MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z3u1MidweekComboBox, this.z3u1WeekendComboBox,
+						(this.inf17.equals("1")), newV));
+
+		this.z3u2MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z3u2MidweekComboBox, this.z3u2WeekendComboBox,
+						(this.inf17.equals("1")), newV));
+
+		this.z3u3MidweekComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z3u3MidweekComboBox, this.z3u3WeekendComboBox,
+						(this.inf17.equals("1")), newV));
+
+		// USCIERI ZONA 1 FINE SETTIMANA
+
+		this.z1u1WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z1u1WeekendComboBox, this.z1u1MidweekComboBox,
+						(this.inf15.equals("1")), newV));
+
+		this.z1u2WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z1u2WeekendComboBox, this.z1u2MidweekComboBox,
+						(this.inf15.equals("1")), newV));
+
+		this.z1u3WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z1u3WeekendComboBox, this.z1u3MidweekComboBox,
+						(this.inf15.equals("1")), newV));
+
+		// USCIERI ZONA 2 FINE SETTIMANA
+
+		this.z2u1WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z2u1WeekendComboBox, this.z2u1MidweekComboBox,
+						(this.inf16.equals("1")), newV));
+
+		this.z2u2WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z2u2WeekendComboBox, this.z2u2MidweekComboBox,
+						(this.inf16.equals("1")), newV));
+
+		this.z2u3WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z2u3WeekendComboBox, this.z2u3MidweekComboBox,
+						(this.inf16.equals("1")), newV));
+
+		// USCIERI ZONA 3 FINE SETTIMANA
+
+		this.z3u1WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z3u1WeekendComboBox, this.z3u1MidweekComboBox,
+						(this.inf17.equals("1")), newV));
+
+		this.z3u2WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z3u2WeekendComboBox, this.z3u2MidweekComboBox,
+						(this.inf17.equals("1")), newV));
+
+		this.z3u3WeekendComboBox.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> checkComboBox(this.z3u3WeekendComboBox, this.z3u3MidweekComboBox,
+						(this.inf17.equals("1")), newV));
+
 		this.saveButton.setOnAction(event -> save());
+	}
+
+	private void checkComboBox(ComboBox<Member> cb1, ComboBox<Member> cb2, boolean equals, Number newV) {
+
+		if (this.activeListenerComboBox) {
+
+			if (equals) {
+
+				int index = newV.intValue();
+				if (index > -1) {
+
+					// MEMBER COMBOBOX 1
+					int memberID = cb1.getItems().get(index).getSpMemberID();
+
+					// FIND INTO COMBOBOX 2
+					ObservableList<Member> items = cb2.getItems();
+					for (int i = 0; i < items.size(); i++) {
+						if (items.get(i).getSpMemberID() == memberID) {
+							cb2.getSelectionModel().select(i);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void save() {

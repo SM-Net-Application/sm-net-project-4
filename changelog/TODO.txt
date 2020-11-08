@@ -9,6 +9,8 @@
 	
 	- Cambiare l'icona Luoghi di adorazione
 	
+	- Devo aggiungere il nuovo privilegio : Consigliere classe supplementare e caricare la lista dei fratelli che hanno questa spunta.
+	
 	------------------------------------------------------------------
 	
 	- Nuova sezione: Adunanze per il servizio di campo
