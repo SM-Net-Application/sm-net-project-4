@@ -66,6 +66,8 @@ if (file_exists("languages/" . $langIni)) {
             if ($sunday_day_in_week != '7') {
                 $objSunday->modify('next sunday');
             }
+            $objSunday->setTime(23, 59);
+
             $sunday_day_in_month = $objSunday->format('j');
             $sunday_month_nr = $objSunday->format('n');
             $sunday_year = $objSunday->format('Y');
@@ -814,7 +816,9 @@ function taskComp($a, $b)
             if ($activity['date'] > $objSunday) {
                 array_push($activities_nextweek, $activity);
             } else {
-                array_push($activities_thisweek, $activity);
+                if ($activity['date'] >= $objToday) {
+                    array_push($activities_thisweek, $activity);
+                }
             }
         }
 
