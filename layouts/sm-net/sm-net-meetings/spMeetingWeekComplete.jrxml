@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -149,6 +149,8 @@
 	<field name="usciereText" class="java.lang.String"/>
 	<field name="usciereMidweek" class="java.lang.String"/>
 	<field name="usciereWeekend" class="java.lang.String"/>
+	<field name="watchtowerPray2" class="java.lang.String"/>
+	<field name="watchtowerPray2Name" class="java.lang.String"/>
 	<detail>
 		<band height="70">
 			<rectangle>
@@ -3272,6 +3274,40 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="4ea5f0a2-80f0-46a6-982c-994ef4d0b596">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[!$F{watchtowerPray2Name}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="8e8fa77d-3ae8-4b7a-8c25-1c2f781a2dab">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[!$F{watchtowerPray2Name}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{watchtowerPray2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="0" width="134" height="17" forecolor="#000000" uuid="cbf90254-b6e0-4879-92a3-e338a62fca37">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[!$F{watchtowerPray2Name}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{watchtowerPray2Name}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{printStandardWeekend}&&$F{printOverseerWeekend}]]></printWhenExpression>

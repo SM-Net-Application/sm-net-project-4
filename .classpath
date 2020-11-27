@@ -32,7 +32,6 @@
 	<classpathentry kind="lib" path="lib/sm-net-directory-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-easy-html-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-file-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/sm-net-jw-wol-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-path-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-project-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/sm-net-util-1.0.jar"/>

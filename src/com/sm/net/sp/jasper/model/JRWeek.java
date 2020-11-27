@@ -102,6 +102,9 @@ public class JRWeek {
 	private String watchtowerStudyMinSong3;
 	private String watchtowerStudySong3;
 
+	private String watchtowerPray2;
+	private String watchtowerPray2Name;
+
 	private String place1;
 	private String place2;
 
@@ -262,6 +265,9 @@ public class JRWeek {
 		this.watchtowerStudyReaderName = "";
 		this.watchtowerStudyMinSong3 = "";
 		this.watchtowerStudySong3 = "";
+
+		this.watchtowerPray2 = "";
+		this.watchtowerPray2Name = "";
 
 		this.place1 = "";
 		this.place2 = "";
@@ -1292,6 +1298,15 @@ public class JRWeek {
 		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 		jrWeek.setWatchtowerStudySong3(
 				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf39()));
+
+		jrWeek.setWatchtowerPray2(language.getString("jasper.layout.meeting.pray2"));
+
+		member = getMemberFromList(membersList, week.getSpInf40());
+		if (member != null)
+			if (extendedName)
+				jrWeek.setWatchtowerPray2Name(member.getNameStyle3());
+			else
+				jrWeek.setWatchtowerPray2Name(member.getNameStyle4());
 
 		// Places
 		if (week.getSpInf51() == 1)
@@ -2650,6 +2665,22 @@ public class JRWeek {
 
 	public void setUsciereWeekend(String usciereWeekend) {
 		this.usciereWeekend = usciereWeekend;
+	}
+
+	public String getWatchtowerPray2() {
+		return watchtowerPray2;
+	}
+
+	public String getWatchtowerPray2Name() {
+		return watchtowerPray2Name;
+	}
+
+	public void setWatchtowerPray2(String watchtowerPray2) {
+		this.watchtowerPray2 = watchtowerPray2;
+	}
+
+	public void setWatchtowerPray2Name(String watchtowerPray2Name) {
+		this.watchtowerPray2Name = watchtowerPray2Name;
 	}
 
 }

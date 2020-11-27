@@ -13,8 +13,6 @@ import org.jsoup.select.Elements;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.jw.wol.MinistryType;
 import com.sm.net.jw.wol.MinistryTypeTranslated;
-import com.sm.net.jw.wol.ScheduleForMeeting;
-import com.sm.net.jw.wol.ScheduleForMeetingHTML;
 import com.sm.net.jw.wol.WatchtowerOnlineLibrary;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -2105,75 +2103,74 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		if (alert.showAndWait().get() == ButtonType.OK) {
 
-			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
-					selectedWeek.getFrom());
+//			ScheduleForMeetingHTML scheduleForMeetingHTML = new ScheduleForMeetingHTML(language,
+//					selectedWeek.getFrom());
 
-			scheduleForMeetingHTML.download();
+//			scheduleForMeetingHTML.download();
 
-			if (scheduleForMeetingHTML != null) {
-				ScheduleForMeeting scheduleForMeeting = new ScheduleForMeeting(scheduleForMeetingHTML.getRelevantRows(),
-						language);
-				if (scheduleForMeeting != null) {
-					if (scheduleForMeeting.isPresent()) {
+//			if (scheduleForMeetingHTML != null) {
+//				ScheduleForMeeting scheduleForMeeting = new ScheduleForMeeting(scheduleForMeetingHTML.getRelevantRows(),
+//						language);
+//				if (scheduleForMeeting != null) {
+//					if (scheduleForMeeting.isPresent()) {
 
-						song1TextField.setText(scheduleForMeeting.getSong1().getSongNo().toString());
+//						song1TextField.setText(scheduleForMeeting.getSong1().getSongNo().toString());
+//
+//						bibleChaptersTextField.setText(scheduleForMeeting.getBibleChapters());
+//
+//						openingCommentsMinTextField
+//								.setText(scheduleForMeeting.getOpeningComments().getMin().toString());
+//						openingCommentsTextTextField.setText(scheduleForMeeting.getOpeningComments().getTitle());
+//
+//						talkMinTextField.setText(scheduleForMeeting.getTreasuresTalk().getMin().toString());
+//						talkTextTextField.setText(scheduleForMeeting.getTreasuresTalk().getTitle());
+//
+//						diggingMinTextField.setText(scheduleForMeeting.getTreasuresDigging().getMin().toString());
+//						diggingTextTextField.setText(scheduleForMeeting.getTreasuresDigging().getTitle());
+//
+//						bibleReadingMinTextField
+//								.setText(scheduleForMeeting.getTreasuresBibleReading().getMin().toString());
+//						bibleReadingTextTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getTextPart());
+//						bibleReadingMaterialsTextField
+//								.setText(scheduleForMeeting.getTreasuresBibleReading().getBible());
+//
+//						ministryPartList.clear();
+//						for (ScheduleForMeeting.MinistryPart part : scheduleForMeeting.getMinistryPartsList())
+//							ministryPartList.add(new MinistryPart(part.getMinistryTypeTranslated(), part.getText(),
+//									part.getMin(), part.getTextPart(), part.getMaterial(), Member.emptyMember(language),
+//									Member.emptyMember(language), Member.emptyMember(language),
+//									Member.emptyMember(language)));
+//
+//						song2TextField.setText(scheduleForMeeting.getSong2().getSongNo().toString());
+//
+//						christiansPartList.clear();
+//						for (ScheduleForMeeting.ChristiansPart part : scheduleForMeeting.getChristiansPartsList())
+//							christiansPartList.add(new ChristiansPart(part.getText(), part.getMin(), part.getTextPart(),
+//									part.getBody(), Member.emptyMember(language)));
+//
+//						congregationBibleStudyMinTextField
+//								.setText(scheduleForMeeting.getCongregationBibleStudy().getMin().toString());
+//						congregationBibleStudyTextTextField
+//								.setText(scheduleForMeeting.getCongregationBibleStudy().getTextPart());
+//						congregationBibleStudyMaterialTextField
+//								.setText(scheduleForMeeting.getCongregationBibleStudy().getBody());
+//
+//						reviewMinTextField.setText(scheduleForMeeting.getReview().getMin().toString());
+//						reviewTextTextField.setText(scheduleForMeeting.getReview().getTitle());
+//
+//						song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
 
-						bibleChaptersTextField.setText(scheduleForMeeting.getBibleChapters());
+			getWOLNewInfo();
 
-						openingCommentsMinTextField
-								.setText(scheduleForMeeting.getOpeningComments().getMin().toString());
-						openingCommentsTextTextField.setText(scheduleForMeeting.getOpeningComments().getTitle());
-
-						talkMinTextField.setText(scheduleForMeeting.getTreasuresTalk().getMin().toString());
-						talkTextTextField.setText(scheduleForMeeting.getTreasuresTalk().getTitle());
-
-						diggingMinTextField.setText(scheduleForMeeting.getTreasuresDigging().getMin().toString());
-						diggingTextTextField.setText(scheduleForMeeting.getTreasuresDigging().getTitle());
-
-						bibleReadingMinTextField
-								.setText(scheduleForMeeting.getTreasuresBibleReading().getMin().toString());
-						bibleReadingTextTextField.setText(scheduleForMeeting.getTreasuresBibleReading().getTextPart());
-						bibleReadingMaterialsTextField
-								.setText(scheduleForMeeting.getTreasuresBibleReading().getBible());
-
-						ministryPartList.clear();
-						for (ScheduleForMeeting.MinistryPart part : scheduleForMeeting.getMinistryPartsList())
-							ministryPartList.add(new MinistryPart(part.getMinistryTypeTranslated(), part.getText(),
-									part.getMin(), part.getTextPart(), part.getMaterial(), Member.emptyMember(language),
-									Member.emptyMember(language), Member.emptyMember(language),
-									Member.emptyMember(language)));
-
-						song2TextField.setText(scheduleForMeeting.getSong2().getSongNo().toString());
-
-						christiansPartList.clear();
-						for (ScheduleForMeeting.ChristiansPart part : scheduleForMeeting.getChristiansPartsList())
-							christiansPartList.add(new ChristiansPart(part.getText(), part.getMin(), part.getTextPart(),
-									part.getBody(), Member.emptyMember(language)));
-
-						congregationBibleStudyMinTextField
-								.setText(scheduleForMeeting.getCongregationBibleStudy().getMin().toString());
-						congregationBibleStudyTextTextField
-								.setText(scheduleForMeeting.getCongregationBibleStudy().getTextPart());
-						congregationBibleStudyMaterialTextField
-								.setText(scheduleForMeeting.getCongregationBibleStudy().getBody());
-
-						reviewMinTextField.setText(scheduleForMeeting.getReview().getMin().toString());
-						reviewTextTextField.setText(scheduleForMeeting.getReview().getTitle());
-
-						song3TextField.setText(scheduleForMeeting.getSong3().getSongNo().toString());
-
-						getWOLNewInfo();
-
-					} else {
-						new AlertDesigner(language.getString("sp.meetings.wol.error"), ownerStage, AlertType.ERROR,
-								Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-								Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
-					}
-				}
-			}
+		} else {
+			new AlertDesigner(language.getString("sp.meetings.wol.error"), ownerStage, AlertType.ERROR,
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 		}
-
 	}
+//			}
+//		}
+//	}
 
 	private void getWOLNewInfo() {
 
@@ -2182,35 +2179,172 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			Document document = Jsoup
 					.connect(WatchtowerOnlineLibrary.createLink(this.language, this.selectedWeek.getFrom())).get();
 
-			Elements groupTOCs = document.getElementsByClass("groupTOC");
-			if (groupTOCs.size() > 0) {
+			newMethode(document);
 
-				Element first = groupTOCs.get(0);
+		} catch (IOException e) {
+			this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+		}
+	}
 
-				Elements tags = first.getElementsByTag("a");
-				if (tags.size() > 0) {
+	private void watchtowerStudy(Element document) throws IOException {
 
-					Element firstTag = tags.get(0);
+		Elements groupTOCs = document.getElementsByClass("groupTOC");
+		if (groupTOCs.size() > 0) {
 
-					// TITOLO DELLA TORRE DI GUARDIA
-					this.watchtowerStudyThemeTextField.setText(firstTag.text());
+			Element first = groupTOCs.get(0);
 
-					Elements attributes = firstTag.getElementsByAttribute("href");
+			Elements tags = first.getElementsByTag("a");
+			if (tags.size() > 0) {
 
-					if (attributes.size() > 0) {
+				Element firstTag = tags.get(0);
 
-						String attr = attributes.attr("href");
+				// TITOLO DELLA TORRE DI GUARDIA
+				this.watchtowerStudyThemeTextField.setText(firstTag.text());
 
-						String watchtowerLink = WOLUtils.ADDRESS + attr;
-						getWOLWatchtowerSongs(watchtowerLink);
-					}
+				Elements attributes = firstTag.getElementsByAttribute("href");
 
+				if (attributes.size() > 0) {
+
+					String attr = attributes.attr("href");
+
+					String watchtowerLink = WOLUtils.ADDRESS + attr;
+					getWOLWatchtowerSongs(watchtowerLink);
 				}
 
 			}
 
-		} catch (IOException e) {
-			this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+		}
+	}
+
+	private void newMethode(Document document) throws IOException {
+
+		// System.out.println(document);
+		// System.out.println("\n==================================\n");
+
+		Elements todayItemsList = document.getElementsByClass("todayItems");
+		if (todayItemsList.size() == 1) {
+
+			Element todayItems = todayItemsList.get(0);
+
+			Elements itemDataList = todayItems.getElementsByClass("itemData");
+
+			for (int i = 0; i < itemDataList.size(); i++) {
+
+				Element element = itemDataList.get(i);
+				switch (WOLUtils.checkItemData(element)) {
+
+				case SCRIPTURE_OF_THE_DAY:
+					// Informazioni non necessarie
+					break;
+				case MEETING:
+					meeting(element);
+					break;
+				case WATCHTOWER_STUDY:
+					// TODO: attivare dopo aver completato MEETING
+					// watchtowerStudy(element);
+					break;
+				case UNKNOW:
+					System.out.println("UNKNOW");
+					System.out.println("\n===================================\n");
+					System.out.println(element);
+					break;
+
+				}
+			}
+		}
+	}
+
+	private void meeting(Element element) {
+
+		// SETTIMANA DEL (non utilizzato)
+
+		// String week = "";
+		// Elements pageNum = element.getElementsByClass("pageNum");
+		// if (pageNum.size() == 1)
+		// week = pageNum.get(0).parent().text();
+
+		// LETTURA BIBLICA
+		meetingBibleWeek(element);
+
+		// SEZIONI
+		Elements sections = element.getElementsByClass("section");
+		// Sezione 1
+		// - Cantico iniziale
+		// - Commenti introduttivi
+		meetingSection1(sections);
+	}
+
+	private void meetingBibleWeek(Element element) {
+
+		String bibleWeek = "";
+		// class "b" -> sono tutti i riferimenti scritturali dell'articolo
+		// il primo riferimento è la lettura biblica settimanale
+
+		Elements bs = element.getElementsByClass("b");
+		if (bs.size() > 0)
+			bibleWeek = bs.get(0).text();
+
+		if (!bibleWeek.isEmpty())
+			this.bibleChaptersTextField.setText(bibleWeek);
+	}
+
+	private void meetingSection1(Elements sections) {
+
+		// SEZIONE 1 - Introduzione
+
+		String song1 = "";
+		String comments1 = "";
+		String comments1min = "";
+
+		if (sections.size() > 0) {
+
+			Element section1 = sections.get(0);
+
+			Elements s1soList = section1.getElementsByClass("so");
+
+			// 1. Cantico iniziale
+			if (s1soList.size() > 0) {
+				Element s1so1 = s1soList.get(0);
+				String song1text = s1so1.text();
+				Matcher song1match = Pattern.compile(this.language.getString("match.wol.song1midweek"))
+						.matcher(song1text);
+
+				if (song1match.find())
+					song1 = song1match.group();
+
+				if (!song1.isEmpty())
+					this.song1TextField.setText(song1);
+			}
+
+			// 2. Commenti introduttivi
+			if (s1soList.size() > 1) {
+
+				Element s1so2 = s1soList.get(1);
+				String comments1text = s1so2.text();
+
+				// Commenti introduttivi - Testo
+				Matcher comments1match = Pattern.compile(this.language.getString("match.wol.comments1midweek"))
+						.matcher(comments1text);
+
+				if (comments1match.find())
+					comments1 = comments1match.group();
+
+				if (!comments1.isEmpty())
+					this.openingCommentsTextTextField.setText(comments1);
+
+				// Commenti introduttivi - Minuti
+				comments1match = Pattern.compile(this.language.getString("match.wol.comments1minmidweek"))
+						.matcher(comments1text);
+
+				if (comments1match.find()) {
+					comments1match = Pattern.compile("\\d+").matcher(comments1match.group());
+					comments1match.find();
+					comments1min = comments1match.group();
+
+					if (!comments1min.isEmpty())
+						this.openingCommentsMinTextField.setText(comments1min);
+				}
+			}
 		}
 	}
 
