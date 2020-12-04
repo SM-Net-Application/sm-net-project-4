@@ -2272,6 +2272,12 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		// - Cantico iniziale
 		// - Commenti introduttivi
 		meetingSection1(sections);
+		// Sezione 2
+		// - Discorso
+		// - Gemme
+		// - Lettura
+		meetingSection2(sections);
+		// TODO: Sezione 3
 	}
 
 	private void meetingBibleWeek(Element element) {
@@ -2343,6 +2349,144 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 					if (!comments1min.isEmpty())
 						this.openingCommentsMinTextField.setText(comments1min);
+				}
+			}
+		}
+	}
+
+	private void meetingSection2(Elements sections) {
+
+		// SEZIONE 2 - Tesori della Parola di Dio
+
+		String talk = "";
+		String talkmin = "";
+		String gems = "";
+		String gemsmin = "";
+		String bibleread = "";
+		String biblereadmin = "";
+		String biblereadvers = "";
+		String biblereadpoint = "";
+
+		if (sections.size() > 1) {
+
+			Element section = sections.get(1);
+
+			Elements soList = section.getElementsByClass("so");
+
+			// 1. Discorso
+			if (soList.size() > 0) {
+
+				Element so1 = soList.get(0);
+				String so1text = so1.text();
+
+				// I doublequote HTML non vengono riconosciuti
+				char dlquoteStart = (char) 8220;
+				char dlquoteEnd = (char) 8221;
+				so1text = so1text.replace(dlquoteStart, '"');
+				so1text = so1text.replace(dlquoteEnd, '"');
+
+				Matcher talkMinMatch = Pattern.compile(this.language.getString("match.wol.treasminmidweek"))
+						.matcher(so1text);
+				if (talkMinMatch.find()) {
+
+					String minGroup = talkMinMatch.group();
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+
+					if (minMatch.find()) {
+
+						talkmin = minMatch.group();
+
+						int minGroupIndex = so1text.indexOf(minGroup);
+						if (minGroupIndex > -1)
+							talk = so1text.substring(0, minGroupIndex).trim();
+					}
+				}
+
+				if (!talkmin.isEmpty())
+					this.talkMinTextField.setText(talkmin);
+
+				if (!talk.isEmpty())
+					this.talkTextTextField.setText(talk);
+			}
+
+			// 2. Gemme
+			if (soList.size() > 1) {
+				Element so = soList.get(1);
+				String sotext = so.text();
+
+				Matcher gemsMinMatch = Pattern.compile(this.language.getString("match.wol.gemsminmidweek"))
+						.matcher(sotext);
+				if (gemsMinMatch.find()) {
+
+					String minGroup = gemsMinMatch.group();
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+
+					if (minMatch.find()) {
+
+						gemsmin = minMatch.group();
+
+						int minGroupIndex = sotext.indexOf(minGroup);
+						if (minGroupIndex > -1)
+							gems = sotext.substring(0, minGroupIndex).trim();
+					}
+				}
+
+				if (!gemsmin.isEmpty())
+					this.diggingMinTextField.setText(gemsmin);
+
+				if (!gems.isEmpty())
+					this.diggingTextTextField.setText(gems);
+			}
+
+			// 3. Lettura biblica
+			if (soList.size() > 2) {
+				Element so = soList.get(2);
+				String sotext = so.text();
+
+				Matcher bibleMinMatch = Pattern.compile(this.language.getString("match.wol.bibleminmidweek"))
+						.matcher(sotext);
+				if (bibleMinMatch.find()) {
+
+					String minGroup = bibleMinMatch.group();
+
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+					if (minMatch.find()) {
+
+						biblereadmin = minMatch.group();
+
+						int minGroupIndex = sotext.indexOf(minGroup);
+						if (minGroupIndex > -1)
+							bibleread = sotext.substring(0, minGroupIndex).trim();
+
+						// Materiale da leggere
+						biblereadvers = sotext.substring(minGroupIndex + minGroup.length(), sotext.length()).trim();
+
+						// Punto
+						Matcher pointMatch = Pattern.compile(this.language.getString("match.wol.biblepointmidweek"))
+								.matcher(biblereadvers);
+						if (pointMatch.find()) {
+
+							String pointGroup = pointMatch.group();
+
+							int pointGroupIndex = biblereadvers.indexOf(pointGroup);
+							if (pointGroupIndex > -1)
+								biblereadvers = biblereadvers.substring(0, pointGroupIndex).trim();
+
+							String bracket = this.language.getString("match.wol.biblepointbracketsmidweek");
+							if (bracket.equals("1"))
+								biblereadpoint = pointGroup.substring(1, pointGroup.length() - 1);
+						}
+					}
+				}
+
+				if (!biblereadmin.isEmpty())
+					this.bibleReadingMinTextField.setText(biblereadmin);
+				if (!bibleread.isEmpty())
+					this.bibleReadingTextTextField.setText(bibleread);
+				if (!biblereadvers.isEmpty())
+					this.bibleReadingMaterialsTextField.setText(biblereadvers);
+				// TODO: Al momento non utilizzato
+				if (!biblereadpoint.isEmpty()) {
 				}
 			}
 		}
