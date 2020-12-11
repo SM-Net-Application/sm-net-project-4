@@ -2277,7 +2277,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		// - Gemme
 		// - Lettura
 		meetingSection2(sections);
-		// TODO: Sezione 3
+		// Sezione 3
+		meetingSection3(sections);
 	}
 
 	private void meetingBibleWeek(Element element) {
@@ -2489,6 +2490,62 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				if (!biblereadpoint.isEmpty()) {
 				}
 			}
+		}
+	}
+
+	private void meetingSection3(Elements sections) {
+
+		// SEZIONE 3 - Discorsi di esercitazione
+
+		if (sections.size() > 2) {
+
+			Element section = sections.get(2);
+
+			Elements soList = section.getElementsByClass("so");
+
+			for (Element e : soList) {
+
+				String ministryMin = "";
+				String ministryTitle = "";
+				String ministryInfo = "";
+
+				String ministryText = e.text();
+
+				Matcher minnistryMinMatch = Pattern.compile(this.language.getString("match.wol.ministryminmidweek"))
+						.matcher(ministryText);
+
+				if (minnistryMinMatch.find()) {
+
+					String minGroup = minnistryMinMatch.group();
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+
+					if (minMatch.find()) {
+
+						ministryMin = minMatch.group();
+
+						int minGroupIndex = ministryText.indexOf(minGroup);
+						if (minGroupIndex > -1) {
+
+							ministryTitle = ministryText.substring(0, minGroupIndex).trim();
+							ministryInfo = ministryText.substring(minGroupIndex + minGroup.length()).trim();
+						}
+
+						int ministryMinInt = 0;
+						if (!ministryMin.isEmpty())
+							ministryMinInt = Integer.valueOf(ministryMin);
+
+						// TODO: Check Ministry Type
+						
+						this.ministryPartList.add(
+								new MinistryPart(new MinistryTypeTranslated(MinistryType.DISCUSSION, this.language),
+										ministryText, ministryMinInt, ministryTitle, ministryInfo,
+										Member.emptyMember(this.language), Member.emptyMember(this.language),
+										Member.emptyMember(this.language), Member.emptyMember(this.language)));
+					}
+				}
+			}
+
+			this.ministryTableView.refresh();
 		}
 	}
 
