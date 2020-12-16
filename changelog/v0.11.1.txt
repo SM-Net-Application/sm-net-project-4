@@ -1,0 +1,21 @@
+Data di pubblicazione : ..-..-....
+
+	Meeting:
+		- Se la preghiera finale è presente nell'adunanza del fine settimana,
+		  viene anche stampata sul programma
+		- Aggiornata la funzione per il riconoscimento del programma da
+		  Watchtower Online Library, poiché dal 01.01.2021 è cambiata la struttura
+		  
+	Monitor-Online:
+		- Il presidente dell'adunanza del fine settimana può avere la spunta
+		  che fa solo la preghiera iniziale, pertanto viene ora visualizzato come Preghiera iniziale
+		  e non come Presidente
+	
+	SupportPlanner
+		- Cambiata icona Luoghi di adorazione
+		
+	Commemorazione
+		- Nel Calendario vengono caricati solo i mesi di Febbraio, Marzo e Aprile
+		  dei prossimi 3 anni
+		- Nella stampa, la sezione Preghiere emblemi, Passaggio emblemi,
+		  Preparazione emblemi e Luogo vengono stampate solo se presenti nel Database

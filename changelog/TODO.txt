@@ -1,17 +1,13 @@
 
-	Aggiungere preghiera finale se presente nell'adunanza del fine settimana
-
-	Monitor-Online:
-		- Il presidente dell'adunanza del fine settimana può avere la spunta che fa solo la preghiera iniziale, pertanto visualizzare come Preghiera iniziale
-	
 	Monitor-Software:
 		- Aggiungere il giorno e l'orario preciso delle adunanze in cui si hanno gli incarichi
 	
-	- Cambiare l'icona Luoghi di adorazione
-	
 	- Devo aggiungere il nuovo privilegio : Consigliere classe supplementare e caricare la lista dei fratelli che hanno questa spunta.
 	
-	------------------------------------------------------------------
+	- Aggiungere la spunta Discorso speciale (così da indentificare il discorso pubblico come discorso speciale)
+	
+	- Unire la sezione Informazioni a Configurazione
+		- Testare poi tutte le sezioni che utilizzavano il Nome Congregazione
 	
 	- Nuova sezione: Adunanze per il servizio di campo
 	- Nuova sezione: Pulizia
@@ -19,17 +15,13 @@
 	- Nuova sezione: Letteratura
 	
 	Configurazione:
-		- Impostare i colori del Layout
+		- Verificare la possibilità di: Impostare i colori dei Documenti di stampa
 	
 	Fix: menu contestuale nelle impostazioni locali non si vede bene
 	
 	Non so se capitera mai: settimana del sorvegliante senza adunanza infrasettimanale.
 	
 	Eliminare AlertBuilder vecchio.
-	
-	Commemorazione mostra solo Febbraio, Marzo, Aprile e Maggio
-	Commemorazione: non stampare Preparazione se non è stato selezionato nessuna famiglia
-	- Lo stesso per le altre sezioni, se vuote non stamparle
 	
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)

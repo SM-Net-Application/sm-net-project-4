@@ -152,7 +152,7 @@ if (file_exists("languages/" . $langIni)) {
                     // Weeks
 
                     $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28,";
-                    $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40, spInf44, spInf45, spInf46, spInf47,";
+                    $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40, spInf41, spInf44, spInf45, spInf46, spInf47,";
                     $query_week .= " spInf48, spInf49, spInf58";
                     $query_week .= " FROM sp_week";
                     $query_week .= " WHERE spInf1 >=";
@@ -182,6 +182,7 @@ if (file_exists("languages/" . $langIni)) {
                             $row["spInf37"] = $resultRow_week["spInf37"];
                             $row["spInf38"] = $resultRow_week["spInf38"];
                             $row["spInf40"] = $resultRow_week["spInf40"];
+                            $row["spInf41"] = $resultRow_week["spInf41"];
                             $row["spInf44"] = $resultRow_week["spInf44"];
                             $row["spInf45"] = $resultRow_week["spInf45"];
                             $row["spInf46"] = $resultRow_week["spInf46"];

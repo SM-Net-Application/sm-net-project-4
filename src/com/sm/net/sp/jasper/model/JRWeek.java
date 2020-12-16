@@ -705,7 +705,7 @@ public class JRWeek {
 
 					jrWeek.setMemDay(memorialDayText.toUpperCase());
 
-					String memPlace = weekMemorial.getSpInf24();
+					String memPlace = weekMemorial.getSpInf24() != null ? weekMemorial.getSpInf24() : "";
 					jrWeek.setMemPlace(memPlace);
 
 					String memSong1Min = language.getString("jasper.memorial.song1min");
@@ -788,7 +788,9 @@ public class JRWeek {
 						else
 							memPrayWineName = member.getNameStyle4();
 
-					String memPrayEmblemsName = String.format(memPrayEmblemsFormat, memPrayBreadName, memPrayWineName);
+					String memPrayEmblemsName = (memPrayBreadName.isEmpty() && memPrayWineName.isEmpty()) ? ""
+							: String.format(memPrayEmblemsFormat, memPrayBreadName, memPrayWineName);
+					
 					jrWeek.setMemPrayEmblemsName(memPrayEmblemsName);
 
 					String memSong2Min = language.getString("jasper.memorial.song2min");
@@ -914,8 +916,8 @@ public class JRWeek {
 						String familyEmblemsTextFormat = language.getString("jasper.memorial.familyemblemstext");
 						familyEmblemsText = String.format(familyEmblemsTextFormat, memBreadFamilyList,
 								memWineFamilyList);
-						jrWeek.setMemFamilyEmblemsList(familyEmblemsText);
 					}
+					jrWeek.setMemFamilyEmblemsList(familyEmblemsText);
 
 					String memMemberEmblemsText = language.getString("jasper.memorial.memberemblems");
 					jrWeek.setMemMemberEmblemsText(memMemberEmblemsText);

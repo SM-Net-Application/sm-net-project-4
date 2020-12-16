@@ -272,7 +272,7 @@ public class Memorial extends UpdateDataAdapter {
 		int countMonth = 0;
 		boolean first = true;
 
-		int monthsToGenerate = 12;
+		int monthsToGenerate = 36;
 
 		do {
 
@@ -284,12 +284,14 @@ public class Memorial extends UpdateDataAdapter {
 
 			int currentMonth = day.getMonthValue();
 
-			if (lastMonth == currentMonth)
-				this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
-			else {
+			if (lastMonth == currentMonth) {
+				if (currentMonth == 2 || currentMonth == 3 || currentMonth == 4)
+					this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
+			} else {
 				countMonth = countMonth + 1;
 				if (countMonth < monthsToGenerate)
-					this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
+					if (currentMonth == 2 || currentMonth == 3 || currentMonth == 4)
+						this.calendar.add(new WeekMemorial(day.plusDays(6), this.language));
 			}
 
 		} while (countMonth < monthsToGenerate);

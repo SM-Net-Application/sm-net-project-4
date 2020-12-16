@@ -2240,8 +2240,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 					meeting(element);
 					break;
 				case WATCHTOWER_STUDY:
-					// TODO: attivare dopo aver completato MEETING
-					// watchtowerStudy(element);
+					watchtowerStudy(element);
 					break;
 				case UNKNOW:
 					System.out.println("UNKNOW");
@@ -2279,6 +2278,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		meetingSection2(sections);
 		// Sezione 3
 		meetingSection3(sections);
+		// Sezione 4
+		meetingSection4(sections);
 	}
 
 	private void meetingBibleWeek(Element element) {
@@ -2486,9 +2487,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 					this.bibleReadingTextTextField.setText(bibleread);
 				if (!biblereadvers.isEmpty())
 					this.bibleReadingMaterialsTextField.setText(biblereadvers);
-				// TODO: Al momento non utilizzato
-				if (!biblereadpoint.isEmpty()) {
-				}
+
+				// Al momento non utilizzato
+				// if (!biblereadpoint.isEmpty()) {
+				// }
 			}
 		}
 	}
@@ -2534,19 +2536,204 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 						if (!ministryMin.isEmpty())
 							ministryMinInt = Integer.valueOf(ministryMin);
 
-						// TODO: Check Ministry Type
-						
-						this.ministryPartList.add(
-								new MinistryPart(new MinistryTypeTranslated(MinistryType.DISCUSSION, this.language),
-										ministryText, ministryMinInt, ministryTitle, ministryInfo,
-										Member.emptyMember(this.language), Member.emptyMember(this.language),
-										Member.emptyMember(this.language), Member.emptyMember(this.language)));
+						this.ministryPartList.add(new MinistryPart(checkMinistryType(ministryTitle), ministryText,
+								ministryMinInt, ministryTitle, ministryInfo, Member.emptyMember(this.language),
+								Member.emptyMember(this.language), Member.emptyMember(this.language),
+								Member.emptyMember(this.language)));
 					}
 				}
 			}
 
 			this.ministryTableView.refresh();
 		}
+	}
+
+	private void meetingSection4(Elements sections) {
+
+		// SEZIONE 4 - Vita cristiana
+
+		String song2 = "";
+
+		if (sections.size() > 3) {
+
+			Element section = sections.get(3);
+
+			Elements soList = section.getElementsByClass("so");
+
+			// 1. Cantico centrale
+
+			if (soList.size() > 0) {
+
+				Element so1 = soList.get(0);
+				String song2text = so1.text();
+				Matcher song2match = Pattern.compile(this.language.getString("match.wol.song2midweek"))
+						.matcher(song2text);
+
+				if (song2match.find())
+					song2 = song2match.group();
+			}
+
+			// 2. Parti vita cristiana
+			// Le ultime 3 righe riguardano Studio biblico / Commenti conclusivi / Cantico
+
+			int lastIndex = 1;
+			for (int i = 1; i < soList.size() - 3; i++) {
+
+				lastIndex = i + 1;
+
+				String christianMin = "";
+				String christianTitle = "";
+				String christianInfo = "";
+
+				String sotext = soList.get(i).text();
+
+				// I doublequote HTML non vengono riconosciuti
+				char dlquoteStart = (char) 8220;
+				char dlquoteEnd = (char) 8221;
+				sotext = sotext.replace(dlquoteStart, '"');
+				sotext = sotext.replace(dlquoteEnd, '"');
+
+				Matcher christianMinMatch = Pattern.compile(this.language.getString("match.wol.christianmidweek"))
+						.matcher(sotext);
+				if (christianMinMatch.find()) {
+
+					String minGroup = christianMinMatch.group();
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+
+					if (minMatch.find()) {
+
+						christianMin = minMatch.group();
+
+						int minGroupIndex = sotext.indexOf(minGroup);
+						if (minGroupIndex > -1) {
+							christianTitle = sotext.substring(0, minGroupIndex).trim();
+							christianInfo = sotext.substring(minGroupIndex + minGroup.length()).trim();
+						}
+
+						int christianMinInt = 0;
+						if (!christianMin.isEmpty())
+							christianMinInt = Integer.valueOf(christianMin);
+
+						this.christiansPartList.add(new ChristiansPart(sotext, christianMinInt, christianTitle,
+								christianInfo, Member.emptyMember(this.language)));
+					}
+				}
+			}
+
+			// 3. Studio biblico di congregazione
+
+			String congrMin = "";
+			String congrTitle = "";
+			String congrInfo = "";
+
+			if (soList.size() > lastIndex) {
+
+				Element so = soList.get(lastIndex);
+				String sotext = so.text();
+
+				Matcher congrMinMatch = Pattern.compile(this.language.getString("match.wol.congrbiblestudyminmidweek"))
+						.matcher(sotext);
+				if (congrMinMatch.find()) {
+
+					String minGroup = congrMinMatch.group();
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+
+					if (minMatch.find()) {
+
+						congrMin = minMatch.group();
+
+						int minGroupIndex = sotext.indexOf(minGroup);
+						if (minGroupIndex > -1) {
+							congrTitle = sotext.substring(0, minGroupIndex).trim();
+							congrInfo = sotext.substring(minGroupIndex + minGroup.length()).trim();
+						}
+					}
+				}
+			}
+
+			// 4. Commenti conclusivi
+
+			String conclMin = "";
+			String conclTitle = "";
+
+			if (soList.size() > lastIndex + 1) {
+
+				Element so = soList.get(lastIndex + 1);
+				String sotext = so.text();
+
+				Matcher conclMinMatch = Pattern.compile(this.language.getString("match.wol.conclcommentsminmidweek"))
+						.matcher(sotext);
+				if (conclMinMatch.find()) {
+
+					String minGroup = conclMinMatch.group();
+					Matcher minMatch = Pattern.compile(this.language.getString("match.wol.min")).matcher(minGroup);
+
+					if (minMatch.find()) {
+
+						conclMin = minMatch.group();
+
+						int minGroupIndex = sotext.indexOf(minGroup);
+						if (minGroupIndex > -1)
+							conclTitle = sotext.substring(0, minGroupIndex).trim();
+					}
+				}
+			}
+
+			// 5. Cantico finale
+
+			String song3 = "";
+
+			if (soList.size() > lastIndex + 2) {
+
+				Element so = soList.get(lastIndex + 2);
+				String sotext = so.text();
+
+				Matcher song3match = Pattern.compile(this.language.getString("match.wol.song3midweek")).matcher(sotext);
+
+				if (song3match.find())
+					song3 = song3match.group();
+			}
+
+			if (!song2.isEmpty())
+				this.song2TextField.setText(song2);
+
+			this.christiansPartTableView.refresh();
+
+			if (!congrMin.isEmpty())
+				this.congregationBibleStudyMinTextField.setText(congrMin);
+
+			if (!congrTitle.isEmpty())
+				this.congregationBibleStudyTextTextField.setText(congrTitle);
+
+			if (!congrInfo.isEmpty())
+				this.congregationBibleStudyMaterialTextField.setText(congrInfo);
+
+			if (!conclMin.isEmpty())
+				this.reviewMinTextField.setText(conclMin);
+
+			if (!conclTitle.isEmpty())
+				this.reviewTextTextField.setText(conclTitle);
+
+			if (!song3.isEmpty())
+				this.song3TextField.setText(song3);
+		}
+	}
+
+	private MinistryTypeTranslated checkMinistryType(String ministryTitle) {
+
+		if (ministryTitle.matches(this.language.getString("match.wol.ministry.initialcall")))
+			return new MinistryTypeTranslated(MinistryType.INITIAL_CALL, this.language);
+
+		if (ministryTitle.matches(this.language.getString("match.wol.ministry.returnvisit")))
+			return new MinistryTypeTranslated(MinistryType.RETURN_VISIT, this.language);
+
+		if (ministryTitle.matches(this.language.getString("match.wol.ministry.biblestudy")))
+			return new MinistryTypeTranslated(MinistryType.BIBLE_STUDY, this.language);
+
+		if (ministryTitle.matches(this.language.getString("match.wol.ministry.talk")))
+			return new MinistryTypeTranslated(MinistryType.TALK, this.language);
+
+		return new MinistryTypeTranslated(MinistryType.DISCUSSION, this.language);
 	}
 
 	private void getWOLWatchtowerSongs(String watchtowerLink) throws IOException {
