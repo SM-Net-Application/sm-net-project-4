@@ -44,11 +44,11 @@
 				<filename name="json-20180813.jar" />
 			</fileset>
 		</copy>
-		<copy todir="externalLibs">
+		<!--<copy todir="externalLibs">
 			<fileset dir="${projectPath}\lib">
 				<filename name="sm-net-jw-wol-1.0.jar" />
 			</fileset>
-		</copy>
+		</copy>-->
 		<copy todir="externalLibs">
 			<fileset dir="${projectPath}\lib">
 				<filename name="sm-net-javafx-1.1.jar" />

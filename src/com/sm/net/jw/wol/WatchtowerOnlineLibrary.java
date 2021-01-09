@@ -17,14 +17,14 @@ public class WatchtowerOnlineLibrary {
         int dateYear = date.getYear();
         int dateMonth = date.getMonthValue();
         int dateDay = date.getDayOfMonth();
-        String link = String.format("https://wol.jw.org/%s/wol/dt/r%s/lp-%s/%d/%d/%d", languageCode, languageNo, languageShortcode, dateYear, dateMonth, dateDay);
+        String link = String.format(linkPattern, languageCode, languageNo, languageShortcode, dateYear, dateMonth, dateDay);
         return link;
     }
 
     public static ArrayList<String> relevantHTMLRows(String sourceCode) {
         ArrayList<String> list = null;
         if (!sourceCode.isEmpty()) {
-            list = new ArrayList();
+            list = new ArrayList<>();
             String[] codeRows = sourceCode.split("\n");
             String[] var6 = codeRows;
             int var5 = codeRows.length;

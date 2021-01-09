@@ -1,33 +1,74 @@
 
-	Monitor-Software:
-		- Aggiungere il giorno e l'orario preciso delle adunanze in cui si hanno gli incarichi
-	
-	- Devo aggiungere il nuovo privilegio : Consigliere classe supplementare e caricare la lista dei fratelli che hanno questa spunta.
-	
-	- Aggiungere la spunta Discorso speciale (così da indentificare il discorso pubblico come discorso speciale)
-	
-	- Unire la sezione Informazioni a Configurazione
-		- Testare poi tutte le sezioni che utilizzavano il Nome Congregazione
-	
-	- Nuova sezione: Adunanze per il servizio di campo
-	- Nuova sezione: Pulizia
-	- Nuova sezione: Territori
-	- Nuova sezione: Letteratura
-	
-	Configurazione:
-		- Verificare la possibilità di: Impostare i colori dei Documenti di stampa
-	
+	Fix: se la settimana non è salvata, non aprire lo Storico, ma mostrare un messaggio di errore. In alternativa capire se è
+	possibile visualizzare lo storico anche se non è salvata la settimana.
+
+	Fix: Stampa elenco gruppi di servizio, capire perché compaiono gli inattivi.
+
 	Fix: menu contestuale nelle impostazioni locali non si vede bene
+
+	Fix: modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)
+		Parlarne prima con Alex.
+
+	Nuova sezione: Adunanze per il servizio di campo (Congregazione)
+		keyWeek
+		Giorno
+		Ora
+		Minuti
+		Conduttore
+		Assistente (ad esempio Host)
+		Materiale
+		Calendario mensile
+		Possono essere inserite massimo 21 comitive (3 al giorno)
+		Struttura da pensare...
+
+	User:
+		Adunanze per il servizio di campo (Congregazione)
+		Associazione Gruppo di Servizio
+			Adunanze per il servizio di campo (Gruppo di Servizio associato)
+
+	Adunanze:
+		Cantico iniziale (infrasettimanale): Testo
+		Cantico centrale (infrasettimanale): Testo
+		Cantico finale (infrasettimanale): Testo
+		Cantico iniziale (fine settimana): Testo
+		Cantico centrale (fine settimana): Testo
+		Cantico finale (fine settimana): Testo
+		Se il numero del cantico è definito, scrivere <Cantico ... Testo>
+		Se il numero del cantico non è definito, scrivere <Testo>
+		Se il ne il numero ne il testo è presente, scrivere <Cantico>
+		Spunta Discorso Speciale
+		ComboBox Oratore Interno
+		Consigliere classe supplementare, caricare la lista
+		
+	Monitor-Online
+		Discorso pubblico se disponibile ComboBox Oratore interno
+		Tabella eventi
+			- Congressi/Assemblee
+			- Visita del sorvegliante
+			- Commemorazione
+
+	Monitor-Software:
+		- Visualizzare il link Online
 	
-	Non so se capitera mai: settimana del sorvegliante senza adunanza infrasettimanale.
-	
-	Eliminare AlertBuilder vecchio.
+	Componenti della congregazione:
+		- Consigliere classe supplementare
+		- Conduttore adunanza per il servizio di campo (Congregazione)
+		- Conduttore adunanza per il servizio di campo (Gruppo di servizio)
 	
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
 		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
 		- Nelle adunanze determinare il titolo in base al numero inserito
 		- Nel layout stampare anche il titolo
+	
+	- Unire la sezione Informazioni a Configurazione
+		- Testare poi tutte le sezioni che utilizzavano il Nome Congregazione
+	
+	- Nuova sezione: Pulizia
+	- Nuova sezione: Territori
+	- Nuova sezione: Letteratura
+	
+	Eliminare AlertBuilder vecchio.
 	
 	- Installer per MAC
 	- Dump/Ripristino del database per MAC 
