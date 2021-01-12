@@ -790,7 +790,7 @@ public class JRWeek {
 
 					String memPrayEmblemsName = (memPrayBreadName.isEmpty() && memPrayWineName.isEmpty()) ? ""
 							: String.format(memPrayEmblemsFormat, memPrayBreadName, memPrayWineName);
-					
+
 					jrWeek.setMemPrayEmblemsName(memPrayEmblemsName);
 
 					String memSong2Min = language.getString("jasper.memorial.song2min");
@@ -1110,7 +1110,12 @@ public class JRWeek {
 
 		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
 
-		jrWeek.setTreasuresSong1(String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf5()));
+		String midweekSong1 = week.getSpInf5();
+		String midweekSong1Title = week.getSpInf59();
+		JRWeekSongType midweekSong1Type = JRWeekSongType.checkType(midweekSong1, midweekSong1Title);
+		String midweekSong1Text = JRWeekSongType.checkText(language, midweekSong1Type, midweekSong1, midweekSong1Title);
+
+		jrWeek.setTreasuresSong1(midweekSong1Text);
 		jrWeek.setTreasuresPray1(language.getString("jasper.layout.meeting.pray1"));
 
 		Member member = getMemberFromList(membersList, week.getSpInf4());
@@ -1177,7 +1182,14 @@ public class JRWeek {
 		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
 
 		jrWeek.setChristiansMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
-		jrWeek.setChristiansSong2(String.format(language.getString("jasper.layout.meeting.song2"), week.getSpInf19()));
+
+		String midweekSong2 = week.getSpInf19();
+		String midweekSong2Title = week.getSpInf60();
+		JRWeekSongType midweekSong2Type = JRWeekSongType.checkType(midweekSong2, midweekSong2Title);
+		String midweekSong2Text = JRWeekSongType.checkText(language, midweekSong2Type, midweekSong2, midweekSong2Title);
+		// jrWeek.setChristiansSong2(String.format(language.getString("jasper.layout.meeting.song2"),
+		// week.getSpInf19()));
+		jrWeek.setChristiansSong2(midweekSong2Text);
 
 		jrWeek.setChristiansBibleStudyMin(
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf20()));
@@ -1220,7 +1232,14 @@ public class JRWeek {
 		jrWeek.setChristiansReviewText(week.getSpInf25());
 
 		jrWeek.setChristiansMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
-		jrWeek.setChristiansSong3(String.format(language.getString("jasper.layout.meeting.song3"), week.getSpInf26()));
+
+		String midweekSong3 = week.getSpInf26();
+		String midweekSong3Title = week.getSpInf61();
+		JRWeekSongType midweekSong3Type = JRWeekSongType.checkType(midweekSong3, midweekSong3Title);
+		String midweekSong3Text = JRWeekSongType.checkText(language, midweekSong3Type, midweekSong3, midweekSong3Title);
+		// jrWeek.setChristiansSong3(String.format(language.getString("jasper.layout.meeting.song3"),
+		// week.getSpInf26()));
+		jrWeek.setChristiansSong3(midweekSong3Text);
 
 		jrWeek.setChristiansPray2(language.getString("jasper.layout.meeting.pray2"));
 
@@ -1234,10 +1253,21 @@ public class JRWeek {
 		jrWeek.setChristiansPartHeader(language.getString("TEXT0082").toUpperCase());
 
 		jrWeek.setWeekHeader2(checkWeekendHeader(week, weekTypeID, language));
-		jrWeek.setPublicTalkHeader(language.getString("jasper.layout.meeting.weekend.publictalk").toUpperCase());
+
+		if (week.getSpInf65() == 1)
+			jrWeek.setPublicTalkHeader(language.getString("jasper.layout.meeting.weekend.specialtalk").toUpperCase());
+		else
+			jrWeek.setPublicTalkHeader(language.getString("jasper.layout.meeting.weekend.publictalk").toUpperCase());
 
 		jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
-		jrWeek.setPublicTalkSong1(String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf31()));
+
+		String weekendSong1 = week.getSpInf31();
+		String weekendSong1Title = week.getSpInf62();
+		JRWeekSongType weekendSong1Type = JRWeekSongType.checkType(weekendSong1, weekendSong1Title);
+		String weekendSong1Text = JRWeekSongType.checkText(language, weekendSong1Type, weekendSong1, weekendSong1Title);
+		// jrWeek.setPublicTalkSong1(String.format(language.getString("jasper.layout.meeting.song1"),
+		// week.getSpInf31()));
+		jrWeek.setPublicTalkSong1(weekendSong1Text);
 
 		// Solo preghiera
 		if (week.getSpInf41() == 1)
@@ -1254,15 +1284,32 @@ public class JRWeek {
 
 		jrWeek.setPublicTalkMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf42()));
 		jrWeek.setPublicTalkTheme(week.getSpInf32());
-		jrWeek.setPublicTalkName(week.getSpInf33());
+
+		int spInf66 = week.getSpInf66();
+		if (spInf66 > 0) {
+			member = getMemberFromList(membersList, spInf66);
+			if (member != null)
+				if (extendedName)
+					jrWeek.setPublicTalkName(member.getNameStyle3());
+				else
+					jrWeek.setPublicTalkName(member.getNameStyle4());
+		} else
+			jrWeek.setPublicTalkName(week.getSpInf33());
+
 		jrWeek.setPublicTalkCongregation(week.getSpInf34());
 
 		jrWeek.setWatchtowerStudyHeader(
 				language.getString("jasper.layout.meeting.weekend.watchtowerstudy").toUpperCase());
 
 		jrWeek.setWatchtowerStudyMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
-		jrWeek.setWatchtowerStudySong2(
-				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf35()));
+
+		String weekendSong2 = week.getSpInf35();
+		String weekendSong2Title = week.getSpInf63();
+		JRWeekSongType weekendSong2Type = JRWeekSongType.checkType(weekendSong2, weekendSong2Title);
+		String weekendSong2Text = JRWeekSongType.checkText(language, weekendSong2Type, weekendSong2, weekendSong2Title);
+//		jrWeek.setWatchtowerStudySong2(
+//				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf35()));
+		jrWeek.setWatchtowerStudySong2(weekendSong2Text);
 
 		jrWeek.setWatchtowerStudyMin(String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf43()));
 
@@ -1285,7 +1332,7 @@ public class JRWeek {
 				jrWeek.setWatchtowerStudyReaderName(member.getNameStyle4());
 
 		// Add reader to Watchtower Study
-		if (weekType == WeekType.STANDARD) {
+		if (weekType == WeekType.STANDARD || weekType == WeekType.MEMORIAL) {
 
 			if (!jrWeek.getWatchtowerStudyReaderName().isEmpty()) {
 
@@ -1298,8 +1345,14 @@ public class JRWeek {
 		}
 
 		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
-		jrWeek.setWatchtowerStudySong3(
-				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf39()));
+
+		String weekendSong3 = week.getSpInf39();
+		String weekendSong3Title = week.getSpInf64();
+		JRWeekSongType weekendSong3Type = JRWeekSongType.checkType(weekendSong3, weekendSong3Title);
+		String weekendSong3Text = JRWeekSongType.checkText(language, weekendSong3Type, weekendSong3, weekendSong3Title);
+//		jrWeek.setWatchtowerStudySong3(
+//				String.format(language.getString("jasper.layout.meeting.song1"), week.getSpInf39()));
+		jrWeek.setWatchtowerStudySong3(weekendSong3Text);
 
 		jrWeek.setWatchtowerPray2(language.getString("jasper.layout.meeting.pray2"));
 

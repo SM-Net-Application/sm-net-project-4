@@ -1,6 +1,6 @@
 <?php
 // Insert Week
-if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf6"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["spInf8"] ) && isset ( $jsonObj ["spInf9"] ) && isset ( $jsonObj ["spInf10"] ) && isset ( $jsonObj ["spInf11"] ) && isset ( $jsonObj ["spInf12"] ) && isset ( $jsonObj ["spInf13"] ) && isset ( $jsonObj ["spInf14"] ) && isset ( $jsonObj ["spInf15"] ) && isset ( $jsonObj ["spInf16"] ) && isset ( $jsonObj ["spInf17"] ) && isset ( $jsonObj ["spInf18"] ) && isset ( $jsonObj ["spInf19"] ) && isset ( $jsonObj ["spInf20"] ) && isset ( $jsonObj ["spInf21"] ) && isset ( $jsonObj ["spInf22"] ) && isset ( $jsonObj ["spInf23"] ) && isset ( $jsonObj ["spInf24"] ) && isset ( $jsonObj ["spInf25"] ) && isset ( $jsonObj ["spInf26"] ) && isset ( $jsonObj ["spInf27"] ) && isset ( $jsonObj ["spInf28"] ) && isset ( $jsonObj ["spInf29"] ) && isset ( $jsonObj ["spInf30"] ) && isset ( $jsonObj ["spInf31"] ) && isset ( $jsonObj ["spInf32"] ) && isset ( $jsonObj ["spInf33"] ) && isset ( $jsonObj ["spInf34"] ) && isset ( $jsonObj ["spInf35"] ) && isset ( $jsonObj ["spInf36"] ) && isset ( $jsonObj ["spInf37"] ) && isset ( $jsonObj ["spInf38"] ) && isset ( $jsonObj ["spInf39"] ) && isset ( $jsonObj ["spInf40"] ) && isset ( $jsonObj ["spInf41"] ) && isset ( $jsonObj ["spInf42"] ) && isset ( $jsonObj ["spInf43"] ) && isset ( $jsonObj ["spInf44"] ) && isset ( $jsonObj ["spInf45"] ) && isset ( $jsonObj ["spInf46"] ) && isset ( $jsonObj ["spInf47"] ) && isset ( $jsonObj ["spInf48"] ) && isset ( $jsonObj ["spInf49"] ) && isset ( $jsonObj ["spInf50"] ) && isset ( $jsonObj ["spInf51"] ) && isset ( $jsonObj ["spInf52"] ) && isset ( $jsonObj ["spInf53"] ) && isset ( $jsonObj ["spInf54"] ) && isset ( $jsonObj ["spInf55"] ) && isset ( $jsonObj ["spInf56"] ) && isset ( $jsonObj ["spInf57"] ) && isset ( $jsonObj ["spInf58"] ) && isset ( $jsonObj ["spInfMP"] ) && isset ( $jsonObj ["spInfCP"] )) {
+if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf6"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["spInf8"] ) && isset ( $jsonObj ["spInf9"] ) && isset ( $jsonObj ["spInf10"] ) && isset ( $jsonObj ["spInf11"] ) && isset ( $jsonObj ["spInf12"] ) && isset ( $jsonObj ["spInf13"] ) && isset ( $jsonObj ["spInf14"] ) && isset ( $jsonObj ["spInf15"] ) && isset ( $jsonObj ["spInf16"] ) && isset ( $jsonObj ["spInf17"] ) && isset ( $jsonObj ["spInf18"] ) && isset ( $jsonObj ["spInf19"] ) && isset ( $jsonObj ["spInf20"] ) && isset ( $jsonObj ["spInf21"] ) && isset ( $jsonObj ["spInf22"] ) && isset ( $jsonObj ["spInf23"] ) && isset ( $jsonObj ["spInf24"] ) && isset ( $jsonObj ["spInf25"] ) && isset ( $jsonObj ["spInf26"] ) && isset ( $jsonObj ["spInf27"] ) && isset ( $jsonObj ["spInf28"] ) && isset ( $jsonObj ["spInf29"] ) && isset ( $jsonObj ["spInf30"] ) && isset ( $jsonObj ["spInf31"] ) && isset ( $jsonObj ["spInf32"] ) && isset ( $jsonObj ["spInf33"] ) && isset ( $jsonObj ["spInf34"] ) && isset ( $jsonObj ["spInf35"] ) && isset ( $jsonObj ["spInf36"] ) && isset ( $jsonObj ["spInf37"] ) && isset ( $jsonObj ["spInf38"] ) && isset ( $jsonObj ["spInf39"] ) && isset ( $jsonObj ["spInf40"] ) && isset ( $jsonObj ["spInf41"] ) && isset ( $jsonObj ["spInf42"] ) && isset ( $jsonObj ["spInf43"] ) && isset ( $jsonObj ["spInf44"] ) && isset ( $jsonObj ["spInf45"] ) && isset ( $jsonObj ["spInf46"] ) && isset ( $jsonObj ["spInf47"] ) && isset ( $jsonObj ["spInf48"] ) && isset ( $jsonObj ["spInf49"] ) && isset ( $jsonObj ["spInf50"] ) && isset ( $jsonObj ["spInf51"] ) && isset ( $jsonObj ["spInf52"] ) && isset ( $jsonObj ["spInf53"] ) && isset ( $jsonObj ["spInf54"] ) && isset ( $jsonObj ["spInf55"] ) && isset ( $jsonObj ["spInf56"] ) && isset ( $jsonObj ["spInf57"] ) && isset ( $jsonObj ["spInf58"] ) && isset ( $jsonObj ["spInf59"] ) && isset ( $jsonObj ["spInf60"] ) && isset ( $jsonObj ["spInf61"] ) && isset ( $jsonObj ["spInf62"] ) && isset ( $jsonObj ["spInf63"] ) && isset ( $jsonObj ["spInf64"] ) && isset ( $jsonObj ["spInf65"] ) && isset ( $jsonObj ["spInf66"] ) && isset ( $jsonObj ["spInfMP"] ) && isset ( $jsonObj ["spInfCP"] )) {
     
 	if (! empty ( $jsonObj ["spInf1"] ) && ! empty ( $jsonObj ["spInf2"] ) && ! empty ( $jsonObj ["spInf5"] ) && ! empty ( $jsonObj ["spInf6"] ) && ! empty ( $jsonObj ["spInf7"] ) && ! empty ( $jsonObj ["spInf8"] ) && ! empty ( $jsonObj ["spInf9"] ) && ! empty ( $jsonObj ["spInf10"] ) && ! empty ( $jsonObj ["spInf12"] ) && ! empty ( $jsonObj ["spInf13"] ) && ! empty ( $jsonObj ["spInf15"] ) && ! empty ( $jsonObj ["spInf16"] ) && ! empty ( $jsonObj ["spInf17"] ) && ! empty ( $jsonObj ["spInf19"] ) && ! empty ( $jsonObj ["spInf20"] ) && ! empty ( $jsonObj ["spInf21"] ) && ! empty ( $jsonObj ["spInf22"] ) && ! empty ( $jsonObj ["spInf24"] ) && ! empty ( $jsonObj ["spInf25"] ) && ! empty ( $jsonObj ["spInf26"] )) {
 		require_once dirname(__DIR__, 1) . '/config.php';
@@ -18,6 +18,7 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
             $query .= ",spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45, spInf46";
 			$query .= ",spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53";
 			$query .= ",spInf54, spInf55, spInf56, spInf57, spInf58";
+			$query .= ",spInf59, spInf60, spInf61, spInf62, spInf63, spInf64, spInf65, spInf66";
             $query .= ")";
 			$query .= "VALUES (";
 			$query .= $jsonObj ["spInf1"];
@@ -135,6 +136,22 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 			$query .= $jsonObj ["spInf57"];
 			$query .= ", ";
 			$query .= $jsonObj ["spInf58"];
+			$query .= ", ";
+			$query .= "'" . $jsonObj ["spInf59"] . "'";
+			$query .= ", ";
+			$query .= "'" . $jsonObj ["spInf60"] . "'";
+			$query .= ", ";
+			$query .= "'" . $jsonObj ["spInf61"] . "'";
+			$query .= ", ";
+			$query .= "'" . $jsonObj ["spInf62"] . "'";
+			$query .= ", ";
+			$query .= "'" . $jsonObj ["spInf63"] . "'";
+			$query .= ", ";
+			$query .= "'" . $jsonObj ["spInf64"] . "'";
+			$query .= ", ";
+			$query .= $jsonObj ["spInf65"];
+			$query .= ", ";
+			$query .= $jsonObj ["spInf66"];
 			$query .= ")";
 			
 			if ($database->query ( $query ) === TRUE) {

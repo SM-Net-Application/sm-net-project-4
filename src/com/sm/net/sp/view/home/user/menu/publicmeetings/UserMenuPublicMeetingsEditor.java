@@ -96,11 +96,11 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
-	
+
 	private AlertBuilderOld alertBuilder;
 
 	private SupportPlannerView application;
-	
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -437,6 +437,17 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 			int spInf57 = 0;
 			int spInf58 = 0;
 
+			// 1.1
+
+			String spInf59 = emptyTextEncrypted;
+			String spInf60 = emptyTextEncrypted;
+			String spInf61 = emptyTextEncrypted;
+			String spInf62 = emptyTextEncrypted;
+			String spInf63 = emptyTextEncrypted;
+			String spInf64 = emptyTextEncrypted;
+			int spInf65 = 0;
+			int spInf66 = 0; // TODO: gestire Discorso speciale
+
 			// ------------------------------------------------
 
 			String spInfMinistryParts = "";
@@ -460,8 +471,9 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
 						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
 						spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50,
-						spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInfMinistryParts,
-						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60,
+						spInf61, spInf62, spInf63, spInf64, spInf65, spInf66, spInfMinistryParts, spInfChristiansParts,
+						settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
 	}
@@ -645,6 +657,5 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
 		this.databaseWeeksUsciere = databaseWeeksUsciere;
 	}
-
 
 }

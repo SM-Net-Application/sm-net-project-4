@@ -153,7 +153,7 @@ if (file_exists("languages/" . $langIni)) {
 
                     $query_week = "SELECT spInf1, spInf3, spInf4, spInf11, spInf14, spInf18, spInf23, spInf27, spInf28,";
                     $query_week .= " spInf29, spInf30, spInf37, spInf38, spInf40, spInf41, spInf44, spInf45, spInf46, spInf47,";
-                    $query_week .= " spInf48, spInf49, spInf58";
+                    $query_week .= " spInf48, spInf49, spInf58, spInf65, spInf66";
                     $query_week .= " FROM sp_week";
                     $query_week .= " WHERE spInf1 >=";
                     $query_week .= " " . $sunday_weekcode;
@@ -190,7 +190,8 @@ if (file_exists("languages/" . $langIni)) {
                             $row["spInf48"] = $resultRow_week["spInf48"];
                             $row["spInf49"] = $resultRow_week["spInf49"];
                             $row["spInf58"] = $resultRow_week["spInf58"];
-
+                            $row["spInf65"] = $resultRow_week["spInf65"];
+                            $row["spInf66"] = $resultRow_week["spInf66"];
                             array_push($weeks, $row);
                         }
                     }
@@ -406,6 +407,13 @@ if (file_exists("languages/" . $langIni)) {
                     }
                     if ($memberID == $week["spInf40"]) {
                         array_push($activities, newTask($weekend, $weekend_text, $language['weekend_pray2'], $language['weekend_pray2_icon'], 0, ""));
+                    }
+                    if ($memberID == $week["spInf66"]) {
+                        if ($week["spInf65"] == 1) {
+                            array_push($activities, newTask($weekend, $weekend_text, $language['weekend_specialtalk'], $language['weekend_specialtalk_icon'], 0, ""));
+                        } else {
+                            array_push($activities, newTask($weekend, $weekend_text, $language['weekend_publictalk'], $language['weekend_publictalk_icon'], 0, ""));
+                        }
                     }
                 }
                 // ***********************************

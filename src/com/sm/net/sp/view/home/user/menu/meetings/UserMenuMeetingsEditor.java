@@ -493,6 +493,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
+	private ObservableList<Member> internSpeakerList;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -1216,6 +1218,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.conductorSecondHallList = FXCollections.observableArrayList();
 
+		this.internSpeakerList = FXCollections.observableArrayList();
+
 		addEmptyMember();
 
 		presidentComboBox.setItems(presidentList);
@@ -1235,6 +1239,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		congregationBibleStudyReaderComboBox.setItems(congregationBibleStudyReaderList);
 
 		this.conductorSecondHallComboBox.setItems(this.conductorSecondHallList);
+
+		this.internSpeakerComboBox.setItems(this.internSpeakerList);
 
 		selectFirst();
 
@@ -1334,6 +1340,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			// if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
 			if (member.getSpInf60() == 1)
 				this.conductorSecondHallList.add(member);
+
+			if (member.getSpInf45() == 1)
+				this.internSpeakerList.add(member);
 		}
 
 		orderLists();
@@ -1358,6 +1367,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.watchtowerStudyList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 
 		this.conductorSecondHallList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+
+		this.internSpeakerList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 	}
 
 	private void addEmptyMember() {
@@ -1378,6 +1389,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.congregationBibleStudyReaderList.add(Member.emptyMember(language));
 
 		this.conductorSecondHallList.add(Member.emptyMember(this.language));
+
+		this.internSpeakerList.add(Member.emptyMember(this.language));
 	}
 
 	private void resetLists() {
@@ -1397,6 +1410,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.congregationBibleStudyReaderList.clear();
 		this.conductorSecondHallList.clear();
+
+		this.internSpeakerList.clear();
 	}
 
 	private void loadSelectedWeek() {
@@ -1988,8 +2003,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			int spInf65 = this.specialTalkCheckBox.isSelected() ? 1 : 0;
 			int spInf66 = this.internSpeakerComboBox.getSelectionModel().getSelectedItem().getSpMemberID();
 
-			// TODO: Salvare le nuove informazioni
-			
 			// -------
 
 			String spInfMinistryParts = getMinistryParts();
@@ -2006,9 +2019,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 						spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
 						spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39,
 						spInf40, spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49,
-						spInf50, spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58,
-						spInfMinistryParts, spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab,
-						ownerCtrl);
+						spInf50, spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59,
+						spInf60, spInf61, spInf62, spInf63, spInf64, spInf65, spInf66, spInfMinistryParts,
+						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 
 			} else {
 				// newWeek
@@ -2020,8 +2033,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 						spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
 						spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
 						spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50,
-						spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInfMinistryParts,
-						spInfChristiansParts, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60,
+						spInf61, spInf62, spInf63, spInf64, spInf65, spInf66, spInfMinistryParts, spInfChristiansParts,
+						settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
 	}
@@ -2455,6 +2469,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		String bibleread = "";
 		String biblereadmin = "";
 		String biblereadvers = "";
+		@SuppressWarnings("unused")
 		String biblereadpoint = "";
 
 		if (sections.size() > 1) {

@@ -15,12 +15,28 @@ Data di pubblicazione : ..-..-....
 				- Conduttore Adunanza per il servizio (Gruppo)
 			- Ottimizzazione della GUI
 
+	Sezione Adunanze:
+		- Nuove informazioni:
+			- Titolo dei cantici
+			- Spunta per identificare il discorso pubblico come Discorso Speciale
+			- Il discorso pubblico può essere pronunciato da un oratore interno (visualizzabile anche sul Monitor-Online)
+
+	Monitor-Online:
+		- Visualizzazione dei seguenti incarichi:
+			- Discorso pubblico
+			- Discorso speciale
+
 	Ottimizzazioni:
-		Lo storico viene aperto solo se la settimana è salvata (Record presente nel database)
-			Adunanze, Audio/Video, Usciere, Discori pubblici
+		- Lo storico viene aperto solo se la settimana è salvata (Record presente nel database)
+			- Sezioni: Adunanze, Audio/Video, Usciere, Discori pubblici
+		- Migliorati i seguenti layout di stampa:
+			- Adunanza infrasettimanale (anche con sorvegliante)
+			- Adunanza del fine settimana (anche con sorvegliante)
+			- Commemorazione
 		
 	Bug-fix:
-		Lo storico nella sezione Discorsi pubblici non veniva caricato
+		- Lo storico nella sezione Discorsi pubblici non veniva caricato
+		- Il lettore dell'adunanza del fine settimana non veniva stampato se in settimana si teneva la commemorazione
 		
 	Database-SQL:
 	ALTER TABLE sp_members ADD spInf60 INT NOT NULL AFTER spInf59, ADD spInf61 INT NOT NULL AFTER spInf60, ADD spInf62 INT NOT NULL AFTER spInf61;

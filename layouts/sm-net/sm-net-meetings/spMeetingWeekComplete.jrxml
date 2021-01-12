@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -264,13 +264,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="1b628578-9d9a-4b90-ba60-d95d5a8b8578">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="1b628578-9d9a-4b90-ba60-d95d5a8b8578">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPray1NameText}]]></textFieldExpression>
 			</textField>
@@ -330,13 +331,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="49b523c1-b8cb-4c5b-9d7a-bd1b6c54234c">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="49b523c1-b8cb-4c5b-9d7a-bd1b6c54234c">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPresidentNameText}]]></textFieldExpression>
 			</textField>
@@ -417,13 +419,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="3d925ac3-3ac5-42dc-b345-dfe020d5bba7">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="3d925ac3-3ac5-42dc-b345-dfe020d5bba7">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPresidentNameText}]]></textFieldExpression>
 			</textField>
@@ -569,13 +572,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="a0e735a4-720c-4540-aae8-486dd3a97ac1">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="a0e735a4-720c-4540-aae8-486dd3a97ac1">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPray2NameText}]]></textFieldExpression>
 			</textField>
@@ -605,7 +609,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek}&&!$F{memPrayEmblemsName}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="3d9827a8-7604-4c36-9a9c-fbeb42423d08">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="3d9827a8-7604-4c36-9a9c-fbeb42423d08">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -613,7 +617,7 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="149f4c50-1361-467e-b738-ba0956457d8b">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="149f4c50-1361-467e-b738-ba0956457d8b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -624,7 +628,7 @@
 				<textFieldExpression><![CDATA[$F{memPrayEmblemsText}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="3597f783-6996-41b1-b70a-4d02e53546e8">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="3597f783-6996-41b1-b70a-4d02e53546e8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -635,11 +639,22 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPrayEmblemsName}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="84240f0f-b8ca-40b9-943f-bd9b319b01d8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek}&&!$F{memMemberEmblemsList}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="44ce3f90-d7d0-4c0e-8ab2-1eaf9630b6c9">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="44ce3f90-d7d0-4c0e-8ab2-1eaf9630b6c9">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -647,10 +662,9 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="294d501f-e1ca-4dbb-97aa-d78229862cb8">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="294d501f-e1ca-4dbb-97aa-d78229862cb8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
@@ -658,22 +672,31 @@
 				<textFieldExpression><![CDATA[$F{memMemberEmblemsText}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="b293119e-ac4a-49a5-a6a2-a0a566c6655f">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="b293119e-ac4a-49a5-a6a2-a0a566c6655f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memMemberEmblemsList}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="8d00af6d-bc3e-4fd0-a229-afc044dff3e3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek}&&!$F{memFamilyEmblemsList}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="b05b6ab5-8259-4f5d-994c-a55f59dbcbbb">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="b05b6ab5-8259-4f5d-994c-a55f59dbcbbb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -681,10 +704,9 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="3138b589-536c-4135-8248-0544a2d471e8">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="3138b589-536c-4135-8248-0544a2d471e8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
@@ -692,22 +714,31 @@
 				<textFieldExpression><![CDATA[$F{memFamilyEmblemsText}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="26419973-21e1-4b70-8ebd-e956b00a8112">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="26419973-21e1-4b70-8ebd-e956b00a8112">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memFamilyEmblemsList}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="ed5720b1-b730-47d4-a640-9340eb4d6053">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek}&&!$F{memPlace}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="5fcdad19-ed64-43c1-ab35-21b55f873384">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="5fcdad19-ed64-43c1-ab35-21b55f873384">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -715,10 +746,8 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="8755fe7e-f7ec-4c6c-acc3-a92b736d6971">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="8755fe7e-f7ec-4c6c-acc3-a92b736d6971">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
@@ -726,16 +755,26 @@
 				<textFieldExpression><![CDATA[$F{memPlace}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="5d4816e3-0015-4556-957d-66299b605f85">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="5d4816e3-0015-4556-957d-66299b605f85">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPlaceText}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="afc24644-9dff-4eac-b28f-89c7bf0e0e2e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek} && !$F{audioMidweek}.isEmpty()]]></printWhenExpression>
@@ -936,13 +975,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="54" width="134" height="17" forecolor="#000000" uuid="6023e677-96cc-412e-927c-7d6cccfaa8f4">
+				<reportElement x="282" y="54" width="132" height="17" forecolor="#000000" uuid="6023e677-96cc-412e-927c-7d6cccfaa8f4">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{treasuresPray1}]]></textFieldExpression>
 			</textField>
@@ -1384,8 +1424,8 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement x="60" y="17" width="217" height="17" forecolor="#000000" uuid="3d6d186e-77e1-4433-b512-e7f871973b67">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="17" width="351" height="17" forecolor="#000000" uuid="3d6d186e-77e1-4433-b512-e7f871973b67">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -1528,11 +1568,12 @@
 			</line>
 		</band>
 		<band height="17">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<printWhenExpression><![CDATA[$F{printStandardMidweek}&&!$F{printOverseerMidweek}]]></printWhenExpression>
 			<rectangle>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="43c35888-7ce7-4255-bffd-7d07917a314c">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
@@ -1550,15 +1591,15 @@
 			</textField>
 			<line>
 				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="26c19039-2539-4727-9113-15751ee9897f">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="c03fe7cb-2a78-43a9-ae81-7744ecc55bcb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1571,31 +1612,32 @@
 			<line>
 				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="703c43c0-e702-4cec-9fc4-814fa616649b">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="ec6b12e3-c765-4c93-aa63-50a4deccc416">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="ec6b12e3-c765-4c93-aa63-50a4deccc416">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{christiansPray2}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="78a23cde-6308-4f7e-a563-4ccf623a9b66">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.5"/>
@@ -1750,13 +1792,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="e4af1981-3735-47e8-86c9-73d7dd9f3462">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="e4af1981-3735-47e8-86c9-73d7dd9f3462">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{christiansPray2}]]></textFieldExpression>
 			</textField>
@@ -1967,13 +2010,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="ba71ee12-2d6f-4609-801c-669ae29ae0b5">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="ba71ee12-2d6f-4609-801c-669ae29ae0b5">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPray1NameText}]]></textFieldExpression>
 			</textField>
@@ -2033,13 +2077,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="712f6e35-a49e-47e9-bbd6-cb08088d5beb">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="712f6e35-a49e-47e9-bbd6-cb08088d5beb">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPresidentNameText}]]></textFieldExpression>
 			</textField>
@@ -2120,13 +2165,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="098e45a3-9cbb-4b36-a343-8118a6a589b0">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="098e45a3-9cbb-4b36-a343-8118a6a589b0">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPresidentNameText}]]></textFieldExpression>
 			</textField>
@@ -2272,13 +2318,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="67867be7-54c0-4107-af13-5882164a2a07">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="67867be7-54c0-4107-af13-5882164a2a07">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPray2NameText}]]></textFieldExpression>
 			</textField>
@@ -2308,7 +2355,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}&&!$F{memPrayEmblemsName}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="7301ff6e-28ec-4702-be62-d2e581c610d8">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="7301ff6e-28ec-4702-be62-d2e581c610d8">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -2316,7 +2363,7 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="17eb9694-2efe-4f3a-a7f8-ddcb4a5e8d4b">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="17eb9694-2efe-4f3a-a7f8-ddcb4a5e8d4b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -2327,7 +2374,7 @@
 				<textFieldExpression><![CDATA[$F{memPrayEmblemsText}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="44bfd520-0ee3-4d90-8334-818a02741231">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="44bfd520-0ee3-4d90-8334-818a02741231">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -2338,11 +2385,22 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPrayEmblemsName}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="acaa84da-8244-4e17-8834-bd4ee307b2c8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}&&!$F{memMemberEmblemsList}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="979c1a72-1777-4667-b1a7-b1031d74cab2">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="979c1a72-1777-4667-b1a7-b1031d74cab2">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -2350,10 +2408,9 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="1ee2c522-a3eb-4674-af7a-580f0e8ff3e2">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="1ee2c522-a3eb-4674-af7a-580f0e8ff3e2">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
@@ -2361,22 +2418,31 @@
 				<textFieldExpression><![CDATA[$F{memMemberEmblemsText}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="36484bd3-a388-41e8-8b3b-35985fe2edc3">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="36484bd3-a388-41e8-8b3b-35985fe2edc3">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memMemberEmblemsList}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="e8fdc7db-d182-4ef7-8229-69e0c2797f96">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}&&!$F{memFamilyEmblemsList}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="07188dd8-b4c9-4391-985d-7e6b6d8a1121">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="07188dd8-b4c9-4391-985d-7e6b6d8a1121">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -2384,10 +2450,9 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="3becf1d4-4852-4fc9-96e7-d124a7c2fb99">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="3becf1d4-4852-4fc9-96e7-d124a7c2fb99">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
@@ -2395,22 +2460,31 @@
 				<textFieldExpression><![CDATA[$F{memFamilyEmblemsText}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="d92a9992-9ca0-449a-9162-3afc316290a6">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="d92a9992-9ca0-449a-9162-3afc316290a6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memFamilyEmblemsList}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="3bdd9653-c5d6-4b02-a073-580b8ae29bac">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}&&!$F{memPlace}.isEmpty()]]></printWhenExpression>
 			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" uuid="9bdc30ae-1307-4317-bd7f-1407ed8569c3">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="17" backcolor="#F0F0F0" uuid="9bdc30ae-1307-4317-bd7f-1407ed8569c3">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<graphicElement>
@@ -2418,10 +2492,8 @@
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="160" y="0" width="389" height="17" forecolor="#000000" uuid="6bdc95db-64b1-4bb0-a43d-8ecc06965c8b">
+				<reportElement x="85" y="0" width="465" height="17" forecolor="#000000" uuid="6bdc95db-64b1-4bb0-a43d-8ecc06965c8b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
@@ -2429,16 +2501,26 @@
 				<textFieldExpression><![CDATA[$F{memPlace}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="5" y="0" width="150" height="17" forecolor="#000000" uuid="efcca3bd-df03-4056-a300-e9d70c6feecc">
+				<reportElement x="5" y="0" width="75" height="17" forecolor="#000000" uuid="efcca3bd-df03-4056-a300-e9d70c6feecc">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{memPlaceText}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="82" y="0" width="1" height="17" uuid="3a8dd462-b923-4018-9ce6-325deea8740e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
 		</band>
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}&&!$F{audioWeekend}.isEmpty()]]></printWhenExpression>
@@ -2610,7 +2692,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[($F{printStandardWeekend}&&!$F{printOverseerWeekend})&&!$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="5c7d7373-9c61-4627-adc8-857f5ddd7199">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="5c7d7373-9c61-4627-adc8-857f5ddd7199">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -2629,7 +2711,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkMinSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="b4b9435e-cfc1-4339-83f0-780a5c69d440">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="b4b9435e-cfc1-4339-83f0-780a5c69d440">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -2638,7 +2720,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="b15f8ee9-03f2-4562-9f14-daea4a4ee535">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -2650,7 +2732,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="23451de5-3b97-4080-89ed-52f21ab04bee">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="23451de5-3b97-4080-89ed-52f21ab04bee">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2661,18 +2743,19 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="6415ba21-1140-4f30-b2a8-74c9cdf1db36">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="6415ba21-1140-4f30-b2a8-74c9cdf1db36">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{publicTalkPresidentText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="06f676a8-1ef4-4e61-a04d-19039e06582e">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="06f676a8-1ef4-4e61-a04d-19039e06582e">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2725,7 +2808,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="9ecc0268-9ee4-4284-982e-11a55f736119">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -2748,13 +2831,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="76bf4186-710d-44c4-acd2-28eabf6eaaf4">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="76bf4186-710d-44c4-acd2-28eabf6eaaf4">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{publicTalkPresidentText}]]></textFieldExpression>
 			</textField>
@@ -2784,7 +2868,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[($F{printStandardWeekend}&&!$F{printOverseerWeekend})&&$F{printOnlyWatchtower}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="df940c0c-4fa1-4a78-9cc0-5b03bc9fc70b">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="df940c0c-4fa1-4a78-9cc0-5b03bc9fc70b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -2803,7 +2887,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkMinSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="a5528869-dae4-4910-9d35-b9b7183c2685">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="a5528869-dae4-4910-9d35-b9b7183c2685">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -2812,7 +2896,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="295efa13-b2f6-45b6-b1f5-adc3c17b060e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -2824,7 +2908,7 @@
 				<textFieldExpression><![CDATA[$F{watchtowerStudySong2}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="7bda5441-3438-4fe0-b7cb-49fa6f1291fc">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="7bda5441-3438-4fe0-b7cb-49fa6f1291fc">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2835,18 +2919,19 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="8347fdc8-7884-47e5-8c1b-87f7b0f701b9">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="8347fdc8-7884-47e5-8c1b-87f7b0f701b9">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{publicTalkPresidentText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="41b6d1fb-91f4-4afc-a6f3-3b66918724bb">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="41b6d1fb-91f4-4afc-a6f3-3b66918724bb">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -3050,8 +3135,8 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="c9614d4d-bc17-41d1-a1bd-f4d766eaf53d">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="0" width="356" height="17" forecolor="#000000" uuid="c9614d4d-bc17-41d1-a1bd-f4d766eaf53d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -3253,7 +3338,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="53f5049e-7e11-4fe5-952b-465c67a8230d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -3287,14 +3372,15 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="8e8fa77d-3ae8-4b7a-8c25-1c2f781a2dab">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="8e8fa77d-3ae8-4b7a-8c25-1c2f781a2dab">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<printWhenExpression><![CDATA[!$F{watchtowerPray2Name}.isEmpty()]]></printWhenExpression>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{watchtowerPray2}]]></textFieldExpression>
 			</textField>
@@ -3340,7 +3426,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="9836c6e0-989d-4953-8303-6e046c135f07">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -3362,13 +3448,14 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="282" y="0" width="134" height="17" forecolor="#000000" uuid="c2a09a01-31d3-461e-a9e9-7a9474111ea0">
+				<reportElement x="282" y="0" width="132" height="17" forecolor="#000000" uuid="c2a09a01-31d3-461e-a9e9-7a9474111ea0">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="false"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{christiansPray2}]]></textFieldExpression>
 			</textField>

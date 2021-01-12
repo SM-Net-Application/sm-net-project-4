@@ -1,24 +1,9 @@
 
-	- salvare le nuove informazioni (nuova adunanza --> 26)
-	- salvare le nuove informazioni (edit adunanza --> 27)
-	- caricare le nuove informazioni (edit adunanza --> 21)
-
-	Adunanze:
-		Cantico iniziale (infrasettimanale): Testo
-		Cantico centrale (infrasettimanale): Testo
-		Cantico finale (infrasettimanale): Testo
-		Cantico iniziale (fine settimana): Testo
-		Cantico centrale (fine settimana): Testo
-		Cantico finale (fine settimana): Testo
-		Se il numero del cantico è definito, scrivere <Cantico ... Testo>
-		Se il numero del cantico non è definito, scrivere <Testo>
-		Se il ne il numero ne il testo è presente, scrivere <Cantico>
-		Spunta Discorso Speciale
-		ComboBox Oratore Interno
-		Consigliere classe supplementare, caricare la lista
-
 	Sorvegliante:
-		- Aggiungere i titoli dei cantici
+		- Aggiungere i titoli dei cantici (sono solo 2 cantici)
+		
+	Commemorazione:
+		- Aggiungere i titoli dei cantici (sono solo 2 cantici)
 
 	Nuova sezione: Adunanze per il servizio di campo (Congregazione)
 	
@@ -39,7 +24,13 @@
 		Parlarne prima con Alex.
 		
 	Monitor-Online
-		Discorso pubblico se disponibile ComboBox Oratore interno
+		- Visualizzare:
+			- Discorso della Commemorazione
+			- Passaggio emblemi
+			- Preparazione emblema Pane
+			- Preparazione emblema Vino
+			- Preghiera Pane
+			- Preghiera Vino
 		Tabella eventi
 			- Congressi/Assemblee
 			- Visita del sorvegliante

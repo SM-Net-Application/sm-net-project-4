@@ -19,6 +19,8 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
             $query .= " sp_week.spInf41, sp_week.spInf42, sp_week.spInf43, sp_week.spInf44, sp_week.spInf45, sp_week.spInf46,";
 			$query .= " sp_week.spInf47, sp_week.spInf48, sp_week.spInf49, sp_week.spInf50, sp_week.spInf51, sp_week.spInf52, sp_week.spInf53,";
 			$query .= " sp_week.spInf54, sp_week.spInf55, sp_week.spInf56, sp_week.spInf57, sp_week.spInf58,";
+			$query .= " sp_week.spInf59, sp_week.spInf60, sp_week.spInf61, sp_week.spInf62,";
+			$query .= " sp_week.spInf63, sp_week.spInf64, sp_week.spInf65, sp_week.spInf66,";
 			$query .= " sp_week_ov.spWeekOvID, sp_week_ov.spInf1 as spInf1_ov, sp_week_ov.spInf2 as spInf2_ov, sp_week_ov.spInf3 as spInf3_ov,";
 			$query .= " sp_week_ov.spInf4 as spInf4_ov, sp_week_ov.spInf5 as spInf5_ov, sp_week_ov.spInf6 as spInf6_ov,";
 			$query .= " sp_week_ov.spInf7 as spInf7_ov, sp_week_ov.spInf8 as spInf8_ov, sp_week_ov.spInf9 as spInf9_ov,";
@@ -107,6 +109,15 @@ if (isset ( $jsonObj ["keyStart"] ) && isset ( $jsonObj ["keyEnd"] )) {
 					$row ["spInf56"] = $resultRow ["spInf56"];
 					$row ["spInf57"] = $resultRow ["spInf57"];
 					$row ["spInf58"] = $resultRow ["spInf58"];
+
+					$row ["spInf59"] = $resultRow ["spInf59"];
+					$row ["spInf60"] = $resultRow ["spInf60"];
+					$row ["spInf61"] = $resultRow ["spInf61"];
+					$row ["spInf62"] = $resultRow ["spInf62"];
+					$row ["spInf63"] = $resultRow ["spInf63"];
+					$row ["spInf64"] = $resultRow ["spInf64"];
+					$row ["spInf65"] = $resultRow ["spInf65"];
+					$row ["spInf66"] = $resultRow ["spInf66"];
 					
 					// Circuit Overseer
 					$row ["spWeekOvID"] = $resultRow ["spWeekOvID"];
