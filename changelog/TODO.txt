@@ -1,10 +1,7 @@
 
-	Componenti della congregazione:
-		- Consigliere classe supplementare
-		- Conduttore adunanza per il servizio di campo (Congregazione)
-		- Conduttore adunanza per il servizio di campo (Gruppo di servizio)
-		- Ottimizzazione della GUI
-		- Modificare struttura del database
+	- salvare le nuove informazioni (nuova adunanza --> 26)
+	- salvare le nuove informazioni (edit adunanza --> 27)
+	- caricare le nuove informazioni (edit adunanza --> 21)
 
 	Adunanze:
 		Cantico iniziale (infrasettimanale): Testo
@@ -19,6 +16,9 @@
 		Spunta Discorso Speciale
 		ComboBox Oratore Interno
 		Consigliere classe supplementare, caricare la lista
+
+	Sorvegliante:
+		- Aggiungere i titoli dei cantici
 
 	Nuova sezione: Adunanze per il servizio di campo (Congregazione)
 	
@@ -49,15 +49,24 @@
 		- Visualizzare il link Online
 	
 	- Cantici:
+		- I cantici vengono salvati nella sezione Configurazione
+		- Il programma contiene il link di default (nel file ini della lingua)
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
 		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
 		- Nelle adunanze determinare il titolo in base al numero inserito
 		- Nel layout stampare anche il titolo
 	
-	- Unire la sezione Informazioni a Configurazione
-		- Testare poi tutte le sezioni che utilizzavano il Nome Congregazione
+	- Rendere la sezione Configurazione come privilegio utente
+	
+	- Discorsi pubblici
+		- Aggiungere Tema del cantico, Discorso speciale e Oratore interno
 	
 	- Nuova sezione: Pulizia
+		- Pulizia semplificata (settimanale, gruppo)
+		- Pulizia approfondita (gruppo (quando in programma) oppure testo (per indicare un altra congregazione che utilizza la stessa sala))
+	
+	- Sostituire la classe Authenticator
+	
 	- Nuova sezione: Territori
 	- Nuova sezione: Letteratura
 	

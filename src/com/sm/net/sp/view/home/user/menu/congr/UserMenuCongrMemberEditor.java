@@ -283,6 +283,18 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private CheckBox usciereZone3WeekendCheckBox;
 
+	@FXML
+	private Tab readerTab;
+	@FXML
+	private Tab speakerTab;
+
+	@FXML
+	private CheckBox presidentSecondHallCheckBox;
+	@FXML
+	private CheckBox serviceMeetingCongrCheckBox;
+	@FXML
+	private CheckBox serviceMeetingGroupCheckBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -434,6 +446,12 @@ public class UserMenuCongrMemberEditor {
 		this.usciereZone3MidweekCheckBox.getStyleClass().add("check_box_001");
 		this.usciereZone3WeekendCheckBox.getStyleClass().add("check_box_001");
 
+		this.readerTab.getStyleClass().add("tab_001");
+		this.speakerTab.getStyleClass().add("tab_001");
+
+		this.presidentSecondHallCheckBox.getStyleClass().add("check_box_001");
+		this.serviceMeetingCongrCheckBox.getStyleClass().add("check_box_001");
+		this.serviceMeetingGroupCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -545,6 +563,10 @@ public class UserMenuCongrMemberEditor {
 		this.usciereZone2WeekendCheckBox.setSelected((this.selectedMember.getSpInf57() == 1));
 		this.usciereZone3MidweekCheckBox.setSelected((this.selectedMember.getSpInf58() == 1));
 		this.usciereZone3WeekendCheckBox.setSelected((this.selectedMember.getSpInf59() == 1));
+		
+		this.presidentSecondHallCheckBox.setSelected((this.selectedMember.getSpInf60() == 1));
+		this.serviceMeetingCongrCheckBox.setSelected((this.selectedMember.getSpInf61() == 1));
+		this.serviceMeetingGroupCheckBox.setSelected((this.selectedMember.getSpInf62() == 1));
 	}
 
 	private void listeners() {
@@ -678,20 +700,24 @@ public class UserMenuCongrMemberEditor {
 			String spInf58 = !this.usciereZone3MidweekCheckBox.isSelected() ? "0" : "1";
 			String spInf59 = !this.usciereZone3WeekendCheckBox.isSelected() ? "0" : "1";
 
+			String spInf60 = !this.presidentSecondHallCheckBox.isSelected() ? "0" : "1";
+			String spInf61 = !this.serviceMeetingCongrCheckBox.isSelected() ? "0" : "1";
+			String spInf62 = !this.serviceMeetingGroupCheckBox.isSelected() ? "0" : "1";
+
 			if (selectedMember != null)
 				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
 						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59);
+						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
 			else
 				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
 						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59);
+						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
 		}
 //		else
 //			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
@@ -708,15 +734,16 @@ public class UserMenuCongrMemberEditor {
 			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
 			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
 			String spInf50, String spInf51, String spInf52, String spInf53, String spInf54, String spInf55,
-			String spInf56, String spInf57, String spInf58, String spInf59) {
+			String spInf56, String spInf57, String spInf58, String spInf59, String spInf60, String spInf61,
+			String spInf62) {
 
 		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", spInf6, spInf7, spInf8, spInf9, spInf10, spInf11,
 				spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 				spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33,
 				spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
 				spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54, spInf55,
-				spInf56, spInf57, spInf58, spInf59, settings, ownerStage, parentTabPane, newMemberTab, membersTab,
-				ownerCtrl);
+				spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62, settings, ownerStage, parentTabPane,
+				newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -728,15 +755,16 @@ public class UserMenuCongrMemberEditor {
 			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
 			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
 			String spInf50, String spInf51, String spInf52, String spInf53, String spInf54, String spInf55,
-			String spInf56, String spInf57, String spInf58, String spInf59) {
+			String spInf56, String spInf57, String spInf58, String spInf59, String spInf60, String spInf61,
+			String spInf62) {
 
 		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, spInf6,
 				spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
 				spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
 				spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
 				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51,
-				spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, settings, ownerStage,
-				parentTabPane, newMemberTab, membersTab, ownerCtrl);
+				spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62,
+				settings, ownerStage, parentTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
@@ -1064,6 +1092,23 @@ public class UserMenuCongrMemberEditor {
 		this.usciereZone2WeekendCheckBox.setText("");
 		this.usciereZone3MidweekCheckBox.setText("");
 		this.usciereZone3WeekendCheckBox.setText("");
+
+		Tooltip readerTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.reader"));
+		readerTabTooltip.getStyleClass().add("tooltip_001");
+		this.readerTab.setTooltip(readerTabTooltip);
+		this.readerTab.setText("");
+		this.readerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PODIUM));
+
+		Tooltip speakerTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.speaker"));
+		speakerTabTooltip.getStyleClass().add("tooltip_001");
+		this.speakerTab.setTooltip(speakerTabTooltip);
+		this.speakerTab.setText("");
+		this.speakerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PUBLIC_TALK));
+
+		this.presidentSecondHallCheckBox
+				.setText(this.language.getString("congregation.memberseditor.presidentsecondhall"));
+		this.serviceMeetingCongrCheckBox.setText(this.language.getString("congregation.memberseditor.servmeetcongr"));
+		this.serviceMeetingGroupCheckBox.setText(this.language.getString("congregation.memberseditor.servmeetgroup"));
 	}
 
 	public Settings getSettings() {

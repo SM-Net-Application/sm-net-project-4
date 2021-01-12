@@ -117,7 +117,8 @@ public class JSONRequest {
 			String spInf37, String spInf38, String spInf39, String spInf40, String spInf41, String spInf42,
 			String spInf43, String spInf44, String spInf45, String spInf46, String spInf47, String spInf48,
 			String spInf49, String spInf50, String spInf51, String spInf52, String spInf53, String spInf54,
-			String spInf55, String spInf56, String spInf57, String spInf58, String spInf59) {
+			String spInf55, String spInf56, String spInf57, String spInf58, String spInf59, String spInf60,
+			String spInf61, String spInf62) {
 
 		JSONObject jsonObj = create(Integer.valueOf(10));
 		jsonObj.put("spInf1", spInf1);
@@ -179,7 +180,10 @@ public class JSONRequest {
 		jsonObj.put("spInf57", spInf57);
 		jsonObj.put("spInf58", spInf58);
 		jsonObj.put("spInf59", spInf59);
-
+		jsonObj.put("spInf60", spInf60);
+		jsonObj.put("spInf61", spInf61);
+		jsonObj.put("spInf62", spInf62);
+		
 		return jsonObj;
 	}
 
@@ -192,7 +196,8 @@ public class JSONRequest {
 			String spInf36, String spInf37, String spInf38, String spInf39, String spInf40, String spInf41,
 			String spInf42, String spInf43, String spInf44, String spInf45, String spInf46, String spInf47,
 			String spInf48, String spInf49, String spInf50, String spInf51, String spInf52, String spInf53,
-			String spInf54, String spInf55, String spInf56, String spInf57, String spInf58, String spInf59) {
+			String spInf54, String spInf55, String spInf56, String spInf57, String spInf58, String spInf59,
+			String spInf60, String spInf61, String spInf62) {
 
 		JSONObject jsonObj = create(Integer.valueOf(11));
 		jsonObj.put("spMemberID", spMemberID);
@@ -254,6 +259,9 @@ public class JSONRequest {
 		jsonObj.put("spInf57", spInf57);
 		jsonObj.put("spInf58", spInf58);
 		jsonObj.put("spInf59", spInf59);
+		jsonObj.put("spInf60", spInf60);
+		jsonObj.put("spInf61", spInf61);
+		jsonObj.put("spInf62", spInf62);
 
 		return jsonObj;
 	}
@@ -1138,7 +1146,7 @@ public class JSONRequest {
 
 		return jsonObj;
 	}
-	
+
 	public static JSONObject USCIERE_UPDATE(WeekUsciere w) {
 
 		JSONObject jsonObj = create(Integer.valueOf(61));
@@ -1166,13 +1174,13 @@ public class JSONRequest {
 
 		return jsonObj;
 	}
-	
+
 	public static JSONObject USCIERE_LOAD() {
 
 		JSONObject jsonObj = create(Integer.valueOf(62));
 		return jsonObj;
 	}
-	
+
 	public static JSONObject USCIERE_DELETE(int id) {
 
 		JSONObject jsonObj = create(Integer.valueOf(63));

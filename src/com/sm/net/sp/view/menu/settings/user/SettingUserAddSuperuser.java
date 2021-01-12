@@ -134,10 +134,13 @@ public class SettingUserAddSuperuser {
 	protected boolean checkFields(String user, String password, String key) {
 
 		boolean check = true;
+		// TODO: Sostituire la classe Authenticator
 		check = Authenticator.isValid(user, ValidationType.VERY_STRONG);
 		if (check)
+			// TODO: Sostituire la classe Authenticator
 			check = Authenticator.isValid(password, ValidationType.VERY_STRONG);
 		if (check)
+			// TODO: Sostituire la classe Authenticator
 			check = Authenticator.isValid(key, ValidationType.VERY_STRONG);
 
 		return check;

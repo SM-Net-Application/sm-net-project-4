@@ -174,15 +174,28 @@
                                                                         </ComboBox>
                                                                      </children>
                                                                   </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <HBox>
                                                                      <children>
-                                                                        <TextField fx:id="song1TextField">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </TextField>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <TextField fx:id="song1TextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <TextField fx:id="midweekSong1TitelTextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
                                                                      </children>
-                                                                  </StackPane>
+                                                                  </HBox>
                                                                   <StackPane alignment="CENTER_LEFT">
                                                                      <children>
                                                                         <TextField fx:id="bibleChaptersTextField" maxWidth="1.7976931348623157E308">
@@ -631,7 +644,19 @@
                                                                   </TextField>
                                                                </children>
                                                             </StackPane>
+                                                            <StackPane HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <TextField fx:id="midweekSong2TitelTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
                                                          </children>
+                                                         <HBox.margin>
+                                                            <Insets left="50.0" />
+                                                         </HBox.margin>
                                                       </HBox>
                                                    </children>
                                                 </HBox>
@@ -888,18 +913,31 @@
                                                                         </StackPane>
                                                                      </children>
                                                                   </HBox>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <HBox>
                                                                      <VBox.margin>
                                                                         <Insets />
                                                                      </VBox.margin>
                                                                      <children>
-                                                                        <TextField fx:id="song3TextField" maxWidth="1.7976931348623157E308">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </TextField>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <TextField fx:id="song3TextField" maxWidth="1.7976931348623157E308">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <TextField fx:id="midweekSong3TitelTextField" maxWidth="1.7976931348623157E308">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
                                                                      </children>
-                                                                  </StackPane>
+                                                                  </HBox>
                                                                   <StackPane alignment="CENTER_LEFT">
                                                                      <VBox.margin>
                                                                         <Insets />
@@ -943,15 +981,24 @@
                                              <children>
                                                 <VBox HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <StackPane alignment="CENTER_LEFT">
+                                                      <HBox>
                                                          <children>
-                                                            <Label fx:id="publicTalkLabel" text="Discorso Pubblico">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Label fx:id="publicTalkLabel" text="Discorso Pubblico">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <CheckBox fx:id="specialTalkCheckBox" mnemonicParsing="false" text="CheckBox" />
+                                                               </children>
+                                                            </StackPane>
                                                          </children>
-                                                      </StackPane>
+                                                      </HBox>
                                                       <StackPane>
                                                          <children>
                                                             <Separator>
@@ -1012,7 +1059,16 @@
                                                                   </StackPane>
                                                                   <StackPane alignment="CENTER_LEFT">
                                                                      <children>
-                                                                        <Label fx:id="publicTalkTalkerLabel" text="Oratore">
+                                                                        <Label fx:id="internSpeakerLabel" text="Oratore interno">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </StackPane>
+                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                     <children>
+                                                                        <Label fx:id="publicTalkTalkerLabel" text="Oratore esterno">
                                                                            <StackPane.margin>
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
@@ -1032,15 +1088,28 @@
                                                             </VBox>
                                                             <VBox HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <HBox>
                                                                      <children>
-                                                                        <TextField fx:id="publicTalkSongTextField">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </TextField>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <TextField fx:id="publicTalkSongTextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <TextField fx:id="weekendSong1TitelTextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
                                                                      </children>
-                                                                  </StackPane>
+                                                                  </HBox>
                                                                   <StackPane alignment="CENTER_LEFT">
                                                                      <children>
                                                                         <ComboBox fx:id="presidentPublicMeetingComboBox" maxWidth="1.7976931348623157E308">
@@ -1075,6 +1144,15 @@
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
                                                                         </TextField>
+                                                                     </children>
+                                                                  </StackPane>
+                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                     <children>
+                                                                        <ComboBox fx:id="internSpeakerComboBox" maxWidth="1.7976931348623157E308">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </ComboBox>
                                                                      </children>
                                                                   </StackPane>
                                                                   <StackPane alignment="CENTER_LEFT">
@@ -1197,15 +1275,28 @@
                                                             </VBox>
                                                             <VBox HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <HBox>
                                                                      <children>
-                                                                        <TextField fx:id="watchtowerStudySong2TextField">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </TextField>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <TextField fx:id="watchtowerStudySong2TextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <TextField fx:id="weekendSong2TitelTextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
                                                                      </children>
-                                                                  </StackPane>
+                                                                  </HBox>
                                                                   <StackPane alignment="CENTER_LEFT">
                                                                      <children>
                                                                         <TextField fx:id="watchtowerStudyMinTextField">
@@ -1242,15 +1333,28 @@
                                                                         </ComboBox>
                                                                      </children>
                                                                   </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                  <HBox>
                                                                      <children>
-                                                                        <TextField fx:id="watchtowerStudySong3TextField">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
-                                                                           </StackPane.margin>
-                                                                        </TextField>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <TextField fx:id="watchtowerStudySong3TextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <TextField fx:id="weekendSong3TitelTextField">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="25.0" />
+                                                                                 </StackPane.margin>
+                                                                              </TextField>
+                                                                           </children>
+                                                                        </StackPane>
                                                                      </children>
-                                                                  </StackPane>
+                                                                  </HBox>
                                                                   <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                                                      <children>
                                                                         <ComboBox fx:id="watchtowerStudyPray2ComboBox" maxWidth="1.7976931348623157E308">

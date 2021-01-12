@@ -93,6 +93,15 @@ public class Week {
 	private IntegerProperty spInf57;
 	private IntegerProperty spInf58;
 
+	private StringProperty spInf59;
+	private StringProperty spInf60;
+	private StringProperty spInf61;
+	private StringProperty spInf62;
+	private StringProperty spInf63;
+	private StringProperty spInf64;
+	private IntegerProperty spInf65;
+	private IntegerProperty spInf66;
+	
 	private ObjectProperty<ObservableList<MinistryPart>> ministryPartList;
 	private ObjectProperty<ObservableList<ChristiansPart>> christiansPartList;
 
@@ -178,6 +187,15 @@ public class Week {
 		this.spInf57 = new SimpleIntegerProperty(jsonObject.getInt("spInf57"));
 		this.spInf58 = new SimpleIntegerProperty(jsonObject.getInt("spInf58"));
 
+		this.spInf59 = new SimpleStringProperty(jsonObject.getString("spInf59"));
+		this.spInf60 = new SimpleStringProperty(jsonObject.getString("spInf60"));
+		this.spInf61 = new SimpleStringProperty(jsonObject.getString("spInf61"));
+		this.spInf62 = new SimpleStringProperty(jsonObject.getString("spInf62"));
+		this.spInf63 = new SimpleStringProperty(jsonObject.getString("spInf63"));
+		this.spInf64 = new SimpleStringProperty(jsonObject.getString("spInf64"));
+		this.spInf65 = new SimpleIntegerProperty(jsonObject.getInt("spInf65"));
+		this.spInf66 = new SimpleIntegerProperty(jsonObject.getInt("spInf66"));
+		
 		this.ministryPartList = new SimpleObjectProperty<ObservableList<MinistryPart>>(
 				getMinistryPartsList(jsonObject, language, settings, membersList));
 
@@ -309,6 +327,15 @@ public class Week {
 				this.setSpInf56(week.getSpInf56());
 				this.setSpInf57(week.getSpInf57());
 				this.setSpInf58(week.getSpInf58());
+				
+				this.setSpInf59(Crypt.decrypt(week.getSpInf59(), settings.getDatabaseSecretKey()));
+				this.setSpInf60(Crypt.decrypt(week.getSpInf60(), settings.getDatabaseSecretKey()));
+				this.setSpInf61(Crypt.decrypt(week.getSpInf61(), settings.getDatabaseSecretKey()));
+				this.setSpInf62(Crypt.decrypt(week.getSpInf62(), settings.getDatabaseSecretKey()));
+				this.setSpInf63(Crypt.decrypt(week.getSpInf63(), settings.getDatabaseSecretKey()));
+				this.setSpInf64(Crypt.decrypt(week.getSpInf64(), settings.getDatabaseSecretKey()));
+				this.setSpInf65(week.getSpInf65());
+				this.setSpInf66(week.getSpInf66());
 				
 				this.weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 						new WeekTypeTranslated(WeekType.getFromOrdinal(week.getSpInf2()), language));
@@ -1391,5 +1418,125 @@ public class Week {
 			this.spInf58 = new SimpleIntegerProperty();
 
 		this.spInf58Property().set(spInf58);
+	}
+	
+	public final StringProperty spInf59Property() {
+		return this.spInf59;
+	}
+
+	public final String getSpInf59() {
+		return this.spInf59Property().get();
+	}
+
+	public final void setSpInf59(final String spInf59) {
+		if (this.spInf59Property() == null)
+			this.spInf59 = new SimpleStringProperty();
+
+		this.spInf59Property().set(spInf59);
+	}
+	
+	public final StringProperty spInf60Property() {
+		return this.spInf60;
+	}
+
+	public final String getSpInf60() {
+		return this.spInf60Property().get();
+	}
+
+	public final void setSpInf60(final String spInf60) {
+		if (this.spInf60Property() == null)
+			this.spInf60 = new SimpleStringProperty();
+
+		this.spInf60Property().set(spInf60);
+	}
+	
+	public final StringProperty spInf61Property() {
+		return this.spInf61;
+	}
+
+	public final String getSpInf61() {
+		return this.spInf61Property().get();
+	}
+
+	public final void setSpInf61(final String spInf61) {
+		if (this.spInf61Property() == null)
+			this.spInf61 = new SimpleStringProperty();
+
+		this.spInf61Property().set(spInf61);
+	}
+	
+	public final StringProperty spInf62Property() {
+		return this.spInf62;
+	}
+
+	public final String getSpInf62() {
+		return this.spInf62Property().get();
+	}
+
+	public final void setSpInf62(final String spInf62) {
+		if (this.spInf62Property() == null)
+			this.spInf62 = new SimpleStringProperty();
+
+		this.spInf62Property().set(spInf62);
+	}
+	
+	public final StringProperty spInf63Property() {
+		return this.spInf63;
+	}
+
+	public final String getSpInf63() {
+		return this.spInf63Property().get();
+	}
+
+	public final void setSpInf63(final String spInf63) {
+		if (this.spInf63Property() == null)
+			this.spInf63 = new SimpleStringProperty();
+
+		this.spInf63Property().set(spInf63);
+	}
+	
+	public final StringProperty spInf64Property() {
+		return this.spInf64;
+	}
+
+	public final String getSpInf64() {
+		return this.spInf64Property().get();
+	}
+
+	public final void setSpInf64(final String spInf64) {
+		if (this.spInf64Property() == null)
+			this.spInf64 = new SimpleStringProperty();
+
+		this.spInf64Property().set(spInf64);
+	}
+	
+	public final IntegerProperty spInf65Property() {
+		return this.spInf65;
+	}
+
+	public final int getSpInf65() {
+		return this.spInf65Property().get();
+	}
+
+	public final void setSpInf65(final int spInf65) {
+		if (this.spInf65Property() == null)
+			this.spInf65 = new SimpleIntegerProperty();
+
+		this.spInf65Property().set(spInf65);
+	}
+	
+	public final IntegerProperty spInf66Property() {
+		return this.spInf66;
+	}
+
+	public final int getSpInf66() {
+		return this.spInf66Property().get();
+	}
+
+	public final void setSpInf66(final int spInf66) {
+		if (this.spInf66Property() == null)
+			this.spInf66 = new SimpleIntegerProperty();
+
+		this.spInf66Property().set(spInf66);
 	}
 }

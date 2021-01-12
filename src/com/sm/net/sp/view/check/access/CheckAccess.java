@@ -96,6 +96,7 @@ public class CheckAccess {
 		String password = passwordPasswordField.getText();
 
 		if (!password.isEmpty()) {
+			// TODO: Sostituire la classe Authenticator
 			if (Authenticator.isValid(password, ValidationType.VERY_STRONG)) {
 				SecretKey key = Crypt.generateKey(password);
 				String passwordEncrypted = Crypt.encrypt(password, key);

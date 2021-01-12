@@ -79,6 +79,7 @@ public class SettingCreateAccess {
 		boolean status = true;
 
 		String password = passwordFieldPassword.getText();
+		// TODO: Sostituire la classe Authenticator
 		status = Authenticator.isValid(password, ValidationType.VERY_STRONG);
 
 		if (!status) {

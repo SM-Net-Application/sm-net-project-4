@@ -140,6 +140,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	private boolean checkUsername(String user) {
 
 		boolean check = true;
+		// TODO: Sostituire la classe Authenticator
 		if (!Authenticator.isValid(user, ValidationType.VERY_STRONG))
 			check = false;
 		return check;
@@ -148,6 +149,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	private boolean checkPassword(String pwd) {
 
 		boolean check = true;
+		// TODO: Sostituire la classe Authenticator
 		if (!Authenticator.isValid(pwd, ValidationType.VERY_STRONG))
 			check = false;
 		return check;

@@ -15,10 +15,6 @@ Data di pubblicazione : ..-..-....
 				- Conduttore Adunanza per il servizio (Gruppo)
 			- Ottimizzazione della GUI
 
-	Nuova sezione: Adunanze per il servizio
-	
-	Nuova sezione: Adunanze per il servizio (Gruppo)
-
 	Ottimizzazioni:
 		Lo storico viene aperto solo se la settimana è salvata (Record presente nel database)
 			Adunanze, Audio/Video, Usciere, Discori pubblici
@@ -27,5 +23,5 @@ Data di pubblicazione : ..-..-....
 		Lo storico nella sezione Discorsi pubblici non veniva caricato
 		
 	Database-SQL:
-	
 	ALTER TABLE sp_members ADD spInf60 INT NOT NULL AFTER spInf59, ADD spInf61 INT NOT NULL AFTER spInf60, ADD spInf62 INT NOT NULL AFTER spInf61;
+	ALTER TABLE sp_week ADD spInf59 VARCHAR(250) NOT NULL AFTER spInf58, ADD spInf60 VARCHAR(250) NOT NULL AFTER spInf59, ADD spInf61 VARCHAR(250) NOT NULL AFTER spInf60, ADD spInf62 VARCHAR(250) NOT NULL AFTER spInf61, ADD spInf63 VARCHAR(250) NOT NULL AFTER spInf62, ADD spInf64 VARCHAR(250) NOT NULL AFTER spInf63, ADD spInf65 INT NOT NULL AFTER spInf64, ADD spInf66 INT NOT NULL AFTER spInf65;

@@ -85,6 +85,10 @@ public class Member {
 	private IntegerProperty spInf58;
 	private IntegerProperty spInf59;
 
+	private IntegerProperty spInf60;
+	private IntegerProperty spInf61;
+	private IntegerProperty spInf62;
+
 	public Member() {
 		super();
 	}
@@ -164,6 +168,10 @@ public class Member {
 		this.spInf57 = new SimpleIntegerProperty(jsonObject.getInt("spInf57"));
 		this.spInf58 = new SimpleIntegerProperty(jsonObject.getInt("spInf58"));
 		this.spInf59 = new SimpleIntegerProperty(jsonObject.getInt("spInf59"));
+
+		this.spInf60 = new SimpleIntegerProperty(jsonObject.getInt("spInf60"));
+		this.spInf61 = new SimpleIntegerProperty(jsonObject.getInt("spInf61"));
+		this.spInf62 = new SimpleIntegerProperty(jsonObject.getInt("spInf62"));
 	}
 
 	public static Member emptyMember(Language language) {
@@ -238,7 +246,11 @@ public class Member {
 		member.spInf57 = new SimpleIntegerProperty(0);
 		member.spInf58 = new SimpleIntegerProperty(0);
 		member.spInf59 = new SimpleIntegerProperty(0);
-		
+
+		member.spInf60 = new SimpleIntegerProperty(0);
+		member.spInf61 = new SimpleIntegerProperty(0);
+		member.spInf62 = new SimpleIntegerProperty(0);
+
 		return member;
 	}
 
@@ -1099,5 +1111,41 @@ public class Member {
 
 	public final void setSpInf59(final int spInf59) {
 		this.spInf59Property().set(spInf59);
+	}
+
+	public final IntegerProperty spInf60Property() {
+		return this.spInf60;
+	}
+
+	public final int getSpInf60() {
+		return this.spInf60Property().get();
+	}
+
+	public final void setSpInf60(final int spInf60) {
+		this.spInf60Property().set(spInf60);
+	}
+
+	public final IntegerProperty spInf61Property() {
+		return this.spInf61;
+	}
+
+	public final int getSpInf61() {
+		return this.spInf61Property().get();
+	}
+
+	public final void setSpInf61(final int spInf61) {
+		this.spInf61Property().set(spInf61);
+	}
+
+	public final IntegerProperty spInf62Property() {
+		return this.spInf62;
+	}
+
+	public final int getSpInf62() {
+		return this.spInf62Property().get();
+	}
+
+	public final void setSpInf62(final int spInf62) {
+		this.spInf62Property().set(spInf62);
 	}
 }

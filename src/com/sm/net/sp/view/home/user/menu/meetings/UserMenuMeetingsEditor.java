@@ -429,6 +429,25 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	@FXML
 	private TextField weekendEventExtraContentTextField;
 
+	@FXML
+	private TextField midweekSong1TitelTextField;
+	@FXML
+	private TextField midweekSong2TitelTextField;
+	@FXML
+	private TextField midweekSong3TitelTextField;
+	@FXML
+	private TextField weekendSong1TitelTextField;
+	@FXML
+	private TextField weekendSong2TitelTextField;
+	@FXML
+	private TextField weekendSong3TitelTextField;
+	@FXML
+	private CheckBox specialTalkCheckBox;
+	@FXML
+	private Label internSpeakerLabel;
+	@FXML
+	private ComboBox<Member> internSpeakerComboBox;
+
 	private SupportPlannerView application;
 
 	private Settings settings;
@@ -685,6 +704,17 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.conductorSecondHallLabel.getStyleClass().add("label_001");
 		this.conductorSecondHallComboBox.getStyleClass().add("combo_box_001");
+
+		this.midweekSong1TitelTextField.getStyleClass().add("text_field_001");
+		this.midweekSong2TitelTextField.getStyleClass().add("text_field_001");
+		this.midweekSong3TitelTextField.getStyleClass().add("text_field_001");
+		this.weekendSong1TitelTextField.getStyleClass().add("text_field_001");
+		this.weekendSong2TitelTextField.getStyleClass().add("text_field_001");
+		this.weekendSong3TitelTextField.getStyleClass().add("text_field_001");
+
+		this.specialTalkCheckBox.getStyleClass().add("check_box_001");
+		this.internSpeakerLabel.getStyleClass().add("label_set_001");
+		this.internSpeakerComboBox.getStyleClass().add("combo_box_001");
 	}
 
 	private void viewUpdate() {
@@ -885,6 +915,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				.setText(this.language.getString("meetings.editor.weekendsettings.eventextracontent"));
 
 		this.conductorSecondHallLabel.setText(this.language.getString("meetings.editor.conductorsecondhall"));
+
+		this.specialTalkCheckBox.setText(this.language.getString("meetings.editor.specialtalk"));
+		this.internSpeakerLabel.setText(this.language.getString("meetings.editor.internspeaker"));
 	}
 
 	private void cellValueFactory() {
@@ -1265,6 +1298,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		congregationBibleStudyReaderComboBox.getSelectionModel().selectFirst();
 
 		this.conductorSecondHallComboBox.getSelectionModel().selectFirst();
+
+		this.internSpeakerComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void setLists() {
@@ -1296,7 +1331,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			if (member.getSpInf26() == 1)
 				this.congregationBibleStudyReaderList.add(member);
 
-			if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
+			// if (member.getSpInf9() == 1 || member.getSpInf10() == 1)
+			if (member.getSpInf60() == 1)
 				this.conductorSecondHallList.add(member);
 		}
 
@@ -1468,6 +1504,20 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				this.weekendOnlyWatchtowerStudyCheckBox.setSelected(this.selectedWeek.getSpInf56() == 1);
 				this.midweekNoPrintCheckBox.setSelected(this.selectedWeek.getSpInf57() == 1);
 				setMemberComboBoxIndex(this.conductorSecondHallComboBox, this.selectedWeek.getSpInf58());
+
+				// 1.1
+
+				this.midweekSong1TitelTextField.setText(this.selectedWeek.getSpInf59());
+				this.midweekSong2TitelTextField.setText(this.selectedWeek.getSpInf60());
+				this.midweekSong3TitelTextField.setText(this.selectedWeek.getSpInf61());
+				this.weekendSong1TitelTextField.setText(this.selectedWeek.getSpInf62());
+				this.weekendSong2TitelTextField.setText(this.selectedWeek.getSpInf63());
+				this.weekendSong3TitelTextField.setText(this.selectedWeek.getSpInf64());
+
+				int spInf65 = this.selectedWeek.getSpInf65();
+				this.specialTalkCheckBox.setSelected(spInf65 == 1);
+
+				setMemberComboBoxIndex(this.internSpeakerComboBox, this.selectedWeek.getSpInf66());
 
 				// --------------------------------------------------------
 
@@ -1921,6 +1971,25 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			int spInf57 = this.midweekNoPrintCheckBox.isSelected() ? 1 : 0;
 			int spInf58 = this.conductorSecondHallComboBox.getSelectionModel().getSelectedItem().getSpMemberID();
 
+			// 1.1
+
+			String spInf59 = Crypt.encrypt(this.midweekSong1TitelTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+			String spInf60 = Crypt.encrypt(this.midweekSong2TitelTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+			String spInf61 = Crypt.encrypt(this.midweekSong3TitelTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+			String spInf62 = Crypt.encrypt(this.weekendSong1TitelTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+			String spInf63 = Crypt.encrypt(this.weekendSong2TitelTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+			String spInf64 = Crypt.encrypt(this.weekendSong3TitelTextField.getText(),
+					this.settings.getDatabaseSecretKey());
+			int spInf65 = this.specialTalkCheckBox.isSelected() ? 1 : 0;
+			int spInf66 = this.internSpeakerComboBox.getSelectionModel().getSelectedItem().getSpMemberID();
+
+			// TODO: Salvare le nuove informazioni
+			
 			// -------
 
 			String spInfMinistryParts = getMinistryParts();
@@ -2055,8 +2124,19 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private boolean checkFields() {
 
-		// TODO: Check all fields
 		boolean status = true;
+
+		int internSpeakerID = -1;
+		Member internSpeaker = this.internSpeakerComboBox.getSelectionModel().getSelectedItem();
+		if (internSpeaker != null)
+			internSpeakerID = internSpeaker.getSpMemberID();
+
+		String externSpeaker = this.publicTalkTalkerTextField.getText();
+		if (!externSpeaker.isEmpty() && internSpeakerID > 0) {
+			status = false;
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("meetings.editor.error.speaker"));
+		}
 
 		return status;
 	}
