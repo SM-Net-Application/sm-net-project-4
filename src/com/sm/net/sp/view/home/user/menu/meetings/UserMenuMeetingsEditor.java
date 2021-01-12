@@ -470,8 +470,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private ObservableList<Member> conductorSecondHallList;
 
-	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private HashMap<String, String> configs;
+	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
 	@FXML
@@ -1041,71 +1041,79 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private void openHistory(Privileges privilege, String title, TableView<ChristiansPart> tableViewCP) {
 
-		ChristiansPart christiansPart = null;
+		if (this.selectedWeek.spInf1Property() != null) {
 
-		if (tableViewCP != null)
-			if (tableViewCP.getSelectionModel().getSelectedIndex() > -1) {
+			ChristiansPart christiansPart = null;
 
-				christiansPart = tableViewCP.getSelectionModel().getSelectedItem();
+			if (tableViewCP != null)
+				if (tableViewCP.getSelectionModel().getSelectedIndex() > -1) {
 
-				if (!(tableViewCP.getItems().size() == 1)) {
+					christiansPart = tableViewCP.getSelectionModel().getSelectedItem();
 
-					if (!this.application.getAlertBuilder2().confirm(this.ownerStage,
-							this.language.getString("meetings.christianlife.confirm.assignpart"),
-							christiansPart.getTheme())) {
+					if (!(tableViewCP.getItems().size() == 1)) {
 
-						return;
+						if (!this.application.getAlertBuilder2().confirm(this.ownerStage,
+								this.language.getString("meetings.christianlife.confirm.assignpart"),
+								christiansPart.getTheme())) {
 
+							return;
+
+						}
 					}
+				} else {
+					this.application.getAlertBuilder2().error(this.ownerStage,
+							this.language.getString("meetings.christianlife.error.noselection"));
+					return;
 				}
-			} else {
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("meetings.christianlife.error.noselection"));
-				return;
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HISTORY);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				Scene scene = new Scene(layout);
+				scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.initModality(Modality.WINDOW_MODAL);
+				stage.initOwner(ownerStage);
+				stage.setTitle(title);
+				stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
+
+				stage.setMinWidth(1050);
+				stage.setMinHeight(500);
+
+				History ctrl = (History) fxmlLoader.getController();
+				ctrl.setLayout(layout);
+				ctrl.setPrivilege(privilege);
+				ctrl.setMembers(memberList);
+				ctrl.setLanguage(language);
+				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setSelectedWeek(this.selectedWeek);
+				ctrl.setEditorWeek(Week.buildMeetingEditorWeek(this));
+				ctrl.setEditor(this);
+				ctrl.setThisStage(stage);
+				ctrl.setAlertBuilder(this.alertBuilder);
+				ctrl.setChristiansPart(christiansPart);
+				ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
+				ctrl.setApplication(this.application);
+				ctrl.setConfigs(this.configs);
+				ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
+
+				ctrl.objectInitialize();
+
+				stage.show();
+
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 
-		try {
+		} else {
 
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(Meta.Views.HISTORY);
-			AnchorPane layout = (AnchorPane) fxmlLoader.load();
-
-			Scene scene = new Scene(layout);
-			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
-
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.initOwner(ownerStage);
-			stage.setTitle(title);
-			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
-
-			stage.setMinWidth(1050);
-			stage.setMinHeight(500);
-
-			History ctrl = (History) fxmlLoader.getController();
-			ctrl.setLayout(layout);
-			ctrl.setPrivilege(privilege);
-			ctrl.setMembers(memberList);
-			ctrl.setLanguage(language);
-			ctrl.setDatabaseWeeks(this.databaseWeeks);
-			ctrl.setSelectedWeek(this.selectedWeek);
-			ctrl.setEditorWeek(Week.buildMeetingEditorWeek(this));
-			ctrl.setEditor(this);
-			ctrl.setThisStage(stage);
-			ctrl.setAlertBuilder(this.alertBuilder);
-			ctrl.setChristiansPart(christiansPart);
-			ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
-			ctrl.setApplication(this.application);
-			ctrl.setConfigs(this.configs);
-			ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
-
-			ctrl.objectInitialize();
-
-			stage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("sp.history.weeknotsaved"));
 		}
 	}
 

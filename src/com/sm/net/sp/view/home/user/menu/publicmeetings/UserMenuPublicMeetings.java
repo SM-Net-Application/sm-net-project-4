@@ -14,6 +14,8 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -87,6 +89,8 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 	private ObservableList<DateAndTime> dateAndTimeList;
 	private ObservableList<Place> placesList;
 	private HashMap<String, String> configs;
+	private ObservableList<WeekAudio> audio;
+	private ObservableList<WeekUsciere> usciere;
 
 //	private String congregationName;
 
@@ -417,12 +421,15 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				UserMenuPublicMeetingsEditor ctrl = (UserMenuPublicMeetingsEditor) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
 				ctrl.setMemberList(this.membersList);
 				ctrl.setSettings(this.settings);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
 				ctrl.setSelectedWeek(week);
 				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setDatabaseWeeksAudio(this.audio);
+				ctrl.setDatabaseWeeksUsciere(this.usciere);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -549,6 +556,22 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public ObservableList<WeekAudio> getAudio() {
+		return audio;
+	}
+
+	public void setAudio(ObservableList<WeekAudio> audio) {
+		this.audio = audio;
+	}
+
+	public ObservableList<WeekUsciere> getUsciere() {
+		return usciere;
+	}
+
+	public void setUsciere(ObservableList<WeekUsciere> usciere) {
+		this.usciere = usciere;
 	}
 
 }

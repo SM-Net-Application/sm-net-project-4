@@ -256,6 +256,8 @@ public class Meta {
 		public static final String INFO = "info.png";
 		public static final String WOL = "wol.png";
 		public static final String PUBLIC_TALK = "public_talk.png";
+		public static final String DOOR_CONGR = "door_congr.png";
+		public static final String DOOR_GROUPS = "door_groups.png";
 		public static final String CALENDAR = "calendar.png";
 		public static final String TALKS = "talks.png";
 		public static final String USER_MENU_MEETINGS_TREASURES = "treasures.png";

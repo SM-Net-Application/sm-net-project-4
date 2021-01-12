@@ -4,6 +4,7 @@ import javax.crypto.SecretKey;
 
 import org.json.JSONObject;
 
+import com.sm.net.project.Language;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.property.IntegerProperty;
@@ -29,6 +30,9 @@ public class SerGroup {
 	public SerGroup(JSONObject jsonObject, SecretKey secretKey) {
 		super();
 		defaultCostructor(jsonObject, secretKey);
+	}
+
+	public SerGroup() {
 	}
 
 	private void defaultCostructor(JSONObject jsonObject, SecretKey secretKey) {
@@ -163,4 +167,25 @@ public class SerGroup {
 		this.assistantProperty().set(assistant);
 	}
 
+	public static SerGroup emptySerGroup(Language language) {
+
+		SerGroup serGroup = new SerGroup();
+
+		serGroup.spSerGrID = new SimpleIntegerProperty(0);
+		serGroup.spInf1Encrypted = new SimpleStringProperty("");
+		serGroup.spInf1Decrypted = new SimpleStringProperty(language.getString("TEXT0096"));
+		serGroup.spInf2 = new SimpleIntegerProperty(0);
+		serGroup.spInf3 = new SimpleIntegerProperty(0);
+		serGroup.overseer = new SimpleStringProperty("");
+		serGroup.assistant = new SimpleStringProperty("");
+		serGroup.spSerGroupFamilies = new SimpleIntegerProperty(0);
+		serGroup.spSerGroupFamilies = new SimpleIntegerProperty(0);
+
+		return serGroup;
+	}
+
+	@Override
+	public String toString() {
+		return this.spInf1Decrypted.get();
+	}
 }

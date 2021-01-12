@@ -6,6 +6,8 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.User;
 import com.sm.net.sp.settings.Settings;
@@ -22,6 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -83,6 +86,17 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private CheckBox authUsciereCheckBox;
 
 	@FXML
+	private CheckBox authServiceMeetingCongrCheckBox;
+	@FXML
+	private CheckBox authServiceMeetingGroupCheckBox;
+	@FXML
+	private Label serviceGroupLabel;
+	@FXML
+	private ComboBox<SerGroup> authServiceMeetingGroupComboBox;
+	@FXML
+	private CheckBox authCleanCheckBox;
+
+	@FXML
 	private Button userAddButton;
 	@FXML
 	private Button userDeleteButton;
@@ -94,6 +108,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private Stage stageSupportPlannerView;
 
 	private SupportPlannerView application;
+
+	private ObservableList<SerGroup> serviceGroupList;
 
 	@FXML
 	private void initialize() {
@@ -143,14 +159,23 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authAudioCheckBox.getStyleClass().add("check_box_001");
 		this.authUsciereCheckBox.getStyleClass().add("check_box_001");
+
+		this.authServiceMeetingCongrCheckBox.getStyleClass().add("check_box_001");
+		this.authServiceMeetingGroupCheckBox.getStyleClass().add("check_box_001");
+		this.authCleanCheckBox.getStyleClass().add("check_box_001");
+		this.authServiceMeetingGroupComboBox.getStyleClass().add("combo_box_001");
+
+		this.serviceGroupLabel.getStyleClass().add("label_001");
 	}
 
 	public void objectInitialize() {
+
 		this.language = settings.getLanguage();
+
 		listeners();
 		viewUpdate();
 
-		updateUsers();
+		updateSerGroups();
 	}
 
 	private void viewUpdate() {
@@ -231,12 +256,42 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authGeneralInfoCheckBox.setText(language.getString("users.auth.generalinfo"));
 		this.authGeneralInfoCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.GENERALINFO));
-		
+
 		this.authAudioCheckBox.setText(language.getString("users.auth.audio"));
 		this.authAudioCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.AUDIO));
-		
+
 		this.authUsciereCheckBox.setText(language.getString("users.auth.usciere"));
 		this.authUsciereCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USCIERE));
+
+		this.authServiceMeetingCongrCheckBox.setText(language.getString("users.auth.servicemeetcongr"));
+		this.authServiceMeetingCongrCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOOR_CONGR));
+
+		this.authServiceMeetingGroupCheckBox.setText(language.getString("users.auth.servicemeetgroup"));
+		this.authServiceMeetingGroupCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOOR_GROUPS));
+
+		this.authCleanCheckBox.setText(language.getString("users.auth.clean"));
+		this.authCleanCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CLEAN));
+
+		this.serviceGroupLabel.setText(language.getString("users.servicegroup"));
+	}
+
+	@Override
+	public void updateSerGroups() {
+		Actions.getAllSerGroups(settings, this.stageSupportPlannerView, this);
+	}
+
+	@Override
+	public void updateSerGroups(ObservableList<SerGroup> list) {
+
+		this.serviceGroupList = list;
+		this.serviceGroupList.add(0, SerGroup.emptySerGroup(this.language));
+
+		this.serviceGroupList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
+
+		this.authServiceMeetingGroupComboBox.setItems(this.serviceGroupList);
+		this.authServiceMeetingGroupComboBox.getSelectionModel().selectFirst();
+
+		updateUsers();
 	}
 
 	@Override
@@ -279,11 +334,24 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				this.authMemorialCheckBox.setSelected(user.isSpInf12());
 
 				this.authGeneralInfoCheckBox.setSelected(user.isSpInf13());
-				
+
 				this.authAudioCheckBox.setSelected(user.isSpInf14());
 				this.authUsciereCheckBox.setSelected(user.isSpInf15());
-			}
 
+				this.authServiceMeetingCongrCheckBox.setSelected(user.isSpInf16());
+				this.authServiceMeetingGroupCheckBox.setSelected(user.isSpInf17());
+				this.authCleanCheckBox.setSelected(user.isSpInf18());
+
+				int serGroupID = user.getSpInf19();
+				for (int i = 0; i < this.authServiceMeetingGroupComboBox.getItems().size(); i++) {
+
+					SerGroup member = this.authServiceMeetingGroupComboBox.getItems().get(i);
+					if (member.getSpSerGrID() == serGroupID) {
+						this.authServiceMeetingGroupComboBox.getSelectionModel().select(i);
+						break;
+					}
+				}
+			}
 		});
 
 		this.saveButton.setOnAction(event -> save());
@@ -293,44 +361,62 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		if (this.userTableView.getSelectionModel().getSelectedIndex() > -1) {
 
-			User user = this.userTableView.getSelectionModel().getSelectedItem();
+			int spInf17 = this.authServiceMeetingGroupCheckBox.isSelected() ? 1 : 0;
+			if (spInf17 == 1) {
+				SerGroup serGroup = this.authServiceMeetingGroupComboBox.getSelectionModel().getSelectedItem();
+				if (serGroup.getSpSerGrID() == 0)
+					this.application.getAlertBuilder2().error(this.stageSupportPlannerView,
+							this.language.getString("users.save.error"));
+				else
+					runSave();
 
-			String header = this.application.getSettings().getLanguage().getString("users.save.confirm");
-			String content = user.getUsername();
+			} else
+				runSave();
+		}
+	}
 
-			if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView, header, content)) {
+	private void runSave() {
 
-				int userID = user.getUserID().get();
+		User user = this.userTableView.getSelectionModel().getSelectedItem();
 
-				int spInf1 = this.authUsersCheckBox.isSelected() ? 1 : 0;
-				int spInf2 = this.authCongregationsCheckBox.isSelected() ? 1 : 0;
-				int spInf3 = this.authServiceGroupsCheckBox.isSelected() ? 1 : 0;
-				int spInf4 = this.authMeetingsCheckBox.isSelected() ? 1 : 0;
-				int spInf5 = this.authOverseerCheckBox.isSelected() ? 1 : 0;
-				int spInf6 = this.authNaturalDisasterCheckBox.isSelected() ? 1 : 0;
-				int spInf7 = this.authMonitorCheckBox.isSelected() ? 1 : 0;
-				int spInf8 = this.authPublicTalkCheckBox.isSelected() ? 1 : 0;
-				int spInf9 = this.authDateAndTimeCheckBox.isSelected() ? 1 : 0;
-				int spInf10 = this.authPlacesCheckBox.isSelected() ? 1 : 0;
-				int spInf11 = this.authConventionsCheckBox.isSelected() ? 1 : 0;
-				int spInf12 = this.authMemorialCheckBox.isSelected() ? 1 : 0;
-				int spInf13 = this.authGeneralInfoCheckBox.isSelected() ? 1 : 0;
-				int spInf14 = this.authAudioCheckBox.isSelected() ? 1 : 0;
-				int spInf15 = this.authUsciereCheckBox.isSelected() ? 1 : 0;
-				int spInf16 = 0;
-				int spInf17 = 0;
-				int spInf18 = 0;
-				int spInf19 = 0;
-				int spInf20 = 0;
+		String header = this.application.getSettings().getLanguage().getString("users.save.confirm");
+		String content = user.getUsername();
 
-				String waitMessage = this.language.getString("users.save.wait");
+		if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView, header, content)) {
 
-				TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-						new UserSaveTask(this.application.getAlertBuilder2(), this.settings,
-								this.stageSupportPlannerView, userID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6,
-								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16,
-								spInf17, spInf18, spInf19, spInf20, this));
-			}
+			int userID = user.getUserID().get();
+
+			int spInf1 = this.authUsersCheckBox.isSelected() ? 1 : 0;
+			int spInf2 = this.authCongregationsCheckBox.isSelected() ? 1 : 0;
+			int spInf3 = this.authServiceGroupsCheckBox.isSelected() ? 1 : 0;
+			int spInf4 = this.authMeetingsCheckBox.isSelected() ? 1 : 0;
+			int spInf5 = this.authOverseerCheckBox.isSelected() ? 1 : 0;
+			int spInf6 = this.authNaturalDisasterCheckBox.isSelected() ? 1 : 0;
+			int spInf7 = this.authMonitorCheckBox.isSelected() ? 1 : 0;
+			int spInf8 = this.authPublicTalkCheckBox.isSelected() ? 1 : 0;
+			int spInf9 = this.authDateAndTimeCheckBox.isSelected() ? 1 : 0;
+			int spInf10 = this.authPlacesCheckBox.isSelected() ? 1 : 0;
+			int spInf11 = this.authConventionsCheckBox.isSelected() ? 1 : 0;
+			int spInf12 = this.authMemorialCheckBox.isSelected() ? 1 : 0;
+			int spInf13 = this.authGeneralInfoCheckBox.isSelected() ? 1 : 0;
+			int spInf14 = this.authAudioCheckBox.isSelected() ? 1 : 0;
+			int spInf15 = this.authUsciereCheckBox.isSelected() ? 1 : 0;
+			int spInf16 = this.authServiceMeetingCongrCheckBox.isSelected() ? 1 : 0;
+			int spInf17 = this.authServiceMeetingGroupCheckBox.isSelected() ? 1 : 0;
+			int spInf18 = this.authCleanCheckBox.isSelected() ? 1 : 0;
+
+			SerGroup serGroup = this.authServiceMeetingGroupComboBox.getSelectionModel().getSelectedItem();
+			int spInf19 = serGroup.getSpSerGrID();
+
+			int spInf20 = 0;
+
+			String waitMessage = this.language.getString("users.save.wait");
+
+			TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+					new UserSaveTask(this.application.getAlertBuilder2(), this.settings, this.stageSupportPlannerView,
+							userID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
+							spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
+							this));
 		}
 	}
 
@@ -353,9 +439,14 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authMemorialCheckBox.setSelected(false);
 
 		this.authGeneralInfoCheckBox.setSelected(false);
-		
+
 		this.authAudioCheckBox.setSelected(false);
 		this.authUsciereCheckBox.setSelected(false);
+		
+		this.authServiceMeetingCongrCheckBox.setSelected(false);
+		this.authServiceMeetingGroupCheckBox.setSelected(false);
+		this.authCleanCheckBox.setSelected(false);
+		this.authServiceMeetingGroupComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void listenerUserPrintButton() {

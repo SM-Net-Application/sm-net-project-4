@@ -1,3 +1,31 @@
 Data di pubblicazione : ..-..-....
 
+	Sezione Utenti:
+		- Nuove autorizzazioni:
+			- Adunanze per il servizio
+			- Adunanze per il servizio (Gruppo)
+			- Gruppo di servizio associato
+			- Pulizia
+
+	Sezione Congregazione:
+		- Componenti
+			- Nuovi privilegi:
+				- Consigliere classe supplementare
+				- Conduttore Adunanza per il servizio (Congregazione)
+				- Conduttore Adunanza per il servizio (Gruppo)
+			- Ottimizzazione della GUI
+
+	Nuova sezione: Adunanze per il servizio
 	
+	Nuova sezione: Adunanze per il servizio (Gruppo)
+
+	Ottimizzazioni:
+		Lo storico viene aperto solo se la settimana è salvata (Record presente nel database)
+			Adunanze, Audio/Video, Usciere, Discori pubblici
+		
+	Bug-fix:
+		Lo storico nella sezione Discorsi pubblici non veniva caricato
+		
+	Database-SQL:
+	
+	ALTER TABLE sp_members ADD spInf60 INT NOT NULL AFTER spInf59, ADD spInf61 INT NOT NULL AFTER spInf60, ADD spInf62 INT NOT NULL AFTER spInf61;

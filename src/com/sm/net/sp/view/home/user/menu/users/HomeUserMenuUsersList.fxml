@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -137,146 +138,214 @@
                               </Separator>
                            </children>
                         </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
+                        <HBox>
                            <children>
-                              <CheckBox fx:id="authUsersCheckBox" mnemonicParsing="false" text="users">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
+                              <VBox>
+                                 <children>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authUsersCheckBox" mnemonicParsing="false" text="users">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authGeneralInfoCheckBox" mnemonicParsing="false" text="geninfo">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authDateAndTimeCheckBox" mnemonicParsing="false" text="progradun">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authPlacesCheckBox" mnemonicParsing="false" text="luoghi">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authCongregationsCheckBox" mnemonicParsing="false" text="congr">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authServiceGroupsCheckBox" mnemonicParsing="false" text="servgroups">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authMeetingsCheckBox" mnemonicParsing="false" text="meeting">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authAudioCheckBox" mnemonicParsing="false" text="audio">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authUsciereCheckBox" mnemonicParsing="false" text="usciere">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authPublicTalkCheckBox" mnemonicParsing="false" text="publictalk">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authServiceMeetingCongrCheckBox" mnemonicParsing="false" text="servicemeetcongr">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authCleanCheckBox" mnemonicParsing="false" text="clean">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authOverseerCheckBox" mnemonicParsing="false" text="overseer">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authConventionsCheckBox" mnemonicParsing="false" text="congres">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authMemorialCheckBox" mnemonicParsing="false" text="commem">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authNaturalDisasterCheckBox" mnemonicParsing="false" text="naturaldis">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authMonitorCheckBox" mnemonicParsing="false" text="monitor">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <StackPane alignment="CENTER_LEFT">
+                                             <children>
+                                                <Label fx:id="serviceGroupLabel" text="groups">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Label>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <ComboBox fx:id="authServiceMeetingGroupComboBox" maxWidth="1.7976931348623157E308">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </ComboBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </StackPane>
+                                       </children>
+                                    </HBox>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authServiceMeetingGroupCheckBox" mnemonicParsing="false" text="servicemeetgroup">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="25.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authGeneralInfoCheckBox" mnemonicParsing="false" text="geninfo">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authDateAndTimeCheckBox" mnemonicParsing="false" text="progradun">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authPlacesCheckBox" mnemonicParsing="false" text="luoghi">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authCongregationsCheckBox" mnemonicParsing="false" text="congr">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authServiceGroupsCheckBox" mnemonicParsing="false" text="servgroups">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authMeetingsCheckBox" mnemonicParsing="false" text="meeting">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authAudioCheckBox" mnemonicParsing="false" text="audio">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authUsciereCheckBox" mnemonicParsing="false" text="usciere">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authPublicTalkCheckBox" mnemonicParsing="false" text="publictalk">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authOverseerCheckBox" mnemonicParsing="false" text="overseer">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authConventionsCheckBox" mnemonicParsing="false" text="congres">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authMemorialCheckBox" mnemonicParsing="false" text="commem">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authNaturalDisasterCheckBox" mnemonicParsing="false" text="naturaldis">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT">
-                           <children>
-                              <CheckBox fx:id="authMonitorCheckBox" mnemonicParsing="false" text="monitor">
-                                 <StackPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                              </CheckBox>
-                           </children>
-                        </StackPane>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
             </HBox>
          </children>
       </VBox>
+      <Label text="Label" />
    </children>
 </AnchorPane>

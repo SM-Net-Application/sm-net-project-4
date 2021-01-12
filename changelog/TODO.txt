@@ -1,30 +1,10 @@
 
-	Fix: se la settimana non è salvata, non aprire lo Storico, ma mostrare un messaggio di errore. In alternativa capire se è
-	possibile visualizzare lo storico anche se non è salvata la settimana.
-
-	Fix: Stampa elenco gruppi di servizio, capire perché compaiono gli inattivi.
-
-	Fix: menu contestuale nelle impostazioni locali non si vede bene
-
-	Fix: modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)
-		Parlarne prima con Alex.
-
-	Nuova sezione: Adunanze per il servizio di campo (Congregazione)
-		keyWeek
-		Giorno
-		Ora
-		Minuti
-		Conduttore
-		Assistente (ad esempio Host)
-		Materiale
-		Calendario mensile
-		Possono essere inserite massimo 21 comitive (3 al giorno)
-		Struttura da pensare...
-
-	User:
-		Adunanze per il servizio di campo (Congregazione)
-		Associazione Gruppo di Servizio
-			Adunanze per il servizio di campo (Gruppo di Servizio associato)
+	Componenti della congregazione:
+		- Consigliere classe supplementare
+		- Conduttore adunanza per il servizio di campo (Congregazione)
+		- Conduttore adunanza per il servizio di campo (Gruppo di servizio)
+		- Ottimizzazione della GUI
+		- Modificare struttura del database
 
 	Adunanze:
 		Cantico iniziale (infrasettimanale): Testo
@@ -39,6 +19,24 @@
 		Spunta Discorso Speciale
 		ComboBox Oratore Interno
 		Consigliere classe supplementare, caricare la lista
+
+	Nuova sezione: Adunanze per il servizio di campo (Congregazione)
+	
+		Il calendario deve essere composto dai mesi
+	
+		keyWeek
+		Giorno
+		Ora
+		Minuti
+		Conduttore
+		Assistente (ad esempio Host)
+		Materiale
+		Calendario mensile
+		Possono essere inserite massimo 21 comitive (3 al giorno)
+		Struttura da pensare...
+
+	Ottimizzazione: modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)
+		Parlarne prima con Alex.
 		
 	Monitor-Online
 		Discorso pubblico se disponibile ComboBox Oratore interno
@@ -49,11 +47,6 @@
 
 	Monitor-Software:
 		- Visualizzare il link Online
-	
-	Componenti della congregazione:
-		- Consigliere classe supplementare
-		- Conduttore adunanza per il servizio di campo (Congregazione)
-		- Conduttore adunanza per il servizio di campo (Gruppo di servizio)
 	
 	- Cantici:
 		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)

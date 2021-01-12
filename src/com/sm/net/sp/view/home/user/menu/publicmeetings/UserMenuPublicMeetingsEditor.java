@@ -14,11 +14,14 @@ import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
+import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekType;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.utils.DateAndTimeUtils;
 import com.sm.net.sp.utils.PlaceUtils;
+import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.history.History;
 import com.sm.net.sp.view.history.UpgradeableComboBoxSelection;
 import com.sm.net.util.Crypt;
@@ -91,9 +94,13 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	private ObservableList<Member> memberList;
 	private ObservableList<Member> presidentPublicMeetingList;
 	private ObservableList<Week> databaseWeeks;
-
+	private ObservableList<WeekAudio> databaseWeeksAudio;
+	private ObservableList<WeekUsciere> databaseWeeksUsciere;
+	
 	private AlertBuilderOld alertBuilder;
 
+	private SupportPlannerView application;
+	
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -177,45 +184,53 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 	private void openHistory(Privileges privilege, String title) {
 
-		try {
+		if (this.selectedWeek.spInf1Property() != null) {
 
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(Meta.Views.HISTORY);
-			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+			try {
 
-			Scene scene = new Scene(layout);
-			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HISTORY);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.initOwner(ownerStage);
-			stage.setTitle(title);
-			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
+				Scene scene = new Scene(layout);
+				scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
 
-			stage.setMinWidth(1050);
-			stage.setMinHeight(500);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.initModality(Modality.WINDOW_MODAL);
+				stage.initOwner(ownerStage);
+				stage.setTitle(title);
+				stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
 
-			History ctrl = (History) fxmlLoader.getController();
-			ctrl.setLayout(layout);
-			ctrl.setPrivilege(privilege);
-			ctrl.setMembers(memberList);
-			ctrl.setLanguage(language);
-			ctrl.setDatabaseWeeks(this.databaseWeeks);
-			ctrl.setSelectedWeek(this.selectedWeek);
-			ctrl.setEditorWeek(Week.buildPublicMeetingEditorWeek(this));
-			ctrl.setEditor(this);
-			ctrl.setThisStage(stage);
-			ctrl.setAlertBuilder(this.alertBuilder);
+				stage.setMinWidth(1050);
+				stage.setMinHeight(500);
 
-			ctrl.objectInitialize();
+				History ctrl = (History) fxmlLoader.getController();
+				ctrl.setLayout(layout);
+				ctrl.setPrivilege(privilege);
+				ctrl.setMembers(memberList);
+				ctrl.setLanguage(language);
+				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setSelectedWeek(this.selectedWeek);
+				ctrl.setEditorWeek(Week.buildPublicMeetingEditorWeek(this));
+				ctrl.setEditor(this);
+				ctrl.setThisStage(stage);
+				ctrl.setAlertBuilder(this.alertBuilder);
+				ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
+				ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
 
-			stage.show();
+				ctrl.objectInitialize();
 
-		} catch (IOException e) {
-			e.printStackTrace();
+				stage.show();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("sp.history.weeknotsaved"));
 		}
-
 	}
 
 	private void initData() {
@@ -606,5 +621,30 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	public void setAlertBuilder(AlertBuilderOld alertBuilder) {
 		this.alertBuilder = alertBuilder;
 	}
+
+	public SupportPlannerView getApplication() {
+		return application;
+	}
+
+	public void setApplication(SupportPlannerView application) {
+		this.application = application;
+	}
+
+	public ObservableList<WeekAudio> getDatabaseWeeksAudio() {
+		return databaseWeeksAudio;
+	}
+
+	public void setDatabaseWeeksAudio(ObservableList<WeekAudio> databaseWeeksAudio) {
+		this.databaseWeeksAudio = databaseWeeksAudio;
+	}
+
+	public ObservableList<WeekUsciere> getDatabaseWeeksUsciere() {
+		return databaseWeeksUsciere;
+	}
+
+	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
+		this.databaseWeeksUsciere = databaseWeeksUsciere;
+	}
+
 
 }

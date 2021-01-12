@@ -23,6 +23,10 @@ public enum EnumHomeUserMenuList {
 	USCIERE("sp.menu.usciere", Meta.Resources.USCIERE),
 
 	PUBLIC_TALK("sp.menu.publictalk", Meta.Resources.PUBLIC_TALK),
+	
+	SERVICE_MEETINGS_CONGR("sp.menu.servicemeetingcongr", Meta.Resources.DOOR_CONGR),
+	
+	SERVICE_MEETINGS_GROUPS("sp.menu.servicemeetinggroups", Meta.Resources.DOOR_GROUPS),
 
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
 

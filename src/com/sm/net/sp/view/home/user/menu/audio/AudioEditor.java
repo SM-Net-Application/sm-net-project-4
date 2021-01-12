@@ -318,46 +318,54 @@ public class AudioEditor extends UpdateDataAdapter implements UpgradeableComboBo
 
 	private void openHistory(Privileges privilege, String title) {
 
-		try {
+		if (this.selectedWeek.spInf1Property() != null) {
 
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(Meta.Views.HISTORYAUDIO);
-			AnchorPane layout = (AnchorPane) fxmlLoader.load();
+			try {
 
-			Scene scene = new Scene(layout);
-			scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.HISTORYAUDIO);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.initOwner(this.ownerStage);
-			stage.setTitle(title);
-			stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
+				Scene scene = new Scene(layout);
+				scene.getStylesheets().add(Meta.Themes.SUPPORTPLANNER_THEME);
 
-			stage.setMinWidth(1050);
-			stage.setMinHeight(500);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.initModality(Modality.WINDOW_MODAL);
+				stage.initOwner(this.ownerStage);
+				stage.setTitle(title);
+				stage.getIcons().add(Meta.Resources.imageForWindowsIcon(Meta.Resources.SEARCH));
 
-			HistoryAudio ctrl = (HistoryAudio) fxmlLoader.getController();
-			ctrl.setLayout(layout);
-			ctrl.setPrivilege(privilege);
-			ctrl.setMembers(this.membersList);
-			ctrl.setLanguage(this.language);
-			ctrl.setDatabaseWeeks(this.databaseWeeks);
-			ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
-			ctrl.setSelectedWeek(this.selectedWeek);
-			ctrl.setEditorWeek(WeekAudio.buildEditorWeek(this));
-			ctrl.setEditor(this);
-			ctrl.setThisStage(stage);
-			ctrl.setApplication(this.application);
-			ctrl.setConfigs(this.configs);
-			ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
+				stage.setMinWidth(1050);
+				stage.setMinHeight(500);
 
-			ctrl.objectInitialize();
+				HistoryAudio ctrl = (HistoryAudio) fxmlLoader.getController();
+				ctrl.setLayout(layout);
+				ctrl.setPrivilege(privilege);
+				ctrl.setMembers(this.membersList);
+				ctrl.setLanguage(this.language);
+				ctrl.setDatabaseWeeks(this.databaseWeeks);
+				ctrl.setDatabaseWeeksAudio(this.databaseWeeksAudio);
+				ctrl.setSelectedWeek(this.selectedWeek);
+				ctrl.setEditorWeek(WeekAudio.buildEditorWeek(this));
+				ctrl.setEditor(this);
+				ctrl.setThisStage(stage);
+				ctrl.setApplication(this.application);
+				ctrl.setConfigs(this.configs);
+				ctrl.setDatabaseWeeksUsciere(this.databaseWeeksUsciere);
 
-			stage.show();
+				ctrl.objectInitialize();
 
-		} catch (IOException e) {
-			e.printStackTrace();
+				stage.show();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("sp.history.weeknotsaved"));
 		}
 	}
 

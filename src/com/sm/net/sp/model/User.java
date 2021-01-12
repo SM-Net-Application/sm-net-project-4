@@ -41,7 +41,7 @@ public class User {
 	private BooleanProperty spInf16;
 	private BooleanProperty spInf17;
 	private BooleanProperty spInf18;
-	private BooleanProperty spInf19;
+	private IntegerProperty spInf19;
 	private BooleanProperty spInf20;
 
 	private StringProperty passwordEncrypted;
@@ -100,7 +100,7 @@ public class User {
 		this.spInf16 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf16")));
 		this.spInf17 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf17")));
 		this.spInf18 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf18")));
-		this.spInf19 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf19")));
+		this.spInf19 = new SimpleIntegerProperty(jsonObject.getInt("spInf19"));
 		this.spInf20 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf20")));
 
 		this.passwordEncrypted = new SimpleStringProperty(jsonObject.getString("spUserPassword"));
@@ -390,15 +390,15 @@ public class User {
 		this.spInf18Property().set(spInf18);
 	}
 
-	public final BooleanProperty spInf19Property() {
+	public final IntegerProperty spInf19Property() {
 		return this.spInf19;
 	}
 
-	public final boolean isSpInf19() {
+	public final int getSpInf19() {
 		return this.spInf19Property().get();
 	}
 
-	public final void setSpInf19(final boolean spInf19) {
+	public final void setSpInf19(final int spInf19) {
 		this.spInf19Property().set(spInf19);
 	}
 
