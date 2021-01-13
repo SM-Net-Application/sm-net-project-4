@@ -1,27 +1,19 @@
 package com.sm.net.sp.view.home.user.menu.monitor;
 
-import java.time.LocalDate;
-
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.Activities;
 import com.sm.net.sp.model.UpdateDataAdapter;
-import com.sm.net.sp.model.Week;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class UserMenuMonitor extends UpdateDataAdapter {
@@ -36,14 +28,17 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 	private PasswordField passwordTextField;
 	@FXML
 	private Button passwordButton;
+//	@FXML
+//	private TableView<Activities> activityTableView;
+//	@FXML
+//	private TableColumn<Activities, String> dateTableColumn;
+//	@FXML
+//	private TableColumn<Activities, ImageView> imageTableColumn;
+//	@FXML
+//	private TableColumn<Activities, String> activityTableColumn;
+
 	@FXML
-	private TableView<Activities> activityTableView;
-	@FXML
-	private TableColumn<Activities, String> dateTableColumn;
-	@FXML
-	private TableColumn<Activities, ImageView> imageTableColumn;
-	@FXML
-	private TableColumn<Activities, String> activityTableColumn;
+	private WebView browser;
 
 	private Settings settings;
 	private Language language;
@@ -52,26 +47,46 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 	@FXML
 	private void initialize() {
 		styleClasses();
-		cellValueFactory();
+//		cellValueFactory();
 		listeners();
 	}
 
-	private void cellValueFactory() {
-
-		dateTableColumn
-				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
-
-		imageTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
-				Meta.Resources.imageForButtonSmall(cellData.getValue().getPrivilege().getImageName())));
-
-		activityTableColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(language.getString(cellData.getValue().getPrivilege().getName())));
-	}
+//	private void cellValueFactory() {
+//
+//		dateTableColumn
+//				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastDateText()));
+//
+//		imageTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<ImageView>(
+//				Meta.Resources.imageForButtonSmall(cellData.getValue().getPrivilege().getImageName())));
+//
+//		activityTableColumn.setCellValueFactory(
+//				cellData -> new SimpleStringProperty(language.getString(cellData.getValue().getPrivilege().getName())));
+//	}
 
 	public void objectInitialize() {
 		viewUpdate();
 		loadPassword();
-		updateActivities();
+		// updateActivities();
+		updateLink();
+	}
+
+	private void updateLink() {
+
+		String psw = this.passwordTextField.getText();
+		if (!psw.isEmpty()) {
+
+			String dbUrl = this.settings.getDatabaseUrl();
+			int indexOf = dbUrl.indexOf("exchange.php");
+			if (indexOf > -1) {
+
+				String subDbUrl = dbUrl.substring(0, indexOf);
+				String link = subDbUrl + "monitor/index.php?pwmon=%s&amp;lang=%s";
+				link = String.format(link, psw, this.language.getString("sp.monitor.language"));
+
+				WebEngine engine = this.browser.getEngine();
+				engine.load(link);
+			}
+		}
 	}
 
 	private void listeners() {
@@ -86,10 +101,10 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 		passwordTextField.getStyleClass().add("text_field_001");
 		passwordButton.getStyleClass().add("button_image_001");
 
-		activityTableView.getStyleClass().add("table_view_001");
-
-		dateTableColumn.getStyleClass().add("table_column_002");
-		imageTableColumn.getStyleClass().add("table_column_002");
+//		activityTableView.getStyleClass().add("table_view_001");
+//
+//		dateTableColumn.getStyleClass().add("table_column_002");
+//		imageTableColumn.getStyleClass().add("table_column_002");
 	}
 
 	private void viewUpdate() {
@@ -109,15 +124,15 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 		this.passwordButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
 		this.passwordButton.setText(null);
 
-		dateTableColumn.setMinWidth(150);
-		dateTableColumn.setMaxWidth(150);
-		dateTableColumn.setText(language.getString("sp.monitor.table.data"));
-
-		imageTableColumn.setMinWidth(100);
-		imageTableColumn.setMaxWidth(100);
-		imageTableColumn.setText("");
-
-		activityTableColumn.setText(language.getString("sp.monitor.table.activity"));
+//		dateTableColumn.setMinWidth(150);
+//		dateTableColumn.setMaxWidth(150);
+//		dateTableColumn.setText(language.getString("sp.monitor.table.data"));
+//
+//		imageTableColumn.setMinWidth(100);
+//		imageTableColumn.setMaxWidth(100);
+//		imageTableColumn.setText("");
+//
+//		activityTableColumn.setText(language.getString("sp.monitor.table.activity"));
 	}
 
 	private void loadPassword() {
@@ -131,24 +146,24 @@ public class UserMenuMonitor extends UpdateDataAdapter {
 	}
 
 	private void listenerPasswordButton() {
-		this.passwordButton.setOnAction(event -> updateActivities());
+		this.passwordButton.setOnAction(event -> updateLink());
 	}
 
-	@Override
-	public void updateActivities() {
-		super.updateActivities();
+//	@Override
+//	public void updateActivities() {
+//		super.updateActivities();
+//
+//		String password = this.passwordTextField.getText();
+//		if (!password.trim().isEmpty())
+//			Actions.getAllActivities(password, Week.buildKey(LocalDate.now()), this.settings, this.ownerStage, this);
+//	}
 
-		String password = this.passwordTextField.getText();
-		if (!password.trim().isEmpty())
-			Actions.getAllActivities(password, Week.buildKey(LocalDate.now()), this.settings, this.ownerStage, this);
-	}
-
-	@Override
-	public void updateActivities(ObservableList<Activities> list) {
-		super.updateActivities(list);
-
-		this.activityTableView.setItems(list);
-	}
+//	@Override
+//	public void updateActivities(ObservableList<Activities> list) {
+//		super.updateActivities(list);
+//
+//		this.activityTableView.setItems(list);
+//	}
 
 	public Settings getSettings() {
 		return settings;

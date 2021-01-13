@@ -1759,8 +1759,8 @@ public class Actions {
 	public static void insertOverseerWeek(String spInf1, String spInf2, String spInf3, String spInf4, String spInf5,
 			String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11, String spInf12,
 			String spInf13, String spInf14, String spInf15, String spInf16, String spInf17, String spInf18,
-			String spInf19, String spInf20, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
-			UpdateData callback) {
+			String spInf19, String spInf20, String spInf21, String spInf22, Settings settings, Stage ownerStage,
+			TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1805,7 +1805,7 @@ public class Actions {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.INSERT_CIRCUITOVERSEER_WEEK(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7,
 								spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17,
-								spInf18, spInf19, spInf20));
+								spInf18, spInf19, spInf20, spInf21, spInf22));
 			}
 		};
 
@@ -1821,8 +1821,8 @@ public class Actions {
 	public static void updateOverseerWeek(String spWeekOvID, String spInf1, String spInf2, String spInf3, String spInf4,
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
-			String spInf18, String spInf19, String spInf20, Settings settings, Stage ownerStage, TabPane tabPane,
-			Tab newTab, UpdateData callback) {
+			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22, Settings settings,
+			Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -1867,7 +1867,7 @@ public class Actions {
 				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
 						JSONRequest.UPDATE_OVERSEER_WEEK(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6,
 								spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16,
-								spInf17, spInf18, spInf19, spInf20));
+								spInf17, spInf18, spInf19, spInf20, spInf21, spInf22));
 			}
 		};
 
@@ -2772,8 +2772,8 @@ public class Actions {
 	}
 
 	public static void updatePublicMeeting(String spWeekID, String spInf30, String spInf31, String spInf32,
-			String spInf33, String spInf34, Settings settings, Stage ownerStage, TabPane tabPane, Tab newTab,
-			UpdateData callback) {
+			String spInf33, String spInf34, String spInf62, int spInf65, int spInf66, Settings settings,
+			Stage ownerStage, TabPane tabPane, Tab newTab, UpdateData callback) {
 
 		Alert waitAlert = createWaitAlert(settings, Meta.Application.getFullTitle(),
 				settings.getLanguage().getString("MEX005"), ownerStage);
@@ -2815,8 +2815,8 @@ public class Actions {
 
 			@Override
 			protected JSONObject call() throws Exception {
-				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(),
-						JSONRequest.UPDATE_PUBLIC_MEETING(spWeekID, spInf30, spInf31, spInf32, spInf33, spInf34));
+				return JSON.executeHttpPostJSON(settings.getDatabaseUrl(), JSONRequest.UPDATE_PUBLIC_MEETING(spWeekID,
+						spInf30, spInf31, spInf32, spInf33, spInf34, spInf62, spInf65, spInf66));
 			}
 		};
 

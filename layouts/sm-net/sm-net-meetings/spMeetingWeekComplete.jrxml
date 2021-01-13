@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spMeetingWeek" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e6d013b3-aa4c-4ba7-ab71-aaec14a42962">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -213,7 +213,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek} && !$F{memPrayPresident}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="c847f022-cce0-40c2-96c6-004b8f658edd">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="c847f022-cce0-40c2-96c6-004b8f658edd">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -232,7 +232,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1Min}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="be80257f-0ec1-48fc-bcc8-082cf7d15a69">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="be80257f-0ec1-48fc-bcc8-082cf7d15a69">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -241,7 +241,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="e67c67de-8de1-4c29-aa61-a5f695a2c2e6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -253,7 +253,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="d0990831-2d92-454b-a2b6-4bc08140d6da">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="d0990831-2d92-454b-a2b6-4bc08140d6da">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -276,7 +276,7 @@
 				<textFieldExpression><![CDATA[$F{memPray1NameText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="8b570d81-a4f1-42cc-9fc7-c2887434d869">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="8b570d81-a4f1-42cc-9fc7-c2887434d869">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -368,7 +368,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek} && $F{memPrayPresident}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="c58ab583-f324-429d-8fd4-1f217366c7cd">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="c58ab583-f324-429d-8fd4-1f217366c7cd">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -387,7 +387,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1Min}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="43a411f9-e05d-4a63-9844-0f9c9f6a5139">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="43a411f9-e05d-4a63-9844-0f9c9f6a5139">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -396,7 +396,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="8825d294-0542-40f3-803d-cb047b42e27d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -408,7 +408,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="61e5e680-1524-47f0-b0cf-0bd17e676ded">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="61e5e680-1524-47f0-b0cf-0bd17e676ded">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -431,7 +431,7 @@
 				<textFieldExpression><![CDATA[$F{memPresidentNameText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="c5c0cde0-8d20-4851-99f7-3bf0ac2a0597">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="c5c0cde0-8d20-4851-99f7-3bf0ac2a0597">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -521,7 +521,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintMidweek}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="905aa25d-8cbf-4d8e-a149-52f8538056b1">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="905aa25d-8cbf-4d8e-a149-52f8538056b1">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -540,7 +540,7 @@
 				<textFieldExpression><![CDATA[$F{memSong2Min}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="ccf7249b-dff1-4f9b-b572-cd4eec285546">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="ccf7249b-dff1-4f9b-b572-cd4eec285546">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -549,7 +549,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="6e504f0a-05c4-4afa-9e22-b67c957bcb11">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -561,7 +561,7 @@
 				<textFieldExpression><![CDATA[$F{memSong2}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="59e35f4d-f41b-4149-a537-f4f6bee00b30">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="59e35f4d-f41b-4149-a537-f4f6bee00b30">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -584,7 +584,7 @@
 				<textFieldExpression><![CDATA[$F{memPray2NameText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="d18e083f-15b4-4951-b738-996154952ea6">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="d18e083f-15b4-4951-b738-996154952ea6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -1770,7 +1770,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="c53fd659-8df3-43dc-909c-506f583754b7">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1959,7 +1959,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend} && !$F{memPrayPresident}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="6caec62c-5aca-4a18-abee-d6b51c35b6b4">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="6caec62c-5aca-4a18-abee-d6b51c35b6b4">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -1978,7 +1978,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1Min}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="1e503c1b-67ae-49e5-8372-c3b9d6a7d2d1">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="1e503c1b-67ae-49e5-8372-c3b9d6a7d2d1">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -1987,7 +1987,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="629082bc-e54f-4036-976a-083f8f89a7e6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1999,7 +1999,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="b16ff0e0-8bee-4d68-82c5-44c0ee7105c6">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="b16ff0e0-8bee-4d68-82c5-44c0ee7105c6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2022,7 +2022,7 @@
 				<textFieldExpression><![CDATA[$F{memPray1NameText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="858ad217-b8ae-40c3-9e1f-f7bf8d562e05">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="858ad217-b8ae-40c3-9e1f-f7bf8d562e05">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2114,7 +2114,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend} && $F{memPrayPresident}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="ebfa843c-1b4c-44b2-a597-ba1ff4b7e2d3">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="ebfa843c-1b4c-44b2-a597-ba1ff4b7e2d3">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -2133,7 +2133,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1Min}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="64dee371-c1b6-4c08-a704-a8941d6b38d9">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="64dee371-c1b6-4c08-a704-a8941d6b38d9">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -2142,7 +2142,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="7b2b0690-827c-49e1-9ac6-705de053dfea">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -2154,7 +2154,7 @@
 				<textFieldExpression><![CDATA[$F{memSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="e233c93c-1c6d-4ac5-9329-9b55f52bc6e9">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="e233c93c-1c6d-4ac5-9329-9b55f52bc6e9">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2177,7 +2177,7 @@
 				<textFieldExpression><![CDATA[$F{memPresidentNameText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="ea92c890-4670-46ee-a776-b8f973fd5960">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="ea92c890-4670-46ee-a776-b8f973fd5960">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2267,7 +2267,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{memPrintWeekend}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="95628b08-07c1-447e-957a-e94095eb5bd6">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="95628b08-07c1-447e-957a-e94095eb5bd6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -2286,7 +2286,7 @@
 				<textFieldExpression><![CDATA[$F{memSong2Min}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="5bebefaf-36f5-4ffe-8dae-c126d3bbd56e">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="5bebefaf-36f5-4ffe-8dae-c126d3bbd56e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -2295,7 +2295,7 @@
 					<pen lineWidth="0.5"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="60" y="0" width="217" height="17" forecolor="#000000" uuid="7734841f-ae6b-404a-9341-16d882feee99">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -2307,7 +2307,7 @@
 				<textFieldExpression><![CDATA[$F{memSong2}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="25226c82-c3e8-4492-916b-397c17263081">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="25226c82-c3e8-4492-916b-397c17263081">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2330,7 +2330,7 @@
 				<textFieldExpression><![CDATA[$F{memPray2NameText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="57a86665-bc60-4c98-8d41-73fcadcfc432">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="57a86665-bc60-4c98-8d41-73fcadcfc432">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2780,7 +2780,7 @@
 		<band height="17">
 			<printWhenExpression><![CDATA[$F{printStandardWeekend}&&$F{printOverseerWeekend}]]></printWhenExpression>
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="17" uuid="965d801a-0378-42c7-b94b-ea01114b35c6">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="555" height="17" uuid="965d801a-0378-42c7-b94b-ea01114b35c6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -2799,7 +2799,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkMinSong1}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="55" y="0" width="1" height="17" uuid="c6905dc1-9d81-4df8-8330-818767e4799b">
+				<reportElement stretchType="RelativeToBandHeight" x="55" y="0" width="1" height="17" uuid="c6905dc1-9d81-4df8-8330-818767e4799b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -2820,7 +2820,7 @@
 				<textFieldExpression><![CDATA[$F{overseerSongTalk2}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="277" y="0" width="1" height="17" uuid="dd4d7821-ea41-4c37-8e52-4af83aff5e90">
+				<reportElement stretchType="RelativeToBandHeight" x="277" y="0" width="1" height="17" uuid="dd4d7821-ea41-4c37-8e52-4af83aff5e90">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -2843,7 +2843,7 @@
 				<textFieldExpression><![CDATA[$F{publicTalkPresidentText}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="416" y="0" width="1" height="17" uuid="43bca1d4-bfa9-4673-97c6-1bb3683da50c">
+				<reportElement stretchType="RelativeToBandHeight" x="416" y="0" width="1" height="17" uuid="43bca1d4-bfa9-4673-97c6-1bb3683da50c">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>

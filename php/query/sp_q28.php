@@ -12,7 +12,7 @@ if (isset($jsonObj["keyStart"]) && isset($jsonObj["keyEnd"])) {
             $query = "SELECT spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5,";
             $query .= "spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,";
             $query .= "spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,";
-            $query .= "spInf20";
+            $query .= "spInf20, spInf21, spInf22";
             $query .= " FROM sp_week_ov";
             // $query .= " WHERE spInf1 BETWEEN";
             // $query .= " " . $jsonObj["keyStart"];
@@ -50,6 +50,8 @@ if (isset($jsonObj["keyStart"]) && isset($jsonObj["keyEnd"])) {
                     $row["spInf18"] = $resultRow["spInf18"];
                     $row["spInf19"] = $resultRow["spInf19"];
                     $row["spInf20"] = $resultRow["spInf20"];
+                    $row["spInf21"] = $resultRow["spInf21"];
+                    $row["spInf22"] = $resultRow["spInf22"];
 
                     // Carico la riga nel risultato
                     array_push($response["result"], $row);

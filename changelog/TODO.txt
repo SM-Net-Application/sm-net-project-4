@@ -1,28 +1,32 @@
 
-	Sorvegliante:
-		- Aggiungere i titoli dei cantici (sono solo 2 cantici)
-		
-	Commemorazione:
-		- Aggiungere i titoli dei cantici (sono solo 2 cantici)
-
-	Nuova sezione: Adunanze per il servizio di campo (Congregazione)
+	Cantici:
+		- I cantici vengono salvati nella sezione Configurazione
+		- Il programma contiene il link di default (nel file ini della lingua)
+		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
+		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
+		- Nelle adunanze determinare il titolo in base al numero inserito
+		- Nel layout stampare anche il titolo
 	
-		Il calendario deve essere composto dai mesi
+	Configurazione:
+		- Spunta per indicare se dopo aver inserito il numero del cantico, si deve inserire automaticamente il titolo
+		- Minuti dei cantici
 	
-		keyWeek
-		Giorno
-		Ora
-		Minuti
-		Conduttore
-		Assistente (ad esempio Host)
-		Materiale
-		Calendario mensile
-		Possono essere inserite massimo 21 comitive (3 al giorno)
-		Struttura da pensare...
+	Ottimizzazione:
+		- modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)
+		- Parlarne prima con Alex.
 
-	Ottimizzazione: modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)
-		Parlarne prima con Alex.
-		
+	Nuova sezione:
+		- Adunanze per il servizio di campo (Congregazione)
+	
+	Nuova sezione:
+		- Adunanze per il servizio di campo (Gruppo)
+	
+	- Nuova sezione:
+		- Pulizia
+			- Pulizia semplificata (settimanale, gruppo)
+			- Pulizia approfondita (gruppo (quando in programma) oppure testo (per indicare un altra congregazione che utilizza la stessa sala))
+			- Aggiungere anche una nota, per indicare ad esempio che deve essere fatto il Winterdienst o il Rasenmaeher
+	
 	Monitor-Online
 		- Visualizzare:
 			- Discorso della Commemorazione
@@ -35,26 +39,6 @@
 			- Congressi/Assemblee
 			- Visita del sorvegliante
 			- Commemorazione
-
-	Monitor-Software:
-		- Visualizzare il link Online
-	
-	- Cantici:
-		- I cantici vengono salvati nella sezione Configurazione
-		- Il programma contiene il link di default (nel file ini della lingua)
-		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
-		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
-		- Nelle adunanze determinare il titolo in base al numero inserito
-		- Nel layout stampare anche il titolo
-	
-	- Rendere la sezione Configurazione come privilegio utente
-	
-	- Discorsi pubblici
-		- Aggiungere Tema del cantico, Discorso speciale e Oratore interno
-	
-	- Nuova sezione: Pulizia
-		- Pulizia semplificata (settimanale, gruppo)
-		- Pulizia approfondita (gruppo (quando in programma) oppure testo (per indicare un altra congregazione che utilizza la stessa sala))
 	
 	- Sostituire la classe Authenticator
 	

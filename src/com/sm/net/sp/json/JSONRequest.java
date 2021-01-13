@@ -582,7 +582,7 @@ public class JSONRequest {
 	public static JSONObject INSERT_CIRCUITOVERSEER_WEEK(String spInf1, String spInf2, String spInf3, String spInf4,
 			String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10, String spInf11,
 			String spInf12, String spInf13, String spInf14, String spInf15, String spInf16, String spInf17,
-			String spInf18, String spInf19, String spInf20) {
+			String spInf18, String spInf19, String spInf20, String spInf21, String spInf22) {
 
 		JSONObject jsonObj = create(Integer.valueOf(29));
 		jsonObj.put("spInf1", spInf1);
@@ -605,14 +605,16 @@ public class JSONRequest {
 		jsonObj.put("spInf18", spInf18);
 		jsonObj.put("spInf19", spInf19);
 		jsonObj.put("spInf20", spInf20);
-
+		jsonObj.put("spInf21", spInf21);
+		jsonObj.put("spInf22", spInf22);
+		
 		return jsonObj;
 	}
 
 	public static JSONObject UPDATE_OVERSEER_WEEK(String spWeekOvID, String spInf1, String spInf2, String spInf3,
 			String spInf4, String spInf5, String spInf6, String spInf7, String spInf8, String spInf9, String spInf10,
 			String spInf11, String spInf12, String spInf13, String spInf14, String spInf15, String spInf16,
-			String spInf17, String spInf18, String spInf19, String spInf20) {
+			String spInf17, String spInf18, String spInf19, String spInf20, String spInf21, String spInf22) {
 
 		JSONObject jsonObj = create(Integer.valueOf(30));
 
@@ -637,7 +639,9 @@ public class JSONRequest {
 		jsonObj.put("spInf18", spInf18);
 		jsonObj.put("spInf19", spInf19);
 		jsonObj.put("spInf20", spInf20);
-
+		jsonObj.put("spInf21", spInf21);
+		jsonObj.put("spInf22", spInf22);
+		
 		return jsonObj;
 	}
 
@@ -686,7 +690,7 @@ public class JSONRequest {
 	}
 
 	public static JSONObject UPDATE_PUBLIC_MEETING(String spWeekID, String spInf30, String spInf31, String spInf32,
-			String spInf33, String spInf34) {
+			String spInf33, String spInf34, String spInf62, int spInf65, int spInf66) {
 
 		JSONObject jsonObj = create(Integer.valueOf(35));
 
@@ -696,6 +700,9 @@ public class JSONRequest {
 		jsonObj.put("spInf32", spInf32);
 		jsonObj.put("spInf33", spInf33);
 		jsonObj.put("spInf34", spInf34);
+		jsonObj.put("spInf62", spInf62);
+		jsonObj.put("spInf65", spInf65);
+		jsonObj.put("spInf66", spInf66);
 
 		return jsonObj;
 	}
@@ -1009,6 +1016,9 @@ public class JSONRequest {
 		jsonObj.put("spInf34", memorial.getSpInf34());
 		jsonObj.put("spInf35", memorial.getSpInf35());
 		jsonObj.put("spInf36", memorial.getSpInf36());
+		
+		jsonObj.put("spInf37", memorial.getSpInf37());
+		jsonObj.put("spInf38", memorial.getSpInf38());
 
 		return jsonObj;
 	}
@@ -1054,6 +1064,9 @@ public class JSONRequest {
 		jsonObj.put("spInf34", memorial.getSpInf34());
 		jsonObj.put("spInf35", memorial.getSpInf35());
 		jsonObj.put("spInf36", memorial.getSpInf36());
+		
+		jsonObj.put("spInf37", memorial.getSpInf37());
+		jsonObj.put("spInf38", memorial.getSpInf38());
 
 		return jsonObj;
 	}

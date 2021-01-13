@@ -52,6 +52,9 @@ public class WeekOverseer {
 	private StringProperty spInf19;
 	private IntegerProperty spInf20;
 
+	private StringProperty spInf21;
+	private StringProperty spInf22;
+
 	public WeekOverseer(LocalDate day, Language language) {
 		super();
 
@@ -107,6 +110,11 @@ public class WeekOverseer {
 				Crypt.decrypt(jsonObject.getString("spInf19" + suffix), settings.getDatabaseSecretKey()));
 		this.spInf20 = new SimpleIntegerProperty(jsonObject.getInt("spInf20" + suffix));
 
+		this.spInf21 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf21" + suffix), settings.getDatabaseSecretKey()));
+		this.spInf22 = new SimpleStringProperty(
+				Crypt.decrypt(jsonObject.getString("spInf22" + suffix), settings.getDatabaseSecretKey()));
+
 		this.setVisitNumber(String.valueOf(this.getSpInf2()));
 		this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
 		this.setOverseerWife(this.getSpInf5().concat(", ").concat(this.getSpInf6()));
@@ -159,6 +167,9 @@ public class WeekOverseer {
 				this.setSpInf19(week.getSpInf19());
 				this.setSpInf20(week.getSpInf20());
 
+				this.setSpInf21(week.getSpInf21());
+				this.setSpInf22(week.getSpInf22());
+				
 				this.setVisitNumber(String.valueOf(this.getSpInf2()));
 				this.setOverseer(this.getSpInf5().concat(", ").concat(this.getSpInf3()));
 				this.setOverseerWife(this.getSpInf5().concat(", ").concat(this.getSpInf6()));
@@ -190,6 +201,9 @@ public class WeekOverseer {
 				this.spInf19 = null;
 				this.spInf20 = null;
 
+				this.spInf21 = null;
+				this.spInf22 = null;
+				
 				this.visitNumber = null;
 				this.overseer = null;
 				this.overseerWife = null;
@@ -624,4 +638,33 @@ public class WeekOverseer {
 		this.overseerWifeProperty().set(overseerWife);
 	}
 
+	public final StringProperty spInf21Property() {
+		return this.spInf21;
+	}
+
+	public final String getSpInf21() {
+		return this.spInf21Property().get();
+	}
+
+	public final void setSpInf21(final String spInf21) {
+		if (this.spInf21Property() == null)
+			this.spInf21 = new SimpleStringProperty();
+
+		this.spInf21Property().set(spInf21);
+	}
+
+	public final StringProperty spInf22Property() {
+		return this.spInf22;
+	}
+
+	public final String getSpInf22() {
+		return this.spInf22Property().get();
+	}
+
+	public final void setSpInf22(final String spInf22) {
+		if (this.spInf22Property() == null)
+			this.spInf22 = new SimpleStringProperty();
+
+		this.spInf22Property().set(spInf22);
+	}
 }

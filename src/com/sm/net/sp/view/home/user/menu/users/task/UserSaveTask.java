@@ -84,7 +84,7 @@ public class UserSaveTask implements TaskInterface {
 		JSONObject json = JSONRequest.USER_SAVE(this.userID, this.spInf1, this.spInf2, this.spInf3, this.spInf4,
 				this.spInf5, this.spInf6, this.spInf7, this.spInf8, spInf9, this.spInf10, this.spInf11, this.spInf12,
 				this.spInf13, this.spInf14, this.spInf15, this.spInf16, this.spInf17, this.spInf18, this.spInf19,
-				spInf20);
+				this.spInf20);
 
 		String url = this.settings.getDatabaseUrl();
 

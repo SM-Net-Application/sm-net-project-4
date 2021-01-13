@@ -83,6 +83,15 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	@FXML
 	private TextField publicTalkMinTextField;
 
+	@FXML
+	private TextField song1TextField;
+	@FXML
+	private CheckBox specialTalkCheckBox;
+	@FXML
+	private Label internSpeakerLabel;
+	@FXML
+	private ComboBox<Member> internSpeakerComboBox;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -93,6 +102,7 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 	private ObservableList<Member> memberList;
 	private ObservableList<Member> presidentPublicMeetingList;
+	private ObservableList<Member> internSpeakerList;
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
@@ -126,6 +136,12 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 		this.presidentOnlyPrayPublicMeetingLabel.getStyleClass().add("check_box_001");
 		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
 		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
+
+		this.song1TextField.getStyleClass().add("text_field_001");
+		this.specialTalkCheckBox.getStyleClass().add("check_box_001");
+		this.internSpeakerLabel.getStyleClass().add("label_set_001");
+		this.internSpeakerComboBox.getStyleClass().add("combo_box_001");
+
 	}
 
 	private void viewUpdate() {
@@ -148,6 +164,9 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 		this.presidentOnlyPrayPublicMeetingLabel
 				.setText(this.language.getString("meetings.presidentpublicmeeting.onlypray"));
 		this.publicTalkMinLabel.setText(this.language.getString("meetings.publictalk.min"));
+
+		this.specialTalkCheckBox.setText(this.language.getString("meetings.editor.specialtalk"));
+		this.internSpeakerLabel.setText(this.language.getString("meetings.editor.internspeaker"));
 	}
 
 	public void objectInitialize() {
@@ -239,8 +258,12 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 			memberList = FXCollections.observableArrayList();
 
 		presidentPublicMeetingList = FXCollections.observableArrayList();
+		this.internSpeakerList = FXCollections.observableArrayList();
+
 		addEmptyMember();
+
 		presidentPublicMeetingComboBox.setItems(presidentPublicMeetingList);
+		this.internSpeakerComboBox.setItems(this.internSpeakerList);
 
 		selectFirst();
 
@@ -271,26 +294,33 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 	private void selectFirst() {
 		presidentPublicMeetingComboBox.getSelectionModel().selectFirst();
+		this.internSpeakerComboBox.getSelectionModel().selectFirst();
 	}
 
 	private void setLists() {
-		for (Member member : this.memberList)
+		for (Member member : this.memberList) {
 			if (member.getSpInf36() == 1)
 				this.presidentPublicMeetingList.add(member);
+			if (member.getSpInf45() == 1)
+				this.internSpeakerList.add(member);
+		}
 
 		orderLists();
 	}
 
 	private void orderLists() {
 		this.presidentPublicMeetingList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
+		this.internSpeakerList.sort((o1, o2) -> o1.getNameStyle1().compareTo(o2.getNameStyle1()));
 	}
 
 	private void addEmptyMember() {
 		this.presidentPublicMeetingList.add(Member.emptyMember(language));
+		this.internSpeakerList.add(Member.emptyMember(language));
 	}
 
 	private void resetLists() {
 		this.presidentPublicMeetingList.clear();
+		this.internSpeakerList.clear();
 	}
 
 	private void loadSelectedWeek() {
@@ -306,6 +336,10 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 				this.presidentOnlyPrayPublicMeetingLabel.setSelected(this.selectedWeek.getSpInf41() == 1);
 				this.publicTalkMinTextField.setText(this.selectedWeek.getSpInf42());
+
+				this.song1TextField.setText(this.selectedWeek.getSpInf62());
+				this.specialTalkCheckBox.setSelected(this.selectedWeek.getSpInf65() == 1);
+				setMemberComboBoxIndex(this.internSpeakerComboBox, this.selectedWeek.getSpInf66());
 
 			} else {
 
@@ -442,11 +476,11 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 			String spInf59 = emptyTextEncrypted;
 			String spInf60 = emptyTextEncrypted;
 			String spInf61 = emptyTextEncrypted;
-			String spInf62 = emptyTextEncrypted;
+			String spInf62 = Crypt.encrypt(this.song1TextField.getText(), this.settings.getDatabaseSecretKey());
 			String spInf63 = emptyTextEncrypted;
 			String spInf64 = emptyTextEncrypted;
-			int spInf65 = 0;
-			int spInf66 = 0; // TODO: gestire Discorso speciale
+			int spInf65 = this.specialTalkCheckBox.isSelected() ? 1 : 0;
+			int spInf66 = this.internSpeakerComboBox.getSelectionModel().getSelectedItem().getSpMemberID();
 
 			// ------------------------------------------------
 
@@ -458,8 +492,8 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 				String spWeekID = String.valueOf(selectedWeek.getSpWeekID());
 
-				Actions.updatePublicMeeting(spWeekID, spInf30, spInf31, spInf32, spInf33, spInf34, settings, ownerStage,
-						ownerTabPane, thisTab, ownerCtrl);
+				Actions.updatePublicMeeting(spWeekID, spInf30, spInf31, spInf32, spInf33, spInf34, spInf62, spInf65,
+						spInf66, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 
 			} else {
 				// newWeek
@@ -512,9 +546,20 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 	private boolean checkFields() {
 
-		// TODO: Check all fields
 		boolean status = true;
 
+		int internSpeakerID = -1;
+		Member internSpeaker = this.internSpeakerComboBox.getSelectionModel().getSelectedItem();
+		if (internSpeaker != null)
+			internSpeakerID = internSpeaker.getSpMemberID();
+
+		String externSpeaker = this.publicTalkTalkerTextField.getText();
+		if (!externSpeaker.isEmpty() && internSpeakerID > 0) {
+			status = false;
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("meetings.editor.error.speaker"));
+		}
+		
 		return status;
 	}
 

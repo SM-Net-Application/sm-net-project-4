@@ -6,7 +6,6 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
-import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.SerGroup;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.User;
@@ -95,6 +94,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private ComboBox<SerGroup> authServiceMeetingGroupComboBox;
 	@FXML
 	private CheckBox authCleanCheckBox;
+	@FXML
+	private CheckBox authConfigCheckBox;
 
 	@FXML
 	private Button userAddButton;
@@ -166,6 +167,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authServiceMeetingGroupComboBox.getStyleClass().add("combo_box_001");
 
 		this.serviceGroupLabel.getStyleClass().add("label_001");
+
+		this.authConfigCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -273,6 +276,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authCleanCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CLEAN));
 
 		this.serviceGroupLabel.setText(language.getString("users.servicegroup"));
+
+		this.authConfigCheckBox.setText(language.getString("users.auth.config"));
+		this.authConfigCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CONFIG));
 	}
 
 	@Override
@@ -351,6 +357,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 						break;
 					}
 				}
+
+				this.authConfigCheckBox.setSelected(user.isSpInf20());
 			}
 		});
 
@@ -408,7 +416,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 			SerGroup serGroup = this.authServiceMeetingGroupComboBox.getSelectionModel().getSelectedItem();
 			int spInf19 = serGroup.getSpSerGrID();
 
-			int spInf20 = 0;
+			int spInf20 = this.authConfigCheckBox.isSelected() ? 1 : 0;
 
 			String waitMessage = this.language.getString("users.save.wait");
 
@@ -442,11 +450,12 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authAudioCheckBox.setSelected(false);
 		this.authUsciereCheckBox.setSelected(false);
-		
+
 		this.authServiceMeetingCongrCheckBox.setSelected(false);
 		this.authServiceMeetingGroupCheckBox.setSelected(false);
 		this.authCleanCheckBox.setSelected(false);
 		this.authServiceMeetingGroupComboBox.getSelectionModel().selectFirst();
+		this.authConfigCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {

@@ -2,7 +2,7 @@
 
 // Insert Public Meeting
 
-if (isset ( $jsonObj ["spWeekID"] ) && isset ( $jsonObj ["spInf30"] ) && isset ( $jsonObj ["spInf31"] ) && isset ( $jsonObj ["spInf32"] ) && isset ( $jsonObj ["spInf33"] ) && isset ( $jsonObj ["spInf34"] )) {
+if (isset ( $jsonObj ["spWeekID"] ) && isset ( $jsonObj ["spInf30"] ) && isset ( $jsonObj ["spInf31"] ) && isset ( $jsonObj ["spInf32"] ) && isset ( $jsonObj ["spInf33"] ) && isset ( $jsonObj ["spInf34"] ) && isset ( $jsonObj ["spInf62"] ) && isset ( $jsonObj ["spInf65"] ) && isset ( $jsonObj ["spInf66"] )) {
 	if (! empty ( $jsonObj ["spWeekID"] )) {
 		require_once dirname(__DIR__, 1) . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
@@ -17,7 +17,10 @@ if (isset ( $jsonObj ["spWeekID"] ) && isset ( $jsonObj ["spInf30"] ) && isset (
             $query .= " spInf31 = '" . $jsonObj ["spInf31"] . "',";
             $query .= " spInf32 = '" . $jsonObj ["spInf32"] . "',";
             $query .= " spInf33 = '" . $jsonObj ["spInf33"] . "',";
-            $query .= " spInf34 = '" . $jsonObj ["spInf34"] . "'";
+			$query .= " spInf34 = '" . $jsonObj ["spInf34"] . "',";
+			$query .= " spInf62 = '" . $jsonObj ["spInf62"] . "',";
+			$query .= " spInf65 = " . $jsonObj ["spInf65"] . ",";
+			$query .= " spInf66 = " . $jsonObj ["spInf66"];
 			$query .= " WHERE spWeekID = " . $jsonObj ["spWeekID"];
 			
 			if ($database->query ( $query ) === TRUE) {

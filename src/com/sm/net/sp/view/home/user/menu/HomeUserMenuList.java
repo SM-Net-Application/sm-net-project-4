@@ -168,6 +168,20 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.USCIERE);
 			if (this.user.isSpInf8())
 				menuListView.getItems().add(EnumHomeUserMenuList.PUBLIC_TALK);
+
+			if (this.user.isSpInf16())
+				menuListView.getItems().add(EnumHomeUserMenuList.SERVICE_MEETINGS_CONGR);
+
+			// Funzioni disponibili solo se presente un gruppo
+			if (this.user.getSpInf19() > 0) {
+
+				if (this.user.isSpInf17())
+					menuListView.getItems().add(EnumHomeUserMenuList.SERVICE_MEETINGS_GROUPS);
+
+			}
+
+			if (this.user.isSpInf18())
+				menuListView.getItems().add(EnumHomeUserMenuList.CLEAN);
 			if (this.user.isSpInf5())
 				menuListView.getItems().add(EnumHomeUserMenuList.CIRCUITOVERSEERS);
 			if (this.user.isSpInf11())
@@ -178,6 +192,8 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.NATURAL_DISASTER);
 			if (this.user.isSpInf7())
 				menuListView.getItems().add(EnumHomeUserMenuList.MONITOR);
+			if (this.user.isSpInf20())
+				menuListView.getItems().add(EnumHomeUserMenuList.CONFIG);
 		}
 	}
 
@@ -220,6 +236,17 @@ public class HomeUserMenuList {
 		case CIRCUITOVERSEERS:
 			ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;
+			
+		case SERVICE_MEETINGS_CONGR:
+			// ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			break;
+		case SERVICE_MEETINGS_GROUPS:
+			// ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			break;
+		case CLEAN:
+			// ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			break;
+			
 		case CONVENTIONS:
 			this.ctrlSupportPlannerView.viewConventions();
 			break;

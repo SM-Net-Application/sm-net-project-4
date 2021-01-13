@@ -5,13 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor">
    <children>
@@ -81,19 +80,11 @@
             </HBox>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <TableView fx:id="activityTableView">
-                    <columns>
-                      <TableColumn fx:id="dateTableColumn" prefWidth="75.0" text="C1" />
-                      <TableColumn fx:id="imageTableColumn" prefWidth="75.0" text="C2" />
-                        <TableColumn fx:id="activityTableColumn" prefWidth="75.0" text="C2" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
+                  <WebView fx:id="browser" prefHeight="-1.0" prefWidth="-1.0">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
-                  </TableView>
+                  </WebView>
                </children>
             </StackPane>
          </children>

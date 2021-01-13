@@ -27,6 +27,8 @@ public enum EnumHomeUserMenuList {
 	SERVICE_MEETINGS_CONGR("sp.menu.servicemeetingcongr", Meta.Resources.DOOR_CONGR),
 	
 	SERVICE_MEETINGS_GROUPS("sp.menu.servicemeetinggroups", Meta.Resources.DOOR_GROUPS),
+	
+	CLEAN("sp.menu.clean", Meta.Resources.CLEAN),
 
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
 

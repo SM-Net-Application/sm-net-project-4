@@ -711,10 +711,16 @@ public class JRWeek {
 					String memSong1Min = language.getString("jasper.memorial.song1min");
 					jrWeek.setMemSong1Min(memSong1Min);
 
-					String memSong1Format = language.getString("jasper.memorial.song1format");
-					String memSong1 = weekMemorial.getSpInf2();
-					String memSong1Text = String.format(memSong1Format, memSong1);
-					jrWeek.setMemSong1(memSong1Text);
+					String song1 = weekMemorial.getSpInf2();
+					String song1title = weekMemorial.getSpInf37();
+					JRWeekSongType song1type = JRWeekSongType.checkType(song1, song1title);
+					String song1text = JRWeekSongType.checkText(language, song1type, song1, song1title);
+					jrWeek.setMemSong1(song1text);
+
+//					String memSong1Format = language.getString("jasper.memorial.song1format");
+//					String memSong1 = weekMemorial.getSpInf2();
+//					String memSong1Text = String.format(memSong1Format, memSong1);
+//					jrWeek.setMemSong1(memSong1Text);
 
 					boolean memPrayPresident = weekMemorial.getSpInf35() == 1;
 					jrWeek.setMemPrayPresident(memPrayPresident);
@@ -796,10 +802,16 @@ public class JRWeek {
 					String memSong2Min = language.getString("jasper.memorial.song2min");
 					jrWeek.setMemSong2Min(memSong2Min);
 
-					String memSong2Format = language.getString("jasper.memorial.song2format");
-					String memSong2 = weekMemorial.getSpInf3();
-					String memSong2Text = String.format(memSong2Format, memSong2);
-					jrWeek.setMemSong2(memSong2Text);
+					String song2 = weekMemorial.getSpInf3();
+					String song2title = weekMemorial.getSpInf38();
+					JRWeekSongType song2type = JRWeekSongType.checkType(song2, song2title);
+					String song2text = JRWeekSongType.checkText(language, song2type, song2, song2title);
+					jrWeek.setMemSong2(song2text);
+
+//					String memSong2Format = language.getString("jasper.memorial.song2format");
+//					String memSong2 = weekMemorial.getSpInf3();
+//					String memSong2Text = String.format(memSong2Format, memSong2);
+//					jrWeek.setMemSong2(memSong2Text);
 
 					String memPray2NameText = language.getString("jasper.memorial.pray2text");
 					jrWeek.setMemPray2NameText(memPray2NameText);
@@ -1066,11 +1078,24 @@ public class JRWeek {
 				String overseerName = weekOverseer.getSpInf3();
 				String overseerShortName = weekOverseer.getSpInf4();
 				String overseerSurname = weekOverseer.getSpInf5();
-				String overseerSongTalk1 = weekOverseer.getSpInf8();
+
+				String song1 = weekOverseer.getSpInf8();
+				String song1title = weekOverseer.getSpInf21();
+				JRWeekSongType song1type = JRWeekSongType.checkType(song1, song1title);
+				String song1text = JRWeekSongType.checkText(language, song1type, song1, song1title);
+				jrWeek.setTreasuresSong1(song1text);
+
+				// String overseerSongTalk1 = weekOverseer.getSpInf8();
+
 				String overseerMinTalk1 = weekOverseer.getSpInf9();
 				String overseerThemeTalk1 = weekOverseer.getSpInf10();
 
-				String overseerSongTalk2 = weekOverseer.getSpInf11();
+				String song2 = weekOverseer.getSpInf11();
+				String song2title = weekOverseer.getSpInf22();
+				JRWeekSongType song2type = JRWeekSongType.checkType(song2, song2title);
+				String song2text = JRWeekSongType.checkText(language, song2type, song2, song2title);
+				// String overseerSongTalk2 = weekOverseer.getSpInf11();
+
 				String overseerMinTalk2 = weekOverseer.getSpInf12();
 				String overseerThemeTalk2 = weekOverseer.getSpInf13();
 
@@ -1086,10 +1111,12 @@ public class JRWeek {
 				jrWeek.setOverseerMinTalk3(
 						String.format(language.getString("jasper.layout.meeting.min"), overseerMinTalk3));
 
-				jrWeek.setOverseerSongTalk1(
-						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk1));
-				jrWeek.setOverseerSongTalk2(
-						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk2));
+//				jrWeek.setOverseerSongTalk1(
+//						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk1));
+				jrWeek.setOverseerSongTalk1(song1text);
+//				jrWeek.setOverseerSongTalk2(
+//						String.format(language.getString("jasper.layout.meeting.song1"), overseerSongTalk2));
+				jrWeek.setOverseerSongTalk2(song2text);
 
 				jrWeek.setOverseerThemeTalk1(overseerThemeTalk1);
 				jrWeek.setOverseerThemeTalk2(overseerThemeTalk2);

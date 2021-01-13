@@ -1,6 +1,6 @@
 <?php
 // Update Overseer Week
-if (isset ( $jsonObj ["spWeekOvID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf6"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["spInf8"] ) && isset ( $jsonObj ["spInf9"] ) && isset ( $jsonObj ["spInf10"] ) && isset ( $jsonObj ["spInf11"] ) && isset ( $jsonObj ["spInf12"] ) && isset ( $jsonObj ["spInf13"] ) && isset ( $jsonObj ["spInf14"] ) && isset ( $jsonObj ["spInf15"] ) && isset ( $jsonObj ["spInf16"] ) && isset ( $jsonObj ["spInf17"] ) && isset ( $jsonObj ["spInf18"] ) && isset ( $jsonObj ["spInf19"] ) && isset ( $jsonObj ["spInf20"] )) {
+if (isset ( $jsonObj ["spWeekOvID"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] ) && isset ( $jsonObj ["spInf5"] ) && isset ( $jsonObj ["spInf6"] ) && isset ( $jsonObj ["spInf7"] ) && isset ( $jsonObj ["spInf8"] ) && isset ( $jsonObj ["spInf9"] ) && isset ( $jsonObj ["spInf10"] ) && isset ( $jsonObj ["spInf11"] ) && isset ( $jsonObj ["spInf12"] ) && isset ( $jsonObj ["spInf13"] ) && isset ( $jsonObj ["spInf14"] ) && isset ( $jsonObj ["spInf15"] ) && isset ( $jsonObj ["spInf16"] ) && isset ( $jsonObj ["spInf17"] ) && isset ( $jsonObj ["spInf18"] ) && isset ( $jsonObj ["spInf19"] ) && isset ( $jsonObj ["spInf20"] ) && isset ( $jsonObj ["spInf21"] ) && isset ( $jsonObj ["spInf22"] )) {
 	if (! empty ( $jsonObj ["spWeekOvID"] ) && ! empty ( $jsonObj ["spInf1"] ) && ! empty ( $jsonObj ["spInf2"] ) && ! empty ( $jsonObj ["spInf3"] ) && ! empty ( $jsonObj ["spInf5"] )) {
 		require_once dirname(__DIR__, 1) . '/config.php';
 		$database = mysqli_connect ( DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE );
@@ -30,7 +30,9 @@ if (isset ( $jsonObj ["spWeekOvID"] ) && isset ( $jsonObj ["spInf1"] ) && isset 
             $query .= " spInf17 = '" . $jsonObj ["spInf17"] . "',";
             $query .= " spInf18 = '" . $jsonObj ["spInf18"] . "',";
             $query .= " spInf19 = '" . $jsonObj ["spInf19"] . "',";
-            $query .= " spInf20 = " . $jsonObj ["spInf20"];
+			$query .= " spInf20 = " . $jsonObj ["spInf20"] . ",";
+			$query .= " spInf21 = '" . $jsonObj ["spInf21"] . "',";
+			$query .= " spInf22 = '" . $jsonObj ["spInf22"] . "'";
 			$query .= " WHERE spWeekOvID = " . $jsonObj ["spWeekOvID"];
 			
 			if ($database->query ( $query ) === TRUE) {

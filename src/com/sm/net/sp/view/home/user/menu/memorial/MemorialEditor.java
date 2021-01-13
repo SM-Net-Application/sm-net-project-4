@@ -208,6 +208,11 @@ public class MemorialEditor extends UpdateDataAdapter {
 	@FXML
 	private ComboBox<Member> emblemsBrother10ComboBox;
 
+	@FXML
+	private TextField song1TextField;
+	@FXML
+	private TextField song2TextField;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -327,6 +332,9 @@ public class MemorialEditor extends UpdateDataAdapter {
 		this.emblemsBrother10ComboBox.getStyleClass().add("combo_box_001");
 
 		this.saveButton.getStyleClass().add("button_image_001");
+
+		this.song1TextField.getStyleClass().add("text_field_001");
+		this.song2TextField.getStyleClass().add("text_field_001");
 	}
 
 	private void viewUpdate() {
@@ -670,6 +678,9 @@ public class MemorialEditor extends UpdateDataAdapter {
 				setComboBoxMember(this.emblemsBrother8ComboBox, this.selectedWeek.getSpInf32());
 				setComboBoxMember(this.emblemsBrother9ComboBox, this.selectedWeek.getSpInf33());
 				setComboBoxMember(this.emblemsBrother10ComboBox, this.selectedWeek.getSpInf34());
+
+				this.song1TextField.setText(this.selectedWeek.getSpInf37());
+				this.song2TextField.setText(this.selectedWeek.getSpInf38());
 
 			} else {
 
@@ -1541,4 +1552,21 @@ public class MemorialEditor extends UpdateDataAdapter {
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
 	}
+
+	public TextField getSong1TextField() {
+		return song1TextField;
+	}
+
+	public TextField getSong2TextField() {
+		return song2TextField;
+	}
+
+	public void setSong1TextField(TextField song1TextField) {
+		this.song1TextField = song1TextField;
+	}
+
+	public void setSong2TextField(TextField song2TextField) {
+		this.song2TextField = song2TextField;
+	}
+
 }

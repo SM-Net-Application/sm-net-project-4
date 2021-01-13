@@ -134,6 +134,11 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	@FXML
 	private CheckBox substituteCheckBox;
 
+	@FXML
+	private TextField song1TextField;
+	@FXML
+	private TextField song2TextField;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -213,6 +218,9 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		substituteCheckBox.getStyleClass().add("check_box_001");
 
 		saveWeekButton.getStyleClass().add("button_image_001");
+
+		this.song1TextField.getStyleClass().add("text_field_001");
+		this.song2TextField.getStyleClass().add("text_field_001");
 	}
 
 	private void viewUpdate() {
@@ -312,6 +320,9 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 				this.mailWifeTextField.setText(this.selectedWeek.getSpInf19());
 
 				this.substituteCheckBox.setSelected((this.selectedWeek.getSpInf20() == 1));
+
+				this.song1TextField.setText(this.selectedWeek.getSpInf21());
+				this.song2TextField.setText(this.selectedWeek.getSpInf22());
 
 			} else {
 
@@ -443,6 +454,9 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 			String spInf20 = !this.substituteCheckBox.isSelected() ? "0" : "1";
 
+			String spInf21 = Crypt.encrypt(this.song1TextField.getText(), settings.getDatabaseSecretKey());
+			String spInf22 = Crypt.encrypt(this.song2TextField.getText(), settings.getDatabaseSecretKey());
+
 			if (this.selectedWeek.spWeekOvIDProperty() != null) {
 				// editWeek
 
@@ -451,7 +465,7 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 				Actions.updateOverseerWeek(spWeekOvID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8,
 						spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
-						spInf19, spInf20, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf19, spInf20, spInf21, spInf22, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 
 			} else {
 				// newWeek
@@ -460,7 +474,7 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 				Actions.insertOverseerWeek(spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9,
 						spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19,
-						spInf20, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
+						spInf20, spInf21, spInf22, settings, ownerStage, ownerTabPane, thisTab, ownerCtrl);
 			}
 		}
 	}
