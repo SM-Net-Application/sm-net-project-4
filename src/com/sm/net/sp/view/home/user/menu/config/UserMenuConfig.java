@@ -1,6 +1,14 @@
 package com.sm.net.sp.view.home.user.menu.config;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -17,6 +25,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
@@ -48,6 +58,8 @@ public class UserMenuConfig {
 	private Tab audioTab;
 	@FXML
 	private Tab usciereTab;
+	@FXML
+	private Tab songsTab;
 
 	@FXML
 	private ScrollPane placesScrollPane;
@@ -63,6 +75,8 @@ public class UserMenuConfig {
 	private ScrollPane audioScrollPane;
 	@FXML
 	private ScrollPane usciereScrollPane;
+	@FXML
+	private ScrollPane songsScrollPane;
 
 	@FXML
 	private Label placesHeaderLabel;
@@ -78,6 +92,8 @@ public class UserMenuConfig {
 	private Label audioHeaderLabel;
 	@FXML
 	private Label usciereHeaderLabel;
+	@FXML
+	private Label songsHeaderLabel;
 
 	@FXML
 	private Label placesPatternLabel;
@@ -107,6 +123,10 @@ public class UserMenuConfig {
 	private Label usciereZone2NameLabel;
 	@FXML
 	private Label usciereZone3NameLabel;
+	@FXML
+	private Label songsMinLabel;
+	@FXML
+	private Label songsSourceLabel;
 
 	@FXML
 	private TextField placesPatternTextField;
@@ -139,11 +159,26 @@ public class UserMenuConfig {
 	private TextField usciereZone3NameTextField;
 
 	@FXML
+	private TextField songsMinTextField;
+	@FXML
+	private TextField songsSourceTextField;
+
+	@FXML
 	private CheckBox usciereZone1WeekendCheckBox;
 	@FXML
 	private CheckBox usciereZone2WeekendCheckBox;
 	@FXML
 	private CheckBox usciereZone3WeekendCheckBox;
+
+	@FXML
+	private TableView<String> songsTableView;
+	@FXML
+	private TableColumn<String, String> songsNumTableColumn;
+	@FXML
+	private TableColumn<String, String> songsTitleTableColumn;
+
+	@FXML
+	private Button songsDownloadButton;
 
 	@FXML
 	private Button placesPatternButton;
@@ -179,6 +214,7 @@ public class UserMenuConfig {
 		this.memorialTab.getStyleClass().add("tab_001");
 		this.audioTab.getStyleClass().add("tab_001");
 		this.usciereTab.getStyleClass().add("tab_001");
+		this.songsTab.getStyleClass().add("tab_001");
 
 		this.placesScrollPane.getStyleClass().add("scroll_pane_001");
 		this.publicTalkScrollPane.getStyleClass().add("scroll_pane_001");
@@ -187,6 +223,7 @@ public class UserMenuConfig {
 		this.memorialScrollPane.getStyleClass().add("scroll_pane_001");
 		this.audioScrollPane.getStyleClass().add("scroll_pane_001");
 		this.usciereScrollPane.getStyleClass().add("scroll_pane_001");
+		this.songsScrollPane.getStyleClass().add("scroll_pane_001");
 
 		this.placesPatternLabel.getStyleClass().add("label_set_001");
 		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
@@ -202,6 +239,8 @@ public class UserMenuConfig {
 		this.usciereZone1NameLabel.getStyleClass().add("label_set_001");
 		this.usciereZone2NameLabel.getStyleClass().add("label_set_001");
 		this.usciereZone3NameLabel.getStyleClass().add("label_set_001");
+		this.songsMinLabel.getStyleClass().add("label_set_001");
+		this.songsSourceLabel.getStyleClass().add("label_set_001");
 
 		this.placesPatternTextField.getStyleClass().add("text_field_001");
 		this.publicTalkMinTextField.getStyleClass().add("text_field_002");
@@ -217,9 +256,12 @@ public class UserMenuConfig {
 		this.usciereZone1NameTextField.getStyleClass().add("text_field_001");
 		this.usciereZone2NameTextField.getStyleClass().add("text_field_001");
 		this.usciereZone3NameTextField.getStyleClass().add("text_field_001");
+		this.songsMinTextField.getStyleClass().add("text_field_002");
+		this.songsSourceTextField.getStyleClass().add("text_field_001");
 
 		this.placesPatternButton.getStyleClass().add("button_image_001");
 		this.saveButton.getStyleClass().add("button_image_001");
+		this.songsDownloadButton.getStyleClass().add("button_image_001");
 
 		this.placesHeaderLabel.getStyleClass().add("label_002");
 		this.publicTalkHeaderLabel.getStyleClass().add("label_002");
@@ -228,10 +270,13 @@ public class UserMenuConfig {
 		this.memorialHeaderLabel.getStyleClass().add("label_002");
 		this.audioHeaderLabel.getStyleClass().add("label_002");
 		this.usciereHeaderLabel.getStyleClass().add("label_002");
+		this.songsHeaderLabel.getStyleClass().add("label_002");
 
 		this.usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
 		this.usciereZone2WeekendCheckBox.getStyleClass().add("check_box_001");
 		this.usciereZone3WeekendCheckBox.getStyleClass().add("check_box_001");
+
+		this.songsTableView.getStyleClass().add("table_view_001");
 	}
 
 	private void viewUpdate() {
@@ -289,6 +334,12 @@ public class UserMenuConfig {
 		this.memorialTab.setText("");
 		this.memorialTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMORIAL));
 
+		Tooltip songsTooltip = new Tooltip(language.getString("conf.tooltip.tab.songs"));
+		songsTooltip.getStyleClass().add("tooltip_001");
+		this.songsTab.setTooltip(songsTooltip);
+		this.songsTab.setText(null);
+		this.songsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.SONGS));
+
 		Tooltip placesPatternHelpTooltip = new Tooltip(language.getString("conf.tooltip.places.pattern.help"));
 		placesPatternHelpTooltip.getStyleClass().add("tooltip_001");
 		this.placesPatternButton.setTooltip(placesPatternHelpTooltip);
@@ -301,6 +352,13 @@ public class UserMenuConfig {
 		this.saveButton.setText(null);
 		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
+		Tooltip songsDownloadTooltip = new Tooltip(language.getString("conf.tooltip.songsdownload"));
+		songsDownloadTooltip.getStyleClass().add("tooltip_001");
+		this.songsDownloadButton.setTooltip(songsDownloadTooltip);
+		this.songsDownloadButton.setText(null);
+		this.songsDownloadButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
+
 		this.placesHeaderLabel.setText(language.getString("conf.label.places.header"));
 		this.publicTalkHeaderLabel.setText(language.getString("conf.label.publictalk.header"));
 		this.watchtowerHeaderLabel.setText(language.getString("conf.label.watchtower.header"));
@@ -309,6 +367,7 @@ public class UserMenuConfig {
 
 		this.audioHeaderLabel.setText(language.getString("conf.label.audio.header"));
 		this.usciereHeaderLabel.setText(language.getString("conf.label.usciere.header"));
+		this.songsHeaderLabel.setText(language.getString("conf.label.songs.header"));
 
 		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
 		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
@@ -330,6 +389,14 @@ public class UserMenuConfig {
 		this.usciereZone1WeekendCheckBox.setText(language.getString("conf.label.usciere.zone1weekend"));
 		this.usciereZone2WeekendCheckBox.setText(language.getString("conf.label.usciere.zone2weekend"));
 		this.usciereZone3WeekendCheckBox.setText(language.getString("conf.label.usciere.zone3weekend"));
+
+		this.songsMinLabel.setText(language.getString("conf.label.songs.min"));
+		this.songsSourceLabel.setText(language.getString("conf.label.songs.source"));
+		this.songsNumTableColumn.setText(language.getString("conf.tablecolumn.songs.num"));
+		this.songsNumTableColumn.setMaxWidth(500);
+		this.songsTitleTableColumn.setText(language.getString("conf.tablecolumn.songs.title"));
+
+		this.songsSourceTextField.setText(this.application.getSettings().getLanguage().getString("conf.songs.source"));
 	}
 
 	private void initData() {
@@ -438,6 +505,64 @@ public class UserMenuConfig {
 
 		this.saveButton.setOnAction(event -> save());
 		this.placesPatternButton.setOnAction(event -> showHelp());
+		this.songsDownloadButton.setOnAction(event -> songsDownload());
+	}
+
+	private void songsDownload() {
+
+		// I doublequote HTML non vengono riconosciuti
+		char dlquoteStart = (char) 8220;
+		char dlquoteEnd = (char) 8221;
+
+		Pattern numberPattern = Pattern.compile("\\d+");
+
+		String source = songsSourceTextField.getText();
+		if (!source.isEmpty()) {
+
+			try {
+				Document doc = Jsoup.connect(source).get();
+				if (doc != null) {
+
+					Elements elemList = doc.getElementsByAttribute("data-classification");
+					for (Element e : elemList) {
+
+						Elements cardLine1List = e.getElementsByClass("cardLine1");
+
+						Elements cardLine2List = e.getElementsByClass("cardLine2");
+						if (cardLine1List.size() == 1 && cardLine2List.size() == 1) {
+
+							String number = cardLine1List.get(0).text();
+							Matcher numberMatcher = numberPattern.matcher(number);
+							if (numberMatcher.find())
+								number = numberMatcher.group();
+
+							String title = cardLine2List.get(0).text();
+							title = title.replace(dlquoteStart, '"');
+							title = title.replace(dlquoteEnd, '"');
+
+							System.out.println(number + " " + title);
+						}
+					}
+
+					// elemList.forEach(e -> System.out.println("=== \n "+ e + "\n === \n\n"));
+
+					// System.out.println(doc);
+
+				} else {
+					String content = this.application.getSettings().getLanguage()
+							.getString("conf.songs.nosourceresult");
+					this.application.getAlertBuilder2().error(this.ownerStage, content);
+				}
+			} catch (IOException e) {
+				String content = e.getMessage();
+				this.application.getAlertBuilder2().error(this.ownerStage, content);
+			}
+
+		} else {
+			String content = this.application.getSettings().getLanguage().getString("conf.songs.nosource");
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+		}
+
 	}
 
 	private void showHelp() {

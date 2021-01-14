@@ -293,7 +293,8 @@ public class Meta {
 		public static final String AUDIO = "audio.png";
 		public static final String USCIERE = "usciere.png";
 		public static final String PRAY = "pray.png";
-
+		public static final String SONGS = "songs.png";
+		
 		public static final String ASSIGNEMENTS = "duties.png";
 		public static final String PRIVILEGIES = "privilegies.png";
 		public static final String ROLES = "servant.png";
