@@ -1,15 +1,13 @@
 
 	Cantici:
-		- I cantici vengono salvati nella sezione Configurazione
-		- Il programma contiene il link di default (nel file ini della lingua)
-		- Scaricare da WOL l'elenco dei cantici (Titoli compresi)
-		- Verificare se i titoli del database sono aggiornati (confrontarli con quelli su WOL)
 		- Nelle adunanze determinare il titolo in base al numero inserito
 		- Nel layout stampare anche il titolo
 	
-	Configurazione:
-		- Spunta per indicare se dopo aver inserito il numero del cantico, si deve inserire automaticamente il titolo
-		- Minuti dei cantici
+	Esercitiamoci per il ministero:
+		- Gestire la parte: Invito alla commemorazione
+	
+	Monitor Online:
+		- Visualizzare la parte: Invito alla commemorazione
 	
 	Ottimizzazione:
 		- modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)

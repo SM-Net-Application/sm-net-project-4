@@ -752,6 +752,15 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
+                                                            <Label fx:id="songsLoadLabel" text="load">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
                                                             <Label fx:id="songsSourceLabel" text="source">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -770,6 +779,15 @@
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
                                                             </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <CheckBox fx:id="songsLoadCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </CheckBox>
                                                          </children>
                                                       </StackPane>
                                                       <HBox>

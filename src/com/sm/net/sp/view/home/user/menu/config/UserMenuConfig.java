@@ -1,6 +1,5 @@
 package com.sm.net.sp.view.home.user.menu.config;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,12 +11,18 @@ import org.jsoup.select.Elements;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigLoadTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigSaveTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigSongsLoadTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigSongsSaveTask;
 import com.sm.net.util.Crypt;
 import com.smnet.core.task.TaskManager;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -171,14 +176,19 @@ public class UserMenuConfig {
 	private CheckBox usciereZone3WeekendCheckBox;
 
 	@FXML
-	private TableView<String> songsTableView;
+	private TableView<Song> songsTableView;
 	@FXML
-	private TableColumn<String, String> songsNumTableColumn;
+	private TableColumn<Song, Integer> songsNumTableColumn;
 	@FXML
-	private TableColumn<String, String> songsTitleTableColumn;
+	private TableColumn<Song, String> songsTitleTableColumn;
 
 	@FXML
 	private Button songsDownloadButton;
+
+	@FXML
+	private Label songsLoadLabel;
+	@FXML
+	private CheckBox songsLoadCheckBox;
 
 	@FXML
 	private Button placesPatternButton;
@@ -188,10 +198,19 @@ public class UserMenuConfig {
 
 	private HashMap<String, String> configs;
 
+	private ObservableList<Song> songList;
+
 	@FXML
 	private void initialize() {
 
 		styleClasses();
+		cellValueFactory();
+	}
+
+	private void cellValueFactory() {
+
+		this.songsNumTableColumn.setCellValueFactory(cellData -> cellData.getValue().getNumberProperty().asObject());
+		this.songsTitleTableColumn.setCellValueFactory(cellData -> cellData.getValue().getTitleProperty());
 	}
 
 	public void objectInitialize() {
@@ -277,6 +296,10 @@ public class UserMenuConfig {
 		this.usciereZone3WeekendCheckBox.getStyleClass().add("check_box_001");
 
 		this.songsTableView.getStyleClass().add("table_view_001");
+		this.songsNumTableColumn.getStyleClass().add("table_column_002");
+
+		this.songsLoadLabel.getStyleClass().add("label_set_001");
+		this.songsLoadCheckBox.getStyleClass().add("check_box_set_001");
 	}
 
 	private void viewUpdate() {
@@ -397,10 +420,14 @@ public class UserMenuConfig {
 		this.songsTitleTableColumn.setText(language.getString("conf.tablecolumn.songs.title"));
 
 		this.songsSourceTextField.setText(this.application.getSettings().getLanguage().getString("conf.songs.source"));
+		this.songsLoadLabel.setText(this.application.getSettings().getLanguage().getString("conf.label.songs.load"));
+		this.songsLoadCheckBox.setText("");
 	}
 
 	private void initData() {
 
+		this.songList = FXCollections.observableArrayList();
+		this.songsTableView.setItems(this.songList);
 		configLoad();
 	}
 
@@ -499,6 +526,19 @@ public class UserMenuConfig {
 			this.usciereZone3WeekendCheckBox.setSelected(usciere3equals.equals("1"));
 		}
 
+		String songsMin = this.configs.get("inf18");
+		if (songsMin != null)
+			this.songsMinTextField
+					.setText(Crypt.decrypt(songsMin, this.application.getSettings().getDatabaseSecretKey()));
+
+		String songsLoad = this.configs.get("inf19");
+		if (songsLoad != null) {
+			songsLoad = Crypt.decrypt(songsLoad, this.application.getSettings().getDatabaseSecretKey());
+			this.songsLoadCheckBox.setSelected(songsLoad.equals("1"));
+		}
+
+		// CARICO I CANTICI
+		this.updateSongList();
 	}
 
 	private void listeners() {
@@ -510,12 +550,6 @@ public class UserMenuConfig {
 
 	private void songsDownload() {
 
-		// I doublequote HTML non vengono riconosciuti
-		char dlquoteStart = (char) 8220;
-		char dlquoteEnd = (char) 8221;
-
-		Pattern numberPattern = Pattern.compile("\\d+");
-
 		String source = songsSourceTextField.getText();
 		if (!source.isEmpty()) {
 
@@ -523,37 +557,41 @@ public class UserMenuConfig {
 				Document doc = Jsoup.connect(source).get();
 				if (doc != null) {
 
-					Elements elemList = doc.getElementsByAttribute("data-classification");
-					for (Element e : elemList) {
+					ObservableList<Song> newSongList = checkSongListByDoc(doc);
+					if (!newSongList.isEmpty()) {
 
-						Elements cardLine1List = e.getElementsByClass("cardLine1");
+						if (!songListEquals(newSongList)) {
 
-						Elements cardLine2List = e.getElementsByClass("cardLine2");
-						if (cardLine1List.size() == 1 && cardLine2List.size() == 1) {
+							String header = this.application.getSettings().getLanguage()
+									.getString("conf.songs.confirmheader");
+							String content = this.application.getSettings().getLanguage()
+									.getString("conf.songs.confirm");
 
-							String number = cardLine1List.get(0).text();
-							Matcher numberMatcher = numberPattern.matcher(number);
-							if (numberMatcher.find())
-								number = numberMatcher.group();
+							if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
 
-							String title = cardLine2List.get(0).text();
-							title = title.replace(dlquoteStart, '"');
-							title = title.replace(dlquoteEnd, '"');
+								String waitMessage = this.application.getSettings().getLanguage()
+										.getString("conf.songs.savewait");
 
-							System.out.println(number + " " + title);
+								TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
+										new ConfigSongsSaveTask(this, this.application.getAlertBuilder2(),
+												this.application.getSettings(), this.ownerStage, newSongList));
+
+							}
+
+						} else {
+
+							String content = this.application.getSettings().getLanguage()
+									.getString("conf.songs.equals");
+							this.application.getAlertBuilder2().information(this.ownerStage, content);
 						}
 					}
-
-					// elemList.forEach(e -> System.out.println("=== \n "+ e + "\n === \n\n"));
-
-					// System.out.println(doc);
 
 				} else {
 					String content = this.application.getSettings().getLanguage()
 							.getString("conf.songs.nosourceresult");
 					this.application.getAlertBuilder2().error(this.ownerStage, content);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				String content = e.getMessage();
 				this.application.getAlertBuilder2().error(this.ownerStage, content);
 			}
@@ -563,6 +601,68 @@ public class UserMenuConfig {
 			this.application.getAlertBuilder2().error(this.ownerStage, content);
 		}
 
+	}
+
+	public void updateSongList() {
+
+		String waitMessage = this.application.getSettings().getLanguage().getString("conf.songs.loadwait");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new ConfigSongsLoadTask(
+				this.application.getAlertBuilder2(), this.application.getSettings(), this.ownerStage, this));
+
+	}
+
+	public void updateSongList(ObservableList<Song> newSongList) {
+
+		this.songList.clear();
+		this.songList.addAll(newSongList);
+		Platform.runLater(() -> this.songsTableView.refresh());
+	}
+
+	private boolean songListEquals(ObservableList<Song> newSongList) {
+
+		if (this.songList.size() != newSongList.size())
+			return false;
+
+		return this.songList.equals(newSongList);
+	}
+
+	private ObservableList<Song> checkSongListByDoc(Document doc) {
+
+		// I doublequote HTML non vengono riconosciuti
+		char dlquoteStart = (char) 8220;
+		char dlquoteEnd = (char) 8221;
+
+		Pattern numberPattern = Pattern.compile("\\d+");
+
+		ObservableList<Song> newList = FXCollections.observableArrayList();
+
+		Elements elemList = doc.getElementsByAttribute("data-classification");
+		for (Element e : elemList) {
+
+			Elements cardLine1List = e.getElementsByClass("cardLine1");
+
+			Elements cardLine2List = e.getElementsByClass("cardLine2");
+			if (cardLine1List.size() == 1 && cardLine2List.size() == 1) {
+
+				int number = 0;
+				String numberText = cardLine1List.get(0).text();
+				Matcher numberMatcher = numberPattern.matcher(numberText);
+				if (numberMatcher.find())
+					number = Integer.valueOf(numberMatcher.group());
+
+				String title = cardLine2List.get(0).text();
+				title = title.replace(dlquoteStart, '"');
+				title = title.replace(dlquoteEnd, '"');
+
+				if (number > 0 && !title.isEmpty())
+					newList.add(new Song(number, title));
+			}
+
+			newList.sort((s1, s2) -> s1.getNumber().compareTo(s2.getNumber()));
+		}
+
+		return newList;
 	}
 
 	private void showHelp() {
@@ -625,6 +725,12 @@ public class UserMenuConfig {
 			String usciere3equals = this.usciereZone3WeekendCheckBox.isSelected() ? "1" : "0";
 			usciere3equals = Crypt.encrypt(usciere3equals, this.application.getSettings().getDatabaseSecretKey());
 
+			String songsMin = this.songsMinTextField.getText();
+			String songsMinEncrypted = Crypt.encrypt(songsMin, this.application.getSettings().getDatabaseSecretKey());
+
+			String songsLoad = this.songsLoadCheckBox.isSelected() ? "1" : "0";
+			songsLoad = Crypt.encrypt(songsLoad, this.application.getSettings().getDatabaseSecretKey());
+
 			// ------------------------------------------
 
 			String waitMessage = this.application.getSettings().getLanguage().getString("conf.save.wait");
@@ -634,7 +740,8 @@ public class UserMenuConfig {
 							this.ownerStage, placesPatternEncrypted, publicTalkMinEncrypted, watchtowerMinEncrypted,
 							overseerTalk1MinEncrypted, overseerTalk2MinEncrypted, overseerTalk3MinEncrypted,
 							overseerVisitCounterEncrypted, memorialTalkMinEncrypted, audio1, audio2, audio3, usciere1,
-							usciere2, usciere3, usciere1equals, usciere2equals, usciere3equals));
+							usciere2, usciere3, usciere1equals, usciere2equals, usciere3equals, songsMinEncrypted,
+							songsLoad));
 		}
 	}
 

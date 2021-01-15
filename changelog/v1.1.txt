@@ -39,6 +39,16 @@ Data di pubblicazione : ..-..-....
 	Sezione Monitor(nel software):
 		- Viene caricato e mostrato il Monito-Online
 
+	Sezione Configurazione:
+		- Nuova configurazione: Cantici
+			- Programma adunanze (minuti) che normalmente sono sempre 5
+			- Carica titoli: quando nel programma adunanze viene inserito il numero del cantico,
+				viene automaticamente caricato il titolo.
+			- Sorgente: link da dove scaricare l'elenco dei cantici (di default si tratta di un link WOL)
+				- Download dell'elenco dalla sorgente
+					- Vengono scaricati i cantici dalla sorgente e confrontati con quelli presenti in lista
+			- Elenco dei cantici: Tabella con tutti i cantici e i relativi titoli
+
 	Monitor-Online:
 		- Visualizzazione dei seguenti incarichi:
 			- Discorso pubblico

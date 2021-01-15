@@ -2,6 +2,8 @@ package com.sm.net.sp.json;
 
 import java.time.format.DateTimeFormatter;
 
+import javax.crypto.SecretKey;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,13 +11,18 @@ import org.json.JSONObject;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekUsciere;
+import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.enumeration.JSONStatus;
+
+import javafx.collections.ObservableList;
 
 /**
  * Gestione delle richieste JSON Un JSON-Object viene creato con un indice: type
@@ -607,7 +614,7 @@ public class JSONRequest {
 		jsonObj.put("spInf20", spInf20);
 		jsonObj.put("spInf21", spInf21);
 		jsonObj.put("spInf22", spInf22);
-		
+
 		return jsonObj;
 	}
 
@@ -641,7 +648,7 @@ public class JSONRequest {
 		jsonObj.put("spInf20", spInf20);
 		jsonObj.put("spInf21", spInf21);
 		jsonObj.put("spInf22", spInf22);
-		
+
 		return jsonObj;
 	}
 
@@ -843,7 +850,8 @@ public class JSONRequest {
 			String watchtowerMinEncrypted, String overseerTalk1MinEncrypted, String overseerTalk2MinEncrypted,
 			String overseerTalk3MinEncrypted, String overseerVisitCounterEncrypted, String memorialTalkMinEncrypted,
 			String audio1, String audio2, String audio3, String usciere1, String usciere2, String usciere3,
-			String usciere1equals, String usciere2equals, String usciere3equals) {
+			String usciere1equals, String usciere2equals, String usciere3equals, String songsMinEncrypted,
+			String songsLoad) {
 
 		JSONObject jsonObj = create(Integer.valueOf(45));
 
@@ -868,6 +876,9 @@ public class JSONRequest {
 		jsonArray.put(createJSONKeyValue("inf15", usciere1equals));
 		jsonArray.put(createJSONKeyValue("inf16", usciere2equals));
 		jsonArray.put(createJSONKeyValue("inf17", usciere3equals));
+
+		jsonArray.put(createJSONKeyValue("inf18", songsMinEncrypted));
+		jsonArray.put(createJSONKeyValue("inf19", songsLoad));
 
 		jsonObj.put("infos", jsonArray);
 
@@ -1016,7 +1027,7 @@ public class JSONRequest {
 		jsonObj.put("spInf34", memorial.getSpInf34());
 		jsonObj.put("spInf35", memorial.getSpInf35());
 		jsonObj.put("spInf36", memorial.getSpInf36());
-		
+
 		jsonObj.put("spInf37", memorial.getSpInf37());
 		jsonObj.put("spInf38", memorial.getSpInf38());
 
@@ -1064,7 +1075,7 @@ public class JSONRequest {
 		jsonObj.put("spInf34", memorial.getSpInf34());
 		jsonObj.put("spInf35", memorial.getSpInf35());
 		jsonObj.put("spInf36", memorial.getSpInf36());
-		
+
 		jsonObj.put("spInf37", memorial.getSpInf37());
 		jsonObj.put("spInf38", memorial.getSpInf38());
 
@@ -1223,6 +1234,34 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject SONGS_UPDATE(SecretKey secretKey, ObservableList<Song> songList) {
+
+		JSONObject jsonObj = create(Integer.valueOf(64));
+
+		JSONArray jsonArray = new JSONArray();
+		
+		for(Song song: songList) {
+			
+			int number = song.getNumber().intValue();
+			String title = song.getTitle();
+			
+			String numberEncrypted = Crypt.encrypt(String.valueOf(number), secretKey);
+			String titleEncrypted = Crypt.encrypt(title, secretKey);
+		
+			jsonArray.put(createJSONKeyValue(numberEncrypted, titleEncrypted));
+		}
+
+		jsonObj.put("songs", jsonArray);
+
+		return jsonObj;
+	}
+	
+	public static JSONObject SONGS_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(65));
+		return jsonObj;
+	}
+	
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

@@ -40,11 +40,15 @@ public class ConfigSaveTask implements TaskInterface {
 	private String usciere2equals;
 	private String usciere3equals;
 
+	private String songsMinEncrypted;
+	private String songsLoad;
+	
 	public ConfigSaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, String placesPatternEncrypted,
 			String publicTalkMinEncrypted, String watchtowerMinEncrypted, String overseerTalk1MinEncrypted,
 			String overseerTalk2MinEncrypted, String overseerTalk3MinEncrypted, String overseerVisitCounterEncrypted,
 			String memorialTalkMinEncrypted, String audio1, String audio2, String audio3, String usciere1,
-			String usciere2, String usciere3, String usciere1equals, String usciere2equals, String usciere3equals) {
+			String usciere2, String usciere3, String usciere1equals, String usciere2equals, String usciere3equals,
+			String songsMinEncrypted, String songsLoad) {
 
 		super();
 
@@ -70,6 +74,9 @@ public class ConfigSaveTask implements TaskInterface {
 		this.usciere1equals = usciere1equals;
 		this.usciere2equals = usciere2equals;
 		this.usciere3equals = usciere3equals;
+		
+		this.songsMinEncrypted = songsMinEncrypted;
+		this.songsLoad = songsLoad;
 	}
 
 	@Override
@@ -79,7 +86,7 @@ public class ConfigSaveTask implements TaskInterface {
 				this.watchtowerMinEncrypted, this.overseerTalk1MinEncrypted, this.overseerTalk2MinEncrypted,
 				this.overseerTalk3MinEncrypted, this.overseerVisitCounterEncrypted, this.memorialTalkMinEncrypted,
 				this.audio1, this.audio2, this.audio3, this.usciere1, this.usciere2, this.usciere3, this.usciere1equals,
-				this.usciere2equals, this.usciere3equals);
+				this.usciere2equals, this.usciere3equals,this.songsMinEncrypted,this.songsLoad);
 
 		String url = this.settings.getDatabaseUrl();
 
