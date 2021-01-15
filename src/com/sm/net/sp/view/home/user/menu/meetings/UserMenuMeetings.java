@@ -15,6 +15,7 @@ import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Info;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
@@ -92,6 +93,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private ObservableList<Family> familiesList;
 	private ObservableList<WeekAudio> audio;
 	private ObservableList<WeekUsciere> usciere;
+	private ObservableList<Song> songList;
 
 	private SupportPlannerView application;
 
@@ -435,6 +437,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				ctrl.setDatabaseWeeksAudio(this.audio);
 				ctrl.setDatabaseWeeksUsciere(this.usciere);
 				ctrl.setConfigs(this.configs);
+				ctrl.setSongList(this.songList);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -592,5 +595,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setUsciere(ObservableList<WeekUsciere> usciere) {
 		this.usciere = usciere;
+	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
 	}
 }

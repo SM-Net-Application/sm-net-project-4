@@ -25,6 +25,7 @@ import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.MinistryPart;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
@@ -494,6 +495,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
 
 	private ObservableList<Member> internSpeakerList;
+
+	private ObservableList<Song> songList;
 
 	@FXML
 	private void initialize() {
@@ -2422,8 +2425,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				if (song1match.find())
 					song1 = song1match.group();
 
-				if (!song1.isEmpty())
+				if (!song1.isEmpty()) {
 					this.song1TextField.setText(song1);
+					// TODO: Se configurato
+					this.checkSongTitle(this.song1TextField, this.midweekSong1TitelTextField);
+				}
 			}
 
 			// 2. Commenti introduttivi
@@ -2820,6 +2826,31 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			if (!song3.isEmpty())
 				this.song3TextField.setText(song3);
 		}
+	}
+
+	private void checkSongTitle(TextField tfSong, TextField tfTitle) {
+
+		String songText = tfSong.getText();
+		if (songText != null) {
+
+			try {
+
+				Integer song = Integer.valueOf(songText);
+				tfTitle.setText(checkSongTitleByNumber(song));
+
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	private String checkSongTitleByNumber(Integer song) {
+
+		if (song != null)
+			for (Song s : this.songList)
+				if (s.getNumber().intValue() == song.intValue())
+					return s.getTitle();
+
+		return "";
 	}
 
 	private MinistryTypeTranslated checkMinistryType(String ministryTitle) {
@@ -3320,4 +3351,13 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
 		this.databaseWeeksUsciere = databaseWeeksUsciere;
 	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
+	}
+
 }

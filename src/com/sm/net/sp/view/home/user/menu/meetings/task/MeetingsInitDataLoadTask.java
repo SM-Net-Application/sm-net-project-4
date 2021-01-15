@@ -11,12 +11,14 @@ import org.jsoup.nodes.Document;
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
+import com.sm.net.util.Crypt;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
@@ -52,6 +54,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		JSONObject jsonMemorial = JSONRequest.MEMORIAL_LOAD();
 		JSONObject jsonAudio = JSONRequest.AUDIO_LOAD();
 		JSONObject jsonUsciere = JSONRequest.USCIERE_LOAD();
+		JSONObject jsonSongs = JSONRequest.SONGS_LOAD();
 
 		post(hashMap, url, jsonDateAndTime, "responseDateAndTime");
 		post(hashMap, url, jsonPlaces, "responsePlaces");
@@ -60,6 +63,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		post(hashMap, url, jsonMemorial, "responseMemorial");
 		post(hashMap, url, jsonAudio, "responseAudio");
 		post(hashMap, url, jsonUsciere, "responseUsciere");
+		post(hashMap, url, jsonSongs, "responseSongs");
 
 	}
 
@@ -87,6 +91,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		ObservableList<WeekMemorial> memorial = memorialFeedback(hashMap);
 		ObservableList<WeekAudio> audio = audioFeedback(hashMap);
 		ObservableList<WeekUsciere> usciere = usciereFeedback(hashMap);
+		ObservableList<Song> songs = songsFeedback(hashMap);
 
 		this.view.setDateAndTimeList(dateAndTimeList);
 		this.view.setPlacesList(placesList);
@@ -95,6 +100,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		this.view.setMemorial(memorial);
 		this.view.setAudio(audio);
 		this.view.setUsciere(usciere);
+		this.view.setSongList(songs);
 	}
 
 	private ObservableList<WeekMemorial> memorialFeedback(HashMap<String, Object> hashMap) {
@@ -167,6 +173,38 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 					list.add(w);
 				}
 
+			}
+		}
+
+		return list;
+	}
+
+	private ObservableList<Song> songsFeedback(HashMap<String, Object> hashMap) {
+
+		ObservableList<Song> list = FXCollections.observableArrayList();
+
+		JSONObject response = (JSONObject) hashMap.get("responseSongs");
+		if (response != null) {
+
+			int status = response.getInt("status");
+
+			if (status == 0) {
+
+				JSONArray result = (JSONArray) response.get("result");
+				for (Object obj : result) {
+
+					JSONObject jsonObj = (JSONObject) obj;
+
+					String numberEncrypted = jsonObj.getString("spInf1");
+					String titleEncrypted = jsonObj.getString("spInf2");
+
+					int number = Integer.valueOf(Crypt.decrypt(numberEncrypted, this.settings.getDatabaseSecretKey()));
+					String title = Crypt.decrypt(titleEncrypted, this.settings.getDatabaseSecretKey());
+
+					list.add(new Song(number, title));
+				}
+
+				list.sort((s1, s2) -> s1.getNumber().compareTo(s2.getNumber()));
 			}
 		}
 
