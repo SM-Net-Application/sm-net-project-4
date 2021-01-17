@@ -27,6 +27,7 @@ import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.meetings.task.MeetingsInitDataLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
@@ -94,6 +95,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private ObservableList<WeekAudio> audio;
 	private ObservableList<WeekUsciere> usciere;
 	private ObservableList<Song> songList;
+
+	private boolean configSongTitleLoad;
 
 	private SupportPlannerView application;
 
@@ -225,10 +228,16 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	private void initData() {
+
 		this.weekTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		loadGeneralInfo();
 		loadCalendar();
 		updateMembers();
+	}
+
+	public void checkConfigs() {
+		String inf19 = Crypt.decrypt(this.configs.get("inf19"), this.application.getSettings().getDatabaseSecretKey());
+		this.configSongTitleLoad = inf19.equals("1");
 	}
 
 	private void loadGeneralInfo() {
@@ -438,6 +447,7 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 				ctrl.setDatabaseWeeksUsciere(this.usciere);
 				ctrl.setConfigs(this.configs);
 				ctrl.setSongList(this.songList);
+				ctrl.setConfigSongTitleLoad(this.configSongTitleLoad);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -603,5 +613,13 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 	public void setSongList(ObservableList<Song> songList) {
 		this.songList = songList;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
 	}
 }

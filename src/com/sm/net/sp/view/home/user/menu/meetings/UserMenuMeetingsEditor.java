@@ -498,6 +498,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 	private ObservableList<Song> songList;
 
+	private boolean configSongTitleLoad;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -1738,6 +1740,37 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		this.place1SelectButton.setOnAction(param -> selectPlace1());
 		this.place2SelectButton.setOnAction(param -> selectPlace2());
+
+		//TODO
+		this.song1TextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.song1TextField, this.midweekSong1TitelTextField);
+		});
+
+		this.song2TextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.song2TextField, this.midweekSong2TitelTextField);
+		});
+
+		this.song3TextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.song3TextField, this.midweekSong3TitelTextField);
+		});
+
+		this.publicTalkSongTextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.publicTalkSongTextField, this.weekendSong1TitelTextField);
+		});
+
+		this.watchtowerStudySong2TextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.watchtowerStudySong2TextField, this.weekendSong2TitelTextField);
+		});
+
+		this.watchtowerStudySong3TextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.watchtowerStudySong3TextField, this.weekendSong3TitelTextField);
+		});
 	}
 
 	private void selectPlace1() {
@@ -2427,8 +2460,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 				if (!song1.isEmpty()) {
 					this.song1TextField.setText(song1);
-					// TODO: Se configurato
-					this.checkSongTitle(this.song1TextField, this.midweekSong1TitelTextField);
+					if (this.configSongTitleLoad)
+						this.checkSongTitle(this.song1TextField, this.midweekSong1TitelTextField);
 				}
 			}
 
@@ -2803,8 +2836,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 					song3 = song3match.group();
 			}
 
-			if (!song2.isEmpty())
+			if (!song2.isEmpty()) {
 				this.song2TextField.setText(song2);
+				if (this.configSongTitleLoad)
+					this.checkSongTitle(this.song2TextField, this.midweekSong2TitelTextField);
+			}
 
 			this.christiansPartTableView.refresh();
 
@@ -2823,8 +2859,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			if (!conclTitle.isEmpty())
 				this.reviewTextTextField.setText(conclTitle);
 
-			if (!song3.isEmpty())
+			if (!song3.isEmpty()) {
 				this.song3TextField.setText(song3);
+				if (this.configSongTitleLoad)
+					this.checkSongTitle(this.song3TextField, this.midweekSong3TitelTextField);
+			}
 		}
 	}
 
@@ -2839,8 +2878,10 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 				tfTitle.setText(checkSongTitleByNumber(song));
 
 			} catch (Exception e) {
+				tfTitle.setText("");
 			}
-		}
+		} else
+			tfTitle.setText("");
 	}
 
 	private String checkSongTitleByNumber(Integer song) {
@@ -2898,7 +2939,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 			}
 
 			this.watchtowerStudySong2TextField.setText(song1);
+			if (this.configSongTitleLoad)
+				this.checkSongTitle(this.watchtowerStudySong2TextField, this.weekendSong2TitelTextField);
 			this.watchtowerStudySong3TextField.setText(song2);
+			if (this.configSongTitleLoad)
+				this.checkSongTitle(this.watchtowerStudySong3TextField, this.weekendSong3TitelTextField);
 		}
 	}
 
@@ -3360,4 +3405,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.songList = songList;
 	}
 
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
+	}
 }

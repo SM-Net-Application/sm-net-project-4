@@ -101,6 +101,7 @@ public class MeetingsInitDataLoadTask implements TaskInterface {
 		this.view.setAudio(audio);
 		this.view.setUsciere(usciere);
 		this.view.setSongList(songs);
+		this.view.checkConfigs();
 	}
 
 	private ObservableList<WeekMemorial> memorialFeedback(HashMap<String, Object> hashMap) {
