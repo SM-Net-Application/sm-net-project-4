@@ -23,6 +23,7 @@ $ministry = array();
 $christians = array();
 $audio = array();
 $usciere = array();
+$memorial = array();
 
 $audio_pos1 = "";
 $audio_pos2 = "";
@@ -320,12 +321,44 @@ if (file_exists("languages/" . $langIni)) {
                     }
                 }
 
+                $query_memorial = "SELECT spInf1, spInf4, spInf5, spInf6, spInf9, spInf10, spInf21, spInf22, spInf23, spInf35, spInf36";
+                $query_memorial .= " FROM sp_memorial";
+                $query_memorial .= " WHERE spInf1 >=";
+                $query_memorial .= " " . $sunday_weekcode;
+                $query_memorial .= " ORDER BY spInf1 ASC";
+
+                $result_memorial = mysqli_query($database, $query_memorial);
+
+                if (mysqli_num_rows($result_memorial) > 0) {
+
+                    while ($resultRow_memorial = $result_memorial->fetch_assoc()) {
+
+                        $resultRow_memorial = array_map("utf8_encode", $resultRow_memorial);
+
+                        $row = array();
+                        $row["spInf1"] = $resultRow_memorial["spInf1"];
+                        $row["spInf4"] = $resultRow_memorial["spInf4"];
+                        $row["spInf5"] = $resultRow_memorial["spInf5"];
+                        $row["spInf6"] = $resultRow_memorial["spInf6"];
+                        $row["spInf9"] = $resultRow_memorial["spInf9"];
+                        $row["spInf10"] = $resultRow_memorial["spInf10"];
+                        $row["spInf21"] = $resultRow_memorial["spInf21"];
+                        $row["spInf22"] = $resultRow_memorial["spInf22"];
+                        $row["spInf23"] = $resultRow_memorial["spInf23"];
+                        $row["spInf35"] = $resultRow_memorial["spInf35"];
+                        $row["spInf36"] = $resultRow_memorial["spInf36"];
+
+                        array_push($memorial, $row);
+                    }
+                }
+
                 $result_mem->close();
                 $result_week->close();
                 $result_ministry->close();
                 $result_christians->close();
                 $result_audio->close();
                 $result_usciere->close();
+                $result_memorial->close();
                 mysqli_close($database);
 
                 foreach ($weeks as $week) {
@@ -464,10 +497,49 @@ if (file_exists("languages/" . $langIni)) {
                     }
 
                     if ($memberID == $min["spInf7"]) {
-                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1'], $language['midweek_ministrystudent1_icon'], 0, ""));
+
+                        if ($min["spInf3"] != 1) {
+
+                            if ($min["spInf3"]==2) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_pc'], $language['midweek_ministrystudent1_pc_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==3) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_vu'], $language['midweek_ministrystudent1_vu_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==4) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_sb'], $language['midweek_ministrystudent1_sb_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==5) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_d'], $language['midweek_ministrystudent1_d_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==6) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_ic'], $language['midweek_ministrystudent1_ic_icon'], 0, ""));
+                            }
+
+                        }
+
+                        // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1'], $language['midweek_ministrystudent1_icon'], 0, ""));
+
                     }
                     if ($memberID == $min["spInf8"]) {
-                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1'], $language['midweek_ministryassistant1_icon'], 0, ""));
+
+                        if ($min["spInf3"]==2) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1_pc'], $language['midweek_ministryassistant1_pc_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==3) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1_vu'], $language['midweek_ministryassistant1_vu_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==4) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1_sb'], $language['midweek_ministryassistant1_sb_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==5) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1_d'], $language['midweek_ministryassistant1_d_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==6) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1_ic'], $language['midweek_ministryassistant1_ic_icon'], 0, ""));
+                        }
+
+                        // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1'], $language['midweek_ministryassistant1_icon'], 0, ""));
                     }
                     if ($memberID == $min["spInf9"]) {
                         // if ($min["spInf3"] == 1) {
@@ -476,11 +548,47 @@ if (file_exists("languages/" . $langIni)) {
                         //    array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
                         // }
                         if ($min["spInf3"] != 1) {
-                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
+
+                            if ($min["spInf3"]==2) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2_pc'], $language['midweek_ministrystudent2_pc_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==3) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2_vu'], $language['midweek_ministrystudent2_vu_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==4) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2_sb'], $language['midweek_ministrystudent2_sb_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==5) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2_d'], $language['midweek_ministrystudent2_d_icon'], 0, ""));
+                            }
+                            if ($min["spInf3"]==6) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2_ic'], $language['midweek_ministrystudent2_ic_icon'], 0, ""));
+                            }
+                            
+                            // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
+
                         }
                     }
                     if ($memberID == $min["spInf10"]) {
-                        array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2'], $language['midweek_ministryassistant2_icon'], 0, ""));
+
+                        if ($min["spInf3"]==2) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2_pc'], $language['midweek_ministryassistant2_pc_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==3) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2_vu'], $language['midweek_ministryassistant2_vu_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==4) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2_sb'], $language['midweek_ministryassistant2_sb_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==5) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2_d'], $language['midweek_ministryassistant2_d_icon'], 0, ""));
+                        }
+                        if ($min["spInf3"]==6) {
+                            array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2_ic'], $language['midweek_ministryassistant2_ic_icon'], 0, ""));
+                        }
+
+                        // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2'], $language['midweek_ministryassistant2_icon'], 0, ""));
+
                     }
                 }
 
@@ -721,6 +829,56 @@ if (file_exists("languages/" . $langIni)) {
                     }
                     if ($memberID == $usc["spInf19"]) {
                         array_push($activities, newTask($weekend, $weekend_text, $language['weekend_usciere3'], $language['weekend_usciere3_icon'], 1, $usciere_z3));
+                    }
+                }
+
+                // ***********************************
+                // COMMEMORAZION
+                // ***********************************
+
+                foreach ($memorial as $mem) {
+
+                    // WEEKCODE DELLA RIGA DEL DATABASE
+                    $row_weekcode = $mem['spInf1'];
+                    $year = substr($row_weekcode, 0, 4);
+                    $weeknr = substr($row_weekcode, 4, 2);
+
+                    // LUNEDI DELLA WEEKCODE
+                    $thisMonday = new DateTime();
+                    $thisMonday->setISODate($year, $weeknr);
+
+                    // GIORNO COMMEMORAZIONE
+                    $day = $mem["spInf21"] - 1;
+                    $hours = $mem["spInf22"];
+                    $minute = $mem["spInf23"];
+
+                    $memorialday = clone $thisMonday;
+                    $memorialday->add(new DateInterval("P" . $day . "D"));
+                    $memorialday->setTime($hours, $minute);
+                    $memorialday_text = dateTimeToText($language, $memorialday);
+
+                    if ($memberID == $mem["spInf4"]) {
+
+                        if ($mem["spInf35"] == 1) {
+                            array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_president2'], $language['memorial_president_icon'], 0, ""));
+                        } else {
+                            array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_president'], $language['memorial_president_icon'], 0, ""));
+                        }
+                    }
+                    if ($memberID == $mem["spInf5"]) {
+                        array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_praystart'], $language['memorial_praystart_icon'], 0, ""));
+                    }
+                    if ($memberID == $mem["spInf6"]) {
+                        array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_talk'], $language['memorial_talk_icon'], 0, ""));
+                    }
+                    if ($memberID == $mem["spInf9"]) {
+                        array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_praybread'], $language['memorial_praybread_icon'], 0, ""));
+                    }
+                    if ($memberID == $mem["spInf10"]) {
+                        array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_praywine'], $language['memorial_praywine_icon'], 0, ""));
+                    }
+                    if ($memberID == $mem["spInf36"]) {
+                        array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_prayend'], $language['memorial_prayend_icon'], 0, ""));
                     }
                 }
 

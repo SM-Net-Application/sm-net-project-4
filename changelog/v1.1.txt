@@ -21,6 +21,10 @@ Data di pubblicazione : ..-..-....
 			- Titolo dei cantici
 			- Spunta per identificare il discorso pubblico come Discorso Speciale
 			- Il discorso pubblico può essere pronunciato da un oratore interno (visualizzabile anche sul Monitor-Online)
+		- Parti assegnate agli studenti
+			- Nuovo tipo di parte: Invito alla Commemorazione (stesso elenco studenti del Primo contatto)
+		- Layout di stampa:
+			- L'informazione minuti dei cantici viene caricata dalla configurazione e non piu fissa sul valore 5
 
 	Sezione Sorvegliante:
 		- Nuove informazioni:
@@ -53,6 +57,12 @@ Data di pubblicazione : ..-..-....
 		- Visualizzazione dei seguenti incarichi:
 			- Discorso pubblico
 			- Discorso speciale
+			- Commemorazione: Discorso
+			- Commemorazione: Presidente
+			- Commemorazione: Preghiera iniziale
+			- Commemorazione: Preghiera finale
+			- Commemorazione: Preghiera pane
+			- Commemorazione: Preghiera vino
 
 	Ottimizzazioni:
 		- Lo storico viene aperto solo se la settimana è salvata (Record presente nel database)
@@ -66,10 +76,23 @@ Data di pubblicazione : ..-..-....
 			- Commemorazione
 				- Titoli dei cantici
 				- Aggiunto colore di sfondo per le righe: Preghiere, Passaggio, Preparazione, Luogo
+		- Monitor Online:
+			- I discorsi di esercitazione venivano tutti visualizzati come Discorsi di esercitazione. 
+				Ora vengono visualizzati in base al tipo di parte:
+				- Primo contatto
+				- Visita ulteriore
+				- Studio biblico
+				- Discorso
+				- Invito alla commemorazione
+		- Sezione Disastri naturali:
+			- Il nome della sezione è stato modificato in Disastri ed emergenze.
+			- Il titolo del documento generato è stato modificato in Disastri ed emergenze: verifica dei recapiti.
 		
 	Bug-fix:
 		- Lo storico nella sezione Discorsi pubblici non veniva caricato
 		- Il lettore dell'adunanza del fine settimana non veniva stampato se in settimana si teneva la commemorazione
+		- Se si scaricavano le informazioni da WOL, venivano inserite piu volte le parti per gli studenti e vita cristiana.
+			Ora ad ogni caricamento, la tabella viene azzerata.
 		
 	Database-SQL:
 	ALTER TABLE sp_members ADD spInf60 INT NOT NULL AFTER spInf59, ADD spInf61 INT NOT NULL AFTER spInf60, ADD spInf62 INT NOT NULL AFTER spInf61;

@@ -1,39 +1,18 @@
-
-	Cantici:
-		- Nelle adunanze determinare il titolo in base al numero inserito
-		- Nel layout stampare anche il titolo
 	
-	Esercitiamoci per il ministero:
-		- Gestire la parte: Invito alla commemorazione
-	
-	Monitor Online:
-		- Visualizzare la parte: Invito alla commemorazione
-	
-	Ottimizzazione:
-		- modificare il nome della sezione Disastri naturali in Disastri ed emergenze - Elenco dei recapiti (come riportato sull'sfl)
-		- Parlarne prima con Alex.
-
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Congregazione)
 	
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Gruppo)
 	
-	- Nuova sezione:
+	Nuova sezione:
 		- Pulizia
 			- Pulizia semplificata (settimanale, gruppo)
 			- Pulizia approfondita (gruppo (quando in programma) oppure testo (per indicare un altra congregazione che utilizza la stessa sala))
 			- Aggiungere anche una nota, per indicare ad esempio che deve essere fatto il Winterdienst o il Rasenmaeher
-	
+			
 	Monitor-Online
-		- Visualizzare:
-			- Discorso della Commemorazione
-			- Passaggio emblemi
-			- Preparazione emblema Pane
-			- Preparazione emblema Vino
-			- Preghiera Pane
-			- Preghiera Vino
-		Tabella eventi
+		- Tabella eventi
 			- Congressi/Assemblee
 			- Visita del sorvegliante
 			- Commemorazione

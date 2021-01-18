@@ -1,5 +1,6 @@
 package com.sm.net.sp.view.home.user.menu.meetings;
 
+import com.sm.net.jw.wol.MinistryType;
 import com.sm.net.jw.wol.MinistryTypeTranslated;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -147,13 +148,20 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 
 	private void selectConductor(ListView<Member> lv, Member cond) {
 
-		if (lv.getSelectionModel().getSelectedIndex() < 1) {
+		if (this.typeComboBox.getSelectionModel().getSelectedIndex() > -1) {
 
-			ObservableList<Member> items = lv.getItems();
-			for (int i = 0; i < items.size(); i++) {
-				if (items.get(i).getSpMemberID() == cond.getSpMemberID()) {
-					lv.getSelectionModel().select(i);
-					break;
+			MinistryTypeTranslated type = this.typeComboBox.getSelectionModel().getSelectedItem();
+			if (type.getType() == MinistryType.DISCUSSION) {
+
+				if (lv.getSelectionModel().getSelectedIndex() < 1) {
+
+					ObservableList<Member> items = lv.getItems();
+					for (int i = 0; i < items.size(); i++) {
+						if (items.get(i).getSpMemberID() == cond.getSpMemberID()) {
+							lv.getSelectionModel().select(i);
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -332,6 +340,11 @@ public class MinistryPartEditor extends UpdateDataAdapter {
 					studentLabel.setText(language.getString("TEXT0044"));
 					student2Label.setText(language.getString("TEXT0044"));
 					GUIUpdateForTalk();
+					break;
+				case MEMORIAL:
+					studentLabel.setText(language.getString("TEXT0044"));
+					student2Label.setText(language.getString("TEXT0044"));
+					GUIUpdateForInitialCall();
 					break;
 				}
 			}

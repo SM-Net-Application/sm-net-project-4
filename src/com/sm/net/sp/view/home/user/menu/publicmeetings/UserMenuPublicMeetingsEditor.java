@@ -12,6 +12,7 @@ import com.sm.net.sp.model.EnumPlaceType;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Privileges;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
@@ -106,6 +107,9 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 	private ObservableList<Week> databaseWeeks;
 	private ObservableList<WeekAudio> databaseWeeksAudio;
 	private ObservableList<WeekUsciere> databaseWeeksUsciere;
+
+	private boolean configSongTitleLoad;
+	private ObservableList<Song> songList;
 
 	private AlertBuilderOld alertBuilder;
 
@@ -356,6 +360,38 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 		listenerDisableMouseSecondary();
 		listenerSaveWeekButton();
+
+		this.publicTalkSongTextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.publicTalkSongTextField, this.song1TextField);
+		});
+	}
+
+	private void checkSongTitle(TextField tfSong, TextField tfTitle) {
+
+		String songText = tfSong.getText();
+		if (songText != null) {
+
+			try {
+
+				Integer song = Integer.valueOf(songText);
+				tfTitle.setText(checkSongTitleByNumber(song));
+
+			} catch (Exception e) {
+				tfTitle.setText("");
+			}
+		} else
+			tfTitle.setText("");
+	}
+
+	private String checkSongTitleByNumber(Integer song) {
+
+		if (song != null)
+			for (Song s : this.songList)
+				if (s.getNumber().intValue() == song.intValue())
+					return s.getTitle();
+
+		return "";
 	}
 
 	private void listenerDisableMouseSecondary() {
@@ -559,7 +595,7 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("meetings.editor.error.speaker"));
 		}
-		
+
 		return status;
 	}
 
@@ -701,6 +737,22 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 
 	public void setDatabaseWeeksUsciere(ObservableList<WeekUsciere> databaseWeeksUsciere) {
 		this.databaseWeeksUsciere = databaseWeeksUsciere;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
+	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
 	}
 
 }

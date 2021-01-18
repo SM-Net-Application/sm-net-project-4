@@ -12,6 +12,7 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
@@ -20,6 +21,7 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.AlertBuilderOld;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.task.PublicMeetingsInitDataLoadTask;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
@@ -75,6 +77,9 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 	@FXML
 	private TextField filterTextField;
 
+	private ObservableList<Song> songList;
+	private boolean configSongTitleLoad;
+	
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -188,6 +193,11 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 //		printButton.setText(null);
 	}
 
+	public void checkConfigs() {
+		String inf19 = Crypt.decrypt(this.configs.get("inf19"), this.application.getSettings().getDatabaseSecretKey());
+		this.configSongTitleLoad = inf19.equals("1");
+	}
+	
 	private void initData() {
 		this.weekTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 //		loadGeneralInfo();
@@ -430,6 +440,8 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 				ctrl.setDatabaseWeeks(this.databaseWeeks);
 				ctrl.setDatabaseWeeksAudio(this.audio);
 				ctrl.setDatabaseWeeksUsciere(this.usciere);
+				ctrl.setConfigSongTitleLoad(this.configSongTitleLoad);
+				ctrl.setSongList(this.songList);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -574,4 +586,19 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		this.usciere = usciere;
 	}
 
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
+	}
 }

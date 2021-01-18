@@ -1741,7 +1741,6 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		this.place1SelectButton.setOnAction(param -> selectPlace1());
 		this.place2SelectButton.setOnAction(param -> selectPlace2());
 
-		//TODO
 		this.song1TextField.focusedProperty().addListener((obs, oldV, newV) -> {
 			if (!newV)
 				checkSongTitle(this.song1TextField, this.midweekSong1TitelTextField);
@@ -2641,6 +2640,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		// SEZIONE 3 - Discorsi di esercitazione
 
+		this.ministryPartList.clear();
+		
 		if (sections.size() > 2) {
 
 			Element section = sections.get(2);
@@ -2694,6 +2695,8 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 
 		// SEZIONE 4 - Vita cristiana
 
+		this.christiansPartList.clear();
+		
 		String song2 = "";
 
 		if (sections.size() > 3) {
@@ -2895,6 +2898,11 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 	}
 
 	private MinistryTypeTranslated checkMinistryType(String ministryTitle) {
+
+		// match.wol.ministry.memorial
+
+		if (ministryTitle.matches(this.language.getString("match.wol.ministry.memorial")))
+			return new MinistryTypeTranslated(MinistryType.MEMORIAL, this.language);
 
 		if (ministryTitle.matches(this.language.getString("match.wol.ministry.initialcall")))
 			return new MinistryTypeTranslated(MinistryType.INITIAL_CALL, this.language);

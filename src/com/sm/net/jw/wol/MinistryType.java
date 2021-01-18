@@ -19,8 +19,10 @@ public enum MinistryType {
 
 	BIBLE_STUDY("wol.ministry.biblestudy", 4),
 
-	TALK("wol.ministry.talk", 5);
+	TALK("wol.ministry.talk", 5),
 
+	MEMORIAL("wol.ministry.memorial", 6);
+	
 	private StringProperty name;
 	private IntegerProperty ordinal;
 

@@ -10,6 +10,7 @@ import com.sm.net.sp.model.EnumPlaceType;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
@@ -225,6 +226,9 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 	private TabPane ownerTabPane;
 	private Tab thisTab;
+
+	private boolean configSongTitleLoad;
+	private ObservableList<Song> songList;
 
 	private ObservableList<WeekMemorial> calendar;
 	private HashMap<String, String> configs;
@@ -722,6 +726,43 @@ public class MemorialEditor extends UpdateDataAdapter {
 	private void listeners() {
 
 		this.saveButton.setOnAction(event -> save());
+
+		this.songStartTextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.songStartTextField, this.song1TextField);
+		});
+
+		this.songEndTextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.songEndTextField, this.song2TextField);
+		});
+	}
+
+	private void checkSongTitle(TextField tfSong, TextField tfTitle) {
+
+		String songText = tfSong.getText();
+		if (songText != null) {
+
+			try {
+
+				Integer song = Integer.valueOf(songText);
+				tfTitle.setText(checkSongTitleByNumber(song));
+
+			} catch (Exception e) {
+				tfTitle.setText("");
+			}
+		} else
+			tfTitle.setText("");
+	}
+
+	private String checkSongTitleByNumber(Integer song) {
+
+		if (song != null)
+			for (Song s : this.songList)
+				if (s.getNumber().intValue() == song.intValue())
+					return s.getTitle();
+
+		return "";
 	}
 
 	private void save() {
@@ -1567,6 +1608,22 @@ public class MemorialEditor extends UpdateDataAdapter {
 
 	public void setSong2TextField(TextField song2TextField) {
 		this.song2TextField = song2TextField;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
 	}
 
 }

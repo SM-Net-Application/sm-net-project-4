@@ -7,12 +7,14 @@ import java.util.HashMap;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.task.OverseerInitDataLoadTask;
 import com.sm.net.sp.view.home.user.menu.circuitoverseer.task.WeekOverseerDeleteTask;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
@@ -63,6 +65,9 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 	@FXML
 	private Button deleteWeekButton;
 
+	private ObservableList<Song> songList;
+	private boolean configSongTitleLoad;
+	
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -233,6 +238,11 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 				this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
+	public void checkConfigs() {
+		String inf19 = Crypt.decrypt(this.configs.get("inf19"), this.application.getSettings().getDatabaseSecretKey());
+		this.configSongTitleLoad = inf19.equals("1");
+	}
+	
 	private void listeners() {
 
 		listenerWeekTableView();
@@ -298,6 +308,8 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 				ctrl.setSelectedWeek(week);
 				ctrl.setCalendar(this.calendar);
 				ctrl.setConfigs(this.configs);
+				ctrl.setConfigSongTitleLoad(this.configSongTitleLoad);
+				ctrl.setSongList(this.songList);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -376,5 +388,21 @@ public class UserMenuCircuitOverseer extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
 	}
 }

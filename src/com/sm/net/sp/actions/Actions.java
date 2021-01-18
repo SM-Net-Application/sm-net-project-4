@@ -2364,8 +2364,8 @@ public class Actions {
 
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
 					for (Week week : weeks)
-						jrWeeks.add(JRWeek.newObject(week, membersList, null, null, null, null, null, null, language,
-								extendedName, false));
+						jrWeeks.add(JRWeek.newObject(settings.getDatabaseSecretKey(), week, membersList, null, null,
+								null, null, null, null, language, extendedName, false));
 
 					JRBeanCollectionDataSource jrWeeksDataSource = new JRBeanCollectionDataSource(jrWeeks);
 
@@ -2419,6 +2419,7 @@ public class Actions {
 				});
 
 				setOnFailed(value -> {
+					
 					new AlertDesigner(settings.getLanguage().getString("MEX008"), ownerStage, AlertType.ERROR,
 							Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
 							Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
@@ -2440,8 +2441,9 @@ public class Actions {
 					ArrayList<JRWeek> jrWeeks = new ArrayList<>();
 					for (Week week : weeks) {
 
-						JRWeek newJRWeek = JRWeek.newObject(week, membersList, familiesList, convention, memorial,
-								audio, usciere, configs, language, extendedName, true);
+						JRWeek newJRWeek = JRWeek.newObject(settings.getDatabaseSecretKey(), week, membersList,
+								familiesList, convention, memorial, audio, usciere, configs, language, extendedName,
+								true);
 
 						String congregationNameHeader = String
 								.format(language.getString("jasper.layout.meeting.congregation"), congregationName);
@@ -2677,7 +2679,7 @@ public class Actions {
 
 					if (sg != null)
 						parameters.put("programmName",
-								language.getString("jasper.layout.naturaldisaster.programm").toUpperCase() + " ("
+								language.getString("jasper.layout.naturaldisaster.programm").toUpperCase() + "<br>("
 										+ sg.getSpInf1Decrypted() + ")");
 					else
 						parameters.put("programmName",

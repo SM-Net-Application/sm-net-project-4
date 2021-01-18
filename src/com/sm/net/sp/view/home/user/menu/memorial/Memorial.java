@@ -11,6 +11,7 @@ import com.sm.net.sp.model.EnumDays;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
@@ -18,6 +19,7 @@ import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.memorial.task.MemorialInitDataLoadTask;
 import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialDeleteTask;
 import com.sm.net.sp.view.home.user.menu.memorial.task.WeekMemorialLoadTask;
+import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
@@ -79,6 +81,9 @@ public class Memorial extends UpdateDataAdapter {
 	private ObservableList<Family> familiesList;
 	private ObservableList<Place> placesList;
 	private HashMap<String, String> configs;
+
+	private ObservableList<Song> songList;
+	private boolean configSongTitleLoad;
 
 	@FXML
 	private void initialize() {
@@ -213,6 +218,11 @@ public class Memorial extends UpdateDataAdapter {
 		updateMembers();
 	}
 
+	public void checkConfigs() {
+		String inf19 = Crypt.decrypt(this.configs.get("inf19"), this.application.getSettings().getDatabaseSecretKey());
+		this.configSongTitleLoad = inf19.equals("1");
+	}
+	
 	@Override
 	public void updateMembers() {
 		Actions.getAllMembers(settings, ownerStage, this);
@@ -379,6 +389,8 @@ public class Memorial extends UpdateDataAdapter {
 				ctrl.setMembersList(this.membersList);
 				ctrl.setFamiliesList(this.familiesList);
 				ctrl.setConfigs(this.configs);
+				ctrl.setConfigSongTitleLoad(this.configSongTitleLoad);
+				ctrl.setSongList(this.songList);
 
 				Tab newTab = new Tab(week.getFrom().toString(), layout);
 				newTab.setClosable(true);
@@ -537,6 +549,22 @@ public class Memorial extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
 	}
 
 }

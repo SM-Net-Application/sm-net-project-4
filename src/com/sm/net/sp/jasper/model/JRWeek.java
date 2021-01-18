@@ -6,6 +6,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.crypto.SecretKey;
+
 import com.sm.net.project.Language;
 import com.sm.net.sp.jasper.Jasper;
 import com.sm.net.sp.model.ChristiansPart;
@@ -22,6 +24,7 @@ import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekType;
 import com.sm.net.sp.model.WeekUsciere;
+import com.sm.net.util.Crypt;
 
 import javafx.collections.ObservableList;
 import net.sf.jasperreports.engine.JRException;
@@ -281,10 +284,13 @@ public class JRWeek {
 		this.jrDataSourceChristiansPart = null;
 	}
 
-	public static JRWeek newObject(Week week, ObservableList<Member> membersList, ObservableList<Family> familiesList,
-			ObservableList<WeekConvention> convention, ObservableList<WeekMemorial> memorial,
-			ObservableList<WeekAudio> audio, ObservableList<WeekUsciere> usciere, HashMap<String, String> configs,
-			Language language, boolean extendedName, boolean complete) throws JRException {
+	public static JRWeek newObject(SecretKey secretKey, Week week, ObservableList<Member> membersList,
+			ObservableList<Family> familiesList, ObservableList<WeekConvention> convention,
+			ObservableList<WeekMemorial> memorial, ObservableList<WeekAudio> audio, ObservableList<WeekUsciere> usciere,
+			HashMap<String, String> configs, Language language, boolean extendedName, boolean complete)
+			throws JRException {
+
+		String songMin = Crypt.decrypt(configs.get("inf18"), secretKey);
 
 		LocalDate weekFrom = week.getFrom();
 
@@ -708,7 +714,7 @@ public class JRWeek {
 					String memPlace = weekMemorial.getSpInf24() != null ? weekMemorial.getSpInf24() : "";
 					jrWeek.setMemPlace(memPlace);
 
-					String memSong1Min = language.getString("jasper.memorial.song1min");
+					String memSong1Min = String.format(language.getString("jasper.memorial.song1min"), songMin);
 					jrWeek.setMemSong1Min(memSong1Min);
 
 					String song1 = weekMemorial.getSpInf2();
@@ -799,7 +805,7 @@ public class JRWeek {
 
 					jrWeek.setMemPrayEmblemsName(memPrayEmblemsName);
 
-					String memSong2Min = language.getString("jasper.memorial.song2min");
+					String memSong2Min = String.format(language.getString("jasper.memorial.song2min"), songMin);
 					jrWeek.setMemSong2Min(memSong2Min);
 
 					String song2 = weekMemorial.getSpInf3();
@@ -1135,7 +1141,9 @@ public class JRWeek {
 
 		jrWeek.setTreasuresHeader(language.getString("TEXT0080").toUpperCase());
 
-		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		// jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"),
+		// "5"));
+		jrWeek.setTreasuresMinSong1(String.format(language.getString("jasper.layout.meeting.min"), songMin));
 
 		String midweekSong1 = week.getSpInf5();
 		String midweekSong1Title = week.getSpInf59();
@@ -1208,7 +1216,9 @@ public class JRWeek {
 
 		jrWeek.setMinistryPartHeader(language.getString("TEXT0081").toUpperCase());
 
-		jrWeek.setChristiansMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		// jrWeek.setChristiansMinSong2(String.format(language.getString("jasper.layout.meeting.min"),
+		// "5"));
+		jrWeek.setChristiansMinSong2(String.format(language.getString("jasper.layout.meeting.min"), songMin));
 
 		String midweekSong2 = week.getSpInf19();
 		String midweekSong2Title = week.getSpInf60();
@@ -1258,7 +1268,9 @@ public class JRWeek {
 				String.format(language.getString("jasper.layout.meeting.min"), week.getSpInf24()));
 		jrWeek.setChristiansReviewText(week.getSpInf25());
 
-		jrWeek.setChristiansMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		// jrWeek.setChristiansMinSong3(String.format(language.getString("jasper.layout.meeting.min"),
+		// "5"));
+		jrWeek.setChristiansMinSong3(String.format(language.getString("jasper.layout.meeting.min"), songMin));
 
 		String midweekSong3 = week.getSpInf26();
 		String midweekSong3Title = week.getSpInf61();
@@ -1286,7 +1298,9 @@ public class JRWeek {
 		else
 			jrWeek.setPublicTalkHeader(language.getString("jasper.layout.meeting.weekend.publictalk").toUpperCase());
 
-		jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		// jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"),
+		// "5"));
+		jrWeek.setPublicTalkMinSong1(String.format(language.getString("jasper.layout.meeting.min"), songMin));
 
 		String weekendSong1 = week.getSpInf31();
 		String weekendSong1Title = week.getSpInf62();
@@ -1328,7 +1342,9 @@ public class JRWeek {
 		jrWeek.setWatchtowerStudyHeader(
 				language.getString("jasper.layout.meeting.weekend.watchtowerstudy").toUpperCase());
 
-		jrWeek.setWatchtowerStudyMinSong2(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		// jrWeek.setWatchtowerStudyMinSong2(String.format(language.getString("jasper.layout.meeting.min"),
+		// "5"));
+		jrWeek.setWatchtowerStudyMinSong2(String.format(language.getString("jasper.layout.meeting.min"), songMin));
 
 		String weekendSong2 = week.getSpInf35();
 		String weekendSong2Title = week.getSpInf63();
@@ -1371,7 +1387,9 @@ public class JRWeek {
 			}
 		}
 
-		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), "5"));
+		// jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"),
+		// "5"));
+		jrWeek.setWatchtowerStudyMinSong3(String.format(language.getString("jasper.layout.meeting.min"), songMin));
 
 		String weekendSong3 = week.getSpInf39();
 		String weekendSong3Title = week.getSpInf64();

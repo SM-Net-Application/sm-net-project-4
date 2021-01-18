@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekOverseer;
@@ -138,6 +139,9 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 	private TextField song1TextField;
 	@FXML
 	private TextField song2TextField;
+
+	private ObservableList<Song> songList;
+	private boolean configSongTitleLoad;
 
 	private Settings settings;
 	private Language language;
@@ -398,6 +402,43 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 		listenerSaveWeekButton();
 		listenerOverseerNameTextField();
 		listenerWifeNameTextField();
+
+		this.talk1SongTextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.talk1SongTextField, this.song1TextField);
+		});
+
+		this.talk2SongTextField.focusedProperty().addListener((obs, oldV, newV) -> {
+			if (!newV)
+				checkSongTitle(this.talk2SongTextField, this.song2TextField);
+		});
+	}
+
+	private void checkSongTitle(TextField tfSong, TextField tfTitle) {
+
+		String songText = tfSong.getText();
+		if (songText != null) {
+
+			try {
+
+				Integer song = Integer.valueOf(songText);
+				tfTitle.setText(checkSongTitleByNumber(song));
+
+			} catch (Exception e) {
+				tfTitle.setText("");
+			}
+		} else
+			tfTitle.setText("");
+	}
+
+	private String checkSongTitleByNumber(Integer song) {
+
+		if (song != null)
+			for (Song s : this.songList)
+				if (s.getNumber().intValue() == song.intValue())
+					return s.getTitle();
+
+		return "";
 	}
 
 	private void listenerOverseerNameTextField() {
@@ -557,5 +598,21 @@ public class UserMenuCircuitOverviewEditor extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public boolean isConfigSongTitleLoad() {
+		return configSongTitleLoad;
+	}
+
+	public void setConfigSongTitleLoad(boolean configSongTitleLoad) {
+		this.configSongTitleLoad = configSongTitleLoad;
+	}
+
+	public ObservableList<Song> getSongList() {
+		return songList;
+	}
+
+	public void setSongList(ObservableList<Song> songList) {
+		this.songList = songList;
 	}
 }
