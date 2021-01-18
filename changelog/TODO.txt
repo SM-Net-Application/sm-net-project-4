@@ -1,3 +1,14 @@
+
+	Nuova sezione:
+		- Comunicazioni ed eventi
+			- Salvare le comunicazioni con il seguente formato:
+				- Data della comunicazione
+				- Titolo della comunicazione
+				- Testo (HTML) della comunicazione
+					Il testo della comunicazione viene preso dalla conversione del PDF con il comando pdftotext
+			- Possibilità di includere la tabella con i prossimi eventi in programma
+	
+	Release
 	
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Congregazione)
@@ -46,6 +57,8 @@
 			- Congressi/Assemblee
 			- Visita del sorvegliante
 			- Commemorazione
+	
+	Gestore Comunicazioni e Promemoria
 	
 	Sezione: Utenti
 		- Rimuovere la colonna ID
