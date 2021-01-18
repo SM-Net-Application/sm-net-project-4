@@ -87,6 +87,8 @@ Data di pubblicazione : ..-..-....
 		- Sezione Disastri naturali:
 			- Il nome della sezione è stato modificato in Disastri ed emergenze.
 			- Il titolo del documento generato è stato modificato in Disastri ed emergenze: verifica dei recapiti.
+		- Sezione Congregazione:
+			- I totali componenti e famiglie sono stati centrati (il testo è stato allineato al centro)
 		
 	Bug-fix:
 		- Lo storico nella sezione Discorsi pubblici non veniva caricato

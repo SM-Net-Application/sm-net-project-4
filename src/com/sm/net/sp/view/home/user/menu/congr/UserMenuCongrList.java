@@ -272,13 +272,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
 
 		this.filterMemberTextField.getStyleClass().add("text_field_001");
-		this.totalTextField.getStyleClass().add("text_field_001");
-		this.totalMaleTextField.getStyleClass().add("text_field_001");
-		this.totalFemaleTextField.getStyleClass().add("text_field_001");
+		this.totalTextField.getStyleClass().add("text_field_002");
+		this.totalMaleTextField.getStyleClass().add("text_field_002");
+		this.totalFemaleTextField.getStyleClass().add("text_field_002");
 
 		this.filterFamilyTextField.getStyleClass().add("text_field_001");
-		this.totalFamilyTextField.getStyleClass().add("text_field_001");
-		this.totalFilteredFamilyTextField.getStyleClass().add("text_field_001");
+		this.totalFamilyTextField.getStyleClass().add("text_field_002");
+		this.totalFilteredFamilyTextField.getStyleClass().add("text_field_002");
 	}
 
 	public void objectInitialize() {

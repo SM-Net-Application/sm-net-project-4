@@ -1,6 +1,36 @@
 	
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Congregazione)
+			- La key è la seguente anno mese giorno es. 20210131
+			- Il calendario è formato da mesi: ogni riga è un mese
+				- Lo genero dal mese precedente e fino a sei mesi in avanti
+			- Informazioni da salvare:
+				- id
+				- key
+				- tipo (congregazione/gruppo)
+				- sorvegliante (0=no, 1=si)
+				- conduttore
+				- assistente audio/video
+				- luogo testo
+				- stampa luogo
+			- Nella tabella, se una comitiva è del sorvegliante, visualizzo l'icona del sorvegliante
+				- Se di congregazione, visualizzo la porta verde
+				- Se di gruppo, visualizzo la porta blu (ma da visualizzare solo nella sezione di gruppo)
+			- Quando seleziono la riga mese:
+				- Determino il primo giorno del mese
+				- Determino l'ultimo giorno del mese
+				- Genero un elenco con tutti giorno con il seguente formato: 01 Lunedi, 02 Martedi ...
+				- Quando voglio inserire una nuova comitiva, devo inserire il giorno, l'ora e i minuti
+					- Il conduttore oppure la spunta sorvegliante
+					- Assistente audio/video
+			- Il nome della seconda postazione (assistente audio/video) può essere definita nelle configurazioni
+				- Il nome deve essere scritto in chiaro
+			- Layout di stampa:
+				- Un layout che visualizza 3 colonne...conduttore, audiovideo e luogo
+				- Un layout che visualizza 2 colonne...conduttore e audiovideo
+				- Un layout che visualizza 2 colonne...conduttore e luogo
+				- Un layout che visualizza solo il conduttore
+				- Le adunanze per il servizio di congregazione devono essere anche stampate sul programma adunanze.
 	
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Gruppo)
@@ -16,6 +46,9 @@
 			- Congressi/Assemblee
 			- Visita del sorvegliante
 			- Commemorazione
+	
+	Sezione: Utenti
+		- Rimuovere la colonna ID
 	
 	- Sostituire la classe Authenticator
 	
