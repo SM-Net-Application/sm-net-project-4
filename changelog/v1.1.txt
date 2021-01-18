@@ -91,6 +91,7 @@ Data di pubblicazione : ..-..-....
 			- I totali componenti e famiglie sono stati centrati (il testo è stato allineato al centro)
 		
 	Bug-fix:
+		- La formula per il calcolo dell'età e degli anni di battesimo era sbagliata, corretta...
 		- Lo storico nella sezione Discorsi pubblici non veniva caricato
 		- Il lettore dell'adunanza del fine settimana non veniva stampato se in settimana si teneva la commemorazione
 		- Se si scaricavano le informazioni da WOL, venivano inserite piu volte le parti per gli studenti e vita cristiana.
