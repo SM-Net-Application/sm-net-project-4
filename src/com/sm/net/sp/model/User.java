@@ -21,6 +21,7 @@ public class User {
 	private boolean spUserSU;
 	private String usernameEncrypted;
 	private StringProperty usernameProperty;
+	private StringProperty passwordEncrypted;
 
 	private BooleanProperty spInf1;
 	private BooleanProperty spInf2;
@@ -44,7 +45,16 @@ public class User {
 	private IntegerProperty spInf19;
 	private BooleanProperty spInf20;
 
-	private StringProperty passwordEncrypted;
+	private BooleanProperty spInf21;
+	private BooleanProperty spInf22;
+	private BooleanProperty spInf23;
+	private BooleanProperty spInf24;
+	private BooleanProperty spInf25;
+	private BooleanProperty spInf26;
+	private BooleanProperty spInf27;
+	private BooleanProperty spInf28;
+	private BooleanProperty spInf29;
+	private BooleanProperty spInf30;
 
 	public User(JSONObject jsonObject, SecretKey secretKey) {
 		super();
@@ -102,6 +112,17 @@ public class User {
 		this.spInf18 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf18")));
 		this.spInf19 = new SimpleIntegerProperty(jsonObject.getInt("spInf19"));
 		this.spInf20 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf20")));
+
+		this.spInf21 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf21")));
+		this.spInf22 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf22")));
+		this.spInf23 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf23")));
+		this.spInf24 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf24")));
+		this.spInf25 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf25")));
+		this.spInf26 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf26")));
+		this.spInf27 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf27")));
+		this.spInf28 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf28")));
+		this.spInf29 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf29")));
+		this.spInf30 = new SimpleBooleanProperty(checkBoolean(jsonObject.getInt("spInf30")));
 
 		this.passwordEncrypted = new SimpleStringProperty(jsonObject.getString("spUserPassword"));
 	}
@@ -412,5 +433,125 @@ public class User {
 
 	public final void setSpInf20(final boolean spInf20) {
 		this.spInf20Property().set(spInf20);
+	}
+
+	public final BooleanProperty spInf21Property() {
+		return this.spInf21;
+	}
+
+	public final boolean isSpInf21() {
+		return this.spInf21Property().get();
+	}
+
+	public final void setSpInf21(final boolean spInf21) {
+		this.spInf21Property().set(spInf21);
+	}
+
+	public final BooleanProperty spInf22Property() {
+		return this.spInf22;
+	}
+
+	public final boolean isSpInf22() {
+		return this.spInf22Property().get();
+	}
+
+	public final void setSpInf22(final boolean spInf22) {
+		this.spInf22Property().set(spInf22);
+	}
+
+	public final BooleanProperty spInf23Property() {
+		return this.spInf23;
+	}
+
+	public final boolean isSpInf23() {
+		return this.spInf23Property().get();
+	}
+
+	public final void setSpInf23(final boolean spInf23) {
+		this.spInf23Property().set(spInf23);
+	}
+
+	public final BooleanProperty spInf24Property() {
+		return this.spInf24;
+	}
+
+	public final boolean isSpInf24() {
+		return this.spInf24Property().get();
+	}
+
+	public final void setSpInf24(final boolean spInf24) {
+		this.spInf24Property().set(spInf24);
+	}
+
+	public final BooleanProperty spInf25Property() {
+		return this.spInf25;
+	}
+
+	public final boolean isSpInf25() {
+		return this.spInf25Property().get();
+	}
+
+	public final void setSpInf25(final boolean spInf25) {
+		this.spInf25Property().set(spInf25);
+	}
+
+	public final BooleanProperty spInf26Property() {
+		return this.spInf26;
+	}
+
+	public final boolean isSpInf26() {
+		return this.spInf26Property().get();
+	}
+
+	public final void setSpInf26(final boolean spInf26) {
+		this.spInf26Property().set(spInf26);
+	}
+
+	public final BooleanProperty spInf27Property() {
+		return this.spInf27;
+	}
+
+	public final boolean isSpInf27() {
+		return this.spInf27Property().get();
+	}
+
+	public final void setSpInf27(final boolean spInf27) {
+		this.spInf27Property().set(spInf27);
+	}
+
+	public final BooleanProperty spInf28Property() {
+		return this.spInf28;
+	}
+
+	public final boolean isSpInf28() {
+		return this.spInf28Property().get();
+	}
+
+	public final void setSpInf28(final boolean spInf28) {
+		this.spInf28Property().set(spInf28);
+	}
+
+	public final BooleanProperty spInf29Property() {
+		return this.spInf29;
+	}
+
+	public final boolean isSpInf29() {
+		return this.spInf29Property().get();
+	}
+
+	public final void setSpInf29(final boolean spInf29) {
+		this.spInf29Property().set(spInf29);
+	}
+
+	public final BooleanProperty spInf30Property() {
+		return this.spInf30;
+	}
+
+	public final boolean isSpInf30() {
+		return this.spInf30Property().get();
+	}
+
+	public final void setSpInf30(final boolean spInf30) {
+		this.spInf30Property().set(spInf30);
 	}
 }

@@ -243,6 +243,8 @@ public class Meta {
 		public static final String CONTACTS = "contacts.png";
 		public static final String SAVE = "save_50x50.png";
 		public static final String UPDATE = "update.png";
+		public static final String PDF = "pdf.png";
+		public static final String POSTDEST = "postdest.png";
 		public static final String ARROW_BACK = "arrow_back2_50x50.png";
 		public static final String ARROW_FRONT = "arrow_front2_50x50.png";
 		public static final String USER_MENU_SERVICEGROUPS = "bag.png";
@@ -253,6 +255,8 @@ public class Meta {
 		public static final String USER_MENU_CIRCUITOVERSEER = "overseer.png";
 		public static final String USER_MENU_MONITOR = "monitor_new.png";
 		public static final String USER_MENU_NATURALDISASTER = "naturaldis.png";
+		public static final String POST = "post.png";
+		public static final String INFOTABLE = "infotable.png";
 		public static final String INFO = "info.png";
 		public static final String WOL = "wol.png";
 		public static final String PUBLIC_TALK = "public_talk.png";

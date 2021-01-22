@@ -1,13 +1,24 @@
 package com.sm.net.sp.view.home.user.menu.config;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.sax.BodyContentHandler;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xml.sax.SAXException;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -32,9 +43,11 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class UserMenuConfig {
@@ -49,6 +62,9 @@ public class UserMenuConfig {
 
 	@FXML
 	private TabPane tabPane;
+	@FXML
+	private TabPane postTabPane;
+
 	@FXML
 	private Tab placesTab;
 	@FXML
@@ -65,6 +81,15 @@ public class UserMenuConfig {
 	private Tab usciereTab;
 	@FXML
 	private Tab songsTab;
+	@FXML
+	private Tab postTab;
+
+	@FXML
+	private Tab postTabPanePDFReaderTab;
+	@FXML
+	private Tab postTabPaneTargetTab;
+	@FXML
+	private Tab postTabPaneReplaceTab;
 
 	@FXML
 	private ScrollPane placesScrollPane;
@@ -82,6 +107,8 @@ public class UserMenuConfig {
 	private ScrollPane usciereScrollPane;
 	@FXML
 	private ScrollPane songsScrollPane;
+	@FXML
+	private ScrollPane postScrollPane;
 
 	@FXML
 	private Label placesHeaderLabel;
@@ -99,6 +126,8 @@ public class UserMenuConfig {
 	private Label usciereHeaderLabel;
 	@FXML
 	private Label songsHeaderLabel;
+	@FXML
+	private Label postHeaderLabel;
 
 	@FXML
 	private Label placesPatternLabel;
@@ -183,6 +212,8 @@ public class UserMenuConfig {
 	private TableColumn<Song, String> songsTitleTableColumn;
 
 	@FXML
+	private Button placesPatternButton;
+	@FXML
 	private Button songsDownloadButton;
 
 	@FXML
@@ -191,7 +222,11 @@ public class UserMenuConfig {
 	private CheckBox songsLoadCheckBox;
 
 	@FXML
-	private Button placesPatternButton;
+	private Button pdfReaderTestButton;
+	@FXML
+	private Label pdfReaderTestLabel;
+	@FXML
+	private TextArea pdfReaderTestTextArea;
 
 	private SupportPlannerView application;
 	private Stage ownerStage;
@@ -225,6 +260,7 @@ public class UserMenuConfig {
 		this.headerLabel.getStyleClass().add("label_header_001");
 
 		this.tabPane.getStyleClass().add("tab_pane_003");
+		this.postTabPane.getStyleClass().add("tab_pane_003");
 
 		this.placesTab.getStyleClass().add("tab_001");
 		this.publicTalkTab.getStyleClass().add("tab_001");
@@ -234,6 +270,10 @@ public class UserMenuConfig {
 		this.audioTab.getStyleClass().add("tab_001");
 		this.usciereTab.getStyleClass().add("tab_001");
 		this.songsTab.getStyleClass().add("tab_001");
+		this.postTab.getStyleClass().add("tab_001");
+		this.postTabPanePDFReaderTab.getStyleClass().add("tab_001");
+		this.postTabPaneReplaceTab.getStyleClass().add("tab_001");
+		this.postTabPaneTargetTab.getStyleClass().add("tab_001");
 
 		this.placesScrollPane.getStyleClass().add("scroll_pane_001");
 		this.publicTalkScrollPane.getStyleClass().add("scroll_pane_001");
@@ -243,6 +283,7 @@ public class UserMenuConfig {
 		this.audioScrollPane.getStyleClass().add("scroll_pane_001");
 		this.usciereScrollPane.getStyleClass().add("scroll_pane_001");
 		this.songsScrollPane.getStyleClass().add("scroll_pane_001");
+		this.postScrollPane.getStyleClass().add("scroll_pane_001");
 
 		this.placesPatternLabel.getStyleClass().add("label_set_001");
 		this.publicTalkMinLabel.getStyleClass().add("label_set_001");
@@ -281,6 +322,7 @@ public class UserMenuConfig {
 		this.placesPatternButton.getStyleClass().add("button_image_001");
 		this.saveButton.getStyleClass().add("button_image_001");
 		this.songsDownloadButton.getStyleClass().add("button_image_001");
+		this.pdfReaderTestButton.getStyleClass().add("button_image_001");
 
 		this.placesHeaderLabel.getStyleClass().add("label_002");
 		this.publicTalkHeaderLabel.getStyleClass().add("label_002");
@@ -290,6 +332,7 @@ public class UserMenuConfig {
 		this.audioHeaderLabel.getStyleClass().add("label_002");
 		this.usciereHeaderLabel.getStyleClass().add("label_002");
 		this.songsHeaderLabel.getStyleClass().add("label_002");
+		this.postHeaderLabel.getStyleClass().add("label_002");
 
 		this.usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
 		this.usciereZone2WeekendCheckBox.getStyleClass().add("check_box_001");
@@ -300,6 +343,9 @@ public class UserMenuConfig {
 
 		this.songsLoadLabel.getStyleClass().add("label_set_001");
 		this.songsLoadCheckBox.getStyleClass().add("check_box_set_001");
+
+		this.pdfReaderTestLabel.getStyleClass().add("label_001");
+		this.pdfReaderTestTextArea.getStyleClass().add("text_area_001");
 	}
 
 	private void viewUpdate() {
@@ -314,6 +360,8 @@ public class UserMenuConfig {
 
 		this.tabPane.setTabMinHeight(75);
 		this.tabPane.setTabMaxHeight(75);
+		this.postTabPane.setTabMinHeight(75);
+		this.postTabPane.setTabMaxHeight(75);
 
 		Tooltip audioTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.audio"));
 		audioTabTooltip.getStyleClass().add("tooltip_001");
@@ -382,6 +430,36 @@ public class UserMenuConfig {
 		this.songsDownloadButton
 				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MEETINGS_WOL_LOAD));
 
+		Tooltip postTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.post"));
+		postTabTooltip.getStyleClass().add("tooltip_001");
+		this.postTab.setTooltip(postTabTooltip);
+		this.postTab.setText("");
+		this.postTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.POST));
+
+		Tooltip postPDFTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.postpdf"));
+		postPDFTabTooltip.getStyleClass().add("tooltip_001");
+		this.postTabPanePDFReaderTab.setTooltip(postPDFTabTooltip);
+		this.postTabPanePDFReaderTab.setText("");
+		this.postTabPanePDFReaderTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PDF));
+
+		Tooltip postReplaceTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.postreplace"));
+		postReplaceTabTooltip.getStyleClass().add("tooltip_001");
+		this.postTabPaneReplaceTab.setTooltip(postReplaceTabTooltip);
+		this.postTabPaneReplaceTab.setText("");
+		this.postTabPaneReplaceTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.UPDATE));
+
+		Tooltip postTargetTabTooltip = new Tooltip(language.getString("conf.tooltip.tab.posttarget"));
+		postTargetTabTooltip.getStyleClass().add("tooltip_001");
+		this.postTabPaneTargetTab.setTooltip(postTargetTabTooltip);
+		this.postTabPaneTargetTab.setText("");
+		this.postTabPaneTargetTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.POSTDEST));
+
+		Tooltip postPDFButtonTooltip = new Tooltip(language.getString("conf.tooltip.postpdftest"));
+		postPDFButtonTooltip.getStyleClass().add("tooltip_001");
+		this.pdfReaderTestButton.setTooltip(postPDFButtonTooltip);
+		this.pdfReaderTestButton.setText(null);
+		this.pdfReaderTestButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PDF));
+
 		this.placesHeaderLabel.setText(language.getString("conf.label.places.header"));
 		this.publicTalkHeaderLabel.setText(language.getString("conf.label.publictalk.header"));
 		this.watchtowerHeaderLabel.setText(language.getString("conf.label.watchtower.header"));
@@ -391,6 +469,7 @@ public class UserMenuConfig {
 		this.audioHeaderLabel.setText(language.getString("conf.label.audio.header"));
 		this.usciereHeaderLabel.setText(language.getString("conf.label.usciere.header"));
 		this.songsHeaderLabel.setText(language.getString("conf.label.songs.header"));
+		this.postHeaderLabel.setText(language.getString("conf.label.post.header"));
 
 		this.placesPatternLabel.setText(language.getString("conf.label.places.pattern"));
 		this.publicTalkMinLabel.setText(language.getString("conf.label.publictalk.min"));
@@ -422,6 +501,8 @@ public class UserMenuConfig {
 		this.songsSourceTextField.setText(this.application.getSettings().getLanguage().getString("conf.songs.source"));
 		this.songsLoadLabel.setText(this.application.getSettings().getLanguage().getString("conf.label.songs.load"));
 		this.songsLoadCheckBox.setText("");
+
+		this.pdfReaderTestLabel.setText(language.getString("conf.label.post.pdftest"));
 	}
 
 	private void initData() {
@@ -546,6 +627,122 @@ public class UserMenuConfig {
 		this.saveButton.setOnAction(event -> save());
 		this.placesPatternButton.setOnAction(event -> showHelp());
 		this.songsDownloadButton.setOnAction(event -> songsDownload());
+		this.pdfReaderTestButton.setOnAction(event -> pdfTest());
+	}
+
+	private void pdfTest() {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+		File file = fileChooser.showOpenDialog(this.ownerStage);
+		if (file != null) {
+
+			try {
+				this.pdfReaderTestTextArea.clear();
+
+				AutoDetectParser parser = new AutoDetectParser();
+				BodyContentHandler handler = new BodyContentHandler(-1);
+
+				Metadata tikaMetadata = new Metadata();
+				InputStream input;
+				input = TikaInputStream.get(file, tikaMetadata);
+				parser.parse(input, handler, tikaMetadata, new ParseContext());
+
+				String text = handler.toString();
+				text = text.replaceAll("\\d\\d/\\d\\d/\\d\\d\\d\\d-[A-Z]\\s[A-Za-z][A-Za-z]", "");
+				text = text.replaceAll("S-\\d+-\\d\\d\\.\\d\\d-[A-Za-z]", "");
+				text = text.replaceAll("S-\\d+-[A-Za-z]+\\s+[A-Za-z]+\\s+\\d+/\\d+", "");
+				text = text.replaceAll("\\d+/\\d+/\\d+-[A-Za-z]+\\s+[A-Za-z]+", "");
+				text = text.replace("\n\n\n", "\n");
+				text = text.replace("\n \n\n", "\n");
+				text = text.replace(" \n\n", "\n");
+				text = text.trim();
+
+//				System.out.println("=====");
+//				checkText(text);
+//				System.out.println("=====");
+
+				this.pdfReaderTestTextArea.setText(text);
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TikaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void checkText(String text) {
+
+		String regExDest = "^PER GLI ANZIANI$|^PER I COORDINATORI DEI CORPI DEGLI ANZIANI$|^PER I SORVEGLIANTI DEL SERVIZIO$|^PER LE CONGREGAZIONI$";
+		String regExTitolo = "^\\d+\\.\\s*.+$";
+		boolean destinatario = false;
+		boolean titolo = false;
+		boolean titoloComeTesto = false;
+
+		String[] strings = text.split("\n");
+		for (int i = 0; i < strings.length; i++) {
+
+			String currText = strings[i];
+			if (currText.isEmpty())
+				continue;
+
+			if (!destinatario) {
+				if (currText.matches(regExDest)) {
+					destinatario = true;
+					System.out.println("DESTINATARIO: " + currText);
+				} else
+					System.out.println("TESTO INIZIALE: " + currText);
+			} else {
+
+				if (!titolo) {
+
+					if (currText.matches(regExTitolo)) {
+
+						titolo = true;
+						System.out.println("TITOLO: " + currText);
+						i--;
+						titoloComeTesto = true;
+
+					}
+
+				} else {
+
+					if (titoloComeTesto) {
+
+						System.out.println("TESTO: " + currText);
+						titoloComeTesto = false;
+
+					} else {
+
+						if (currText.matches(regExDest)) {
+							destinatario = false;
+							titolo = false;
+							i--;
+							continue;
+						}
+
+						if (currText.matches(regExTitolo)) {
+							titolo = false;
+							i--;
+							continue;
+						}
+
+						System.out.println("TESTO: " + currText);
+					}
+				}
+			}
+		}
 	}
 
 	private void songsDownload() {

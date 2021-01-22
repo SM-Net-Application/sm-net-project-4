@@ -17,17 +17,17 @@ public enum EnumHomeUserMenuList {
 	SERVICEGROUPS("USERMENU003", Meta.Resources.USER_MENU_SERVICEGROUPS),
 
 	MEETINGS("USERMENU004", Meta.Resources.USER_MENU_MEETINGS),
-	
+
 	AUDIO("sp.menu.audio", Meta.Resources.AUDIO),
-	
+
 	USCIERE("sp.menu.usciere", Meta.Resources.USCIERE),
 
 	PUBLIC_TALK("sp.menu.publictalk", Meta.Resources.PUBLIC_TALK),
-	
+
 	SERVICE_MEETINGS_CONGR("sp.menu.servicemeetingcongr", Meta.Resources.DOOR_CONGR),
-	
+
 	SERVICE_MEETINGS_GROUPS("sp.menu.servicemeetinggroups", Meta.Resources.DOOR_GROUPS),
-	
+
 	CLEAN("sp.menu.clean", Meta.Resources.CLEAN),
 
 	CIRCUITOVERSEERS("USERMENU005", Meta.Resources.USER_MENU_CIRCUITOVERSEER),
@@ -37,6 +37,10 @@ public enum EnumHomeUserMenuList {
 	MEMORIAL("sp.menu.memorial", Meta.Resources.MEMORIAL),
 
 	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER),
+
+	POST("sp.menu.post", Meta.Resources.POST),
+
+	INFOTABLE("sp.menu.infotable", Meta.Resources.INFOTABLE),
 
 	MONITOR("sp.menu.monitor", Meta.Resources.USER_MENU_MONITOR),
 

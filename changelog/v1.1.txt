@@ -6,6 +6,8 @@ Data di pubblicazione : ..-..-....
 			- Adunanze per il servizio (Gruppo)
 			- Gruppo di servizio associato
 			- Pulizia
+			- Comunicazioni e promemoria
+			- Tabella informazioni
 		- La sezione Configurazione, prima era visibile solo all'utente Admin, ora può essere gestita come Autorizzazione
 
 	Sezione Congregazione:
@@ -103,3 +105,5 @@ Data di pubblicazione : ..-..-....
 	ALTER TABLE sp_week_ov ADD spInf21 VARCHAR(250) NOT NULL AFTER spInf20, ADD spInf22 VARCHAR(250) NOT NULL AFTER spInf21;
 	ALTER TABLE sp_memorial ADD spInf37 VARCHAR(250) NOT NULL AFTER spInf36, ADD spInf38 VARCHAR(250) NOT NULL AFTER spInf37;
 	CREATE TABLE sp_songs ( spInf1 VARCHAR(250) NOT NULL , spInf2 VARCHAR(250) NOT NULL ) ENGINE = InnoDB;
+	ALTER TABLE sp_users ADD COLUMN spInf21 INT(11) NOT NULL AFTER spInf20, ADD COLUMN spInf22 INT(11) NOT NULL AFTER spInf21, ADD COLUMN spInf23 INT(11) NOT NULL AFTER spInf22, ADD COLUMN spInf24 INT(11) NOT NULL AFTER spInf23, ADD COLUMN spInf25 INT(11) NOT NULL AFTER spInf24, ADD COLUMN spInf26 INT(11) NOT NULL AFTER spInf25, ADD COLUMN spInf27 INT(11) NOT NULL AFTER spInf26, ADD COLUMN spInf28 INT(11) NOT NULL AFTER spInf27, ADD COLUMN spInf29 INT(11) NOT NULL AFTER spInf28, ADD COLUMN spInf30 INT(11) NOT NULL AFTER spInf29;
+	CREATE TABLE sp_postrepl (spInfID INT(11) NOT NULL AUTO_INCREMENT, spInf1 INT NOT NULL, spInf2 TEXT NOT NULL, spInf3 TEXT NOT NULL, PRIMARY KEY (spInfID)) ENGINE = InnoDB;

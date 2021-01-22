@@ -43,11 +43,22 @@ public class UserSaveTask implements TaskInterface {
 	private int spInf18;
 	private int spInf19;
 	private int spInf20;
+	private int spInf21;
+	private int spInf22;
+	private int spInf23;
+	private int spInf24;
+	private int spInf25;
+	private int spInf26;
+	private int spInf27;
+	private int spInf28;
+	private int spInf29;
+	private int spInf30;
 
 	public UserSaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, int userID, int spInf1,
 			int spInf2, int spInf3, int spInf4, int spInf5, int spInf6, int spInf7, int spInf8, int spInf9, int spInf10,
 			int spInf11, int spInf12, int spInf13, int spInf14, int spInf15, int spInf16, int spInf17, int spInf18,
-			int spInf19, int spInf20, HomeUserMenuUsersList view) {
+			int spInf19, int spInf20, int spInf21, int spInf22, int spInf23, int spInf24, int spInf25, int spInf26,
+			int spInf27, int spInf28, int spInf29, int spInf30, HomeUserMenuUsersList view) {
 		super();
 
 		this.view = view;
@@ -76,6 +87,16 @@ public class UserSaveTask implements TaskInterface {
 		this.spInf18 = spInf18;
 		this.spInf19 = spInf19;
 		this.spInf20 = spInf20;
+		this.spInf21 = spInf21;
+		this.spInf22 = spInf22;
+		this.spInf23 = spInf23;
+		this.spInf24 = spInf24;
+		this.spInf25 = spInf25;
+		this.spInf26 = spInf26;
+		this.spInf27 = spInf27;
+		this.spInf28 = spInf28;
+		this.spInf29 = spInf29;
+		this.spInf30 = spInf30;
 	}
 
 	@Override
@@ -84,7 +105,8 @@ public class UserSaveTask implements TaskInterface {
 		JSONObject json = JSONRequest.USER_SAVE(this.userID, this.spInf1, this.spInf2, this.spInf3, this.spInf4,
 				this.spInf5, this.spInf6, this.spInf7, this.spInf8, spInf9, this.spInf10, this.spInf11, this.spInf12,
 				this.spInf13, this.spInf14, this.spInf15, this.spInf16, this.spInf17, this.spInf18, this.spInf19,
-				this.spInf20);
+				this.spInf20, this.spInf21, this.spInf22, this.spInf23, this.spInf24, this.spInf25, this.spInf26,
+				this.spInf27, this.spInf28, this.spInf29, this.spInf30);
 
 		String url = this.settings.getDatabaseUrl();
 

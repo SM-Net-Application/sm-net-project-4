@@ -18,7 +18,6 @@ import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.model.WeekUsciere;
-import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
 import com.sm.net.util.enumeration.JSONStatus;
 
@@ -798,7 +797,9 @@ public class JSONRequest {
 
 	public static JSONObject USER_SAVE(int userID, int spInf1, int spInf2, int spInf3, int spInf4, int spInf5,
 			int spInf6, int spInf7, int spInf8, int spInf9, int spInf10, int spInf11, int spInf12, int spInf13,
-			int spInf14, int spInf15, int spInf16, int spInf17, int spInf18, int spInf19, int spInf20) {
+			int spInf14, int spInf15, int spInf16, int spInf17, int spInf18, int spInf19, int spInf20, int spInf21,
+			int spInf22, int spInf23, int spInf24, int spInf25, int spInf26, int spInf27, int spInf28, int spInf29,
+			int spInf30) {
 
 		JSONObject jsonObj = create(Integer.valueOf(44));
 
@@ -823,6 +824,16 @@ public class JSONRequest {
 		jsonObj.put("spInf18", spInf18);
 		jsonObj.put("spInf19", spInf19);
 		jsonObj.put("spInf20", spInf20);
+		jsonObj.put("spInf21", spInf21);
+		jsonObj.put("spInf22", spInf22);
+		jsonObj.put("spInf23", spInf23);
+		jsonObj.put("spInf24", spInf24);
+		jsonObj.put("spInf25", spInf25);
+		jsonObj.put("spInf26", spInf26);
+		jsonObj.put("spInf27", spInf27);
+		jsonObj.put("spInf28", spInf28);
+		jsonObj.put("spInf29", spInf29);
+		jsonObj.put("spInf30", spInf30);
 
 		return jsonObj;
 	}
@@ -1239,15 +1250,15 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(64));
 
 		JSONArray jsonArray = new JSONArray();
-		
-		for(Song song: songList) {
-			
+
+		for (Song song : songList) {
+
 			int number = song.getNumber().intValue();
 			String title = song.getTitle();
-			
+
 			String numberEncrypted = Crypt.encrypt(String.valueOf(number), secretKey);
 			String titleEncrypted = Crypt.encrypt(title, secretKey);
-		
+
 			jsonArray.put(createJSONKeyValue(numberEncrypted, titleEncrypted));
 		}
 
@@ -1255,13 +1266,13 @@ public class JSONRequest {
 
 		return jsonObj;
 	}
-	
+
 	public static JSONObject SONGS_LOAD() {
 
 		JSONObject jsonObj = create(Integer.valueOf(65));
 		return jsonObj;
 	}
-	
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

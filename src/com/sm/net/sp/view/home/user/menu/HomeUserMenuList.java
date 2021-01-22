@@ -190,6 +190,10 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.MEMORIAL);
 			if (this.user.isSpInf6())
 				menuListView.getItems().add(EnumHomeUserMenuList.NATURAL_DISASTER);
+			if (this.user.isSpInf21())
+				menuListView.getItems().add(EnumHomeUserMenuList.POST);
+			if (this.user.isSpInf22())
+				menuListView.getItems().add(EnumHomeUserMenuList.INFOTABLE);
 			if (this.user.isSpInf7())
 				menuListView.getItems().add(EnumHomeUserMenuList.MONITOR);
 			if (this.user.isSpInf20())
@@ -236,28 +240,36 @@ public class HomeUserMenuList {
 		case CIRCUITOVERSEERS:
 			ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;
-			
+
 		case SERVICE_MEETINGS_CONGR:
-			// ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			// TODO: ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;
 		case SERVICE_MEETINGS_GROUPS:
-			// ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			// TODO:ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;
 		case CLEAN:
-			// ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			// TODO:ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
 			break;
-			
+
 		case CONVENTIONS:
 			this.ctrlSupportPlannerView.viewConventions();
 			break;
 		case MEMORIAL:
 			this.ctrlSupportPlannerView.viewMemorial();
 			break;
-		case MONITOR:
-			ctrlSupportPlannerView.viewHomeUserMenuMonitor();
-			break;
 		case NATURAL_DISASTER:
 			ctrlSupportPlannerView.viewHomeUserMenuNaturalDisaster();
+			break;
+
+		case POST:
+			// TODO:ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			break;
+		case INFOTABLE:
+			// TODO:ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			break;
+
+		case MONITOR:
+			ctrlSupportPlannerView.viewHomeUserMenuMonitor();
 			break;
 		case CONFIG:
 			ctrlSupportPlannerView.viewHomeUserMenuConfig();

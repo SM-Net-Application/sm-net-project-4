@@ -98,6 +98,11 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private CheckBox authConfigCheckBox;
 
 	@FXML
+	private CheckBox authPostCheckBox;
+	@FXML
+	private CheckBox authInfoTableCheckBox;
+
+	@FXML
 	private Button userAddButton;
 	@FXML
 	private Button userDeleteButton;
@@ -169,6 +174,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.serviceGroupLabel.getStyleClass().add("label_001");
 
 		this.authConfigCheckBox.getStyleClass().add("check_box_001");
+
+		this.authPostCheckBox.getStyleClass().add("check_box_001");
+		this.authInfoTableCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -279,6 +287,12 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authConfigCheckBox.setText(language.getString("users.auth.config"));
 		this.authConfigCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CONFIG));
+
+		this.authPostCheckBox.setText(language.getString("users.auth.post"));
+		this.authPostCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.POST));
+
+		this.authInfoTableCheckBox.setText(language.getString("users.auth.infotable"));
+		this.authInfoTableCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.INFOTABLE));
 	}
 
 	@Override
@@ -359,6 +373,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				}
 
 				this.authConfigCheckBox.setSelected(user.isSpInf20());
+
+				this.authPostCheckBox.setSelected(user.isSpInf21());
+				this.authInfoTableCheckBox.setSelected(user.isSpInf22());
 			}
 		});
 
@@ -418,12 +435,24 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 			int spInf20 = this.authConfigCheckBox.isSelected() ? 1 : 0;
 
+			int spInf21 = this.authPostCheckBox.isSelected() ? 1 : 0;
+			int spInf22 = this.authInfoTableCheckBox.isSelected() ? 1 : 0;
+			int spInf23 = 0;
+			int spInf24 = 0;
+			int spInf25 = 0;
+			int spInf26 = 0;
+			int spInf27 = 0;
+			int spInf28 = 0;
+			int spInf29 = 0;
+			int spInf30 = 0;
+
 			String waitMessage = this.language.getString("users.save.wait");
 
 			TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
 					new UserSaveTask(this.application.getAlertBuilder2(), this.settings, this.stageSupportPlannerView,
 							userID, spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10,
 							spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20,
+							spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30,
 							this));
 		}
 	}
@@ -456,6 +485,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authCleanCheckBox.setSelected(false);
 		this.authServiceMeetingGroupComboBox.getSelectionModel().selectFirst();
 		this.authConfigCheckBox.setSelected(false);
+		
+		this.authPostCheckBox.setSelected(false);
+		this.authInfoTableCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {
