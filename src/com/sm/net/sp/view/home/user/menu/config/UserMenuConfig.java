@@ -822,13 +822,19 @@ public class UserMenuConfig {
 				parser.parse(input, handler, tikaMetadata, new ParseContext());
 
 				String text = handler.toString();
-				text = text.replaceAll("\\d\\d/\\d\\d/\\d\\d\\d\\d-[A-Z]\\s[A-Za-z][A-Za-z]", "");
-				text = text.replaceAll("S-\\d+-\\d\\d\\.\\d\\d-[A-Za-z]", "");
-				text = text.replaceAll("S-\\d+-[A-Za-z]+\\s+[A-Za-z]+\\s+\\d+/\\d+", "");
-				text = text.replaceAll("\\d+/\\d+/\\d+-[A-Za-z]+\\s+[A-Za-z]+", "");
-				text = text.replace("\n\n\n", "\n");
-				text = text.replace("\n \n\n", "\n");
-				text = text.replace(" \n\n", "\n");
+
+				for (PDFReplace pdfReplace : pdfReplaceList) {
+
+					switch (EnumPDFReplaceType.valueByID(pdfReplace.getSpInf1())) {
+					case REGEX:
+						text = text.replaceAll(pdfReplace.getSpInf2(), pdfReplace.getSpInf3());
+						break;
+					case TEXT:
+						text = text.replace(pdfReplace.getSpInf2(), pdfReplace.getSpInf3());
+						break;
+					}
+				}
+				
 				text = text.trim();
 
 //				System.out.println("=====");
@@ -838,16 +844,12 @@ public class UserMenuConfig {
 				this.pdfReaderTestTextArea.setText(text);
 
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SAXException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (TikaException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
