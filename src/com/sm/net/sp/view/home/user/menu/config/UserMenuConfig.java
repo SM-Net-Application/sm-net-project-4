@@ -22,9 +22,14 @@ import org.xml.sax.SAXException;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
+import com.sm.net.sp.model.EnumPDFReplaceType;
+import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.Song;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigLoadTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFReplaceLoadTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFReplaceRemoveTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFReplaceSaveTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigSaveTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigSongsLoadTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigSongsSaveTask;
@@ -32,15 +37,20 @@ import com.sm.net.util.Crypt;
 import com.smnet.core.task.TaskManager;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -49,6 +59,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class UserMenuConfig {
 
@@ -228,24 +239,80 @@ public class UserMenuConfig {
 	@FXML
 	private TextArea pdfReaderTestTextArea;
 
+	@FXML
+	private Label pdfReplaceTypeLabel;
+	@FXML
+	private Label pdfReplaceValueLabel;
+	@FXML
+	private Label pdfReplaceTextLabel;
+	@FXML
+	private ComboBox<EnumPDFReplaceType> pdfReplaceTypeComboBox;
+	@FXML
+	private TextField pdfReplaceValueTextField;
+	@FXML
+	private TextField pdfReplaceTextTextField;
+	@FXML
+	private Button pdfReplaceAddButton;
+	@FXML
+	private Button pdfReplaceRemoveButton;
+	@FXML
+	private TableView<PDFReplace> pdfReplaceTableView;
+	@FXML
+	private TableColumn<PDFReplace, EnumPDFReplaceType> pdfReplaceTypeTableColumn;
+	@FXML
+	private TableColumn<PDFReplace, String> pdfReplaceValueTableColumn;
+	@FXML
+	private TableColumn<PDFReplace, String> pdfReplaceTextTableColumn;
+
 	private SupportPlannerView application;
 	private Stage ownerStage;
 
 	private HashMap<String, String> configs;
 
 	private ObservableList<Song> songList;
+	private ObservableList<PDFReplace> pdfReplaceList;
 
 	@FXML
 	private void initialize() {
 
 		styleClasses();
+		cellFactory();
 		cellValueFactory();
+	}
+
+	private void cellFactory() {
+
+		this.pdfReplaceTypeTableColumn.setCellFactory(param -> tableCellForEnumPDFReplaceType());
+
 	}
 
 	private void cellValueFactory() {
 
 		this.songsNumTableColumn.setCellValueFactory(cellData -> cellData.getValue().getNumberProperty().asObject());
 		this.songsTitleTableColumn.setCellValueFactory(cellData -> cellData.getValue().getTitleProperty());
+
+		this.pdfReplaceTypeTableColumn.setCellValueFactory(cellData -> {
+			Integer spInf1 = cellData.getValue().getSpInf1();
+			return new SimpleObjectProperty<EnumPDFReplaceType>(EnumPDFReplaceType.valueByID(spInf1));
+		});
+		this.pdfReplaceValueTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf2Property());
+		this.pdfReplaceTextTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf3Property());
+	}
+
+	private TableCell<PDFReplace, EnumPDFReplaceType> tableCellForEnumPDFReplaceType() {
+
+		return new TableCell<PDFReplace, EnumPDFReplaceType>() {
+			@Override
+			protected void updateItem(EnumPDFReplaceType item, boolean empty) {
+				super.updateItem(item, empty);
+
+				if (empty)
+					setText(null);
+				else {
+					setText(application.getSettings().getLanguage().getString(item.getTextKey().get()));
+				}
+			}
+		};
 	}
 
 	public void objectInitialize() {
@@ -346,6 +413,16 @@ public class UserMenuConfig {
 
 		this.pdfReaderTestLabel.getStyleClass().add("label_001");
 		this.pdfReaderTestTextArea.getStyleClass().add("text_area_001");
+
+		this.pdfReplaceTypeLabel.getStyleClass().add("label_set_001");
+		this.pdfReplaceValueLabel.getStyleClass().add("label_set_001");
+		this.pdfReplaceTextLabel.getStyleClass().add("label_set_001");
+		this.pdfReplaceTypeComboBox.getStyleClass().add("combo_box_001");
+		this.pdfReplaceValueTextField.getStyleClass().add("text_field_001");
+		this.pdfReplaceTextTextField.getStyleClass().add("text_field_001");
+		this.pdfReplaceAddButton.getStyleClass().add("button_image_001");
+		this.pdfReplaceRemoveButton.getStyleClass().add("button_image_001");
+		this.pdfReplaceTableView.getStyleClass().add("table_view_001");
 	}
 
 	private void viewUpdate() {
@@ -503,13 +580,45 @@ public class UserMenuConfig {
 		this.songsLoadCheckBox.setText("");
 
 		this.pdfReaderTestLabel.setText(language.getString("conf.label.post.pdftest"));
+
+		this.pdfReplaceTypeLabel.setText(language.getString("conf.label.post.pdfreplacetype"));
+		this.pdfReplaceValueLabel.setText(language.getString("conf.label.post.pdfreplacevalue"));
+		this.pdfReplaceTextLabel.setText(language.getString("conf.label.post.pdfreplacetext"));
+		this.pdfReplaceTypeTableColumn.setText(language.getString("conf.label.post.pdfreplacecolumntype"));
+		this.pdfReplaceValueTableColumn.setText(language.getString("conf.label.post.pdfreplacecolumnvalue"));
+		this.pdfReplaceTextTableColumn.setText(language.getString("conf.label.post.pdfreplacecolumntext"));
+		Tooltip pdfReplaceAddTooltip = new Tooltip(language.getString("conf.tooltip.pdfreplaceadd"));
+		pdfReplaceAddTooltip.getStyleClass().add("tooltip_001");
+		this.pdfReplaceAddButton.setTooltip(pdfReplaceAddTooltip);
+		this.pdfReplaceAddButton.setText(null);
+		this.pdfReplaceAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ADD));
+		Tooltip pdfReplaceRemoveTooltip = new Tooltip(language.getString("conf.tooltip.pdfreplaceremove"));
+		pdfReplaceRemoveTooltip.getStyleClass().add("tooltip_001");
+		this.pdfReplaceRemoveButton.setTooltip(pdfReplaceRemoveTooltip);
+		this.pdfReplaceRemoveButton.setText(null);
+		this.pdfReplaceRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
 	}
 
 	private void initData() {
 
 		this.songList = FXCollections.observableArrayList();
 		this.songsTableView.setItems(this.songList);
+
+		this.pdfReplaceList = FXCollections.observableArrayList();
+		this.pdfReplaceTableView.setItems(this.pdfReplaceList);
+
+		Callback<ListView<EnumPDFReplaceType>, ListCell<EnumPDFReplaceType>> callbackEnumPDFReplaceType = callbackForEnumPDFReplaceType();
+		this.pdfReplaceTypeComboBox.setButtonCell(callbackEnumPDFReplaceType.call(null));
+		this.pdfReplaceTypeComboBox.setCellFactory(callbackEnumPDFReplaceType);
+
+		this.pdfReplaceTypeComboBox.getItems().addAll(EnumPDFReplaceType.values());
+		this.pdfReplaceTypeComboBox.getSelectionModel().selectFirst();
+
 		configLoad();
+	}
+
+	private Callback<ListView<EnumPDFReplaceType>, ListCell<EnumPDFReplaceType>> callbackForEnumPDFReplaceType() {
+		return param -> new EnumPDFReplaceTypeComboBoxListCell(this.application.getSettings().getLanguage());
 	}
 
 	private void configLoad() {
@@ -620,6 +729,9 @@ public class UserMenuConfig {
 
 		// CARICO I CANTICI
 		this.updateSongList();
+
+		// CARICO I PDF REPLACE
+		this.updatePDFReplaceList();
 	}
 
 	private void listeners() {
@@ -628,6 +740,65 @@ public class UserMenuConfig {
 		this.placesPatternButton.setOnAction(event -> showHelp());
 		this.songsDownloadButton.setOnAction(event -> songsDownload());
 		this.pdfReaderTestButton.setOnAction(event -> pdfTest());
+
+		this.pdfReplaceAddButton.setOnAction(event -> pdfReplaceAdd());
+		this.pdfReplaceRemoveButton.setOnAction(event -> pdfReplaceRemove());
+	}
+
+	private void pdfReplaceAdd() {
+
+		String value = this.pdfReplaceValueTextField.getText();
+
+		if (value.isEmpty()) {
+
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfreplace.errornovalue");
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+		} else {
+
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfreplace.confirmadd");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+				int spInf1 = this.pdfReplaceTypeComboBox.getSelectionModel().getSelectedItem().getId();
+				String spInf2 = Crypt.encrypt(this.pdfReplaceValueTextField.getText(),
+						this.application.getSettings().getDatabaseSecretKey());
+				String spInf3 = Crypt.encrypt(this.pdfReplaceTextTextField.getText(),
+						this.application.getSettings().getDatabaseSecretKey());
+
+				PDFReplace pdfReplace = new PDFReplace(spInf1, spInf2, spInf3);
+
+				String waitMessage = this.application.getSettings().getLanguage().getString("conf.pdfreplace.savewait");
+
+				TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
+						new ConfigPDFReplaceSaveTask(this, this.application.getAlertBuilder2(),
+								this.application.getSettings(), this.ownerStage, pdfReplace));
+
+			}
+		}
+	}
+
+	private void pdfReplaceRemove() {
+
+		if (this.pdfReplaceTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			PDFReplace pdfReplace = this.pdfReplaceTableView.getSelectionModel().getSelectedItem();
+
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfreplace.confirmremove");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+				String waitMessage = this.application.getSettings().getLanguage()
+						.getString("conf.pdfreplace.removewait");
+
+				TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
+						new ConfigPDFReplaceRemoveTask(this, this.application.getAlertBuilder2(),
+								this.application.getSettings(), this.ownerStage, pdfReplace));
+
+			}
+
+		} else {
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfreplace.errornoselected");
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+		}
 	}
 
 	private void pdfTest() {
@@ -809,11 +980,27 @@ public class UserMenuConfig {
 
 	}
 
+	public void updatePDFReplaceList() {
+
+		String waitMessage = this.application.getSettings().getLanguage().getString("conf.pdfreplace.loadwait");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new ConfigPDFReplaceLoadTask(
+				this.application.getAlertBuilder2(), this.application.getSettings(), this.ownerStage, this));
+
+	}
+
 	public void updateSongList(ObservableList<Song> newSongList) {
 
 		this.songList.clear();
 		this.songList.addAll(newSongList);
 		Platform.runLater(() -> this.songsTableView.refresh());
+	}
+
+	public void updatePDFReplaceList(ObservableList<PDFReplace> newList) {
+
+		this.pdfReplaceList.clear();
+		this.pdfReplaceList.addAll(newList);
+		Platform.runLater(() -> this.pdfReplaceTableView.refresh());
 	}
 
 	private boolean songListEquals(ObservableList<Song> newSongList) {

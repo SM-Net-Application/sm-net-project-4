@@ -931,27 +931,27 @@
                                                                      <children>
                                                                         <VBox>
                                                                            <children>
-                                                                              <StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
                                                                                  <children>
-                                                                                    <Label text="Label">
+                                                                                    <Label fx:id="pdfReplaceTypeLabel" text="Label">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
                                                                                     </Label>
                                                                                  </children>
                                                                               </StackPane>
-                                                                              <StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
                                                                                  <children>
-                                                                                    <Label text="Label">
+                                                                                    <Label fx:id="pdfReplaceValueLabel" text="Label">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
                                                                                     </Label>
                                                                                  </children>
                                                                               </StackPane>
-                                                                              <StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
                                                                                  <children>
-                                                                                    <Label text="Label">
+                                                                                    <Label fx:id="pdfReplaceTextLabel" text="Label">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -964,7 +964,7 @@
                                                                            <children>
                                                                               <StackPane>
                                                                                  <children>
-                                                                                    <ComboBox>
+                                                                                    <ComboBox fx:id="pdfReplaceTypeComboBox">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -973,7 +973,7 @@
                                                                               </StackPane>
                                                                               <StackPane>
                                                                                  <children>
-                                                                                    <TextField>
+                                                                                    <TextField fx:id="pdfReplaceValueTextField">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -982,7 +982,7 @@
                                                                               </StackPane>
                                                                               <StackPane>
                                                                                  <children>
-                                                                                    <TextField>
+                                                                                    <TextField fx:id="pdfReplaceTextTextField">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -1004,7 +1004,7 @@
                                                                   </StackPane>
                                                                   <StackPane alignment="CENTER_RIGHT">
                                                                      <children>
-                                                                        <Button mnemonicParsing="false" text="Button">
+                                                                        <Button fx:id="pdfReplaceAddButton" mnemonicParsing="false" text="Button">
                                                                            <StackPane.margin>
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
@@ -1022,7 +1022,7 @@
                                                                   </StackPane>
                                                                   <StackPane alignment="CENTER_RIGHT">
                                                                      <children>
-                                                                        <Button mnemonicParsing="false" text="Button">
+                                                                        <Button fx:id="pdfReplaceRemoveButton" mnemonicParsing="false" text="Button">
                                                                            <StackPane.margin>
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
@@ -1033,11 +1033,11 @@
                                                             </VBox>
                                                             <StackPane HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <TableView>
+                                                                  <TableView fx:id="pdfReplaceTableView">
                                                                      <columns>
-                                                                        <TableColumn prefWidth="75.0" text="tipo" />
-                                                                        <TableColumn prefWidth="75.0" text="valore" />
-                                                                        <TableColumn prefWidth="75.0" text="sostituisci con" />
+                                                                        <TableColumn fx:id="pdfReplaceTypeTableColumn" prefWidth="75.0" text="tipo" />
+                                                                        <TableColumn fx:id="pdfReplaceValueTableColumn" prefWidth="75.0" text="valore" />
+                                                                        <TableColumn fx:id="pdfReplaceTextTableColumn" prefWidth="75.0" text="sostituisci con" />
                                                                      </columns>
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
