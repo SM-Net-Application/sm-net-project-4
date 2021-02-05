@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,10 +24,14 @@ import org.xml.sax.SAXException;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.EnumPDFReplaceType;
+import com.sm.net.sp.model.PDFDest;
 import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.Song;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigLoadTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFDestLoadTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFDestRemoveTask;
+import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFDestSaveTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFReplaceLoadTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFReplaceRemoveTask;
 import com.sm.net.sp.view.home.user.menu.config.task.ConfigPDFReplaceSaveTask;
@@ -264,6 +269,25 @@ public class UserMenuConfig {
 	@FXML
 	private TableColumn<PDFReplace, String> pdfReplaceTextTableColumn;
 
+	@FXML
+	private Label pdfDestTextLabel;
+	@FXML
+	private Label pdfDestRegExLabel;
+	@FXML
+	private TextField pdfDestTextTextField;
+	@FXML
+	private TextField pdfDestRegExTextField;
+	@FXML
+	private Button pdfDestAddButton;
+	@FXML
+	private Button pdfDestRemoveButton;
+	@FXML
+	private TableView<PDFDest> pdfDestTableView;
+	@FXML
+	private TableColumn<PDFDest, String> pdfDestTextTableColumn;
+	@FXML
+	private TableColumn<PDFDest, String> pdfDestRegExTableColumn;
+
 	private SupportPlannerView application;
 	private Stage ownerStage;
 
@@ -271,6 +295,10 @@ public class UserMenuConfig {
 
 	private ObservableList<Song> songList;
 	private ObservableList<PDFReplace> pdfReplaceList;
+	private ObservableList<PDFDest> pdfDestList;
+
+	private String bufferPDFDestText;
+	private File lastDirectory;
 
 	@FXML
 	private void initialize() {
@@ -297,6 +325,9 @@ public class UserMenuConfig {
 		});
 		this.pdfReplaceValueTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf2Property());
 		this.pdfReplaceTextTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf3Property());
+
+		this.pdfDestTextTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf1Property());
+		this.pdfDestRegExTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf2Property());
 	}
 
 	private TableCell<PDFReplace, EnumPDFReplaceType> tableCellForEnumPDFReplaceType() {
@@ -423,6 +454,14 @@ public class UserMenuConfig {
 		this.pdfReplaceAddButton.getStyleClass().add("button_image_001");
 		this.pdfReplaceRemoveButton.getStyleClass().add("button_image_001");
 		this.pdfReplaceTableView.getStyleClass().add("table_view_001");
+
+		this.pdfDestTextLabel.getStyleClass().add("label_set_001");
+		this.pdfDestRegExLabel.getStyleClass().add("label_set_001");
+		this.pdfDestTextTextField.getStyleClass().add("text_field_001");
+		this.pdfDestRegExTextField.getStyleClass().add("text_field_001");
+		this.pdfDestAddButton.getStyleClass().add("button_image_001");
+		this.pdfDestRemoveButton.getStyleClass().add("button_image_001");
+		this.pdfDestTableView.getStyleClass().add("table_view_001");
 	}
 
 	private void viewUpdate() {
@@ -597,6 +636,21 @@ public class UserMenuConfig {
 		this.pdfReplaceRemoveButton.setTooltip(pdfReplaceRemoveTooltip);
 		this.pdfReplaceRemoveButton.setText(null);
 		this.pdfReplaceRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
+
+		this.pdfDestTextLabel.setText(language.getString("conf.label.post.pdfdesttext"));
+		this.pdfDestRegExLabel.setText(language.getString("conf.label.post.pdfdestregex"));
+		this.pdfDestTextTableColumn.setText(language.getString("conf.label.post.pdfdestcolumntext"));
+		this.pdfDestRegExTableColumn.setText(language.getString("conf.label.post.pdfdestcolumnregex"));
+		Tooltip pdfDestAddTooltip = new Tooltip(language.getString("conf.tooltip.pdfreplaceadd"));
+		pdfDestAddTooltip.getStyleClass().add("tooltip_001");
+		this.pdfDestAddButton.setTooltip(pdfDestAddTooltip);
+		this.pdfDestAddButton.setText(null);
+		this.pdfDestAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ADD));
+		Tooltip pdfDestRemoveTooltip = new Tooltip(language.getString("conf.tooltip.pdfreplaceremove"));
+		pdfDestRemoveTooltip.getStyleClass().add("tooltip_001");
+		this.pdfDestRemoveButton.setTooltip(pdfDestRemoveTooltip);
+		this.pdfDestRemoveButton.setText(null);
+		this.pdfDestRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
 	}
 
 	private void initData() {
@@ -606,6 +660,9 @@ public class UserMenuConfig {
 
 		this.pdfReplaceList = FXCollections.observableArrayList();
 		this.pdfReplaceTableView.setItems(this.pdfReplaceList);
+
+		this.pdfDestList = FXCollections.observableArrayList();
+		this.pdfDestTableView.setItems(this.pdfDestList);
 
 		Callback<ListView<EnumPDFReplaceType>, ListCell<EnumPDFReplaceType>> callbackEnumPDFReplaceType = callbackForEnumPDFReplaceType();
 		this.pdfReplaceTypeComboBox.setButtonCell(callbackEnumPDFReplaceType.call(null));
@@ -732,6 +789,9 @@ public class UserMenuConfig {
 
 		// CARICO I PDF REPLACE
 		this.updatePDFReplaceList();
+
+		// CARICO I PDF DESTINATARI
+		this.updatePDFDestList();
 	}
 
 	private void listeners() {
@@ -743,6 +803,75 @@ public class UserMenuConfig {
 
 		this.pdfReplaceAddButton.setOnAction(event -> pdfReplaceAdd());
 		this.pdfReplaceRemoveButton.setOnAction(event -> pdfReplaceRemove());
+
+		this.pdfDestAddButton.setOnAction(event -> pdfDestAdd());
+		this.pdfDestRemoveButton.setOnAction(event -> pdfDestRemove());
+
+		this.pdfDestTextTextField.focusedProperty().addListener((v1, v2, v3) -> {
+
+			if (v3) {
+				bufferPDFDestText = pdfDestTextTextField.getText();
+			} else {
+				String text = pdfDestTextTextField.getText();
+				if (!text.equals(bufferPDFDestText)) {
+					String format = "^%s$";
+					pdfDestRegExTextField.setText(String.format(format, text));
+				}
+			}
+		});
+	}
+
+	private void pdfDestAdd() {
+
+		String dest = this.pdfDestTextTextField.getText();
+		String regex = this.pdfDestRegExTextField.getText();
+
+		if (dest.isEmpty() || regex.isEmpty()) {
+
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfdest.errornodata");
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+		} else {
+
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfdest.confirmadd");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+				String spInf1 = Crypt.encrypt(dest, this.application.getSettings().getDatabaseSecretKey());
+				String spInf2 = Crypt.encrypt(regex, this.application.getSettings().getDatabaseSecretKey());
+
+				PDFDest pdfDest = new PDFDest(spInf1, spInf2);
+
+				String waitMessage = this.application.getSettings().getLanguage().getString("conf.pdfdest.savewait");
+
+				TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
+						new ConfigPDFDestSaveTask(this, this.application.getAlertBuilder2(),
+								this.application.getSettings(), this.ownerStage, pdfDest));
+
+			}
+		}
+	}
+
+	private void pdfDestRemove() {
+
+		if (this.pdfDestTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			PDFDest pdfDest = this.pdfDestTableView.getSelectionModel().getSelectedItem();
+
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfdest.confirmremove");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+				String waitMessage = this.application.getSettings().getLanguage().getString("conf.pdfdest.removewait");
+
+				TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
+						new ConfigPDFDestRemoveTask(this, this.application.getAlertBuilder2(),
+								this.application.getSettings(), this.ownerStage, pdfDest));
+
+			}
+
+		} else {
+			String content = this.application.getSettings().getLanguage().getString("conf.pdfreplace.errornoselected");
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+		}
 	}
 
 	private void pdfReplaceAdd() {
@@ -801,16 +930,26 @@ public class UserMenuConfig {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void pdfTest() {
 
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+		if (lastDirectory != null)
+			fileChooser.setInitialDirectory(lastDirectory);
+		else
+			fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+
 		File file = fileChooser.showOpenDialog(this.ownerStage);
 		if (file != null) {
 
+			this.lastDirectory = file.getParentFile();
+
 			try {
+
 				this.pdfReaderTestTextArea.clear();
 
 				AutoDetectParser parser = new AutoDetectParser();
@@ -834,14 +973,11 @@ public class UserMenuConfig {
 						break;
 					}
 				}
-				
+
 				text = text.trim();
 
-//				System.out.println("=====");
-//				checkText(text);
-//				System.out.println("=====");
-
-				this.pdfReaderTestTextArea.setText(text);
+				String checkedText = checkText(text);
+				this.pdfReaderTestTextArea.setText(checkedText);
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -855,10 +991,14 @@ public class UserMenuConfig {
 		}
 	}
 
-	private void checkText(String text) {
+	private String checkText(String text) {
 
-		String regExDest = "^PER GLI ANZIANI$|^PER I COORDINATORI DEI CORPI DEGLI ANZIANI$|^PER I SORVEGLIANTI DEL SERVIZIO$|^PER LE CONGREGAZIONI$";
-		String regExTitolo = "^\\d+\\.\\s*.+$";
+		ArrayList<String> initialText = new ArrayList<>();
+
+		StringBuilder sb = new StringBuilder();
+
+		String regExTitolo = this.application.getSettings().getLanguage().getString("post.pdf.regextitle");
+
 		boolean destinatario = false;
 		boolean titolo = false;
 		boolean titoloComeTesto = false;
@@ -866,16 +1006,20 @@ public class UserMenuConfig {
 		String[] strings = text.split("\n");
 		for (int i = 0; i < strings.length; i++) {
 
-			String currText = strings[i];
-			if (currText.isEmpty())
+			String currText = strings[i].trim();
+			if (currText.isEmpty() || initialText.contains(currText))
 				continue;
 
 			if (!destinatario) {
-				if (currText.matches(regExDest)) {
+				if (checkDest(currText) != null) {
 					destinatario = true;
-					System.out.println("DESTINATARIO: " + currText);
-				} else
-					System.out.println("TESTO INIZIALE: " + currText);
+					sb.append("DESTINATARIO: " + currText);
+					sb.append("\n");
+				} else {
+					sb.append("TESTO INIZIALE: " + currText);
+					sb.append("\n");
+					initialText.add(currText);
+				}
 			} else {
 
 				if (!titolo) {
@@ -883,7 +1027,8 @@ public class UserMenuConfig {
 					if (currText.matches(regExTitolo)) {
 
 						titolo = true;
-						System.out.println("TITOLO: " + currText);
+						sb.append("TITOLO: " + currText);
+						sb.append("\n");
 						i--;
 						titoloComeTesto = true;
 
@@ -893,12 +1038,13 @@ public class UserMenuConfig {
 
 					if (titoloComeTesto) {
 
-						System.out.println("TESTO: " + currText);
+						sb.append("TESTO: " + currText);
+						sb.append("\n");
 						titoloComeTesto = false;
 
 					} else {
 
-						if (currText.matches(regExDest)) {
+						if (checkDest(currText) != null) {
 							destinatario = false;
 							titolo = false;
 							i--;
@@ -911,11 +1057,25 @@ public class UserMenuConfig {
 							continue;
 						}
 
-						System.out.println("TESTO: " + currText);
+						sb.append("TESTO: " + currText);
+						sb.append("\n");
 					}
 				}
 			}
 		}
+
+		return sb.toString();
+	}
+
+	private PDFDest checkDest(String currText) {
+
+		for (PDFDest pd : this.pdfDestList) {
+			String spInf2 = pd.getSpInf2();
+			if (currText.matches(spInf2))
+				return pd;
+		}
+
+		return null;
 	}
 
 	private void songsDownload() {
@@ -991,6 +1151,15 @@ public class UserMenuConfig {
 
 	}
 
+	public void updatePDFDestList() {
+
+		String waitMessage = this.application.getSettings().getLanguage().getString("conf.pdfdest.loadwait");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage, new ConfigPDFDestLoadTask(
+				this.application.getAlertBuilder2(), this.application.getSettings(), this.ownerStage, this));
+
+	}
+
 	public void updateSongList(ObservableList<Song> newSongList) {
 
 		this.songList.clear();
@@ -1003,6 +1172,13 @@ public class UserMenuConfig {
 		this.pdfReplaceList.clear();
 		this.pdfReplaceList.addAll(newList);
 		Platform.runLater(() -> this.pdfReplaceTableView.refresh());
+	}
+
+	public void updatePDFDestList(ObservableList<PDFDest> newList) {
+
+		this.pdfDestList.clear();
+		this.pdfDestList.addAll(newList);
+		Platform.runLater(() -> this.pdfDestTableView.refresh());
 	}
 
 	private boolean songListEquals(ObservableList<Song> newSongList) {

@@ -1,12 +1,4 @@
 
-	Configurazioni:
-		- Comunicazioni e promemoria:
-			- Lettore PDF
-			- Sostituzioni (1. Tipo (RegEx, Testo), 2. Valore, 3. Sostituisci con)
-				- Aggiungere ed elimina
-				- Per aggiungere i campi sono disponibili nella maschera principale (non apro una finestra)
-			- Elenco dei destinatari (1. Nome, 2. RegEx (^Nome$))
-
 	Nuova sezione:
 		- Comunicazioni ed eventi
 			- Salvare le comunicazioni con il seguente formato:

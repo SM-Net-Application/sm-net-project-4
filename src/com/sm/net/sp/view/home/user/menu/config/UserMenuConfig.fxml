@@ -1062,18 +1062,18 @@
                                                                      <children>
                                                                         <VBox>
                                                                            <children>
-                                                                              <StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
                                                                                  <children>
-                                                                                    <Label text="Label">
+                                                                                    <Label fx:id="pdfDestTextLabel" text="Label">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
                                                                                     </Label>
                                                                                  </children>
                                                                               </StackPane>
-                                                                              <StackPane>
+                                                                              <StackPane alignment="CENTER_LEFT">
                                                                                  <children>
-                                                                                    <Label text="Label">
+                                                                                    <Label fx:id="pdfDestRegExLabel" text="Label">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -1086,7 +1086,7 @@
                                                                            <children>
                                                                               <StackPane>
                                                                                  <children>
-                                                                                    <TextField>
+                                                                                    <TextField fx:id="pdfDestTextTextField">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -1095,7 +1095,7 @@
                                                                               </StackPane>
                                                                               <StackPane>
                                                                                  <children>
-                                                                                    <TextField>
+                                                                                    <TextField fx:id="pdfDestRegExTextField">
                                                                                        <StackPane.margin>
                                                                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                        </StackPane.margin>
@@ -1117,7 +1117,7 @@
                                                                   </StackPane>
                                                                   <StackPane alignment="CENTER_RIGHT">
                                                                      <children>
-                                                                        <Button mnemonicParsing="false" text="Button">
+                                                                        <Button fx:id="pdfDestAddButton" mnemonicParsing="false" text="Button">
                                                                            <StackPane.margin>
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
@@ -1135,7 +1135,7 @@
                                                                   </StackPane>
                                                                   <StackPane alignment="CENTER_RIGHT">
                                                                      <children>
-                                                                        <Button mnemonicParsing="false" text="Button">
+                                                                        <Button fx:id="pdfDestRemoveButton" mnemonicParsing="false" text="Button">
                                                                            <StackPane.margin>
                                                                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                            </StackPane.margin>
@@ -1146,10 +1146,10 @@
                                                             </VBox>
                                                             <StackPane HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <TableView>
+                                                                  <TableView fx:id="pdfDestTableView">
                                                                      <columns>
-                                                                        <TableColumn prefWidth="75.0" text="nome" />
-                                                                        <TableColumn prefWidth="75.0" text="regex" />
+                                                                        <TableColumn fx:id="pdfDestTextTableColumn" prefWidth="75.0" text="nome" />
+                                                                        <TableColumn fx:id="pdfDestRegExTableColumn" prefWidth="75.0" text="regex" />
                                                                      </columns>
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

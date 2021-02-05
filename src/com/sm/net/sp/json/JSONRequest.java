@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.PDFDest;
 import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.Song;
@@ -1296,6 +1297,31 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(68));
 
 		jsonObj.put("spInfID", pdfReplace.getSpInfID());
+
+		return jsonObj;
+	}
+
+	public static JSONObject PDFDEST_INSERT(PDFDest pdfDest) {
+
+		JSONObject jsonObj = create(Integer.valueOf(69));
+
+		jsonObj.put("spInf1", pdfDest.getSpInf1());
+		jsonObj.put("spInf2", pdfDest.getSpInf2());
+
+		return jsonObj;
+	}
+
+	public static JSONObject PDFDEST_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(70));
+		return jsonObj;
+	}
+
+	public static JSONObject PDFDEST_REMOVE(PDFDest pdfDest) {
+
+		JSONObject jsonObj = create(Integer.valueOf(71));
+
+		jsonObj.put("spInfID", pdfDest.getSpInfID());
 
 		return jsonObj;
 	}
