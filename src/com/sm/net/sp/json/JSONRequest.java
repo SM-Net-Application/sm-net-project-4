@@ -1,5 +1,6 @@
 package com.sm.net.sp.json;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import javax.crypto.SecretKey;
@@ -13,6 +14,8 @@ import com.sm.net.sp.model.DateAndTime;
 import com.sm.net.sp.model.PDFDest;
 import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.Place;
+import com.sm.net.sp.model.PostImportDoc;
+import com.sm.net.sp.model.PostImportNews;
 import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
@@ -1323,6 +1326,49 @@ public class JSONRequest {
 
 		jsonObj.put("spInfID", pdfDest.getSpInfID());
 
+		return jsonObj;
+	}
+
+	public static JSONObject PDF_IMPORT(SecretKey secretKey, PostImportDoc doc) {
+
+		JSONObject jsonObj = create(Integer.valueOf(72));
+
+		JSONArray jsonArray = new JSONArray();
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate docDate = doc.getDocDate();
+		String docDateText = dtf.format(docDate);
+		String docName = Crypt.encrypt(doc.getDocName(), secretKey);
+		String docTitle = Crypt.encrypt(doc.getDocTitle(), secretKey);
+
+		for (PostImportNews news : doc.getDocNewst()) {
+
+			String destinatario = Crypt.encrypt(news.getDest(), secretKey);
+			String title = Crypt.encrypt(news.getTitle(), secretKey);
+			String newsText = Crypt.encrypt(news.getText(), secretKey);
+
+			JSONObject jsonObject = new JSONObject();
+
+			jsonObject.put("spInf1", docDateText);
+			jsonObject.put("spInf2", destinatario);
+			jsonObject.put("spInf3", title);
+			jsonObject.put("spInf4", newsText);
+			jsonObject.put("spInf5", docName);
+			jsonObject.put("spInf6", docTitle);
+			jsonObject.put("spInf7", "0");
+			jsonObject.put("spInf8", "0");
+
+			jsonArray.put(jsonObject);
+		}
+
+		jsonObj.put("news", jsonArray);
+
+		return jsonObj;
+	}
+
+	public static JSONObject POST_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(73));
 		return jsonObj;
 	}
 

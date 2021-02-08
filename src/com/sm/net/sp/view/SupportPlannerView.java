@@ -37,6 +37,7 @@ import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
+import com.sm.net.sp.view.home.user.menu.post.Post;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
@@ -911,6 +912,31 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				Usciere ctrl = (Usciere) fxmlLoader.getController();
 				ctrl.setApplication(this);
 				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	public void viewPost() {
+
+		if (this.center != 23) {
+
+			this.center = 23;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.POST_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				Post ctrl = (Post) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.setApplication(this);
 				ctrl.objectInitialize();
 
 				this.viewSupportPlannerBorderPane.setCenter(layout);

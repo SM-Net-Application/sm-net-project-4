@@ -33,6 +33,8 @@ import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
 import com.sm.net.sp.view.home.user.menu.naturaldisaster.UserMenuNaturalDisasterList;
 import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
 import com.sm.net.sp.view.home.user.menu.places.PlacesAdd;
+import com.sm.net.sp.view.home.user.menu.post.Post;
+import com.sm.net.sp.view.home.user.menu.post.PostImport;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
@@ -196,6 +198,10 @@ public class Meta {
 		
 		public static final URL USCIERE_FXML_URL = Usciere.class.getResource("Usciere.fxml");
 		public static final URL USCIERE_EDITOR_FXML_URL = UsciereEditor.class.getResource("UsciereEditor.fxml");
+		
+		public static final URL POST_FXML_URL = Post.class.getResource("Post.fxml");
+		public static final URL POST_IMPORT_FXML_URL = PostImport.class
+				.getResource("PostImport.fxml");
 	}
 
 	public static class Themes {
@@ -318,6 +324,10 @@ public class Meta {
 		
 		public static final String LOCK_OPEN = "lock_open.png";
 		public static final String LOCK_CLOSE = "lock_close.png";
+		
+		public static final String PDF_ADD = "pdf_add.png";
+		public static final String FOLDER = "folder.png";
+		public static final String NEWS = "news.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 
