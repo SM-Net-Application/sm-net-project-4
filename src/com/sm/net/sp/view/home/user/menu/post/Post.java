@@ -27,6 +27,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -52,12 +54,33 @@ public class Post {
 	private TableColumn<PostNews, LocalDate> dateTableColumn;
 	@FXML
 	private TableColumn<PostNews, String> docTitleTableColumn;
-	@FXML
-	private TableColumn<PostNews, String> newsDestTableColumn;
+//	@FXML
+//	private TableColumn<PostNews, String> newsDestTableColumn;
 	@FXML
 	private TableColumn<PostNews, String> newsTitleTableColumn;
 	@FXML
 	private Button addButton;
+
+	@FXML
+	private Label docNameLabel;
+	@FXML
+	private Label docTitleLabel;
+	@FXML
+	private Label destLabel;
+	@FXML
+	private Label titleLabel;
+	@FXML
+	private Label textLabel;
+	@FXML
+	private TextField docNameTextField;
+	@FXML
+	private TextField docTitleTextField;
+	@FXML
+	private TextField destTextField;
+	@FXML
+	private TextField titleTextField;
+	@FXML
+	private TextArea textTextArea;
 
 	private Settings settings;
 	private Language language;
@@ -98,7 +121,7 @@ public class Post {
 		});
 
 		this.docTitleTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf6Property());
-		this.newsDestTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf2Property());
+//		this.newsDestTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf2Property());
 		this.newsTitleTableColumn.setCellValueFactory(cellData -> cellData.getValue().getSpInf3Property());
 	}
 
@@ -129,8 +152,21 @@ public class Post {
 		this.listTab.getStyleClass().add("tab_001");
 
 		this.tableView.getStyleClass().add("table_view_001");
+		this.dateTableColumn.getStyleClass().add("table_column_002");
 
 		this.addButton.getStyleClass().add("button_image_001");
+
+		this.docNameLabel.getStyleClass().add("label_set_001");
+		this.docTitleLabel.getStyleClass().add("label_set_001");
+		this.destLabel.getStyleClass().add("label_set_001");
+		this.titleLabel.getStyleClass().add("label_set_001");
+		this.textLabel.getStyleClass().add("label_set_001");
+
+		this.docNameTextField.getStyleClass().add("text_field_001");
+		this.docTitleTextField.getStyleClass().add("text_field_001");
+		this.destTextField.getStyleClass().add("text_field_001");
+		this.titleTextField.getStyleClass().add("text_field_001");
+		this.textTextArea.getStyleClass().add("text_area_001");
 	}
 
 	public void objectInitialize() {
@@ -148,18 +184,31 @@ public class Post {
 
 		this.listTab.setText(this.language.getString("post.tab.database"));
 
-		// TODO: Nomi delle colonne
-//		this.typeTableColumn.setText(this.language.getString("places.table.column.type"));
-//		this.descrTableColumn.setText(this.language.getString("places.table.column.descr"));
-//		this.streetTableColumn.setText(this.language.getString("places.table.column.street"));
-//		this.numTableColumn.setText(this.language.getString("places.table.column.num"));
-//		this.postCodeTableColumn.setText(this.language.getString("places.table.column.postCode"));
-//		this.cityTableColumn.setText(this.language.getString("places.table.column.city"));
-//		this.countyTableColumn.setText(this.language.getString("places.table.column.county"));
-//		this.countryTableColumn.setText(this.language.getString("places.table.column.country"));
-//		this.coordTableColumn.setText(this.language.getString("places.table.column.coord"));
-//		this.defaultTableColumn.setText(this.language.getString("places.table.column.default"));
+		this.infoTableTableColumn.setText("");
+		this.infoTableTableColumn.setMinWidth(50);
+		this.infoTableTableColumn.setMaxWidth(50);
+		this.infoTableTableColumn.setResizable(false);
 
+		this.dateTableColumn.setMinWidth(100);
+		this.dateTableColumn.setMaxWidth(100);
+
+		this.docNameTextField.setEditable(false);
+		this.docTitleTextField.setEditable(false);
+		this.destTextField.setEditable(false);
+		this.titleTextField.setEditable(false);
+		this.textTextArea.setEditable(false);
+
+		this.destLabel.setText(this.language.getString("post.label.dest"));
+		this.docNameLabel.setText(this.language.getString("post.label.docname"));
+		this.docTitleLabel.setText(this.language.getString("post.label.doctitle"));
+		this.titleLabel.setText(this.language.getString("post.label.title"));
+		this.textLabel.setText(this.language.getString("post.label.text"));
+		
+		this.dateTableColumn.setText(this.language.getString("post.tablecolumn.date"));
+		this.docTitleTableColumn.setText(this.language.getString("post.tablecolumn.doctitle"));
+		this.infoTableTableColumn.setText("");
+		this.newsTitleTableColumn.setText(this.language.getString("post.tablecolumn.title"));
+		
 		Tooltip addTooltip = new Tooltip(this.language.getString("post.tooltip.add"));
 		addTooltip.getStyleClass().add("tooltip_001");
 		this.addButton.setTooltip(addTooltip);
@@ -193,6 +242,40 @@ public class Post {
 	private void listeners() {
 		listenerUserAddButton();
 //		listenerUserDeleteButton();
+
+		this.tableView.getSelectionModel().selectedIndexProperty()
+				.addListener((o, oldV, newV) -> selectPost(newV.intValue()));
+	}
+
+	private void selectPost(int intValue) {
+
+		if (intValue > -1) {
+
+			PostNews postNews = this.tableView.getSelectionModel().getSelectedItem();
+			if (postNews != null) {
+
+				String dest = postNews.getSpInf2();
+				String title = postNews.getSpInf3();
+				String text = postNews.getSpInf4();
+				String docName = postNews.getSpInf5();
+				String docTitle = postNews.getSpInf6();
+
+				this.destTextField.setText(dest);
+				this.titleTextField.setText(title);
+				this.textTextArea.setText(text);
+				this.docNameTextField.setText(docName);
+				this.docTitleTextField.setText(docTitle);
+			}
+		}
+	}
+
+	public void resetPost() {
+
+		this.destTextField.setText("");
+		this.titleTextField.setText("");
+		this.textTextArea.setText("");
+		this.docNameTextField.setText("");
+		this.docTitleTextField.setText("");
 	}
 
 //	private void listenerUserDeleteButton() {
