@@ -32,6 +32,7 @@ import com.sm.net.sp.view.home.user.menu.conven.Convention;
 import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
+import com.sm.net.sp.view.home.user.menu.infotable.InfoTable;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
 import com.sm.net.sp.view.home.user.menu.monitor.UserMenuMonitor;
@@ -934,6 +935,31 @@ public class SupportPlannerView implements SupportPlannerCallback {
 				fxmlLoader.setLocation(Meta.Views.POST_FXML_URL);
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 				Post ctrl = (Post) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
+				ctrl.setApplication(this);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+			}
+		}
+	}
+
+	public void viewInfoTable() {
+
+		if (this.center != 24) {
+
+			this.center = 24;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.INFOTABLE_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				InfoTable ctrl = (InfoTable) fxmlLoader.getController();
 				ctrl.setSettings(this.settings);
 				ctrl.setStageSupportPlannerView(viewSupportPlannerStage);
 				ctrl.setApplication(this);

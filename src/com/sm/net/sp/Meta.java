@@ -26,6 +26,7 @@ import com.sm.net.sp.view.home.user.menu.database.UserMenuDatabase;
 import com.sm.net.sp.view.home.user.menu.dateandtime.HomeUserMenuDateAndTime;
 import com.sm.net.sp.view.home.user.menu.dateandtime.MenuDateAndTimeAdd;
 import com.sm.net.sp.view.home.user.menu.generalinfo.UserMenuGeneralInfo;
+import com.sm.net.sp.view.home.user.menu.infotable.InfoTable;
 import com.sm.net.sp.view.home.user.menu.meetings.UserMenuMeetings;
 import com.sm.net.sp.view.home.user.menu.memorial.Memorial;
 import com.sm.net.sp.view.home.user.menu.memorial.MemorialEditor;
@@ -202,6 +203,8 @@ public class Meta {
 		public static final URL POST_FXML_URL = Post.class.getResource("Post.fxml");
 		public static final URL POST_IMPORT_FXML_URL = PostImport.class
 				.getResource("PostImport.fxml");
+		
+		public static final URL INFOTABLE_FXML_URL = InfoTable.class.getResource("InfoTable.fxml");
 	}
 
 	public static class Themes {

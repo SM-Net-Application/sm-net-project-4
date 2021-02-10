@@ -265,7 +265,7 @@ public class HomeUserMenuList {
 			ctrlSupportPlannerView.viewPost();
 			break;
 		case INFOTABLE:
-			// TODO:ctrlSupportPlannerView.viewHomeUserMenuCircuitOverseer();
+			ctrlSupportPlannerView.viewInfoTable();
 			break;
 
 		case MONITOR:
