@@ -100,6 +100,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	@FXML
 	private CheckBox authPostCheckBox;
 	@FXML
+	private CheckBox authPDFImportCheckBox;
+	@FXML
 	private CheckBox authInfoTableCheckBox;
 
 	@FXML
@@ -176,6 +178,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authConfigCheckBox.getStyleClass().add("check_box_001");
 
 		this.authPostCheckBox.getStyleClass().add("check_box_001");
+		this.authPDFImportCheckBox.getStyleClass().add("check_box_001");
 		this.authInfoTableCheckBox.getStyleClass().add("check_box_001");
 	}
 
@@ -290,6 +293,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authPostCheckBox.setText(language.getString("users.auth.post"));
 		this.authPostCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.POST));
+		
+		this.authPDFImportCheckBox.setText(language.getString("users.auth.pdfimport"));
+		this.authPDFImportCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PDF_ADD));
 
 		this.authInfoTableCheckBox.setText(language.getString("users.auth.infotable"));
 		this.authInfoTableCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.INFOTABLE));
@@ -376,6 +382,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 				this.authPostCheckBox.setSelected(user.isSpInf21());
 				this.authInfoTableCheckBox.setSelected(user.isSpInf22());
+				this.authPDFImportCheckBox.setSelected(user.isSpInf23());
 			}
 		});
 
@@ -437,7 +444,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 			int spInf21 = this.authPostCheckBox.isSelected() ? 1 : 0;
 			int spInf22 = this.authInfoTableCheckBox.isSelected() ? 1 : 0;
-			int spInf23 = 0;
+			int spInf23 = this.authPDFImportCheckBox.isSelected() ? 1 : 0;
 			int spInf24 = 0;
 			int spInf25 = 0;
 			int spInf26 = 0;
@@ -488,6 +495,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		
 		this.authPostCheckBox.setSelected(false);
 		this.authInfoTableCheckBox.setSelected(false);
+		this.authPDFImportCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {

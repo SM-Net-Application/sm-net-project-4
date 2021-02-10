@@ -192,7 +192,7 @@ public class PostImport {
 				String content = this.language.getString("post.import.newsimport.confirm");
 				if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
 
-					String waitMessage = this.application.getSettings().getLanguage().getString("conf.songs.savewait");
+					String waitMessage = this.application.getSettings().getLanguage().getString("post.import.savewait");
 
 					TaskManager.run(this.getApplication().getAlertBuilder2(), this.ownerStage, waitMessage,
 							new PostImportTask(this, this.application.getAlertBuilder2(),

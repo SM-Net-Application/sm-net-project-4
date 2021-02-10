@@ -1,5 +1,12 @@
 Data di pubblicazione : ..-..-....
 
+	Nuova sezione: Comunicazioni e promemoria
+		- Questa sezione visualizza tutte le comunicazioni presenti nel database
+		- Importazione PDF:
+			- E' possibile selezionare i PDF delle comunicazioni (JW.ORG) e di convertirli in comunicazioni per SupportPlanner.
+				- Il riconoscimento del testo viene elaborato in base alle configurazioni del software (vedi sezione Configurazione)
+			- E' possibile aggiungere una comunicazione alla Tabella informazioni (vedi nuova sezione Tabella informazioni)
+
 	Sezione Utenti:
 		- Nuove autorizzazioni:
 			- Adunanze per il servizio
@@ -7,6 +14,7 @@ Data di pubblicazione : ..-..-....
 			- Gruppo di servizio associato
 			- Pulizia
 			- Comunicazioni e promemoria
+			- Importazione PDF (Comunicazioni)
 			- Tabella informazioni
 		- La sezione Configurazione, prima era visibile solo all'utente Admin, ora può essere gestita come Autorizzazione
 

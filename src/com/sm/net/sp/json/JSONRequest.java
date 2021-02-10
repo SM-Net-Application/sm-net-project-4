@@ -16,6 +16,7 @@ import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.Place;
 import com.sm.net.sp.model.PostImportDoc;
 import com.sm.net.sp.model.PostImportNews;
+import com.sm.net.sp.model.PostNews;
 import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
@@ -1369,6 +1370,25 @@ public class JSONRequest {
 	public static JSONObject POST_LOAD() {
 
 		JSONObject jsonObj = create(Integer.valueOf(73));
+		return jsonObj;
+	}
+
+	public static JSONObject POST_INFOTABLE_UPDATE(PostNews postNews, String spInf7) {
+
+		JSONObject jsonObj = create(Integer.valueOf(74));
+
+		jsonObj.put("spInfID", postNews.getSpInfID());
+		jsonObj.put("spInf7", spInf7);
+
+		return jsonObj;
+	}
+
+	public static JSONObject POST_DELETE(PostNews postNews) {
+
+		JSONObject jsonObj = create(Integer.valueOf(75));
+
+		jsonObj.put("spInfID", postNews.getSpInfID());
+
 		return jsonObj;
 	}
 

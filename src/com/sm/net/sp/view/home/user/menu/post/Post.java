@@ -3,6 +3,7 @@ package com.sm.net.sp.view.home.user.menu.post;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.StreamSupport;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -11,6 +12,8 @@ import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.PostNews;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.post.task.PostDeleteTask;
+import com.sm.net.sp.view.home.user.menu.post.task.PostInfoTableUpdateTask;
 import com.sm.net.sp.view.home.user.menu.post.task.PostInitDataLoadTask;
 import com.smnet.core.task.TaskManager;
 
@@ -82,6 +85,13 @@ public class Post {
 	@FXML
 	private TextArea textTextArea;
 
+	@FXML
+	private Button infotableButton;
+	@FXML
+	private TextField filterTextField;
+	@FXML
+	private Button deleteButton;
+
 	private Settings settings;
 	private Language language;
 	private Stage stageSupportPlannerView;
@@ -101,7 +111,7 @@ public class Post {
 
 		this.infoTableTableColumn.setCellValueFactory(cellData -> {
 
-			if (cellData.getValue().getSpInf8().intValue() == 1) {
+			if (cellData.getValue().getSpInf7().intValue() == 1) {
 				ImageView iv = Meta.Resources.imageForButtonSmall(Meta.Resources.INFOTABLE);
 				return new SimpleObjectProperty<ImageView>(iv);
 			}
@@ -152,6 +162,7 @@ public class Post {
 		this.listTab.getStyleClass().add("tab_001");
 
 		this.tableView.getStyleClass().add("table_view_001");
+		this.infoTableTableColumn.getStyleClass().add("table_column_002");
 		this.dateTableColumn.getStyleClass().add("table_column_002");
 
 		this.addButton.getStyleClass().add("button_image_001");
@@ -167,6 +178,10 @@ public class Post {
 		this.destTextField.getStyleClass().add("text_field_001");
 		this.titleTextField.getStyleClass().add("text_field_001");
 		this.textTextArea.getStyleClass().add("text_area_001");
+
+		this.infotableButton.getStyleClass().add("button_image_001");
+		this.filterTextField.getStyleClass().add("text_field_001");
+		this.deleteButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -203,17 +218,29 @@ public class Post {
 		this.docTitleLabel.setText(this.language.getString("post.label.doctitle"));
 		this.titleLabel.setText(this.language.getString("post.label.title"));
 		this.textLabel.setText(this.language.getString("post.label.text"));
-		
+
 		this.dateTableColumn.setText(this.language.getString("post.tablecolumn.date"));
 		this.docTitleTableColumn.setText(this.language.getString("post.tablecolumn.doctitle"));
 		this.infoTableTableColumn.setText("");
 		this.newsTitleTableColumn.setText(this.language.getString("post.tablecolumn.title"));
-		
+
 		Tooltip addTooltip = new Tooltip(this.language.getString("post.tooltip.add"));
 		addTooltip.getStyleClass().add("tooltip_001");
 		this.addButton.setTooltip(addTooltip);
 		this.addButton.setText(null);
 		this.addButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PDF_ADD));
+
+		Tooltip infotableTooltip = new Tooltip(this.language.getString("post.tooltip.infotable"));
+		infotableTooltip.getStyleClass().add("tooltip_001");
+		this.infotableButton.setTooltip(infotableTooltip);
+		this.infotableButton.setText(null);
+		this.infotableButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.INFOTABLE));
+
+		Tooltip deleteTooltip = new Tooltip(this.language.getString("post.tooltip.delete"));
+		deleteTooltip.getStyleClass().add("tooltip_001");
+		this.deleteButton.setTooltip(deleteTooltip);
+		this.deleteButton.setText(null);
+		this.deleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
 	}
 
 	public void initData() {
@@ -245,6 +272,117 @@ public class Post {
 
 		this.tableView.getSelectionModel().selectedIndexProperty()
 				.addListener((o, oldV, newV) -> selectPost(newV.intValue()));
+
+		this.filterTextField.textProperty().addListener((observable, oldValue, newValue) -> updateFilter(newValue));
+
+		this.infotableButton.setOnAction(event -> checkInfoTable());
+		this.deleteButton.setOnAction(event -> deletePost());
+	}
+
+	private void deletePost() {
+
+		if (this.tableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			PostNews postNews = this.tableView.getSelectionModel().getSelectedItem();
+			if (postNews != null) {
+
+				String content = this.language.getString("post.delete.confirm");
+
+				if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView, content,
+						postNews.getSpInf3())) {
+
+					String waitMessage = this.language.getString("post.delete.wait");
+
+					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+							new PostDeleteTask(this.application.getAlertBuilder2(), this.application.getSettings(),
+									this.stageSupportPlannerView, postNews, this));
+				}
+			}
+
+		} else {
+			String content = this.language.getString("post.error.nopostselected");
+			this.application.getAlertBuilder2().error(this.stageSupportPlannerView, content);
+		}
+	}
+
+	public void updateDeletedPost(PostNews postNews) {
+
+		this.postNewsList.remove(postNews);
+		this.tableView.getItems().remove(postNews);
+
+		Platform.runLater(() -> {
+			this.tableView.refresh();
+			this.tableView.getSelectionModel().clearSelection();
+		});
+	}
+
+	private void checkInfoTable() {
+
+		if (this.tableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			PostNews postNews = this.tableView.getSelectionModel().getSelectedItem();
+			if (postNews != null) {
+
+				String spInf7 = "1";
+				String content = this.language.getString("post.infotable.confirmadd");
+				if (postNews.getSpInf7().intValue() == 1) {
+					spInf7 = "0";
+					content = this.language.getString("post.infotable.confirmremove");
+				}
+
+				if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView, content,
+						postNews.getSpInf3())) {
+
+					String waitMessage = this.language.getString("post.infotable.save");
+
+					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+							new PostInfoTableUpdateTask(this.application.getAlertBuilder2(),
+									this.application.getSettings(), this.stageSupportPlannerView, postNews, spInf7,
+									this));
+				}
+			}
+
+		} else {
+			String content = this.language.getString("post.error.nopostselected");
+			this.application.getAlertBuilder2().error(this.stageSupportPlannerView, content);
+		}
+	}
+
+	public void updatePostInfoTableStatus(PostNews postNews, String spInf7) {
+
+		postNews.setSpInf7(Integer.valueOf(spInf7));
+		Platform.runLater(() -> this.tableView.refresh());
+	}
+
+	private void updateFilter(String newValue) {
+
+		if (newValue.isEmpty())
+			this.tableView.setItems(this.postNewsList);
+		else {
+			ObservableList<PostNews> filteredProjectList = buildProjectList(newValue);
+			this.tableView.setItems(filteredProjectList);
+		}
+
+		this.tableView.refresh();
+	}
+
+	private ObservableList<PostNews> buildProjectList(String filter) {
+
+		ObservableList<PostNews> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.postNewsList.spliterator(), false).filter(news -> matchFilter(news, filter))
+				.forEach(project -> list.add(project));
+
+		return list;
+	}
+
+	private boolean matchFilter(PostNews news, String match) {
+
+		String filter = match.toLowerCase();
+
+		return news.getSpInf2().toLowerCase().contains(filter) || news.getSpInf3().toLowerCase().contains(filter)
+				|| news.getSpInf4().toLowerCase().contains(filter) || news.getSpInf5().toLowerCase().contains(filter)
+				|| news.getSpInf6().toLowerCase().contains(filter);
 	}
 
 	private void selectPost(int intValue) {
@@ -307,6 +445,20 @@ public class Post {
 
 	private void newPost() {
 
+		if (this.application.getUser().isSpUserSU())
+			showNewPostTab();
+		else {
+			if (this.application.getUser().isSpInf23())
+				showNewPostTab();
+			else {
+				String content = this.language.getString("post.error.authpdfimport");
+				this.application.getAlertBuilder2().error(this.stageSupportPlannerView, content);
+			}
+		}
+	}
+
+	private void showNewPostTab() {
+
 		String newPost = language.getString("post.tab.new");
 
 		if (!isAlreadyOpen(this.tabPane, newPost)) {
@@ -322,10 +474,7 @@ public class Post {
 				ctrl.setApplication(this.application);
 				ctrl.setPdfDestList(this.pdfDestList);
 				ctrl.setPdfReplaceList(this.pdfReplaceList);
-//				ctrl.setOwnerStage(ownerStage);
-//				ctrl.setOwnerCtrl(this);
 
-				// Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
 				Tab newTab = new Tab(newPost, layout);
 				newTab.setClosable(true);
 				newTab.getStyleClass().add("tab_001");
@@ -334,13 +483,6 @@ public class Post {
 				ctrl.setParentTabPane(this.tabPane);
 				ctrl.setThisTab(newTab);
 
-//				ctrl.setParentTabPane(this.memberTabPane);
-//				ctrl.setMembersTab(membersTab);
-//				ctrl.setNewMemberTab(newMemberTab);
-//				ctrl.setConfigs(this.configs);
-
-//				congrTabPane.getTabs().add(newMemberTab);
-//				congrTabPane.getSelectionModel().select(newMemberTab);
 				this.tabPane.getTabs().add(newTab);
 				this.tabPane.getSelectionModel().select(newTab);
 
