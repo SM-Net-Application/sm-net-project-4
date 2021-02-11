@@ -18,6 +18,7 @@ public class Jasper {
 	public static final String LAYOUT_NATURALDISASTER = "sm-net-naturaldisaster";
 	public static final String LAYOUT_MONITOR = "sm-net-monitor";
 	public static final String LAYOUT_SERVICEGROUP = "sm-net-servicegroup";
+	public static final String LAYOUT_INFOTABLE = "sm-net-infotable";
 
 	public static final String FILE_USERS_LOGO = "iconSP";
 	public static final String FILE_USERS_USERS = "spUsers";
@@ -33,6 +34,9 @@ public class Jasper {
 	public static final String FILE_NATURAL_DISASTER_MEMBER = "spNaturalDisasterMemberRow";
 	public static final String FILE_MONITOR = "spMonitor";
 	public static final String FILE_SERVICE_GROUP5 = "spServiceGroup5";
+	public static final String FILE_INFOTABLE_PROGRAMM = "spInfoTable";
+	public static final String FILE_INFOTABLE_POST = "spInfoTablePost";
+	public static final String FILE_INFOTABLE_EVENT = "spInfoTableEvents";
 
 	public static class Layouts {
 
@@ -65,7 +69,13 @@ public class Jasper {
 
 		public static final File SM_NET_MONITOR = getLayout(TYPE_SM_NET, LAYOUT_MONITOR, FILE_MONITOR);
 
-		public static final File SM_NET_SERVICE_GROUP5 = getLayout(TYPE_SM_NET, LAYOUT_SERVICEGROUP, FILE_SERVICE_GROUP5);
+		public static final File SM_NET_SERVICE_GROUP5 = getLayout(TYPE_SM_NET, LAYOUT_SERVICEGROUP,
+				FILE_SERVICE_GROUP5);
+
+		public static final File SM_NET_INFOTABLE = getLayout(TYPE_SM_NET, LAYOUT_INFOTABLE, FILE_INFOTABLE_PROGRAMM);
+		public static final File SM_NET_INFOTABLE_POST = getLayout(TYPE_SM_NET, LAYOUT_INFOTABLE, FILE_INFOTABLE_POST);
+		public static final File SM_NET_INFOTABLE_EVENT = getLayout(TYPE_SM_NET, LAYOUT_INFOTABLE,
+				FILE_INFOTABLE_EVENT);
 
 		public static File getLayout(String layoutType, String layoutName, String layoutFileName) {
 

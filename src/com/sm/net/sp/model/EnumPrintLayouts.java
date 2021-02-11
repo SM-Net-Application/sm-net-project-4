@@ -27,6 +27,10 @@ public enum EnumPrintLayouts {
 	NATURAL_DISASTER_SERVICEGROUPS_9("sp.printlayout.naturaldisaster.servicegroup"),
 	NATURAL_DISASTER_SERVICEGROUPS_10("sp.printlayout.naturaldisaster.servicegroup"),
 
+	INFOTABLE_POST("sp.printlayout.infotable"),
+	
+	INFOTABLE_POST_EVENTS("sp.printlayout.infotableevents"),
+	
 	MEMBER_PASSWORD_MONITOR("sp.printlayout.passwordmonitor"),
 
 	SERVICE_GROUP("sp.printlayout.servicegroup"),

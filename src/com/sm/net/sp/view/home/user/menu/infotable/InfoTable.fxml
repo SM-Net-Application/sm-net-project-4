@@ -58,7 +58,7 @@
                      <children>
                         <StackPane alignment="CENTER_RIGHT">
                            <children>
-                              <Button fx:id="addButton" mnemonicParsing="false" text="Button">
+                              <Button fx:id="printButton" mnemonicParsing="false" text="Button">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>

@@ -359,14 +359,14 @@ public class Post {
 		if (newValue.isEmpty())
 			this.tableView.setItems(this.postNewsList);
 		else {
-			ObservableList<PostNews> filteredProjectList = buildProjectList(newValue);
-			this.tableView.setItems(filteredProjectList);
+			ObservableList<PostNews> filteredList = buildList(newValue);
+			this.tableView.setItems(filteredList);
 		}
 
 		this.tableView.refresh();
 	}
 
-	private ObservableList<PostNews> buildProjectList(String filter) {
+	private ObservableList<PostNews> buildList(String filter) {
 
 		ObservableList<PostNews> list = FXCollections.observableArrayList();
 

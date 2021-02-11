@@ -1392,6 +1392,12 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject INFOTABLE_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(76));
+		return jsonObj;
+	}
+	
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

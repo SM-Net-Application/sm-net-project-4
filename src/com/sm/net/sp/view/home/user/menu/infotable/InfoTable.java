@@ -2,15 +2,21 @@ package com.sm.net.sp.view.home.user.menu.infotable;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.stream.StreamSupport;
+import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.model.PDFDest;
-import com.sm.net.sp.model.PDFReplace;
+import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.PostNews;
+import com.sm.net.sp.model.WeekConvention;
+import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.infotable.task.InfoTableInitDataLoadTask;
+import com.sm.net.sp.view.home.user.menu.infotable.task.InfoTablePrintTask;
+import com.sm.net.sp.view.printlayout.PrintLayout;
+import com.smnet.core.task.TaskManager;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
@@ -41,12 +47,10 @@ public class InfoTable {
 	private TableColumn<PostNews, LocalDate> dateTableColumn;
 	@FXML
 	private TableColumn<PostNews, String> docTitleTableColumn;
-//	@FXML
-//	private TableColumn<PostNews, String> newsDestTableColumn;
 	@FXML
 	private TableColumn<PostNews, String> newsTitleTableColumn;
 	@FXML
-	private Button addButton;
+	private Button printButton;
 
 	@FXML
 	private Label docNameLabel;
@@ -74,9 +78,10 @@ public class InfoTable {
 	private Stage stageSupportPlannerView;
 	private SupportPlannerView application;
 
-	private ObservableList<PDFDest> pdfDestList;
-	private ObservableList<PDFReplace> pdfReplaceList;
 	private ObservableList<PostNews> postNewsList;
+	private ObservableList<WeekConvention> convention;
+	private ObservableList<WeekMemorial> memorial;
+	private HashMap<String, String> generalInfo;
 
 	@FXML
 	private void initialize() {
@@ -128,7 +133,7 @@ public class InfoTable {
 		this.tableView.getStyleClass().add("table_view_001");
 		this.dateTableColumn.getStyleClass().add("table_column_002");
 
-		this.addButton.getStyleClass().add("button_image_001");
+		this.printButton.getStyleClass().add("button_image_001");
 
 		this.docNameLabel.getStyleClass().add("label_set_001");
 		this.docTitleLabel.getStyleClass().add("label_set_001");
@@ -165,36 +170,37 @@ public class InfoTable {
 		this.titleTextField.setEditable(false);
 		this.textTextArea.setEditable(false);
 
-		this.destLabel.setText(this.language.getString("post.label.dest"));
-		this.docNameLabel.setText(this.language.getString("post.label.docname"));
-		this.docTitleLabel.setText(this.language.getString("post.label.doctitle"));
-		this.titleLabel.setText(this.language.getString("post.label.title"));
-		this.textLabel.setText(this.language.getString("post.label.text"));
+		this.destLabel.setText(this.language.getString("infotable.label.dest"));
+		this.docNameLabel.setText(this.language.getString("infotable.label.docname"));
+		this.docTitleLabel.setText(this.language.getString("infotable.label.doctitle"));
+		this.titleLabel.setText(this.language.getString("infotable.label.title"));
+		this.textLabel.setText(this.language.getString("infotable.label.text"));
 
-		this.dateTableColumn.setText(this.language.getString("post.tablecolumn.date"));
-		this.docTitleTableColumn.setText(this.language.getString("post.tablecolumn.doctitle"));
-		this.newsTitleTableColumn.setText(this.language.getString("post.tablecolumn.title"));
+		this.dateTableColumn.setText(this.language.getString("infotable.tablecolumn.date"));
+		this.docTitleTableColumn.setText(this.language.getString("infotable.tablecolumn.doctitle"));
+		this.newsTitleTableColumn.setText(this.language.getString("infotable.tablecolumn.title"));
 
 		Tooltip addTooltip = new Tooltip(this.language.getString("infotable.tooltip.print"));
 		addTooltip.getStyleClass().add("tooltip_001");
-		this.addButton.setTooltip(addTooltip);
-		this.addButton.setText(null);
-		this.addButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
+		this.printButton.setTooltip(addTooltip);
+		this.printButton.setText(null);
+		this.printButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 	}
 
 	public void initData() {
 
-		this.pdfDestList = FXCollections.observableArrayList();
-		this.pdfReplaceList = FXCollections.observableArrayList();
 		this.postNewsList = FXCollections.observableArrayList();
+		this.convention = FXCollections.observableArrayList();
+		this.memorial = FXCollections.observableArrayList();
+		this.generalInfo = new HashMap<String, String>();
 
 		this.tableView.setItems(this.postNewsList);
 
-//		String waitMessage = this.language.getString("post.wait.init");
-//
-//		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-//				new PostInitDataLoadTask(this.application.getAlertBuilder2(), this.settings,
-//						this.stageSupportPlannerView, this));
+		String waitMessage = this.language.getString("infotable.wait.init");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+				new InfoTableInitDataLoadTask(this.application.getAlertBuilder2(), this.settings,
+						this.stageSupportPlannerView, this));
 
 	}
 
@@ -209,86 +215,46 @@ public class InfoTable {
 
 		this.tableView.getSelectionModel().selectedIndexProperty()
 				.addListener((o, oldV, newV) -> selectPost(newV.intValue()));
+
+		this.printButton.setOnAction(e -> print());
 	}
 
-	public void updateDeletedPost(PostNews postNews) {
+	private void print() {
 
-		this.postNewsList.remove(postNews);
-		this.tableView.getItems().remove(postNews);
+		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.stageSupportPlannerView, language, null,
+				EnumPrintLayouts.INFOTABLE_POST, EnumPrintLayouts.INFOTABLE_POST_EVENTS);
 
-		Platform.runLater(() -> {
-			this.tableView.refresh();
-			this.tableView.getSelectionModel().clearSelection();
-		});
-	}
+		if (selectedLayout != null) {
 
-	private void checkInfoTable() {
+//			String overseerName = this.overseerTextField.getText();
+//			String overseerPhone = this.overseerPhoneTextField.getText();
+//			String overseerMail = this.overseerMailTextField.getText();
 
-		if (this.tableView.getSelectionModel().getSelectedIndex() > -1) {
+			String waitMessage = this.language.getString("infotable.wait.print");
 
-			PostNews postNews = this.tableView.getSelectionModel().getSelectedItem();
-			if (postNews != null) {
+			switch (selectedLayout) {
 
-				String spInf7 = "1";
-				String content = this.language.getString("post.infotable.confirmadd");
-				if (postNews.getSpInf7().intValue() == 1) {
-					spInf7 = "0";
-					content = this.language.getString("post.infotable.confirmremove");
-				}
+			case INFOTABLE_POST:
 
-				if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView, content,
-						postNews.getSpInf3())) {
+				TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+						new InfoTablePrintTask(this.application, this.stageSupportPlannerView, this.generalInfo, false,
+								this.postNewsList, this.memorial, this.convention));
 
-//					String waitMessage = this.language.getString("post.infotable.save");
-//
-//					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-//							new PostInfoTableUpdateTask(this.application.getAlertBuilder2(),
-//									this.application.getSettings(), this.stageSupportPlannerView, postNews, spInf7,
-//									this));
-				}
+				break;
+
+			case INFOTABLE_POST_EVENTS:
+
+				TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
+						new InfoTablePrintTask(this.application, this.stageSupportPlannerView, this.generalInfo, true,
+								this.postNewsList, this.memorial, this.convention));
+
+				break;
+
+			default:
+				break;
 			}
 
-		} else {
-			String content = this.language.getString("post.error.nopostselected");
-			this.application.getAlertBuilder2().error(this.stageSupportPlannerView, content);
 		}
-	}
-
-	public void updatePostInfoTableStatus(PostNews postNews, String spInf7) {
-
-		postNews.setSpInf7(Integer.valueOf(spInf7));
-		Platform.runLater(() -> this.tableView.refresh());
-	}
-
-	private void updateFilter(String newValue) {
-
-		if (newValue.isEmpty())
-			this.tableView.setItems(this.postNewsList);
-		else {
-			ObservableList<PostNews> filteredProjectList = buildProjectList(newValue);
-			this.tableView.setItems(filteredProjectList);
-		}
-
-		this.tableView.refresh();
-	}
-
-	private ObservableList<PostNews> buildProjectList(String filter) {
-
-		ObservableList<PostNews> list = FXCollections.observableArrayList();
-
-		StreamSupport.stream(this.postNewsList.spliterator(), false).filter(news -> matchFilter(news, filter))
-				.forEach(project -> list.add(project));
-
-		return list;
-	}
-
-	private boolean matchFilter(PostNews news, String match) {
-
-		String filter = match.toLowerCase();
-
-		return news.getSpInf2().toLowerCase().contains(filter) || news.getSpInf3().toLowerCase().contains(filter)
-				|| news.getSpInf4().toLowerCase().contains(filter) || news.getSpInf5().toLowerCase().contains(filter)
-				|| news.getSpInf6().toLowerCase().contains(filter);
 	}
 
 	private void selectPost(int intValue) {
@@ -321,28 +287,6 @@ public class InfoTable {
 		this.docNameTextField.setText("");
 		this.docTitleTextField.setText("");
 	}
-
-//	private void listenerUserDeleteButton() {
-//
-//		this.deleteButton.setOnAction(event -> {
-//
-//			if (this.placesTableView.getSelectionModel().getSelectedIndex() > -1) {
-//
-//				Place item = this.placesTableView.getSelectionModel().getSelectedItem();
-//
-//				if (this.application.getAlertBuilder2().confirm(this.stageSupportPlannerView,
-//						this.language.getString("places.delete.confirm"), item.getDescr().get())) {
-//
-//					String waitMessage = this.language.getString("places.wait.delete");
-//
-////					TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
-////							new PlaceDeleteTask(this.application.getAlertBuilder2(), this.settings,
-////									this.stageSupportPlannerView, item, this));
-//				}
-//			}
-//
-//		});
-//	}
 
 	public Settings getSettings() {
 		return settings;
@@ -385,11 +329,11 @@ public class InfoTable {
 	}
 
 	public Button getAddButton() {
-		return addButton;
+		return printButton;
 	}
 
 	public void setAddButton(Button addButton) {
-		this.addButton = addButton;
+		this.printButton = addButton;
 	}
 
 	public Language getLanguage() {
@@ -400,27 +344,35 @@ public class InfoTable {
 		this.language = language;
 	}
 
-	public ObservableList<PDFDest> getPdfDestList() {
-		return pdfDestList;
-	}
-
-	public void setPdfDestList(ObservableList<PDFDest> pdfDestList) {
-		this.pdfDestList = pdfDestList;
-	}
-
-	public ObservableList<PDFReplace> getPdfReplaceList() {
-		return pdfReplaceList;
-	}
-
-	public void setPdfReplaceList(ObservableList<PDFReplace> pdfReplaceList) {
-		this.pdfReplaceList = pdfReplaceList;
-	}
-
 	public ObservableList<PostNews> getPostNewsList() {
 		return postNewsList;
 	}
 
 	public void setPostNewsList(ObservableList<PostNews> postNewsList) {
 		this.postNewsList = postNewsList;
+	}
+
+	public ObservableList<WeekConvention> getConvention() {
+		return convention;
+	}
+
+	public void setConvention(ObservableList<WeekConvention> convention) {
+		this.convention = convention;
+	}
+
+	public ObservableList<WeekMemorial> getMemorial() {
+		return memorial;
+	}
+
+	public void setMemorial(ObservableList<WeekMemorial> memorial) {
+		this.memorial = memorial;
+	}
+
+	public HashMap<String, String> getGeneralInfo() {
+		return generalInfo;
+	}
+
+	public void setGeneralInfo(HashMap<String, String> generalInfo) {
+		this.generalInfo = generalInfo;
 	}
 }
