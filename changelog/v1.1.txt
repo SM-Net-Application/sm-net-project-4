@@ -1,4 +1,4 @@
-Data di pubblicazione : ..-..-....
+Data di pubblicazione : 12-02-2021
 
 	Nuova sezione: Comunicazioni e promemoria
 		- Questa sezione visualizza tutte le comunicazioni presenti nel database
@@ -14,6 +14,7 @@ Data di pubblicazione : ..-..-....
 			Stampa il documento con le comunicazioni e i prossimi eventi
 
 	Sezione Utenti:
+		- Rimossa colonna ID (era relativa al database, non serve nel software)
 		- Nuove autorizzazioni:
 			- Adunanze per il servizio
 			- Adunanze per il servizio (Gruppo)

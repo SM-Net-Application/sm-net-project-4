@@ -105,6 +105,7 @@ public class PostImport {
 	private File lastFile;
 	private File lastDirectory;
 
+	private Post post;
 	private ObservableList<PDFDest> pdfDestList;
 	private ObservableList<PDFReplace> pdfReplaceList;
 	private PostImportDoc postDoc;
@@ -212,6 +213,7 @@ public class PostImport {
 	}
 
 	public void closeTab() {
+		this.post.loadPosts();
 		this.parentTabPane.getTabs().remove(this.thisTab);
 	}
 
@@ -328,8 +330,8 @@ public class PostImport {
 		LocalDate date = this.dateFileDatePicker.getValue();
 		String text = this.textArea.getText();
 
-		this.postDoc = PostImportDoc.newIstance(this.application, this.pdfDestList, this.lastFile.getName(), date, title,
-				text);
+		this.postDoc = PostImportDoc.newIstance(this.application, this.pdfDestList, this.lastFile.getName(), date,
+				title, text);
 
 		if (this.postDoc != null) {
 			buildList();
@@ -599,5 +601,13 @@ public class PostImport {
 
 	public void setThisTab(Tab thisTab) {
 		this.thisTab = thisTab;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 }

@@ -1,14 +1,20 @@
 
 	IMPORTANTE: Il file ant deve essere aggiornato con tutte le librerie nuove
 	
+	Release
+
 	Sorvegliante:
 		- Il sorvegliante può venire con un altra coppia (probabile sostituto sorvegliante)
 		- I discorsi possono essere fatti anche dall'altro fratello
-	
-	Release
 
-	
-	
+	Congregazione:
+		- Stampare gli Elenchi:
+			- Chi ha privilegi
+			- Chi ha restrizioni
+				- Ad esempio:
+					- Non può fare la preghiera pubblica
+					- Non può commentare
+
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Congregazione)
 			- La key è la seguente anno mese giorno es. 20210131
@@ -56,9 +62,6 @@
 			- Congressi/Assemblee
 			- Visita del sorvegliante
 			- Commemorazione
-	
-	Sezione: Utenti
-		- Rimuovere la colonna ID
 	
 	- Sostituire la classe Authenticator
 	

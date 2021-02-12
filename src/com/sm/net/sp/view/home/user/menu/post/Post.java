@@ -251,12 +251,17 @@ public class Post {
 
 		this.tableView.setItems(this.postNewsList);
 
+		loadPosts();
+
+	}
+
+	public void loadPosts() {
+
 		String waitMessage = this.language.getString("post.wait.init");
 
 		TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
 				new PostInitDataLoadTask(this.application.getAlertBuilder2(), this.settings,
 						this.stageSupportPlannerView, this));
-
 	}
 
 	public void updatePostNewsList(ObservableList<PostNews> postNewsList) {
@@ -314,6 +319,8 @@ public class Post {
 			this.tableView.refresh();
 			this.tableView.getSelectionModel().clearSelection();
 		});
+
+		this.resetPost();
 	}
 
 	private void checkInfoTable() {
@@ -474,6 +481,7 @@ public class Post {
 				ctrl.setApplication(this.application);
 				ctrl.setPdfDestList(this.pdfDestList);
 				ctrl.setPdfReplaceList(this.pdfReplaceList);
+				ctrl.setPost(this);
 
 				Tab newTab = new Tab(newPost, layout);
 				newTab.setClosable(true);
