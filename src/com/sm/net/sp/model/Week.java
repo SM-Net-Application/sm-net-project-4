@@ -101,13 +101,16 @@ public class Week {
 	private StringProperty spInf64;
 	private IntegerProperty spInf65;
 	private IntegerProperty spInf66;
-	
+
 	private ObjectProperty<ObservableList<MinistryPart>> ministryPartList;
 	private ObjectProperty<ObservableList<ChristiansPart>> christiansPartList;
 
 	private ObjectProperty<WeekTypeTranslated> weekTypeTranslated;
 
 	private WeekOverseer weekOverseer;
+
+	public Week() {
+	}
 
 	public Week(LocalDate day, Language language) {
 		super();
@@ -195,7 +198,7 @@ public class Week {
 		this.spInf64 = new SimpleStringProperty(jsonObject.getString("spInf64"));
 		this.spInf65 = new SimpleIntegerProperty(jsonObject.getInt("spInf65"));
 		this.spInf66 = new SimpleIntegerProperty(jsonObject.getInt("spInf66"));
-		
+
 		this.ministryPartList = new SimpleObjectProperty<ObservableList<MinistryPart>>(
 				getMinistryPartsList(jsonObject, language, settings, membersList));
 
@@ -327,7 +330,7 @@ public class Week {
 				this.setSpInf56(week.getSpInf56());
 				this.setSpInf57(week.getSpInf57());
 				this.setSpInf58(week.getSpInf58());
-				
+
 				this.setSpInf59(Crypt.decrypt(week.getSpInf59(), settings.getDatabaseSecretKey()));
 				this.setSpInf60(Crypt.decrypt(week.getSpInf60(), settings.getDatabaseSecretKey()));
 				this.setSpInf61(Crypt.decrypt(week.getSpInf61(), settings.getDatabaseSecretKey()));
@@ -336,7 +339,7 @@ public class Week {
 				this.setSpInf64(Crypt.decrypt(week.getSpInf64(), settings.getDatabaseSecretKey()));
 				this.setSpInf65(week.getSpInf65());
 				this.setSpInf66(week.getSpInf66());
-				
+
 				this.weekTypeTranslated = new SimpleObjectProperty<WeekTypeTranslated>(
 						new WeekTypeTranslated(WeekType.getFromOrdinal(week.getSpInf2()), language));
 
@@ -1419,7 +1422,7 @@ public class Week {
 
 		this.spInf58Property().set(spInf58);
 	}
-	
+
 	public final StringProperty spInf59Property() {
 		return this.spInf59;
 	}
@@ -1434,7 +1437,7 @@ public class Week {
 
 		this.spInf59Property().set(spInf59);
 	}
-	
+
 	public final StringProperty spInf60Property() {
 		return this.spInf60;
 	}
@@ -1449,7 +1452,7 @@ public class Week {
 
 		this.spInf60Property().set(spInf60);
 	}
-	
+
 	public final StringProperty spInf61Property() {
 		return this.spInf61;
 	}
@@ -1464,7 +1467,7 @@ public class Week {
 
 		this.spInf61Property().set(spInf61);
 	}
-	
+
 	public final StringProperty spInf62Property() {
 		return this.spInf62;
 	}
@@ -1479,7 +1482,7 @@ public class Week {
 
 		this.spInf62Property().set(spInf62);
 	}
-	
+
 	public final StringProperty spInf63Property() {
 		return this.spInf63;
 	}
@@ -1494,7 +1497,7 @@ public class Week {
 
 		this.spInf63Property().set(spInf63);
 	}
-	
+
 	public final StringProperty spInf64Property() {
 		return this.spInf64;
 	}
@@ -1509,7 +1512,7 @@ public class Week {
 
 		this.spInf64Property().set(spInf64);
 	}
-	
+
 	public final IntegerProperty spInf65Property() {
 		return this.spInf65;
 	}
@@ -1524,7 +1527,7 @@ public class Week {
 
 		this.spInf65Property().set(spInf65);
 	}
-	
+
 	public final IntegerProperty spInf66Property() {
 		return this.spInf66;
 	}
@@ -1538,5 +1541,85 @@ public class Week {
 			this.spInf66 = new SimpleIntegerProperty();
 
 		this.spInf66Property().set(spInf66);
+	}
+
+	public static Week newInstance(JSONObject jsonObject) {
+
+		Week week = new Week();
+
+		week.spWeekID = new SimpleIntegerProperty(jsonObject.getInt("spWeekID"));
+		week.spInf1 = new SimpleIntegerProperty(jsonObject.getInt("spInf1"));
+		week.spInf2 = new SimpleIntegerProperty(jsonObject.getInt("spInf2"));
+
+		week.spInf3 = new SimpleIntegerProperty(jsonObject.getInt("spInf3"));
+		week.spInf4 = new SimpleIntegerProperty(jsonObject.getInt("spInf4"));
+		week.spInf5 = new SimpleStringProperty(jsonObject.getString("spInf5"));
+		week.spInf6 = new SimpleStringProperty(jsonObject.getString("spInf6"));
+		week.spInf7 = new SimpleStringProperty(jsonObject.getString("spInf7"));
+		week.spInf8 = new SimpleStringProperty(jsonObject.getString("spInf8"));
+		week.spInf9 = new SimpleStringProperty(jsonObject.getString("spInf9"));
+		week.spInf10 = new SimpleStringProperty(jsonObject.getString("spInf10"));
+		week.spInf11 = new SimpleIntegerProperty(jsonObject.getInt("spInf11"));
+		week.spInf12 = new SimpleStringProperty(jsonObject.getString("spInf12"));
+		week.spInf13 = new SimpleStringProperty(jsonObject.getString("spInf13"));
+		week.spInf14 = new SimpleIntegerProperty(jsonObject.getInt("spInf14"));
+		week.spInf15 = new SimpleStringProperty(jsonObject.getString("spInf15"));
+		week.spInf16 = new SimpleStringProperty(jsonObject.getString("spInf16"));
+		week.spInf17 = new SimpleStringProperty(jsonObject.getString("spInf17"));
+		week.spInf18 = new SimpleIntegerProperty(jsonObject.getInt("spInf18"));
+		week.spInf19 = new SimpleStringProperty(jsonObject.getString("spInf19"));
+		week.spInf20 = new SimpleStringProperty(jsonObject.getString("spInf20"));
+		week.spInf21 = new SimpleStringProperty(jsonObject.getString("spInf21"));
+		week.spInf22 = new SimpleStringProperty(jsonObject.getString("spInf22"));
+		week.spInf23 = new SimpleIntegerProperty(jsonObject.getInt("spInf23"));
+		week.spInf24 = new SimpleStringProperty(jsonObject.getString("spInf24"));
+		week.spInf25 = new SimpleStringProperty(jsonObject.getString("spInf25"));
+		week.spInf26 = new SimpleStringProperty(jsonObject.getString("spInf26"));
+		week.spInf27 = new SimpleIntegerProperty(jsonObject.getInt("spInf27"));
+		week.spInf28 = new SimpleIntegerProperty(jsonObject.getInt("spInf28"));
+
+		week.spInf29 = new SimpleIntegerProperty(jsonObject.getInt("spInf29"));
+		week.spInf30 = new SimpleIntegerProperty(jsonObject.getInt("spInf30"));
+		week.spInf31 = new SimpleStringProperty(jsonObject.getString("spInf31"));
+		week.spInf32 = new SimpleStringProperty(jsonObject.getString("spInf32"));
+		week.spInf33 = new SimpleStringProperty(jsonObject.getString("spInf33"));
+		week.spInf34 = new SimpleStringProperty(jsonObject.getString("spInf34"));
+		week.spInf35 = new SimpleStringProperty(jsonObject.getString("spInf35"));
+		week.spInf36 = new SimpleStringProperty(jsonObject.getString("spInf36"));
+		week.spInf37 = new SimpleIntegerProperty(jsonObject.getInt("spInf37"));
+		week.spInf38 = new SimpleIntegerProperty(jsonObject.getInt("spInf38"));
+		week.spInf39 = new SimpleStringProperty(jsonObject.getString("spInf39"));
+		week.spInf40 = new SimpleIntegerProperty(jsonObject.getInt("spInf40"));
+
+		week.spInf41 = new SimpleIntegerProperty(jsonObject.getInt("spInf41"));
+		week.spInf42 = new SimpleStringProperty(jsonObject.getString("spInf42"));
+		week.spInf43 = new SimpleStringProperty(jsonObject.getString("spInf43"));
+		week.spInf44 = new SimpleIntegerProperty(jsonObject.getInt("spInf44"));
+		week.spInf45 = new SimpleIntegerProperty(jsonObject.getInt("spInf45"));
+		week.spInf46 = new SimpleIntegerProperty(jsonObject.getInt("spInf46"));
+		week.spInf47 = new SimpleIntegerProperty(jsonObject.getInt("spInf47"));
+		week.spInf48 = new SimpleIntegerProperty(jsonObject.getInt("spInf48"));
+		week.spInf49 = new SimpleIntegerProperty(jsonObject.getInt("spInf49"));
+		week.spInf50 = new SimpleStringProperty(jsonObject.getString("spInf50"));
+		week.spInf51 = new SimpleIntegerProperty(jsonObject.getInt("spInf51"));
+		week.spInf52 = new SimpleStringProperty(jsonObject.getString("spInf52"));
+		week.spInf53 = new SimpleIntegerProperty(jsonObject.getInt("spInf53"));
+
+		week.spInf54 = new SimpleStringProperty(jsonObject.getString("spInf54"));
+		week.spInf55 = new SimpleStringProperty(jsonObject.getString("spInf55"));
+		week.spInf56 = new SimpleIntegerProperty(jsonObject.getInt("spInf56"));
+		week.spInf57 = new SimpleIntegerProperty(jsonObject.getInt("spInf57"));
+		week.spInf58 = new SimpleIntegerProperty(jsonObject.getInt("spInf58"));
+
+		week.spInf59 = new SimpleStringProperty(jsonObject.getString("spInf59"));
+		week.spInf60 = new SimpleStringProperty(jsonObject.getString("spInf60"));
+		week.spInf61 = new SimpleStringProperty(jsonObject.getString("spInf61"));
+		week.spInf62 = new SimpleStringProperty(jsonObject.getString("spInf62"));
+		week.spInf63 = new SimpleStringProperty(jsonObject.getString("spInf63"));
+		week.spInf64 = new SimpleStringProperty(jsonObject.getString("spInf64"));
+		week.spInf65 = new SimpleIntegerProperty(jsonObject.getInt("spInf65"));
+		week.spInf66 = new SimpleIntegerProperty(jsonObject.getInt("spInf66"));
+
+		return week;
 	}
 }

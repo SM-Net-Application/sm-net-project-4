@@ -9,8 +9,10 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.jasper.Jasper;
 import com.sm.net.sp.jasper.model.InfoTableEvent;
 import com.sm.net.sp.model.PostNews;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.utils.DateUtils;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
@@ -37,10 +39,13 @@ public class InfoTablePrintTask implements TaskInterface {
 	private ObservableList<PostNews> postNewsList;
 	private ObservableList<WeekMemorial> memorial;
 	private ObservableList<WeekConvention> convention;
+	private ObservableList<WeekOverseer> overseer;
+	private ObservableList<Week> meeting;
 
 	public InfoTablePrintTask(SupportPlannerView application, Stage stage, HashMap<String, String> infos,
 			boolean withEvents, ObservableList<PostNews> postNewsList, ObservableList<WeekMemorial> memorial,
-			ObservableList<WeekConvention> convention) {
+			ObservableList<WeekConvention> convention, ObservableList<WeekOverseer> overseer,
+			ObservableList<Week> meeting) {
 
 		this.application = application;
 		this.stage = stage;
@@ -50,6 +55,8 @@ public class InfoTablePrintTask implements TaskInterface {
 		this.postNewsList = postNewsList;
 		this.memorial = memorial;
 		this.convention = convention;
+		this.overseer = overseer;
+		this.meeting = meeting;
 	}
 
 	@Override
@@ -71,10 +78,44 @@ public class InfoTablePrintTask implements TaskInterface {
 			LocalDate now = LocalDate.now();
 			int nowWeekNr = Integer.valueOf(DateUtils.getWeekNr(now)).intValue();
 
-			for (WeekConvention weekConvention : convention) {
+			// ASSEMBLEE
+
+			for (WeekConvention weekConvention : this.convention) {
 
 				InfoTableEvent infoTableEvent = InfoTableEvent.newInstance(this.application, now, nowWeekNr,
 						weekConvention);
+
+				if (infoTableEvent != null)
+					events.add(infoTableEvent);
+			}
+
+			// COMMEMORAZIONI
+
+			for (WeekMemorial weekMemorial : this.memorial) {
+
+				InfoTableEvent infoTableEvent = InfoTableEvent.newInstance(this.application, now, nowWeekNr,
+						weekMemorial);
+
+				if (infoTableEvent != null)
+					events.add(infoTableEvent);
+			}
+
+			// SORVEGLIANTE
+
+			for (WeekOverseer weekOverseer : this.overseer) {
+
+				InfoTableEvent infoTableEvent = InfoTableEvent.newInstance(this.application, now, nowWeekNr,
+						weekOverseer);
+
+				if (infoTableEvent != null)
+					events.add(infoTableEvent);
+			}
+
+			// ADUNANZE
+
+			for (Week week : this.meeting) {
+
+				InfoTableEvent infoTableEvent = InfoTableEvent.newInstance(this.application, now, nowWeekNr, week);
 
 				if (infoTableEvent != null)
 					events.add(infoTableEvent);

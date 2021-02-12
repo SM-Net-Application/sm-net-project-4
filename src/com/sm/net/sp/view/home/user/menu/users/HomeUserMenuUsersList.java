@@ -41,8 +41,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private Label userLabel;
 	@FXML
 	private TableView<User> userTableView;
-	@FXML
-	private TableColumn<User, Integer> userTableColumnID;
+//	@FXML
+//	private TableColumn<User, Integer> userTableColumnID;
 	@FXML
 	private TableColumn<User, String> userTableColumnName;
 
@@ -126,7 +126,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	}
 
 	private void tableColumnsCellValueFactory() {
-		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
+//		userTableColumnID.setCellValueFactory(cellData -> cellData.getValue().getUserID().asObject());
 		userTableColumnName.setCellValueFactory(cellData -> cellData.getValue().getUsernameProperty());
 	}
 
@@ -140,7 +140,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		userTableView.getStyleClass().add("table_view_001");
 
-		userTableColumnID.getStyleClass().add("table_column_002");
+//		userTableColumnID.getStyleClass().add("table_column_002");
 
 		userAddButton.getStyleClass().add("button_image_001");
 		userDeleteButton.getStyleClass().add("button_image_001");
@@ -198,13 +198,13 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		userLabel.setText(language.getString("TEXT0001"));
 
-		userTableColumnID.setText(language.getString("TEXT0005"));
+//		userTableColumnID.setText(language.getString("TEXT0005"));
 		userTableColumnName.setText(language.getString("VIEW007LAB002"));
 
 		userTableView.setEditable(true);
-		userTableColumnID.setMinWidth(50);
-		userTableColumnID.setMaxWidth(50);
-		userTableColumnID.setResizable(false);
+//		userTableColumnID.setMinWidth(50);
+//		userTableColumnID.setMaxWidth(50);
+//		userTableColumnID.setResizable(false);
 
 		Tooltip userAddTooltip = new Tooltip(this.language.getString("users.tooltip.add"));
 		userAddTooltip.getStyleClass().add("tooltip_001");
@@ -293,7 +293,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authPostCheckBox.setText(language.getString("users.auth.post"));
 		this.authPostCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.POST));
-		
+
 		this.authPDFImportCheckBox.setText(language.getString("users.auth.pdfimport"));
 		this.authPDFImportCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PDF_ADD));
 
@@ -492,7 +492,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authCleanCheckBox.setSelected(false);
 		this.authServiceMeetingGroupComboBox.getSelectionModel().selectFirst();
 		this.authConfigCheckBox.setSelected(false);
-		
+
 		this.authPostCheckBox.setSelected(false);
 		this.authInfoTableCheckBox.setSelected(false);
 		this.authPDFImportCheckBox.setSelected(false);

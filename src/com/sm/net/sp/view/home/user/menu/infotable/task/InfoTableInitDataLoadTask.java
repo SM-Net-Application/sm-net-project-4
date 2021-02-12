@@ -10,8 +10,10 @@ import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
 import com.sm.net.sp.model.PostNews;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.infotable.InfoTable;
 import com.sm.net.util.Crypt;
@@ -47,26 +49,15 @@ public class InfoTableInitDataLoadTask implements TaskInterface {
 		JSONObject jsonConvention = JSONRequest.CONVENTION_LOAD();
 		JSONObject jsonMemorial = JSONRequest.MEMORIAL_LOAD();
 		JSONObject jsonGeneralInfo = JSONRequest.GENERAL_INFO_LOAD();
+		JSONObject jsonOverseer = JSONRequest.OVERSEER_LOAD();
+		JSONObject jsonMeeting = JSONRequest.MEETING_LOAD();
 
 		post(hashMap, url, jsonInfoTable, "responseInfoTable");
 		post(hashMap, url, jsonConvention, "responseConvention");
 		post(hashMap, url, jsonMemorial, "responseMemorial");
 		post(hashMap, url, jsonGeneralInfo, "responseGeneralInfo");
-
-//		JSONObject jsonDateAndTime = JSONRequest.DATE_AND_TIME_LOAD();
-//		JSONObject jsonPlaces = JSONRequest.PLACES_LOAD();
-//		JSONObject jsonConfig = JSONRequest.CONFIG_LOAD();
-//		JSONObject jsonAudio = JSONRequest.AUDIO_LOAD();
-//		JSONObject jsonUsciere = JSONRequest.USCIERE_LOAD();
-//		JSONObject jsonSongs = JSONRequest.SONGS_LOAD();
-//
-//		post(hashMap, url, jsonDateAndTime, "responseDateAndTime");
-//		post(hashMap, url, jsonPlaces, "responsePlaces");
-//		post(hashMap, url, jsonConfig, "responseConfig");
-//		post(hashMap, url, jsonAudio, "responseAudio");
-//		post(hashMap, url, jsonUsciere, "responseUsciere");
-//		post(hashMap, url, jsonSongs, "responseSongs");
-
+		post(hashMap, url, jsonOverseer, "responseOverseer");
+		post(hashMap, url, jsonMeeting, "responseMeeting");
 	}
 
 	private void post(HashMap<String, Object> hashMap, String url, JSONObject json, String keyResponse) {
@@ -90,26 +81,47 @@ public class InfoTableInitDataLoadTask implements TaskInterface {
 		ObservableList<WeekConvention> convention = conventionFeedback(hashMap);
 		ObservableList<WeekMemorial> memorial = memorialFeedback(hashMap);
 		HashMap<String, String> generalInfo = generalInfoFeedback(hashMap);
+		ObservableList<WeekOverseer> overseer = overseerFeedback(hashMap);
+		ObservableList<Week> meeting = meetingFeedback(hashMap);
 
 		this.view.updatePostNewsList(postNewsList);
 		this.view.setConvention(convention);
 		this.view.setMemorial(memorial);
 		this.view.setGeneralInfo(generalInfo);
+		this.view.setOverseer(overseer);
+		this.view.setMeeting(meeting);
+	}
 
-//		ObservableList<DateAndTime> dateAndTimeList = dateAndTimeFeedback(hashMap);
-//		ObservableList<Place> placesList = placesFeedback(hashMap);
-//		HashMap<String, String> configs = configFeedback(hashMap);
-//		ObservableList<WeekAudio> audio = audioFeedback(hashMap);
-//		ObservableList<WeekUsciere> usciere = usciereFeedback(hashMap);
-//		ObservableList<Song> songs = songsFeedback(hashMap);
-//
-//		this.view.setDateAndTimeList(dateAndTimeList);
-//		this.view.setPlacesList(placesList);
-//		this.view.setConfigs(configs);
-//		this.view.setAudio(audio);
-//		this.view.setUsciere(usciere);
-//		this.view.setSongList(songs);
-//		this.view.checkConfigs();
+	private ObservableList<Week> meetingFeedback(HashMap<String, Object> hashMap) {
+
+		ObservableList<Week> list = FXCollections.observableArrayList();
+		JSONObject response = (JSONObject) hashMap.get("responseMeeting");
+		int status = response.getInt("status");
+		if (status == 0) {
+			JSONArray result = (JSONArray) response.get("result");
+			for (Object object : result) {
+				JSONObject json = (JSONObject) object;
+				list.add(Week.newInstance(json));
+			}
+		}
+
+		return list;
+	}
+
+	private ObservableList<WeekOverseer> overseerFeedback(HashMap<String, Object> hashMap) {
+
+		ObservableList<WeekOverseer> list = FXCollections.observableArrayList();
+
+		JSONObject response = (JSONObject) hashMap.get("responseOverseer");
+		int status = response.getInt("status");
+		if (status == 0) {
+			JSONArray result = (JSONArray) response.get("result");
+			for (Object object : result) {
+				JSONObject json = (JSONObject) object;
+				list.add(new WeekOverseer(json, settings.getLanguage(), settings, false));
+			}
+		}
+		return list;
 	}
 
 	private HashMap<String, String> generalInfoFeedback(HashMap<String, Object> hashMap) {

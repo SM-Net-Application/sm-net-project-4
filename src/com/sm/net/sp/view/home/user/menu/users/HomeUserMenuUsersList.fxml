@@ -106,7 +106,6 @@
                      <children>
                         <TableView fx:id="userTableView" maxHeight="1.7976931348623157E308">
                           <columns>
-                              <TableColumn fx:id="userTableColumnID" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="userTableColumnName" prefWidth="75.0" text="name" />
                           </columns>
                            <columnResizePolicy>

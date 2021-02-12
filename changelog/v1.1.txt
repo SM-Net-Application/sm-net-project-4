@@ -7,6 +7,12 @@ Data di pubblicazione : ..-..-....
 				- Il riconoscimento del testo viene elaborato in base alle configurazioni del software (vedi sezione Configurazione)
 			- E' possibile aggiungere una comunicazione alla Tabella informazioni (vedi nuova sezione Tabella informazioni)
 
+	Nuova sezione:
+		- Tabella informazioni
+			Visualizza tutte le comunicazioni che hanno la spunta tabella informazioni
+			Stampa il documento con le comunicazioni
+			Stampa il documento con le comunicazioni e i prossimi eventi
+
 	Sezione Utenti:
 		- Nuove autorizzazioni:
 			- Adunanze per il servizio

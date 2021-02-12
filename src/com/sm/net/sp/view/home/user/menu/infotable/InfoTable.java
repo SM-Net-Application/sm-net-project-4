@@ -6,11 +6,12 @@ import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.PostNews;
+import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekConvention;
 import com.sm.net.sp.model.WeekMemorial;
+import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.infotable.task.InfoTableInitDataLoadTask;
@@ -81,6 +82,8 @@ public class InfoTable {
 	private ObservableList<PostNews> postNewsList;
 	private ObservableList<WeekConvention> convention;
 	private ObservableList<WeekMemorial> memorial;
+	private ObservableList<WeekOverseer> overseer;
+	private ObservableList<Week> meeting;
 	private HashMap<String, String> generalInfo;
 
 	@FXML
@@ -192,6 +195,8 @@ public class InfoTable {
 		this.postNewsList = FXCollections.observableArrayList();
 		this.convention = FXCollections.observableArrayList();
 		this.memorial = FXCollections.observableArrayList();
+		this.overseer = FXCollections.observableArrayList();
+		this.meeting = FXCollections.observableArrayList();
 		this.generalInfo = new HashMap<String, String>();
 
 		this.tableView.setItems(this.postNewsList);
@@ -222,13 +227,9 @@ public class InfoTable {
 	private void print() {
 
 		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.stageSupportPlannerView, language, null,
-				EnumPrintLayouts.INFOTABLE_POST, EnumPrintLayouts.INFOTABLE_POST_EVENTS);
+				EnumPrintLayouts.INFOTABLE_POST_EVENTS, EnumPrintLayouts.INFOTABLE_POST);
 
 		if (selectedLayout != null) {
-
-//			String overseerName = this.overseerTextField.getText();
-//			String overseerPhone = this.overseerPhoneTextField.getText();
-//			String overseerMail = this.overseerMailTextField.getText();
 
 			String waitMessage = this.language.getString("infotable.wait.print");
 
@@ -238,7 +239,7 @@ public class InfoTable {
 
 				TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
 						new InfoTablePrintTask(this.application, this.stageSupportPlannerView, this.generalInfo, false,
-								this.postNewsList, this.memorial, this.convention));
+								this.postNewsList, this.memorial, this.convention, this.overseer, this.meeting));
 
 				break;
 
@@ -246,7 +247,7 @@ public class InfoTable {
 
 				TaskManager.run(this.application.getAlertBuilder2(), this.stageSupportPlannerView, waitMessage,
 						new InfoTablePrintTask(this.application, this.stageSupportPlannerView, this.generalInfo, true,
-								this.postNewsList, this.memorial, this.convention));
+								this.postNewsList, this.memorial, this.convention, this.overseer, this.meeting));
 
 				break;
 
@@ -374,5 +375,21 @@ public class InfoTable {
 
 	public void setGeneralInfo(HashMap<String, String> generalInfo) {
 		this.generalInfo = generalInfo;
+	}
+
+	public ObservableList<WeekOverseer> getOverseer() {
+		return overseer;
+	}
+
+	public void setOverseer(ObservableList<WeekOverseer> overseer) {
+		this.overseer = overseer;
+	}
+
+	public ObservableList<Week> getMeeting() {
+		return meeting;
+	}
+
+	public void setMeeting(ObservableList<Week> meeting) {
+		this.meeting = meeting;
 	}
 }
