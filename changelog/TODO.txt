@@ -2,10 +2,12 @@
 	Bug-Fix: Perché non riconosce l'ultima comunicazione del S-147 di febbraio? Il testo è presente.
 	Bug-Fix: Capire perché la parola Comunicazioni viene eliminata dal S-147 di gennaio.
 	
-	Bug-Fix: Commemorazione: non compare il lettore studio biblico
-	Bug-Fix: Commemorazione: tema 
-	Bug-Fix: Discorsi pubblici, se oratore interno non compare il nome nella tabella
-	Bug-Fix: Tabella Informazioni Tema Discorso Speciale
+	Risolto:
+		Bug-Fix: Commemorazione: non compare il lettore studio biblico
+		Bug-Fix: Commemorazione: tema 
+		Bug-Fix: Discorsi pubblici, se oratore interno non compare il nome nella tabella
+		Bug-Fix: Tabella Informazioni Tema Discorso Speciale
+		Bug-Fix: Lo storico audio video non carica bene la data ultima assegnazione
 	
 	Comunicazioni: Stampa comunicazioni selezionate
 	Comunicazioni: Elimina comunicazioni come privilegio
@@ -17,9 +19,13 @@
 		- Il sorvegliante può venire con un altra coppia (probabile sostituto sorvegliante)
 		- I discorsi possono essere fatti anche dall'altro fratello
 
+	Nuova sezione:
+		- Annunci
+
 	Congregazione:
 		- Stampare gli Elenchi:
 			- Chi ha privilegi
+			- Settaggi: Es. escludi dall'elenco disastri naturali
 			- Chi ha restrizioni
 				- Ad esempio:
 					- Non può fare la preghiera pubblica

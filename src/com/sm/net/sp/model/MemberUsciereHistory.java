@@ -128,8 +128,11 @@ public class MemberUsciereHistory {
 		LocalDate firstDayOfWeekOfYear = getFirstDayOfWeekOfYear(Integer.valueOf(yearText),
 				Integer.valueOf(weekNumberText));
 
-		if (from != null)
-			return (firstDayOfWeekOfYear.compareTo(from) > 0) ? firstDayOfWeekOfYear : from;
+//		if (from != null)
+//			return (firstDayOfWeekOfYear.compareTo(from) > 0) ? firstDayOfWeekOfYear : from;
+		
+		if (this.lastDate != null)
+			return (firstDayOfWeekOfYear.compareTo(this.lastDate) > 0) ? firstDayOfWeekOfYear : this.lastDate;
 
 		return firstDayOfWeekOfYear;
 	}
