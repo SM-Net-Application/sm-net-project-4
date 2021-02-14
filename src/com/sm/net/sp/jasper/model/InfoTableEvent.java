@@ -12,6 +12,7 @@ import com.sm.net.sp.model.WeekMemorial;
 import com.sm.net.sp.model.WeekOverseer;
 import com.sm.net.sp.utils.DateUtils;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.util.Crypt;
 
 public class InfoTableEvent {
 
@@ -41,7 +42,9 @@ public class InfoTableEvent {
 						.getString("infotable.print.specialtalk.typeformat");
 				String typeText = application.getSettings().getLanguage().getString("infotable.print.specialtalk.type");
 
-				String eventType = String.format(typeFormat, typeText);
+				String theme = Crypt.decrypt(week.getSpInf32(), application.getSettings().getDatabaseSecretKey());
+
+				String eventType = String.format(typeFormat, typeText, theme);
 				infoTableEvent.setEventType(eventType);
 
 				return infoTableEvent;

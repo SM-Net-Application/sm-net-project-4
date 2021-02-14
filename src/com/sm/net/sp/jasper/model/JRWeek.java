@@ -1252,7 +1252,7 @@ public class JRWeek {
 				jrWeek.setChristiansBibleStudyReaderName(member.getNameStyle4());
 
 		// Add reader to Congregation Study Bible
-		if (weekType == WeekType.STANDARD) {
+		if (weekType == WeekType.STANDARD || weekType == WeekType.MEMORIAL) {
 
 			if (!jrWeek.getChristiansBibleStudyReaderName().isEmpty()) {
 

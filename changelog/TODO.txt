@@ -1,7 +1,17 @@
 
-	IMPORTANTE: Il file ant deve essere aggiornato con tutte le librerie nuove
+	Bug-Fix: Perché non riconosce l'ultima comunicazione del S-147 di febbraio? Il testo è presente.
+	Bug-Fix: Capire perché la parola Comunicazioni viene eliminata dal S-147 di gennaio.
 	
-	Release
+	Bug-Fix: Commemorazione: non compare il lettore studio biblico
+	Bug-Fix: Commemorazione: tema 
+	Bug-Fix: Discorsi pubblici, se oratore interno non compare il nome nella tabella
+	Bug-Fix: Tabella Informazioni Tema Discorso Speciale
+	
+	Comunicazioni: Stampa comunicazioni selezionate
+	Comunicazioni: Elimina comunicazioni come privilegio
+	Importazione PDF: Aggiungi comunicazione manualmente
+	Configurazione:
+		- Comunicazioni: Riduci la dimensione della colonna Tipo (RegEx/Testo)
 
 	Sorvegliante:
 		- Il sorvegliante può venire con un altra coppia (probabile sostituto sorvegliante)

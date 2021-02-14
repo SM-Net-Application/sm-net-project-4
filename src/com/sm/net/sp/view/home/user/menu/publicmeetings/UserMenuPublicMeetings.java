@@ -79,7 +79,7 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 
 	private ObservableList<Song> songList;
 	private boolean configSongTitleLoad;
-	
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -126,7 +126,29 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 			}
 			return null;
 		});
-		speakerColumn.setCellValueFactory(cellData -> cellData.getValue().spInf33Property());
+
+		speakerColumn.setCellValueFactory(cellData -> {
+
+			if (cellData.getValue().spInf66Property() != null) {
+
+				int internSpeaker = cellData.getValue().getSpInf66();
+				if (internSpeaker > 0) {
+
+					Optional<Member> find = StreamSupport.stream(this.membersList.spliterator(), false)
+							.filter(member -> (internSpeaker == member.getSpMemberID())).findFirst();
+					if (find.isPresent()) {
+
+						Member member = find.get();
+						return new SimpleStringProperty(member.getNameStyle1());
+
+					}
+
+				}
+			}
+
+			return cellData.getValue().spInf33Property();
+		});
+
 		speakerCongregationColumn.setCellValueFactory(cellData -> cellData.getValue().spInf34Property());
 		talkColumn.setCellValueFactory(cellData -> cellData.getValue().spInf32Property());
 	}
@@ -143,7 +165,7 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		this.weekTableColumn.getStyleClass().add("table_column_002");
 		this.fromTableColumn.getStyleClass().add("table_column_002");
 		this.toTableColumn.getStyleClass().add("table_column_002");
-		
+
 		this.filterTextField.getStyleClass().add("text_field_001");
 
 //		printButton.getStyleClass().add("button_image_001");
@@ -197,7 +219,7 @@ public class UserMenuPublicMeetings extends UpdateDataAdapter {
 		String inf19 = Crypt.decrypt(this.configs.get("inf19"), this.application.getSettings().getDatabaseSecretKey());
 		this.configSongTitleLoad = inf19.equals("1");
 	}
-	
+
 	private void initData() {
 		this.weekTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 //		loadGeneralInfo();
