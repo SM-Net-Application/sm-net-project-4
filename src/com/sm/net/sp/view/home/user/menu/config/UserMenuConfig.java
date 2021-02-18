@@ -651,6 +651,9 @@ public class UserMenuConfig {
 		this.pdfDestRemoveButton.setTooltip(pdfDestRemoveTooltip);
 		this.pdfDestRemoveButton.setText(null);
 		this.pdfDestRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REMOVE));
+
+		this.pdfReplaceTypeTableColumn.setMinWidth(100);
+		this.pdfReplaceTypeTableColumn.setMaxWidth(100);
 	}
 
 	private void initData() {

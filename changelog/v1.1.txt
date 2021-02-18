@@ -7,11 +7,10 @@ Data di pubblicazione : 12-02-2021
 				- Il riconoscimento del testo viene elaborato in base alle configurazioni del software (vedi sezione Configurazione)
 			- E' possibile aggiungere una comunicazione alla Tabella informazioni (vedi nuova sezione Tabella informazioni)
 
-	Nuova sezione:
-		- Tabella informazioni
-			Visualizza tutte le comunicazioni che hanno la spunta tabella informazioni
-			Stampa il documento con le comunicazioni
-			Stampa il documento con le comunicazioni e i prossimi eventi
+	Nuova sezione: Tabella informazioni
+		- Visualizza tutte le comunicazioni che hanno la spunta tabella informazioni
+		- Stampa il documento con le comunicazioni
+		- Stampa il documento con le comunicazioni e i prossimi eventi
 
 	Sezione Utenti:
 		- Rimossa colonna ID (era relativa al database, non serve nel software)
@@ -117,6 +116,12 @@ Data di pubblicazione : 12-02-2021
 		- Il lettore dell'adunanza del fine settimana non veniva stampato se in settimana si teneva la commemorazione
 		- Se si scaricavano le informazioni da WOL, venivano inserite piu volte le parti per gli studenti e vita cristiana.
 			Ora ad ogni caricamento, la tabella viene azzerata.
+		- Commemorazione: Il lettore dello Studio biblico non veniva stampato
+		- Commemorazione: Il tema del discorso era incompleto 
+		- Discorsi pubblici: Se era oratore interno, non compariva il nome nella tabella
+		- Tabella Informazioni: Prossimi eventi, aggiungo il tema del Discorso Speciale
+		- Lo Storico non caricava bene la data ultima assegnazione
+		- Importazione PDF: l'ultima comunicazione non veniva mai considerata
 		
 	Database-SQL:
 	ALTER TABLE sp_members ADD spInf60 INT NOT NULL AFTER spInf59, ADD spInf61 INT NOT NULL AFTER spInf60, ADD spInf62 INT NOT NULL AFTER spInf61;

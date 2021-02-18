@@ -69,7 +69,7 @@ public class PostImportDoc {
 					if (currText.matches(regExTitolo)) {
 
 						titolo = true;
-						currTitolo = currText;
+						currTitolo = checkTitle(currText);
 						i--;
 						titoloComeTesto = true;
 					}
@@ -116,9 +116,33 @@ public class PostImportDoc {
 				}
 			}
 		}
+
+		if (currNews.length() > 0)
+			addNews(postDoc, currFoundDest, currTitolo, currNews);
 	}
 
-	private static void addNews(PostImportDoc postDoc, String currFoundDest, String currTitolo, StringBuilder currNews) {
+	private static String checkTitle(String currText) {
+
+		String title = currText;
+
+		int firstPoint = title.indexOf(".");
+		if (firstPoint > -1)
+			title = title.substring(firstPoint + 1).trim();
+
+		int secondPoint = title.lastIndexOf(".");
+		if (secondPoint > -1)
+			title = title.substring(0, secondPoint).trim();
+		else {
+			int doublePoint = title.indexOf(":");
+			if (doublePoint > -1)
+				title = title.substring(0, doublePoint).trim();
+		}
+
+		return title;
+	}
+
+	private static void addNews(PostImportDoc postDoc, String currFoundDest, String currTitolo,
+			StringBuilder currNews) {
 
 		String currNewsText = currNews.toString();
 		if (!currFoundDest.isEmpty() && !currTitolo.isEmpty() && !currNewsText.isEmpty()) {

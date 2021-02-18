@@ -476,12 +476,14 @@ public class PostImport {
 
 				for (PDFReplace pdfReplace : pdfReplaceList) {
 
+					String spInf2 = pdfReplace.getSpInf2();
+					String spInf3 = pdfReplace.getSpInf3();
 					switch (EnumPDFReplaceType.valueByID(pdfReplace.getSpInf1())) {
 					case REGEX:
-						text = text.replaceAll(pdfReplace.getSpInf2(), pdfReplace.getSpInf3());
+						text = text.replaceAll(spInf2, spInf3);
 						break;
 					case TEXT:
-						text = text.replace(pdfReplace.getSpInf2(), pdfReplace.getSpInf3());
+						text = text.replace(spInf2, spInf3);
 						break;
 					}
 				}
