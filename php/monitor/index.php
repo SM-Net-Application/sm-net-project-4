@@ -455,6 +455,10 @@ if (file_exists("languages/" . $langIni)) {
 
                 foreach ($ministry as $min) {
 
+                    // PRESIDENTE E CONDUTTORE CLASSE SUPPLEMENTARE
+                    $min_president = 0;
+                    $min_president2 = 0;
+
                     // WEEKCODE DELLA RIGA DEL DATABASE
                     $row_weekcode = $min['spInf1'];
                     $year = substr($row_weekcode, 0, 4);
@@ -471,6 +475,9 @@ if (file_exists("languages/" . $langIni)) {
 
                     foreach ($weeks as $week) {
                         if ($week['spInf1'] == $row_weekcode) {
+
+                            $min_president = $week['spInf3'];
+                            $min_president2 = $week['spInf58'];
 
                             // GIORNO ADUNANZA INFRASETTIMANALE
                             $midweek_day = $week["spInf44"] - 1;
@@ -516,6 +523,10 @@ if (file_exists("languages/" . $langIni)) {
                                 array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_ic'], $language['midweek_ministrystudent1_ic_icon'], 0, ""));
                             }
 
+                        } else {
+                            if ($memberID != $min_president) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_discussion1'], $language['midweek_discussion1_icon'], 0, ""));
+                            }
                         }
 
                         // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1'], $language['midweek_ministrystudent1_icon'], 0, ""));
@@ -567,6 +578,10 @@ if (file_exists("languages/" . $langIni)) {
                             
                             // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
 
+                        } else {
+                            if ($memberID != $min_president2) {
+                                array_push($activities, newTask($midweek, $midweek_text, $language['midweek_discussion2'], $language['midweek_discussion2_icon'], 0, ""));
+                            }
                         }
                     }
                     if ($memberID == $min["spInf10"]) {
