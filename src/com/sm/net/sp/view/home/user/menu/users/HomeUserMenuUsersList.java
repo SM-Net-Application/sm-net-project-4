@@ -105,6 +105,11 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private CheckBox authInfoTableCheckBox;
 
 	@FXML
+	private CheckBox authTerritoryCheckBox;
+	@FXML
+	private CheckBox authTerritoryEditorCheckBox;
+	
+	@FXML
 	private Button userAddButton;
 	@FXML
 	private Button userDeleteButton;
@@ -180,6 +185,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authPostCheckBox.getStyleClass().add("check_box_001");
 		this.authPDFImportCheckBox.getStyleClass().add("check_box_001");
 		this.authInfoTableCheckBox.getStyleClass().add("check_box_001");
+		
+		this.authTerritoryCheckBox.getStyleClass().add("check_box_001");
+		this.authTerritoryEditorCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void objectInitialize() {
@@ -299,6 +307,12 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 
 		this.authInfoTableCheckBox.setText(language.getString("users.auth.infotable"));
 		this.authInfoTableCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.INFOTABLE));
+		
+		this.authTerritoryCheckBox.setText(language.getString("users.auth.territory"));
+		this.authTerritoryCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY));
+		
+		this.authTerritoryEditorCheckBox.setText(language.getString("users.auth.territoryeditor"));
+		this.authTerritoryEditorCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYEDITOR));
 	}
 
 	@Override
@@ -383,6 +397,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				this.authPostCheckBox.setSelected(user.isSpInf21());
 				this.authInfoTableCheckBox.setSelected(user.isSpInf22());
 				this.authPDFImportCheckBox.setSelected(user.isSpInf23());
+				
+				this.authTerritoryCheckBox.setSelected(user.isSpInf24());
+				this.authTerritoryEditorCheckBox.setSelected(user.isSpInf25());
 			}
 		});
 
@@ -445,8 +462,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 			int spInf21 = this.authPostCheckBox.isSelected() ? 1 : 0;
 			int spInf22 = this.authInfoTableCheckBox.isSelected() ? 1 : 0;
 			int spInf23 = this.authPDFImportCheckBox.isSelected() ? 1 : 0;
-			int spInf24 = 0;
-			int spInf25 = 0;
+			int spInf24 = this.authTerritoryCheckBox.isSelected() ? 1 : 0;
+			int spInf25 = this.authTerritoryEditorCheckBox.isSelected() ? 1 : 0;
 			int spInf26 = 0;
 			int spInf27 = 0;
 			int spInf28 = 0;
@@ -496,6 +513,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		this.authPostCheckBox.setSelected(false);
 		this.authInfoTableCheckBox.setSelected(false);
 		this.authPDFImportCheckBox.setSelected(false);
+		
+		this.authTerritoryCheckBox.setSelected(false);
+		this.authTerritoryEditorCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {

@@ -64,7 +64,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.1";
+		public static final String VERSION = "1.2";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -267,6 +267,8 @@ public class Meta {
 		public static final String POST = "post.png";
 		public static final String INFOTABLE = "infotable.png";
 		public static final String INFO = "info.png";
+		public static final String TERRITORY = "territory.png";
+		public static final String TERRITORYEDITOR = "territoryeditor.png";
 		public static final String WOL = "wol.png";
 		public static final String PUBLIC_TALK = "public_talk.png";
 		public static final String DOOR_CONGR = "door_congr.png";
