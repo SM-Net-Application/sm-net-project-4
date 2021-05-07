@@ -1,0 +1,1362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane alignment="CENTER_LEFT">
+               <children>
+                  <Button fx:id="saveButton" mnemonicParsing="false" text="salva">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <Separator>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Separator>
+               </children>
+            </StackPane>
+            <StackPane VBox.vgrow="ALWAYS">
+               <children>
+                  <TabPane fx:id="memberTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="memberPersonalTab" text="Untitled Tab 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="surnameLabel" text="Label">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="nameLabel" text="Label">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="nameShortLabel" text="Label">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="singlenessLabel" text="Label">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="dateOfBirthLabel" text="datadinasc">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="genderLabel" text="Label">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="surnameTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="nameTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="nameShortTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <HBox>
+                                                         <children>
+                                                            <StackPane HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <TextField fx:id="singlenessTextField" maxWidth="1.7976931348623157E308">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <CheckBox fx:id="maidenNamePrintCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </CheckBox>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </HBox>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <DatePicker fx:id="dateOfBirthDatePicker">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </DatePicker>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <HBox>
+                                                               <children>
+                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                     <children>
+                                                                        <CheckBox fx:id="genderMaleCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </CheckBox>
+                                                                     </children>
+                                                                  </StackPane>
+                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                     <children>
+                                                                        <CheckBox fx:id="genderFemaleCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </CheckBox>
+                                                                     </children>
+                                                                  </StackPane>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab fx:id="memberAppointmentAndPrivilegeTab" text="Untitled Tab">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <CheckBox fx:id="studentCheckBox" mnemonicParsing="false" text="student">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <CheckBox fx:id="unbaptizedPublisherCheckBox" mnemonicParsing="false" text="proclamatore non batt">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <CheckBox fx:id="baptizedPublisherCheckBox" mnemonicParsing="false" text="proclamatore batt">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <CheckBox fx:id="otherSheepCheckBox" mnemonicParsing="false" text="altrepec">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <CheckBox fx:id="anointedCheckBox" mnemonicParsing="false" text="unto">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </CheckBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <HBox>
+                                                         <children>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Label fx:id="dateOfBaptismLabel" text="databatt">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <DatePicker fx:id="dateOfBaptismDatePicker">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </DatePicker>
+                                                               </children>
+                                                            </StackPane>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets left="25.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <StackPane>
+                                             <children>
+                                                <Separator>
+                                                   <StackPane.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </StackPane.margin>
+                                                </Separator>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="TOP_LEFT" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TabPane fx:id="memberInfoTabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                                                  <tabs>
+                                                    <Tab fx:id="assignmentsTab" text="Untitled Tab 1">
+                                                      <content>
+                                                            <ScrollPane fx:id="assignmentsScrollPane" fitToHeight="true" fitToWidth="true">
+                                                               <content>
+                                                              <AnchorPane>
+                                                                     <children>
+                                                                        <HBox prefHeight="180.0" prefWidth="373.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                           <children>
+                                                                              <VBox HBox.hgrow="ALWAYS">
+                                                                                 <children>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <Label fx:id="treasuresLabel" text="tesori">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Label>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <Separator prefWidth="200.0">
+                                                                                       <VBox.margin>
+                                                                                          <Insets left="5.0" right="5.0" />
+                                                                                       </VBox.margin>
+                                                                                    </Separator>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="treasuresTalkCheckBox" mnemonicParsing="false" text="discorso">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="diggingCheckBox" mnemonicParsing="false" text="scaviamo">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="bibleReadingCheckBox" mnemonicParsing="false" text="lettura">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                              <VBox HBox.hgrow="ALWAYS">
+                                                                                 <children>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <Label fx:id="ministryLabel" text="esercitiamoci">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Label>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <Separator prefWidth="200.0">
+                                                                                       <VBox.margin>
+                                                                                          <Insets left="5.0" right="5.0" />
+                                                                                       </VBox.margin>
+                                                                                    </Separator>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="initialCallCheckBox" mnemonicParsing="false" text="primo contatto">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="returnVisitCheckBox" mnemonicParsing="false" text="visita ulteriore">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="bibleStudyCheckBox" mnemonicParsing="false" text="studio biblico">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="talkCheckBox" mnemonicParsing="false" text="discorso">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                              <VBox HBox.hgrow="ALWAYS">
+                                                                                 <children>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <Label fx:id="christiansLabel" text="vita cristiana">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Label>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <Separator prefWidth="200.0">
+                                                                                       <VBox.margin>
+                                                                                          <Insets left="5.0" right="5.0" />
+                                                                                       </VBox.margin>
+                                                                                    </Separator>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <CheckBox fx:id="christiansCheckBox" mnemonicParsing="false" text="parti">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </CheckBox>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </ScrollPane>
+                                                      </content>
+                                                    </Tab>
+                                                    <Tab fx:id="privilegeTab" text="Untitled Tab 2">
+                                                      <content>
+                                                            <ScrollPane fx:id="privilegeScrollPane" fitToHeight="true" fitToWidth="true">
+                                                               <content>
+                                                              <AnchorPane>
+                                                                     <children>
+                                                                        <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                           <children>
+                                                                              <VBox HBox.hgrow="ALWAYS">
+                                                                                 <children>
+                                                                                    <VBox>
+                                                                                       <children>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <Label fx:id="conductorLabel" text="conduttore">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </Label>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane>
+                                                                                             <VBox.margin>
+                                                                                                <Insets />
+                                                                                             </VBox.margin>
+                                                                                             <children>
+                                                                                                <Separator prefWidth="200.0">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </Separator>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="presidentMidweekCheckBox" mnemonicParsing="false" text="presidente">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="presidentWeekendCheckBox" mnemonicParsing="false" text="pri2">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="bibleStudyCongregationCheckBox" mnemonicParsing="false" text="studio biblico">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="watchtowerStudyCheckBox" mnemonicParsing="false" text="studio torre">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="watchtowerSubstituteStudyCheckBox" mnemonicParsing="false" text="studio torre (sostituto)">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="presidentSecondHallCheckBox" mnemonicParsing="false" text="consigliere 2">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="serviceMeetingCongrCheckBox" mnemonicParsing="false" text="comitive congr">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                          <StackPane alignment="CENTER_LEFT">
+                                                                                             <children>
+                                                                                                <CheckBox fx:id="serviceMeetingGroupCheckBox" mnemonicParsing="false" text="comitive group">
+                                                                                                   <StackPane.margin>
+                                                                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                   </StackPane.margin>
+                                                                                                </CheckBox>
+                                                                                             </children>
+                                                                                          </StackPane>
+                                                                                       </children>
+                                                                                    </VBox>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                              <Separator orientation="VERTICAL" prefHeight="200.0">
+                                                                                 <HBox.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </HBox.margin>
+                                                                              </Separator>
+                                                                              <VBox HBox.hgrow="ALWAYS">
+                                                                                 <children>
+                                                                                    <StackPane alignment="CENTER_LEFT">
+                                                                                       <children>
+                                                                                          <Label fx:id="privilegeLabel" text="privilegio">
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Label>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <StackPane>
+                                                                                       <VBox.margin>
+                                                                                          <Insets />
+                                                                                       </VBox.margin>
+                                                                                       <children>
+                                                                                          <Separator>
+                                                                                             <StackPane.margin>
+                                                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                             </StackPane.margin>
+                                                                                          </Separator>
+                                                                                       </children>
+                                                                                    </StackPane>
+                                                                                    <TabPane fx:id="memberAssignmentTabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                                                                       <tabs>
+                                                                                          <Tab fx:id="prayTab">
+                                                                                             <content>
+                                                                                                <VBox>
+                                                                                                   <children>
+                                                                                                      <StackPane alignment="CENTER_LEFT">
+                                                                                                         <children>
+                                                                                                            <Label fx:id="prayLabel" text="preghiere">
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Label>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <StackPane>
+                                                                                                         <children>
+                                                                                                            <Separator prefWidth="200.0">
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Separator>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <HBox>
+                                                                                                         <children>
+                                                                                                            <VBox>
+                                                                                                               <children>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="prayStartLabel" text="preghiera iniziale">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                     <VBox.margin>
+                                                                                                                        <Insets top="31.0" />
+                                                                                                                     </VBox.margin>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="prayEndLabel" text="preghiera finale">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                            <VBox HBox.hgrow="ALWAYS">
+                                                                                                               <children>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="prayMidweekLabel" text="infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="prayStartMidweekCheckBox" mnemonicParsing="false" text="pri1">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="prayEndMidweekCheckBox" mnemonicParsing="false" text="prf1">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                            <VBox HBox.hgrow="ALWAYS">
+                                                                                                               <children>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="prayWeekendLabel" text="weekend">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="prayEndWeekendCheckBox" mnemonicParsing="false" text="prf1">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                     <VBox.margin>
+                                                                                                                        <Insets top="31.0" />
+                                                                                                                     </VBox.margin>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                         </children>
+                                                                                                      </HBox>
+                                                                                                   </children>
+                                                                                                </VBox>
+                                                                                             </content>
+                                                                                          </Tab>
+                                                                                          <Tab fx:id="audioTab">
+                                                                                             <content>
+                                                                                                <VBox>
+                                                                                                   <children>
+                                                                                                      <StackPane alignment="CENTER_LEFT">
+                                                                                                         <children>
+                                                                                                            <Label fx:id="audioLabel" text="acustica">
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Label>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <StackPane>
+                                                                                                         <children>
+                                                                                                            <Separator>
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Separator>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <HBox>
+                                                                                                         <children>
+                                                                                                            <VBox>
+                                                                                                               <children>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="audioPos1Label" text="audio pos 1">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                     <VBox.margin>
+                                                                                                                        <Insets top="31.0" />
+                                                                                                                     </VBox.margin>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="audioPos2Label" text="audio pos 2">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="audioPos3Label" text="audio pos 3">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="audioMicLabel" text="microf">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                            <VBox HBox.hgrow="ALWAYS">
+                                                                                                               <children>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="audioMidweekLabel" text="infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioPos1MidweekCheckBox" mnemonicParsing="false" text="pos1infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioPos2MidweekCheckBox" mnemonicParsing="false" text="pos2infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioPos3MidweekCheckBox" mnemonicParsing="false" text="pos3infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioMicMidweekCheckBox" mnemonicParsing="false" text="micInfr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                            <VBox HBox.hgrow="ALWAYS">
+                                                                                                               <children>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="audioWeekendLabel" text="finese">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioPos1WeekendCheckBox" mnemonicParsing="false" text="pos1week">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioPos2WeekendCheckBox" mnemonicParsing="false" text="pos2week">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioPos3WeekendCheckBox" mnemonicParsing="false" text="pos3week">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="audioMicWeekendCheckBox" mnemonicParsing="false" text="micWeek">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                         </children>
+                                                                                                      </HBox>
+                                                                                                   </children>
+                                                                                                </VBox>
+                                                                                             </content>
+                                                                                          </Tab>
+                                                                                          <Tab fx:id="usciereTab">
+                                                                                             <content>
+                                                                                                <VBox>
+                                                                                                   <children>
+                                                                                                      <StackPane alignment="CENTER_LEFT">
+                                                                                                         <children>
+                                                                                                            <Label fx:id="usciereLabel" text="usciere">
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Label>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <StackPane>
+                                                                                                         <children>
+                                                                                                            <Separator>
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Separator>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <HBox>
+                                                                                                         <children>
+                                                                                                            <VBox>
+                                                                                                               <children>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="usciereZone1Label" text="zone 1">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                     <VBox.margin>
+                                                                                                                        <Insets top="31.0" />
+                                                                                                                     </VBox.margin>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="usciereZone2Label" text="zone 2">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane alignment="CENTER_LEFT">
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="usciereZone3Label" text="zone 3">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                            <VBox HBox.hgrow="ALWAYS">
+                                                                                                               <children>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="usciereMidweekLabel" text="infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="usciereZone1MidweekCheckBox" mnemonicParsing="false" text="pos1infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="usciereZone2MidweekCheckBox" mnemonicParsing="false" text="pos2infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="usciereZone3MidweekCheckBox" mnemonicParsing="false" text="pos3infr">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                            <VBox HBox.hgrow="ALWAYS">
+                                                                                                               <children>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <Label fx:id="usciereWeekendLabel" text="fines">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </Label>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="usciereZone1WeekendCheckBox" mnemonicParsing="false" text="pos1week">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="usciereZone2WeekendCheckBox" mnemonicParsing="false" text="pos2week">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                                  <StackPane>
+                                                                                                                     <children>
+                                                                                                                        <CheckBox fx:id="usciereZone3WeekendCheckBox" mnemonicParsing="false" text="pos3week">
+                                                                                                                           <StackPane.margin>
+                                                                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                           </StackPane.margin>
+                                                                                                                        </CheckBox>
+                                                                                                                     </children>
+                                                                                                                  </StackPane>
+                                                                                                               </children>
+                                                                                                            </VBox>
+                                                                                                         </children>
+                                                                                                      </HBox>
+                                                                                                   </children>
+                                                                                                </VBox>
+                                                                                             </content>
+                                                                                          </Tab>
+                                                                                          <Tab fx:id="readerTab">
+                                                                                             <content>
+                                                                                                <VBox>
+                                                                                                   <children>
+                                                                                                      <StackPane alignment="CENTER_LEFT">
+                                                                                                         <children>
+                                                                                                            <Label fx:id="readerLabel" text="lettore">
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Label>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <StackPane>
+                                                                                                         <children>
+                                                                                                            <Separator>
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Separator>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <VBox>
+                                                                                                         <children>
+                                                                                                            <StackPane alignment="CENTER_LEFT">
+                                                                                                               <children>
+                                                                                                                  <CheckBox fx:id="readerCongregationBibleStudyCheckBox" mnemonicParsing="false" text="studiobiblico">
+                                                                                                                     <StackPane.margin>
+                                                                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                     </StackPane.margin>
+                                                                                                                  </CheckBox>
+                                                                                                               </children>
+                                                                                                            </StackPane>
+                                                                                                            <StackPane alignment="CENTER_LEFT">
+                                                                                                               <children>
+                                                                                                                  <CheckBox fx:id="readerWatchtowerCheckBox" mnemonicParsing="false" text="torre">
+                                                                                                                     <StackPane.margin>
+                                                                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                     </StackPane.margin>
+                                                                                                                  </CheckBox>
+                                                                                                               </children>
+                                                                                                            </StackPane>
+                                                                                                         </children>
+                                                                                                      </VBox>
+                                                                                                   </children>
+                                                                                                </VBox>
+                                                                                             </content>
+                                                                                          </Tab>
+                                                                                          <Tab fx:id="speakerTab">
+                                                                                             <content>
+                                                                                                <VBox>
+                                                                                                   <children>
+                                                                                                      <StackPane alignment="CENTER_LEFT">
+                                                                                                         <children>
+                                                                                                            <Label fx:id="publicSpeakerLabel" text="oratore pubblico">
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Label>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <StackPane>
+                                                                                                         <children>
+                                                                                                            <Separator>
+                                                                                                               <StackPane.margin>
+                                                                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                               </StackPane.margin>
+                                                                                                            </Separator>
+                                                                                                         </children>
+                                                                                                      </StackPane>
+                                                                                                      <VBox>
+                                                                                                         <children>
+                                                                                                            <StackPane alignment="CENTER_LEFT">
+                                                                                                               <children>
+                                                                                                                  <CheckBox fx:id="publicSpeakerInternCheckBox" mnemonicParsing="false" text="interno">
+                                                                                                                     <StackPane.margin>
+                                                                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                     </StackPane.margin>
+                                                                                                                  </CheckBox>
+                                                                                                               </children>
+                                                                                                            </StackPane>
+                                                                                                            <StackPane alignment="CENTER_LEFT">
+                                                                                                               <children>
+                                                                                                                  <CheckBox fx:id="publicSpeakerExternCheckBox" mnemonicParsing="false" text="esterno">
+                                                                                                                     <StackPane.margin>
+                                                                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                                                     </StackPane.margin>
+                                                                                                                  </CheckBox>
+                                                                                                               </children>
+                                                                                                            </StackPane>
+                                                                                                         </children>
+                                                                                                      </VBox>
+                                                                                                   </children>
+                                                                                                </VBox>
+                                                                                             </content>
+                                                                                          </Tab>
+                                                                                       </tabs>
+                                                                                    </TabPane>
+                                                                                 </children>
+                                                                              </VBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets left="10.0" />
+                                                                     </padding>
+                                                                  </AnchorPane>
+                                                               </content>
+                                                            </ScrollPane>
+                                                      </content>
+                                                    </Tab>
+                                                      <Tab fx:id="appointmentTab" text="Untitled Tab 2">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                               <children>
+                                                                  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="ministerialServantCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="elderCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="regularPioneerCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="specialPioneerCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                      <Tab fx:id="onthersTab" text="altro">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                               <children>
+                                                                  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="inactiveCheckBox" mnemonicParsing="false" text="inattivo">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="markedCheckBox" mnemonicParsing="false" text="segnato">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="disfellowshippedCheckBox" mnemonicParsing="false" text="disassociato">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <CheckBox fx:id="excludeFromNaturalDisastersListCheckBox" mnemonicParsing="false" text="escludidadisastrinat">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </CheckBox>
+                                                                           </children>
+                                                                           <VBox.margin>
+                                                                              <Insets top="10.0" />
+                                                                           </VBox.margin>
+                                                                        </StackPane>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="10.0" />
+                                                               </padding>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                  </tabs>
+                                                   <StackPane.margin>
+                                                      <Insets top="10.0" />
+                                                   </StackPane.margin>
+                                                </TabPane>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab fx:id="memberContactsTab" text="Untitled Tab">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="smartphoneLabel" text="Label">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="emailLabel" text="Label">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </VBox>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <StackPane>
+                                                   <children>
+                                                      <TextField fx:id="smartphoneTextField" maxWidth="1.7976931348623157E308">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane>
+                                                   <children>
+                                                      <TextField fx:id="emailTextField" maxWidth="1.7976931348623157E308">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab fx:id="memberMonitorTab" text="monitor">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <StackPane alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label fx:id="monitorLabel" text="Label">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </Label>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </VBox>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <StackPane>
+                                                   <children>
+                                                      <TextField fx:id="monitorTextField" maxWidth="1.7976931348623157E308">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </StackPane.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </TabPane>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

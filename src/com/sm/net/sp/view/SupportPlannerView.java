@@ -41,6 +41,7 @@ import com.sm.net.sp.view.home.user.menu.places.HomeUserMenuPlaces;
 import com.sm.net.sp.view.home.user.menu.post.Post;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
+import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
@@ -972,6 +973,33 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 	}
 
+	public void viewHomeUserMenuTerritory() {
+
+		if (this.center != 25) {
+
+			this.center = 25;
+			this.viewSupportPlannerBorderPane.setCenter(null);
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				Territory ctrl = (Territory) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setApplication(this);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());

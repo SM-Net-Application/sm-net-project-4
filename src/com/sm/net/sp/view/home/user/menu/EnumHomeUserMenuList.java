@@ -37,6 +37,8 @@ public enum EnumHomeUserMenuList {
 	MEMORIAL("sp.menu.memorial", Meta.Resources.MEMORIAL),
 
 	NATURAL_DISASTER("sp.menu.naturaldisaster", Meta.Resources.USER_MENU_NATURALDISASTER),
+	
+	TERRITORY("sp.menu.territory", Meta.Resources.TERRITORY),
 
 	POST("sp.menu.post", Meta.Resources.POST),
 

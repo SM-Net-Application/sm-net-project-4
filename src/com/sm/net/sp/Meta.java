@@ -38,6 +38,8 @@ import com.sm.net.sp.view.home.user.menu.post.Post;
 import com.sm.net.sp.view.home.user.menu.post.PostImport;
 import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
+import com.sm.net.sp.view.home.user.menu.territory.Territory;
+import com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.sm.net.sp.view.home.user.menu.usciere.UsciereEditor;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
@@ -205,6 +207,11 @@ public class Meta {
 				.getResource("PostImport.fxml");
 		
 		public static final URL INFOTABLE_FXML_URL = InfoTable.class.getResource("InfoTable.fxml");
+		
+		public static final URL TERRITORY_FXML_URL = Territory.class
+				.getResource("Territory.fxml");
+		public static final URL TERRITORY_EDITOR_FXML_URL = TerritoryEditor.class
+				.getResource("TerritoryEditor.fxml");
 	}
 
 	public static class Themes {

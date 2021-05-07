@@ -190,6 +190,8 @@ public class HomeUserMenuList {
 				menuListView.getItems().add(EnumHomeUserMenuList.MEMORIAL);
 			if (this.user.isSpInf6())
 				menuListView.getItems().add(EnumHomeUserMenuList.NATURAL_DISASTER);
+			if (this.user.isSpInf24())
+				menuListView.getItems().add(EnumHomeUserMenuList.TERRITORY);
 			if (this.user.isSpInf21())
 				menuListView.getItems().add(EnumHomeUserMenuList.POST);
 			if (this.user.isSpInf22())
@@ -261,6 +263,10 @@ public class HomeUserMenuList {
 			ctrlSupportPlannerView.viewHomeUserMenuNaturalDisaster();
 			break;
 
+		case TERRITORY:
+			ctrlSupportPlannerView.viewHomeUserMenuTerritory();
+			break;
+			
 		case POST:
 			ctrlSupportPlannerView.viewPost();
 			break;
