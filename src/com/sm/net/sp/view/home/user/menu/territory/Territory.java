@@ -65,7 +65,7 @@ public class Territory extends UpdateDataAdapter {
 	private Tab memberListTab;
 
 	@FXML
-	private TabPane familyTabPane;
+	private TabPane territoryTabPane;
 	@FXML
 	private Tab familyListTab;
 
@@ -138,11 +138,11 @@ public class Territory extends UpdateDataAdapter {
 	private TableColumn<Family, String> familyCityTableColumn;
 
 	@FXML
-	private Button familyAddButton;
+	private Button territoryAddButton;
 	@FXML
-	private Button familyDeleteButton;
+	private Button territoryRemoveButton;
 	@FXML
-	private Button familiesUpdateButton;
+	private Button territoryEditButton;
 	@FXML
 	private Button familiesMapsButton;
 
@@ -248,7 +248,7 @@ public class Territory extends UpdateDataAdapter {
 		this.memberTabPane.getStyleClass().add("tab_pane_001");
 		this.memberListTab.getStyleClass().add("tab_001");
 
-		this.familyTabPane.getStyleClass().add("tab_pane_001");
+		this.territoryTabPane.getStyleClass().add("tab_pane_001");
 		this.familyListTab.getStyleClass().add("tab_001");
 
 		this.memberIDTableColumn.getStyleClass().add("table_column_002");
@@ -264,9 +264,10 @@ public class Territory extends UpdateDataAdapter {
 
 		this.familyMapsTableColumn.getStyleClass().add("table_column_002");
 
-		familyAddButton.getStyleClass().add("button_image_001");
-		familyDeleteButton.getStyleClass().add("button_image_001");
-		familiesUpdateButton.getStyleClass().add("button_image_001");
+		this.territoryAddButton.getStyleClass().add("button_image_001");
+		this.territoryRemoveButton.getStyleClass().add("button_image_001");
+		this.territoryEditButton.getStyleClass().add("button_image_001");
+
 		this.familiesMapsButton.getStyleClass().add("button_image_001");
 
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
@@ -406,23 +407,23 @@ public class Territory extends UpdateDataAdapter {
 		familyPostCodeTableColumn.setText(language.getString("TEXT0029"));
 		familyCityTableColumn.setText(language.getString("TEXT0030"));
 
-		Tooltip familyAddTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.add"));
-		familyAddTooltip.getStyleClass().add("tooltip_001");
-		this.familyAddButton.setTooltip(familyAddTooltip);
-		this.familyAddButton.setText("");
-		this.familyAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FAMILY_ADD));
+		Tooltip territoryAddTooltip = new Tooltip(this.language.getString("territory.tooltip.add"));
+		territoryAddTooltip.getStyleClass().add("tooltip_001");
+		this.territoryAddButton.setTooltip(territoryAddTooltip);
+		this.territoryAddButton.setText("");
+		this.territoryAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_ADD));
 
-		Tooltip familyDeleteTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.delete"));
-		familyDeleteTooltip.getStyleClass().add("tooltip_001");
-		this.familyDeleteButton.setTooltip(familyDeleteTooltip);
-		this.familyDeleteButton.setText("");
-		this.familyDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FAMILY_DEL));
+		Tooltip territoryRemoveTooltip = new Tooltip(this.language.getString("territory.tooltip.remove"));
+		territoryRemoveTooltip.getStyleClass().add("tooltip_001");
+		this.territoryRemoveButton.setTooltip(territoryRemoveTooltip);
+		this.territoryRemoveButton.setText("");
+		this.territoryRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_REMOVE));
 
-		Tooltip familiesUpdateTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.update"));
-		familiesUpdateTooltip.getStyleClass().add("tooltip_001");
-		this.familiesUpdateButton.setTooltip(familiesUpdateTooltip);
-		this.familiesUpdateButton.setText("");
-		this.familiesUpdateButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
+		Tooltip territoryEditTooltip = new Tooltip(this.language.getString("territory.tooltip.edit"));
+		territoryEditTooltip.getStyleClass().add("tooltip_001");
+		this.territoryEditButton.setTooltip(territoryEditTooltip);
+		this.territoryEditButton.setText("");
+		this.territoryEditButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_EDIT));
 
 		Tooltip familyMapsTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.maps"));
 		familyMapsTooltip.getStyleClass().add("tooltip_001");
@@ -595,7 +596,7 @@ public class Territory extends UpdateDataAdapter {
 	}
 
 	private void listenerFamilyAddButton() {
-		familyAddButton.setOnAction(event -> newFamily());
+		territoryAddButton.setOnAction(event -> newTerritory());
 	}
 
 	private void listenerMemberDeleteButton() {
@@ -603,7 +604,7 @@ public class Territory extends UpdateDataAdapter {
 	}
 
 	private void listenerFamilyDeleteButton() {
-		familyDeleteButton.setOnAction(event -> deleteFamily());
+		territoryRemoveButton.setOnAction(event -> deleteFamily());
 	}
 
 	private void listenerMembersUpdateButton() {
@@ -611,7 +612,7 @@ public class Territory extends UpdateDataAdapter {
 	}
 
 	private void listenerFamilyUpdateButton() {
-		familiesUpdateButton.setOnAction(event -> updateFamilies());
+		territoryEditButton.setOnAction(event -> updateFamilies());
 	}
 
 	private void deleteMember() {
@@ -696,39 +697,39 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
-	private void newFamily() {
+	private void newTerritory() {
 
-		if (!isAlreadyOpen(this.familyTabPane, "")) {
+		if (!isAlreadyOpen(this.territoryTabPane, "")) {
 
-//			try {
-//
-//				FXMLLoader fxmlLoader = new FXMLLoader();
-//				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
-//				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-//
-//				UserMenuCongrFamilyEditor ctrl = (UserMenuCongrFamilyEditor) fxmlLoader.getController();
-//				ctrl.setSettings(this.settings);
-//				ctrl.setOwnerStage(ownerStage);
-//				ctrl.setOwnerCtrl(this);
-//
-//				Tab newFamilyTab = new Tab("", layout);
-//				newFamilyTab.setClosable(true);
-//				newFamilyTab.getStyleClass().add("tab_001");
-//				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
-//
-//				ctrl.setParentTabPane(this.familyTabPane);
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_EDITOR_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryEditor ctrl = (TerritoryEditor) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(ownerStage);
+				ctrl.setOwnerCtrl(this);
+
+				Tab newTab = new Tab("", layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
+
+				ctrl.setParentTabPane(this.territoryTabPane);
 //				ctrl.setMembersTab(membersTab);
-//				ctrl.setNewMemberTab(newFamilyTab);
+				ctrl.setNewMemberTab(newTab);
 //				ctrl.setMembersList(this.membersList);
-//
-//				this.familyTabPane.getTabs().add(newFamilyTab);
-//				this.familyTabPane.getSelectionModel().select(newFamilyTab);
-//
-//				ctrl.objectInitialize();
-//
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+
+				this.territoryTabPane.getTabs().add(newTab);
+				this.territoryTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -780,7 +781,7 @@ public class Territory extends UpdateDataAdapter {
 
 	private void editFamily(Family family) {
 
-		if (!isAlreadyOpen(this.familyTabPane, family.getSpInf1Decrypted())) {
+		if (!isAlreadyOpen(this.territoryTabPane, family.getSpInf1Decrypted())) {
 
 //			try {
 //

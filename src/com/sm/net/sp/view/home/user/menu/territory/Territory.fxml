@@ -58,7 +58,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TabPane fx:id="familyTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TabPane fx:id="territoryTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <tabs>
                                           <Tab fx:id="familyListTab" closable="false" text="elenc">
                                              <content>
@@ -77,7 +77,7 @@
                                                          <children>
                                                             <StackPane>
                                                                <children>
-                                                                  <Button fx:id="familyAddButton" mnemonicParsing="false" text="aggiungi">
+                                                                  <Button fx:id="territoryAddButton" mnemonicParsing="false" text="aggiungi">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
@@ -86,7 +86,7 @@
                                                             </StackPane>
                                                             <StackPane>
                                                                <children>
-                                                                  <Button fx:id="familyDeleteButton" mnemonicParsing="false" text="elimina">
+                                                                  <Button fx:id="territoryRemoveButton" mnemonicParsing="false" text="elimina">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
@@ -95,7 +95,7 @@
                                                             </StackPane>
                                                             <StackPane alignment="CENTER_LEFT">
                                                                <children>
-                                                                  <Button fx:id="familiesUpdateButton" mnemonicParsing="false" text="aggiorna">
+                                                                  <Button fx:id="territoryEditButton" mnemonicParsing="false" text="aggiorna">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>

@@ -28,36 +28,58 @@ import javafx.stage.Stage;
 public class TerritoryEditor {
 
 	@FXML
-	private TabPane memberTabPane;
+	private TabPane territoryTabPane;
 	@FXML
 	private TabPane memberInfoTabPane;
 
 	@FXML
-	private Tab memberPersonalTab;
+	private Tab territoryInfoTab;
 
 	@FXML
-	private Label surnameLabel;
+	private Label territoryNumberLabel;
 	@FXML
-	private TextField surnameTextField;
+	private TextField territoryNumberTextField;
+	
 	@FXML
-	private Label nameLabel;
+	private Label territoryNameLabel;
 	@FXML
-	private TextField nameTextField;
+	private TextField territoryNameTextField;
+	
 	@FXML
-	private Label nameShortLabel;
+	private Label territoryCoordinatesLabel;
 	@FXML
-	private TextField nameShortTextField;
+	private TextField territoryCoordinatesTextField;
+	
 	@FXML
-	private Label genderLabel;
+	private Label territoryLandLabel;
 	@FXML
-	private CheckBox genderMaleCheckBox;
+	private TextField territoryLandTextField;
+	
 	@FXML
-	private CheckBox genderFemaleCheckBox;
+	private Label territoryLandkreisLabel;
 	@FXML
-	private Label singlenessLabel;
+	private TextField territoryLandkreisTextField;
+	
 	@FXML
-	private TextField singlenessTextField;
+	private Label territoryKreisstadtLabel;
+	@FXML
+	private TextField territoryKreisstadtTextField;
 
+	@FXML
+	private Label territoryOrtLabel;
+	@FXML
+	private TextField territoryOrtTextField;
+
+	@FXML
+	private Label territoryZipCodeLabel;
+	@FXML
+	private TextField territoryZipCodeTextField;
+	
+	@FXML
+	private Label territoryOrtsteilLabel;
+	@FXML
+	private TextField territoryOrtsteilTextField;
+	
 	@FXML
 	private Tab memberAppointmentAndPrivilegeTab;
 
@@ -190,17 +212,9 @@ public class TerritoryEditor {
 	private Button saveButton;
 
 	@FXML
-	private Label dateOfBirthLabel;
-	@FXML
-	private DatePicker dateOfBirthDatePicker;
-
-	@FXML
 	private CheckBox anointedCheckBox;
 	@FXML
 	private CheckBox otherSheepCheckBox;
-
-	@FXML
-	private CheckBox maidenNamePrintCheckBox;
 
 	@FXML
 	private CheckBox excludeFromNaturalDisastersListCheckBox;
@@ -316,13 +330,24 @@ public class TerritoryEditor {
 
 	private void styleClasses() {
 
+		this.territoryInfoTab.getStyleClass().add("tab_001");
+		
+		this.territoryTabPane.getStyleClass().add("tab_pane_003");
+		this.memberInfoTabPane.getStyleClass().add("tab_pane_003");
+
+		this.territoryNumberLabel.getStyleClass().add("label_set_001");
+		this.territoryNameLabel.getStyleClass().add("label_set_001");
+		this.territoryCoordinatesLabel.getStyleClass().add("label_set_001");
+		this.territoryLandLabel.getStyleClass().add("label_set_001");
+		this.territoryLandkreisLabel.getStyleClass().add("label_set_001");
+		this.territoryKreisstadtLabel.getStyleClass().add("label_set_001");
+		this.territoryOrtLabel.getStyleClass().add("label_set_001");
+		this.territoryZipCodeLabel.getStyleClass().add("label_set_001");
+		this.territoryOrtsteilLabel.getStyleClass().add("label_set_001");
+
 		assignmentsScrollPane.getStyleClass().add("scroll_pane_001");
 		privilegeScrollPane.getStyleClass().add("scroll_pane_001");
 
-		this.memberTabPane.getStyleClass().add("tab_pane_003");
-		this.memberInfoTabPane.getStyleClass().add("tab_pane_003");
-
-		memberPersonalTab.getStyleClass().add("tab_001");
 		memberAppointmentAndPrivilegeTab.getStyleClass().add("tab_001");
 		assignmentsTab.getStyleClass().add("tab_001");
 		privilegeTab.getStyleClass().add("tab_001");
@@ -331,11 +356,6 @@ public class TerritoryEditor {
 		memberContactsTab.getStyleClass().add("tab_001");
 		memberMonitorTab.getStyleClass().add("tab_001");
 
-		surnameLabel.getStyleClass().add("label_set_001");
-		nameLabel.getStyleClass().add("label_set_001");
-		nameShortLabel.getStyleClass().add("label_set_001");
-		singlenessLabel.getStyleClass().add("label_set_001");
-		genderLabel.getStyleClass().add("label_set_001");
 
 		treasuresLabel.getStyleClass().add("label_002");
 		ministryLabel.getStyleClass().add("label_002");
@@ -351,16 +371,19 @@ public class TerritoryEditor {
 		emailLabel.getStyleClass().add("label_set_001");
 		monitorLabel.getStyleClass().add("label_set_001");
 
-		surnameTextField.getStyleClass().add("text_field_001");
-		nameTextField.getStyleClass().add("text_field_001");
-		nameShortTextField.getStyleClass().add("text_field_001");
-		singlenessTextField.getStyleClass().add("text_field_001");
+		this.territoryNumberTextField.getStyleClass().add("text_field_002");
+		this.territoryNameTextField.getStyleClass().add("text_field_001");
+		this.territoryCoordinatesTextField.getStyleClass().add("text_field_001");
+		this.territoryLandTextField.getStyleClass().add("text_field_001");
+		this.territoryLandkreisTextField.getStyleClass().add("text_field_001");
+		this.territoryKreisstadtTextField.getStyleClass().add("text_field_001");
+		this.territoryOrtTextField.getStyleClass().add("text_field_001");
+		this.territoryZipCodeTextField.getStyleClass().add("text_field_001");
+		this.territoryOrtsteilTextField.getStyleClass().add("text_field_001");
+		
 		smartphoneTextField.getStyleClass().add("text_field_001");
 		emailTextField.getStyleClass().add("text_field_001");
 		monitorTextField.getStyleClass().add("text_field_001");
-
-		genderMaleCheckBox.getStyleClass().add("check_box_set_001");
-		genderFemaleCheckBox.getStyleClass().add("check_box_set_001");
 
 		this.studentCheckBox.getStyleClass().add("check_box_set_001");
 		this.unbaptizedPublisherCheckBox.getStyleClass().add("check_box_set_001");
@@ -395,9 +418,6 @@ public class TerritoryEditor {
 
 		saveButton.getStyleClass().add("button_image_001");
 
-		this.maidenNamePrintCheckBox.getStyleClass().add("check_box_001");
-		this.dateOfBirthLabel.getStyleClass().add("label_set_001");
-		this.dateOfBirthDatePicker.getStyleClass().add("combo_box_001");
 		this.anointedCheckBox.getStyleClass().add("check_box_set_001");
 		this.otherSheepCheckBox.getStyleClass().add("check_box_set_001");
 		this.dateOfBaptismLabel.getStyleClass().add("label_set_001");
@@ -469,24 +489,14 @@ public class TerritoryEditor {
 
 		if (selectedMember != null) {
 
-			surnameTextField.setText(selectedMember.getSpInf2Decrypted());
-			nameTextField.setText(selectedMember.getSpInf1Decrypted());
-			nameShortTextField.setText(selectedMember.getSpInf3Decrypted());
-			singlenessTextField.setText(selectedMember.getSpInf39Decrypted());
+			territoryNumberTextField.setText(selectedMember.getSpInf2Decrypted());
+			territoryNameTextField.setText(selectedMember.getSpInf1Decrypted());
+			territoryCoordinatesTextField.setText(selectedMember.getSpInf3Decrypted());
 			smartphoneTextField.setText(selectedMember.getSpInf40Decrypted());
 			emailTextField.setText(selectedMember.getSpInf41Decrypted());
 			monitorTextField.setText(selectedMember.getSpInf47());
 
-			if (selectedMember.getSpInf4() == 0)
-				genderMaleCheckBox.setSelected(true);
-			else
-				genderFemaleCheckBox.setSelected(true);
-
 			// DATA DI NASCITA
-
-			String spInf52 = this.selectedMember.getSpInf52Decrypted();
-			if (!spInf52.isEmpty())
-				this.dateOfBirthDatePicker.setValue(LocalDate.parse(spInf52));
 
 			// DATA DI BATTESIMO
 
@@ -497,7 +507,6 @@ public class TerritoryEditor {
 			setCheckBoxes();
 
 		} else {
-			this.genderMaleCheckBox.setSelected(true);
 			this.otherSheepCheckBox.setSelected(true);
 		}
 	}
@@ -554,7 +563,6 @@ public class TerritoryEditor {
 
 		this.otherSheepCheckBox.setSelected((this.selectedMember.getSpInf48() == 1));
 		this.anointedCheckBox.setSelected((this.selectedMember.getSpInf49() == 1));
-		this.maidenNamePrintCheckBox.setSelected((this.selectedMember.getSpInf50() == 1));
 		this.excludeFromNaturalDisastersListCheckBox.setSelected((this.selectedMember.getSpInf51() == 1));
 
 		this.audioPos3MidweekCheckBox.setSelected((this.selectedMember.getSpInf54() == 1));
@@ -572,11 +580,6 @@ public class TerritoryEditor {
 	private void listeners() {
 
 		listenerNameTextField();
-
-		this.genderMaleCheckBox.selectedProperty().addListener(
-				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.genderMaleCheckBox, this.genderFemaleCheckBox));
-		this.genderFemaleCheckBox.selectedProperty().addListener(
-				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.genderFemaleCheckBox, this.genderMaleCheckBox));
 
 		this.studentCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
 				this.studentCheckBox, this.unbaptizedPublisherCheckBox, this.baptizedPublisherCheckBox));
@@ -625,10 +628,9 @@ public class TerritoryEditor {
 
 			SecretKey secretKey = this.settings.getDatabaseSecretKey();
 
-			String spInf1 = Crypt.encrypt(nameTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf2 = Crypt.encrypt(surnameTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf3 = Crypt.encrypt(nameShortTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf4 = genderMaleCheckBox.isSelected() ? "0" : "1";
+			String spInf1 = Crypt.encrypt(territoryNameTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf2 = Crypt.encrypt(territoryNumberTextField.getText(), settings.getDatabaseSecretKey());
+			String spInf3 = Crypt.encrypt(territoryCoordinatesTextField.getText(), settings.getDatabaseSecretKey());
 
 			String spInf6 = !this.studentCheckBox.isSelected() ? "0" : "1";
 			String spInf7 = !this.unbaptizedPublisherCheckBox.isSelected() ? "0" : "1";
@@ -670,7 +672,6 @@ public class TerritoryEditor {
 			String spInf36 = !this.presidentWeekendCheckBox.isSelected() ? "0" : "1";
 			String spInf37 = !this.prayEndWeekendCheckBox.isSelected() ? "0" : "1";
 			String spInf38 = !this.inactiveCheckBox.isSelected() ? "0" : "1";
-			String spInf39 = Crypt.encrypt(singlenessTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf40 = Crypt.encrypt(smartphoneTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf41 = Crypt.encrypt(emailTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf42 = !this.bibleStudyCongregationCheckBox.isSelected() ? "0" : "1";
@@ -682,12 +683,7 @@ public class TerritoryEditor {
 
 			String spInf48 = !this.otherSheepCheckBox.isSelected() ? "0" : "1";
 			String spInf49 = !this.anointedCheckBox.isSelected() ? "0" : "1";
-			String spInf50 = !this.maidenNamePrintCheckBox.isSelected() ? "0" : "1";
 			String spInf51 = !this.excludeFromNaturalDisastersListCheckBox.isSelected() ? "0" : "1";
-
-			LocalDate dateOfBirth = this.dateOfBirthDatePicker.getValue();
-			String spInf52 = dateOfBirth != null ? Crypt.encrypt(dateOfBirth.toString(), secretKey)
-					: Crypt.encrypt("", secretKey);
 
 			LocalDate dateOfBaptism = this.dateOfBaptismDatePicker.getValue();
 			String spInf53 = dateOfBaptism != null ? Crypt.encrypt(dateOfBaptism.toString(), secretKey)
@@ -704,20 +700,20 @@ public class TerritoryEditor {
 			String spInf61 = !this.serviceMeetingCongrCheckBox.isSelected() ? "0" : "1";
 			String spInf62 = !this.serviceMeetingGroupCheckBox.isSelected() ? "0" : "1";
 
-			if (selectedMember != null)
-				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
-						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
-						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
-						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
-			else
-				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
-						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
-						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
-						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
+//			if (selectedMember != null)
+//				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
+//						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
+//						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
+//						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
+//						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
+//						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
+//			else
+//				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
+//						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
+//						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
+//						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
+//						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
+//						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
 		}
 //		else
 //			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
@@ -769,7 +765,7 @@ public class TerritoryEditor {
 
 	private boolean checkFields() {
 
-		if (surnameTextField.getText().isEmpty()) {
+		if (territoryNumberTextField.getText().isEmpty()) {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("congregation.memberseditor.error.surname"));
@@ -777,7 +773,7 @@ public class TerritoryEditor {
 			return false;
 		}
 
-		if (nameTextField.getText().isEmpty()) {
+		if (territoryNameTextField.getText().isEmpty()) {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("congregation.memberseditor.error.name"));
@@ -785,7 +781,7 @@ public class TerritoryEditor {
 			return false;
 		}
 
-		if (nameShortTextField.getText().isEmpty()) {
+		if (territoryCoordinatesTextField.getText().isEmpty()) {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("congregation.memberseditor.error.nameshort"));
@@ -793,34 +789,34 @@ public class TerritoryEditor {
 			return false;
 		}
 
-		boolean male = genderMaleCheckBox.isSelected();
-		boolean female = genderFemaleCheckBox.isSelected();
+//		boolean male = genderMaleCheckBox.isSelected();
+//		boolean female = genderFemaleCheckBox.isSelected();
 
-		if ((male && female) || (!male && !female)) {
+//		if ((male && female) || (!male && !female)) {
+//
+//			this.application.getAlertBuilder2().error(this.ownerStage,
+//					this.language.getString("congregation.memberseditor.error.gender"));
+//
+//			return false;
+//		}
 
-			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.memberseditor.error.gender"));
+//		if (!this.singlenessTextField.getText().isEmpty())
+//			if (this.genderMaleCheckBox.isSelected()) {
+//
+//				this.application.getAlertBuilder2().error(this.ownerStage,
+//						this.language.getString("congregation.memberseditor.error.surname2"));
+//
+//				return false;
+//			}
 
-			return false;
-		}
-
-		if (!this.singlenessTextField.getText().isEmpty())
-			if (this.genderMaleCheckBox.isSelected()) {
-
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("congregation.memberseditor.error.surname2"));
-
-				return false;
-			}
-
-		if (this.maidenNamePrintCheckBox.isSelected())
-			if (!this.genderFemaleCheckBox.isSelected()) {
-
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("congregation.memberseditor.error.maidennameprint"));
-
-				return false;
-			}
+//		if (this.maidenNamePrintCheckBox.isSelected())
+//			if (!this.genderFemaleCheckBox.isSelected()) {
+//
+//				this.application.getAlertBuilder2().error(this.ownerStage,
+//						this.language.getString("congregation.memberseditor.error.maidennameprint"));
+//
+//				return false;
+//			}
 
 		if (this.dateOfBaptismDatePicker.getValue() != null)
 			if (!this.baptizedPublisherCheckBox.isSelected()) {
@@ -836,41 +832,49 @@ public class TerritoryEditor {
 
 	private void listenerNameTextField() {
 
-		nameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+		territoryNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue)
-				if (nameShortTextField.getText().isEmpty()) {
-					if (!nameTextField.getText().isEmpty())
-						nameShortTextField.setText(nameTextField.getText(0, 1) + ".");
-				} else if (nameTextField.getText().isEmpty())
-					nameShortTextField.setText("");
+				if (territoryCoordinatesTextField.getText().isEmpty()) {
+					if (!territoryNameTextField.getText().isEmpty())
+						territoryCoordinatesTextField.setText(territoryNameTextField.getText(0, 1) + ".");
+				} else if (territoryNameTextField.getText().isEmpty())
+					territoryCoordinatesTextField.setText("");
 		});
 
 	}
 
 	private void viewUpdate() {
 
-		this.language = settings.getLanguage();
+		this.language = this.settings.getLanguage();
 
-		this.memberTabPane.setTabMinHeight(75);
-		this.memberTabPane.setTabMaxHeight(75);
+		this.territoryTabPane.setTabMinHeight(75);
+		this.territoryTabPane.setTabMaxHeight(75);
 
-		Tooltip memberPersonalTooltip = new Tooltip(
-				this.language.getString("congregation.memberseditor.tooltip.personal"));
-		memberPersonalTooltip.getStyleClass().add("tooltip_001");
-		this.memberPersonalTab.setTooltip(memberPersonalTooltip);
-		this.memberPersonalTab.setText("");
-		this.memberPersonalTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PERSONAL_INFO));
+		Tooltip territoryInfoTooltip = new Tooltip(
+				this.language.getString("territoryeditor.tab.tooltip.territoryinfo"));
+		territoryInfoTooltip.getStyleClass().add("tooltip_001");
+		this.territoryInfoTab.setTooltip(territoryInfoTooltip);
+		this.territoryInfoTab.setText("");
+		this.territoryInfoTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.INFO));
 
-		surnameLabel.setText(language.getString("TEXT0013"));
-		nameLabel.setText(language.getString("TEXT0014"));
-		nameShortLabel.setText(language.getString("TEXT0018"));
-		singlenessLabel.setText(language.getString("TEXT0065"));
-		genderLabel.setText(language.getString("TEXT0019"));
-
-		this.genderMaleCheckBox.setText(language.getString("TEXT0020"));
-		this.genderMaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MALE));
-		this.genderFemaleCheckBox.setText(language.getString("TEXT0021"));
-		this.genderFemaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
+		this.territoryNumberLabel.setText(this.language.getString("territoryeditor.label.number"));
+		this.territoryNameLabel.setText(this.language.getString("territoryeditor.label.name"));
+		this.territoryCoordinatesLabel.setText(this.language.getString("territoryeditor.label.coordinates"));
+		
+		this.territoryLandLabel.setText(this.language.getString("territoryeditor.label.land"));
+		this.territoryLandkreisLabel.setText(this.language.getString("territoryeditor.label.landkreis"));
+		this.territoryKreisstadtLabel.setText(this.language.getString("territoryeditor.label.kreisstadt"));
+		this.territoryOrtLabel.setText(this.language.getString("territoryeditor.label.ort"));
+		this.territoryZipCodeLabel.setText(this.language.getString("territoryeditor.label.zipcode"));
+		this.territoryOrtsteilLabel.setText(this.language.getString("territoryeditor.label.ortsteil"));
+		
+//		singlenessLabel.setText(language.getString("TEXT0065"));
+//		genderLabel.setText(language.getString("TEXT0019"));
+//
+//		this.genderMaleCheckBox.setText(language.getString("TEXT0020"));
+//		this.genderMaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MALE));
+//		this.genderFemaleCheckBox.setText(language.getString("TEXT0021"));
+//		this.genderFemaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
 
 		Tooltip saveTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.save"));
 		saveTooltip.getStyleClass().add("tooltip_001");
@@ -944,8 +948,8 @@ public class TerritoryEditor {
 		markedCheckBox.setText(language.getString("TEXT0072"));
 		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
 
-		this.maidenNamePrintCheckBox.setText(this.language.getString("congregation.memberseditor.maidennameprint"));
-		this.dateOfBirthLabel.setText(this.language.getString("congregation.memberseditor.dateofbirth"));
+//		this.maidenNamePrintCheckBox.setText(this.language.getString("congregation.memberseditor.maidennameprint"));
+//		this.dateOfBirthLabel.setText(this.language.getString("congregation.memberseditor.dateofbirth"));
 		this.anointedCheckBox.setText(this.language.getString("congregation.memberseditor.anointed"));
 		this.otherSheepCheckBox.setText(this.language.getString("congregation.memberseditor.othersheep"));
 		this.dateOfBaptismLabel.setText(this.language.getString("congregation.memberseditor.dateofbaptism"));
@@ -1036,23 +1040,23 @@ public class TerritoryEditor {
 		String audioFormat = this.language.getString("congregation.memberseditor.assignments.audiopos");
 		String usciereFormat = this.language.getString("congregation.memberseditor.assignments.uscierezone");
 
-		String inf9 = this.configs.get("inf9");
-		if (inf9 == null || inf9.isEmpty())
-			this.audioPos1Label.setText(String.format(audioFormat, noconfig));
-		else
-			this.audioPos1Label.setText(String.format(audioFormat, inf9));
+//		String inf9 = this.configs.get("inf9");
+//		if (inf9 == null || inf9.isEmpty())
+//			this.audioPos1Label.setText(String.format(audioFormat, noconfig));
+//		else
+//			this.audioPos1Label.setText(String.format(audioFormat, inf9));
 
-		String inf10 = this.configs.get("inf10");
-		if (inf10 == null || inf10.isEmpty())
-			this.audioPos2Label.setText(String.format(audioFormat, noconfig));
-		else
-			this.audioPos2Label.setText(String.format(audioFormat, inf10));
-
-		String inf11 = this.configs.get("inf11");
-		if (inf11 == null || inf11.isEmpty())
-			this.audioPos3Label.setText(String.format(audioFormat, noconfig));
-		else
-			this.audioPos3Label.setText(String.format(audioFormat, inf11));
+//		String inf10 = this.configs.get("inf10");
+//		if (inf10 == null || inf10.isEmpty())
+//			this.audioPos2Label.setText(String.format(audioFormat, noconfig));
+//		else
+//			this.audioPos2Label.setText(String.format(audioFormat, inf10));
+//
+//		String inf11 = this.configs.get("inf11");
+//		if (inf11 == null || inf11.isEmpty())
+//			this.audioPos3Label.setText(String.format(audioFormat, noconfig));
+//		else
+//			this.audioPos3Label.setText(String.format(audioFormat, inf11));
 
 		this.audioMicLabel.setText(this.language.getString("congregation.memberseditor.audio.mic"));
 		this.audioMicMidweekCheckBox.setText("");
@@ -1068,23 +1072,23 @@ public class TerritoryEditor {
 		this.usciereMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
 		this.usciereWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
 
-		String inf12 = this.configs.get("inf12");
-		if (inf12 == null || inf12.isEmpty())
-			this.usciereZone1Label.setText(String.format(usciereFormat, noconfig));
-		else
-			this.usciereZone1Label.setText(String.format(usciereFormat, inf12));
-
-		String inf13 = this.configs.get("inf13");
-		if (inf13 == null || inf13.isEmpty())
-			this.usciereZone2Label.setText(String.format(usciereFormat, noconfig));
-		else
-			this.usciereZone2Label.setText(String.format(usciereFormat, inf13));
-
-		String inf14 = this.configs.get("inf14");
-		if (inf14 == null || inf14.isEmpty())
-			this.usciereZone3Label.setText(String.format(usciereFormat, noconfig));
-		else
-			this.usciereZone3Label.setText(String.format(usciereFormat, inf14));
+//		String inf12 = this.configs.get("inf12");
+//		if (inf12 == null || inf12.isEmpty())
+//			this.usciereZone1Label.setText(String.format(usciereFormat, noconfig));
+//		else
+//			this.usciereZone1Label.setText(String.format(usciereFormat, inf12));
+//
+//		String inf13 = this.configs.get("inf13");
+//		if (inf13 == null || inf13.isEmpty())
+//			this.usciereZone2Label.setText(String.format(usciereFormat, noconfig));
+//		else
+//			this.usciereZone2Label.setText(String.format(usciereFormat, inf13));
+//
+//		String inf14 = this.configs.get("inf14");
+//		if (inf14 == null || inf14.isEmpty())
+//			this.usciereZone3Label.setText(String.format(usciereFormat, noconfig));
+//		else
+//			this.usciereZone3Label.setText(String.format(usciereFormat, inf14));
 
 		this.usciereZone1MidweekCheckBox.setText("");
 		this.usciereZone1WeekendCheckBox.setText("");

@@ -39,9 +39,9 @@
             </StackPane>
             <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <TabPane fx:id="memberTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="territoryTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab fx:id="memberPersonalTab" text="Untitled Tab 1">
+                      <Tab fx:id="territoryInfoTab" text="info">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0">
                                  <children>
@@ -53,7 +53,7 @@
                                                    <children>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="surnameLabel" text="Label">
+                                                            <Label fx:id="territoryNumberLabel" text="numero">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -62,7 +62,7 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="nameLabel" text="Label">
+                                                            <Label fx:id="territoryNameLabel" text="nome">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -71,7 +71,7 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="nameShortLabel" text="Label">
+                                                            <Label fx:id="territoryCoordinatesLabel" text="coordinate">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -80,7 +80,7 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="singlenessLabel" text="Label">
+                                                            <Label fx:id="territoryLandLabel" text="regione">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -89,7 +89,7 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="dateOfBirthLabel" text="datadinasc">
+                                                            <Label fx:id="territoryLandkreisLabel" text="distretto">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -98,7 +98,34 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="genderLabel" text="Label">
+                                                            <Label fx:id="territoryKreisstadtLabel" text="capoluogo">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryOrtLabel" text="luogo">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryZipCodeLabel" text="plz">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryOrtsteilLabel" text="frazione">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -109,88 +136,85 @@
                                                 </VBox>
                                                 <VBox HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <StackPane>
-                                                         <children>
-                                                            <TextField fx:id="surnameTextField" maxWidth="1.7976931348623157E308">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </TextField>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane>
-                                                         <children>
-                                                            <TextField fx:id="nameTextField" maxWidth="1.7976931348623157E308">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </TextField>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane>
-                                                         <children>
-                                                            <TextField fx:id="nameShortTextField" maxWidth="1.7976931348623157E308">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </TextField>
-                                                         </children>
-                                                      </StackPane>
-                                                      <HBox>
-                                                         <children>
-                                                            <StackPane HBox.hgrow="ALWAYS">
-                                                               <children>
-                                                                  <TextField fx:id="singlenessTextField" maxWidth="1.7976931348623157E308">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </TextField>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane alignment="CENTER_LEFT">
-                                                               <children>
-                                                                  <CheckBox fx:id="maidenNamePrintCheckBox" mnemonicParsing="false" text="CheckBox">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </CheckBox>
-                                                               </children>
-                                                            </StackPane>
-                                                         </children>
-                                                      </HBox>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <DatePicker fx:id="dateOfBirthDatePicker">
+                                                            <TextField fx:id="territoryNumberTextField" maxWidth="1.7976931348623157E308">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
-                                                            </DatePicker>
+                                                            </TextField>
                                                          </children>
                                                       </StackPane>
                                                       <StackPane>
                                                          <children>
-                                                            <HBox>
-                                                               <children>
-                                                                  <StackPane alignment="CENTER_LEFT">
-                                                                     <children>
-                                                                        <CheckBox fx:id="genderMaleCheckBox" mnemonicParsing="false" text="CheckBox">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </CheckBox>
-                                                                     </children>
-                                                                  </StackPane>
-                                                                  <StackPane alignment="CENTER_LEFT">
-                                                                     <children>
-                                                                        <CheckBox fx:id="genderFemaleCheckBox" mnemonicParsing="false" text="CheckBox">
-                                                                           <StackPane.margin>
-                                                                              <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                                           </StackPane.margin>
-                                                                        </CheckBox>
-                                                                     </children>
-                                                                  </StackPane>
-                                                               </children>
-                                                            </HBox>
+                                                            <TextField fx:id="territoryNameTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryCoordinatesTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryLandTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryLandkreisTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryKreisstadtTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryOrtTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryZipCodeTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryOrtsteilTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
                                                          </children>
                                                       </StackPane>
                                                    </children>
