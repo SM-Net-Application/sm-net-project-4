@@ -748,7 +748,7 @@ public class Territory extends UpdateDataAdapter {
 				ctrl.setApplication(this.application);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
-				ctrl.setSelectedMember(member);
+				//ctrl.setSelectedMember(member);
 				ctrl.setConfigs(this.configs);
 				ctrl.objectInitialize();
 

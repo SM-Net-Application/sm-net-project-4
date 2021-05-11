@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -545,14 +544,6 @@ public class TerritoryEditor {
 
 	public void setMembersTab(Tab membersTab) {
 		this.membersTab = membersTab;
-	}
-
-	public Member getSelectedMember() {
-		return selectedMember;
-	}
-
-	public void setSelectedMember(Member selectedMember) {
-		this.selectedMember = selectedMember;
 	}
 
 	public SupportPlannerView getApplication() {
