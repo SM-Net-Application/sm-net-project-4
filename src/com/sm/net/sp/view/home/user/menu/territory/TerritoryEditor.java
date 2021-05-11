@@ -2,15 +2,12 @@ package com.sm.net.sp.view.home.user.menu.territory;
 
 import java.util.HashMap;
 
-import javax.crypto.SecretKey;
-
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
-import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.util.Crypt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -180,7 +177,8 @@ public class TerritoryEditor {
 	private Tab newMemberTab;
 	private Tab membersTab;
 	private Territory ownerCtrl;
-	private Member selectedMember;
+
+	private TerritoryObj selectedTerritory;
 	private SupportPlannerView application;
 
 	private boolean listenerCheckFields;
@@ -283,83 +281,44 @@ public class TerritoryEditor {
 
 	private void initValue() {
 
-		if (selectedMember != null) {
+		if (this.selectedTerritory != null) {
 
-			territoryNumberTextField.setText(selectedMember.getSpInf2Decrypted());
-			territoryNameTextField.setText(selectedMember.getSpInf1Decrypted());
-			territoryCoordinatesTextField.setText(selectedMember.getSpInf3Decrypted());
+			this.territoryNumberTextField.setText(this.selectedTerritory.getSpInf7().toString());
+			this.territoryNameTextField.setText(this.selectedTerritory.getSpInf8());
+			this.territoryCoordinatesTextField.setText(this.selectedTerritory.getSpInf9());
 
-			setCheckBoxes();
+			this.territoryLandTextField.setText(this.selectedTerritory.getSpInf1());
+			this.territoryLandkreisTextField.setText(this.selectedTerritory.getSpInf2());
+			this.territoryKreisstadtTextField.setText(this.selectedTerritory.getSpInf3());
+			this.territoryOrtTextField.setText(this.selectedTerritory.getSpInf4());
+			this.territoryZipCodeTextField.setText(String.valueOf(this.selectedTerritory.getSpInf5()));
+			this.territoryOrtsteilTextField.setText(this.selectedTerritory.getSpInf6());
+			this.territoryMyMapsIDTextField.setText(this.selectedTerritory.getSpInf10());
 
-		} else {
-//			this.otherSheepCheckBox.setSelected(true);
+			this.image1TextField.setText(this.selectedTerritory.getSpInf11());
+			this.image1TitleTextField.setText(this.selectedTerritory.getSpInf12());
+			this.image2TextField.setText(this.selectedTerritory.getSpInf13());
+			this.image2TitleTextField.setText(this.selectedTerritory.getSpInf14());
+			this.image3TextField.setText(this.selectedTerritory.getSpInf15());
+			this.image3TitleTextField.setText(this.selectedTerritory.getSpInf16());
+			this.image4TextField.setText(this.selectedTerritory.getSpInf17());
+			this.image4TitleTextField.setText(this.selectedTerritory.getSpInf18());
+			this.image5TextField.setText(this.selectedTerritory.getSpInf19());
+			this.image5TitleTextField.setText(this.selectedTerritory.getSpInf20());
+
+			this.doc1TextField.setText(this.selectedTerritory.getSpInf21());
+			this.doc1TitleTextField.setText(this.selectedTerritory.getSpInf22());
+			this.doc2TextField.setText(this.selectedTerritory.getSpInf23());
+			this.doc2TitleTextField.setText(this.selectedTerritory.getSpInf24());
+			this.doc3TextField.setText(this.selectedTerritory.getSpInf25());
+			this.doc3TitleTextField.setText(this.selectedTerritory.getSpInf26());
+			this.doc4TextField.setText(this.selectedTerritory.getSpInf27());
+			this.doc4TitleTextField.setText(this.selectedTerritory.getSpInf28());
+			this.doc5TextField.setText(this.selectedTerritory.getSpInf29());
+			this.doc5TitleTextField.setText(this.selectedTerritory.getSpInf30());
+
+			// I campi da 31 a 40 non sono ancora utilizzati
 		}
-	}
-
-	private void setCheckBoxes() {
-
-//		this.studentCheckBox.setSelected((selectedMember.getSpInf6() == 1));
-//		this.unbaptizedPublisherCheckBox.setSelected((selectedMember.getSpInf7() == 1));
-//		this.baptizedPublisherCheckBox.setSelected((selectedMember.getSpInf8() == 1));
-//
-//		this.ministerialServantCheckBox.setSelected((selectedMember.getSpInf9() == 1));
-//		this.elderCheckBox.setSelected((selectedMember.getSpInf10() == 1));
-//		this.regularPioneerCheckBox.setSelected((selectedMember.getSpInf11() == 1));
-//		this.specialPioneerCheckBox.setSelected((selectedMember.getSpInf12() == 1));
-//
-//		this.bibleReadingCheckBox.setSelected((selectedMember.getSpInf13() == 1));
-//		this.initialCallCheckBox.setSelected((selectedMember.getSpInf14() == 1));
-//		this.returnVisitCheckBox.setSelected((selectedMember.getSpInf15() == 1));
-//		this.bibleStudyCheckBox.setSelected((selectedMember.getSpInf16() == 1));
-//		this.talkCheckBox.setSelected((selectedMember.getSpInf17() == 1));
-//
-//		this.markedCheckBox.setSelected((selectedMember.getSpInf18() == 1));
-//		this.disfellowshippedCheckBox.setSelected((selectedMember.getSpInf19() == 1));
-//
-//		this.audioMicMidweekCheckBox.setSelected((selectedMember.getSpInf20() == 1));
-//		this.audioMicWeekendCheckBox.setSelected((selectedMember.getSpInf21() == 1));
-//		this.audioPos1MidweekCheckBox.setSelected((selectedMember.getSpInf22() == 1));
-//		this.audioPos1WeekendCheckBox.setSelected((selectedMember.getSpInf23() == 1));
-//		this.audioPos2MidweekCheckBox.setSelected((selectedMember.getSpInf24() == 1));
-//		this.audioPos2WeekendCheckBox.setSelected((selectedMember.getSpInf25() == 1));
-//
-//		this.readerCongregationBibleStudyCheckBox.setSelected((selectedMember.getSpInf26() == 1));
-//		this.readerWatchtowerCheckBox.setSelected((selectedMember.getSpInf27() == 1));
-//
-//		this.usciereZone1MidweekCheckBox.setSelected((selectedMember.getSpInf28() == 1));
-//		this.usciereZone1WeekendCheckBox.setSelected((selectedMember.getSpInf29() == 1));
-//
-//		this.treasuresTalkCheckBox.setSelected((selectedMember.getSpInf30() == 1));
-//		this.diggingCheckBox.setSelected((selectedMember.getSpInf31() == 1));
-//		this.christiansCheckBox.setSelected((selectedMember.getSpInf32() == 1));
-//		this.presidentMidweekCheckBox.setSelected((selectedMember.getSpInf33() == 1));
-//		this.prayStartMidweekCheckBox.setSelected((selectedMember.getSpInf34() == 1));
-//		this.prayEndMidweekCheckBox.setSelected((selectedMember.getSpInf35() == 1));
-//		this.presidentWeekendCheckBox.setSelected((selectedMember.getSpInf36() == 1));
-//		this.prayEndWeekendCheckBox.setSelected((selectedMember.getSpInf37() == 1));
-//		this.inactiveCheckBox.setSelected((selectedMember.getSpInf38() == 1));
-//
-//		this.bibleStudyCongregationCheckBox.setSelected((selectedMember.getSpInf42() == 1));
-//		this.watchtowerStudyCheckBox.setSelected((selectedMember.getSpInf43() == 1));
-//
-//		this.watchtowerSubstituteStudyCheckBox.setSelected((selectedMember.getSpInf44() == 1));
-//		this.publicSpeakerInternCheckBox.setSelected((selectedMember.getSpInf45() == 1));
-//		this.publicSpeakerExternCheckBox.setSelected((selectedMember.getSpInf46() == 1));
-//
-//		this.otherSheepCheckBox.setSelected((this.selectedMember.getSpInf48() == 1));
-//		this.anointedCheckBox.setSelected((this.selectedMember.getSpInf49() == 1));
-//		this.excludeFromNaturalDisastersListCheckBox.setSelected((this.selectedMember.getSpInf51() == 1));
-//
-//		this.audioPos3MidweekCheckBox.setSelected((this.selectedMember.getSpInf54() == 1));
-//		this.audioPos3WeekendCheckBox.setSelected((this.selectedMember.getSpInf55() == 1));
-//		this.usciereZone2MidweekCheckBox.setSelected((this.selectedMember.getSpInf56() == 1));
-//		this.usciereZone2WeekendCheckBox.setSelected((this.selectedMember.getSpInf57() == 1));
-//		this.usciereZone3MidweekCheckBox.setSelected((this.selectedMember.getSpInf58() == 1));
-//		this.usciereZone3WeekendCheckBox.setSelected((this.selectedMember.getSpInf59() == 1));
-//		
-//		this.presidentSecondHallCheckBox.setSelected((this.selectedMember.getSpInf60() == 1));
-//		this.serviceMeetingCongrCheckBox.setSelected((this.selectedMember.getSpInf61() == 1));
-//		this.serviceMeetingGroupCheckBox.setSelected((this.selectedMember.getSpInf62() == 1));
 	}
 
 	private void listeners() {
@@ -381,11 +340,7 @@ public class TerritoryEditor {
 //		this.otherSheepCheckBox.selectedProperty().addListener(
 //				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.otherSheepCheckBox, this.anointedCheckBox));
 
-		listenerSaveButton();
-	}
-
-	private void listenerSaveButton() {
-		saveButton.setOnAction(event -> saveMember());
+		this.saveButton.setOnAction(event -> save());
 	}
 
 	private void checkBoxGroups(Boolean newV, Boolean notNull, CheckBox edited, CheckBox... others) {
@@ -407,224 +362,66 @@ public class TerritoryEditor {
 		}
 	}
 
-	private void saveMember() {
+	private void save() {
 
 		if (checkFields()) {
 
-			SecretKey secretKey = this.settings.getDatabaseSecretKey();
+			if (this.selectedTerritory != null) {
 
-			String spInf1 = Crypt.encrypt(territoryNameTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf2 = Crypt.encrypt(territoryNumberTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf3 = Crypt.encrypt(territoryCoordinatesTextField.getText(), settings.getDatabaseSecretKey());
-
-//			String spInf6 = !this.studentCheckBox.isSelected() ? "0" : "1";
-//			String spInf7 = !this.unbaptizedPublisherCheckBox.isSelected() ? "0" : "1";
-//			String spInf8 = !this.baptizedPublisherCheckBox.isSelected() ? "0" : "1";
+//				// editWeek
 //
-//			String spInf9 = !this.ministerialServantCheckBox.isSelected() ? "0" : "1";
-//			String spInf10 = !this.elderCheckBox.isSelected() ? "0" : "1";
-//			String spInf11 = !this.regularPioneerCheckBox.isSelected() ? "0" : "1";
-//			String spInf12 = !this.specialPioneerCheckBox.isSelected() ? "0" : "1";
+//				WeekUsciere week = WeekUsciere.newInstanceByView(this);
+//				week.setUscID(this.selectedWeek.getUscID());
 //
-//			String spInf13 = !this.bibleReadingCheckBox.isSelected() ? "0" : "1";
-//			String spInf14 = !this.initialCallCheckBox.isSelected() ? "0" : "1";
-//			String spInf15 = !this.returnVisitCheckBox.isSelected() ? "0" : "1";
-//			String spInf16 = !this.bibleStudyCheckBox.isSelected() ? "0" : "1";
-//			String spInf17 = !this.talkCheckBox.isSelected() ? "0" : "1";
+//				String waitMessage = this.language.getString("memorialeditor.wait.save");
+//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//						new WeekUsciereSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+//								week, this.ownerCtrl, this.thisTab));
 //
-//			String spInf18 = !this.markedCheckBox.isSelected() ? "0" : "1";
-//			String spInf19 = !this.disfellowshippedCheckBox.isSelected() ? "0" : "1";
+			} else {
 //
-//			String spInf20 = !this.audioMicMidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf21 = !this.audioMicWeekendCheckBox.isSelected() ? "0" : "1";
-//			String spInf22 = !this.audioPos1MidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf23 = !this.audioPos1WeekendCheckBox.isSelected() ? "0" : "1";
-//			String spInf24 = !this.audioPos2MidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf25 = !this.audioPos2WeekendCheckBox.isSelected() ? "0" : "1";
+//				// newWeek
 //
-//			String spInf26 = !this.readerCongregationBibleStudyCheckBox.isSelected() ? "0" : "1";
-//			String spInf27 = !this.readerWatchtowerCheckBox.isSelected() ? "0" : "1";
+//				WeekUsciere week = WeekUsciere.newInstanceByView(this);
 //
-//			String spInf28 = !this.usciereZone1MidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf29 = !this.usciereZone1WeekendCheckBox.isSelected() ? "0" : "1";
-//
-//			String spInf30 = !this.treasuresTalkCheckBox.isSelected() ? "0" : "1";
-//			String spInf31 = !this.diggingCheckBox.isSelected() ? "0" : "1";
-//			String spInf32 = !this.christiansCheckBox.isSelected() ? "0" : "1";
-//			String spInf33 = !this.presidentMidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf34 = !this.prayStartMidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf35 = !this.prayEndMidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf36 = !this.presidentWeekendCheckBox.isSelected() ? "0" : "1";
-//			String spInf37 = !this.prayEndWeekendCheckBox.isSelected() ? "0" : "1";
-//			String spInf38 = !this.inactiveCheckBox.isSelected() ? "0" : "1";
-//			String spInf40 = Crypt.encrypt(smartphoneTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf41 = Crypt.encrypt(emailTextField.getText(), settings.getDatabaseSecretKey());
-//			String spInf42 = !this.bibleStudyCongregationCheckBox.isSelected() ? "0" : "1";
-//			String spInf43 = !this.watchtowerStudyCheckBox.isSelected() ? "0" : "1";
-//			String spInf44 = !this.watchtowerSubstituteStudyCheckBox.isSelected() ? "0" : "1";
-//			String spInf45 = !this.publicSpeakerInternCheckBox.isSelected() ? "0" : "1";
-//			String spInf46 = !this.publicSpeakerExternCheckBox.isSelected() ? "0" : "1";
-//			String spInf47 = monitorTextField.getText();
-//
-//			String spInf48 = !this.otherSheepCheckBox.isSelected() ? "0" : "1";
-//			String spInf49 = !this.anointedCheckBox.isSelected() ? "0" : "1";
-//			String spInf51 = !this.excludeFromNaturalDisastersListCheckBox.isSelected() ? "0" : "1";
-//
-//			LocalDate dateOfBaptism = this.dateOfBaptismDatePicker.getValue();
-//			String spInf53 = dateOfBaptism != null ? Crypt.encrypt(dateOfBaptism.toString(), secretKey)
-//					: Crypt.encrypt("", secretKey);
-//
-//			String spInf54 = !this.audioPos3MidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf55 = !this.audioPos3WeekendCheckBox.isSelected() ? "0" : "1";
-//			String spInf56 = !this.usciereZone2MidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf57 = !this.usciereZone2WeekendCheckBox.isSelected() ? "0" : "1";
-//			String spInf58 = !this.usciereZone3MidweekCheckBox.isSelected() ? "0" : "1";
-//			String spInf59 = !this.usciereZone3WeekendCheckBox.isSelected() ? "0" : "1";
-//
-//			String spInf60 = !this.presidentSecondHallCheckBox.isSelected() ? "0" : "1";
-//			String spInf61 = !this.serviceMeetingCongrCheckBox.isSelected() ? "0" : "1";
-//			String spInf62 = !this.serviceMeetingGroupCheckBox.isSelected() ? "0" : "1";
-
-//			if (selectedMember != null)
-//				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
-//						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
-//						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
-//						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-//						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-//						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
-//			else
-//				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
-//						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
-//						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
-//						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
-//						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-//						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
+//				String waitMessage = this.language.getString("memorialeditor.wait.save");
+//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+//						new WeekUsciereSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+//								week, this.ownerCtrl, this.thisTab));
+			}
 		}
-//		else
-//			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
-//					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-//					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
-	}
-
-	private void newMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
-			String spInf8, String spInf9, String spInf10, String spInf11, String spInf12, String spInf13,
-			String spInf14, String spInf15, String spInf16, String spInf17, String spInf18, String spInf19,
-			String spInf20, String spInf21, String spInf22, String spInf23, String spInf24, String spInf25,
-			String spInf26, String spInf27, String spInf28, String spInf29, String spInf30, String spInf31,
-			String spInf32, String spInf33, String spInf34, String spInf35, String spInf36, String spInf37,
-			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
-			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
-			String spInf50, String spInf51, String spInf52, String spInf53, String spInf54, String spInf55,
-			String spInf56, String spInf57, String spInf58, String spInf59, String spInf60, String spInf61,
-			String spInf62) {
-
-		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", spInf6, spInf7, spInf8, spInf9, spInf10, spInf11,
-				spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
-				spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33,
-				spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
-				spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54, spInf55,
-				spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62, settings, ownerStage, parentTabPane,
-				newMemberTab, membersTab, ownerCtrl);
-	}
-
-	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
-			String spInf8, String spInf9, String spInf10, String spInf11, String spInf12, String spInf13,
-			String spInf14, String spInf15, String spInf16, String spInf17, String spInf18, String spInf19,
-			String spInf20, String spInf21, String spInf22, String spInf23, String spInf24, String spInf25,
-			String spInf26, String spInf27, String spInf28, String spInf29, String spInf30, String spInf31,
-			String spInf32, String spInf33, String spInf34, String spInf35, String spInf36, String spInf37,
-			String spInf38, String spInf39, String spInf40, String spInf41, String spInf42, String spInf43,
-			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
-			String spInf50, String spInf51, String spInf52, String spInf53, String spInf54, String spInf55,
-			String spInf56, String spInf57, String spInf58, String spInf59, String spInf60, String spInf61,
-			String spInf62) {
-
-		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, spInf6,
-				spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
-				spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29,
-				spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
-				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51,
-				spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62,
-				settings, ownerStage, parentTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
 
-		if (territoryNumberTextField.getText().isEmpty()) {
+		if (this.territoryNumberTextField.getText().isEmpty()) {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.memberseditor.error.surname"));
+					this.language.getString("territoryeditor.error.emptynumber"));
 
 			return false;
 		}
 
-		if (territoryNameTextField.getText().isEmpty()) {
+		if (this.territoryNameTextField.getText().isEmpty()) {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.memberseditor.error.name"));
+					this.language.getString("territoryeditor.error.emptyname"));
 
 			return false;
 		}
 
-		if (territoryCoordinatesTextField.getText().isEmpty()) {
+		if (this.territoryZipCodeTextField.getText().isEmpty()) {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.memberseditor.error.nameshort"));
+					this.language.getString("territoryeditor.error.emptyzipcode"));
 
 			return false;
 		}
-
-//		boolean male = genderMaleCheckBox.isSelected();
-//		boolean female = genderFemaleCheckBox.isSelected();
-
-//		if ((male && female) || (!male && !female)) {
-//
-//			this.application.getAlertBuilder2().error(this.ownerStage,
-//					this.language.getString("congregation.memberseditor.error.gender"));
-//
-//			return false;
-//		}
-
-//		if (!this.singlenessTextField.getText().isEmpty())
-//			if (this.genderMaleCheckBox.isSelected()) {
-//
-//				this.application.getAlertBuilder2().error(this.ownerStage,
-//						this.language.getString("congregation.memberseditor.error.surname2"));
-//
-//				return false;
-//			}
-
-//		if (this.maidenNamePrintCheckBox.isSelected())
-//			if (!this.genderFemaleCheckBox.isSelected()) {
-//
-//				this.application.getAlertBuilder2().error(this.ownerStage,
-//						this.language.getString("congregation.memberseditor.error.maidennameprint"));
-//
-//				return false;
-//			}
-
-//		if (this.dateOfBaptismDatePicker.getValue() != null)
-//			if (!this.baptizedPublisherCheckBox.isSelected()) {
-//
-//				this.application.getAlertBuilder2().error(this.ownerStage,
-//						this.language.getString("congregation.memberseditor.error.dateofbaptism"));
-//
-//				return false;
-//			}
 
 		return true;
 	}
 
 	private void listenerNameTextField() {
-
-		territoryNameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue)
-				if (territoryCoordinatesTextField.getText().isEmpty()) {
-					if (!territoryNameTextField.getText().isEmpty())
-						territoryCoordinatesTextField.setText(territoryNameTextField.getText(0, 1) + ".");
-				} else if (territoryNameTextField.getText().isEmpty())
-					territoryCoordinatesTextField.setText("");
-		});
 
 	}
 
@@ -652,6 +449,8 @@ public class TerritoryEditor {
 		this.territoryOrtLabel.setText(this.language.getString("territoryeditor.label.ort"));
 		this.territoryZipCodeLabel.setText(this.language.getString("territoryeditor.label.zipcode"));
 		this.territoryOrtsteilLabel.setText(this.language.getString("territoryeditor.label.ortsteil"));
+
+		this.territoryMyMapsIDLabel.setText(this.language.getString("territoryeditor.label.mymapsid"));
 
 		Tooltip saveTooltip = new Tooltip(this.language.getString("territoryeditor.button.tooltip.save"));
 		saveTooltip.getStyleClass().add("tooltip_001");
