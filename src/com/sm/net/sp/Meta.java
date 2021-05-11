@@ -344,6 +344,9 @@ public class Meta {
 		public static final String TERRITORY_ADD = "territoryadd.png";
 		public static final String TERRITORY_REMOVE = "territoryremove.png";
 		public static final String TERRITORY_EDIT = "territoryeditor.png";
+		
+		public static final String GALLERY = "gallery.png";
+		public static final String DOCS = "docs.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

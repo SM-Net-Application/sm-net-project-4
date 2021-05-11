@@ -1,6 +1,5 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 
 import javax.crypto.SecretKey;
@@ -16,9 +15,7 @@ import com.sm.net.util.Crypt;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -29,8 +26,6 @@ public class TerritoryEditor {
 
 	@FXML
 	private TabPane territoryTabPane;
-	@FXML
-	private TabPane memberInfoTabPane;
 
 	@FXML
 	private Tab territoryInfoTab;
@@ -39,27 +34,27 @@ public class TerritoryEditor {
 	private Label territoryNumberLabel;
 	@FXML
 	private TextField territoryNumberTextField;
-	
+
 	@FXML
 	private Label territoryNameLabel;
 	@FXML
 	private TextField territoryNameTextField;
-	
+
 	@FXML
 	private Label territoryCoordinatesLabel;
 	@FXML
 	private TextField territoryCoordinatesTextField;
-	
+
 	@FXML
 	private Label territoryLandLabel;
 	@FXML
 	private TextField territoryLandTextField;
-	
+
 	@FXML
 	private Label territoryLandkreisLabel;
 	@FXML
 	private TextField territoryLandkreisTextField;
-	
+
 	@FXML
 	private Label territoryKreisstadtLabel;
 	@FXML
@@ -74,240 +69,109 @@ public class TerritoryEditor {
 	private Label territoryZipCodeLabel;
 	@FXML
 	private TextField territoryZipCodeTextField;
-	
+
 	@FXML
 	private Label territoryOrtsteilLabel;
 	@FXML
 	private TextField territoryOrtsteilTextField;
-	
-	@FXML
-	private Tab memberAppointmentAndPrivilegeTab;
 
 	@FXML
-	private CheckBox studentCheckBox;
+	private Label territoryMyMapsIDLabel;
 	@FXML
-	private CheckBox unbaptizedPublisherCheckBox;
-	@FXML
-	private CheckBox baptizedPublisherCheckBox;
+	private TextField territoryMyMapsIDTextField;
 
 	@FXML
-	private Tab assignmentsTab;
-	@FXML
-	private ScrollPane assignmentsScrollPane;
+	private Tab imagesTab;
 
 	@FXML
-	private Label treasuresLabel;
+	private Label image1Label;
 	@FXML
-	private Label ministryLabel;
+	private TextField image1TextField;
 	@FXML
-	private Label christiansLabel;
+	private Label image2Label;
 	@FXML
-	private CheckBox treasuresTalkCheckBox;
+	private TextField image2TextField;
 	@FXML
-	private CheckBox diggingCheckBox;
+	private Label image3Label;
 	@FXML
-	private CheckBox bibleReadingCheckBox;
+	private TextField image3TextField;
 	@FXML
-	private CheckBox initialCallCheckBox;
+	private Label image4Label;
 	@FXML
-	private CheckBox returnVisitCheckBox;
+	private TextField image4TextField;
 	@FXML
-	private CheckBox bibleStudyCheckBox;
+	private Label image5Label;
 	@FXML
-	private CheckBox talkCheckBox;
-	@FXML
-	private CheckBox christiansCheckBox;
+	private TextField image5TextField;
 
 	@FXML
-	private Tab privilegeTab;
+	private Label image1TitleLabel;
 	@FXML
-	private ScrollPane privilegeScrollPane;
+	private TextField image1TitleTextField;
+	@FXML
+	private Label image2TitleLabel;
+	@FXML
+	private TextField image2TitleTextField;
+	@FXML
+	private Label image3TitleLabel;
+	@FXML
+	private TextField image3TitleTextField;
+	@FXML
+	private Label image4TitleLabel;
+	@FXML
+	private TextField image4TitleTextField;
+	@FXML
+	private Label image5TitleLabel;
+	@FXML
+	private TextField image5TitleTextField;
 
 	@FXML
-	private Label conductorLabel;
-	@FXML
-	private Label privilegeLabel;
-	@FXML
-	private Label prayStartLabel;
-	@FXML
-	private Label prayEndLabel;
-//	@FXML
-//	private Label meetingLabel;
-//	@FXML
-//	private Label meetingMidweekLabel;
-//	@FXML
-//	private Label meetingWeekendLabel;
-	@FXML
-	private CheckBox presidentMidweekCheckBox;
-	@FXML
-	private CheckBox presidentWeekendCheckBox;
-	@FXML
-	private CheckBox bibleStudyCongregationCheckBox;
-	@FXML
-	private CheckBox watchtowerStudyCheckBox;
-	@FXML
-	private CheckBox watchtowerSubstituteStudyCheckBox;
-	@FXML
-	private CheckBox prayStartMidweekCheckBox;
-	@FXML
-	private CheckBox prayEndMidweekCheckBox;
-	@FXML
-	private CheckBox prayEndWeekendCheckBox;
-	@FXML
-	private Label readerLabel;
-	@FXML
-	private CheckBox readerCongregationBibleStudyCheckBox;
-	@FXML
-	private CheckBox readerWatchtowerCheckBox;
-	@FXML
-	private Label publicSpeakerLabel;
-	@FXML
-	private CheckBox publicSpeakerInternCheckBox;
-	@FXML
-	private CheckBox publicSpeakerExternCheckBox;
+	private Tab docsTab;
 
 	@FXML
-	private Tab appointmentTab;
+	private Label doc1Label;
+	@FXML
+	private TextField doc1TextField;
+	@FXML
+	private Label doc2Label;
+	@FXML
+	private TextField doc2TextField;
+	@FXML
+	private Label doc3Label;
+	@FXML
+	private TextField doc3TextField;
+	@FXML
+	private Label doc4Label;
+	@FXML
+	private TextField doc4TextField;
+	@FXML
+	private Label doc5Label;
+	@FXML
+	private TextField doc5TextField;
 
 	@FXML
-	private CheckBox ministerialServantCheckBox;
+	private Label doc1TitleLabel;
 	@FXML
-	private CheckBox elderCheckBox;
+	private TextField doc1TitleTextField;
 	@FXML
-	private CheckBox regularPioneerCheckBox;
+	private Label doc2TitleLabel;
 	@FXML
-	private CheckBox specialPioneerCheckBox;
-
+	private TextField doc2TitleTextField;
 	@FXML
-	private Tab onthersTab;
-
+	private Label doc3TitleLabel;
 	@FXML
-	private CheckBox inactiveCheckBox;
+	private TextField doc3TitleTextField;
 	@FXML
-	private CheckBox markedCheckBox;
+	private Label doc4TitleLabel;
 	@FXML
-	private CheckBox disfellowshippedCheckBox;
-
+	private TextField doc4TitleTextField;
 	@FXML
-	private Tab memberContactsTab;
-
+	private Label doc5TitleLabel;
 	@FXML
-	private Label smartphoneLabel;
-	@FXML
-	private TextField smartphoneTextField;
-	@FXML
-	private Label emailLabel;
-	@FXML
-	private TextField emailTextField;
-
-	@FXML
-	private Tab memberMonitorTab;
-
-	@FXML
-	private Label monitorLabel;
-	@FXML
-	private TextField monitorTextField;
+	private TextField doc5TitleTextField;
 
 	@FXML
 	private Button saveButton;
-
-	@FXML
-	private CheckBox anointedCheckBox;
-	@FXML
-	private CheckBox otherSheepCheckBox;
-
-	@FXML
-	private CheckBox excludeFromNaturalDisastersListCheckBox;
-
-	@FXML
-	private Label dateOfBaptismLabel;
-	@FXML
-	private DatePicker dateOfBaptismDatePicker;
-
-	@FXML
-	private TabPane memberAssignmentTabPane;
-
-	@FXML
-	private Tab prayTab;
-	@FXML
-	private Label prayLabel;
-	@FXML
-	private Label prayMidweekLabel;
-	@FXML
-	private Label prayWeekendLabel;
-
-	@FXML
-	private Tab audioTab;
-	@FXML
-	private Label audioLabel;
-	@FXML
-	private Label audioMidweekLabel;
-	@FXML
-	private Label audioWeekendLabel;
-	@FXML
-	private Label audioMicLabel;
-	@FXML
-	private Label audioPos1Label;
-	@FXML
-	private Label audioPos2Label;
-	@FXML
-	private Label audioPos3Label;
-
-	@FXML
-	private CheckBox audioMicMidweekCheckBox;
-	@FXML
-	private CheckBox audioMicWeekendCheckBox;
-	@FXML
-	private CheckBox audioPos1MidweekCheckBox;
-	@FXML
-	private CheckBox audioPos1WeekendCheckBox;
-	@FXML
-	private CheckBox audioPos2MidweekCheckBox;
-	@FXML
-	private CheckBox audioPos2WeekendCheckBox;
-	@FXML
-	private CheckBox audioPos3MidweekCheckBox;
-	@FXML
-	private CheckBox audioPos3WeekendCheckBox;
-
-	@FXML
-	private Tab usciereTab;
-	@FXML
-	private Label usciereLabel;
-	@FXML
-	private Label usciereMidweekLabel;
-	@FXML
-	private Label usciereWeekendLabel;
-	@FXML
-	private Label usciereZone1Label;
-	@FXML
-	private Label usciereZone2Label;
-	@FXML
-	private Label usciereZone3Label;
-	@FXML
-	private CheckBox usciereZone1MidweekCheckBox;
-	@FXML
-	private CheckBox usciereZone1WeekendCheckBox;
-	@FXML
-	private CheckBox usciereZone2MidweekCheckBox;
-	@FXML
-	private CheckBox usciereZone2WeekendCheckBox;
-	@FXML
-	private CheckBox usciereZone3MidweekCheckBox;
-	@FXML
-	private CheckBox usciereZone3WeekendCheckBox;
-
-	@FXML
-	private Tab readerTab;
-	@FXML
-	private Tab speakerTab;
-
-	@FXML
-	private CheckBox presidentSecondHallCheckBox;
-	@FXML
-	private CheckBox serviceMeetingCongrCheckBox;
-	@FXML
-	private CheckBox serviceMeetingGroupCheckBox;
 
 	private Settings settings;
 	private Language language;
@@ -331,9 +195,8 @@ public class TerritoryEditor {
 	private void styleClasses() {
 
 		this.territoryInfoTab.getStyleClass().add("tab_001");
-		
+
 		this.territoryTabPane.getStyleClass().add("tab_pane_003");
-		this.memberInfoTabPane.getStyleClass().add("tab_pane_003");
 
 		this.territoryNumberLabel.getStyleClass().add("label_set_001");
 		this.territoryNameLabel.getStyleClass().add("label_set_001");
@@ -344,32 +207,32 @@ public class TerritoryEditor {
 		this.territoryOrtLabel.getStyleClass().add("label_set_001");
 		this.territoryZipCodeLabel.getStyleClass().add("label_set_001");
 		this.territoryOrtsteilLabel.getStyleClass().add("label_set_001");
+		this.territoryMyMapsIDLabel.getStyleClass().add("label_set_001");
 
-		assignmentsScrollPane.getStyleClass().add("scroll_pane_001");
-		privilegeScrollPane.getStyleClass().add("scroll_pane_001");
+		this.image1Label.getStyleClass().add("label_set_001");
+		this.image1TitleLabel.getStyleClass().add("label_set_001");
+		this.image2Label.getStyleClass().add("label_set_001");
+		this.image2TitleLabel.getStyleClass().add("label_set_001");
+		this.image3Label.getStyleClass().add("label_set_001");
+		this.image3TitleLabel.getStyleClass().add("label_set_001");
+		this.image4Label.getStyleClass().add("label_set_001");
+		this.image4TitleLabel.getStyleClass().add("label_set_001");
+		this.image5Label.getStyleClass().add("label_set_001");
+		this.image5TitleLabel.getStyleClass().add("label_set_001");
 
-		memberAppointmentAndPrivilegeTab.getStyleClass().add("tab_001");
-		assignmentsTab.getStyleClass().add("tab_001");
-		privilegeTab.getStyleClass().add("tab_001");
-		appointmentTab.getStyleClass().add("tab_001");
-		onthersTab.getStyleClass().add("tab_001");
-		memberContactsTab.getStyleClass().add("tab_001");
-		memberMonitorTab.getStyleClass().add("tab_001");
+		this.doc1Label.getStyleClass().add("label_set_001");
+		this.doc1TitleLabel.getStyleClass().add("label_set_001");
+		this.doc2Label.getStyleClass().add("label_set_001");
+		this.doc2TitleLabel.getStyleClass().add("label_set_001");
+		this.doc3Label.getStyleClass().add("label_set_001");
+		this.doc3TitleLabel.getStyleClass().add("label_set_001");
+		this.doc4Label.getStyleClass().add("label_set_001");
+		this.doc4TitleLabel.getStyleClass().add("label_set_001");
+		this.doc5Label.getStyleClass().add("label_set_001");
+		this.doc5TitleLabel.getStyleClass().add("label_set_001");
 
-
-		treasuresLabel.getStyleClass().add("label_002");
-		ministryLabel.getStyleClass().add("label_002");
-		christiansLabel.getStyleClass().add("label_002");
-		conductorLabel.getStyleClass().add("label_002");
-		privilegeLabel.getStyleClass().add("label_002");
-//		meetingLabel.getStyleClass().add("label_002");
-//		meetingMidweekLabel.getStyleClass().add("label_002");
-//		meetingWeekendLabel.getStyleClass().add("label_002");
-		readerLabel.getStyleClass().add("label_002");
-		publicSpeakerLabel.getStyleClass().add("label_002");
-		smartphoneLabel.getStyleClass().add("label_set_001");
-		emailLabel.getStyleClass().add("label_set_001");
-		monitorLabel.getStyleClass().add("label_set_001");
+		this.imagesTab.getStyleClass().add("tab_001");
+		this.docsTab.getStyleClass().add("tab_001");
 
 		this.territoryNumberTextField.getStyleClass().add("text_field_002");
 		this.territoryNameTextField.getStyleClass().add("text_field_001");
@@ -380,98 +243,31 @@ public class TerritoryEditor {
 		this.territoryOrtTextField.getStyleClass().add("text_field_001");
 		this.territoryZipCodeTextField.getStyleClass().add("text_field_001");
 		this.territoryOrtsteilTextField.getStyleClass().add("text_field_001");
-		
-		smartphoneTextField.getStyleClass().add("text_field_001");
-		emailTextField.getStyleClass().add("text_field_001");
-		monitorTextField.getStyleClass().add("text_field_001");
+		this.territoryMyMapsIDTextField.getStyleClass().add("text_field_001");
 
-		this.studentCheckBox.getStyleClass().add("check_box_set_001");
-		this.unbaptizedPublisherCheckBox.getStyleClass().add("check_box_set_001");
-		this.baptizedPublisherCheckBox.getStyleClass().add("check_box_set_001");
+		this.image1TextField.getStyleClass().add("text_field_001");
+		this.image1TitleTextField.getStyleClass().add("text_field_001");
+		this.image2TextField.getStyleClass().add("text_field_001");
+		this.image2TitleTextField.getStyleClass().add("text_field_001");
+		this.image3TextField.getStyleClass().add("text_field_001");
+		this.image3TitleTextField.getStyleClass().add("text_field_001");
+		this.image4TextField.getStyleClass().add("text_field_001");
+		this.image4TitleTextField.getStyleClass().add("text_field_001");
+		this.image5TextField.getStyleClass().add("text_field_001");
+		this.image5TitleTextField.getStyleClass().add("text_field_001");
 
-		treasuresTalkCheckBox.getStyleClass().add("check_box_001");
-		diggingCheckBox.getStyleClass().add("check_box_001");
-		bibleReadingCheckBox.getStyleClass().add("check_box_001");
-		initialCallCheckBox.getStyleClass().add("check_box_001");
-		returnVisitCheckBox.getStyleClass().add("check_box_001");
-		bibleStudyCheckBox.getStyleClass().add("check_box_001");
-		talkCheckBox.getStyleClass().add("check_box_001");
-		christiansCheckBox.getStyleClass().add("check_box_001");
-		presidentMidweekCheckBox.getStyleClass().add("check_box_001");
-		bibleStudyCongregationCheckBox.getStyleClass().add("check_box_001");
-		watchtowerStudyCheckBox.getStyleClass().add("check_box_001");
-		watchtowerSubstituteStudyCheckBox.getStyleClass().add("check_box_001");
-		presidentWeekendCheckBox.getStyleClass().add("check_box_001");
-		readerCongregationBibleStudyCheckBox.getStyleClass().add("check_box_001");
-		readerWatchtowerCheckBox.getStyleClass().add("check_box_001");
-		publicSpeakerInternCheckBox.getStyleClass().add("check_box_001");
-		publicSpeakerExternCheckBox.getStyleClass().add("check_box_001");
-		usciereZone1MidweekCheckBox.getStyleClass().add("check_box_001");
-		usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
-		ministerialServantCheckBox.getStyleClass().add("check_box_001");
-		elderCheckBox.getStyleClass().add("check_box_001");
-		regularPioneerCheckBox.getStyleClass().add("check_box_001");
-		specialPioneerCheckBox.getStyleClass().add("check_box_001");
-		inactiveCheckBox.getStyleClass().add("check_box_001");
-		markedCheckBox.getStyleClass().add("check_box_001");
-		disfellowshippedCheckBox.getStyleClass().add("check_box_001");
+		this.doc1TextField.getStyleClass().add("text_field_001");
+		this.doc1TitleTextField.getStyleClass().add("text_field_001");
+		this.doc2TextField.getStyleClass().add("text_field_001");
+		this.doc2TitleTextField.getStyleClass().add("text_field_001");
+		this.doc3TextField.getStyleClass().add("text_field_001");
+		this.doc3TitleTextField.getStyleClass().add("text_field_001");
+		this.doc4TextField.getStyleClass().add("text_field_001");
+		this.doc4TitleTextField.getStyleClass().add("text_field_001");
+		this.doc5TextField.getStyleClass().add("text_field_001");
+		this.doc5TitleTextField.getStyleClass().add("text_field_001");
 
-		saveButton.getStyleClass().add("button_image_001");
-
-		this.anointedCheckBox.getStyleClass().add("check_box_set_001");
-		this.otherSheepCheckBox.getStyleClass().add("check_box_set_001");
-		this.dateOfBaptismLabel.getStyleClass().add("label_set_001");
-		this.dateOfBaptismDatePicker.getStyleClass().add("combo_box_001");
-		this.excludeFromNaturalDisastersListCheckBox.getStyleClass().add("check_box_001");
-
-		this.prayTab.getStyleClass().add("tab_001");
-		this.audioTab.getStyleClass().add("tab_001");
-		this.usciereTab.getStyleClass().add("tab_001");
-
-		this.prayLabel.getStyleClass().add("label_002");
-		this.prayStartLabel.getStyleClass().add("label_001");
-		this.prayEndLabel.getStyleClass().add("label_001");
-		this.prayMidweekLabel.getStyleClass().add("label_001");
-		this.prayWeekendLabel.getStyleClass().add("label_001");
-		this.prayStartMidweekCheckBox.getStyleClass().add("check_box_001");
-		this.prayEndMidweekCheckBox.getStyleClass().add("check_box_001");
-		this.prayEndWeekendCheckBox.getStyleClass().add("check_box_001");
-
-		this.audioLabel.getStyleClass().add("label_002");
-		this.audioMidweekLabel.getStyleClass().add("label_001");
-		this.audioWeekendLabel.getStyleClass().add("label_001");
-		this.audioPos1Label.getStyleClass().add("label_001");
-		this.audioPos2Label.getStyleClass().add("label_001");
-		this.audioPos3Label.getStyleClass().add("label_001");
-		this.audioMicLabel.getStyleClass().add("label_001");
-		this.audioMicMidweekCheckBox.getStyleClass().add("check_box_001");
-		this.audioMicWeekendCheckBox.getStyleClass().add("check_box_001");
-		this.audioPos1MidweekCheckBox.getStyleClass().add("check_box_001");
-		this.audioPos1WeekendCheckBox.getStyleClass().add("check_box_001");
-		this.audioPos2MidweekCheckBox.getStyleClass().add("check_box_001");
-		this.audioPos2WeekendCheckBox.getStyleClass().add("check_box_001");
-		this.audioPos3MidweekCheckBox.getStyleClass().add("check_box_001");
-		this.audioPos3WeekendCheckBox.getStyleClass().add("check_box_001");
-
-		this.usciereLabel.getStyleClass().add("label_002");
-		this.usciereMidweekLabel.getStyleClass().add("label_001");
-		this.usciereWeekendLabel.getStyleClass().add("label_001");
-		this.usciereZone1Label.getStyleClass().add("label_001");
-		this.usciereZone2Label.getStyleClass().add("label_001");
-		this.usciereZone3Label.getStyleClass().add("label_001");
-		this.usciereZone1MidweekCheckBox.getStyleClass().add("check_box_001");
-		this.usciereZone1WeekendCheckBox.getStyleClass().add("check_box_001");
-		this.usciereZone2MidweekCheckBox.getStyleClass().add("check_box_001");
-		this.usciereZone2WeekendCheckBox.getStyleClass().add("check_box_001");
-		this.usciereZone3MidweekCheckBox.getStyleClass().add("check_box_001");
-		this.usciereZone3WeekendCheckBox.getStyleClass().add("check_box_001");
-
-		this.readerTab.getStyleClass().add("tab_001");
-		this.speakerTab.getStyleClass().add("tab_001");
-
-		this.presidentSecondHallCheckBox.getStyleClass().add("check_box_001");
-		this.serviceMeetingCongrCheckBox.getStyleClass().add("check_box_001");
-		this.serviceMeetingGroupCheckBox.getStyleClass().add("check_box_001");
+		this.saveButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -492,109 +288,98 @@ public class TerritoryEditor {
 			territoryNumberTextField.setText(selectedMember.getSpInf2Decrypted());
 			territoryNameTextField.setText(selectedMember.getSpInf1Decrypted());
 			territoryCoordinatesTextField.setText(selectedMember.getSpInf3Decrypted());
-			smartphoneTextField.setText(selectedMember.getSpInf40Decrypted());
-			emailTextField.setText(selectedMember.getSpInf41Decrypted());
-			monitorTextField.setText(selectedMember.getSpInf47());
-
-			// DATA DI NASCITA
-
-			// DATA DI BATTESIMO
-
-			String spInf53 = this.selectedMember.getSpInf53Decrypted();
-			if (!spInf53.isEmpty())
-				this.dateOfBaptismDatePicker.setValue(LocalDate.parse(spInf53));
 
 			setCheckBoxes();
 
 		} else {
-			this.otherSheepCheckBox.setSelected(true);
+//			this.otherSheepCheckBox.setSelected(true);
 		}
 	}
 
 	private void setCheckBoxes() {
 
-		this.studentCheckBox.setSelected((selectedMember.getSpInf6() == 1));
-		this.unbaptizedPublisherCheckBox.setSelected((selectedMember.getSpInf7() == 1));
-		this.baptizedPublisherCheckBox.setSelected((selectedMember.getSpInf8() == 1));
-
-		this.ministerialServantCheckBox.setSelected((selectedMember.getSpInf9() == 1));
-		this.elderCheckBox.setSelected((selectedMember.getSpInf10() == 1));
-		this.regularPioneerCheckBox.setSelected((selectedMember.getSpInf11() == 1));
-		this.specialPioneerCheckBox.setSelected((selectedMember.getSpInf12() == 1));
-
-		this.bibleReadingCheckBox.setSelected((selectedMember.getSpInf13() == 1));
-		this.initialCallCheckBox.setSelected((selectedMember.getSpInf14() == 1));
-		this.returnVisitCheckBox.setSelected((selectedMember.getSpInf15() == 1));
-		this.bibleStudyCheckBox.setSelected((selectedMember.getSpInf16() == 1));
-		this.talkCheckBox.setSelected((selectedMember.getSpInf17() == 1));
-
-		this.markedCheckBox.setSelected((selectedMember.getSpInf18() == 1));
-		this.disfellowshippedCheckBox.setSelected((selectedMember.getSpInf19() == 1));
-
-		this.audioMicMidweekCheckBox.setSelected((selectedMember.getSpInf20() == 1));
-		this.audioMicWeekendCheckBox.setSelected((selectedMember.getSpInf21() == 1));
-		this.audioPos1MidweekCheckBox.setSelected((selectedMember.getSpInf22() == 1));
-		this.audioPos1WeekendCheckBox.setSelected((selectedMember.getSpInf23() == 1));
-		this.audioPos2MidweekCheckBox.setSelected((selectedMember.getSpInf24() == 1));
-		this.audioPos2WeekendCheckBox.setSelected((selectedMember.getSpInf25() == 1));
-
-		this.readerCongregationBibleStudyCheckBox.setSelected((selectedMember.getSpInf26() == 1));
-		this.readerWatchtowerCheckBox.setSelected((selectedMember.getSpInf27() == 1));
-
-		this.usciereZone1MidweekCheckBox.setSelected((selectedMember.getSpInf28() == 1));
-		this.usciereZone1WeekendCheckBox.setSelected((selectedMember.getSpInf29() == 1));
-
-		this.treasuresTalkCheckBox.setSelected((selectedMember.getSpInf30() == 1));
-		this.diggingCheckBox.setSelected((selectedMember.getSpInf31() == 1));
-		this.christiansCheckBox.setSelected((selectedMember.getSpInf32() == 1));
-		this.presidentMidweekCheckBox.setSelected((selectedMember.getSpInf33() == 1));
-		this.prayStartMidweekCheckBox.setSelected((selectedMember.getSpInf34() == 1));
-		this.prayEndMidweekCheckBox.setSelected((selectedMember.getSpInf35() == 1));
-		this.presidentWeekendCheckBox.setSelected((selectedMember.getSpInf36() == 1));
-		this.prayEndWeekendCheckBox.setSelected((selectedMember.getSpInf37() == 1));
-		this.inactiveCheckBox.setSelected((selectedMember.getSpInf38() == 1));
-
-		this.bibleStudyCongregationCheckBox.setSelected((selectedMember.getSpInf42() == 1));
-		this.watchtowerStudyCheckBox.setSelected((selectedMember.getSpInf43() == 1));
-
-		this.watchtowerSubstituteStudyCheckBox.setSelected((selectedMember.getSpInf44() == 1));
-		this.publicSpeakerInternCheckBox.setSelected((selectedMember.getSpInf45() == 1));
-		this.publicSpeakerExternCheckBox.setSelected((selectedMember.getSpInf46() == 1));
-
-		this.otherSheepCheckBox.setSelected((this.selectedMember.getSpInf48() == 1));
-		this.anointedCheckBox.setSelected((this.selectedMember.getSpInf49() == 1));
-		this.excludeFromNaturalDisastersListCheckBox.setSelected((this.selectedMember.getSpInf51() == 1));
-
-		this.audioPos3MidweekCheckBox.setSelected((this.selectedMember.getSpInf54() == 1));
-		this.audioPos3WeekendCheckBox.setSelected((this.selectedMember.getSpInf55() == 1));
-		this.usciereZone2MidweekCheckBox.setSelected((this.selectedMember.getSpInf56() == 1));
-		this.usciereZone2WeekendCheckBox.setSelected((this.selectedMember.getSpInf57() == 1));
-		this.usciereZone3MidweekCheckBox.setSelected((this.selectedMember.getSpInf58() == 1));
-		this.usciereZone3WeekendCheckBox.setSelected((this.selectedMember.getSpInf59() == 1));
-		
-		this.presidentSecondHallCheckBox.setSelected((this.selectedMember.getSpInf60() == 1));
-		this.serviceMeetingCongrCheckBox.setSelected((this.selectedMember.getSpInf61() == 1));
-		this.serviceMeetingGroupCheckBox.setSelected((this.selectedMember.getSpInf62() == 1));
+//		this.studentCheckBox.setSelected((selectedMember.getSpInf6() == 1));
+//		this.unbaptizedPublisherCheckBox.setSelected((selectedMember.getSpInf7() == 1));
+//		this.baptizedPublisherCheckBox.setSelected((selectedMember.getSpInf8() == 1));
+//
+//		this.ministerialServantCheckBox.setSelected((selectedMember.getSpInf9() == 1));
+//		this.elderCheckBox.setSelected((selectedMember.getSpInf10() == 1));
+//		this.regularPioneerCheckBox.setSelected((selectedMember.getSpInf11() == 1));
+//		this.specialPioneerCheckBox.setSelected((selectedMember.getSpInf12() == 1));
+//
+//		this.bibleReadingCheckBox.setSelected((selectedMember.getSpInf13() == 1));
+//		this.initialCallCheckBox.setSelected((selectedMember.getSpInf14() == 1));
+//		this.returnVisitCheckBox.setSelected((selectedMember.getSpInf15() == 1));
+//		this.bibleStudyCheckBox.setSelected((selectedMember.getSpInf16() == 1));
+//		this.talkCheckBox.setSelected((selectedMember.getSpInf17() == 1));
+//
+//		this.markedCheckBox.setSelected((selectedMember.getSpInf18() == 1));
+//		this.disfellowshippedCheckBox.setSelected((selectedMember.getSpInf19() == 1));
+//
+//		this.audioMicMidweekCheckBox.setSelected((selectedMember.getSpInf20() == 1));
+//		this.audioMicWeekendCheckBox.setSelected((selectedMember.getSpInf21() == 1));
+//		this.audioPos1MidweekCheckBox.setSelected((selectedMember.getSpInf22() == 1));
+//		this.audioPos1WeekendCheckBox.setSelected((selectedMember.getSpInf23() == 1));
+//		this.audioPos2MidweekCheckBox.setSelected((selectedMember.getSpInf24() == 1));
+//		this.audioPos2WeekendCheckBox.setSelected((selectedMember.getSpInf25() == 1));
+//
+//		this.readerCongregationBibleStudyCheckBox.setSelected((selectedMember.getSpInf26() == 1));
+//		this.readerWatchtowerCheckBox.setSelected((selectedMember.getSpInf27() == 1));
+//
+//		this.usciereZone1MidweekCheckBox.setSelected((selectedMember.getSpInf28() == 1));
+//		this.usciereZone1WeekendCheckBox.setSelected((selectedMember.getSpInf29() == 1));
+//
+//		this.treasuresTalkCheckBox.setSelected((selectedMember.getSpInf30() == 1));
+//		this.diggingCheckBox.setSelected((selectedMember.getSpInf31() == 1));
+//		this.christiansCheckBox.setSelected((selectedMember.getSpInf32() == 1));
+//		this.presidentMidweekCheckBox.setSelected((selectedMember.getSpInf33() == 1));
+//		this.prayStartMidweekCheckBox.setSelected((selectedMember.getSpInf34() == 1));
+//		this.prayEndMidweekCheckBox.setSelected((selectedMember.getSpInf35() == 1));
+//		this.presidentWeekendCheckBox.setSelected((selectedMember.getSpInf36() == 1));
+//		this.prayEndWeekendCheckBox.setSelected((selectedMember.getSpInf37() == 1));
+//		this.inactiveCheckBox.setSelected((selectedMember.getSpInf38() == 1));
+//
+//		this.bibleStudyCongregationCheckBox.setSelected((selectedMember.getSpInf42() == 1));
+//		this.watchtowerStudyCheckBox.setSelected((selectedMember.getSpInf43() == 1));
+//
+//		this.watchtowerSubstituteStudyCheckBox.setSelected((selectedMember.getSpInf44() == 1));
+//		this.publicSpeakerInternCheckBox.setSelected((selectedMember.getSpInf45() == 1));
+//		this.publicSpeakerExternCheckBox.setSelected((selectedMember.getSpInf46() == 1));
+//
+//		this.otherSheepCheckBox.setSelected((this.selectedMember.getSpInf48() == 1));
+//		this.anointedCheckBox.setSelected((this.selectedMember.getSpInf49() == 1));
+//		this.excludeFromNaturalDisastersListCheckBox.setSelected((this.selectedMember.getSpInf51() == 1));
+//
+//		this.audioPos3MidweekCheckBox.setSelected((this.selectedMember.getSpInf54() == 1));
+//		this.audioPos3WeekendCheckBox.setSelected((this.selectedMember.getSpInf55() == 1));
+//		this.usciereZone2MidweekCheckBox.setSelected((this.selectedMember.getSpInf56() == 1));
+//		this.usciereZone2WeekendCheckBox.setSelected((this.selectedMember.getSpInf57() == 1));
+//		this.usciereZone3MidweekCheckBox.setSelected((this.selectedMember.getSpInf58() == 1));
+//		this.usciereZone3WeekendCheckBox.setSelected((this.selectedMember.getSpInf59() == 1));
+//		
+//		this.presidentSecondHallCheckBox.setSelected((this.selectedMember.getSpInf60() == 1));
+//		this.serviceMeetingCongrCheckBox.setSelected((this.selectedMember.getSpInf61() == 1));
+//		this.serviceMeetingGroupCheckBox.setSelected((this.selectedMember.getSpInf62() == 1));
 	}
 
 	private void listeners() {
 
 		listenerNameTextField();
 
-		this.studentCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
-				this.studentCheckBox, this.unbaptizedPublisherCheckBox, this.baptizedPublisherCheckBox));
-
-		this.unbaptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
-				this.unbaptizedPublisherCheckBox, this.studentCheckBox, this.baptizedPublisherCheckBox));
-
-		this.baptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
-				this.baptizedPublisherCheckBox, this.studentCheckBox, this.unbaptizedPublisherCheckBox));
-
-		this.anointedCheckBox.selectedProperty().addListener(
-				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.anointedCheckBox, this.otherSheepCheckBox));
-
-		this.otherSheepCheckBox.selectedProperty().addListener(
-				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.otherSheepCheckBox, this.anointedCheckBox));
+//		this.studentCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
+//				this.studentCheckBox, this.unbaptizedPublisherCheckBox, this.baptizedPublisherCheckBox));
+//
+//		this.unbaptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
+//				this.unbaptizedPublisherCheckBox, this.studentCheckBox, this.baptizedPublisherCheckBox));
+//
+//		this.baptizedPublisherCheckBox.selectedProperty().addListener((obs, oldV, newV) -> checkBoxGroups(newV, false,
+//				this.baptizedPublisherCheckBox, this.studentCheckBox, this.unbaptizedPublisherCheckBox));
+//
+//		this.anointedCheckBox.selectedProperty().addListener(
+//				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.anointedCheckBox, this.otherSheepCheckBox));
+//
+//		this.otherSheepCheckBox.selectedProperty().addListener(
+//				(obs, oldV, newV) -> checkBoxGroups(newV, true, this.otherSheepCheckBox, this.anointedCheckBox));
 
 		listenerSaveButton();
 	}
@@ -632,73 +417,73 @@ public class TerritoryEditor {
 			String spInf2 = Crypt.encrypt(territoryNumberTextField.getText(), settings.getDatabaseSecretKey());
 			String spInf3 = Crypt.encrypt(territoryCoordinatesTextField.getText(), settings.getDatabaseSecretKey());
 
-			String spInf6 = !this.studentCheckBox.isSelected() ? "0" : "1";
-			String spInf7 = !this.unbaptizedPublisherCheckBox.isSelected() ? "0" : "1";
-			String spInf8 = !this.baptizedPublisherCheckBox.isSelected() ? "0" : "1";
-
-			String spInf9 = !this.ministerialServantCheckBox.isSelected() ? "0" : "1";
-			String spInf10 = !this.elderCheckBox.isSelected() ? "0" : "1";
-			String spInf11 = !this.regularPioneerCheckBox.isSelected() ? "0" : "1";
-			String spInf12 = !this.specialPioneerCheckBox.isSelected() ? "0" : "1";
-
-			String spInf13 = !this.bibleReadingCheckBox.isSelected() ? "0" : "1";
-			String spInf14 = !this.initialCallCheckBox.isSelected() ? "0" : "1";
-			String spInf15 = !this.returnVisitCheckBox.isSelected() ? "0" : "1";
-			String spInf16 = !this.bibleStudyCheckBox.isSelected() ? "0" : "1";
-			String spInf17 = !this.talkCheckBox.isSelected() ? "0" : "1";
-
-			String spInf18 = !this.markedCheckBox.isSelected() ? "0" : "1";
-			String spInf19 = !this.disfellowshippedCheckBox.isSelected() ? "0" : "1";
-
-			String spInf20 = !this.audioMicMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf21 = !this.audioMicWeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf22 = !this.audioPos1MidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf23 = !this.audioPos1WeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf24 = !this.audioPos2MidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf25 = !this.audioPos2WeekendCheckBox.isSelected() ? "0" : "1";
-
-			String spInf26 = !this.readerCongregationBibleStudyCheckBox.isSelected() ? "0" : "1";
-			String spInf27 = !this.readerWatchtowerCheckBox.isSelected() ? "0" : "1";
-
-			String spInf28 = !this.usciereZone1MidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf29 = !this.usciereZone1WeekendCheckBox.isSelected() ? "0" : "1";
-
-			String spInf30 = !this.treasuresTalkCheckBox.isSelected() ? "0" : "1";
-			String spInf31 = !this.diggingCheckBox.isSelected() ? "0" : "1";
-			String spInf32 = !this.christiansCheckBox.isSelected() ? "0" : "1";
-			String spInf33 = !this.presidentMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf34 = !this.prayStartMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf35 = !this.prayEndMidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf36 = !this.presidentWeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf37 = !this.prayEndWeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf38 = !this.inactiveCheckBox.isSelected() ? "0" : "1";
-			String spInf40 = Crypt.encrypt(smartphoneTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf41 = Crypt.encrypt(emailTextField.getText(), settings.getDatabaseSecretKey());
-			String spInf42 = !this.bibleStudyCongregationCheckBox.isSelected() ? "0" : "1";
-			String spInf43 = !this.watchtowerStudyCheckBox.isSelected() ? "0" : "1";
-			String spInf44 = !this.watchtowerSubstituteStudyCheckBox.isSelected() ? "0" : "1";
-			String spInf45 = !this.publicSpeakerInternCheckBox.isSelected() ? "0" : "1";
-			String spInf46 = !this.publicSpeakerExternCheckBox.isSelected() ? "0" : "1";
-			String spInf47 = monitorTextField.getText();
-
-			String spInf48 = !this.otherSheepCheckBox.isSelected() ? "0" : "1";
-			String spInf49 = !this.anointedCheckBox.isSelected() ? "0" : "1";
-			String spInf51 = !this.excludeFromNaturalDisastersListCheckBox.isSelected() ? "0" : "1";
-
-			LocalDate dateOfBaptism = this.dateOfBaptismDatePicker.getValue();
-			String spInf53 = dateOfBaptism != null ? Crypt.encrypt(dateOfBaptism.toString(), secretKey)
-					: Crypt.encrypt("", secretKey);
-
-			String spInf54 = !this.audioPos3MidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf55 = !this.audioPos3WeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf56 = !this.usciereZone2MidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf57 = !this.usciereZone2WeekendCheckBox.isSelected() ? "0" : "1";
-			String spInf58 = !this.usciereZone3MidweekCheckBox.isSelected() ? "0" : "1";
-			String spInf59 = !this.usciereZone3WeekendCheckBox.isSelected() ? "0" : "1";
-
-			String spInf60 = !this.presidentSecondHallCheckBox.isSelected() ? "0" : "1";
-			String spInf61 = !this.serviceMeetingCongrCheckBox.isSelected() ? "0" : "1";
-			String spInf62 = !this.serviceMeetingGroupCheckBox.isSelected() ? "0" : "1";
+//			String spInf6 = !this.studentCheckBox.isSelected() ? "0" : "1";
+//			String spInf7 = !this.unbaptizedPublisherCheckBox.isSelected() ? "0" : "1";
+//			String spInf8 = !this.baptizedPublisherCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf9 = !this.ministerialServantCheckBox.isSelected() ? "0" : "1";
+//			String spInf10 = !this.elderCheckBox.isSelected() ? "0" : "1";
+//			String spInf11 = !this.regularPioneerCheckBox.isSelected() ? "0" : "1";
+//			String spInf12 = !this.specialPioneerCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf13 = !this.bibleReadingCheckBox.isSelected() ? "0" : "1";
+//			String spInf14 = !this.initialCallCheckBox.isSelected() ? "0" : "1";
+//			String spInf15 = !this.returnVisitCheckBox.isSelected() ? "0" : "1";
+//			String spInf16 = !this.bibleStudyCheckBox.isSelected() ? "0" : "1";
+//			String spInf17 = !this.talkCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf18 = !this.markedCheckBox.isSelected() ? "0" : "1";
+//			String spInf19 = !this.disfellowshippedCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf20 = !this.audioMicMidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf21 = !this.audioMicWeekendCheckBox.isSelected() ? "0" : "1";
+//			String spInf22 = !this.audioPos1MidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf23 = !this.audioPos1WeekendCheckBox.isSelected() ? "0" : "1";
+//			String spInf24 = !this.audioPos2MidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf25 = !this.audioPos2WeekendCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf26 = !this.readerCongregationBibleStudyCheckBox.isSelected() ? "0" : "1";
+//			String spInf27 = !this.readerWatchtowerCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf28 = !this.usciereZone1MidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf29 = !this.usciereZone1WeekendCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf30 = !this.treasuresTalkCheckBox.isSelected() ? "0" : "1";
+//			String spInf31 = !this.diggingCheckBox.isSelected() ? "0" : "1";
+//			String spInf32 = !this.christiansCheckBox.isSelected() ? "0" : "1";
+//			String spInf33 = !this.presidentMidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf34 = !this.prayStartMidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf35 = !this.prayEndMidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf36 = !this.presidentWeekendCheckBox.isSelected() ? "0" : "1";
+//			String spInf37 = !this.prayEndWeekendCheckBox.isSelected() ? "0" : "1";
+//			String spInf38 = !this.inactiveCheckBox.isSelected() ? "0" : "1";
+//			String spInf40 = Crypt.encrypt(smartphoneTextField.getText(), settings.getDatabaseSecretKey());
+//			String spInf41 = Crypt.encrypt(emailTextField.getText(), settings.getDatabaseSecretKey());
+//			String spInf42 = !this.bibleStudyCongregationCheckBox.isSelected() ? "0" : "1";
+//			String spInf43 = !this.watchtowerStudyCheckBox.isSelected() ? "0" : "1";
+//			String spInf44 = !this.watchtowerSubstituteStudyCheckBox.isSelected() ? "0" : "1";
+//			String spInf45 = !this.publicSpeakerInternCheckBox.isSelected() ? "0" : "1";
+//			String spInf46 = !this.publicSpeakerExternCheckBox.isSelected() ? "0" : "1";
+//			String spInf47 = monitorTextField.getText();
+//
+//			String spInf48 = !this.otherSheepCheckBox.isSelected() ? "0" : "1";
+//			String spInf49 = !this.anointedCheckBox.isSelected() ? "0" : "1";
+//			String spInf51 = !this.excludeFromNaturalDisastersListCheckBox.isSelected() ? "0" : "1";
+//
+//			LocalDate dateOfBaptism = this.dateOfBaptismDatePicker.getValue();
+//			String spInf53 = dateOfBaptism != null ? Crypt.encrypt(dateOfBaptism.toString(), secretKey)
+//					: Crypt.encrypt("", secretKey);
+//
+//			String spInf54 = !this.audioPos3MidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf55 = !this.audioPos3WeekendCheckBox.isSelected() ? "0" : "1";
+//			String spInf56 = !this.usciereZone2MidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf57 = !this.usciereZone2WeekendCheckBox.isSelected() ? "0" : "1";
+//			String spInf58 = !this.usciereZone3MidweekCheckBox.isSelected() ? "0" : "1";
+//			String spInf59 = !this.usciereZone3WeekendCheckBox.isSelected() ? "0" : "1";
+//
+//			String spInf60 = !this.presidentSecondHallCheckBox.isSelected() ? "0" : "1";
+//			String spInf61 = !this.serviceMeetingCongrCheckBox.isSelected() ? "0" : "1";
+//			String spInf62 = !this.serviceMeetingGroupCheckBox.isSelected() ? "0" : "1";
 
 //			if (selectedMember != null)
 //				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
@@ -818,14 +603,14 @@ public class TerritoryEditor {
 //				return false;
 //			}
 
-		if (this.dateOfBaptismDatePicker.getValue() != null)
-			if (!this.baptizedPublisherCheckBox.isSelected()) {
-
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("congregation.memberseditor.error.dateofbaptism"));
-
-				return false;
-			}
+//		if (this.dateOfBaptismDatePicker.getValue() != null)
+//			if (!this.baptizedPublisherCheckBox.isSelected()) {
+//
+//				this.application.getAlertBuilder2().error(this.ownerStage,
+//						this.language.getString("congregation.memberseditor.error.dateofbaptism"));
+//
+//				return false;
+//			}
 
 		return true;
 	}
@@ -860,259 +645,59 @@ public class TerritoryEditor {
 		this.territoryNumberLabel.setText(this.language.getString("territoryeditor.label.number"));
 		this.territoryNameLabel.setText(this.language.getString("territoryeditor.label.name"));
 		this.territoryCoordinatesLabel.setText(this.language.getString("territoryeditor.label.coordinates"));
-		
+
 		this.territoryLandLabel.setText(this.language.getString("territoryeditor.label.land"));
 		this.territoryLandkreisLabel.setText(this.language.getString("territoryeditor.label.landkreis"));
 		this.territoryKreisstadtLabel.setText(this.language.getString("territoryeditor.label.kreisstadt"));
 		this.territoryOrtLabel.setText(this.language.getString("territoryeditor.label.ort"));
 		this.territoryZipCodeLabel.setText(this.language.getString("territoryeditor.label.zipcode"));
 		this.territoryOrtsteilLabel.setText(this.language.getString("territoryeditor.label.ortsteil"));
-		
-//		singlenessLabel.setText(language.getString("TEXT0065"));
-//		genderLabel.setText(language.getString("TEXT0019"));
-//
-//		this.genderMaleCheckBox.setText(language.getString("TEXT0020"));
-//		this.genderMaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MALE));
-//		this.genderFemaleCheckBox.setText(language.getString("TEXT0021"));
-//		this.genderFemaleCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
 
-		Tooltip saveTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.save"));
+		Tooltip saveTooltip = new Tooltip(this.language.getString("territoryeditor.button.tooltip.save"));
 		saveTooltip.getStyleClass().add("tooltip_001");
 		this.saveButton.setTooltip(saveTooltip);
 		this.saveButton.setText("");
 		this.saveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.SAVE));
 
-		Tooltip memberAppointmentAndPrivilegeTooltip = new Tooltip(
-				this.language.getString("congregation.memberseditor.tooltip.appointmentundprivileges"));
-		memberAppointmentAndPrivilegeTooltip.getStyleClass().add("tooltip_001");
-		this.memberAppointmentAndPrivilegeTab.setTooltip(memberAppointmentAndPrivilegeTooltip);
-		this.memberAppointmentAndPrivilegeTab.setText("");
-		this.memberAppointmentAndPrivilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER_PRIVILEGES));
+		Tooltip imagesTabTooltip = new Tooltip(this.language.getString("territoryeditor.tab.tooltip.images"));
+		imagesTabTooltip.getStyleClass().add("tooltip_001");
+		this.imagesTab.setTooltip(imagesTabTooltip);
+		this.imagesTab.setText("");
+		this.imagesTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.GALLERY));
 
-		studentCheckBox.setText(language.getString("TEXT0044"));
-		unbaptizedPublisherCheckBox.setText(language.getString("TEXT0045"));
-		baptizedPublisherCheckBox.setText(language.getString("TEXT0046"));
+		String imageFormat = this.language.getString("territoryeditor.label.imageformat");
+		String imageTitleFormat = this.language.getString("territoryeditor.label.imagenameformat");
 
-		// assignmentsTab.setText(language.getString("TEXT0104"));
+		this.image1Label.setText(String.format(imageFormat, 1));
+		this.image1TitleLabel.setText(String.format(imageTitleFormat, 1));
+		this.image2Label.setText(String.format(imageFormat, 2));
+		this.image2TitleLabel.setText(String.format(imageTitleFormat, 2));
+		this.image3Label.setText(String.format(imageFormat, 3));
+		this.image3TitleLabel.setText(String.format(imageTitleFormat, 3));
+		this.image4Label.setText(String.format(imageFormat, 4));
+		this.image4TitleLabel.setText(String.format(imageTitleFormat, 4));
+		this.image5Label.setText(String.format(imageFormat, 5));
+		this.image5TitleLabel.setText(String.format(imageTitleFormat, 5));
 
-		treasuresLabel.setText(language.getString("TEXT0080"));
-		ministryLabel.setText(language.getString("TEXT0081"));
-		christiansLabel.setText(language.getString("TEXT0082"));
-		treasuresTalkCheckBox.setText(language.getString("TEXT0051"));
-		diggingCheckBox.setText(language.getString("TEXT0088"));
-		bibleReadingCheckBox.setText(language.getString("TEXT0047"));
-		initialCallCheckBox.setText(language.getString("TEXT0048"));
-		returnVisitCheckBox.setText(language.getString("TEXT0049"));
-		bibleStudyCheckBox.setText(language.getString("TEXT0050"));
-		talkCheckBox.setText(language.getString("TEXT0051"));
-		christiansCheckBox.setText(language.getString("TEXT0082"));
+		String docFormat = this.language.getString("territoryeditor.label.docformat");
+		String docTitleFormat = this.language.getString("territoryeditor.label.docnameformat");
 
-		// privilegeTab.setText(language.getString("TEXT0052"));
+		this.doc1Label.setText(String.format(docFormat, 1));
+		this.doc1TitleLabel.setText(String.format(docTitleFormat, 1));
+		this.doc2Label.setText(String.format(docFormat, 2));
+		this.doc2TitleLabel.setText(String.format(docTitleFormat, 2));
+		this.doc3Label.setText(String.format(docFormat, 3));
+		this.doc3TitleLabel.setText(String.format(docTitleFormat, 3));
+		this.doc4Label.setText(String.format(docFormat, 4));
+		this.doc4TitleLabel.setText(String.format(docTitleFormat, 4));
+		this.doc5Label.setText(String.format(docFormat, 5));
+		this.doc5TitleLabel.setText(String.format(docTitleFormat, 5));
 
-		conductorLabel.setText(language.getString("TEXT0105"));
-		privilegeLabel.setText(this.language.getString("congregation.memberseditor.assignments"));
-		prayStartLabel.setText(language.getString("TEXT0084"));
-		prayEndLabel.setText(language.getString("TEXT0102"));
-//		audioPos1Label.setText(language.getString("TEXT0056"));
-//		audioPos2Label.setText(language.getString("TEXT0058"));
-
-//		meetingLabel.setText(language.getString("TEXT0055"));
-//		meetingMidweekLabel.setText(language.getString("TEXT0057"));
-//		meetingWeekendLabel.setText(language.getString("TEXT0059"));
-
-		presidentMidweekCheckBox.setText(language.getString("TEXT0083"));
-		presidentWeekendCheckBox.setText(language.getString("TEXT0110"));
-		bibleStudyCongregationCheckBox.setText(language.getString("TEXT0061"));
-		watchtowerStudyCheckBox.setText(language.getString("TEXT0062"));
-		watchtowerSubstituteStudyCheckBox.setText(language.getString("TEXT0111"));
-		prayStartMidweekCheckBox.setText("");
-		prayEndMidweekCheckBox.setText("");
-		prayEndWeekendCheckBox.setText("");
-		readerLabel.setText(language.getString("TEXT0060"));
-		readerCongregationBibleStudyCheckBox.setText(language.getString("TEXT0061"));
-		readerWatchtowerCheckBox.setText(language.getString("TEXT0062"));
-		publicSpeakerLabel.setText(language.getString("TEXT0112"));
-		publicSpeakerInternCheckBox.setText(language.getString("TEXT0113"));
-		publicSpeakerExternCheckBox.setText(language.getString("TEXT0114"));
-
-		// appointmentTab.setText(language.getString("TEXT0066"));
-
-		ministerialServantCheckBox.setText(language.getString("TEXT0067"));
-		elderCheckBox.setText(language.getString("TEXT0068"));
-		regularPioneerCheckBox.setText(language.getString("TEXT0069"));
-		specialPioneerCheckBox.setText(language.getString("TEXT0070"));
-
-		// onthersTab.setText(language.getString("TEXT0071"));
-
-		inactiveCheckBox.setText(language.getString("TEXT0064"));
-		markedCheckBox.setText(language.getString("TEXT0072"));
-		disfellowshippedCheckBox.setText(language.getString("TEXT0073"));
-
-//		this.maidenNamePrintCheckBox.setText(this.language.getString("congregation.memberseditor.maidennameprint"));
-//		this.dateOfBirthLabel.setText(this.language.getString("congregation.memberseditor.dateofbirth"));
-		this.anointedCheckBox.setText(this.language.getString("congregation.memberseditor.anointed"));
-		this.otherSheepCheckBox.setText(this.language.getString("congregation.memberseditor.othersheep"));
-		this.dateOfBaptismLabel.setText(this.language.getString("congregation.memberseditor.dateofbaptism"));
-		this.excludeFromNaturalDisastersListCheckBox
-				.setText(this.language.getString("congregation.memberseditor.excludefromnaturaldisasters"));
-
-		Tooltip memberContactsTooltip = new Tooltip(
-				this.language.getString("congregation.memberseditor.tooltip.contacts"));
-		memberContactsTooltip.getStyleClass().add("tooltip_001");
-		this.memberContactsTab.setTooltip(memberContactsTooltip);
-		this.memberContactsTab.setText("");
-		this.memberContactsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONTACTS));
-
-		smartphoneLabel.setText(language.getString("TEXT0107"));
-		emailLabel.setText(language.getString("TEXT0108"));
-
-		Tooltip memberMonitorTooltip = new Tooltip(
-				this.language.getString("congregation.memberseditor.tooltip.monitor"));
-		memberMonitorTooltip.getStyleClass().add("tooltip_001");
-		this.memberMonitorTab.setTooltip(memberMonitorTooltip);
-		this.memberMonitorTab.setText("");
-		this.memberMonitorTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USER_MENU_MONITOR));
-
-		monitorLabel.setText(language.getString("sp.congr.member.monitorpass"));
-
-		this.memberInfoTabPane.setTabMinHeight(75);
-		this.memberInfoTabPane.setTabMaxHeight(75);
-
-		Tooltip assignmentsTooltip = new Tooltip(
-				this.language.getString("congregation.memberseditor.tooltip.assignments"));
-		assignmentsTooltip.getStyleClass().add("tooltip_001");
-		this.assignmentsTab.setTooltip(assignmentsTooltip);
-		this.assignmentsTab.setText("");
-		this.assignmentsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ASSIGNEMENTS));
-
-		Tooltip privilegeTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.privilege"));
-		privilegeTooltip.getStyleClass().add("tooltip_001");
-		this.privilegeTab.setTooltip(privilegeTooltip);
-		this.privilegeTab.setText("");
-		this.privilegeTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PRIVILEGIES));
-
-		Tooltip appointmentTooltip = new Tooltip(
-				this.language.getString("congregation.memberseditor.tooltip.appointment"));
-		appointmentTooltip.getStyleClass().add("tooltip_001");
-		this.appointmentTab.setTooltip(appointmentTooltip);
-		this.appointmentTab.setText("");
-		this.appointmentTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.ROLES));
-
-		Tooltip onthersTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.onthers"));
-		onthersTooltip.getStyleClass().add("tooltip_001");
-		this.onthersTab.setTooltip(onthersTooltip);
-		this.onthersTab.setText("");
-		this.onthersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.OTHERS));
-
-		this.memberAssignmentTabPane.setTabMinHeight(75);
-		this.memberAssignmentTabPane.setTabMaxHeight(75);
-
-		Tooltip prayTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.pray"));
-		prayTabTooltip.getStyleClass().add("tooltip_001");
-		this.prayTab.setTooltip(prayTabTooltip);
-		this.prayTab.setText("");
-		this.prayTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PRAY));
-
-		Tooltip audioTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.audio"));
-		audioTabTooltip.getStyleClass().add("tooltip_001");
-		this.audioTab.setTooltip(audioTabTooltip);
-		this.audioTab.setText("");
-		this.audioTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.AUDIO));
-
-		Tooltip usciereTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.usciere"));
-		usciereTabTooltip.getStyleClass().add("tooltip_001");
-		this.usciereTab.setTooltip(usciereTabTooltip);
-		this.usciereTab.setText("");
-		this.usciereTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.USCIERE));
-
-		this.prayLabel.setText(this.language.getString("congregation.memberseditor.assignments.pray"));
-		this.prayMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
-		this.prayWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
-		this.prayStartMidweekCheckBox.setText("");
-		this.prayEndMidweekCheckBox.setText("");
-		this.prayEndWeekendCheckBox.setText("");
-
-		this.audioLabel.setText(this.language.getString("congregation.memberseditor.audio"));
-		this.audioMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
-		this.audioWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
-
-		String noconfig = this.language.getString("congregation.memberseditor.assignments.noconfig");
-		String audioFormat = this.language.getString("congregation.memberseditor.assignments.audiopos");
-		String usciereFormat = this.language.getString("congregation.memberseditor.assignments.uscierezone");
-
-//		String inf9 = this.configs.get("inf9");
-//		if (inf9 == null || inf9.isEmpty())
-//			this.audioPos1Label.setText(String.format(audioFormat, noconfig));
-//		else
-//			this.audioPos1Label.setText(String.format(audioFormat, inf9));
-
-//		String inf10 = this.configs.get("inf10");
-//		if (inf10 == null || inf10.isEmpty())
-//			this.audioPos2Label.setText(String.format(audioFormat, noconfig));
-//		else
-//			this.audioPos2Label.setText(String.format(audioFormat, inf10));
-//
-//		String inf11 = this.configs.get("inf11");
-//		if (inf11 == null || inf11.isEmpty())
-//			this.audioPos3Label.setText(String.format(audioFormat, noconfig));
-//		else
-//			this.audioPos3Label.setText(String.format(audioFormat, inf11));
-
-		this.audioMicLabel.setText(this.language.getString("congregation.memberseditor.audio.mic"));
-		this.audioMicMidweekCheckBox.setText("");
-		this.audioMicWeekendCheckBox.setText("");
-		this.audioPos1MidweekCheckBox.setText("");
-		this.audioPos1WeekendCheckBox.setText("");
-		this.audioPos2MidweekCheckBox.setText("");
-		this.audioPos2WeekendCheckBox.setText("");
-		this.audioPos3MidweekCheckBox.setText("");
-		this.audioPos3WeekendCheckBox.setText("");
-
-		this.usciereLabel.setText(this.language.getString("congregation.memberseditor.usciere"));
-		this.usciereMidweekLabel.setText(this.language.getString("congregation.memberseditor.assignments.midweek"));
-		this.usciereWeekendLabel.setText(this.language.getString("congregation.memberseditor.assignments.weekend"));
-
-//		String inf12 = this.configs.get("inf12");
-//		if (inf12 == null || inf12.isEmpty())
-//			this.usciereZone1Label.setText(String.format(usciereFormat, noconfig));
-//		else
-//			this.usciereZone1Label.setText(String.format(usciereFormat, inf12));
-//
-//		String inf13 = this.configs.get("inf13");
-//		if (inf13 == null || inf13.isEmpty())
-//			this.usciereZone2Label.setText(String.format(usciereFormat, noconfig));
-//		else
-//			this.usciereZone2Label.setText(String.format(usciereFormat, inf13));
-//
-//		String inf14 = this.configs.get("inf14");
-//		if (inf14 == null || inf14.isEmpty())
-//			this.usciereZone3Label.setText(String.format(usciereFormat, noconfig));
-//		else
-//			this.usciereZone3Label.setText(String.format(usciereFormat, inf14));
-
-		this.usciereZone1MidweekCheckBox.setText("");
-		this.usciereZone1WeekendCheckBox.setText("");
-		this.usciereZone2MidweekCheckBox.setText("");
-		this.usciereZone2WeekendCheckBox.setText("");
-		this.usciereZone3MidweekCheckBox.setText("");
-		this.usciereZone3WeekendCheckBox.setText("");
-
-		Tooltip readerTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.reader"));
-		readerTabTooltip.getStyleClass().add("tooltip_001");
-		this.readerTab.setTooltip(readerTabTooltip);
-		this.readerTab.setText("");
-		this.readerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PODIUM));
-
-		Tooltip speakerTabTooltip = new Tooltip(language.getString("congregation.memberseditor.tooltip.tab.speaker"));
-		speakerTabTooltip.getStyleClass().add("tooltip_001");
-		this.speakerTab.setTooltip(speakerTabTooltip);
-		this.speakerTab.setText("");
-		this.speakerTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PUBLIC_TALK));
-
-		this.presidentSecondHallCheckBox
-				.setText(this.language.getString("congregation.memberseditor.presidentsecondhall"));
-		this.serviceMeetingCongrCheckBox.setText(this.language.getString("congregation.memberseditor.servmeetcongr"));
-		this.serviceMeetingGroupCheckBox.setText(this.language.getString("congregation.memberseditor.servmeetgroup"));
+		Tooltip docsTooltip = new Tooltip(this.language.getString("congregation.memberseditor.tooltip.contacts"));
+		docsTooltip.getStyleClass().add("tooltip_001");
+		this.docsTab.setTooltip(docsTooltip);
+		this.docsTab.setText("");
+		this.docsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.DOCS));
 	}
 
 	public Settings getSettings() {
