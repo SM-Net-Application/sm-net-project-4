@@ -7,6 +7,8 @@ import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritorySaveTask;
+import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -75,6 +77,11 @@ public class TerritoryEditor {
 	private Label territoryMyMapsIDLabel;
 	@FXML
 	private TextField territoryMyMapsIDTextField;
+
+	@FXML
+	private Label territoryViewerIDLabel;
+	@FXML
+	private TextField territoryViewerIDTextField;
 
 	@FXML
 	private Tab imagesTab;
@@ -173,7 +180,7 @@ public class TerritoryEditor {
 	private Language language;
 	private Stage ownerStage;
 	private TabPane parentTabPane;
-	private Tab newMemberTab;
+	private Tab newTab;
 	private Tab membersTab;
 	private Territory ownerCtrl;
 
@@ -205,6 +212,7 @@ public class TerritoryEditor {
 		this.territoryZipCodeLabel.getStyleClass().add("label_set_001");
 		this.territoryOrtsteilLabel.getStyleClass().add("label_set_001");
 		this.territoryMyMapsIDLabel.getStyleClass().add("label_set_001");
+		this.territoryViewerIDLabel.getStyleClass().add("label_set_001");
 
 		this.image1Label.getStyleClass().add("label_set_001");
 		this.image1TitleLabel.getStyleClass().add("label_set_001");
@@ -241,6 +249,7 @@ public class TerritoryEditor {
 		this.territoryZipCodeTextField.getStyleClass().add("text_field_001");
 		this.territoryOrtsteilTextField.getStyleClass().add("text_field_001");
 		this.territoryMyMapsIDTextField.getStyleClass().add("text_field_001");
+		this.territoryViewerIDTextField.getStyleClass().add("text_field_001");
 
 		this.image1TextField.getStyleClass().add("text_field_001");
 		this.image1TitleTextField.getStyleClass().add("text_field_001");
@@ -292,7 +301,7 @@ public class TerritoryEditor {
 			this.territoryOrtTextField.setText(this.selectedTerritory.getSpInf4());
 			this.territoryZipCodeTextField.setText(String.valueOf(this.selectedTerritory.getSpInf5()));
 			this.territoryOrtsteilTextField.setText(this.selectedTerritory.getSpInf6());
-			this.territoryMyMapsIDTextField.setText(this.selectedTerritory.getSpInf10());
+			this.territoryMyMapsIDTextField.setText(this.selectedTerritory.getSpInf31());
 
 			this.image1TextField.setText(this.selectedTerritory.getSpInf11());
 			this.image1TitleTextField.setText(this.selectedTerritory.getSpInf12());
@@ -316,7 +325,7 @@ public class TerritoryEditor {
 			this.doc5TextField.setText(this.selectedTerritory.getSpInf29());
 			this.doc5TitleTextField.setText(this.selectedTerritory.getSpInf30());
 
-			// I campi da 31 a 40 non sono ancora utilizzati
+			// I campi da 32 a 40 non sono ancora utilizzati
 		}
 	}
 
@@ -387,6 +396,13 @@ public class TerritoryEditor {
 //				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 //						new WeekUsciereSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
 //								week, this.ownerCtrl, this.thisTab));
+
+				TerritoryObj territoryObj = TerritoryObj.newInstanceByView(this);
+
+				String waitMessage = this.language.getString("territoryeditor.wait.save");
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new TerritorySaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								territoryObj, this.ownerCtrl, this.newTab));
 			}
 		}
 	}
@@ -450,6 +466,7 @@ public class TerritoryEditor {
 		this.territoryOrtsteilLabel.setText(this.language.getString("territoryeditor.label.ortsteil"));
 
 		this.territoryMyMapsIDLabel.setText(this.language.getString("territoryeditor.label.mymapsid"));
+		this.territoryViewerIDLabel.setText(this.language.getString("territoryeditor.label.viewerid"));
 
 		Tooltip saveTooltip = new Tooltip(this.language.getString("territoryeditor.button.tooltip.save"));
 		saveTooltip.getStyleClass().add("tooltip_001");
@@ -522,12 +539,12 @@ public class TerritoryEditor {
 		this.parentTabPane = parentTabPane;
 	}
 
-	public Tab getNewMemberTab() {
-		return newMemberTab;
+	public Tab getNewTab() {
+		return newTab;
 	}
 
-	public void setNewMemberTab(Tab newMemberTab) {
-		this.newMemberTab = newMemberTab;
+	public void setNewTab(Tab newTab) {
+		this.newTab = newTab;
 	}
 
 	public Territory getOwnerCtrl() {

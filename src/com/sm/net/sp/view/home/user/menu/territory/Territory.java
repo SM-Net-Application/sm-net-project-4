@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.stream.StreamSupport;
 
-import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
@@ -19,19 +18,14 @@ import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
-import com.sm.net.sp.view.home.user.menu.congr.task.CongrInitDataLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
-import com.smnet.core.task.TaskManager;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -66,6 +60,7 @@ public class Territory extends UpdateDataAdapter {
 
 	@FXML
 	private TabPane territoryTabPane;
+
 	@FXML
 	private Tab familyListTab;
 
@@ -496,6 +491,12 @@ public class Territory extends UpdateDataAdapter {
 		this.familiesMapsButton.setOnAction(event -> viewMaps());
 	}
 
+	public void updateTerritory() {
+
+		// TODO caricare la lista territori
+
+	}
+
 	private void updateFilterMember(String newValue) {
 
 		if (newValue.isEmpty())
@@ -674,20 +675,20 @@ public class Territory extends UpdateDataAdapter {
 				ctrl.setOwnerCtrl(this);
 
 				// Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
-				Tab newMemberTab = new Tab("", layout);
-				newMemberTab.setClosable(true);
-				newMemberTab.getStyleClass().add("tab_001");
-				newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
+				Tab newTab = new Tab("", layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
 
 				ctrl.setParentTabPane(this.memberTabPane);
 				ctrl.setMembersTab(territoryTab);
-				ctrl.setNewMemberTab(newMemberTab);
+				ctrl.setNewTab(newTab);
 				ctrl.setConfigs(this.configs);
 
 //				congrTabPane.getTabs().add(newMemberTab);
 //				congrTabPane.getSelectionModel().select(newMemberTab);
-				this.memberTabPane.getTabs().add(newMemberTab);
-				this.memberTabPane.getSelectionModel().select(newMemberTab);
+				this.memberTabPane.getTabs().add(newTab);
+				this.memberTabPane.getSelectionModel().select(newTab);
 
 				ctrl.objectInitialize();
 
@@ -708,8 +709,9 @@ public class Territory extends UpdateDataAdapter {
 				AnchorPane layout = (AnchorPane) fxmlLoader.load();
 
 				TerritoryEditor ctrl = (TerritoryEditor) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
 				ctrl.setSettings(this.settings);
-				ctrl.setOwnerStage(ownerStage);
+				ctrl.setOwnerStage(this.ownerStage);
 				ctrl.setOwnerCtrl(this);
 
 				Tab newTab = new Tab("", layout);
@@ -719,7 +721,7 @@ public class Territory extends UpdateDataAdapter {
 
 				ctrl.setParentTabPane(this.territoryTabPane);
 //				ctrl.setMembersTab(membersTab);
-				ctrl.setNewMemberTab(newTab);
+				ctrl.setNewTab(newTab);
 //				ctrl.setMembersList(this.membersList);
 
 				this.territoryTabPane.getTabs().add(newTab);
@@ -748,7 +750,7 @@ public class Territory extends UpdateDataAdapter {
 				ctrl.setApplication(this.application);
 				ctrl.setOwnerStage(ownerStage);
 				ctrl.setOwnerCtrl(this);
-				//ctrl.setSelectedMember(member);
+				// ctrl.setSelectedMember(member);
 				ctrl.setConfigs(this.configs);
 				ctrl.objectInitialize();
 
@@ -765,7 +767,7 @@ public class Territory extends UpdateDataAdapter {
 				// ctrl.setMembersTab(membersTab);
 				ctrl.setParentTabPane(this.memberTabPane);
 				ctrl.setMembersTab(this.memberListTab);
-				ctrl.setNewMemberTab(newMemberTab);
+				ctrl.setNewTab(newMemberTab);
 
 //				congrTabPane.getTabs().add(newMemberTab);
 //				congrTabPane.getSelectionModel().select(newMemberTab);
@@ -1027,5 +1029,13 @@ public class Territory extends UpdateDataAdapter {
 
 	public void setConfigs(HashMap<String, String> configs) {
 		this.configs = configs;
+	}
+
+	public TabPane getTerritoryTabPane() {
+		return territoryTabPane;
+	}
+
+	public void setTerritoryTabPane(TabPane territoryTabPane) {
+		this.territoryTabPane = territoryTabPane;
 	}
 }
