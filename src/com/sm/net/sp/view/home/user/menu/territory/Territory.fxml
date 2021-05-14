@@ -93,6 +93,24 @@
                                                                   </Button>
                                                                </children>
                                                             </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="territoryOpenViewerButton" mnemonicParsing="false" text="viewer">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="territoryOpenViewerURLButton" mnemonicParsing="false" text="viewerLink">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane alignment="CENTER_LEFT">
                                                                <children>
                                                                   <Button fx:id="territoryEditButton" mnemonicParsing="false" text="aggiorna">
@@ -120,42 +138,6 @@
                                                                   </TextField>
                                                                </children>
                                                             </StackPane>
-                                                            <StackPane>
-                                                               <children>
-                                                                  <ImageView fx:id="totalFamilyImageView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane>
-                                                               <children>
-                                                                  <TextField fx:id="totalFamilyTextField">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </TextField>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane>
-                                                               <children>
-                                                                  <ImageView fx:id="totalFilteredFamilyImageView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane>
-                                                               <children>
-                                                                  <TextField fx:id="totalFilteredFamilyTextField">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </TextField>
-                                                               </children>
-                                                            </StackPane>
                                                          </children>
                                                       </HBox>
                                                       <StackPane>
@@ -169,16 +151,11 @@
                                                       </StackPane>
                                                       <StackPane VBox.vgrow="ALWAYS">
                                                          <children>
-                                                            <TableView fx:id="familiesTableView">
+                                                            <TableView fx:id="territoryTableView">
                                                               <columns>
-                                                                <TableColumn fx:id="familyIDTableColumn" prefWidth="75.0" text="id" />
-                                                                  <TableColumn fx:id="familyMapsTableColumn" prefWidth="75.0" text="maps" />
-                                                                <TableColumn fx:id="familyNameTableColumn" prefWidth="75.0" text="C2" />
-                                                                  <TableColumn fx:id="familyCountTableColumn" prefWidth="75.0" text="C2" />
-                                                                  <TableColumn fx:id="familyStreetTableColumn" prefWidth="75.0" text="C2" />
-                                                                  <TableColumn fx:id="familyNummerTableColumn" prefWidth="75.0" text="C2" />
-                                                                  <TableColumn fx:id="familyPostCodeTableColumn" prefWidth="75.0" text="C2" />
-                                                                  <TableColumn fx:id="familyCityTableColumn" prefWidth="75.0" text="C2" />
+                                                                <TableColumn fx:id="territoryNumberTableColumn" prefWidth="75.0" text="number" />
+                                                                  <TableColumn fx:id="territoryNameTableColumn" prefWidth="75.0" text="name" />
+                                                                <TableColumn fx:id="territoryAssignedToTableColumn" prefWidth="75.0" text="assignedto" />
                                                               </columns>
                                                                <columnResizePolicy>
                                                                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

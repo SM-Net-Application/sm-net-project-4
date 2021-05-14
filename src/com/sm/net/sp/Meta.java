@@ -324,6 +324,9 @@ public class Meta {
 
 		public static final String MAPS = "maps.png";
 		public static final String FILTER = "filter.png";
+		
+		public static final String TERRITORYVIEWER = "territoryviewer.png";
+		public static final String TERRITORYVIEWERURL = "territoryviewerurl.png";
 
 		public static final String ONE = "day1.png";
 		public static final String TWO = "day2.png";

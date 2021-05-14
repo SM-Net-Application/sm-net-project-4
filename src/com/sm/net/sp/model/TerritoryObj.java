@@ -7,11 +7,10 @@ import javax.crypto.SecretKey;
 import org.json.JSONObject;
 
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor;
+import com.sm.net.util.Crypt;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -22,9 +21,9 @@ public class TerritoryObj {
 	private StringProperty spInf2;
 	private StringProperty spInf3;
 	private StringProperty spInf4;
-	private IntegerProperty spInf5;
+	private StringProperty spInf5;
 	private StringProperty spInf6;
-	private ObjectProperty<BigDecimal> spInf7;
+	private StringProperty spInf7;
 	private StringProperty spInf8;
 	private StringProperty spInf9;
 	private StringProperty spInf10;
@@ -68,9 +67,9 @@ public class TerritoryObj {
 		this.spInf2 = new SimpleStringProperty();
 		this.spInf3 = new SimpleStringProperty();
 		this.spInf4 = new SimpleStringProperty();
-		this.spInf5 = new SimpleIntegerProperty();
+		this.spInf5 = new SimpleStringProperty();
 		this.spInf6 = new SimpleStringProperty();
-		this.spInf7 = new SimpleObjectProperty<>();
+		this.spInf7 = new SimpleStringProperty();
 		this.spInf8 = new SimpleStringProperty();
 		this.spInf9 = new SimpleStringProperty();
 		this.spInf10 = new SimpleStringProperty();
@@ -106,57 +105,105 @@ public class TerritoryObj {
 		this.spInf40 = new SimpleStringProperty();
 	}
 
-	public static TerritoryObj newInstanceByView(TerritoryEditor editor) {
+	public static TerritoryObj newInstanceByView(TerritoryEditor editor, SecretKey sk) {
 
-		// Territory selectedWeek = editor.getSelectedWeek();
+		String emptyStringEncrypted = Crypt.encrypt("", sk);
 
-		// TODO
+		String spInf1 = Crypt.encrypt(editor.getTerritoryLandTextField().getText(), sk);
+		String spInf2 = Crypt.encrypt(editor.getTerritoryLandkreisTextField().getText(), sk);
+		String spInf3 = Crypt.encrypt(editor.getTerritoryKreisstadtTextField().getText(), sk);
+		String spInf4 = Crypt.encrypt(editor.getTerritoryOrtTextField().getText(), sk);
+		String spInf5 = Crypt.encrypt(editor.getTerritoryZipCodeTextField().getText(), sk);
+		String spInf6 = Crypt.encrypt(editor.getTerritoryOrtsteilTextField().getText(), sk);
 
-//		int spInf1 = Integer.valueOf(selectedWeek.getKey());
-//		int spInf2 = editor.getZ1u1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf3 = editor.getZ1u2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf4 = editor.getZ1u3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf5 = editor.getZ2u1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf6 = editor.getZ2u2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf7 = editor.getZ2u3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf8 = editor.getZ3u1MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf9 = editor.getZ3u2MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf10 = editor.getZ3u3MidweekComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf11 = editor.getZ1u1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf12 = editor.getZ1u2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf13 = editor.getZ1u3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf14 = editor.getZ2u1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf15 = editor.getZ2u2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf16 = editor.getZ2u3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf17 = editor.getZ3u1WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf18 = editor.getZ3u2WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
-//		int spInf19 = editor.getZ3u3WeekendComboBox().getSelectionModel().getSelectedItem().getSpMemberID();
+		BigDecimal territoryNumber = new BigDecimal(editor.getTerritoryNumberTextField().getText().replace(',', '.'));
+		String spInf7 = Crypt.encrypt(territoryNumber.toString(), sk);
+
+		String spInf8 = Crypt.encrypt(editor.getTerritoryNameTextField().getText(), sk);
+		String spInf9 = Crypt.encrypt(editor.getTerritoryCoordinatesTextField().getText(), sk);
+		String spInf10 = editor.getTerritoryMyMapsIDTextField().getText();
+		String spInf11 = Crypt.encrypt(editor.getImage1TextField().getText(), sk);
+		String spInf12 = Crypt.encrypt(editor.getImage1TitleTextField().getText(), sk);
+		String spInf13 = Crypt.encrypt(editor.getImage2TextField().getText(), sk);
+		String spInf14 = Crypt.encrypt(editor.getImage2TitleTextField().getText(), sk);
+		String spInf15 = Crypt.encrypt(editor.getImage3TextField().getText(), sk);
+		String spInf16 = Crypt.encrypt(editor.getImage3TitleTextField().getText(), sk);
+		String spInf17 = Crypt.encrypt(editor.getImage4TextField().getText(), sk);
+		String spInf18 = Crypt.encrypt(editor.getImage4TitleTextField().getText(), sk);
+		String spInf19 = Crypt.encrypt(editor.getImage5TextField().getText(), sk);
+		String spInf20 = Crypt.encrypt(editor.getImage5TitleTextField().getText(), sk);
+		String spInf21 = Crypt.encrypt(editor.getDoc1TextField().getText(), sk);
+		String spInf22 = Crypt.encrypt(editor.getDoc1TitleTextField().getText(), sk);
+		String spInf23 = Crypt.encrypt(editor.getDoc2TextField().getText(), sk);
+		String spInf24 = Crypt.encrypt(editor.getDoc2TitleTextField().getText(), sk);
+		String spInf25 = Crypt.encrypt(editor.getDoc3TextField().getText(), sk);
+		String spInf26 = Crypt.encrypt(editor.getDoc3TitleTextField().getText(), sk);
+		String spInf27 = Crypt.encrypt(editor.getDoc4TextField().getText(), sk);
+		String spInf28 = Crypt.encrypt(editor.getDoc4TitleTextField().getText(), sk);
+		String spInf29 = Crypt.encrypt(editor.getDoc5TextField().getText(), sk);
+		String spInf30 = Crypt.encrypt(editor.getDoc5TitleTextField().getText(), sk);
+
+		// Not encrypted
+		String spInf31 = editor.getTerritoryViewerIDTextField().getText();
+
+		String spInf32 = emptyStringEncrypted;
+		String spInf33 = emptyStringEncrypted;
+		String spInf34 = emptyStringEncrypted;
+		String spInf35 = emptyStringEncrypted;
+		String spInf36 = emptyStringEncrypted;
+		String spInf37 = emptyStringEncrypted;
+		String spInf38 = emptyStringEncrypted;
+		String spInf39 = emptyStringEncrypted;
+		String spInf40 = emptyStringEncrypted;
+
+		// Set data
 
 		TerritoryObj territory = new TerritoryObj();
-//
-//		if (selectedWeek != null)
-//			if (selectedWeek.spUscIDProperty() != null)
-//				week.setUscID(selectedWeek.getUscID());
-//
-//		week.setSpInf1(spInf1);
-//		week.setSpInf2(spInf2);
-//		week.setSpInf3(spInf3);
-//		week.setSpInf4(spInf4);
-//		week.setSpInf5(spInf5);
-//		week.setSpInf6(spInf6);
-//		week.setSpInf7(spInf7);
-//		week.setSpInf8(spInf8);
-//		week.setSpInf9(spInf9);
-//		week.setSpInf10(spInf10);
-//		week.setSpInf11(spInf11);
-//		week.setSpInf12(spInf12);
-//		week.setSpInf13(spInf13);
-//		week.setSpInf14(spInf14);
-//		week.setSpInf15(spInf15);
-//		week.setSpInf16(spInf16);
-//		week.setSpInf17(spInf17);
-//		week.setSpInf18(spInf18);
-//		week.setSpInf19(spInf19);
+
+		territory.setSpTerritoryID(-1);
+		if (editor.getSelectedTerritory() != null)
+			territory.setSpTerritoryID(editor.getSelectedTerritory().getSpTerritoryID());
+
+		territory.setSpInf1(spInf1);
+		territory.setSpInf2(spInf2);
+		territory.setSpInf3(spInf3);
+		territory.setSpInf4(spInf4);
+		territory.setSpInf5(spInf5);
+		territory.setSpInf6(spInf6);
+		territory.setSpInf7(spInf7);
+		territory.setSpInf8(spInf8);
+		territory.setSpInf9(spInf9);
+		territory.setSpInf10(spInf10);
+		territory.setSpInf11(spInf11);
+		territory.setSpInf12(spInf12);
+		territory.setSpInf13(spInf13);
+		territory.setSpInf14(spInf14);
+		territory.setSpInf15(spInf15);
+		territory.setSpInf16(spInf16);
+		territory.setSpInf17(spInf17);
+		territory.setSpInf18(spInf18);
+		territory.setSpInf19(spInf19);
+		territory.setSpInf20(spInf20);
+		territory.setSpInf21(spInf21);
+		territory.setSpInf22(spInf22);
+		territory.setSpInf23(spInf23);
+		territory.setSpInf24(spInf24);
+		territory.setSpInf25(spInf25);
+		territory.setSpInf26(spInf26);
+		territory.setSpInf27(spInf27);
+		territory.setSpInf28(spInf28);
+		territory.setSpInf29(spInf29);
+		territory.setSpInf30(spInf30);
+		territory.setSpInf31(spInf31);
+		territory.setSpInf32(spInf32);
+		territory.setSpInf33(spInf33);
+		territory.setSpInf34(spInf34);
+		territory.setSpInf35(spInf35);
+		territory.setSpInf36(spInf36);
+		territory.setSpInf37(spInf37);
+		territory.setSpInf38(spInf38);
+		territory.setSpInf39(spInf39);
+		territory.setSpInf40(spInf40);
 
 		return territory;
 	}
@@ -165,29 +212,89 @@ public class TerritoryObj {
 
 		TerritoryObj territory = new TerritoryObj();
 
-//		int spUscID = json.getInt("spUscID");
-//		int spInf1 = json.getInt("spInf1");
-//		int spInf2 = json.getInt("spInf2");
-//		int spInf3 = json.getInt("spInf3");
-//		int spInf4 = json.getInt("spInf4");
-//		int spInf5 = json.getInt("spInf5");
-//		int spInf6 = json.getInt("spInf6");
-//		int spInf7 = json.getInt("spInf7");
-//		int spInf8 = json.getInt("spInf8");
-//		int spInf9 = json.getInt("spInf9");
-//		int spInf10 = json.getInt("spInf10");
-//		int spInf11 = json.getInt("spInf11");
-//		int spInf12 = json.getInt("spInf12");
-//		int spInf13 = json.getInt("spInf13");
-//		int spInf14 = json.getInt("spInf14");
-//		int spInf15 = json.getInt("spInf15");
-//		int spInf16 = json.getInt("spInf16");
-//		int spInf17 = json.getInt("spInf17");
-//		int spInf18 = json.getInt("spInf18");
-//		int spInf19 = json.getInt("spInf19");
-//
+		int id = json.getInt("id");
+		String spInf1 = Crypt.decrypt(json.getString("spInf1"), secretKey);
+		String spInf2 = Crypt.decrypt(json.getString("spInf2"), secretKey);
+		String spInf3 = Crypt.decrypt(json.getString("spInf3"), secretKey);
+		String spInf4 = Crypt.decrypt(json.getString("spInf4"), secretKey);
+		String spInf5 = Crypt.decrypt(json.getString("spInf5"), secretKey);
+		String spInf6 = Crypt.decrypt(json.getString("spInf6"), secretKey);
+		String spInf7 = Crypt.decrypt(json.getString("spInf7"), secretKey);
+		String spInf8 = Crypt.decrypt(json.getString("spInf8"), secretKey);
+		String spInf9 = Crypt.decrypt(json.getString("spInf9"), secretKey);
+		String spInf10 = json.getString("spInf10");
+		String spInf11 = Crypt.decrypt(json.getString("spInf11"), secretKey);
+		String spInf12 = Crypt.decrypt(json.getString("spInf12"), secretKey);
+		String spInf13 = Crypt.decrypt(json.getString("spInf13"), secretKey);
+		String spInf14 = Crypt.decrypt(json.getString("spInf14"), secretKey);
+		String spInf15 = Crypt.decrypt(json.getString("spInf15"), secretKey);
+		String spInf16 = Crypt.decrypt(json.getString("spInf16"), secretKey);
+		String spInf17 = Crypt.decrypt(json.getString("spInf17"), secretKey);
+		String spInf18 = Crypt.decrypt(json.getString("spInf18"), secretKey);
+		String spInf19 = Crypt.decrypt(json.getString("spInf19"), secretKey);
+		String spInf20 = Crypt.decrypt(json.getString("spInf20"), secretKey);
+		String spInf21 = Crypt.decrypt(json.getString("spInf21"), secretKey);
+		String spInf22 = Crypt.decrypt(json.getString("spInf22"), secretKey);
+		String spInf23 = Crypt.decrypt(json.getString("spInf23"), secretKey);
+		String spInf24 = Crypt.decrypt(json.getString("spInf24"), secretKey);
+		String spInf25 = Crypt.decrypt(json.getString("spInf25"), secretKey);
+		String spInf26 = Crypt.decrypt(json.getString("spInf26"), secretKey);
+		String spInf27 = Crypt.decrypt(json.getString("spInf27"), secretKey);
+		String spInf28 = Crypt.decrypt(json.getString("spInf28"), secretKey);
+		String spInf29 = Crypt.decrypt(json.getString("spInf29"), secretKey);
+		String spInf30 = Crypt.decrypt(json.getString("spInf30"), secretKey);
+		String spInf31 = json.getString("spInf31");
+		String spInf32 = Crypt.decrypt(json.getString("spInf32"), secretKey);
+		String spInf33 = Crypt.decrypt(json.getString("spInf33"), secretKey);
+		String spInf34 = Crypt.decrypt(json.getString("spInf34"), secretKey);
+		String spInf35 = Crypt.decrypt(json.getString("spInf35"), secretKey);
+		String spInf36 = Crypt.decrypt(json.getString("spInf36"), secretKey);
+		String spInf37 = Crypt.decrypt(json.getString("spInf37"), secretKey);
+		String spInf38 = Crypt.decrypt(json.getString("spInf38"), secretKey);
+		String spInf39 = Crypt.decrypt(json.getString("spInf39"), secretKey);
+		String spInf40 = Crypt.decrypt(json.getString("spInf40"), secretKey);
 
-		// TODO: set Territory
+		territory.setSpTerritoryID(id);
+		territory.setSpInf1(spInf1);
+		territory.setSpInf2(spInf2);
+		territory.setSpInf3(spInf3);
+		territory.setSpInf4(spInf4);
+		territory.setSpInf5(spInf5);
+		territory.setSpInf6(spInf6);
+		territory.setSpInf7(spInf7);
+		territory.setSpInf8(spInf8);
+		territory.setSpInf9(spInf9);
+		territory.setSpInf10(spInf10);
+		territory.setSpInf11(spInf11);
+		territory.setSpInf12(spInf12);
+		territory.setSpInf13(spInf13);
+		territory.setSpInf14(spInf14);
+		territory.setSpInf15(spInf15);
+		territory.setSpInf16(spInf16);
+		territory.setSpInf17(spInf17);
+		territory.setSpInf18(spInf18);
+		territory.setSpInf19(spInf19);
+		territory.setSpInf20(spInf20);
+		territory.setSpInf21(spInf21);
+		territory.setSpInf22(spInf22);
+		territory.setSpInf23(spInf23);
+		territory.setSpInf24(spInf24);
+		territory.setSpInf25(spInf25);
+		territory.setSpInf26(spInf26);
+		territory.setSpInf27(spInf27);
+		territory.setSpInf28(spInf28);
+		territory.setSpInf29(spInf29);
+		territory.setSpInf30(spInf30);
+		territory.setSpInf31(spInf31);
+		territory.setSpInf32(spInf32);
+		territory.setSpInf33(spInf33);
+		territory.setSpInf34(spInf34);
+		territory.setSpInf35(spInf35);
+		territory.setSpInf36(spInf36);
+		territory.setSpInf37(spInf37);
+		territory.setSpInf38(spInf38);
+		territory.setSpInf39(spInf39);
+		territory.setSpInf40(spInf40);
 
 		return territory;
 	}
@@ -252,15 +359,15 @@ public class TerritoryObj {
 		this.spInf4Property().set(spInf4);
 	}
 
-	public final IntegerProperty spInf5Property() {
+	public final StringProperty spInf5Property() {
 		return this.spInf5;
 	}
 
-	public final int getSpInf5() {
+	public final String getSpInf5() {
 		return this.spInf5.get();
 	}
 
-	public final void setSpInf5(final int spInf5) {
+	public final void setSpInf5(final String spInf5) {
 		this.spInf5Property().set(spInf5);
 	}
 
@@ -276,15 +383,15 @@ public class TerritoryObj {
 		this.spInf6Property().set(spInf6);
 	}
 
-	public final ObjectProperty<BigDecimal> spInf7Property() {
+	public final StringProperty spInf7Property() {
 		return this.spInf7;
 	}
 
-	public final BigDecimal getSpInf7() {
+	public final String getSpInf7() {
 		return this.spInf7.get();
 	}
 
-	public final void setSpInf7(final BigDecimal spInf7) {
+	public final void setSpInf7(final String spInf7) {
 		this.spInf7Property().set(spInf7);
 	}
 

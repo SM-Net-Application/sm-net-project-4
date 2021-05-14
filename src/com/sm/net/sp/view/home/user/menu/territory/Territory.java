@@ -1,9 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
-import java.awt.Desktop;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URI;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.stream.StreamSupport;
@@ -14,12 +12,15 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.UpdateDataAdapter;
+import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
+import com.smnet.core.task.TaskManager;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Territory extends UpdateDataAdapter {
+public class Territory {
 
 	@FXML
 	private ImageView congrImageView;
@@ -54,12 +55,33 @@ public class Territory extends UpdateDataAdapter {
 	private Tab publisherTab;
 
 	@FXML
+	private TabPane territoryTabPane;
+
+	@FXML
+	private Button territoryAddButton;
+	@FXML
+	private Button territoryOpenViewerButton;
+	@FXML
+	private Button territoryOpenViewerURLButton;
+
+	@FXML
+	private Button territoryRemoveButton;
+	@FXML
+	private Button territoryEditButton;
+
+	@FXML
+	private TableView<TerritoryObj> territoryTableView;
+	@FXML
+	private TableColumn<TerritoryObj, BigDecimal> territoryNumberTableColumn;
+	@FXML
+	private TableColumn<TerritoryObj, String> territoryNameTableColumn;
+	@FXML
+	private TableColumn<TerritoryObj, String> territoryAssignedToTableColumn;
+
+	@FXML
 	private TabPane memberTabPane;
 	@FXML
 	private Tab memberListTab;
-
-	@FXML
-	private TabPane territoryTabPane;
 
 	@FXML
 	private Tab familyListTab;
@@ -114,44 +136,10 @@ public class Territory extends UpdateDataAdapter {
 	private TextField totalFemaleTextField;
 
 	@FXML
-	private TableView<Family> familiesTableView;
-	@FXML
-	private TableColumn<Family, Integer> familyIDTableColumn;
-	@FXML
-	private TableColumn<Family, ImageView> familyMapsTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyNameTableColumn;
-	@FXML
-	private TableColumn<Family, Integer> familyCountTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyStreetTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyNummerTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyPostCodeTableColumn;
-	@FXML
-	private TableColumn<Family, String> familyCityTableColumn;
-
-	@FXML
-	private Button territoryAddButton;
-	@FXML
-	private Button territoryRemoveButton;
-	@FXML
-	private Button territoryEditButton;
-	@FXML
 	private Button familiesMapsButton;
 
 	@FXML
 	private TextField filterFamilyTextField;
-	@FXML
-	private ImageView totalFamilyImageView;
-	@FXML
-	private TextField totalFamilyTextField;
-
-	@FXML
-	private ImageView totalFilteredFamilyImageView;
-	@FXML
-	private TextField totalFilteredFamilyTextField;
 
 	private Settings settings;
 	private Language language;
@@ -159,8 +147,9 @@ public class Territory extends UpdateDataAdapter {
 
 	private SupportPlannerView application;
 
+	private ObservableList<TerritoryObj> territoryList;
+
 	private ObservableList<Member> membersList;
-	private ObservableList<Family> familiesList;
 
 	private HashMap<String, String> configs;
 
@@ -171,6 +160,10 @@ public class Territory extends UpdateDataAdapter {
 	}
 
 	private void cellValueFactory() {
+
+		this.territoryNumberTableColumn.setCellValueFactory(
+				cellData -> new SimpleObjectProperty<BigDecimal>(new BigDecimal(cellData.getValue().getSpInf7())));
+		this.territoryNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
 
 		this.memberIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
 		this.memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
@@ -213,22 +206,22 @@ public class Territory extends UpdateDataAdapter {
 			return null;
 		});
 
-		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
-
-		this.familyMapsTableColumn.setCellValueFactory(cellData -> {
-
-			if (!cellData.getValue().getSpInf9Decrypted().isEmpty())
-				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS));
-
-			return null;
-		});
-
-		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
-		familyCountTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
-		familyStreetTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
-		familyNummerTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
-		familyPostCodeTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf4DecryptedProperty());
-		familyCityTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf5DecryptedProperty());
+//		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
+//
+//		this.familyMapsTableColumn.setCellValueFactory(cellData -> {
+//
+//			if (!cellData.getValue().getSpInf9Decrypted().isEmpty())
+//				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS));
+//
+//			return null;
+//		});
+//
+//		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
+//		familyCountTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
+//		familyStreetTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
+//		familyNummerTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
+//		familyPostCodeTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf4DecryptedProperty());
+//		familyCityTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf5DecryptedProperty());
 	}
 
 	private void styleClasses() {
@@ -251,15 +244,17 @@ public class Territory extends UpdateDataAdapter {
 		this.memberMonitorTableColumn.getStyleClass().add("table_column_002");
 
 		membersTableView.getStyleClass().add("table_view_001");
-		familiesTableView.getStyleClass().add("table_view_001");
+		territoryTableView.getStyleClass().add("table_view_001");
 
 		memberAddButton.getStyleClass().add("button_image_001");
 		memberDeleteButton.getStyleClass().add("button_image_001");
 		membersUpdateButton.getStyleClass().add("button_image_001");
 
-		this.familyMapsTableColumn.getStyleClass().add("table_column_002");
+		this.territoryNumberTableColumn.getStyleClass().add("table_column_002");
 
 		this.territoryAddButton.getStyleClass().add("button_image_001");
+		this.territoryOpenViewerButton.getStyleClass().add("button_image_001");
+		this.territoryOpenViewerURLButton.getStyleClass().add("button_image_001");
 		this.territoryRemoveButton.getStyleClass().add("button_image_001");
 		this.territoryEditButton.getStyleClass().add("button_image_001");
 
@@ -273,16 +268,12 @@ public class Territory extends UpdateDataAdapter {
 		this.totalFemaleTextField.getStyleClass().add("text_field_002");
 
 		this.filterFamilyTextField.getStyleClass().add("text_field_001");
-		this.totalFamilyTextField.getStyleClass().add("text_field_002");
-		this.totalFilteredFamilyTextField.getStyleClass().add("text_field_002");
 	}
 
 	public void objectInitialize() {
 		listeners();
 		viewUpdate();
 		initInfo();
-		updateMembers();
-		updateFamilies();
 
 		// Carica programmazione e luoghi
 
@@ -290,6 +281,11 @@ public class Territory extends UpdateDataAdapter {
 //
 //		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 //				new CongrInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+	}
+
+	public void updateTerritoryList(ObservableList<TerritoryObj> list) {
+		this.territoryList.clear();
+		this.territoryList.addAll(list);
 	}
 
 	private void viewUpdate() {
@@ -385,28 +381,32 @@ public class Territory extends UpdateDataAdapter {
 		this.memberMonitorPrintButton.setText("");
 		this.memberMonitorPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 
-		familyIDTableColumn.setText(language.getString("TEXT0005"));
-		familyIDTableColumn.setMinWidth(50);
-		familyIDTableColumn.setMaxWidth(50);
-		familyIDTableColumn.setResizable(false);
-
-		this.familyMapsTableColumn.setText("");
-		this.familyMapsTableColumn.setMinWidth(50);
-		this.familyMapsTableColumn.setMaxWidth(50);
-		this.familyMapsTableColumn.setResizable(false);
-
-		familyNameTableColumn.setText(language.getString("TEXT0025"));
-		familyCountTableColumn.setText(language.getString("TEXT0026"));
-		familyStreetTableColumn.setText(language.getString("TEXT0027"));
-		familyNummerTableColumn.setText(language.getString("TEXT0028"));
-		familyPostCodeTableColumn.setText(language.getString("TEXT0029"));
-		familyCityTableColumn.setText(language.getString("TEXT0030"));
+		this.territoryNumberTableColumn.setText(this.language.getString("territory.tablecolumns.territorynumber"));
+		this.territoryNumberTableColumn.setMinWidth(100);
+		this.territoryNumberTableColumn.setMaxWidth(100);
+		this.territoryNumberTableColumn.setResizable(false);
+		this.territoryNameTableColumn.setText(this.language.getString("territory.tablecolumns.territoryname"));
+		this.territoryAssignedToTableColumn
+				.setText(this.language.getString("territory.tablecolumns.territoryassignedto"));
 
 		Tooltip territoryAddTooltip = new Tooltip(this.language.getString("territory.tooltip.add"));
 		territoryAddTooltip.getStyleClass().add("tooltip_001");
 		this.territoryAddButton.setTooltip(territoryAddTooltip);
 		this.territoryAddButton.setText("");
 		this.territoryAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_ADD));
+
+		Tooltip territoryViewerTooltip = new Tooltip(this.language.getString("territory.tooltip.viewer"));
+		territoryViewerTooltip.getStyleClass().add("tooltip_001");
+		this.territoryOpenViewerButton.setTooltip(territoryViewerTooltip);
+		this.territoryOpenViewerButton.setText("");
+		this.territoryOpenViewerButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYVIEWER));
+
+		Tooltip territoryViewerURLTooltip = new Tooltip(this.language.getString("territory.tooltip.viewerurl"));
+		territoryViewerURLTooltip.getStyleClass().add("tooltip_001");
+		this.territoryOpenViewerURLButton.setTooltip(territoryViewerURLTooltip);
+		this.territoryOpenViewerURLButton.setText("");
+		this.territoryOpenViewerURLButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYVIEWERURL));
 
 		Tooltip territoryRemoveTooltip = new Tooltip(this.language.getString("territory.tooltip.remove"));
 		territoryRemoveTooltip.getStyleClass().add("tooltip_001");
@@ -446,41 +446,53 @@ public class Territory extends UpdateDataAdapter {
 		this.totalFemaleTextField.setMinWidth(50);
 		this.totalFemaleTextField.setMaxWidth(50);
 		this.totalFemaleTextField.setEditable(false);
-
-		this.totalFamilyImageView.setFitWidth(25);
-		this.totalFamilyImageView.setFitHeight(25);
-		this.totalFamilyImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.FAMILY, 25, 25));
-		this.totalFamilyTextField.setMinWidth(50);
-		this.totalFamilyTextField.setMaxWidth(50);
-		this.totalFamilyTextField.setEditable(false);
-
-		this.totalFilteredFamilyImageView.setFitWidth(25);
-		this.totalFilteredFamilyImageView.setFitHeight(25);
-		this.totalFilteredFamilyImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.FILTER, 25, 25));
-		this.totalFilteredFamilyTextField.setMinWidth(50);
-		this.totalFilteredFamilyTextField.setMaxWidth(50);
-		this.totalFilteredFamilyTextField.setEditable(false);
 	}
 
 	private void initInfo() {
 
-		// TODO : load Info con il nuovo sistema
+		this.territoryList = FXCollections.observableArrayList();
+		this.territoryTableView.setItems(this.territoryList);
 
+		updateTerritory();
+	}
+
+	public void updateTerritory() {
+
+		String waitMessage = this.language.getString("territory.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new TerritoryLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
 	private void listeners() {
 
-		listenerMemberAddButton();
-		listenerMemberDeleteButton();
-		listenerMembersUpdateButton();
-		listenerMembersTableView();
+		// TODO: Fix all listeners
+		this.territoryAddButton.setOnAction(event -> newTerritory());
+		this.territoryOpenViewerButton.setOnAction(event -> openTerritoryViewer());
 
-		listenerFamilyAddButton();
-		listenerFamilyDeleteButton();
-		listenerFamilyUpdateButton();
-		listenerFamiliesTableView();
+		this.territoryTableView.setRowFactory(param -> {
+			TableRow<TerritoryObj> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty()))
+					editTerritory(row.getItem());
+			});
+			return row;
+		});
 
-		listenerMemberMonitorPrintButton();
+		memberAddButton.setOnAction(event2 -> newMember());
+		memberDeleteButton.setOnAction(event3 -> deleteMember());
+		membersTableView.setRowFactory(param1 -> {
+			TableRow<Member> row = new TableRow<>();
+			row.setOnMouseClicked(event4 -> {
+				if (event4.getClickCount() == 2 && (!row.isEmpty()))
+					editMember(row.getItem());
+			});
+			return row;
+		});
+
+		territoryRemoveButton.setOnAction(event1 -> deleteFamily());
+
+		this.memberMonitorPrintButton.setOnAction(event4 -> print());
 
 		this.filterMemberTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
@@ -488,13 +500,32 @@ public class Territory extends UpdateDataAdapter {
 		this.filterFamilyTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterFamily(newValue));
 
-		this.familiesMapsButton.setOnAction(event -> viewMaps());
+//		this.familiesMapsButton.setOnAction(event -> viewMaps());
 	}
 
-	public void updateTerritory() {
+	private void openTerritoryViewer() {
 
-		// TODO caricare la lista territori
+		
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex()>-1) {
+			
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+			
+			String spInf10 = territoryObj.getSpInf10();
+			String spInf31 = territoryObj.getSpInf31();
+			
+			if (!(spInf10.isEmpty() || spInf31.isEmpty())) {
 
+				// TODO: open Viewer
+				
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("territory.error.nomymapsidorviewerid"));
+			}
+			
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
 	}
 
 	private void updateFilterMember(String newValue) {
@@ -511,18 +542,20 @@ public class Territory extends UpdateDataAdapter {
 
 	private void updateFilterFamily(String newValue) {
 
-		if (newValue.isEmpty()) {
-			this.familiesTableView.setItems(this.familiesList);
-			// FILTRO
-			this.totalFilteredFamilyTextField.setText(String.valueOf(this.familiesList.size()));
-		} else {
-			ObservableList<Family> filteredMemberList = buildListFamily(newValue);
-			this.familiesTableView.setItems(filteredMemberList);
-			// FILTRO
-			this.totalFilteredFamilyTextField.setText(String.valueOf(filteredMemberList.size()));
-		}
+		// TODO: Filter
 
-		this.familiesTableView.refresh();
+//		if (newValue.isEmpty()) {
+//			this.territoryTableView.setItems(this.familiesList);
+//			// FILTRO
+//			this.totalFilteredFamilyTextField.setText(String.valueOf(this.familiesList.size()));
+//		} else {
+//			ObservableList<Family> filteredMemberList = buildListFamily(newValue);
+//			this.territoryTableView.setItems(filteredMemberList);
+//			// FILTRO
+//			this.totalFilteredFamilyTextField.setText(String.valueOf(filteredMemberList.size()));
+//		}
+//
+//		this.territoryTableView.refresh();
 	}
 
 	private ObservableList<Member> buildListMember(String filter) {
@@ -535,15 +568,15 @@ public class Territory extends UpdateDataAdapter {
 		return list;
 	}
 
-	private ObservableList<Family> buildListFamily(String filter) {
-
-		ObservableList<Family> list = FXCollections.observableArrayList();
-
-		StreamSupport.stream(this.familiesList.spliterator(), false).filter(obj -> matchFilterFamily(obj, filter))
-				.forEach(obj -> list.add(obj));
-
-		return list;
-	}
+//	private ObservableList<Family> buildListFamily(String filter) {
+//
+//		ObservableList<Family> list = FXCollections.observableArrayList();
+//
+//		StreamSupport.stream(this.familiesList.spliterator(), false).filter(obj -> matchFilterFamily(obj, filter))
+//				.forEach(obj -> list.add(obj));
+//
+//		return list;
+//	}
 
 	private boolean matchFilterMember(Member obj, String match) {
 
@@ -581,12 +614,13 @@ public class Territory extends UpdateDataAdapter {
 		});
 	}
 
-	private void listenerFamiliesTableView() {
-		familiesTableView.setRowFactory(param -> {
-			TableRow<Family> row = new TableRow<>();
+	private void listenerTerritoryTableView() {
+
+		this.territoryTableView.setRowFactory(param -> {
+			TableRow<TerritoryObj> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty()))
-					editFamily(row.getItem());
+					editTerritory(row.getItem());
 			});
 			return row;
 		});
@@ -606,14 +640,6 @@ public class Territory extends UpdateDataAdapter {
 
 	private void listenerFamilyDeleteButton() {
 		territoryRemoveButton.setOnAction(event -> deleteFamily());
-	}
-
-	private void listenerMembersUpdateButton() {
-		membersUpdateButton.setOnAction(event -> updateMembers());
-	}
-
-	private void listenerFamilyUpdateButton() {
-		territoryEditButton.setOnAction(event -> updateFamilies());
 	}
 
 	private void deleteMember() {
@@ -638,7 +664,7 @@ public class Territory extends UpdateDataAdapter {
 
 	private void deleteFamily() {
 
-		if (familiesTableView.getSelectionModel().getSelectedIndex() > -1) {
+		if (territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 //			Family family = familiesTableView.getSelectionModel().getSelectedItem();
 //
@@ -781,9 +807,9 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
-	private void editFamily(Family family) {
+	private void editTerritory(TerritoryObj territoryObj) {
 
-		if (!isAlreadyOpen(this.territoryTabPane, family.getSpInf1Decrypted())) {
+		if (!isAlreadyOpen(this.territoryTabPane, territoryObj.getSpInf7())) {
 
 //			try {
 //
@@ -815,6 +841,36 @@ public class Territory extends UpdateDataAdapter {
 //			} catch (IOException e) {
 //				e.printStackTrace();
 //			}
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_EDITOR_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryEditor ctrl = (TerritoryEditor) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedTerritory(territoryObj);
+
+				Tab newTab = new Tab(territoryObj.getSpInf7(), layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.TERRITORY_EDIT));
+
+				ctrl.setParentTabPane(this.territoryTabPane);
+				ctrl.setNewTab(newTab);
+
+				this.territoryTabPane.getTabs().add(newTab);
+				this.territoryTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -828,64 +884,6 @@ public class Territory extends UpdateDataAdapter {
 			}
 
 		return false;
-	}
-
-	@Override
-	public void updateMembers() {
-		Actions.getAllMembers(settings, ownerStage, this);
-	}
-
-	@Override
-	public void updateFamilies() {
-		Actions.getAllFamilies(settings, ownerStage, this);
-	}
-
-	@Override
-	public void updateMembers(ObservableList<Member> list) {
-
-		this.membersList = list;
-		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
-				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
-
-		this.membersTableView.setItems(membersList);
-
-		// RESET FILTRO
-		this.filterMemberTextField.setText("");
-
-		// TOTALE
-		this.totalTextField.setText(String.valueOf(this.membersList.size()));
-
-		// MASCHI E FEMMINE
-		int male = 0;
-		int female = 0;
-
-		for (Member m : this.membersList) {
-			if (m.getSpInf4() == 0)
-				male++;
-			else if (m.getSpInf4() == 1)
-				female++;
-		}
-
-		this.totalMaleTextField.setText(String.valueOf(male));
-		this.totalFemaleTextField.setText(String.valueOf(female));
-	}
-
-	@Override
-	public void updateFamilies(ObservableList<Family> list) {
-
-		this.familiesList = list;
-		this.familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
-
-		this.familiesTableView.setItems(familiesList);
-
-		// RESET FILTRO
-		this.filterFamilyTextField.setText("");
-
-		// TOTALE
-		this.totalFamilyTextField.setText(String.valueOf(this.familiesList.size()));
-
-		// FILTRO
-		this.totalFilteredFamilyTextField.setText(String.valueOf(this.familiesList.size()));
 	}
 
 	private void print() {
@@ -938,57 +936,8 @@ public class Territory extends UpdateDataAdapter {
 
 	}
 
-	private void viewMaps() {
-
-		if (this.familiesTableView.getSelectionModel().getSelectedIndex() > -1) {
-
-			Family family = this.familiesTableView.getSelectionModel().getSelectedItem();
-
-			String link = "";
-
-			String coord = family.getSpInf9Decrypted();
-			if (!coord.isEmpty()) {
-
-				link = this.language.getString("supportplanner.googlemaps.pattern");
-				link = String.format(link, coord.replace(" ", "+"));
-
-			} else {
-
-				String spInf2 = family.getSpInf2Decrypted();
-				String spInf3 = family.getSpInf3Decrypted();
-				String spInf4 = family.getSpInf4Decrypted();
-				String spInf5 = family.getSpInf5Decrypted();
-
-				if (!spInf2.isEmpty() && !spInf3.isEmpty() && !spInf4.isEmpty() && !spInf5.isEmpty()) {
-
-					String addr = String.format("%s %s, %s %s", spInf2, spInf3, spInf4, spInf5);
-					addr = addr.replace(" ", "+");
-
-					link = this.language.getString("supportplanner.googlemaps.pattern");
-					link = String.format(link, addr);
-				}
-
-			}
-
-			if (!link.isEmpty()) {
-
-				Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-				if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-					try {
-						desktop.browse(new URI(link));
-					} catch (Exception e) {
-						this.application.getAlertBuilder().error(this.ownerStage, e.getMessage()).show();
-					}
-				}
-			} else {
-
-				this.application.getAlertBuilder2().error(this.ownerStage,
-						this.language.getString("congregation.family.error.coord"));
-			}
-		} else {
-			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.family.error.select"));
-		}
+	public void territoryTableViewRefresh() {
+		Platform.runLater(() -> this.territoryTableView.refresh());
 	}
 
 	public Settings getSettings() {
@@ -1037,5 +986,13 @@ public class Territory extends UpdateDataAdapter {
 
 	public void setTerritoryTabPane(TabPane territoryTabPane) {
 		this.territoryTabPane = territoryTabPane;
+	}
+
+	public ObservableList<TerritoryObj> getTerritoryList() {
+		return territoryList;
+	}
+
+	public void setTerritoryList(ObservableList<TerritoryObj> territoryList) {
+		this.territoryList = territoryList;
 	}
 }

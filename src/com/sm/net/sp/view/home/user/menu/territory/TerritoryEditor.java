@@ -1,5 +1,6 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 import com.sm.net.project.Language;
@@ -301,7 +302,8 @@ public class TerritoryEditor {
 			this.territoryOrtTextField.setText(this.selectedTerritory.getSpInf4());
 			this.territoryZipCodeTextField.setText(String.valueOf(this.selectedTerritory.getSpInf5()));
 			this.territoryOrtsteilTextField.setText(this.selectedTerritory.getSpInf6());
-			this.territoryMyMapsIDTextField.setText(this.selectedTerritory.getSpInf31());
+			this.territoryMyMapsIDTextField.setText(this.selectedTerritory.getSpInf10());
+			this.territoryViewerIDTextField.setText(this.selectedTerritory.getSpInf31());
 
 			this.image1TextField.setText(this.selectedTerritory.getSpInf11());
 			this.image1TitleTextField.setText(this.selectedTerritory.getSpInf12());
@@ -374,36 +376,21 @@ public class TerritoryEditor {
 
 		if (checkFields()) {
 
+			TerritoryObj territoryObj;
 			if (this.selectedTerritory != null) {
-
-//				// editWeek
-//
-//				WeekUsciere week = WeekUsciere.newInstanceByView(this);
-//				week.setUscID(this.selectedWeek.getUscID());
-//
-//				String waitMessage = this.language.getString("memorialeditor.wait.save");
-//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//						new WeekUsciereSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-//								week, this.ownerCtrl, this.thisTab));
-//
+				// EDIT
+				territoryObj = TerritoryObj.newInstanceByView(this,
+						this.application.getSettings().getDatabaseSecretKey());
 			} else {
-//
-//				// newWeek
-//
-//				WeekUsciere week = WeekUsciere.newInstanceByView(this);
-//
-//				String waitMessage = this.language.getString("memorialeditor.wait.save");
-//				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//						new WeekUsciereSaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-//								week, this.ownerCtrl, this.thisTab));
-
-				TerritoryObj territoryObj = TerritoryObj.newInstanceByView(this);
-
-				String waitMessage = this.language.getString("territoryeditor.wait.save");
-				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new TerritorySaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-								territoryObj, this.ownerCtrl, this.newTab));
+				// NEW
+				territoryObj = TerritoryObj.newInstanceByView(this,
+						this.application.getSettings().getDatabaseSecretKey());
 			}
+
+			String waitMessage = this.language.getString("territoryeditor.wait.save");
+			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+					new TerritorySaveTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+							territoryObj, this.ownerCtrl, this.newTab));
 		}
 	}
 
@@ -413,6 +400,20 @@ public class TerritoryEditor {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("territoryeditor.error.emptynumber"));
+
+			return false;
+		}
+
+		try {
+
+			String number = this.territoryNumberTextField.getText();
+			number = number.replace(',', '.');
+			new BigDecimal(number);
+
+		} catch (Exception e) {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territoryeditor.error.validnumber"));
 
 			return false;
 		}
@@ -429,6 +430,18 @@ public class TerritoryEditor {
 
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("territoryeditor.error.emptyzipcode"));
+
+			return false;
+		}
+
+		try {
+
+			Integer.valueOf(territoryZipCodeTextField.getText());
+
+		} catch (Exception e) {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territoryeditor.error.validzipcode"));
 
 			return false;
 		}
@@ -579,4 +592,259 @@ public class TerritoryEditor {
 		this.configs = configs;
 	}
 
+	public TextField getTerritoryNumberTextField() {
+		return territoryNumberTextField;
+	}
+
+	public void setTerritoryNumberTextField(TextField territoryNumberTextField) {
+		this.territoryNumberTextField = territoryNumberTextField;
+	}
+
+	public TextField getTerritoryNameTextField() {
+		return territoryNameTextField;
+	}
+
+	public void setTerritoryNameTextField(TextField territoryNameTextField) {
+		this.territoryNameTextField = territoryNameTextField;
+	}
+
+	public TextField getTerritoryCoordinatesTextField() {
+		return territoryCoordinatesTextField;
+	}
+
+	public void setTerritoryCoordinatesTextField(TextField territoryCoordinatesTextField) {
+		this.territoryCoordinatesTextField = territoryCoordinatesTextField;
+	}
+
+	public TextField getTerritoryLandTextField() {
+		return territoryLandTextField;
+	}
+
+	public void setTerritoryLandTextField(TextField territoryLandTextField) {
+		this.territoryLandTextField = territoryLandTextField;
+	}
+
+	public TextField getTerritoryLandkreisTextField() {
+		return territoryLandkreisTextField;
+	}
+
+	public void setTerritoryLandkreisTextField(TextField territoryLandkreisTextField) {
+		this.territoryLandkreisTextField = territoryLandkreisTextField;
+	}
+
+	public TextField getTerritoryKreisstadtTextField() {
+		return territoryKreisstadtTextField;
+	}
+
+	public void setTerritoryKreisstadtTextField(TextField territoryKreisstadtTextField) {
+		this.territoryKreisstadtTextField = territoryKreisstadtTextField;
+	}
+
+	public TextField getTerritoryOrtTextField() {
+		return territoryOrtTextField;
+	}
+
+	public void setTerritoryOrtTextField(TextField territoryOrtTextField) {
+		this.territoryOrtTextField = territoryOrtTextField;
+	}
+
+	public TextField getTerritoryZipCodeTextField() {
+		return territoryZipCodeTextField;
+	}
+
+	public void setTerritoryZipCodeTextField(TextField territoryZipCodeTextField) {
+		this.territoryZipCodeTextField = territoryZipCodeTextField;
+	}
+
+	public TextField getTerritoryOrtsteilTextField() {
+		return territoryOrtsteilTextField;
+	}
+
+	public void setTerritoryOrtsteilTextField(TextField territoryOrtsteilTextField) {
+		this.territoryOrtsteilTextField = territoryOrtsteilTextField;
+	}
+
+	public TextField getTerritoryMyMapsIDTextField() {
+		return territoryMyMapsIDTextField;
+	}
+
+	public void setTerritoryMyMapsIDTextField(TextField territoryMyMapsIDTextField) {
+		this.territoryMyMapsIDTextField = territoryMyMapsIDTextField;
+	}
+
+	public TextField getTerritoryViewerIDTextField() {
+		return territoryViewerIDTextField;
+	}
+
+	public void setTerritoryViewerIDTextField(TextField territoryViewerIDTextField) {
+		this.territoryViewerIDTextField = territoryViewerIDTextField;
+	}
+
+	public TextField getImage1TextField() {
+		return image1TextField;
+	}
+
+	public void setImage1TextField(TextField image1TextField) {
+		this.image1TextField = image1TextField;
+	}
+
+	public TextField getImage2TextField() {
+		return image2TextField;
+	}
+
+	public void setImage2TextField(TextField image2TextField) {
+		this.image2TextField = image2TextField;
+	}
+
+	public TextField getImage3TextField() {
+		return image3TextField;
+	}
+
+	public void setImage3TextField(TextField image3TextField) {
+		this.image3TextField = image3TextField;
+	}
+
+	public TextField getImage4TextField() {
+		return image4TextField;
+	}
+
+	public void setImage4TextField(TextField image4TextField) {
+		this.image4TextField = image4TextField;
+	}
+
+	public TextField getImage5TextField() {
+		return image5TextField;
+	}
+
+	public void setImage5TextField(TextField image5TextField) {
+		this.image5TextField = image5TextField;
+	}
+
+	public TextField getImage1TitleTextField() {
+		return image1TitleTextField;
+	}
+
+	public void setImage1TitleTextField(TextField image1TitleTextField) {
+		this.image1TitleTextField = image1TitleTextField;
+	}
+
+	public TextField getImage2TitleTextField() {
+		return image2TitleTextField;
+	}
+
+	public void setImage2TitleTextField(TextField image2TitleTextField) {
+		this.image2TitleTextField = image2TitleTextField;
+	}
+
+	public TextField getImage3TitleTextField() {
+		return image3TitleTextField;
+	}
+
+	public void setImage3TitleTextField(TextField image3TitleTextField) {
+		this.image3TitleTextField = image3TitleTextField;
+	}
+
+	public TextField getImage4TitleTextField() {
+		return image4TitleTextField;
+	}
+
+	public void setImage4TitleTextField(TextField image4TitleTextField) {
+		this.image4TitleTextField = image4TitleTextField;
+	}
+
+	public TextField getImage5TitleTextField() {
+		return image5TitleTextField;
+	}
+
+	public void setImage5TitleTextField(TextField image5TitleTextField) {
+		this.image5TitleTextField = image5TitleTextField;
+	}
+
+	public TextField getDoc1TextField() {
+		return doc1TextField;
+	}
+
+	public void setDoc1TextField(TextField doc1TextField) {
+		this.doc1TextField = doc1TextField;
+	}
+
+	public TextField getDoc2TextField() {
+		return doc2TextField;
+	}
+
+	public void setDoc2TextField(TextField doc2TextField) {
+		this.doc2TextField = doc2TextField;
+	}
+
+	public TextField getDoc3TextField() {
+		return doc3TextField;
+	}
+
+	public void setDoc3TextField(TextField doc3TextField) {
+		this.doc3TextField = doc3TextField;
+	}
+
+	public TextField getDoc4TextField() {
+		return doc4TextField;
+	}
+
+	public void setDoc4TextField(TextField doc4TextField) {
+		this.doc4TextField = doc4TextField;
+	}
+
+	public TextField getDoc5TextField() {
+		return doc5TextField;
+	}
+
+	public void setDoc5TextField(TextField doc5TextField) {
+		this.doc5TextField = doc5TextField;
+	}
+
+	public TextField getDoc1TitleTextField() {
+		return doc1TitleTextField;
+	}
+
+	public void setDoc1TitleTextField(TextField doc1TitleTextField) {
+		this.doc1TitleTextField = doc1TitleTextField;
+	}
+
+	public TextField getDoc2TitleTextField() {
+		return doc2TitleTextField;
+	}
+
+	public void setDoc2TitleTextField(TextField doc2TitleTextField) {
+		this.doc2TitleTextField = doc2TitleTextField;
+	}
+
+	public TextField getDoc3TitleTextField() {
+		return doc3TitleTextField;
+	}
+
+	public void setDoc3TitleTextField(TextField doc3TitleTextField) {
+		this.doc3TitleTextField = doc3TitleTextField;
+	}
+
+	public TextField getDoc4TitleTextField() {
+		return doc4TitleTextField;
+	}
+
+	public void setDoc4TitleTextField(TextField doc4TitleTextField) {
+		this.doc4TitleTextField = doc4TitleTextField;
+	}
+
+	public TextField getDoc5TitleTextField() {
+		return doc5TitleTextField;
+	}
+
+	public void setDoc5TitleTextField(TextField doc5TitleTextField) {
+		this.doc5TitleTextField = doc5TitleTextField;
+	}
+
+	public TerritoryObj getSelectedTerritory() {
+		return selectedTerritory;
+	}
+
+	public void setSelectedTerritory(TerritoryObj selectedTerritory) {
+		this.selectedTerritory = selectedTerritory;
+	}
 }

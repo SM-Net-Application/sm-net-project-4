@@ -18,9 +18,9 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
         $query .= "'" . $jsonObj ["spInf2"] . "', ";
         $query .= "'" . $jsonObj ["spInf3"] . "', ";
         $query .= "'" . $jsonObj ["spInf4"] . "', ";
-        $query .= $jsonObj ["spInf5"] . ", ";
+        $query .= "'" . $jsonObj ["spInf5"] . "', ";
         $query .= "'" . $jsonObj ["spInf6"] . "', ";
-        $query .= $jsonObj ["spInf7"] . ", ";
+        $query .= "'" . $jsonObj ["spInf7"] . "', ";
         $query .= "'" . $jsonObj ["spInf8"] . "', ";
         $query .= "'" . $jsonObj ["spInf9"] . "', ";
         $query .= "'" . $jsonObj ["spInf10"] . "', ";

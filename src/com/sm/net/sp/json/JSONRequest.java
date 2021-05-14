@@ -1458,6 +1458,61 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject TERRITORY_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(80));
+		return jsonObj;
+	}
+
+	public static JSONObject TERRITORY_UPDATE(TerritoryObj obj) {
+
+		JSONObject jsonObj = create(Integer.valueOf(81));
+
+		jsonObj.put("id", obj.getSpTerritoryID());
+		jsonObj.put("spInf1", obj.getSpInf1());
+		jsonObj.put("spInf2", obj.getSpInf2());
+		jsonObj.put("spInf3", obj.getSpInf3());
+		jsonObj.put("spInf4", obj.getSpInf4());
+		jsonObj.put("spInf5", obj.getSpInf5());
+		jsonObj.put("spInf6", obj.getSpInf6());
+		jsonObj.put("spInf7", obj.getSpInf7());
+		jsonObj.put("spInf8", obj.getSpInf8());
+		jsonObj.put("spInf9", obj.getSpInf9());
+		jsonObj.put("spInf10", obj.getSpInf10());
+		jsonObj.put("spInf11", obj.getSpInf11());
+		jsonObj.put("spInf12", obj.getSpInf12());
+		jsonObj.put("spInf13", obj.getSpInf13());
+		jsonObj.put("spInf14", obj.getSpInf14());
+		jsonObj.put("spInf15", obj.getSpInf15());
+		jsonObj.put("spInf16", obj.getSpInf16());
+		jsonObj.put("spInf17", obj.getSpInf17());
+		jsonObj.put("spInf18", obj.getSpInf18());
+		jsonObj.put("spInf19", obj.getSpInf19());
+		jsonObj.put("spInf20", obj.getSpInf20());
+		jsonObj.put("spInf21", obj.getSpInf21());
+		jsonObj.put("spInf22", obj.getSpInf22());
+		jsonObj.put("spInf23", obj.getSpInf23());
+		jsonObj.put("spInf24", obj.getSpInf24());
+		jsonObj.put("spInf25", obj.getSpInf25());
+		jsonObj.put("spInf26", obj.getSpInf26());
+		jsonObj.put("spInf27", obj.getSpInf27());
+		jsonObj.put("spInf28", obj.getSpInf28());
+		jsonObj.put("spInf29", obj.getSpInf29());
+		jsonObj.put("spInf30", obj.getSpInf30());
+		jsonObj.put("spInf31", obj.getSpInf31());
+		jsonObj.put("spInf32", obj.getSpInf32());
+		jsonObj.put("spInf33", obj.getSpInf33());
+		jsonObj.put("spInf34", obj.getSpInf34());
+		jsonObj.put("spInf35", obj.getSpInf35());
+		jsonObj.put("spInf36", obj.getSpInf36());
+		jsonObj.put("spInf37", obj.getSpInf37());
+		jsonObj.put("spInf38", obj.getSpInf38());
+		jsonObj.put("spInf39", obj.getSpInf39());
+		jsonObj.put("spInf40", obj.getSpInf40());
+
+		return jsonObj;
+	}
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

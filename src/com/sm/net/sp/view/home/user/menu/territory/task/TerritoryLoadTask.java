@@ -2,66 +2,56 @@ package com.sm.net.sp.view.home.user.menu.territory.task;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
+import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
+import com.sm.net.sp.model.WeekUsciere;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.territory.Territory;
+import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.smnet.core.dialog.AlertBuilder;
 import com.smnet.core.task.TaskInterface;
 
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-public class TerritorySaveTask implements TaskInterface {
+public class TerritoryLoadTask implements TaskInterface {
 
 	private Territory view;
 	private AlertBuilder alertBuilder;
 	private Settings settings;
 	private Stage viewStage;
-	private TerritoryObj territory;
-	private Tab thisTab;
 
-	public TerritorySaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, TerritoryObj territory,
-			Territory view, Tab thisTab) {
+	public TerritoryLoadTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Territory view) {
 		super();
 
 		this.view = view;
 		this.alertBuilder = alertBuilder;
 		this.settings = settings;
 		this.viewStage = viewStage;
-		this.territory = territory;
-		this.thisTab = thisTab;
 	}
 
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		JSONObject json = null;
-
-		if (this.territory.getSpTerritoryID() > -1)
-			json = JSONRequest.TERRITORY_UPDATE(this.territory);
-		else
-			json = JSONRequest.TERRITORY_INSERT(this.territory);
-
+		JSONObject json = JSONRequest.TERRITORY_LOAD();
 		String url = this.settings.getDatabaseUrl();
 
 		try {
 
 			Document post = Jsoup.connect(url).requestBody(json.toString()).post();
-
 			JSONObject response = new JSONObject(post.body().text());
 
-			int status = response.getInt("status");
-			String error = response.getString("error");
-
-			hashMap.put("status", status);
-			hashMap.put("error", error);
+			hashMap.put("response", response);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,19 +61,30 @@ public class TerritorySaveTask implements TaskInterface {
 	@Override
 	public void feedback(HashMap<String, Object> hashMap) {
 
-		int status = (int) hashMap.get("status");
-		String error = (String) hashMap.get("error");
+		ObservableList<TerritoryObj> list = FXCollections.observableArrayList();
+
+		JSONObject response = (JSONObject) hashMap.get("response");
+		int status = response.getInt("status");
 
 		if (status == 0) {
 
-			this.view.updateTerritory();
+			JSONArray result = (JSONArray) response.get("result");
+			for (Object obj : result) {
 
-			TabPane tabPane = this.view.getTerritoryTabPane();
-			tabPane.getTabs().remove(this.thisTab);
+				JSONObject json = (JSONObject) obj;
+				TerritoryObj territory = TerritoryObj.newInstanceByJSONObject(json,
+						this.settings.getDatabaseSecretKey());
+				list.add(territory);
+			}
 
-		} else if (status == 1)
+		} else if (status == 1) {
+
+			String error = response.getString("error");
 			this.alertBuilder.error(this.viewStage, error);
-		else if (status == 2)
-			this.alertBuilder.error(this.viewStage, this.settings.getLanguage().getString(error));
+
+		}
+
+		this.view.updateTerritoryList(list);
+		this.view.territoryTableViewRefresh();
 	}
 }
