@@ -84,6 +84,15 @@
                                                                   </Button>
                                                                </children>
                                                             </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="territoryEditButton" mnemonicParsing="false" text="edit">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane>
                                                                <children>
                                                                   <Button fx:id="territoryRemoveButton" mnemonicParsing="false" text="elimina">
@@ -97,7 +106,7 @@
                                                                <children>
                                                                   <Button fx:id="territoryOpenViewerButton" mnemonicParsing="false" text="viewer">
                                                                      <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
                                                                   </Button>
                                                                </children>
@@ -113,16 +122,7 @@
                                                             </StackPane>
                                                             <StackPane alignment="CENTER_LEFT">
                                                                <children>
-                                                                  <Button fx:id="territoryEditButton" mnemonicParsing="false" text="aggiorna">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </Button>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane alignment="CENTER_LEFT">
-                                                               <children>
-                                                                  <Button fx:id="familiesMapsButton" mnemonicParsing="false" text="maps">
+                                                                  <Button fx:id="territoryResourcesDownloadButton" mnemonicParsing="false" text="download">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
@@ -131,7 +131,7 @@
                                                             </StackPane>
                                                             <StackPane HBox.hgrow="ALWAYS">
                                                                <children>
-                                                                  <TextField fx:id="filterFamilyTextField">
+                                                                  <TextField fx:id="territoryFilterTextField">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>

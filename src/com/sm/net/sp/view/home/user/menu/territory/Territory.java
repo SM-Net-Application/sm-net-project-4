@@ -1,7 +1,9 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.stream.StreamSupport;
@@ -9,13 +11,15 @@ import java.util.stream.StreamSupport;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.dialogs.territory.TerritoryDialog;
 import com.sm.net.sp.model.EnumPrintLayouts;
-import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDeleteTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.smnet.core.task.TaskManager;
@@ -60,14 +64,18 @@ public class Territory {
 	@FXML
 	private Button territoryAddButton;
 	@FXML
-	private Button territoryOpenViewerButton;
-	@FXML
-	private Button territoryOpenViewerURLButton;
-
+	private Button territoryEditButton;
 	@FXML
 	private Button territoryRemoveButton;
 	@FXML
-	private Button territoryEditButton;
+	private Button territoryOpenViewerButton;
+	@FXML
+	private Button territoryOpenViewerURLButton;
+	@FXML
+	private Button territoryResourcesDownloadButton;
+
+	@FXML
+	private TextField territoryFilterTextField;
 
 	@FXML
 	private TableView<TerritoryObj> territoryTableView;
@@ -134,12 +142,6 @@ public class Territory {
 	private TextField totalMaleTextField;
 	@FXML
 	private TextField totalFemaleTextField;
-
-	@FXML
-	private Button familiesMapsButton;
-
-	@FXML
-	private TextField filterFamilyTextField;
 
 	private Settings settings;
 	private Language language;
@@ -258,7 +260,7 @@ public class Territory {
 		this.territoryRemoveButton.getStyleClass().add("button_image_001");
 		this.territoryEditButton.getStyleClass().add("button_image_001");
 
-		this.familiesMapsButton.getStyleClass().add("button_image_001");
+		this.territoryResourcesDownloadButton.getStyleClass().add("button_image_001");
 
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
 
@@ -267,7 +269,7 @@ public class Territory {
 		this.totalMaleTextField.getStyleClass().add("text_field_002");
 		this.totalFemaleTextField.getStyleClass().add("text_field_002");
 
-		this.filterFamilyTextField.getStyleClass().add("text_field_001");
+		this.territoryFilterTextField.getStyleClass().add("text_field_001");
 	}
 
 	public void objectInitialize() {
@@ -420,11 +422,11 @@ public class Territory {
 		this.territoryEditButton.setText("");
 		this.territoryEditButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_EDIT));
 
-		Tooltip familyMapsTooltip = new Tooltip(this.language.getString("congregation.family.tooltip.maps"));
-		familyMapsTooltip.getStyleClass().add("tooltip_001");
-		this.familiesMapsButton.setTooltip(familyMapsTooltip);
-		this.familiesMapsButton.setText("");
-		this.familiesMapsButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS));
+		Tooltip territoryDownloadTooltip = new Tooltip(this.language.getString("territory.tooltip.downloadresources"));
+		territoryDownloadTooltip.getStyleClass().add("tooltip_001");
+		this.territoryResourcesDownloadButton.setTooltip(territoryDownloadTooltip);
+		this.territoryResourcesDownloadButton.setText("");
+		this.territoryResourcesDownloadButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD));
 
 		this.totalImageView.setFitWidth(25);
 		this.totalImageView.setFitHeight(25);
@@ -468,60 +470,141 @@ public class Territory {
 
 		// TODO: Fix all listeners
 		this.territoryAddButton.setOnAction(event -> newTerritory());
+		this.territoryEditButton.setOnAction(event -> editTerritory());
+		this.territoryRemoveButton.setOnAction(event -> removeTerritory());
 		this.territoryOpenViewerButton.setOnAction(event -> openTerritoryViewer());
+		this.territoryOpenViewerURLButton.setOnAction(event -> openTerritoryViewerURL());
+		this.territoryResourcesDownloadButton.setOnAction(event -> downloadTerritoryResources());
 
 		this.territoryTableView.setRowFactory(param -> {
 			TableRow<TerritoryObj> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (!row.isEmpty()))
-					editTerritory(row.getItem());
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+//					editTerritory(row.getItem());
+					// TODO: Registro
+				}
 			});
 			return row;
 		});
 
-		memberAddButton.setOnAction(event2 -> newMember());
-		memberDeleteButton.setOnAction(event3 -> deleteMember());
-		membersTableView.setRowFactory(param1 -> {
-			TableRow<Member> row = new TableRow<>();
-			row.setOnMouseClicked(event4 -> {
-				if (event4.getClickCount() == 2 && (!row.isEmpty()))
-					editMember(row.getItem());
-			});
-			return row;
-		});
+		this.territoryFilterTextField.textProperty()
+				.addListener((observable, oldValue, newValue) -> updateFilterTerritory(newValue));
 
-		territoryRemoveButton.setOnAction(event1 -> deleteFamily());
-
-		this.memberMonitorPrintButton.setOnAction(event4 -> print());
-
-		this.filterMemberTextField.textProperty()
-				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
-
-		this.filterFamilyTextField.textProperty()
-				.addListener((observable, oldValue, newValue) -> updateFilterFamily(newValue));
+//		memberAddButton.setOnAction(event2 -> newMember());
+//		memberDeleteButton.setOnAction(event3 -> deleteMember());
+//		membersTableView.setRowFactory(param1 -> {
+//			TableRow<Member> row = new TableRow<>();
+//			row.setOnMouseClicked(event4 -> {
+//				if (event4.getClickCount() == 2 && (!row.isEmpty()))
+//					editMember(row.getItem());
+//			});
+//			return row;
+//		});
+//
+//		this.memberMonitorPrintButton.setOnAction(event4 -> print());
+//
+//		this.filterMemberTextField.textProperty()
+//				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
+//
 
 //		this.familiesMapsButton.setOnAction(event -> viewMaps());
 	}
 
+	private void downloadTerritoryResources() {
+
+		// TODO: Download
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+
+			String territoryNr = territoryObj.getSpInf7();
+			String territoryName = territoryObj.getSpInf8();
+
+			String header = this.application.getSettings().getLanguage()
+					.getString("territory.confirm.downloadresources");
+			String content = String.format("%s - %s", territoryNr, territoryName);
+
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+				String waitMessage = this.language.getString("territory.wait.download");
+
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new TerritoryDownloadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								this, territoryObj));
+
+			}
+		}
+	}
+
 	private void openTerritoryViewer() {
 
-		
-		if (this.territoryTableView.getSelectionModel().getSelectedIndex()>-1) {
-			
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
 			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
-			
+
 			String spInf10 = territoryObj.getSpInf10();
 			String spInf31 = territoryObj.getSpInf31();
-			
+
 			if (!(spInf10.isEmpty() || spInf31.isEmpty())) {
 
-				// TODO: open Viewer
-				
+				String dbUrl = this.application.getSettings().getDatabaseUrl();
+				int indexOf = dbUrl.indexOf("exchange.php");
+				if (indexOf > -1) {
+
+					String subDbUrl = dbUrl.substring(0, indexOf);
+					String link = subDbUrl + "monitor/territoryviewer.php?tid=%s&amp;lang=%s";
+					link = String.format(link, spInf31, this.language.getString("sp.monitor.language"));
+
+					Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+					if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+						try {
+							desktop.browse(new URI(link));
+						} catch (Exception e) {
+							this.application.getAlertBuilder().error(this.ownerStage, e.getMessage()).show();
+						}
+					}
+				}
+
 			} else {
 				this.application.getAlertBuilder2().error(this.ownerStage,
 						this.language.getString("territory.error.nomymapsidorviewerid"));
 			}
-			
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	private void openTerritoryViewerURL() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+
+			String spInf10 = territoryObj.getSpInf10();
+			String spInf31 = territoryObj.getSpInf31();
+
+			if (!(spInf10.isEmpty() || spInf31.isEmpty())) {
+
+				String dbUrl = this.application.getSettings().getDatabaseUrl();
+				int indexOf = dbUrl.indexOf("exchange.php");
+				if (indexOf > -1) {
+
+					String subDbUrl = dbUrl.substring(0, indexOf);
+					String link = subDbUrl + "monitor/territoryviewer.php?tid=%s&amp;lang=%s";
+					link = String.format(link, spInf31, this.language.getString("sp.monitor.language"));
+
+					TerritoryDialog.show(this.application, this.ownerStage, link);
+
+				}
+
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("territory.error.nomymapsidorviewerid"));
+			}
+
 		} else {
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("territory.error.noterritoryselected"));
@@ -540,22 +623,16 @@ public class Territory {
 		this.membersTableView.refresh();
 	}
 
-	private void updateFilterFamily(String newValue) {
+	private void updateFilterTerritory(String newValue) {
 
-		// TODO: Filter
+		if (newValue.isEmpty()) {
+			this.territoryTableView.setItems(this.territoryList);
+		} else {
+			ObservableList<TerritoryObj> filteredMemberList = buildListTerritory(newValue);
+			this.territoryTableView.setItems(filteredMemberList);
+		}
 
-//		if (newValue.isEmpty()) {
-//			this.territoryTableView.setItems(this.familiesList);
-//			// FILTRO
-//			this.totalFilteredFamilyTextField.setText(String.valueOf(this.familiesList.size()));
-//		} else {
-//			ObservableList<Family> filteredMemberList = buildListFamily(newValue);
-//			this.territoryTableView.setItems(filteredMemberList);
-//			// FILTRO
-//			this.totalFilteredFamilyTextField.setText(String.valueOf(filteredMemberList.size()));
-//		}
-//
-//		this.territoryTableView.refresh();
+		Platform.runLater(() -> territoryTableView.refresh());
 	}
 
 	private ObservableList<Member> buildListMember(String filter) {
@@ -568,15 +645,15 @@ public class Territory {
 		return list;
 	}
 
-//	private ObservableList<Family> buildListFamily(String filter) {
-//
-//		ObservableList<Family> list = FXCollections.observableArrayList();
-//
-//		StreamSupport.stream(this.familiesList.spliterator(), false).filter(obj -> matchFilterFamily(obj, filter))
-//				.forEach(obj -> list.add(obj));
-//
-//		return list;
-//	}
+	private ObservableList<TerritoryObj> buildListTerritory(String filter) {
+
+		ObservableList<TerritoryObj> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.territoryList.spliterator(), false).filter(obj -> matchFilterTerritory(obj, filter))
+				.forEach(obj -> list.add(obj));
+
+		return list;
+	}
 
 	private boolean matchFilterMember(Member obj, String match) {
 
@@ -587,16 +664,16 @@ public class Territory {
 				|| obj.getSpInf39Decrypted().toLowerCase().contains(filter);
 	}
 
-	private boolean matchFilterFamily(Family obj, String match) {
+	private boolean matchFilterTerritory(TerritoryObj obj, String match) {
 
 		String filter = match.toLowerCase();
 
-		return obj.getSpInf1Decrypted().toLowerCase().contains(filter)
-				|| obj.getSpInf2Decrypted().toLowerCase().contains(filter)
-				|| obj.getSpInf3Decrypted().toLowerCase().contains(filter)
-				|| obj.getSpInf4Decrypted().toLowerCase().contains(filter)
-				|| obj.getSpInf5Decrypted().toLowerCase().contains(filter)
-				|| obj.getSpInf7Decrypted().toLowerCase().contains(filter);
+		return obj.getSpInf1().toLowerCase().contains(filter) || obj.getSpInf2().toLowerCase().contains(filter)
+				|| obj.getSpInf3().toLowerCase().contains(filter) || obj.getSpInf4().toLowerCase().contains(filter)
+				|| obj.getSpInf5().toLowerCase().contains(filter) || obj.getSpInf6().toLowerCase().contains(filter)
+				|| obj.getSpInf7().toLowerCase().contains(filter) || obj.getSpInf8().toLowerCase().contains(filter)
+				|| obj.getSpInf9().toLowerCase().contains(filter) || obj.getSpInf10().toLowerCase().contains(filter)
+				|| obj.getSpInf31().toLowerCase().contains(filter);
 	}
 
 	private void listenerMemberMonitorPrintButton() {
@@ -726,6 +803,16 @@ public class Territory {
 
 	private void newTerritory() {
 
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
 		if (!isAlreadyOpen(this.territoryTabPane, "")) {
 
 			try {
@@ -807,40 +894,25 @@ public class Territory {
 		}
 	}
 
+	private void editTerritory() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1)
+			editTerritory(this.territoryTableView.getSelectionModel().getSelectedItem());
+	}
+
 	private void editTerritory(TerritoryObj territoryObj) {
 
-		if (!isAlreadyOpen(this.territoryTabPane, territoryObj.getSpInf7())) {
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
 
-//			try {
-//
-//				FXMLLoader fxmlLoader = new FXMLLoader();
-//				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_FAMILY_EDITOR);
-//				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-//
-//				UserMenuCongrFamilyEditor ctrl = (UserMenuCongrFamilyEditor) fxmlLoader.getController();
-//				ctrl.setSettings(this.settings);
-//				ctrl.setOwnerStage(ownerStage);
-//				ctrl.setOwnerCtrl(this);
-//				ctrl.setSelectedFamily(family);
-//
-//				Tab newFamilyTab = new Tab(family.getSpInf1Decrypted(), layout);
-//				newFamilyTab.setClosable(true);
-//				newFamilyTab.getStyleClass().add("tab_001");
-//				newFamilyTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FAMILY));
-//
-//				ctrl.setParentTabPane(this.familyTabPane);
-//				ctrl.setMembersTab(membersTab);
-//				ctrl.setNewMemberTab(newFamilyTab);
-//				ctrl.setMembersList(this.membersList);
-//
-//				this.familyTabPane.getTabs().add(newFamilyTab);
-//				this.familyTabPane.getSelectionModel().select(newFamilyTab);
-//
-//				ctrl.objectInitialize();
-//
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		if (!isAlreadyOpen(this.territoryTabPane, territoryObj.getSpInf7())) {
 
 			try {
 
@@ -873,6 +945,41 @@ public class Territory {
 			}
 		}
 
+	}
+
+	private void removeTerritory() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+
+			String territoryNr = territoryObj.getSpInf7();
+			String territoryName = territoryObj.getSpInf8();
+
+			String header = this.application.getSettings().getLanguage().getString("territory.confirm.territoryremove");
+			String content = String.format("%s - %s", territoryNr, territoryName);
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+				int id = territoryObj.getSpTerritoryID();
+
+				String waitMessage = this.language.getString("territory.wait.delete");
+
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new TerritoryDeleteTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								this, id));
+
+			}
+		}
 	}
 
 	private boolean isAlreadyOpen(TabPane tabPane, String label) {

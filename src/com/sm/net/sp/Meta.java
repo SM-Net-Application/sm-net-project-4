@@ -350,6 +350,7 @@ public class Meta {
 		
 		public static final String GALLERY = "gallery.png";
 		public static final String DOCS = "docs.png";
+		public static final String DOWNLOAD = "download.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 
