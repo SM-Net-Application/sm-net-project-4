@@ -15,30 +15,58 @@ import com.sm.net.sp.model.TerritoryResource;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.smnet.core.task.TaskInterface;
 
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-public class TerritoryDownloadTask implements TaskInterface {
+public class TerritoryDownloadAllTask implements TaskInterface {
 
 	private SupportPlannerView application;
 	private Stage viewStage;
-	private TerritoryObj territoryObj;
+	private ObservableList<TerritoryObj> territoryList;
 
-	public TerritoryDownloadTask(SupportPlannerView application, Stage viewStage, TerritoryObj territoryObj) {
+	public TerritoryDownloadAllTask(SupportPlannerView application, Stage viewStage,
+			ObservableList<TerritoryObj> territoryList) {
 		super();
 
 		this.application = application;
 		this.viewStage = viewStage;
-		this.territoryObj = territoryObj;
+		this.territoryList = territoryList;
 	}
 
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		ArrayList<TerritoryResource> territoryResourceList = this.territoryObj.getResources();
+		ArrayList<String> errorList = new ArrayList<>();
+
+		this.territoryList.forEach(territoryObj -> download(errorList, territoryObj));
+
+		if (errorList.isEmpty())
+			hashMap.put("status", 0);
+		else {
+			hashMap.put("error", buildErrorMessage(errorList));
+			hashMap.put("status", 1);
+		}
+	}
+
+	private String buildErrorMessage(ArrayList<String> errorList) {
+
+		String message = "";
+		for (String error : errorList) {
+			if (!message.isEmpty())
+				message += "\n\n";
+			message += error;
+		}
+
+		return message;
+	}
+
+	private void download(ArrayList<String> errorList, TerritoryObj territoryObj) {
+
+		ArrayList<TerritoryResource> territoryResourceList = territoryObj.getResources();
 
 		if (!territoryResourceList.isEmpty()) {
 
-			File targetDirectory = this.territoryObj.buildTargetDirectory();
+			File targetDirectory = territoryObj.buildTargetDirectory();
 
 			String error = "";
 			for (TerritoryResource territoryResource : territoryResourceList) {
@@ -54,13 +82,10 @@ public class TerritoryDownloadTask implements TaskInterface {
 				}
 			}
 
-			if (error.isEmpty())
-				hashMap.put("status", 0);
-			else {
-				hashMap.put("error", error);
-				hashMap.put("status", 1);
-			}
+			if (!error.isEmpty())
+				errorList.add(error);
 		}
+
 	}
 
 	private String download(File targetDirectory, TerritoryResource res) {

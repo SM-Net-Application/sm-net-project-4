@@ -19,6 +19,7 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDeleteTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadAllTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
@@ -73,6 +74,8 @@ public class Territory {
 	private Button territoryOpenViewerURLButton;
 	@FXML
 	private Button territoryResourcesDownloadButton;
+	@FXML
+	private Button territoryResourcesDownloadAllButton;
 
 	@FXML
 	private TextField territoryFilterTextField;
@@ -85,6 +88,23 @@ public class Territory {
 	private TableColumn<TerritoryObj, String> territoryNameTableColumn;
 	@FXML
 	private TableColumn<TerritoryObj, String> territoryAssignedToTableColumn;
+
+	@FXML
+	private Label territoryDocsLabel;
+	@FXML
+	private TableView<TerritoryObj> territoryDocsTableView;
+	@FXML
+	private TableColumn<TerritoryObj, String> territoryDocsNameTableColumn;
+
+	@FXML
+	private Label territoryImagesLabel;
+	@FXML
+	private TableView<TerritoryObj> territoryImagesTableView;
+	@FXML
+	private TableColumn<TerritoryObj, String> territoryImagesNameTableColumn;
+
+	@FXML
+	private ImageView territoryImageView;
 
 	@FXML
 	private TabPane memberTabPane;
@@ -261,6 +281,13 @@ public class Territory {
 		this.territoryEditButton.getStyleClass().add("button_image_001");
 
 		this.territoryResourcesDownloadButton.getStyleClass().add("button_image_001");
+		this.territoryResourcesDownloadAllButton.getStyleClass().add("button_image_001");
+
+		this.territoryDocsLabel.getStyleClass().add("label_001");
+		this.territoryImagesLabel.getStyleClass().add("label_001");
+
+		this.territoryDocsTableView.getStyleClass().add("table_view_001");
+		this.territoryImagesTableView.getStyleClass().add("table_view_001");
 
 		memberMonitorPrintButton.getStyleClass().add("button_image_001");
 
@@ -428,6 +455,14 @@ public class Territory {
 		this.territoryResourcesDownloadButton.setText("");
 		this.territoryResourcesDownloadButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD));
 
+		Tooltip territoryDownloadAllTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.downloadallresources"));
+		territoryDownloadAllTooltip.getStyleClass().add("tooltip_001");
+		this.territoryResourcesDownloadAllButton.setTooltip(territoryDownloadAllTooltip);
+		this.territoryResourcesDownloadAllButton.setText("");
+		this.territoryResourcesDownloadAllButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD2));
+
 		this.totalImageView.setFitWidth(25);
 		this.totalImageView.setFitHeight(25);
 		this.totalImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.USER_MENU_CONGR, 25, 25));
@@ -475,6 +510,7 @@ public class Territory {
 		this.territoryOpenViewerButton.setOnAction(event -> openTerritoryViewer());
 		this.territoryOpenViewerURLButton.setOnAction(event -> openTerritoryViewerURL());
 		this.territoryResourcesDownloadButton.setOnAction(event -> downloadTerritoryResources());
+		this.territoryResourcesDownloadAllButton.setOnAction(event -> downloadAllTerritoryResources());
 
 		this.territoryTableView.setRowFactory(param -> {
 			TableRow<TerritoryObj> row = new TableRow<>();
@@ -512,8 +548,6 @@ public class Territory {
 
 	private void downloadTerritoryResources() {
 
-		// TODO: Download
-
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
@@ -530,10 +564,24 @@ public class Territory {
 				String waitMessage = this.language.getString("territory.wait.download");
 
 				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new TerritoryDownloadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
-								this, territoryObj));
+						new TerritoryDownloadTask(this.application, this.ownerStage, territoryObj));
 
 			}
+		}
+	}
+
+	private void downloadAllTerritoryResources() {
+
+		String content = this.application.getSettings().getLanguage()
+				.getString("territory.confirm.downloadallresources");
+
+		if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+			String waitMessage = this.language.getString("territory.wait.download");
+
+			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+					new TerritoryDownloadAllTask(this.application, this.ownerStage, this.territoryList));
+
 		}
 	}
 

@@ -74,6 +74,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	private User user;
 	private File mysqlDump;
 	private File mysqlRestore;
+	private File wget;
 
 	private Settings settings;
 	private int left;
@@ -112,6 +113,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 		this.mysqlDump = setMySQLDumpFile();
 		this.mysqlRestore = setMySQLRestoreFile();
+		this.wget = setWgetFile();
 
 	}
 
@@ -209,6 +211,54 @@ public class SupportPlannerView implements SupportPlannerCallback {
 		}
 
 		return dump;
+	}
+
+	private File setWgetFile() {
+
+		File file = new File("tools", "wget");
+
+		File wget = null;
+
+		switch (this.architecture) {
+		case BIT32:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				wget = new File(file, "wget.exe");
+				return wget;
+
+			case LINUX:
+
+				break;
+			case MAC:
+
+				break;
+			}
+
+			break;
+
+		case BIT64:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				wget = new File(file, "wget.exe");
+				return wget;
+
+			case LINUX:
+
+				break;
+
+			case MAC:
+
+				break;
+			}
+
+			break;
+		}
+
+		return wget;
 	}
 
 	private void settingsInitialize() {
@@ -999,7 +1049,7 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			}
 		}
 	}
-	
+
 	@Override
 	public void setUserLogin(JSONObject jsonObject) {
 		this.user = new User(jsonObject, settings.getDatabaseSecretKey());
@@ -1205,5 +1255,13 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void setSettings(Settings settings) {
 		this.settings = settings;
+	}
+
+	public File getWget() {
+		return wget;
+	}
+
+	public void setWget(File wget) {
+		this.wget = wget;
 	}
 }

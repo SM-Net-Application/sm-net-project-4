@@ -129,6 +129,15 @@
                                                                   </Button>
                                                                </children>
                                                             </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="territoryResourcesDownloadAllButton" mnemonicParsing="false" text="downloadAll">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane HBox.hgrow="ALWAYS">
                                                                <children>
                                                                   <TextField fx:id="territoryFilterTextField">
@@ -149,23 +158,100 @@
                                                             </Separator>
                                                          </children>
                                                       </StackPane>
-                                                      <StackPane VBox.vgrow="ALWAYS">
+                                                      <HBox VBox.vgrow="ALWAYS">
                                                          <children>
-                                                            <TableView fx:id="territoryTableView">
-                                                              <columns>
-                                                                <TableColumn fx:id="territoryNumberTableColumn" prefWidth="75.0" text="number" />
-                                                                  <TableColumn fx:id="territoryNameTableColumn" prefWidth="75.0" text="name" />
-                                                                <TableColumn fx:id="territoryAssignedToTableColumn" prefWidth="75.0" text="assignedto" />
-                                                              </columns>
-                                                               <columnResizePolicy>
-                                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                               </columnResizePolicy>
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </TableView>
+                                                            <VBox HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <StackPane VBox.vgrow="ALWAYS">
+                                                                     <children>
+                                                                        <TableView fx:id="territoryTableView">
+                                                                          <columns>
+                                                                            <TableColumn fx:id="territoryNumberTableColumn" prefWidth="75.0" text="number" />
+                                                                              <TableColumn fx:id="territoryNameTableColumn" prefWidth="75.0" text="name" />
+                                                                            <TableColumn fx:id="territoryAssignedToTableColumn" prefWidth="75.0" text="assignedto" />
+                                                                          </columns>
+                                                                           <columnResizePolicy>
+                                                                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                           </columnResizePolicy>
+                                                                           <StackPane.margin>
+                                                                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                           </StackPane.margin>
+                                                                        </TableView>
+                                                                     </children>
+                                                                  </StackPane>
+                                                                  <HBox VBox.vgrow="ALWAYS">
+                                                                     <children>
+                                                                        <VBox HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <StackPane alignment="CENTER_LEFT">
+                                                                                 <children>
+                                                                                    <Label fx:id="territoryDocsLabel" text="docs">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </Label>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                              <StackPane>
+                                                                                 <children>
+                                                                                    <TableView fx:id="territoryDocsTableView">
+                                                                                      <columns>
+                                                                                        <TableColumn fx:id="territoryDocsNameTableColumn" prefWidth="75.0" text="filename" />
+                                                                                      </columns>
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                       <columnResizePolicy>
+                                                                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                                       </columnResizePolicy>
+                                                                                    </TableView>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                           </children>
+                                                                        </VBox>
+                                                                        <VBox HBox.hgrow="ALWAYS">
+                                                                           <children>
+                                                                              <StackPane alignment="CENTER_LEFT">
+                                                                                 <children>
+                                                                                    <Label fx:id="territoryImagesLabel" text="images">
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                    </Label>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                              <StackPane>
+                                                                                 <children>
+                                                                                    <TableView fx:id="territoryImagesTableView">
+                                                                                      <columns>
+                                                                                        <TableColumn fx:id="territoryImagesNameTableColumn" prefWidth="75.0" text="filename" />
+                                                                                      </columns>
+                                                                                       <StackPane.margin>
+                                                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                       </StackPane.margin>
+                                                                                       <columnResizePolicy>
+                                                                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                                       </columnResizePolicy>
+                                                                                    </TableView>
+                                                                                 </children>
+                                                                              </StackPane>
+                                                                           </children>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <StackPane HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <ImageView fx:id="territoryImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </ImageView>
+                                                               </children>
+                                                            </StackPane>
                                                          </children>
-                                                      </StackPane>
+                                                      </HBox>
                                                    </children>
                                                 </VBox>
                                              </content>

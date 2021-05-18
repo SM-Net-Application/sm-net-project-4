@@ -1,6 +1,9 @@
 package com.sm.net.sp.model;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javax.crypto.SecretKey;
 
@@ -297,6 +300,49 @@ public class TerritoryObj {
 		territory.setSpInf40(spInf40);
 
 		return territory;
+	}
+
+	public File buildTargetDirectory() {
+
+		String userHome = System.getProperty("user.home");
+
+		String territoryNr = this.getSpInf7();
+		String territoryName = this.getSpInf8();
+		String territoryID = String.valueOf(this.getSpTerritoryID());
+
+		File target = Paths.get(userHome, "SupportPlanner", "TerritoryResources",
+				String.format("%s-%s(ID-%s)", territoryNr, territoryName, territoryID)).toFile();
+
+		if (!target.exists())
+			target.mkdirs();
+
+		return target;
+	}
+
+	public ArrayList<TerritoryResource> getResources() {
+
+		ArrayList<TerritoryResource> resourceList = new ArrayList<>();
+
+		// ImageList
+		checkResource(resourceList, 0, this.getSpInf11(), this.getSpInf12());
+		checkResource(resourceList, 0, this.getSpInf13(), this.getSpInf14());
+		checkResource(resourceList, 0, this.getSpInf15(), this.getSpInf16());
+		checkResource(resourceList, 0, this.getSpInf17(), this.getSpInf18());
+		checkResource(resourceList, 0, this.getSpInf19(), this.getSpInf20());
+
+		// DocList
+		checkResource(resourceList, 1, this.getSpInf21(), this.getSpInf22());
+		checkResource(resourceList, 1, this.getSpInf23(), this.getSpInf24());
+		checkResource(resourceList, 1, this.getSpInf25(), this.getSpInf26());
+		checkResource(resourceList, 1, this.getSpInf27(), this.getSpInf28());
+		checkResource(resourceList, 1, this.getSpInf29(), this.getSpInf30());
+
+		return resourceList;
+	}
+
+	private void checkResource(ArrayList<TerritoryResource> resourceList, int type, String url, String title) {
+		if (!url.isEmpty() && !title.isEmpty())
+			resourceList.add(new TerritoryResource(type, title, url));
 	}
 
 	public final IntegerProperty spTerritoryIDProperty() {
