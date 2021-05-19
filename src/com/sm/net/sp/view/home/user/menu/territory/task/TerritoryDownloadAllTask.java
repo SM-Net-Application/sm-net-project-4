@@ -71,14 +71,18 @@ public class TerritoryDownloadAllTask implements TaskInterface {
 			String error = "";
 			for (TerritoryResource territoryResource : territoryResourceList) {
 
-				String feedback = download(targetDirectory, territoryResource);
+				File targetFile = new File(targetDirectory, territoryResource.getResourceName());
+				if (!targetFile.exists()) {
 
-				if (!feedback.isEmpty()) {
-					if (!error.isEmpty())
-						error += "\n\n";
+					String feedback = download(targetFile, territoryResource);
 
-					error += String.format("Download failed: (%s) -> %s", territoryResource.getResourceName(),
-							territoryResource.getResourceURL());
+					if (!feedback.isEmpty()) {
+						if (!error.isEmpty())
+							error += "\n\n";
+
+						error += String.format("Download failed: (%s) -> %s", territoryResource.getResourceName(),
+								territoryResource.getResourceURL());
+					}
 				}
 			}
 
@@ -88,13 +92,11 @@ public class TerritoryDownloadAllTask implements TaskInterface {
 
 	}
 
-	private String download(File targetDirectory, TerritoryResource res) {
+	private String download(File targetFile, TerritoryResource res) {
 
 		switch (res.getType()) {
 		case 0:// IMAGE
 		case 1:// DOC
-
-			File targetFile = new File(targetDirectory, res.getResourceName());
 
 			try {
 				InputStream in = new URL(res.getResourceURL()).openStream();

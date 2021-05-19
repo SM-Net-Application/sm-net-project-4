@@ -1,12 +1,16 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.StreamSupport;
+
+import org.apache.commons.io.FileUtils;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -15,6 +19,7 @@ import com.sm.net.sp.dialogs.territory.TerritoryDialog;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
+import com.sm.net.sp.model.TerritoryResource;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -27,6 +32,7 @@ import com.smnet.core.task.TaskManager;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,8 +47,11 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Territory {
@@ -90,19 +99,28 @@ public class Territory {
 	private TableColumn<TerritoryObj, String> territoryAssignedToTableColumn;
 
 	@FXML
+	private Button territoryResourcesOpenDirectoryButton;
+	@FXML
+	private Button territoryResourcesDeleteAllButton;
+
+	@FXML
 	private Label territoryDocsLabel;
 	@FXML
-	private TableView<TerritoryObj> territoryDocsTableView;
+	private TableView<File> territoryDocsTableView;
 	@FXML
-	private TableColumn<TerritoryObj, String> territoryDocsNameTableColumn;
+	private TableColumn<File, String> territoryDocsNameTableColumn;
 
 	@FXML
 	private Label territoryImagesLabel;
 	@FXML
-	private TableView<TerritoryObj> territoryImagesTableView;
+	private TableView<File> territoryImagesTableView;
 	@FXML
-	private TableColumn<TerritoryObj, String> territoryImagesNameTableColumn;
+	private TableColumn<File, String> territoryImagesNameTableColumn;
 
+	@FXML
+	private VBox territoryTablesVBox;
+	@FXML
+	private StackPane territoryImageViewStackPane;
 	@FXML
 	private ImageView territoryImageView;
 
@@ -170,6 +188,8 @@ public class Territory {
 	private SupportPlannerView application;
 
 	private ObservableList<TerritoryObj> territoryList;
+	private ObservableList<File> territoryDocs;
+	private ObservableList<File> territoryImages;
 
 	private ObservableList<Member> membersList;
 
@@ -186,6 +206,11 @@ public class Territory {
 		this.territoryNumberTableColumn.setCellValueFactory(
 				cellData -> new SimpleObjectProperty<BigDecimal>(new BigDecimal(cellData.getValue().getSpInf7())));
 		this.territoryNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
+
+		this.territoryDocsNameTableColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		this.territoryImagesNameTableColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
 		this.memberIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
 		this.memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
@@ -283,6 +308,9 @@ public class Territory {
 		this.territoryResourcesDownloadButton.getStyleClass().add("button_image_001");
 		this.territoryResourcesDownloadAllButton.getStyleClass().add("button_image_001");
 
+		this.territoryResourcesOpenDirectoryButton.getStyleClass().add("button_image_001");
+		this.territoryResourcesDeleteAllButton.getStyleClass().add("button_image_001");
+
 		this.territoryDocsLabel.getStyleClass().add("label_001");
 		this.territoryImagesLabel.getStyleClass().add("label_001");
 
@@ -300,6 +328,16 @@ public class Territory {
 	}
 
 	public void objectInitialize() {
+
+		this.territoryDocs = FXCollections.observableArrayList();
+		this.territoryImages = FXCollections.observableArrayList();
+
+		this.territoryDocsTableView.setItems(this.territoryDocs);
+		this.territoryImagesTableView.setItems(this.territoryImages);
+
+		this.territoryTablesVBox.setMinWidth(600);
+		this.territoryTablesVBox.setMaxWidth(600);
+		
 		listeners();
 		viewUpdate();
 		initInfo();
@@ -463,6 +501,31 @@ public class Territory {
 		this.territoryResourcesDownloadAllButton
 				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD2));
 
+		Tooltip territoryResourcesOpenDirectoryTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.resourcesopendirectory"));
+		territoryResourcesOpenDirectoryTooltip.getStyleClass().add("tooltip_001");
+		this.territoryResourcesOpenDirectoryButton.setTooltip(territoryResourcesOpenDirectoryTooltip);
+		this.territoryResourcesOpenDirectoryButton.setText("");
+		this.territoryResourcesOpenDirectoryButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FOLDER));
+
+		Tooltip territoryResourcesDeleteAllTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.resourcesdeleteall"));
+		territoryResourcesDeleteAllTooltip.getStyleClass().add("tooltip_001");
+		this.territoryResourcesDeleteAllButton.setTooltip(territoryResourcesDeleteAllTooltip);
+		this.territoryResourcesDeleteAllButton.setText("");
+		this.territoryResourcesDeleteAllButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
+
+		this.territoryDocsLabel.setText(this.language.getString("territory.label.resourcedocs"));
+		this.territoryImagesLabel.setText(this.language.getString("territory.label.resourceimages"));
+
+		this.territoryDocsNameTableColumn.setText(this.language.getString("territory.tablecolumn.resourcedocfilename"));
+		this.territoryImagesNameTableColumn
+				.setText(this.language.getString("territory.tablecolumn.resourceimagefilename"));
+
+		this.territoryDocsTableView.setMaxHeight(250);
+		this.territoryImagesTableView.setMaxHeight(250);
+
 		this.totalImageView.setFitWidth(25);
 		this.totalImageView.setFitHeight(25);
 		this.totalImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.USER_MENU_CONGR, 25, 25));
@@ -511,6 +574,14 @@ public class Territory {
 		this.territoryOpenViewerURLButton.setOnAction(event -> openTerritoryViewerURL());
 		this.territoryResourcesDownloadButton.setOnAction(event -> downloadTerritoryResources());
 		this.territoryResourcesDownloadAllButton.setOnAction(event -> downloadAllTerritoryResources());
+		this.territoryResourcesOpenDirectoryButton.setOnAction(event -> openResourceDirectory());
+		this.territoryResourcesDeleteAllButton.setOnAction(event -> deleteResourceDirectory());
+
+		this.territoryTableView.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> selectTerritory());
+
+		this.territoryImagesTableView.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> selectTerritoryImage());
 
 		this.territoryTableView.setRowFactory(param -> {
 			TableRow<TerritoryObj> row = new TableRow<>();
@@ -546,6 +617,195 @@ public class Territory {
 //		this.familiesMapsButton.setOnAction(event -> viewMaps());
 	}
 
+	private void selectTerritoryImage() {
+
+		if (this.territoryImagesTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			File item = this.territoryImagesTableView.getSelectionModel().getSelectedItem();
+			if (item.exists()) {
+				clearImage();
+				fillImage(item);
+			}
+		}
+	}
+
+	private void fillImage(File fileImage) {
+
+		// TODO: check image
+
+		if (fileImage.exists()) {
+
+			double stackPaneWidth = this.territoryImageViewStackPane.getWidth() - 5;
+			double stackPaneHeight = this.territoryImageViewStackPane.getHeight() - 5;
+
+			Image image = new Image(fileImage.toURI().toString());
+			this.territoryImageView.setImage(image);
+			this.territoryImageView.setPreserveRatio(true);
+
+			double imageWidth = image.getWidth();
+			double imageHeight = image.getHeight();
+
+			double newWidth = setNewWidthSize(imageWidth, imageHeight, stackPaneWidth, stackPaneHeight);
+			double newHeight = setNewHeightSize(imageWidth, imageHeight, stackPaneWidth, stackPaneHeight);
+
+			if (newWidth > stackPaneWidth || newHeight > stackPaneHeight) {
+				newWidth = reverseWidthSize(newWidth, newHeight, stackPaneWidth, stackPaneHeight);
+				newHeight = reverseHeightSize(newWidth, newHeight, stackPaneWidth, stackPaneHeight);
+			}
+
+			this.territoryImageView.setFitWidth(newWidth);
+			this.territoryImageView.setFitHeight(newHeight);
+
+		}
+	}
+
+	private double setNewWidthSize(double width, double height, double screenWidth, double screenHeight) {
+
+		if (width > height) {
+			return screenWidth;
+		} else {
+			return imageRatioSize(screenHeight, height, width);
+		}
+	}
+
+	private double setNewHeightSize(double width, double height, double screenWidth, double screenHeight) {
+
+		if (width > height) {
+			return imageRatioSize(screenWidth, width, height);
+		} else {
+			return screenHeight;
+		}
+	}
+
+	private double imageRatioSize(double screenSize, double originalSize, double otherSide) {
+
+		double ratio = screenSize * 100 / originalSize;
+		return (otherSide * ratio / 100);
+	}
+
+	private double reverseWidthSize(double newWidth, double newHeight, double stackPaneWidth, double stackPaneHeight) {
+
+		if (newWidth > newHeight) {
+			return imageRatioSize(stackPaneHeight, newHeight, newWidth);
+		} else {
+			return stackPaneWidth;
+		}
+	}
+
+	private double reverseHeightSize(double newWidth, double newHeight, double stackPaneWidth, double stackPaneHeight) {
+
+		if (newWidth > newHeight) {
+			return stackPaneHeight;
+		} else {
+			return imageRatioSize(stackPaneWidth, newWidth, newHeight);
+		}
+	}
+
+	private void clearImage() {
+		this.territoryImageView.setImage(null);
+	}
+
+	private void deleteResourceDirectory() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			String content = this.application.getSettings().getLanguage()
+					.getString("territory.confirm.deleteallresources");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+				TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+				File targetDirectory = territoryObj.buildTargetDirectory();
+
+				try {
+					FileUtils.deleteDirectory(targetDirectory);
+				} catch (IOException e) {
+					this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+				}
+
+				selectTerritory();
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	public void selectTerritory() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			this.territoryDocs.clear();
+			this.territoryImages.clear();
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+			File targetDirectory = territoryObj.buildTargetDirectory();
+
+			ArrayList<TerritoryResource> resources = territoryObj.getResources();
+			for (TerritoryResource territoryResource : resources) {
+
+				File resource = new File(targetDirectory, territoryResource.getResourceName());
+				if (resource.exists()) {
+
+					switch (territoryResource.getType()) {
+					case 0: // Image
+
+						this.territoryImages.add(resource);
+
+						break;
+
+					case 1: // Doc
+
+						this.territoryDocs.add(resource);
+
+						break;
+
+					default:
+						break;
+					}
+				}
+			}
+
+			Platform.runLater(() -> {
+				this.territoryDocsTableView.refresh();
+				this.territoryImagesTableView.refresh();
+			});
+
+			// TODO: check selection
+			this.territoryImagesTableView.getSelectionModel().selectFirst();
+			// selectFirstTerritoryImage();
+		}
+	}
+
+	private void selectFirstTerritoryImage() {
+
+		this.territoryImagesTableView.getSelectionModel().selectFirst();
+
+//		if(this.territoryImagesTableView.getItems().size()>0) {
+//		}
+	}
+
+	private void openResourceDirectory() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+			File targetDirectory = territoryObj.buildTargetDirectory();
+			if (targetDirectory.exists()) {
+
+				try {
+					Desktop.getDesktop().open(targetDirectory);
+				} catch (IOException e) {
+					this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+				}
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
 	private void downloadTerritoryResources() {
 
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
@@ -564,7 +824,7 @@ public class Territory {
 				String waitMessage = this.language.getString("territory.wait.download");
 
 				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-						new TerritoryDownloadTask(this.application, this.ownerStage, territoryObj));
+						new TerritoryDownloadTask(this.application, this.ownerStage, this, territoryObj));
 
 			}
 		}

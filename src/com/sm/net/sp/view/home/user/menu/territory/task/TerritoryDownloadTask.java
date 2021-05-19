@@ -13,6 +13,7 @@ import java.util.HashMap;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.model.TerritoryResource;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.smnet.core.task.TaskInterface;
 
 import javafx.stage.Stage;
@@ -21,13 +22,16 @@ public class TerritoryDownloadTask implements TaskInterface {
 
 	private SupportPlannerView application;
 	private Stage viewStage;
+	private Territory view;
 	private TerritoryObj territoryObj;
 
-	public TerritoryDownloadTask(SupportPlannerView application, Stage viewStage, TerritoryObj territoryObj) {
+	public TerritoryDownloadTask(SupportPlannerView application, Stage viewStage, Territory view,
+			TerritoryObj territoryObj) {
 		super();
 
 		this.application = application;
 		this.viewStage = viewStage;
+		this.view = view;
 		this.territoryObj = territoryObj;
 	}
 
@@ -43,14 +47,18 @@ public class TerritoryDownloadTask implements TaskInterface {
 			String error = "";
 			for (TerritoryResource territoryResource : territoryResourceList) {
 
-				String feedback = download(targetDirectory, territoryResource);
+				File targetFile = new File(targetDirectory, territoryResource.getResourceName());
+				if (!targetFile.exists()) {
 
-				if (!feedback.isEmpty()) {
-					if (!error.isEmpty())
-						error += "\n\n";
+					String feedback = download(targetFile, territoryResource);
 
-					error += String.format("Download failed: (%s) -> %s", territoryResource.getResourceName(),
-							territoryResource.getResourceURL());
+					if (!feedback.isEmpty()) {
+						if (!error.isEmpty())
+							error += "\n\n";
+
+						error += String.format("Download failed: (%s) -> %s", territoryResource.getResourceName(),
+								territoryResource.getResourceURL());
+					}
 				}
 			}
 
@@ -63,13 +71,11 @@ public class TerritoryDownloadTask implements TaskInterface {
 		}
 	}
 
-	private String download(File targetDirectory, TerritoryResource res) {
+	private String download(File targetFile, TerritoryResource res) {
 
 		switch (res.getType()) {
 		case 0:// IMAGE
 		case 1:// DOC
-
-			File targetFile = new File(targetDirectory, res.getResourceName());
 
 			try {
 				InputStream in = new URL(res.getResourceURL()).openStream();
@@ -101,6 +107,7 @@ public class TerritoryDownloadTask implements TaskInterface {
 					this.application.getSettings().getLanguage().getString(error));
 			break;
 		default:
+			this.view.selectTerritory();
 			break;
 		}
 	}
