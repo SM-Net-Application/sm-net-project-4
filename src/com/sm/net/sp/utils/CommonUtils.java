@@ -1,5 +1,8 @@
 package com.sm.net.sp.utils;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -31,5 +34,13 @@ public class CommonUtils {
 
 		return age;
 	}
+	
+	public static void open(File file) throws IOException {
+
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+            if (file.exists()) desktop.open(file);
+        }
+    }
 
 }

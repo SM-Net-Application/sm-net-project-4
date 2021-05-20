@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.StreamSupport;
@@ -20,6 +19,7 @@ import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.model.TerritoryResource;
+import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.utils.CommonUtils;
 import com.sm.net.sp.view.SupportPlannerView;
@@ -54,7 +54,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Territory {
+public class Territory extends UpdateDataAdapter {
 
 	@FXML
 	private ImageView congrImageView;
@@ -70,6 +70,8 @@ public class Territory {
 
 	@FXML
 	private TabPane territoryTabPane;
+	@FXML
+	private Tab territoryListTab;
 
 	@FXML
 	private Button territoryAddButton;
@@ -130,56 +132,36 @@ public class Territory {
 	private Tab memberListTab;
 
 	@FXML
-	private Tab familyListTab;
-
-	@FXML
 	private TableView<Member> membersTableView;
-	@FXML
-	private TableColumn<Member, Integer> memberIDTableColumn;
 	@FXML
 	private TableColumn<Member, String> memberSurnameTableColumn;
 	@FXML
 	private TableColumn<Member, String> memberNameTableColumn;
 	@FXML
 	private TableColumn<Member, ImageView> memberIconTableColumn;
-	@FXML
-	private TableColumn<Member, String> memberSurname2TableColumn;
-	@FXML
-	private TableColumn<Member, String> memberName2TableColumn;
-	@FXML
-	private TableColumn<Member, BigDecimal> memberAgeTableColumn;
-	@FXML
-	private TableColumn<Member, String> memberNumberTableColumn;
-	@FXML
-	private TableColumn<Member, String> memberMailTableColumn;
-	@FXML
-	private TableColumn<Member, BigDecimal> memberAgeBaptismTableColumn;
-	@FXML
-	private TableColumn<Member, ImageView> memberMonitorTableColumn;
 
 	@FXML
-	private Button memberAddButton;
-	@FXML
-	private Button memberDeleteButton;
-	@FXML
-	private Button membersUpdateButton;
-	@FXML
-	private Button memberMonitorPrintButton;
+	private Button memberAssignedTerritoryReturnButton;
 
 	@FXML
 	private TextField filterMemberTextField;
+
 	@FXML
-	private ImageView totalImageView;
+	private Label memberAssignedTerritoryLabel;
+
 	@FXML
-	private ImageView totalMaleImageView;
+	private TableView<TerritoryObj> memberAssignedTerritoryTableView;
 	@FXML
-	private ImageView totalFemaleImageView;
+	private TableColumn<TerritoryObj, BigDecimal> memberAssignedTerritoryNumberTableColumn;
 	@FXML
-	private TextField totalTextField;
+	private TableColumn<TerritoryObj, String> memberAssignedTerritoryNameTableColumn;
+
 	@FXML
-	private TextField totalMaleTextField;
+	private VBox memberAssignedTerritoryTablesVBox;
 	@FXML
-	private TextField totalFemaleTextField;
+	private StackPane memberAssignedTerritoryImageViewStackPane;
+	@FXML
+	private ImageView memberAssignedTerritoryImageView;
 
 	private Settings settings;
 	private Language language;
@@ -212,7 +194,6 @@ public class Territory {
 		this.territoryImagesNameTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
-		this.memberIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spMemberIDProperty().asObject());
 		this.memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
 		this.memberNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
 
@@ -224,78 +205,29 @@ public class Territory {
 				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
 
 		});
-		this.memberSurname2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf39DecryptedProperty());
-		this.memberName2TableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
-		this.memberAgeTableColumn.setCellValueFactory(cellData -> {
-
-			String spInf52 = cellData.getValue().getSpInf52Decrypted();
-			if (!spInf52.isEmpty())
-				return new SimpleObjectProperty<BigDecimal>(CommonUtils.calculateAge(LocalDate.parse(spInf52)));
-
-			return null;
-		});
-		this.memberNumberTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf40DecryptedProperty());
-		this.memberMailTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf41DecryptedProperty());
-		this.memberAgeBaptismTableColumn.setCellValueFactory(cellData -> {
-
-			String spInf53 = cellData.getValue().getSpInf53Decrypted();
-			if (!spInf53.isEmpty())
-				return new SimpleObjectProperty<BigDecimal>(CommonUtils.calculateAge(LocalDate.parse(spInf53)));
-
-			return null;
-		});
-		this.memberMonitorTableColumn.setCellValueFactory(cellData -> {
-
-			if (!cellData.getValue().getSpInf47().isEmpty())
-				return new SimpleObjectProperty<ImageView>(
-						Meta.Resources.imageForButtonSmall(Meta.Resources.USER_MENU_MONITOR));
-
-			return null;
-		});
-
-//		familyIDTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamIDProperty().asObject());
-//
-//		this.familyMapsTableColumn.setCellValueFactory(cellData -> {
-//
-//			if (!cellData.getValue().getSpInf9Decrypted().isEmpty())
-//				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS));
-//
-//			return null;
-//		});
-//
-//		familyNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
-//		familyCountTableColumn.setCellValueFactory(cellData -> cellData.getValue().spFamMembersProperty().asObject());
-//		familyStreetTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
-//		familyNummerTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf3DecryptedProperty());
-//		familyPostCodeTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf4DecryptedProperty());
-//		familyCityTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf5DecryptedProperty());
 	}
 
 	private void styleClasses() {
 
-		congrHeaderLabel.getStyleClass().add("label_header_001");
+		this.congrHeaderLabel.getStyleClass().add("label_header_001");
 
-		congrTabPane.getStyleClass().add("tab_pane_003");
+		this.congrTabPane.getStyleClass().add("tab_pane_003");
 
-		territoryTab.getStyleClass().add("tab_001");
-		publisherTab.getStyleClass().add("tab_001");
+		this.territoryTab.getStyleClass().add("tab_001");
+		this.publisherTab.getStyleClass().add("tab_001");
 
 		this.memberTabPane.getStyleClass().add("tab_pane_001");
 		this.memberListTab.getStyleClass().add("tab_001");
 
 		this.territoryTabPane.getStyleClass().add("tab_pane_001");
-		this.familyListTab.getStyleClass().add("tab_001");
+		this.territoryListTab.getStyleClass().add("tab_001");
 
-		this.memberIDTableColumn.getStyleClass().add("table_column_002");
 		this.memberIconTableColumn.getStyleClass().add("table_column_002");
-		this.memberMonitorTableColumn.getStyleClass().add("table_column_002");
 
-		membersTableView.getStyleClass().add("table_view_001");
-		territoryTableView.getStyleClass().add("table_view_001");
+		this.membersTableView.getStyleClass().add("table_view_001");
+		this.territoryTableView.getStyleClass().add("table_view_001");
 
-		memberAddButton.getStyleClass().add("button_image_001");
-		memberDeleteButton.getStyleClass().add("button_image_001");
-		membersUpdateButton.getStyleClass().add("button_image_001");
+		this.memberAssignedTerritoryReturnButton.getStyleClass().add("button_image_001");
 
 		this.territoryNumberTableColumn.getStyleClass().add("table_column_002");
 
@@ -317,14 +249,12 @@ public class Territory {
 		this.territoryDocsTableView.getStyleClass().add("table_view_001");
 		this.territoryImagesTableView.getStyleClass().add("table_view_001");
 
-		memberMonitorPrintButton.getStyleClass().add("button_image_001");
-
 		this.filterMemberTextField.getStyleClass().add("text_field_001");
-		this.totalTextField.getStyleClass().add("text_field_002");
-		this.totalMaleTextField.getStyleClass().add("text_field_002");
-		this.totalFemaleTextField.getStyleClass().add("text_field_002");
 
 		this.territoryFilterTextField.getStyleClass().add("text_field_001");
+
+		this.memberAssignedTerritoryLabel.getStyleClass().add("label_001");
+		this.memberAssignedTerritoryTableView.getStyleClass().add("table_view_001");
 	}
 
 	public void objectInitialize() {
@@ -337,17 +267,39 @@ public class Territory {
 
 		this.territoryTablesVBox.setMinWidth(600);
 		this.territoryTablesVBox.setMaxWidth(600);
-		
+
+		this.memberAssignedTerritoryTablesVBox.setMinWidth(600);
+		this.memberAssignedTerritoryTablesVBox.setMaxWidth(600);
+
 		listeners();
 		viewUpdate();
 		initInfo();
 
-		// Carica programmazione e luoghi
+		updateMembers();
+	}
 
-//		String waitMessage = this.language.getString("congregation.wait.load");
-//
-//		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-//				new CongrInitDataLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+	@Override
+	public void updateMembers() {
+		Actions.getAllMembers(settings, ownerStage, this);
+	}
+
+	@Override
+	public void updateMembers(ObservableList<Member> list) {
+
+		this.membersList = list;
+		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
+				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
+
+		// Rimuovi i non proclamatori
+		this.membersList.removeIf(member -> {
+			boolean isPublisher = member.getSpInf7() == 1 || member.getSpInf8() == 1;
+			boolean isInactive = member.getSpInf38() == 1;
+			return (!isPublisher || isInactive);
+		});
+
+		this.membersTableView.setItems(membersList);
+
+		this.filterMemberTextField.setText("");
 	}
 
 	public void updateTerritoryList(ObservableList<TerritoryObj> list) {
@@ -385,68 +337,20 @@ public class Territory {
 
 		this.memberListTab.setText(this.language.getString("congregation.members.list"));
 
-		this.familyListTab.setText(this.language.getString("congregation.family.list"));
-
-		memberIDTableColumn.setText(language.getString("TEXT0005"));
-		memberIDTableColumn.setMinWidth(50);
-		memberIDTableColumn.setMaxWidth(50);
-		memberIDTableColumn.setResizable(false);
-
 		this.memberIconTableColumn.setText("");
 		this.memberIconTableColumn.setMinWidth(50);
 		this.memberIconTableColumn.setMaxWidth(50);
 		this.memberIconTableColumn.setResizable(false);
 
-		this.memberMonitorTableColumn.setText("");
-		this.memberMonitorTableColumn.setMinWidth(50);
-		this.memberMonitorTableColumn.setMaxWidth(50);
-		this.memberMonitorTableColumn.setResizable(false);
-
 		this.memberSurnameTableColumn.setText(this.language.getString("TEXT0013"));
-		this.memberSurname2TableColumn.setText(this.language.getString("congregation.members.column.surname2"));
 		this.memberNameTableColumn.setText(this.language.getString("TEXT0014"));
 
-		this.memberNumberTableColumn.setText(this.language.getString("congregation.members.column.number"));
-		this.memberMailTableColumn.setText(this.language.getString("congregation.members.column.mail"));
-
-		this.memberName2TableColumn.setText("");
-		this.memberName2TableColumn.setMinWidth(75);
-		this.memberName2TableColumn.setMaxWidth(75);
-		this.memberName2TableColumn.setResizable(false);
-
-		this.memberAgeTableColumn.setText(this.language.getString("congregation.members.column.age"));
-		this.memberAgeTableColumn.setMinWidth(50);
-		this.memberAgeTableColumn.setMaxWidth(50);
-		this.memberAgeTableColumn.setResizable(false);
-
-		this.memberAgeBaptismTableColumn.setText(this.language.getString("congregation.members.column.agebaptism"));
-		this.memberAgeBaptismTableColumn.setMinWidth(100);
-		this.memberAgeBaptismTableColumn.setMaxWidth(100);
-//		this.memberAgeBaptismTableColumn.setResizable(false);
-
-		Tooltip memberAddTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.add"));
-		memberAddTooltip.getStyleClass().add("tooltip_001");
-		this.memberAddButton.setTooltip(memberAddTooltip);
-		this.memberAddButton.setText("");
-		this.memberAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER_ADD));
-
-		Tooltip memberDeleteTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.delete"));
-		memberDeleteTooltip.getStyleClass().add("tooltip_001");
-		this.memberDeleteButton.setTooltip(memberDeleteTooltip);
-		this.memberDeleteButton.setText("");
-		this.memberDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER_DEL));
-
-		Tooltip membersUpdateTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.update"));
-		membersUpdateTooltip.getStyleClass().add("tooltip_001");
-		this.membersUpdateButton.setTooltip(membersUpdateTooltip);
-		this.membersUpdateButton.setText("");
-		this.membersUpdateButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.UPDATE));
-
-		Tooltip memberMonitorPrintTooltip = new Tooltip(this.language.getString("congregation.members.tooltip.print"));
-		memberMonitorPrintTooltip.getStyleClass().add("tooltip_001");
-		this.memberMonitorPrintButton.setTooltip(memberMonitorPrintTooltip);
-		this.memberMonitorPrintButton.setText("");
-		this.memberMonitorPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
+		Tooltip memberAssignedTerritoryReturnTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.assignedterritoryreturn"));
+		memberAssignedTerritoryReturnTooltip.getStyleClass().add("tooltip_001");
+		this.memberAssignedTerritoryReturnButton.setTooltip(memberAssignedTerritoryReturnTooltip);
+		this.memberAssignedTerritoryReturnButton.setText("");
+		this.memberAssignedTerritoryReturnButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.OK));
 
 		this.territoryNumberTableColumn.setText(this.language.getString("territory.tablecolumns.territorynumber"));
 		this.territoryNumberTableColumn.setMinWidth(100);
@@ -526,26 +430,18 @@ public class Territory {
 		this.territoryDocsTableView.setMaxHeight(250);
 		this.territoryImagesTableView.setMaxHeight(250);
 
-		this.totalImageView.setFitWidth(25);
-		this.totalImageView.setFitHeight(25);
-		this.totalImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.USER_MENU_CONGR, 25, 25));
-		this.totalTextField.setMinWidth(50);
-		this.totalTextField.setMaxWidth(50);
-		this.totalTextField.setEditable(false);
+		this.memberAssignedTerritoryLabel.setText(this.language.getString("territory.label.assignedterritory"));
 
-		this.totalMaleImageView.setFitWidth(25);
-		this.totalMaleImageView.setFitHeight(25);
-		this.totalMaleImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.MALE, 25, 25));
-		this.totalMaleTextField.setMinWidth(50);
-		this.totalMaleTextField.setMaxWidth(50);
-		this.totalMaleTextField.setEditable(false);
+		this.memberAssignedTerritoryNumberTableColumn
+				.setText(this.language.getString("territory.tablecolumns.territorynumber"));
+		this.memberAssignedTerritoryNumberTableColumn.setMinWidth(100);
+		this.memberAssignedTerritoryNumberTableColumn.setMaxWidth(100);
+		this.memberAssignedTerritoryNumberTableColumn.setResizable(false);
 
-		this.totalFemaleImageView.setFitWidth(25);
-		this.totalFemaleImageView.setFitHeight(25);
-		this.totalFemaleImageView.setImage(Meta.Resources.getImageFromResources(Meta.Resources.FEMALE, 25, 25));
-		this.totalFemaleTextField.setMinWidth(50);
-		this.totalFemaleTextField.setMaxWidth(50);
-		this.totalFemaleTextField.setEditable(false);
+		this.memberAssignedTerritoryNameTableColumn
+				.setText(this.language.getString("territory.tablecolumns.territoryname"));
+
+		this.memberAssignedTerritoryTableView.setMaxHeight(250);
 	}
 
 	private void initInfo() {
@@ -594,6 +490,32 @@ public class Territory {
 			return row;
 		});
 
+		this.territoryDocsTableView.setRowFactory(param -> {
+			TableRow<File> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					try {
+						CommonUtils.open(row.getItem());
+					} catch (IOException e) {
+					}
+				}
+			});
+			return row;
+		});
+
+		this.territoryImagesTableView.setRowFactory(param -> {
+			TableRow<File> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					try {
+						CommonUtils.open(row.getItem());
+					} catch (IOException e) {
+					}
+				}
+			});
+			return row;
+		});
+
 		this.territoryFilterTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterTerritory(newValue));
 
@@ -610,8 +532,8 @@ public class Territory {
 //
 //		this.memberMonitorPrintButton.setOnAction(event4 -> print());
 //
-//		this.filterMemberTextField.textProperty()
-//				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
+		this.filterMemberTextField.textProperty()
+				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
 //
 
 //		this.familiesMapsButton.setOnAction(event -> viewMaps());
@@ -630,8 +552,6 @@ public class Territory {
 	}
 
 	private void fillImage(File fileImage) {
-
-		// TODO: check image
 
 		if (fileImage.exists()) {
 
@@ -771,18 +691,8 @@ public class Territory {
 				this.territoryImagesTableView.refresh();
 			});
 
-			// TODO: check selection
 			this.territoryImagesTableView.getSelectionModel().selectFirst();
-			// selectFirstTerritoryImage();
 		}
-	}
-
-	private void selectFirstTerritoryImage() {
-
-		this.territoryImagesTableView.getSelectionModel().selectFirst();
-
-//		if(this.territoryImagesTableView.getItems().size()>0) {
-//		}
 	}
 
 	private void openResourceDirectory() {
@@ -984,131 +894,6 @@ public class Territory {
 				|| obj.getSpInf31().toLowerCase().contains(filter);
 	}
 
-	private void listenerMemberMonitorPrintButton() {
-		this.memberMonitorPrintButton.setOnAction(event -> print());
-	}
-
-	private void listenerMembersTableView() {
-		membersTableView.setRowFactory(param -> {
-			TableRow<Member> row = new TableRow<>();
-			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (!row.isEmpty()))
-					editMember(row.getItem());
-			});
-			return row;
-		});
-	}
-
-	private void listenerTerritoryTableView() {
-
-		this.territoryTableView.setRowFactory(param -> {
-			TableRow<TerritoryObj> row = new TableRow<>();
-			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (!row.isEmpty()))
-					editTerritory(row.getItem());
-			});
-			return row;
-		});
-	}
-
-	private void listenerMemberAddButton() {
-		memberAddButton.setOnAction(event -> newMember());
-	}
-
-	private void listenerFamilyAddButton() {
-		territoryAddButton.setOnAction(event -> newTerritory());
-	}
-
-	private void listenerMemberDeleteButton() {
-		memberDeleteButton.setOnAction(event -> deleteMember());
-	}
-
-	private void listenerFamilyDeleteButton() {
-		territoryRemoveButton.setOnAction(event -> deleteFamily());
-	}
-
-	private void deleteMember() {
-
-		if (membersTableView.getSelectionModel().getSelectedIndex() > -1) {
-
-			Member member = membersTableView.getSelectionModel().getSelectedItem();
-
-//			Alert alert = new AlertDesigner(language.getString("TEXT0024"), member.getNameStyle1(), ownerStage,
-//					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-//					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
-//			if (alert.showAndWait().get() == ButtonType.OK)
-//				Actions.deleteMember(String.valueOf(member.getSpMemberID()), settings, ownerStage, this);
-		} else {
-
-			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.members.error.delete"));
-
-		}
-
-	}
-
-	private void deleteFamily() {
-
-		if (territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
-
-//			Family family = familiesTableView.getSelectionModel().getSelectedItem();
-//
-//			Alert alert = new AlertDesigner(language.getString("TEXT0034"), family.getSpInf1Decrypted(), ownerStage,
-//					AlertType.CONFIRMATION, Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
-//					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001");
-//			if (alert.showAndWait().get() == ButtonType.OK)
-//				Actions.deleteFamily(String.valueOf(family.getSpFamID()), settings, ownerStage, this);
-
-		} else {
-
-			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.family.error.delete"));
-
-		}
-
-	}
-
-	private void newMember() {
-
-		// if (!isAlreadyOpen(language.getString("TEXT0015"))) {
-		if (!isAlreadyOpen(this.memberTabPane, "")) {
-
-			try {
-
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_MEMBER_EDITOR);
-				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-
-				TerritoryEditor ctrl = (TerritoryEditor) fxmlLoader.getController();
-				ctrl.setSettings(this.settings);
-				ctrl.setApplication(this.application);
-				ctrl.setOwnerStage(ownerStage);
-				ctrl.setOwnerCtrl(this);
-
-				// Tab newMemberTab = new Tab(language.getString("TEXT0015"), layout);
-				Tab newTab = new Tab("", layout);
-				newTab.setClosable(true);
-				newTab.getStyleClass().add("tab_001");
-				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
-
-				ctrl.setParentTabPane(this.memberTabPane);
-				ctrl.setMembersTab(territoryTab);
-				ctrl.setNewTab(newTab);
-				ctrl.setConfigs(this.configs);
-
-//				congrTabPane.getTabs().add(newMemberTab);
-//				congrTabPane.getSelectionModel().select(newMemberTab);
-				this.memberTabPane.getTabs().add(newTab);
-				this.memberTabPane.getSelectionModel().select(newTab);
-
-				ctrl.objectInitialize();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	private void newTerritory() {
 
 		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
@@ -1153,52 +938,6 @@ public class Territory {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	private void editMember(Member member) {
-
-		if (!isAlreadyOpen(this.memberTabPane, member.getNameStyle1())) {
-
-			try {
-
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				fxmlLoader.setLocation(Meta.Views.HOME_USER_MENU_CONGR_MEMBER_EDITOR);
-				AnchorPane layout = (AnchorPane) fxmlLoader.load();
-
-				TerritoryEditor ctrl = (TerritoryEditor) fxmlLoader.getController();
-				ctrl.setSettings(this.settings);
-				ctrl.setApplication(this.application);
-				ctrl.setOwnerStage(ownerStage);
-				ctrl.setOwnerCtrl(this);
-				// ctrl.setSelectedMember(member);
-				ctrl.setConfigs(this.configs);
-				ctrl.objectInitialize();
-
-				Tab newMemberTab = new Tab(member.getNameStyle1(), layout);
-				newMemberTab.setClosable(true);
-				newMemberTab.getStyleClass().add("tab_001");
-
-				if (member.getSpInf4() == 0)
-					newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MALE));
-				else if (member.getSpInf4() == 1)
-					newMemberTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.FEMALE));
-
-				// ctrl.setCongrTabPane(congrTabPane);
-				// ctrl.setMembersTab(membersTab);
-				ctrl.setParentTabPane(this.memberTabPane);
-				ctrl.setMembersTab(this.memberListTab);
-				ctrl.setNewTab(newMemberTab);
-
-//				congrTabPane.getTabs().add(newMemberTab);
-//				congrTabPane.getSelectionModel().select(newMemberTab);
-				this.memberTabPane.getTabs().add(newMemberTab);
-				this.memberTabPane.getSelectionModel().select(newMemberTab);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
 		}
 	}
 
