@@ -9,7 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
-import com.sm.net.sp.model.TerritoryObj;
+import com.sm.net.sp.model.TerritoryRegistryEntity;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.smnet.core.dialog.AlertBuilder;
@@ -19,14 +19,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-public class TerritoryLoadTask implements TaskInterface {
+public class TerritoryRegistryLoadTask implements TaskInterface {
 
 	private Territory view;
 	private AlertBuilder alertBuilder;
 	private Settings settings;
 	private Stage viewStage;
 
-	public TerritoryLoadTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Territory view) {
+	public TerritoryRegistryLoadTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Territory view) {
 		super();
 
 		this.view = view;
@@ -38,7 +38,7 @@ public class TerritoryLoadTask implements TaskInterface {
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		JSONObject json = JSONRequest.TERRITORY_LOAD();
+		JSONObject json = JSONRequest.TERRITORY_REGISTRY_LOAD();
 		String url = this.settings.getDatabaseUrl();
 
 		try {
@@ -56,7 +56,7 @@ public class TerritoryLoadTask implements TaskInterface {
 	@Override
 	public void feedback(HashMap<String, Object> hashMap) {
 
-		ObservableList<TerritoryObj> list = FXCollections.observableArrayList();
+		ObservableList<TerritoryRegistryEntity> list = FXCollections.observableArrayList();
 
 		JSONObject response = (JSONObject) hashMap.get("response");
 		int status = response.getInt("status");
@@ -67,9 +67,10 @@ public class TerritoryLoadTask implements TaskInterface {
 			for (Object obj : result) {
 
 				JSONObject json = (JSONObject) obj;
-				TerritoryObj territory = TerritoryObj.newInstanceByJSONObject(json,
+
+				TerritoryRegistryEntity entity = TerritoryRegistryEntity.newInstanceByJSONObject(json,
 						this.settings.getDatabaseSecretKey());
-				list.add(territory);
+				list.add(entity);
 			}
 
 		} else if (status == 1) {
@@ -79,7 +80,8 @@ public class TerritoryLoadTask implements TaskInterface {
 
 		}
 
-		this.view.updateTerritoryList(list);
-		this.view.loadTerritoryRegistry();
+		this.view.updateTerritoryRegistryList(list);
+		this.view.updateTerritoryAssignedMember();
+		this.view.territoryTableViewRefresh();
 	}
 }

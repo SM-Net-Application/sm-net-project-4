@@ -61,6 +61,8 @@ public class TerritoryObj {
 	private StringProperty spInf39;
 	private StringProperty spInf40;
 
+	private Member assignedMember;
+
 	public TerritoryObj() {
 		super();
 
@@ -343,6 +345,14 @@ public class TerritoryObj {
 	private void checkResource(ArrayList<TerritoryResource> resourceList, int type, String url, String title) {
 		if (!url.isEmpty() && !title.isEmpty())
 			resourceList.add(new TerritoryResource(type, title, url));
+	}
+
+	public boolean isAvailable() {
+		return this.getAssignedMember() == null;
+	}
+
+	public void updateAssignedMember(Member member) {
+		this.setAssignedMember(member);
 	}
 
 	public final IntegerProperty spTerritoryIDProperty() {
@@ -835,6 +845,14 @@ public class TerritoryObj {
 
 	public final void setSpInf40(final String spInf40) {
 		this.spInf40Property().set(spInf40);
+	}
+
+	public Member getAssignedMember() {
+		return assignedMember;
+	}
+
+	public void setAssignedMember(Member assignedMember) {
+		this.assignedMember = assignedMember;
 	}
 
 }

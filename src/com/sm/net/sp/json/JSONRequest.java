@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.DateAndTime;
+import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.PDFDest;
 import com.sm.net.sp.model.PDFReplace;
 import com.sm.net.sp.model.Place;
@@ -1519,6 +1520,25 @@ public class JSONRequest {
 
 		jsonObj.put("id", id);
 
+		return jsonObj;
+	}
+
+	public static JSONObject TERRITORY_REGISTRY_INSERT(TerritoryObj territoryObj, Member member, LocalDate assignDate,
+			SecretKey secretKey) {
+
+		JSONObject jsonObj = create(Integer.valueOf(83));
+
+		jsonObj.put("spInf1", territoryObj.getSpTerritoryID());
+		jsonObj.put("spInf2", member.getSpMemberID());
+		jsonObj.put("spInf3", Crypt.encrypt(assignDate.toString(), secretKey));
+		jsonObj.put("spInf4", Crypt.encrypt("", secretKey));
+
+		return jsonObj;
+	}
+
+	public static JSONObject TERRITORY_REGISTRY_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(84));
 		return jsonObj;
 	}
 

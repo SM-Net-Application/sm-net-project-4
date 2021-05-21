@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.StreamSupport;
@@ -14,10 +16,14 @@ import org.apache.commons.io.FileUtils;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.dialogs.territory.TerritoryAssignDateDialog;
+import com.sm.net.sp.dialogs.territory.TerritoryAssignToMemberDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryDialog;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
+import com.sm.net.sp.model.TerritoryRegistry;
+import com.sm.net.sp.model.TerritoryRegistryEntity;
 import com.sm.net.sp.model.TerritoryResource;
 import com.sm.net.sp.model.UpdateDataAdapter;
 import com.sm.net.sp.settings.Settings;
@@ -27,6 +33,8 @@ import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDeleteTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadAllTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.smnet.core.task.TaskManager;
 
@@ -87,6 +95,8 @@ public class Territory extends UpdateDataAdapter {
 	private Button territoryResourcesDownloadButton;
 	@FXML
 	private Button territoryResourcesDownloadAllButton;
+	@FXML
+	private Button territoryAssignButton;
 
 	@FXML
 	private TextField territoryFilterTextField;
@@ -125,11 +135,6 @@ public class Territory extends UpdateDataAdapter {
 	private StackPane territoryImageViewStackPane;
 	@FXML
 	private ImageView territoryImageView;
-
-	@FXML
-	private TabPane memberTabPane;
-	@FXML
-	private Tab memberListTab;
 
 	@FXML
 	private TableView<Member> membersTableView;
@@ -177,6 +182,8 @@ public class Territory extends UpdateDataAdapter {
 
 	private HashMap<String, String> configs;
 
+	private TerritoryRegistry territoryRegistry;
+
 	@FXML
 	private void initialize() {
 		styleClasses();
@@ -188,6 +195,13 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryNumberTableColumn.setCellValueFactory(
 				cellData -> new SimpleObjectProperty<BigDecimal>(new BigDecimal(cellData.getValue().getSpInf7())));
 		this.territoryNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
+		this.territoryAssignedToTableColumn.setCellValueFactory(cellData -> {
+			Member assignedMember = cellData.getValue().getAssignedMember();
+			if (assignedMember != null) {
+				return new SimpleStringProperty(assignedMember.getNameStyle1());
+			}
+			return null;
+		});
 
 		this.territoryDocsNameTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -215,9 +229,6 @@ public class Territory extends UpdateDataAdapter {
 
 		this.territoryTab.getStyleClass().add("tab_001");
 		this.publisherTab.getStyleClass().add("tab_001");
-
-		this.memberTabPane.getStyleClass().add("tab_pane_001");
-		this.memberListTab.getStyleClass().add("tab_001");
 
 		this.territoryTabPane.getStyleClass().add("tab_pane_001");
 		this.territoryListTab.getStyleClass().add("tab_001");
@@ -255,9 +266,13 @@ public class Territory extends UpdateDataAdapter {
 
 		this.memberAssignedTerritoryLabel.getStyleClass().add("label_001");
 		this.memberAssignedTerritoryTableView.getStyleClass().add("table_view_001");
+
+		this.territoryAssignButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
+
+		this.territoryRegistry = new TerritoryRegistry();
 
 		this.territoryDocs = FXCollections.observableArrayList();
 		this.territoryImages = FXCollections.observableArrayList();
@@ -335,7 +350,7 @@ public class Territory extends UpdateDataAdapter {
 		this.publisherTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
 		this.publisherTab.setClosable(false);
 
-		this.memberListTab.setText(this.language.getString("congregation.members.list"));
+		this.territoryListTab.setText(this.language.getString("territory.tab.territorylist"));
 
 		this.memberIconTableColumn.setText("");
 		this.memberIconTableColumn.setMinWidth(50);
@@ -442,6 +457,12 @@ public class Territory extends UpdateDataAdapter {
 				.setText(this.language.getString("territory.tablecolumns.territoryname"));
 
 		this.memberAssignedTerritoryTableView.setMaxHeight(250);
+
+		Tooltip territoryAssignTooltip = new Tooltip(this.language.getString("territory.tooltip.assign"));
+		territoryAssignTooltip.getStyleClass().add("tooltip_001");
+		this.territoryAssignButton.setTooltip(territoryAssignTooltip);
+		this.territoryAssignButton.setText("");
+		this.territoryAssignButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER));
 	}
 
 	private void initInfo() {
@@ -450,6 +471,16 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryTableView.setItems(this.territoryList);
 
 		updateTerritory();
+	}
+
+	public void loadTerritoryRegistry() {
+
+		String waitMessage = this.language.getString("territory.wait.loadregistry");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new TerritoryRegistryLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+						this));
+
 	}
 
 	public void updateTerritory() {
@@ -472,6 +503,7 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryResourcesDownloadAllButton.setOnAction(event -> downloadAllTerritoryResources());
 		this.territoryResourcesOpenDirectoryButton.setOnAction(event -> openResourceDirectory());
 		this.territoryResourcesDeleteAllButton.setOnAction(event -> deleteResourceDirectory());
+		this.territoryAssignButton.setOnAction(event -> assignTerritory());
 
 		this.territoryTableView.getSelectionModel().selectedIndexProperty()
 				.addListener((obs, oldV, newV) -> selectTerritory());
@@ -537,6 +569,80 @@ public class Territory extends UpdateDataAdapter {
 //
 
 //		this.familiesMapsButton.setOnAction(event -> viewMaps());
+	}
+
+	private void assignTerritory() {
+
+		// TODO: Assegna territorio
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+			if (territoryObj.isAvailable()) {
+
+				Member member = TerritoryAssignToMemberDialog.show(this.application, this.ownerStage, this.membersList);
+				if (member != null) {
+
+					// TODO: Aggiungere il controllo che la data scelta sia superiore all'ultima
+
+					LocalDate assignDate = TerritoryAssignDateDialog.show(this.application, this.ownerStage,
+							territoryObj, member);
+
+					if (assignDate != null) {
+
+						String header = this.application.getSettings().getLanguage()
+								.getString("territory.error.registryentityheader");
+
+						String contentFormat = this.application.getSettings().getLanguage()
+								.getStringWithNewLine("territory.error.registryentitycontentformat");
+
+						String territoryName = String.format("%s - %s", territoryObj.getSpInf7(),
+								territoryObj.getSpInf8());
+						String memberName = member.getNameStyle1();
+
+						String datePattern = this.application.getSettings().getLanguage().getString("datepattern");
+						String date = DateTimeFormatter.ofPattern(datePattern).format(assignDate);
+
+						String content = String.format(contentFormat, territoryName, memberName, date);
+
+						if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+							// TODO: Salvare il movimento nel registro
+
+							String waitMessage = this.language.getString("territory.wait.assignsave");
+							TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+									new TerritoryRegistryEntitySaveTask(this.application.getAlertBuilder2(),
+											this.settings, this.ownerStage, this, territoryObj, member, assignDate));
+
+						}
+
+					} else {
+						this.application.getAlertBuilder2().error(this.ownerStage,
+								this.language.getString("territory.error.noassigndate"));
+					}
+
+				} else {
+					this.application.getAlertBuilder2().error(this.ownerStage,
+							this.language.getString("territory.error.nomembertoassign"));
+				}
+
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("territory.error.noterritoryavailable"));
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	public void updateTerritoryRegistryList(ObservableList<TerritoryRegistryEntity> list) {
+		this.territoryRegistry.update(list);
+	}
+
+	public void updateTerritoryAssignedMember() {
+		this.territoryRegistry.updateTerritoryAssignedMember(this.territoryList, this.membersList);
 	}
 
 	private void selectTerritoryImage() {
