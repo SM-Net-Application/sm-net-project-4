@@ -29,8 +29,8 @@ public class TerritoryRegistryEntitySaveTask implements TaskInterface {
 	private Member member;
 	private LocalDate assignDate;
 
-	public TerritoryRegistryEntitySaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage, Territory view,
-			TerritoryObj territoryObj, Member member, LocalDate assignDate) {
+	public TerritoryRegistryEntitySaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage,
+			Territory view, TerritoryObj territoryObj, Member member, LocalDate assignDate) {
 		super();
 
 		this.view = view;
@@ -77,10 +77,7 @@ public class TerritoryRegistryEntitySaveTask implements TaskInterface {
 
 			// TODO: update dopo il salvataggio
 
-//			this.view.updateTerritory();
-//
-//			TabPane tabPane = this.view.getTerritoryTabPane();
-//			tabPane.getTabs().remove(this.thisTab);
+			this.view.loadTerritoryRegistry();
 
 		} else if (status == 1)
 			this.alertBuilder.error(this.viewStage, error);

@@ -109,6 +109,8 @@ public class Territory extends UpdateDataAdapter {
 	private TableColumn<TerritoryObj, String> territoryNameTableColumn;
 	@FXML
 	private TableColumn<TerritoryObj, String> territoryAssignedToTableColumn;
+	@FXML
+	private TableColumn<TerritoryObj, LocalDate> territoryAssignedDateTableColumn;
 
 	@FXML
 	private Button territoryResourcesOpenDirectoryButton;
@@ -160,6 +162,8 @@ public class Territory extends UpdateDataAdapter {
 	private TableColumn<TerritoryObj, BigDecimal> memberAssignedTerritoryNumberTableColumn;
 	@FXML
 	private TableColumn<TerritoryObj, String> memberAssignedTerritoryNameTableColumn;
+	@FXML
+	private TableColumn<TerritoryObj, LocalDate> memberAssignedTerritoryAssignedDateTableColumn;
 
 	@FXML
 	private VBox memberAssignedTerritoryTablesVBox;
@@ -183,6 +187,8 @@ public class Territory extends UpdateDataAdapter {
 	private HashMap<String, String> configs;
 
 	private TerritoryRegistry territoryRegistry;
+	private boolean imageView1;
+	private boolean imageView2;
 
 	@FXML
 	private void initialize() {
@@ -203,6 +209,9 @@ public class Territory extends UpdateDataAdapter {
 			return null;
 		});
 
+		this.territoryAssignedDateTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().assignedDateProperty());
+
 		this.territoryDocsNameTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		this.territoryImagesNameTableColumn
@@ -219,6 +228,13 @@ public class Territory extends UpdateDataAdapter {
 				return new SimpleObjectProperty<ImageView>(Meta.Resources.imageForButtonSmall(Meta.Resources.FEMALE));
 
 		});
+
+		this.memberAssignedTerritoryNumberTableColumn.setCellValueFactory(
+				cellData -> new SimpleObjectProperty<BigDecimal>(new BigDecimal(cellData.getValue().getSpInf7())));
+		this.memberAssignedTerritoryNameTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().spInf8Property());
+		this.memberAssignedTerritoryAssignedDateTableColumn
+				.setCellValueFactory(cellData -> cellData.getValue().assignedDateProperty());
 	}
 
 	private void styleClasses() {
@@ -241,6 +257,7 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryReturnButton.getStyleClass().add("button_image_001");
 
 		this.territoryNumberTableColumn.getStyleClass().add("table_column_002");
+		this.territoryAssignedDateTableColumn.getStyleClass().add("table_column_002");
 
 		this.territoryAddButton.getStyleClass().add("button_image_001");
 		this.territoryOpenViewerButton.getStyleClass().add("button_image_001");
@@ -267,10 +284,16 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryLabel.getStyleClass().add("label_001");
 		this.memberAssignedTerritoryTableView.getStyleClass().add("table_view_001");
 
+		this.memberAssignedTerritoryNumberTableColumn.getStyleClass().add("table_column_002");
+		this.memberAssignedTerritoryAssignedDateTableColumn.getStyleClass().add("table_column_002");
+
 		this.territoryAssignButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
+
+		this.imageView1 = false;
+		this.imageView2 = false;
 
 		this.territoryRegistry = new TerritoryRegistry();
 
@@ -280,15 +303,17 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryDocsTableView.setItems(this.territoryDocs);
 		this.territoryImagesTableView.setItems(this.territoryImages);
 
-		this.territoryTablesVBox.setMinWidth(600);
-		this.territoryTablesVBox.setMaxWidth(600);
+		this.territoryTablesVBox.setMinWidth(750);
+		this.territoryTablesVBox.setMaxWidth(750);
 
 		this.memberAssignedTerritoryTablesVBox.setMinWidth(600);
 		this.memberAssignedTerritoryTablesVBox.setMaxWidth(600);
 
+		this.territoryList = FXCollections.observableArrayList();
+		this.territoryTableView.setItems(this.territoryList);
+
 		listeners();
 		viewUpdate();
-		initInfo();
 
 		updateMembers();
 	}
@@ -315,6 +340,8 @@ public class Territory extends UpdateDataAdapter {
 		this.membersTableView.setItems(membersList);
 
 		this.filterMemberTextField.setText("");
+
+		updateTerritory();
 	}
 
 	public void updateTerritoryList(ObservableList<TerritoryObj> list) {
@@ -374,6 +401,11 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryNameTableColumn.setText(this.language.getString("territory.tablecolumns.territoryname"));
 		this.territoryAssignedToTableColumn
 				.setText(this.language.getString("territory.tablecolumns.territoryassignedto"));
+
+		this.territoryAssignedDateTableColumn
+				.setText(this.language.getString("territory.tablecolumns.territoryassigneddate"));
+		this.territoryAssignedDateTableColumn.setMinWidth(100);
+		this.territoryAssignedDateTableColumn.setMaxWidth(100);
 
 		Tooltip territoryAddTooltip = new Tooltip(this.language.getString("territory.tooltip.add"));
 		territoryAddTooltip.getStyleClass().add("tooltip_001");
@@ -442,8 +474,12 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryImagesNameTableColumn
 				.setText(this.language.getString("territory.tablecolumn.resourceimagefilename"));
 
-		this.territoryDocsTableView.setMaxHeight(250);
-		this.territoryImagesTableView.setMaxHeight(250);
+		this.territoryTableView.setMinHeight(400);
+		this.territoryTableView.setMaxHeight(400);
+//		this.territoryDocsTableView.setMinHeight(250);
+//		this.territoryDocsTableView.setMaxHeight(250);
+//		this.territoryImagesTableView.setMinHeight(250);
+//		this.territoryImagesTableView.setMaxHeight(250);
 
 		this.memberAssignedTerritoryLabel.setText(this.language.getString("territory.label.assignedterritory"));
 
@@ -456,6 +492,12 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryNameTableColumn
 				.setText(this.language.getString("territory.tablecolumns.territoryname"));
 
+		this.memberAssignedTerritoryAssignedDateTableColumn
+				.setText(this.language.getString("territory.tablecolumns.territoryassigneddate"));
+		this.memberAssignedTerritoryAssignedDateTableColumn.setMinWidth(100);
+		this.memberAssignedTerritoryAssignedDateTableColumn.setMaxWidth(100);
+
+		this.memberAssignedTerritoryTableView.setMinHeight(250);
 		this.memberAssignedTerritoryTableView.setMaxHeight(250);
 
 		Tooltip territoryAssignTooltip = new Tooltip(this.language.getString("territory.tooltip.assign"));
@@ -463,14 +505,6 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryAssignButton.setTooltip(territoryAssignTooltip);
 		this.territoryAssignButton.setText("");
 		this.territoryAssignButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER));
-	}
-
-	private void initInfo() {
-
-		this.territoryList = FXCollections.observableArrayList();
-		this.territoryTableView.setItems(this.territoryList);
-
-		updateTerritory();
 	}
 
 	public void loadTerritoryRegistry() {
@@ -551,24 +585,27 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryFilterTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterTerritory(newValue));
 
-//		memberAddButton.setOnAction(event2 -> newMember());
-//		memberDeleteButton.setOnAction(event3 -> deleteMember());
-//		membersTableView.setRowFactory(param1 -> {
-//			TableRow<Member> row = new TableRow<>();
-//			row.setOnMouseClicked(event4 -> {
-//				if (event4.getClickCount() == 2 && (!row.isEmpty()))
-//					editMember(row.getItem());
-//			});
-//			return row;
-//		});
-//
-//		this.memberMonitorPrintButton.setOnAction(event4 -> print());
-//
 		this.filterMemberTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
-//
 
-//		this.familiesMapsButton.setOnAction(event -> viewMaps());
+		this.membersTableView.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> selectMemberAssignedTerritory());
+
+		this.memberAssignedTerritoryTableView.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> selectAssignedTerritory());
+	}
+
+	private void selectMemberAssignedTerritory() {
+
+		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			Member publisher = this.membersTableView.getSelectionModel().getSelectedItem();
+			ObservableList<TerritoryObj> territoryList = this.territoryRegistry
+					.findActualTerritoriesByPublisher(this.territoryList, publisher);
+
+			this.memberAssignedTerritoryTableView.setItems(territoryList);
+			Platform.runLater(() -> this.memberAssignedTerritoryTableView.refresh());
+		}
 	}
 
 	private void assignTerritory() {
@@ -610,6 +647,7 @@ public class Territory extends UpdateDataAdapter {
 							// TODO: Salvare il movimento nel registro
 
 							String waitMessage = this.language.getString("territory.wait.assignsave");
+
 							TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 									new TerritoryRegistryEntitySaveTask(this.application.getAlertBuilder2(),
 											this.settings, this.ownerStage, this, territoryObj, member, assignDate));
@@ -621,10 +659,11 @@ public class Territory extends UpdateDataAdapter {
 								this.language.getString("territory.error.noassigndate"));
 					}
 
-				} else {
-					this.application.getAlertBuilder2().error(this.ownerStage,
-							this.language.getString("territory.error.nomembertoassign"));
 				}
+//				else {
+//					this.application.getAlertBuilder2().error(this.ownerStage,
+//							this.language.getString("territory.error.nomembertoassign"));
+//				}
 
 			} else {
 				this.application.getAlertBuilder2().error(this.ownerStage,
@@ -651,37 +690,55 @@ public class Territory extends UpdateDataAdapter {
 
 			File item = this.territoryImagesTableView.getSelectionModel().getSelectedItem();
 			if (item.exists()) {
-				clearImage();
-				fillImage(item);
+				clearImage(this.territoryImageView);
+				fillImage(item, this.territoryImageView);
 			}
 		}
 	}
 
-	private void fillImage(File fileImage) {
+	private void initImageViewSize(StackPane stackPane, ImageView imageView) {
+
+		double stackPaneWidth = stackPane.getWidth() - 5;
+		double stackPaneHeight = stackPane.getHeight() - 5;
+
+		imageView.setPreserveRatio(true);
+
+		imageView.setFitWidth(stackPaneWidth);
+		imageView.setFitHeight(stackPaneHeight);
+	}
+
+	private void fillImage(File fileImage, ImageView imageView) {
+
+		if (!imageView1) {
+			initImageViewSize(this.territoryImageViewStackPane, this.territoryImageView);
+			this.imageView1 = true;
+		}
+		if (!imageView2) {
+			initImageViewSize(this.memberAssignedTerritoryImageViewStackPane, this.memberAssignedTerritoryImageView);
+			this.imageView2 = true;
+		}
 
 		if (fileImage.exists()) {
 
-			double stackPaneWidth = this.territoryImageViewStackPane.getWidth() - 5;
-			double stackPaneHeight = this.territoryImageViewStackPane.getHeight() - 5;
+//			double imageViewFitWidth = imageView.getFitWidth();
+//			double imageViewFitHeight = imageView.getFitHeight();
 
 			Image image = new Image(fileImage.toURI().toString());
-			this.territoryImageView.setImage(image);
-			this.territoryImageView.setPreserveRatio(true);
 
-			double imageWidth = image.getWidth();
-			double imageHeight = image.getHeight();
-
-			double newWidth = setNewWidthSize(imageWidth, imageHeight, stackPaneWidth, stackPaneHeight);
-			double newHeight = setNewHeightSize(imageWidth, imageHeight, stackPaneWidth, stackPaneHeight);
-
-			if (newWidth > stackPaneWidth || newHeight > stackPaneHeight) {
-				newWidth = reverseWidthSize(newWidth, newHeight, stackPaneWidth, stackPaneHeight);
-				newHeight = reverseHeightSize(newWidth, newHeight, stackPaneWidth, stackPaneHeight);
-			}
-
-			this.territoryImageView.setFitWidth(newWidth);
-			this.territoryImageView.setFitHeight(newHeight);
-
+//			double imageWidth = image.getWidth();
+//			double imageHeight = image.getHeight();
+//
+//			double newWidth = setNewWidthSize(imageWidth, imageHeight, imageViewFitWidth, imageViewFitHeight);
+//			double newHeight = setNewHeightSize(imageWidth, imageHeight, imageViewFitWidth, imageViewFitHeight);
+//
+//			if (newWidth > imageViewFitWidth || newHeight > imageViewFitHeight) {
+//				newWidth = reverseWidthSize(newWidth, newHeight, imageViewFitWidth, imageViewFitHeight);
+//				newHeight = reverseHeightSize(newWidth, newHeight, imageViewFitWidth, imageViewFitHeight);
+//			}
+//
+//			// imageView.setImage(new Image(fileImage.toURI().toString(), newWidth,
+//			// newHeight, true, true));
+			imageView.setImage(image);
 		}
 	}
 
@@ -727,8 +784,8 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
-	private void clearImage() {
-		this.territoryImageView.setImage(null);
+	private void clearImage(ImageView imageView) {
+		imageView.setImage(null);
 	}
 
 	private void deleteResourceDirectory() {
@@ -757,12 +814,32 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
+	public void selectAssignedTerritory() {
+
+		if (this.memberAssignedTerritoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			clearImage(this.memberAssignedTerritoryImageView);
+
+			TerritoryObj territoryObj = this.memberAssignedTerritoryTableView.getSelectionModel().getSelectedItem();
+			File targetDirectory = territoryObj.buildTargetDirectory();
+
+			String firstResourceTitle = territoryObj.getSpInf12();
+			if (!firstResourceTitle.isEmpty()) {
+				File firstResource = new File(targetDirectory, firstResourceTitle);
+				if (firstResource.exists()) {
+					fillImage(firstResource, this.memberAssignedTerritoryImageView);
+				}
+			}
+		}
+	}
+
 	public void selectTerritory() {
 
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			this.territoryDocs.clear();
 			this.territoryImages.clear();
+			this.territoryImageView.setImage(null);
 
 			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
 			File targetDirectory = territoryObj.buildTargetDirectory();

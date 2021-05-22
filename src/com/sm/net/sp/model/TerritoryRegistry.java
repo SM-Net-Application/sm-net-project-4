@@ -43,6 +43,7 @@ public class TerritoryRegistry {
 					Member member = this.findMemberByID(memberList, memberID);
 					if (member != null) {
 						territoryObj.updateAssignedMember(member);
+						territoryObj.updateAssignedDate(lastEntity.getStartDate());
 					}
 				}
 			}
@@ -60,7 +61,7 @@ public class TerritoryRegistry {
 		return null;
 	}
 
-	private ObservableList<TerritoryRegistryEntity> findTerritoryEntityList(int territoryID) {
+	public ObservableList<TerritoryRegistryEntity> findTerritoryEntityList(int territoryID) {
 
 		ObservableList<TerritoryRegistryEntity> entityList = FXCollections.observableArrayList();
 
@@ -73,5 +74,36 @@ public class TerritoryRegistry {
 		entityList.sort((o1, o2) -> o2.getStartDate().compareTo(o1.getEndDate()));
 
 		return entityList;
+	}
+
+	public ObservableList<TerritoryObj> findActualTerritoriesByPublisher(ObservableList<TerritoryObj> territoryList,
+			Member publisher) {
+
+		ObservableList<TerritoryObj> assignedList = FXCollections.observableArrayList();
+
+		for (TerritoryRegistryEntity territoryRegistryEntity : this.registry) {
+			if (territoryRegistryEntity.getSpInf2() == publisher.getSpMemberID()) {
+				if (territoryRegistryEntity.getSpInf4().isEmpty()) {
+					TerritoryObj territoryObj = findTerritoryByID(territoryList, territoryRegistryEntity.getSpInf1());
+					if (territoryObj != null)
+						assignedList.add(territoryObj);
+				}
+			}
+		}
+
+		assignedList.sort((o1, o2) -> o1.getSpInf7().compareTo(o2.getSpInf7()));
+
+		return assignedList;
+	}
+
+	private TerritoryObj findTerritoryByID(ObservableList<TerritoryObj> territoryList, Integer territoryID) {
+
+		for (TerritoryObj territoryObj : territoryList) {
+			if (territoryObj.getSpTerritoryID() == territoryID) {
+				return territoryObj;
+			}
+		}
+
+		return null;
 	}
 }

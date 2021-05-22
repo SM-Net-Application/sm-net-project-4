@@ -3,6 +3,7 @@ package com.sm.net.sp.model;
 import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.crypto.SecretKey;
@@ -13,7 +14,9 @@ import com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor;
 import com.sm.net.util.Crypt;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -62,6 +65,7 @@ public class TerritoryObj {
 	private StringProperty spInf40;
 
 	private Member assignedMember;
+	private ObjectProperty<LocalDate> assignedDate;
 
 	public TerritoryObj() {
 		super();
@@ -108,6 +112,8 @@ public class TerritoryObj {
 		this.spInf38 = new SimpleStringProperty();
 		this.spInf39 = new SimpleStringProperty();
 		this.spInf40 = new SimpleStringProperty();
+
+		this.assignedDate = new SimpleObjectProperty<>();
 	}
 
 	public static TerritoryObj newInstanceByView(TerritoryEditor editor, SecretKey sk) {
@@ -353,6 +359,10 @@ public class TerritoryObj {
 
 	public void updateAssignedMember(Member member) {
 		this.setAssignedMember(member);
+	}
+
+	public void updateAssignedDate(LocalDate assignedDate) {
+		this.setAssignedDate(assignedDate);
 	}
 
 	public final IntegerProperty spTerritoryIDProperty() {
@@ -853,6 +863,18 @@ public class TerritoryObj {
 
 	public void setAssignedMember(Member assignedMember) {
 		this.assignedMember = assignedMember;
+	}
+
+	public final ObjectProperty<LocalDate> assignedDateProperty() {
+		return this.assignedDate;
+	}
+
+	public final LocalDate getAssignedDate() {
+		return this.assignedDate.get();
+	}
+
+	public final void setAssignedDate(final LocalDate assignedDate) {
+		this.assignedDateProperty().set(assignedDate);
 	}
 
 }
