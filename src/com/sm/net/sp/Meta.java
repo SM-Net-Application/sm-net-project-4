@@ -40,6 +40,7 @@ import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor;
+import com.sm.net.sp.view.home.user.menu.territory.TerritoryRegistryViewer;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.sm.net.sp.view.home.user.menu.usciere.UsciereEditor;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
@@ -195,23 +196,22 @@ public class Meta {
 				.getResource("ConventionEditor.fxml");
 		public static final URL MEMORIAL_FXML_URL = Memorial.class.getResource("Memorial.fxml");
 		public static final URL MEMORIAL_EDITOR_FXML_URL = MemorialEditor.class.getResource("MemorialEditor.fxml");
-		
+
 		public static final URL AUDIO_FXML_URL = Audio.class.getResource("Audio.fxml");
 		public static final URL AUDIO_EDITOR_FXML_URL = AudioEditor.class.getResource("AudioEditor.fxml");
-		
+
 		public static final URL USCIERE_FXML_URL = Usciere.class.getResource("Usciere.fxml");
 		public static final URL USCIERE_EDITOR_FXML_URL = UsciereEditor.class.getResource("UsciereEditor.fxml");
-		
+
 		public static final URL POST_FXML_URL = Post.class.getResource("Post.fxml");
-		public static final URL POST_IMPORT_FXML_URL = PostImport.class
-				.getResource("PostImport.fxml");
-		
+		public static final URL POST_IMPORT_FXML_URL = PostImport.class.getResource("PostImport.fxml");
+
 		public static final URL INFOTABLE_FXML_URL = InfoTable.class.getResource("InfoTable.fxml");
-		
-		public static final URL TERRITORY_FXML_URL = Territory.class
-				.getResource("Territory.fxml");
-		public static final URL TERRITORY_EDITOR_FXML_URL = TerritoryEditor.class
-				.getResource("TerritoryEditor.fxml");
+
+		public static final URL TERRITORY_FXML_URL = Territory.class.getResource("Territory.fxml");
+		public static final URL TERRITORY_EDITOR_FXML_URL = TerritoryEditor.class.getResource("TerritoryEditor.fxml");
+		public static final URL TERRITORY_REGISTRY_FXML_URL = TerritoryRegistryViewer.class
+				.getResource("TerritoryRegistryViewer.fxml");
 	}
 
 	public static class Themes {
@@ -224,7 +224,7 @@ public class Meta {
 		public static final String RESOURCES = "resources";
 
 		public static final String THEME = "theme.css";
-		
+
 		public static final String ICON = "iconSP.png";
 		public static final String PRINT = "print.png";
 		public static final String MENU_APP = "menu_app.png";
@@ -316,7 +316,7 @@ public class Meta {
 		public static final String USCIERE = "usciere.png";
 		public static final String PRAY = "pray.png";
 		public static final String SONGS = "songs.png";
-		
+
 		public static final String ASSIGNEMENTS = "duties.png";
 		public static final String PRIVILEGIES = "privilegies.png";
 		public static final String ROLES = "servant.png";
@@ -324,7 +324,7 @@ public class Meta {
 
 		public static final String MAPS = "maps.png";
 		public static final String FILTER = "filter.png";
-		
+
 		public static final String TERRITORYVIEWER = "territoryviewer.png";
 		public static final String TERRITORYVIEWERURL = "territoryviewerurl.png";
 
@@ -332,26 +332,27 @@ public class Meta {
 		public static final String TWO = "day2.png";
 		public static final String THREE = "day3.png";
 		public static final String QUESTION = "questions.png";
-		
+
 		public static final String PODIUM = "podium.png";
 		public static final String EMBLEMS = "emblems.png";
 		public static final String EMBLEMSBROTHER = "emblemsbrothers.png";
-		
+
 		public static final String LOCK_OPEN = "lock_open.png";
 		public static final String LOCK_CLOSE = "lock_close.png";
-		
+
 		public static final String PDF_ADD = "pdf_add.png";
 		public static final String FOLDER = "folder.png";
 		public static final String NEWS = "news.png";
-		
+
 		public static final String TERRITORY_ADD = "territoryadd.png";
 		public static final String TERRITORY_REMOVE = "territoryremove.png";
 		public static final String TERRITORY_EDIT = "territoryeditor.png";
-		
+
 		public static final String GALLERY = "gallery.png";
 		public static final String DOCS = "docs.png";
 		public static final String DOWNLOAD = "download.png";
 		public static final String DOWNLOAD2 = "download2.png";
+		public static final String REGISTRY = "registry.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

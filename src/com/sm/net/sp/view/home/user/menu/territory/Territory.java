@@ -9,9 +9,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
+import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
+import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
@@ -19,8 +24,9 @@ import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.dialogs.territory.TerritoryAssignDateDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryAssignToMemberDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryDialog;
-import com.sm.net.sp.model.EnumPrintLayouts;
+import com.sm.net.sp.dialogs.territory.TerritoryReturnDateDialog;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.TerritoryModul;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.model.TerritoryRegistry;
 import com.sm.net.sp.model.TerritoryRegistryEntity;
@@ -33,9 +39,9 @@ import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDeleteTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadAllTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveReturnTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryLoadTask;
-import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.smnet.core.task.TaskManager;
 
 import javafx.application.Platform;
@@ -82,6 +88,9 @@ public class Territory extends UpdateDataAdapter {
 	private Tab territoryListTab;
 
 	@FXML
+	private Button territoryPrintButton;
+
+	@FXML
 	private Button territoryAddButton;
 	@FXML
 	private Button territoryEditButton;
@@ -97,6 +106,8 @@ public class Territory extends UpdateDataAdapter {
 	private Button territoryResourcesDownloadAllButton;
 	@FXML
 	private Button territoryAssignButton;
+	@FXML
+	private Button territoryReturnButton;
 
 	@FXML
 	private TextField territoryFilterTextField;
@@ -254,10 +265,13 @@ public class Territory extends UpdateDataAdapter {
 		this.membersTableView.getStyleClass().add("table_view_001");
 		this.territoryTableView.getStyleClass().add("table_view_001");
 
+		this.territoryReturnButton.getStyleClass().add("button_image_001");
 		this.memberAssignedTerritoryReturnButton.getStyleClass().add("button_image_001");
 
 		this.territoryNumberTableColumn.getStyleClass().add("table_column_002");
 		this.territoryAssignedDateTableColumn.getStyleClass().add("table_column_002");
+
+		this.territoryPrintButton.getStyleClass().add("button_image_001");
 
 		this.territoryAddButton.getStyleClass().add("button_image_001");
 		this.territoryOpenViewerButton.getStyleClass().add("button_image_001");
@@ -394,6 +408,10 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryReturnButton.setText("");
 		this.memberAssignedTerritoryReturnButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.OK));
 
+		this.territoryReturnButton.setTooltip(memberAssignedTerritoryReturnTooltip);
+		this.territoryReturnButton.setText("");
+		this.territoryReturnButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.OK));
+
 		this.territoryNumberTableColumn.setText(this.language.getString("territory.tablecolumns.territorynumber"));
 		this.territoryNumberTableColumn.setMinWidth(100);
 		this.territoryNumberTableColumn.setMaxWidth(100);
@@ -406,6 +424,12 @@ public class Territory extends UpdateDataAdapter {
 				.setText(this.language.getString("territory.tablecolumns.territoryassigneddate"));
 		this.territoryAssignedDateTableColumn.setMinWidth(100);
 		this.territoryAssignedDateTableColumn.setMaxWidth(100);
+
+		Tooltip territoryPrintTooltip = new Tooltip(this.language.getString("territory.tooltip.print"));
+		territoryPrintTooltip.getStyleClass().add("tooltip_001");
+		this.territoryPrintButton.setTooltip(territoryPrintTooltip);
+		this.territoryPrintButton.setText("");
+		this.territoryPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 
 		Tooltip territoryAddTooltip = new Tooltip(this.language.getString("territory.tooltip.add"));
 		territoryAddTooltip.getStyleClass().add("tooltip_001");
@@ -497,8 +521,10 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryAssignedDateTableColumn.setMinWidth(100);
 		this.memberAssignedTerritoryAssignedDateTableColumn.setMaxWidth(100);
 
-		this.memberAssignedTerritoryTableView.setMinHeight(250);
-		this.memberAssignedTerritoryTableView.setMaxHeight(250);
+		this.membersTableView.setMinHeight(500);
+		this.membersTableView.setMaxHeight(500);
+//		this.memberAssignedTerritoryTableView.setMinHeight(250);
+//		this.memberAssignedTerritoryTableView.setMaxHeight(250);
 
 		Tooltip territoryAssignTooltip = new Tooltip(this.language.getString("territory.tooltip.assign"));
 		territoryAssignTooltip.getStyleClass().add("tooltip_001");
@@ -527,7 +553,7 @@ public class Territory extends UpdateDataAdapter {
 
 	private void listeners() {
 
-		// TODO: Fix all listeners
+		this.territoryPrintButton.setOnAction(event -> print());
 		this.territoryAddButton.setOnAction(event -> newTerritory());
 		this.territoryEditButton.setOnAction(event -> editTerritory());
 		this.territoryRemoveButton.setOnAction(event -> removeTerritory());
@@ -549,8 +575,7 @@ public class Territory extends UpdateDataAdapter {
 			TableRow<TerritoryObj> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
-//					editTerritory(row.getItem());
-					// TODO: Registro
+					showRegistry(row.getItem());
 				}
 			});
 			return row;
@@ -593,9 +618,167 @@ public class Territory extends UpdateDataAdapter {
 
 		this.memberAssignedTerritoryTableView.getSelectionModel().selectedIndexProperty()
 				.addListener((obs, oldV, newV) -> selectAssignedTerritory());
+
+		this.memberAssignedTerritoryReturnButton.setOnAction(event -> memberAssignedTerritoryReturn());
+		this.territoryReturnButton.setOnAction(event -> assignedTerritoryReturn());
 	}
 
-	private void selectMemberAssignedTerritory() {
+	private void showRegistry(TerritoryObj territoryObj) {
+
+		String title = this.language.getString("territory.tab.registrytitle");
+		title = String.format(title, territoryObj.getSpInf7());
+
+		if (!isAlreadyOpen(this.territoryTabPane, title)) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_REGISTRY_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryRegistryViewer ctrl = (TerritoryRegistryViewer) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedTerritory(territoryObj);
+				ctrl.setTerritoryRegistry(this.territoryRegistry);
+				ctrl.setMembersList(this.membersList);
+
+				Tab newTab = new Tab(title, layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.REGISTRY));
+
+				ctrl.setParentTabPane(this.territoryTabPane);
+				ctrl.setNewTab(newTab);
+
+				this.territoryTabPane.getTabs().add(newTab);
+				this.territoryTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private void assignedTerritoryReturn() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+
+			if (!territoryObj.isAvailable()) {
+
+				LocalDate returnDate = TerritoryReturnDateDialog.show(this.application, this.ownerStage);
+				if (returnDate != null) {
+
+					Member assignedMember = territoryObj.getAssignedMember();
+					LocalDate assignedDate = territoryObj.getAssignedDate();
+
+					DateTimeFormatter dtf = DateTimeFormatter
+							.ofPattern(this.language.getStringWithNewLine("datepattern"));
+
+					if (assignedDate.compareTo(returnDate) < 0) {
+
+						String header = this.language.getString("territory.confirm.returnterritory");
+						String content = this.language.getStringWithNewLine("territory.confirm.returnterritorycontent");
+
+						String territoryName = String.format("%s - %s", territoryObj.getSpInf7(),
+								territoryObj.getSpInf8());
+
+						content = String.format(content, assignedMember.getNameStyle1(), territoryName,
+								dtf.format(assignedDate), dtf.format(returnDate));
+						if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+							TerritoryRegistryEntity territoriesEntity = this.territoryRegistry
+									.findActualTerritoriesEntity(this.territoryList, assignedMember, territoryObj);
+
+							String waitMessage = this.language.getString("territory.wait.returnsave");
+
+							TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+									new TerritoryRegistryEntitySaveReturnTask(this.application.getAlertBuilder2(),
+											this.settings, this.ownerStage, this, territoriesEntity, returnDate));
+
+						}
+
+					} else {
+
+						String errorReturnDateFormat = this.language.getStringWithNewLine("territory.error.returndate");
+
+						String content = String.format(errorReturnDateFormat, dtf.format(assignedDate),
+								dtf.format(returnDate));
+
+						this.application.getAlertBuilder2().error(this.ownerStage, content);
+					}
+				}
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("territory.error.territorynotassigned"));
+			}
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	private void memberAssignedTerritoryReturn() {
+
+		if (this.memberAssignedTerritoryTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryObj territoryObj = this.memberAssignedTerritoryTableView.getSelectionModel().getSelectedItem();
+
+			LocalDate returnDate = TerritoryReturnDateDialog.show(this.application, this.ownerStage);
+			if (returnDate != null) {
+
+				Member assignedMember = territoryObj.getAssignedMember();
+				LocalDate assignedDate = territoryObj.getAssignedDate();
+
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.language.getStringWithNewLine("datepattern"));
+
+				if (assignedDate.compareTo(returnDate) < 0) {
+
+					String header = this.language.getString("territory.confirm.returnterritory");
+					String content = this.language.getStringWithNewLine("territory.confirm.returnterritorycontent");
+
+					String territoryName = String.format("%s - %s", territoryObj.getSpInf7(), territoryObj.getSpInf8());
+
+					content = String.format(content, assignedMember.getNameStyle1(), territoryName,
+							dtf.format(assignedDate), dtf.format(returnDate));
+					if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+						TerritoryRegistryEntity territoriesEntity = this.territoryRegistry
+								.findActualTerritoriesEntity(this.territoryList, assignedMember, territoryObj);
+
+						String waitMessage = this.language.getString("territory.wait.returnsave");
+
+						TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+								new TerritoryRegistryEntitySaveReturnTask(this.application.getAlertBuilder2(),
+										this.settings, this.ownerStage, this, territoriesEntity, returnDate));
+
+					}
+
+				} else {
+
+					String errorReturnDateFormat = this.language.getStringWithNewLine("territory.error.returndate");
+
+					String content = String.format(errorReturnDateFormat, dtf.format(assignedDate),
+							dtf.format(returnDate));
+
+					this.application.getAlertBuilder2().error(this.ownerStage, content);
+				}
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	public void selectMemberAssignedTerritory() {
 
 		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
 
@@ -610,49 +793,45 @@ public class Territory extends UpdateDataAdapter {
 
 	private void assignTerritory() {
 
-		// TODO: Assegna territorio
-
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
 			if (territoryObj.isAvailable()) {
 
+				LocalDate lastEndDate = null;
+				ObservableList<TerritoryRegistryEntity> entityList = this.territoryRegistry
+						.findTerritoryEntityList(territoryObj.getSpTerritoryID());
+
+				if (!entityList.isEmpty()) {
+					lastEndDate = entityList.get(0).getEndDate();
+				}
+
 				Member member = TerritoryAssignToMemberDialog.show(this.application, this.ownerStage, this.membersList);
 				if (member != null) {
-
-					// TODO: Aggiungere il controllo che la data scelta sia superiore all'ultima
 
 					LocalDate assignDate = TerritoryAssignDateDialog.show(this.application, this.ownerStage,
 							territoryObj, member);
 
 					if (assignDate != null) {
 
-						String header = this.application.getSettings().getLanguage()
-								.getString("territory.error.registryentityheader");
+						if (lastEndDate != null) {
 
-						String contentFormat = this.application.getSettings().getLanguage()
-								.getStringWithNewLine("territory.error.registryentitycontentformat");
+							if (lastEndDate.compareTo(assignDate) > 0) {
 
-						String territoryName = String.format("%s - %s", territoryObj.getSpInf7(),
-								territoryObj.getSpInf8());
-						String memberName = member.getNameStyle1();
+								DateTimeFormatter dtf = DateTimeFormatter
+										.ofPattern(this.language.getString("datepattern"));
 
-						String datePattern = this.application.getSettings().getLanguage().getString("datepattern");
-						String date = DateTimeFormatter.ofPattern(datePattern).format(assignDate);
+								String content = this.language
+										.getStringWithNewLine("territory.error.assigndatenotvalid");
 
-						String content = String.format(contentFormat, territoryName, memberName, date);
+								content = String.format(content, dtf.format(lastEndDate), dtf.format(assignDate));
 
-						if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+								this.application.getAlertBuilder2().error(this.ownerStage, content);
 
-							// TODO: Salvare il movimento nel registro
-
-							String waitMessage = this.language.getString("territory.wait.assignsave");
-
-							TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-									new TerritoryRegistryEntitySaveTask(this.application.getAlertBuilder2(),
-											this.settings, this.ownerStage, this, territoryObj, member, assignDate));
-
-						}
+							} else
+								assignTerritoryRun(territoryObj, member, assignDate);
+						} else
+							assignTerritoryRun(territoryObj, member, assignDate);
 
 					} else {
 						this.application.getAlertBuilder2().error(this.ownerStage,
@@ -673,6 +852,32 @@ public class Territory extends UpdateDataAdapter {
 		} else {
 			this.application.getAlertBuilder2().error(this.ownerStage,
 					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	private void assignTerritoryRun(TerritoryObj territoryObj, Member member, LocalDate assignDate) {
+
+		String header = this.application.getSettings().getLanguage().getString("territory.error.registryentityheader");
+
+		String contentFormat = this.application.getSettings().getLanguage()
+				.getStringWithNewLine("territory.error.registryentitycontentformat");
+
+		String territoryName = String.format("%s - %s", territoryObj.getSpInf7(), territoryObj.getSpInf8());
+		String memberName = member.getNameStyle1();
+
+		String datePattern = this.application.getSettings().getLanguage().getString("datepattern");
+		String date = DateTimeFormatter.ofPattern(datePattern).format(assignDate);
+
+		String content = String.format(contentFormat, territoryName, memberName, date);
+
+		if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+			String waitMessage = this.language.getString("territory.wait.assignsave");
+
+			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+					new TerritoryRegistryEntitySaveTask(this.application.getAlertBuilder2(), this.settings,
+							this.ownerStage, this, territoryObj, member, assignDate));
+
 		}
 	}
 
@@ -742,47 +947,47 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
-	private double setNewWidthSize(double width, double height, double screenWidth, double screenHeight) {
-
-		if (width > height) {
-			return screenWidth;
-		} else {
-			return imageRatioSize(screenHeight, height, width);
-		}
-	}
-
-	private double setNewHeightSize(double width, double height, double screenWidth, double screenHeight) {
-
-		if (width > height) {
-			return imageRatioSize(screenWidth, width, height);
-		} else {
-			return screenHeight;
-		}
-	}
-
-	private double imageRatioSize(double screenSize, double originalSize, double otherSide) {
-
-		double ratio = screenSize * 100 / originalSize;
-		return (otherSide * ratio / 100);
-	}
-
-	private double reverseWidthSize(double newWidth, double newHeight, double stackPaneWidth, double stackPaneHeight) {
-
-		if (newWidth > newHeight) {
-			return imageRatioSize(stackPaneHeight, newHeight, newWidth);
-		} else {
-			return stackPaneWidth;
-		}
-	}
-
-	private double reverseHeightSize(double newWidth, double newHeight, double stackPaneWidth, double stackPaneHeight) {
-
-		if (newWidth > newHeight) {
-			return stackPaneHeight;
-		} else {
-			return imageRatioSize(stackPaneWidth, newWidth, newHeight);
-		}
-	}
+//	private double setNewWidthSize(double width, double height, double screenWidth, double screenHeight) {
+//
+//		if (width > height) {
+//			return screenWidth;
+//		} else {
+//			return imageRatioSize(screenHeight, height, width);
+//		}
+//	}
+//
+//	private double setNewHeightSize(double width, double height, double screenWidth, double screenHeight) {
+//
+//		if (width > height) {
+//			return imageRatioSize(screenWidth, width, height);
+//		} else {
+//			return screenHeight;
+//		}
+//	}
+//
+//	private double imageRatioSize(double screenSize, double originalSize, double otherSide) {
+//
+//		double ratio = screenSize * 100 / originalSize;
+//		return (otherSide * ratio / 100);
+//	}
+//
+//	private double reverseWidthSize(double newWidth, double newHeight, double stackPaneWidth, double stackPaneHeight) {
+//
+//		if (newWidth > newHeight) {
+//			return imageRatioSize(stackPaneHeight, newHeight, newWidth);
+//		} else {
+//			return stackPaneWidth;
+//		}
+//	}
+//
+//	private double reverseHeightSize(double newWidth, double newHeight, double stackPaneWidth, double stackPaneHeight) {
+//
+//		if (newWidth > newHeight) {
+//			return stackPaneHeight;
+//		} else {
+//			return imageRatioSize(stackPaneWidth, newWidth, newHeight);
+//		}
+//	}
 
 	private void clearImage(ImageView imageView) {
 		imageView.setImage(null);
@@ -1225,56 +1430,120 @@ public class Territory extends UpdateDataAdapter {
 
 	private void print() {
 
-		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+		File modulo = new File("s13.pdf");
+		if (modulo.exists()) {
 
-			Member member = membersTableView.getSelectionModel().getSelectedItem();
+			ArrayList<ArrayList<TerritoryModul>> modules = this.territoryRegistry.build(this.territoryList,
+					this.membersList, DateTimeFormatter.ofPattern(this.language.getString("datepattern")));
 
-			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
-					EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
+			for (ArrayList<TerritoryModul> module : modules) {
 
-			if (selectedLayout != null) {
+				try {
 
-				switch (selectedLayout) {
+					PDDocument doc = PDDocument.load(modulo);
+					PDDocumentCatalog docCatalog = doc.getDocumentCatalog();
+					PDAcroForm acroForm = docCatalog.getAcroForm();
 
-				case MEMBER_PASSWORD_MONITOR:
+					if (acroForm != null) {
 
-					String spInf47 = member.getSpInf47();
-					if (!spInf47.isEmpty()) {
+						String territories = "";
 
-						String dbUrl = this.settings.getDatabaseUrl();
-						int indexOf = dbUrl.indexOf("exchange.php");
-						if (indexOf > -1) {
+						for (TerritoryModul territoryModul : module) {
 
-							String memberName = member.getNameStyle1();
+							HashMap<String, String> infos = territoryModul.getInfos();
+							Set<String> keySet = infos.keySet();
+							for (String key : keySet) {
 
-							String subDbUrl = dbUrl.substring(0, indexOf);
-							String link = subDbUrl + "monitor/index.php?pwmon=%s&amp;lang=%s";
-							link = String.format(link, spInf47, this.language.getString("sp.monitor.language"));
+								String value = infos.get(key);
+								if (key.startsWith("Terr_")) {
+									if (!territories.isEmpty())
+										territories += "-";
+									territories += value;
+								}
 
-							Actions.printMonitorPassword(memberName, spInf47, link, settings, ownerStage, language);
+								PDField field = (PDField) acroForm.getField(key);
+								field.setValue(value);
+							}
 						}
-					} else {
 
-						String header = member.getNameStyle1();
-
-						this.application.getAlertBuilder2().error(this.ownerStage, header,
-								this.language.getString("congregation.members.print.nopasswordmonitor"));
+						File export = new File(String.format("S-13 (%s).pdf", territories));
+						doc.save(export);
+						doc.close();
 					}
 
-					break;
-
-				default:
-					break;
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
-		} else
-			this.application.getAlertBuilder2().error(this.ownerStage,
-					this.language.getString("congregation.members.print.noselect"));
+		}
+
+//		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+//
+//			Member member = membersTableView.getSelectionModel().getSelectedItem();
+//
+//			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
+//					EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
+//
+//			if (selectedLayout != null) {
+//
+//				switch (selectedLayout) {
+//
+//				case MEMBER_PASSWORD_MONITOR:
+//
+//					String spInf47 = member.getSpInf47();
+//					if (!spInf47.isEmpty()) {
+//
+//						String dbUrl = this.settings.getDatabaseUrl();
+//						int indexOf = dbUrl.indexOf("exchange.php");
+//						if (indexOf > -1) {
+//
+//							String memberName = member.getNameStyle1();
+//
+//							String subDbUrl = dbUrl.substring(0, indexOf);
+//							String link = subDbUrl + "monitor/index.php?pwmon=%s&amp;lang=%s";
+//							link = String.format(link, spInf47, this.language.getString("sp.monitor.language"));
+//
+//							Actions.printMonitorPassword(memberName, spInf47, link, settings, ownerStage, language);
+//						}
+//					} else {
+//
+//						String header = member.getNameStyle1();
+//
+//						this.application.getAlertBuilder2().error(this.ownerStage, header,
+//								this.language.getString("congregation.members.print.nopasswordmonitor"));
+//					}
+//
+//					break;
+//
+//				default:
+//					break;
+//				}
+//			}
+//		} else
+//			this.application.getAlertBuilder2().error(this.ownerStage,
+//					this.language.getString("congregation.members.print.noselect"));
 
 	}
 
 	public void territoryTableViewRefresh() {
 		Platform.runLater(() -> this.territoryTableView.refresh());
+	}
+
+	public void resetSelectionAllTable() {
+
+		this.territoryImages.clear();
+		this.territoryImagesTableView.refresh();
+
+		this.territoryDocs.clear();
+		this.territoryDocsTableView.refresh();
+
+		this.territoryImageView.setImage(null);
+		this.memberAssignedTerritoryImageView.setImage(null);
+
+		this.membersTableView.getSelectionModel().clearSelection();
+
+		this.memberAssignedTerritoryTableView.setItems(null);
+		this.memberAssignedTerritoryTableView.refresh();
 	}
 
 	public Settings getSettings() {
@@ -1332,4 +1601,5 @@ public class Territory extends UpdateDataAdapter {
 	public void setTerritoryList(ObservableList<TerritoryObj> territoryList) {
 		this.territoryList = territoryList;
 	}
+
 }

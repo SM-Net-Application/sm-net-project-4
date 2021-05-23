@@ -12,6 +12,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 
 public class TerritoryRegistryEntity {
 
@@ -23,6 +24,8 @@ public class TerritoryRegistryEntity {
 
 	private LocalDate startDate;
 	private LocalDate endDate;
+
+	private Member publisher;
 
 	public TerritoryRegistryEntity() {
 		super();
@@ -170,6 +173,16 @@ public class TerritoryRegistryEntity {
 		}
 	}
 
+	public void updatePublisher(ObservableList<Member> membersList) {
+
+		for (Member member : membersList) {
+			if (member.getSpMemberID() == this.spInf2.get()) {
+				this.setPublisher(member);
+				break;
+			}
+		}
+	}
+
 	public final IntegerProperty idProperty() {
 		return this.id;
 	}
@@ -244,5 +257,13 @@ public class TerritoryRegistryEntity {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+
+	public Member getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Member publisher) {
+		this.publisher = publisher;
 	}
 }

@@ -77,9 +77,18 @@
                                                          <children>
                                                             <StackPane>
                                                                <children>
-                                                                  <Button fx:id="territoryAddButton" mnemonicParsing="false" text="aggiungi">
+                                                                  <Button fx:id="territoryPrintButton" mnemonicParsing="false" text="print">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="territoryAddButton" mnemonicParsing="false" text="aggiungi">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
                                                                   </Button>
                                                                </children>
@@ -158,6 +167,15 @@
                                                                         <StackPane>
                                                                            <children>
                                                                               <Button fx:id="territoryAssignButton" mnemonicParsing="false" text="assign">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </Button>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane>
+                                                                           <children>
+                                                                              <Button fx:id="territoryReturnButton" mnemonicParsing="false" text="return">
                                                                                  <StackPane.margin>
                                                                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                  </StackPane.margin>

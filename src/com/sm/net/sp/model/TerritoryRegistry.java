@@ -1,5 +1,8 @@
 package com.sm.net.sp.model;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -71,7 +74,7 @@ public class TerritoryRegistry {
 			}
 		}
 
-		entityList.sort((o1, o2) -> o2.getStartDate().compareTo(o1.getEndDate()));
+		entityList.sort((o1, o2) -> o2.getStartDate().compareTo(o1.getStartDate()));
 
 		return entityList;
 	}
@@ -105,5 +108,58 @@ public class TerritoryRegistry {
 		}
 
 		return null;
+	}
+
+	public TerritoryRegistryEntity findActualTerritoriesEntity(ObservableList<TerritoryObj> territoryList,
+			Member publisher, TerritoryObj territoryObj) {
+
+		for (TerritoryRegistryEntity territoryRegistryEntity : this.registry) {
+			if (territoryRegistryEntity.getSpInf2() == publisher.getSpMemberID()) {
+				if (territoryRegistryEntity.getSpInf4().isEmpty()
+						&& territoryRegistryEntity.getSpInf1() == territoryObj.getSpTerritoryID()) {
+					return territoryRegistryEntity;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public ArrayList<ArrayList<TerritoryModul>> build(ObservableList<TerritoryObj> territoryList,
+			ObservableList<Member> membersList, DateTimeFormatter dtf) {
+
+		ArrayList<ArrayList<TerritoryModul>> list = new ArrayList<>();
+
+		int territoryCount = 0;
+		ArrayList<TerritoryModul> currList = null;
+		for (TerritoryObj territoryObj : territoryList) {
+
+			if (territoryCount == 0)
+				currList = new ArrayList<>();
+			else if (territoryCount == 10) {
+				list.add(new ArrayList<>(currList));
+				currList = new ArrayList<>();
+				territoryCount = 0;
+			}
+
+			territoryCount++;
+
+			ObservableList<TerritoryRegistryEntity> entityList = this
+					.findTerritoryEntityList(territoryObj.getSpTerritoryID());
+			entityList.forEach(entity -> entity.updatePublisher(membersList));
+
+			TerritoryModul territoryModul = new TerritoryModul(territoryCount, territoryObj);
+
+			for (TerritoryRegistryEntity entity : entityList) {
+				territoryModul.processEntity(entity, dtf);
+			}
+
+			currList.add(territoryModul);
+		}
+
+		if (currList != null)
+			list.add(currList);
+
+		return list;
 	}
 }

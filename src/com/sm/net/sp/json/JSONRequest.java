@@ -20,6 +20,7 @@ import com.sm.net.sp.model.PostImportNews;
 import com.sm.net.sp.model.PostNews;
 import com.sm.net.sp.model.Song;
 import com.sm.net.sp.model.TerritoryObj;
+import com.sm.net.sp.model.TerritoryRegistryEntity;
 import com.sm.net.sp.model.Week;
 import com.sm.net.sp.model.WeekAudio;
 import com.sm.net.sp.model.WeekConvention;
@@ -1542,6 +1543,17 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject TERRITORY_REGISTRY_INSERT_RETURN(TerritoryRegistryEntity territoriesEntity,
+			LocalDate returnDate, SecretKey secretKey) {
+
+		JSONObject jsonObj = create(Integer.valueOf(85));
+
+		jsonObj.put("id", territoriesEntity.getID());
+		jsonObj.put("spInf4", Crypt.encrypt(returnDate.toString(), secretKey));
+
+		return jsonObj;
+	}
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();
@@ -1587,5 +1599,4 @@ public class JSONRequest {
 		jsonObj.put("type", type.intValue());
 		return jsonObj;
 	}
-
 }

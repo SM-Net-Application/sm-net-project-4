@@ -9,8 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.sm.net.sp.json.JSONRequest;
-import com.sm.net.sp.model.Member;
-import com.sm.net.sp.model.TerritoryObj;
+import com.sm.net.sp.model.TerritoryRegistryEntity;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.smnet.core.dialog.AlertBuilder;
@@ -18,34 +17,32 @@ import com.smnet.core.task.TaskInterface;
 
 import javafx.stage.Stage;
 
-public class TerritoryRegistryEntitySaveTask implements TaskInterface {
+public class TerritoryRegistryEntitySaveReturnTask implements TaskInterface {
 
 	private Territory view;
 	private AlertBuilder alertBuilder;
 	private Settings settings;
 	private Stage viewStage;
 
-	private TerritoryObj territoryObj;
-	private Member member;
-	private LocalDate assignDate;
+	private TerritoryRegistryEntity territoriesEntity;
+	private LocalDate returnDate;
 
-	public TerritoryRegistryEntitySaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage,
-			Territory view, TerritoryObj territoryObj, Member member, LocalDate assignDate) {
+	public TerritoryRegistryEntitySaveReturnTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage,
+			Territory view, TerritoryRegistryEntity territoriesEntity, LocalDate returnDate) {
 		super();
 
 		this.view = view;
 		this.alertBuilder = alertBuilder;
 		this.settings = settings;
 		this.viewStage = viewStage;
-		this.territoryObj = territoryObj;
-		this.member = member;
-		this.assignDate = assignDate;
+		this.territoriesEntity = territoriesEntity;
+		this.returnDate = returnDate;
 	}
 
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		JSONObject json = JSONRequest.TERRITORY_REGISTRY_INSERT(this.territoryObj, this.member, this.assignDate,
+		JSONObject json = JSONRequest.TERRITORY_REGISTRY_INSERT_RETURN(this.territoriesEntity, this.returnDate,
 				this.settings.getDatabaseSecretKey());
 
 		String url = this.settings.getDatabaseUrl();
@@ -75,11 +72,9 @@ public class TerritoryRegistryEntitySaveTask implements TaskInterface {
 
 		if (status == 0) {
 
-			// TODO: update dopo il salvataggio
-
 			this.view.updateTerritory();
 			this.view.resetSelectionAllTable();
-
+			
 		} else if (status == 1)
 			this.alertBuilder.error(this.viewStage, error);
 		else if (status == 2)
