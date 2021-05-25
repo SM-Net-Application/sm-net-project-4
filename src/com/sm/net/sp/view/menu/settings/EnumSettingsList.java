@@ -7,7 +7,8 @@ public enum EnumSettingsList {
 	CONNECTION("sp.settings.connection", Meta.Resources.MENU_SETTINGS_CONNECTION),
 	DATABASE("VIEW006MEN001", Meta.Resources.MENU_SETTINGS_DB),
 	USER("VIEW006MEN002", Meta.Resources.MENU_SETTINGS_USER),
-	MONITOR("sp.settings.monitor", Meta.Resources.USER_MENU_MONITOR);
+	MONITOR("sp.settings.monitor", Meta.Resources.USER_MENU_MONITOR),
+	MODULES("sp.settings.modules", Meta.Resources.PDF);
 
 	private String name;
 	private String imageName;

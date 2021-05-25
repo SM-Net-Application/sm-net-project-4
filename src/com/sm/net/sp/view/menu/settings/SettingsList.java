@@ -95,6 +95,9 @@ public class SettingsList {
 		case MONITOR:
 			ctrlViewSupportPlanner.loadMenuSettingMonitor();
 			break;
+		case MODULES:
+			ctrlViewSupportPlanner.loadMenuSettingModules();
+			break;
 		}
 
 	}

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import com.sm.net.sp.dialogs.territory.TerritoryAssignDateDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryAssignToMemberDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryReturnDateDialog;
+import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryModul;
 import com.sm.net.sp.model.TerritoryObj;
@@ -42,6 +44,7 @@ import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveReturnTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryLoadTask;
+import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.smnet.core.task.TaskManager;
 
 import javafx.application.Platform;
@@ -66,6 +69,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class Territory extends UpdateDataAdapter {
@@ -1430,17 +1434,74 @@ public class Territory extends UpdateDataAdapter {
 
 	private void print() {
 
-		File modulo = new File("s13.pdf");
-		if (modulo.exists()) {
+		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, this.language, null,
+				EnumPrintLayouts.MODULE_S13);
 
-			ArrayList<ArrayList<TerritoryModul>> modules = this.territoryRegistry.build(this.territoryList,
-					this.membersList, DateTimeFormatter.ofPattern(this.language.getString("datepattern")));
+		if (selectedLayout != null) {
 
-			for (ArrayList<TerritoryModul> module : modules) {
+			switch (selectedLayout) {
 
-				try {
+			case MODULE_S13:
 
-					PDDocument doc = PDDocument.load(modulo);
+				printModuleS13();
+
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	private void printModuleS13() {
+
+		String s13Path = this.settings.getModuleS13Decrypted();
+		if (s13Path.isEmpty()) {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.application.getSettings().getLanguage().getString("territory.error.nomodules13"));
+			return;
+		}
+
+		File fileS13 = new File(s13Path);
+		if (!fileS13.exists()) {
+
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.application.getSettings().getLanguage().getString("territory.error.nomodules13"));
+			return;
+
+		}
+
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		directoryChooser.setTitle(this.application.getSettings().getLanguage().getString("territory.chooser.saves13"));
+		File directory = directoryChooser.showDialog(this.ownerStage);
+		if (directory == null) {
+			return;
+		}
+
+		if (!directory.exists()) {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.application.getSettings().getLanguage().getString("territory.error.nosavedirectory"));
+			return;
+		}
+
+		File saveDirectory = new File(directory,
+				String.format("S13_export%s", DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(LocalDateTime.now())));
+		if (!saveDirectory.exists()) {
+			saveDirectory.mkdirs();
+		}
+
+		ArrayList<ArrayList<TerritoryModul>> modules = this.territoryRegistry.build(this.territoryList,
+				this.membersList, DateTimeFormatter.ofPattern(this.language.getString("datepattern")));
+
+		if (this.application.getAlertBuilder2().confirm(this.ownerStage,
+				this.application.getSettings().getLanguage().getString("territory.confirm.saves13"))) {
+
+			try {
+
+				for (ArrayList<TerritoryModul> module : modules) {
+
+					PDDocument doc = PDDocument.load(fileS13);
 					PDDocumentCatalog docCatalog = doc.getDocumentCatalog();
 					PDAcroForm acroForm = docCatalog.getAcroForm();
 
@@ -1466,63 +1527,22 @@ public class Territory extends UpdateDataAdapter {
 							}
 						}
 
-						File export = new File(String.format("S-13 (%s).pdf", territories));
+						File export = new File(saveDirectory, String.format("S-13 (%s).pdf", territories));
 						doc.save(export);
 						doc.close();
 					}
-
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
+
+				CommonUtils.open(saveDirectory);
+				
+				this.application.getAlertBuilder2().information(this.ownerStage,
+						this.application.getSettings().getLanguage().getString("territory.information.saves13done"));
+
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+
 		}
-
-//		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
-//
-//			Member member = membersTableView.getSelectionModel().getSelectedItem();
-//
-//			EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, language, null,
-//					EnumPrintLayouts.MEMBER_PASSWORD_MONITOR);
-//
-//			if (selectedLayout != null) {
-//
-//				switch (selectedLayout) {
-//
-//				case MEMBER_PASSWORD_MONITOR:
-//
-//					String spInf47 = member.getSpInf47();
-//					if (!spInf47.isEmpty()) {
-//
-//						String dbUrl = this.settings.getDatabaseUrl();
-//						int indexOf = dbUrl.indexOf("exchange.php");
-//						if (indexOf > -1) {
-//
-//							String memberName = member.getNameStyle1();
-//
-//							String subDbUrl = dbUrl.substring(0, indexOf);
-//							String link = subDbUrl + "monitor/index.php?pwmon=%s&amp;lang=%s";
-//							link = String.format(link, spInf47, this.language.getString("sp.monitor.language"));
-//
-//							Actions.printMonitorPassword(memberName, spInf47, link, settings, ownerStage, language);
-//						}
-//					} else {
-//
-//						String header = member.getNameStyle1();
-//
-//						this.application.getAlertBuilder2().error(this.ownerStage, header,
-//								this.language.getString("congregation.members.print.nopasswordmonitor"));
-//					}
-//
-//					break;
-//
-//				default:
-//					break;
-//				}
-//			}
-//		} else
-//			this.application.getAlertBuilder2().error(this.ownerStage,
-//					this.language.getString("congregation.members.print.noselect"));
-
 	}
 
 	public void territoryTableViewRefresh() {

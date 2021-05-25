@@ -1531,8 +1531,10 @@ public class JSONRequest {
 
 		jsonObj.put("spInf1", territoryObj.getSpTerritoryID());
 		jsonObj.put("spInf2", member.getSpMemberID());
-		jsonObj.put("spInf3", Crypt.encrypt(assignDate.toString(), secretKey));
-		jsonObj.put("spInf4", Crypt.encrypt("", secretKey));
+//		jsonObj.put("spInf3", Crypt.encrypt(assignDate.toString(), secretKey));
+//		jsonObj.put("spInf4", Crypt.encrypt("", secretKey));
+		jsonObj.put("spInf3", assignDate.toString());
+		jsonObj.put("spInf4", "");
 
 		return jsonObj;
 	}
@@ -1549,7 +1551,8 @@ public class JSONRequest {
 		JSONObject jsonObj = create(Integer.valueOf(85));
 
 		jsonObj.put("id", territoriesEntity.getID());
-		jsonObj.put("spInf4", Crypt.encrypt(returnDate.toString(), secretKey));
+//		jsonObj.put("spInf4", Crypt.encrypt(returnDate.toString(), secretKey));
+		jsonObj.put("spInf4", returnDate.toString());
 
 		return jsonObj;
 	}

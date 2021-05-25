@@ -32,6 +32,8 @@ public class Settings {
 	private String mysqlDBUserNameEncrypted;
 	private String mysqlDBUserPasswordEncrypted;
 
+	private String moduleS13;
+
 	public Settings(SettingsConf settingsConf) {
 		super();
 		this.settingsConf = settingsConf;
@@ -50,6 +52,8 @@ public class Settings {
 		this.mysqlDBNameEncrypted = "";
 		this.mysqlDBUserNameEncrypted = "";
 		this.mysqlDBUserPasswordEncrypted = "";
+
+		this.moduleS13 = "";
 	}
 
 	public void save() throws IOException {
@@ -67,6 +71,8 @@ public class Settings {
 		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBNAME, mysqlDBNameEncrypted);
 		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBUSERNAME, mysqlDBUserNameEncrypted);
 		ini.add(Meta.Settings.SECTION_MYSQL, Meta.Settings.KEY_DBPASSWORD, mysqlDBUserPasswordEncrypted);
+
+		ini.add(Meta.Settings.SECTION_MODULES, Meta.Settings.S13, moduleS13);
 
 		ini.store();
 	}
@@ -108,6 +114,10 @@ public class Settings {
 				String.class);
 		if (this.mysqlDBUserPasswordEncrypted == null)
 			this.mysqlDBUserPasswordEncrypted = "";
+
+		this.moduleS13 = ini.get(Meta.Settings.SECTION_MODULES, Meta.Settings.S13, String.class);
+		if (this.moduleS13 == null)
+			this.moduleS13 = "";
 	}
 
 	private Language languageLoad() throws FileNotFoundException, IOException {
@@ -322,5 +332,23 @@ public class Settings {
 
 	public void setMysqlDBUserPasswordEncrypted(String mysqlDBUserPasswordEncrypted) {
 		this.mysqlDBUserPasswordEncrypted = mysqlDBUserPasswordEncrypted;
+	}
+
+	public String getModuleS13() {
+		return moduleS13;
+	}
+
+	public String getModuleS13Decrypted() {
+
+		if (this.applicationKey != null)
+			if (this.moduleS13 != null)
+				if (!this.moduleS13.isEmpty())
+					return Crypt.decrypt(this.moduleS13, this.applicationKey);
+
+		return "";
+	}
+
+	public void setModuleS13(String moduleS13) {
+		this.moduleS13 = moduleS13;
 	}
 }

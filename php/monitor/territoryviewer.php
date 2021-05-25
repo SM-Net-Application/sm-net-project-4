@@ -6,6 +6,11 @@ $error = "";
 $mapsID = "";
 $territoryID = "";
 
+$ort = "";
+$plz = "";
+$nr = "";
+$name = "";
+
 if (isset($_GET["lang"])) {
     if (!empty($_GET["lang"])) {
         $langIni = $_GET["lang"] . ".ini";
@@ -17,12 +22,10 @@ if (!file_exists("languages/" . $langIni)) {
 }
 
 if (file_exists("languages/" . $langIni)) {
-
     $language = parse_ini_file("languages/" . $langIni);
 
     if (isset($_GET["tid"])) {
         if (!empty($_GET["tid"])) {
-
             $territoryID = $_GET["tid"];
 
             include_once dirname(__DIR__, 1) . '/config.php';
@@ -32,8 +35,7 @@ if (file_exists("languages/" . $langIni)) {
             if (!$database) {
                 $error = "Database connection error: " . mysqli_connect_error();
             } else {
-
-                $query_mem = "SELECT spInf10";
+                $query_mem = "SELECT spInf4, spInf5, spInf7, spInf8, spInf10";
                 $query_mem .= " FROM sp_territory";
                 $query_mem .= " WHERE spInf31 =";
                 $query_mem .= " '" . $territoryID . "'";
@@ -41,11 +43,15 @@ if (file_exists("languages/" . $langIni)) {
                 $result_mem = mysqli_query($database, $query_mem);
 
                 if (mysqli_num_rows($result_mem) > 0) {
-
                     $resultRow_mem = $result_mem->fetch_assoc();
                     $resultRow_mem = array_map("utf8_encode", $resultRow_mem);
 
                     $mapsID = $resultRow_mem["spInf10"];
+
+                    $ort = $resultRow_mem["spInf4"];
+                    $plz = $resultRow_mem["spInf5"];
+                    $nr = $resultRow_mem["spInf7"];
+                    $name = $resultRow_mem["spInf8"];
                 }
 
                 $result_mem->close();
@@ -77,8 +83,7 @@ if (file_exists("languages/" . $langIni)) {
     <?php
 
     if (!isset($language) || empty($territoryID) || empty($mapsID)) {
-
-    ?>
+        ?>
 
         <table class="table table-striped table-dark">
             <thead>
@@ -91,15 +96,16 @@ if (file_exists("languages/" . $langIni)) {
         </table>
 
     <?php
-
     } else {
+        ?>
 
-    ?>
-
+        <br>
+        <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
+        <center><h2 class="text-white"><strong><?php echo $plz . " " . $ort; ?></strong></h2></center>
+        <br>
         <iframe src="https://www.google.com/maps/d/embed?mid=<?php echo $mapsID; ?>" width="100%" height="960"></iframe>
 
     <?php
-    
     }
 
     ?>

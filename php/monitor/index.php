@@ -3,7 +3,7 @@
 /**
  * Support Planner Monitor
  * php version 7.2.34
- * 
+ *
  * @category Category
  * @package  Package
  * @author   SM-Net <admin@sm-netzwerk.com>
@@ -11,8 +11,10 @@
  * @version  GIT: @0.11.0@
  * @link     https://sm-netzwerk.com
  */
+$defaultLangName = "it";
 $defaultLang = "it.ini";
 $langIni = $defaultLang;
+$langIniName = $defaultLangName;
 $pwmon = "";
 $weekcode = "";
 $error = "";
@@ -24,6 +26,7 @@ $christians = array();
 $audio = array();
 $usciere = array();
 $memorial = array();
+$territory = array();
 
 $audio_pos1 = "";
 $audio_pos2 = "";
@@ -40,21 +43,21 @@ $activities_nextweek = array();
 if (isset($_GET["lang"])) {
     if (!empty($_GET["lang"])) {
         $langIni = $_GET["lang"] . ".ini";
+        $langIniName = $_GET["lang"];
     }
 }
 
 if (!file_exists("languages/" . $langIni)) {
     $langIni = $defaultLang;
+    $langIniName = $defaultLangName;
 }
 
 if (file_exists("languages/" . $langIni)) {
-
     $language = parse_ini_file("languages/" . $langIni);
 
     // Password monitor
     if (isset($_GET["pwmon"])) {
         if (!empty($_GET["pwmon"])) {
-
             $pwmon = $_GET["pwmon"];
 
             // OGGI
@@ -92,7 +95,6 @@ if (file_exists("languages/" . $langIni)) {
             if (!$database) {
                 $error = "Database connection error: " . mysqli_connect_error();
             } else {
-
                 $query_mem = "SELECT spMemberID";
                 $query_mem .= " FROM sp_members";
                 $query_mem .= " WHERE spInf47 =";
@@ -101,7 +103,6 @@ if (file_exists("languages/" . $langIni)) {
                 $result_mem = mysqli_query($database, $query_mem);
 
                 if (mysqli_num_rows($result_mem) > 0) {
-
                     $resultRow_mem = $result_mem->fetch_assoc();
                     $resultRow_mem = array_map("utf8_encode", $resultRow_mem);
 
@@ -163,9 +164,7 @@ if (file_exists("languages/" . $langIni)) {
                     $result_week = mysqli_query($database, $query_week);
 
                     if (mysqli_num_rows($result_week) > 0) {
-
                         while ($resultRow_week = $result_week->fetch_assoc()) {
-
                             $resultRow_week = array_map("utf8_encode", $resultRow_week);
 
                             $row = array();
@@ -206,9 +205,7 @@ if (file_exists("languages/" . $langIni)) {
                     $result_ministry = mysqli_query($database, $query_ministry);
 
                     if (mysqli_num_rows($result_ministry) > 0) {
-
                         while ($resultRow_ministry = $result_ministry->fetch_assoc()) {
-
                             $resultRow_ministry = array_map("utf8_encode", $resultRow_ministry);
 
                             $row = array();
@@ -232,9 +229,7 @@ if (file_exists("languages/" . $langIni)) {
                     $result_christians = mysqli_query($database, $query_christians);
 
                     if (mysqli_num_rows($result_christians) > 0) {
-
                         while ($resultRow_christians = $result_christians->fetch_assoc()) {
-
                             $resultRow_christians = array_map("utf8_encode", $resultRow_christians);
 
                             $row = array();
@@ -256,9 +251,7 @@ if (file_exists("languages/" . $langIni)) {
                 $result_audio = mysqli_query($database, $query_audio);
 
                 if (mysqli_num_rows($result_audio) > 0) {
-
                     while ($resultRow_audio = $result_audio->fetch_assoc()) {
-
                         $resultRow_audio = array_map("utf8_encode", $resultRow_audio);
 
                         $row = array();
@@ -291,9 +284,7 @@ if (file_exists("languages/" . $langIni)) {
                 $result_usciere = mysqli_query($database, $query_usciere);
 
                 if (mysqli_num_rows($result_usciere) > 0) {
-
                     while ($resultRow_usciere = $result_usciere->fetch_assoc()) {
-
                         $resultRow_usciere = array_map("utf8_encode", $resultRow_usciere);
 
                         $row = array();
@@ -330,9 +321,7 @@ if (file_exists("languages/" . $langIni)) {
                 $result_memorial = mysqli_query($database, $query_memorial);
 
                 if (mysqli_num_rows($result_memorial) > 0) {
-
                     while ($resultRow_memorial = $result_memorial->fetch_assoc()) {
-
                         $resultRow_memorial = array_map("utf8_encode", $resultRow_memorial);
 
                         $row = array();
@@ -352,6 +341,29 @@ if (file_exists("languages/" . $langIni)) {
                     }
                 }
 
+                $query_territory = "SELECT sp_territory.spInf7 AS terrnr, sp_territory.spInf8 AS terrname, sp_territory.spInf31 AS terrviewer, sp_terrregistry.spInf3 AS terrass";
+                $query_territory .= " FROM sp_territory";
+                $query_territory .= " INNER JOIN sp_terrregistry";
+                $query_territory .= " ON sp_territory.id = sp_terrregistry.spInf1";
+                $query_territory .= " WHERE sp_terrregistry.spInf4 =''";
+                $query_territory .= " ORDER BY sp_terrregistry.spInf3 ASC";
+
+                $result_territory = mysqli_query($database, $query_territory);
+
+                if (mysqli_num_rows($result_territory) > 0) {
+                    while ($resultRow_territory = $result_territory->fetch_assoc()) {
+                        $resultRow_territory = array_map("utf8_encode", $resultRow_territory);
+
+                        $row = array();
+                        $row["spInf7"] = $resultRow_territory["terrnr"];
+                        $row["spInf8"] = $resultRow_territory["terrname"];
+                        $row["spInf31"] = $resultRow_territory["terrviewer"];
+                        $row["spInf3"] = $resultRow_territory["terrass"];
+
+                        array_push($territory, $row);
+                    }
+                }
+
                 $result_mem->close();
                 $result_week->close();
                 $result_ministry->close();
@@ -359,6 +371,7 @@ if (file_exists("languages/" . $langIni)) {
                 $result_audio->close();
                 $result_usciere->close();
                 $result_memorial->close();
+                $result_territory->close();
                 mysqli_close($database);
 
                 foreach ($weeks as $week) {
@@ -475,7 +488,6 @@ if (file_exists("languages/" . $langIni)) {
 
                     foreach ($weeks as $week) {
                         if ($week['spInf1'] == $row_weekcode) {
-
                             $min_president = $week['spInf3'];
                             $min_president2 = $week['spInf58'];
 
@@ -504,9 +516,7 @@ if (file_exists("languages/" . $langIni)) {
                     }
 
                     if ($memberID == $min["spInf7"]) {
-
                         if ($min["spInf3"] != 1) {
-
                             if ($min["spInf3"]==2) {
                                 array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_pc'], $language['midweek_ministrystudent1_pc_icon'], 0, ""));
                             }
@@ -522,7 +532,6 @@ if (file_exists("languages/" . $langIni)) {
                             if ($min["spInf3"]==6) {
                                 array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1_ic'], $language['midweek_ministrystudent1_ic_icon'], 0, ""));
                             }
-
                         } else {
                             if ($memberID != $min_president) {
                                 array_push($activities, newTask($midweek, $midweek_text, $language['midweek_discussion1'], $language['midweek_discussion1_icon'], 0, ""));
@@ -530,10 +539,8 @@ if (file_exists("languages/" . $langIni)) {
                         }
 
                         // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent1'], $language['midweek_ministrystudent1_icon'], 0, ""));
-
                     }
                     if ($memberID == $min["spInf8"]) {
-
                         if ($min["spInf3"]==2) {
                             array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant1_pc'], $language['midweek_ministryassistant1_pc_icon'], 0, ""));
                         }
@@ -559,7 +566,6 @@ if (file_exists("languages/" . $langIni)) {
                         //    array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
                         // }
                         if ($min["spInf3"] != 1) {
-
                             if ($min["spInf3"]==2) {
                                 array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2_pc'], $language['midweek_ministrystudent2_pc_icon'], 0, ""));
                             }
@@ -577,7 +583,6 @@ if (file_exists("languages/" . $langIni)) {
                             }
                             
                             // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministrystudent2'], $language['midweek_ministrystudent2_icon'], 0, ""));
-
                         } else {
                             if ($memberID != $min_president2) {
                                 array_push($activities, newTask($midweek, $midweek_text, $language['midweek_discussion2'], $language['midweek_discussion2_icon'], 0, ""));
@@ -585,7 +590,6 @@ if (file_exists("languages/" . $langIni)) {
                         }
                     }
                     if ($memberID == $min["spInf10"]) {
-
                         if ($min["spInf3"]==2) {
                             array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2_pc'], $language['midweek_ministryassistant2_pc_icon'], 0, ""));
                         }
@@ -603,7 +607,6 @@ if (file_exists("languages/" . $langIni)) {
                         }
 
                         // array_push($activities, newTask($midweek, $midweek_text, $language['midweek_ministryassistant2'], $language['midweek_ministryassistant2_icon'], 0, ""));
-
                     }
                 }
 
@@ -873,7 +876,6 @@ if (file_exists("languages/" . $langIni)) {
                     $memorialday_text = dateTimeToText($language, $memorialday);
 
                     if ($memberID == $mem["spInf4"]) {
-
                         if ($mem["spInf35"] == 1) {
                             array_push($activities, newTask($memorialday, $memorialday_text, $language['memorial_president2'], $language['memorial_president_icon'], 0, ""));
                         } else {
@@ -929,7 +931,7 @@ function newTask($date, $date_text, $activity_name, $activity_icon, $inf, $infte
 
     $activity_array['date'] = $date;
     $activity_array['date_text'] = $date_text;
-    if($inf==0){
+    if ($inf==0) {
         $activity_array['name'] = $activity_name;
     } else {
         $activity_array['name'] = sprintf($activity_name, $inftext);
@@ -967,8 +969,7 @@ function taskComp($a, $b)
     <?php
 
     if (!isset($language) || empty($pwmon) || empty($memberID)) {
-
-    ?>
+        ?>
 
         <table class="table table-striped table-dark">
             <thead>
@@ -981,10 +982,8 @@ function taskComp($a, $b)
         </table>
 
     <?php
-
     } else {
-
-    ?>
+        ?>
 
         <!-- TODAY -->
         <br>
@@ -994,7 +993,6 @@ function taskComp($a, $b)
         <?php
 
         foreach ($activities as $activity) {
-
             if ($activity['date'] > $objSunday) {
                 array_push($activities_nextweek, $activity);
             } else {
@@ -1002,9 +1000,7 @@ function taskComp($a, $b)
                     array_push($activities_thisweek, $activity);
                 }
             }
-        }
-
-        ?>
+        } ?>
 
         <!-- THIS WEEK HEADER-->
         <table class="table table-striped table-dark">
@@ -1020,8 +1016,7 @@ function taskComp($a, $b)
                 <?php
 
                 if (empty($activities_thisweek)) {
-
-                ?>
+                    ?>
 
                     <!-- NO ACTIVITY FOR THIS WEEK -->
                     <tr>
@@ -1032,10 +1027,8 @@ function taskComp($a, $b)
 
                     <?php
                 } else {
-
                     foreach ($activities_thisweek as $activity) {
-
-                    ?>
+                        ?>
 
                         <!-- ROW -->
                         <tr>
@@ -1046,9 +1039,7 @@ function taskComp($a, $b)
 
                 <?php
                     }
-                }
-
-                ?>
+                } ?>
 
                 <!-- CLOSE TABLE THIS WEEK -->
             </tbody>
@@ -1058,8 +1049,7 @@ function taskComp($a, $b)
         <?php
 
         if (!empty($activities_nextweek)) {
-
-        ?>
+            ?>
 
             <!-- NEXT WEEK HEADER-->
             <table class="table table-striped table-dark">
@@ -1075,8 +1065,7 @@ function taskComp($a, $b)
                     <?php
 
                     foreach ($activities_nextweek as $activity) {
-
-                    ?>
+                        ?>
 
                         <!-- ROW -->
                         <tr>
@@ -1085,10 +1074,60 @@ function taskComp($a, $b)
                             <td><?php echo $activity['name']; ?></td>
                         </tr>
 
-            <?php
+           <?php
                     }
-                }
-            }
+        } ?>
+
+                <!-- CLOSE TABLE THIS WEEK -->
+            </tbody>
+        </table>
+        <br>
+
+        <?php
+        if (!empty($territory)) {
+            ?>
+
+            <br>
+            <div class="p-3 mb-2 bg-secondary text-white"><?php echo $language['territory']; ?></div>
+            <br>
+
+            <!-- TERRITORY-->
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th style="width: 20%"><?php echo $language['territory_date']; ?></th>
+                        <th style="width: 20%"><?php echo $language['territory_nr']; ?></th>
+                        <th style="width: 60%"><?php echo $language['territory_name']; ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php
+
+                    foreach ($territory as $curr_terr) {
+                        ?>
+
+                        <!-- ROW -->
+                        <tr>
+                            <td><?php echo $curr_terr['spInf3']; ?></td>
+                            <td><?php echo $curr_terr['spInf7']; ?></td>
+
+                            <?php
+                            if (!empty($curr_terr['spInf31'])) {
+                                ?>
+                            <td><a target="_blank" href="territoryviewer.php?tid=<?php echo $curr_terr['spInf31']; ?>&amp;lang=<?php echo $langIniName; ?>"><img src="images/territory.png" width="25" height="25" alt="Territory"></a>&nbsp;&nbsp;<?php echo $curr_terr['spInf8']; ?></td>
+                            <?php
+                            } else {
+                                ?>
+                            <td><?php echo $curr_terr['spInf8']; ?></td>
+                            <?php
+                            } ?>
+                        </tr>
+
+                            <?php
+                    }
+        }
+    }
 
             ?>
 

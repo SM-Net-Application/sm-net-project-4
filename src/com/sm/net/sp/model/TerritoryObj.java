@@ -123,14 +123,19 @@ public class TerritoryObj {
 		String spInf1 = Crypt.encrypt(editor.getTerritoryLandTextField().getText(), sk);
 		String spInf2 = Crypt.encrypt(editor.getTerritoryLandkreisTextField().getText(), sk);
 		String spInf3 = Crypt.encrypt(editor.getTerritoryKreisstadtTextField().getText(), sk);
-		String spInf4 = Crypt.encrypt(editor.getTerritoryOrtTextField().getText(), sk);
-		String spInf5 = Crypt.encrypt(editor.getTerritoryZipCodeTextField().getText(), sk);
-		String spInf6 = Crypt.encrypt(editor.getTerritoryOrtsteilTextField().getText(), sk);
+//		String spInf4 = Crypt.encrypt(editor.getTerritoryOrtTextField().getText(), sk);
+//		String spInf5 = Crypt.encrypt(editor.getTerritoryZipCodeTextField().getText(), sk);
+//		String spInf6 = Crypt.encrypt(editor.getTerritoryOrtsteilTextField().getText(), sk);
+		String spInf4 = editor.getTerritoryOrtTextField().getText();
+		String spInf5 = editor.getTerritoryZipCodeTextField().getText();
+		String spInf6 = editor.getTerritoryOrtsteilTextField().getText();
 
 		BigDecimal territoryNumber = new BigDecimal(editor.getTerritoryNumberTextField().getText().replace(',', '.'));
-		String spInf7 = Crypt.encrypt(territoryNumber.toString(), sk);
+//		String spInf7 = Crypt.encrypt(territoryNumber.toString(), sk);
+		String spInf7 = territoryNumber.toString();
 
-		String spInf8 = Crypt.encrypt(editor.getTerritoryNameTextField().getText(), sk);
+//		String spInf8 = Crypt.encrypt(editor.getTerritoryNameTextField().getText(), sk);
+		String spInf8 = editor.getTerritoryNameTextField().getText();
 		String spInf9 = Crypt.encrypt(editor.getTerritoryCoordinatesTextField().getText(), sk);
 		String spInf10 = editor.getTerritoryMyMapsIDTextField().getText();
 		String spInf11 = Crypt.encrypt(editor.getImage1TextField().getText(), sk);
@@ -227,11 +232,18 @@ public class TerritoryObj {
 		String spInf1 = Crypt.decrypt(json.getString("spInf1"), secretKey);
 		String spInf2 = Crypt.decrypt(json.getString("spInf2"), secretKey);
 		String spInf3 = Crypt.decrypt(json.getString("spInf3"), secretKey);
-		String spInf4 = Crypt.decrypt(json.getString("spInf4"), secretKey);
-		String spInf5 = Crypt.decrypt(json.getString("spInf5"), secretKey);
-		String spInf6 = Crypt.decrypt(json.getString("spInf6"), secretKey);
-		String spInf7 = Crypt.decrypt(json.getString("spInf7"), secretKey);
-		String spInf8 = Crypt.decrypt(json.getString("spInf8"), secretKey);
+
+//		String spInf4 = Crypt.decrypt(json.getString("spInf4"), secretKey);
+//		String spInf5 = Crypt.decrypt(json.getString("spInf5"), secretKey);
+//		String spInf6 = Crypt.decrypt(json.getString("spInf6"), secretKey);
+//		String spInf7 = Crypt.decrypt(json.getString("spInf7"), secretKey);
+//		String spInf8 = Crypt.decrypt(json.getString("spInf8"), secretKey);
+		String spInf4 = json.getString("spInf4");
+		String spInf5 = json.getString("spInf5");
+		String spInf6 = json.getString("spInf6");
+		String spInf7 = json.getString("spInf7");
+		String spInf8 = json.getString("spInf8");
+
 		String spInf9 = Crypt.decrypt(json.getString("spInf9"), secretKey);
 		String spInf10 = json.getString("spInf10");
 		String spInf11 = Crypt.decrypt(json.getString("spInf11"), secretKey);

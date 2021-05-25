@@ -131,18 +131,9 @@
                                                             </StackPane>
                                                             <StackPane alignment="CENTER_LEFT">
                                                                <children>
-                                                                  <Button fx:id="territoryResourcesDownloadButton" mnemonicParsing="false" text="download">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </Button>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane alignment="CENTER_LEFT">
-                                                               <children>
                                                                   <Button fx:id="territoryResourcesDownloadAllButton" mnemonicParsing="false" text="downloadAll">
                                                                      <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
                                                                   </Button>
                                                                </children>
@@ -189,6 +180,15 @@
                                                                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                  </StackPane.margin>
                                                                               </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane alignment="CENTER_LEFT">
+                                                                           <children>
+                                                                              <Button fx:id="territoryResourcesDownloadButton" mnemonicParsing="false" text="download">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </Button>
                                                                            </children>
                                                                         </StackPane>
                                                                         <StackPane>

@@ -6,8 +6,6 @@ import javax.crypto.SecretKey;
 
 import org.json.JSONObject;
 
-import com.sm.net.util.Crypt;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -148,8 +146,10 @@ public class TerritoryRegistryEntity {
 		int id = json.getInt("id");
 		int spInf1 = json.getInt("spInf1");
 		int spInf2 = json.getInt("spInf2");
-		String spInf3 = Crypt.decrypt(json.getString("spInf3"), secretKey);
-		String spInf4 = Crypt.decrypt(json.getString("spInf4"), secretKey);
+//		String spInf3 = Crypt.decrypt(json.getString("spInf3"), secretKey);
+//		String spInf4 = Crypt.decrypt(json.getString("spInf4"), secretKey);
+		String spInf3 = json.getString("spInf3");
+		String spInf4 = json.getString("spInf4");
 
 		territoryRegistryEntity.setID(id);
 		territoryRegistryEntity.setSpInf1(spInf1);

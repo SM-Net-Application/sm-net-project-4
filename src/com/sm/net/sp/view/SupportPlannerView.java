@@ -47,6 +47,7 @@ import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.connection.SettingConnection;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
+import com.sm.net.sp.view.menu.settings.modules.SettingModules;
 import com.sm.net.sp.view.menu.settings.monitor.SettingMonitor;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
@@ -1046,6 +1047,32 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void loadMenuSettingModules() {
+
+		// TODO: Moduli PDF
+		
+		if (this.center != 26) {
+			this.center = 26;
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.MENU_SETTING_MODULES);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+				SettingModules ctrl = (SettingModules) fxmlLoader.getController();
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.viewSupportPlannerStage);
+				ctrl.setLoggedUser(this.user);
+				ctrl.setApplication(this);
+				ctrl.objectInitialize();
+
+				this.viewSupportPlannerBorderPane.setCenter(layout);
+
+			} catch (IOException e) {
 			}
 		}
 	}

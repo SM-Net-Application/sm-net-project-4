@@ -13,7 +13,6 @@ import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -188,7 +187,7 @@ public class TerritoryEditor {
 	private TerritoryObj selectedTerritory;
 	private SupportPlannerView application;
 
-	private boolean listenerCheckFields;
+//	private boolean listenerCheckFields;
 
 	private HashMap<String, String> configs;
 
@@ -279,13 +278,13 @@ public class TerritoryEditor {
 
 	public void objectInitialize() {
 
-		this.listenerCheckFields = false;
+//		this.listenerCheckFields = false;
 
 		initValue();
 		viewUpdate();
 		listeners();
 
-		this.listenerCheckFields = true;
+//		this.listenerCheckFields = true;
 	}
 
 	private void initValue() {
@@ -353,39 +352,31 @@ public class TerritoryEditor {
 		this.saveButton.setOnAction(event -> save());
 	}
 
-	private void checkBoxGroups(Boolean newV, Boolean notNull, CheckBox edited, CheckBox... others) {
-
-		if (this.listenerCheckFields) {
-
-			this.listenerCheckFields = false;
-
-			if (newV) {
-				for (CheckBox cb : others)
-					if (cb.isSelected())
-						cb.setSelected(false);
-			} else {
-				if (notNull)
-					edited.setSelected(true);
-			}
-
-			this.listenerCheckFields = true;
-		}
-	}
+//	private void checkBoxGroups(Boolean newV, Boolean notNull, CheckBox edited, CheckBox... others) {
+//
+//		if (this.listenerCheckFields) {
+//
+//			this.listenerCheckFields = false;
+//
+//			if (newV) {
+//				for (CheckBox cb : others)
+//					if (cb.isSelected())
+//						cb.setSelected(false);
+//			} else {
+//				if (notNull)
+//					edited.setSelected(true);
+//			}
+//
+//			this.listenerCheckFields = true;
+//		}
+//	}
 
 	private void save() {
 
 		if (checkFields()) {
 
-			TerritoryObj territoryObj;
-			if (this.selectedTerritory != null) {
-				// EDIT
-				territoryObj = TerritoryObj.newInstanceByView(this,
-						this.application.getSettings().getDatabaseSecretKey());
-			} else {
-				// NEW
-				territoryObj = TerritoryObj.newInstanceByView(this,
-						this.application.getSettings().getDatabaseSecretKey());
-			}
+			TerritoryObj territoryObj = TerritoryObj.newInstanceByView(this,
+					this.application.getSettings().getDatabaseSecretKey());
 
 			String waitMessage = this.language.getString("territoryeditor.wait.save");
 			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,

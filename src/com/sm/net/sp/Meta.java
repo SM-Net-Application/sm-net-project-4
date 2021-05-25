@@ -48,6 +48,7 @@ import com.sm.net.sp.view.home.user.menu.users.MenuUsersAdd;
 import com.sm.net.sp.view.menu.settings.SettingsList;
 import com.sm.net.sp.view.menu.settings.connection.SettingConnection;
 import com.sm.net.sp.view.menu.settings.database.SettingDatabase;
+import com.sm.net.sp.view.menu.settings.modules.SettingModules;
 import com.sm.net.sp.view.menu.settings.monitor.SettingMonitor;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.access.SettingCreateAccess;
@@ -104,6 +105,9 @@ public class Meta {
 		public static final String KEY_DBUSERNAME = "mysqluser";
 		public static final String KEY_DBPASSWORD = "mysqlpass";
 
+		public static final String SECTION_MODULES = "modules";
+		public static final String S13 = "s13";
+
 		public static File getFile() {
 
 			String absoulutePath = PathBuilder.concatFolder(Project.currentWorkingDirectory(), FOLDER);
@@ -130,6 +134,7 @@ public class Meta {
 		public static final URL MENU_SETTINGS_LIST = SettingsList.class.getResource("SettingsList.fxml");
 		public static final URL MENU_SETTING_CONNECTION = SettingConnection.class.getResource("SettingConnection.fxml");
 		public static final URL MENU_SETTING_MONITOR = SettingMonitor.class.getResource("SettingMonitor.fxml");
+		public static final URL MENU_SETTING_MODULES = SettingModules.class.getResource("SettingModules.fxml");
 		public static final URL MENU_SETTING_DB = SettingDatabase.class.getResource("SettingDatabase.fxml");
 		public static final URL MENU_SETTING_DB_ROOT = SettingUser.class.getResource("SettingUserAddSuperuser.fxml");
 		public static final URL MENU_SETTING_USER = SettingUser.class.getResource("SettingUser.fxml");
