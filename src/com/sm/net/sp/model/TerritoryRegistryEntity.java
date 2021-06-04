@@ -1,6 +1,7 @@
 package com.sm.net.sp.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.crypto.SecretKey;
 
@@ -181,6 +182,20 @@ public class TerritoryRegistryEntity {
 				break;
 			}
 		}
+	}
+
+	public long toTimestamp() {
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+		String timestampString = dtf.format(this.startDate);
+
+		if (!this.getSpInf4().isEmpty()) {
+			timestampString += dtf.format(this.endDate);
+		} else
+			timestampString += "99991231";
+
+		return Long.valueOf(timestampString);
 	}
 
 	public final IntegerProperty idProperty() {

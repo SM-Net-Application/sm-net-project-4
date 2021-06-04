@@ -1557,6 +1557,15 @@ public class JSONRequest {
 		return jsonObj;
 	}
 
+	public static JSONObject TERRITORYENTITY_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(86));
+
+		jsonObj.put("id", id);
+
+		return jsonObj;
+	}
+	
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

@@ -281,6 +281,7 @@ public class Meta {
 		public static final String INFO = "info.png";
 		public static final String TERRITORY = "territory.png";
 		public static final String TERRITORYEDITOR = "territoryeditor.png";
+		public static final String MAPSGLOBAL = "mapsglobal.png";
 		public static final String WOL = "wol.png";
 		public static final String PUBLIC_TALK = "public_talk.png";
 		public static final String DOOR_CONGR = "door_congr.png";
@@ -352,6 +353,10 @@ public class Meta {
 		public static final String TERRITORY_ADD = "territoryadd.png";
 		public static final String TERRITORY_REMOVE = "territoryremove.png";
 		public static final String TERRITORY_EDIT = "territoryeditor.png";
+		
+		public static final String MAPS_ADD = "mapsglobaladd.png";
+		public static final String MAPS_REMOVE = "mapsglobalremove.png";
+		public static final String MAPS_EDIT = "mapsglobaledit.png";
 
 		public static final String GALLERY = "gallery.png";
 		public static final String DOCS = "docs.png";

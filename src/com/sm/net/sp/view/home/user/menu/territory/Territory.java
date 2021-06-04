@@ -85,6 +85,8 @@ public class Territory extends UpdateDataAdapter {
 	private Tab territoryTab;
 	@FXML
 	private Tab publisherTab;
+	@FXML
+	private Tab mapsTab;
 
 	@FXML
 	private TabPane territoryTabPane;
@@ -187,6 +189,59 @@ public class Territory extends UpdateDataAdapter {
 	@FXML
 	private ImageView memberAssignedTerritoryImageView;
 
+	@FXML
+	private TabPane territoryMapsTabPane;
+	@FXML
+	private Tab territoryMapsListTab;
+
+	@FXML
+	private Button territoryMapsAddButton;
+	@FXML
+	private Button territoryMapsEditButton;
+	@FXML
+	private Button territoryMapsRemoveButton;
+	@FXML
+	private Button territoryMapsOpenViewerButton;
+	@FXML
+	private Button territoryMapsOpenViewerURLButton;
+	@FXML
+	private Button territoryMapsResourcesDownloadButton;
+	@FXML
+	private Button territoryMapsResourcesDownloadAllButton;
+	@FXML
+	private Button territoryMapsResourcesOpenDirectoryButton;
+	@FXML
+	private Button territoryMapsResourcesDeleteAllButton;
+
+	@FXML
+	private TextField territoryMapsFilterTextField;
+
+	@FXML
+	private TableView<TerritoryObj> territoryMapsTableView;
+	@FXML
+	private TableColumn<TerritoryObj, String> territoryMapsNameTableColumn;
+
+	@FXML
+	private Label territoryMapsDocsLabel;
+	@FXML
+	private TableView<File> territoryMapsDocsTableView;
+	@FXML
+	private TableColumn<File, String> territoryMapsDocsNameTableColumn;
+
+	@FXML
+	private Label territoryMapsImagesLabel;
+	@FXML
+	private TableView<File> territoryMapsImagesTableView;
+	@FXML
+	private TableColumn<File, String> territoryMapsImagesNameTableColumn;
+
+	@FXML
+	private VBox territoryMapsTablesVBox;
+	@FXML
+	private StackPane territoryMapsImageViewStackPane;
+	@FXML
+	private ImageView territoryMapsImageView;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -260,14 +315,20 @@ public class Territory extends UpdateDataAdapter {
 
 		this.territoryTab.getStyleClass().add("tab_001");
 		this.publisherTab.getStyleClass().add("tab_001");
+		this.mapsTab.getStyleClass().add("tab_001");
 
 		this.territoryTabPane.getStyleClass().add("tab_pane_001");
 		this.territoryListTab.getStyleClass().add("tab_001");
 
+		this.territoryMapsTabPane.getStyleClass().add("tab_pane_001");
+		this.territoryMapsListTab.getStyleClass().add("tab_001");
+
 		this.memberIconTableColumn.getStyleClass().add("table_column_002");
 
 		this.membersTableView.getStyleClass().add("table_view_001");
+
 		this.territoryTableView.getStyleClass().add("table_view_001");
+		this.territoryMapsTableView.getStyleClass().add("table_view_001");
 
 		this.territoryReturnButton.getStyleClass().add("button_image_001");
 		this.memberAssignedTerritoryReturnButton.getStyleClass().add("button_image_001");
@@ -282,22 +343,35 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryOpenViewerURLButton.getStyleClass().add("button_image_001");
 		this.territoryRemoveButton.getStyleClass().add("button_image_001");
 		this.territoryEditButton.getStyleClass().add("button_image_001");
-
 		this.territoryResourcesDownloadButton.getStyleClass().add("button_image_001");
 		this.territoryResourcesDownloadAllButton.getStyleClass().add("button_image_001");
-
 		this.territoryResourcesOpenDirectoryButton.getStyleClass().add("button_image_001");
 		this.territoryResourcesDeleteAllButton.getStyleClass().add("button_image_001");
 
+		this.territoryMapsAddButton.getStyleClass().add("button_image_001");
+		this.territoryMapsOpenViewerButton.getStyleClass().add("button_image_001");
+		this.territoryMapsOpenViewerURLButton.getStyleClass().add("button_image_001");
+		this.territoryMapsRemoveButton.getStyleClass().add("button_image_001");
+		this.territoryMapsEditButton.getStyleClass().add("button_image_001");
+		this.territoryMapsResourcesDownloadButton.getStyleClass().add("button_image_001");
+		this.territoryMapsResourcesDownloadAllButton.getStyleClass().add("button_image_001");
+		this.territoryMapsResourcesOpenDirectoryButton.getStyleClass().add("button_image_001");
+		this.territoryMapsResourcesDeleteAllButton.getStyleClass().add("button_image_001");
+
 		this.territoryDocsLabel.getStyleClass().add("label_001");
 		this.territoryImagesLabel.getStyleClass().add("label_001");
+		this.territoryMapsDocsLabel.getStyleClass().add("label_001");
+		this.territoryMapsImagesLabel.getStyleClass().add("label_001");
 
 		this.territoryDocsTableView.getStyleClass().add("table_view_001");
 		this.territoryImagesTableView.getStyleClass().add("table_view_001");
+		this.territoryMapsDocsTableView.getStyleClass().add("table_view_001");
+		this.territoryMapsImagesTableView.getStyleClass().add("table_view_001");
 
 		this.filterMemberTextField.getStyleClass().add("text_field_001");
 
 		this.territoryFilterTextField.getStyleClass().add("text_field_001");
+		this.territoryMapsFilterTextField.getStyleClass().add("text_field_001");
 
 		this.memberAssignedTerritoryLabel.getStyleClass().add("label_001");
 		this.memberAssignedTerritoryTableView.getStyleClass().add("table_view_001");
@@ -323,6 +397,9 @@ public class Territory extends UpdateDataAdapter {
 
 		this.territoryTablesVBox.setMinWidth(750);
 		this.territoryTablesVBox.setMaxWidth(750);
+
+		this.territoryMapsTablesVBox.setMinWidth(750);
+		this.territoryMapsTablesVBox.setMaxWidth(750);
 
 		this.memberAssignedTerritoryTablesVBox.setMinWidth(600);
 		this.memberAssignedTerritoryTablesVBox.setMaxWidth(600);
@@ -395,7 +472,15 @@ public class Territory extends UpdateDataAdapter {
 		this.publisherTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MEMBER));
 		this.publisherTab.setClosable(false);
 
+		Tooltip territoryMapsTabTooltip = new Tooltip(language.getString("territory.tab.maps"));
+		territoryMapsTabTooltip.getStyleClass().add("tooltip_001");
+		this.mapsTab.setTooltip(territoryMapsTabTooltip);
+		this.mapsTab.setText("");
+		this.mapsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MAPSGLOBAL));
+		this.mapsTab.setClosable(false);
+
 		this.territoryListTab.setText(this.language.getString("territory.tab.territorylist"));
+		this.territoryMapsListTab.setText(this.language.getString("territory.tab.territorylist"));
 
 		this.memberIconTableColumn.setText("");
 		this.memberIconTableColumn.setMinWidth(50);
@@ -424,6 +509,8 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryAssignedToTableColumn
 				.setText(this.language.getString("territory.tablecolumns.territoryassignedto"));
 
+		this.territoryMapsNameTableColumn.setText(this.language.getString("territory.tablecolumns.mapsname"));
+		
 		this.territoryAssignedDateTableColumn
 				.setText(this.language.getString("territory.tablecolumns.territoryassigneddate"));
 		this.territoryAssignedDateTableColumn.setMinWidth(100);
@@ -441,11 +528,24 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryAddButton.setText("");
 		this.territoryAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_ADD));
 
+		Tooltip territoryMapsAddTooltip = new Tooltip(this.language.getString("territory.tooltip.mapsadd"));
+		territoryMapsAddTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsAddButton.setTooltip(territoryMapsAddTooltip);
+		this.territoryMapsAddButton.setText("");
+		this.territoryMapsAddButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS_ADD));
+
 		Tooltip territoryViewerTooltip = new Tooltip(this.language.getString("territory.tooltip.viewer"));
 		territoryViewerTooltip.getStyleClass().add("tooltip_001");
 		this.territoryOpenViewerButton.setTooltip(territoryViewerTooltip);
 		this.territoryOpenViewerButton.setText("");
 		this.territoryOpenViewerButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYVIEWER));
+
+		Tooltip territoryMapsViewerTooltip = new Tooltip(this.language.getString("territory.tooltip.mapsviewer"));
+		territoryMapsViewerTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsOpenViewerButton.setTooltip(territoryMapsViewerTooltip);
+		this.territoryMapsOpenViewerButton.setText("");
+		this.territoryMapsOpenViewerButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYVIEWER));
 
 		Tooltip territoryViewerURLTooltip = new Tooltip(this.language.getString("territory.tooltip.viewerurl"));
 		territoryViewerURLTooltip.getStyleClass().add("tooltip_001");
@@ -454,11 +554,24 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryOpenViewerURLButton
 				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYVIEWERURL));
 
+		Tooltip territoryMapsViewerURLTooltip = new Tooltip(this.language.getString("territory.tooltip.mapsviewerurl"));
+		territoryMapsViewerURLTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsOpenViewerURLButton.setTooltip(territoryMapsViewerURLTooltip);
+		this.territoryMapsOpenViewerURLButton.setText("");
+		this.territoryMapsOpenViewerURLButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYVIEWERURL));
+
 		Tooltip territoryRemoveTooltip = new Tooltip(this.language.getString("territory.tooltip.remove"));
 		territoryRemoveTooltip.getStyleClass().add("tooltip_001");
 		this.territoryRemoveButton.setTooltip(territoryRemoveTooltip);
 		this.territoryRemoveButton.setText("");
 		this.territoryRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_REMOVE));
+
+		Tooltip territoryMapsRemoveTooltip = new Tooltip(this.language.getString("territory.tooltip.mapsremove"));
+		territoryMapsRemoveTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsRemoveButton.setTooltip(territoryMapsRemoveTooltip);
+		this.territoryMapsRemoveButton.setText("");
+		this.territoryMapsRemoveButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS_REMOVE));
 
 		Tooltip territoryEditTooltip = new Tooltip(this.language.getString("territory.tooltip.edit"));
 		territoryEditTooltip.getStyleClass().add("tooltip_001");
@@ -466,11 +579,25 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryEditButton.setText("");
 		this.territoryEditButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_EDIT));
 
+		Tooltip territoryMapsEditTooltip = new Tooltip(this.language.getString("territory.tooltip.mapsedit"));
+		territoryMapsEditTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsEditButton.setTooltip(territoryMapsEditTooltip);
+		this.territoryMapsEditButton.setText("");
+		this.territoryMapsEditButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS_EDIT));
+
 		Tooltip territoryDownloadTooltip = new Tooltip(this.language.getString("territory.tooltip.downloadresources"));
 		territoryDownloadTooltip.getStyleClass().add("tooltip_001");
 		this.territoryResourcesDownloadButton.setTooltip(territoryDownloadTooltip);
 		this.territoryResourcesDownloadButton.setText("");
 		this.territoryResourcesDownloadButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD));
+
+		Tooltip territoryMapsDownloadTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.mapsdownloadresources"));
+		territoryMapsDownloadTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsResourcesDownloadButton.setTooltip(territoryMapsDownloadTooltip);
+		this.territoryMapsResourcesDownloadButton.setText("");
+		this.territoryMapsResourcesDownloadButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD));
 
 		Tooltip territoryDownloadAllTooltip = new Tooltip(
 				this.language.getString("territory.tooltip.downloadallresources"));
@@ -478,6 +605,14 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryResourcesDownloadAllButton.setTooltip(territoryDownloadAllTooltip);
 		this.territoryResourcesDownloadAllButton.setText("");
 		this.territoryResourcesDownloadAllButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD2));
+
+		Tooltip territoryMapsDownloadAllTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.mapsdownloadallresources"));
+		territoryMapsDownloadAllTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsResourcesDownloadAllButton.setTooltip(territoryMapsDownloadAllTooltip);
+		this.territoryMapsResourcesDownloadAllButton.setText("");
+		this.territoryMapsResourcesDownloadAllButton
 				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DOWNLOAD2));
 
 		Tooltip territoryResourcesOpenDirectoryTooltip = new Tooltip(
@@ -488,6 +623,14 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryResourcesOpenDirectoryButton
 				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FOLDER));
 
+		Tooltip territoryMapsResourcesOpenDirectoryTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.mapsresourcesopendirectory"));
+		territoryMapsResourcesOpenDirectoryTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsResourcesOpenDirectoryButton.setTooltip(territoryMapsResourcesOpenDirectoryTooltip);
+		this.territoryMapsResourcesOpenDirectoryButton.setText("");
+		this.territoryMapsResourcesOpenDirectoryButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.FOLDER));
+
 		Tooltip territoryResourcesDeleteAllTooltip = new Tooltip(
 				this.language.getString("territory.tooltip.resourcesdeleteall"));
 		territoryResourcesDeleteAllTooltip.getStyleClass().add("tooltip_001");
@@ -495,11 +638,25 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryResourcesDeleteAllButton.setText("");
 		this.territoryResourcesDeleteAllButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
 
+		Tooltip territoryMapsResourcesDeleteAllTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.mapsresourcesdeleteall"));
+		territoryMapsResourcesDeleteAllTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsResourcesDeleteAllButton.setTooltip(territoryMapsResourcesDeleteAllTooltip);
+		this.territoryMapsResourcesDeleteAllButton.setText("");
+		this.territoryMapsResourcesDeleteAllButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
+		
 		this.territoryDocsLabel.setText(this.language.getString("territory.label.resourcedocs"));
 		this.territoryImagesLabel.setText(this.language.getString("territory.label.resourceimages"));
 
 		this.territoryDocsNameTableColumn.setText(this.language.getString("territory.tablecolumn.resourcedocfilename"));
 		this.territoryImagesNameTableColumn
+				.setText(this.language.getString("territory.tablecolumn.resourceimagefilename"));
+		
+		this.territoryMapsDocsLabel.setText(this.language.getString("territory.label.resourcedocs"));
+		this.territoryMapsImagesLabel.setText(this.language.getString("territory.label.resourceimages"));
+
+		this.territoryMapsDocsNameTableColumn.setText(this.language.getString("territory.tablecolumn.resourcedocfilename"));
+		this.territoryMapsImagesNameTableColumn
 				.setText(this.language.getString("territory.tablecolumn.resourceimagefilename"));
 
 		this.territoryTableView.setMinHeight(400);
@@ -1534,7 +1691,7 @@ public class Territory extends UpdateDataAdapter {
 				}
 
 				CommonUtils.open(saveDirectory);
-				
+
 				this.application.getAlertBuilder2().information(this.ownerStage,
 						this.application.getSettings().getLanguage().getString("territory.information.saves13done"));
 

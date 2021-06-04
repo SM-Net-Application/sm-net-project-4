@@ -4,21 +4,26 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 import com.sm.net.project.Language;
+import com.sm.net.sp.Meta;
 import com.sm.net.sp.model.Member;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.model.TerritoryRegistry;
 import com.sm.net.sp.model.TerritoryRegistryEntity;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntityDeleteTask;
+import com.smnet.core.task.TaskManager;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
 public class TerritoryRegistryViewer {
@@ -31,6 +36,9 @@ public class TerritoryRegistryViewer {
 	private TableColumn<TerritoryRegistryEntity, String> publisherTableColumn;
 	@FXML
 	private TableColumn<TerritoryRegistryEntity, LocalDate> endDateTableColumn;
+
+	@FXML
+	private Button deleteButton;
 
 	private Settings settings;
 	private Language language;
@@ -47,6 +55,8 @@ public class TerritoryRegistryViewer {
 	private ObservableList<Member> membersList;
 
 	private HashMap<String, String> configs;
+
+	private ObservableList<TerritoryRegistryEntity> entityList;
 
 	@FXML
 	private void initialize() {
@@ -67,6 +77,8 @@ public class TerritoryRegistryViewer {
 
 		this.startDateTableColumn.getStyleClass().add("table_column_002");
 		this.endDateTableColumn.getStyleClass().add("table_column_002");
+
+		this.deleteButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -74,26 +86,97 @@ public class TerritoryRegistryViewer {
 		viewUpdate();
 
 		initValue();
-//		listeners();
+		listeners();
 	}
 
 	private void initValue() {
 
 		if (this.selectedTerritory != null) {
 
-			ObservableList<TerritoryRegistryEntity> entityList = this.territoryRegistry
-					.findTerritoryEntityList(this.selectedTerritory.getSpTerritoryID());
+			this.entityList = this.territoryRegistry.findTerritoryEntityList(this.selectedTerritory.getSpTerritoryID());
 
-			entityList.forEach(entity -> entity.updatePublisher(this.membersList));
+			this.entityList.forEach(entity -> entity.updatePublisher(this.membersList));
 
-			this.tableView.setItems(entityList);
+			this.tableView.setItems(this.entityList);
 
 		}
 	}
 
-//	private void listeners() {
-//
-//	}
+	private void listeners() {
+
+		this.deleteButton.setOnAction(event -> delete());
+
+	}
+
+	private void delete() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		if (this.tableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryRegistryEntity selectedItem = this.tableView.getSelectionModel().getSelectedItem();
+			if (this.isLastEntity(selectedItem)) {
+
+				String content = this.application.getSettings().getLanguage()
+						.getString("territoryregistry.confirm.entitydelete");
+				if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+					int id = selectedItem.getID();
+
+					String waitMessage = this.language.getString("territoryregistry.wait.delete");
+
+					TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+							new TerritoryRegistryEntityDeleteTask(this.application.getAlertBuilder2(), this.settings,
+									this.ownerStage, this, id));
+
+				}
+
+			} else {
+
+				final String content = this.application.getSettings().getLanguage()
+						.getString("territoryregistry.error.nolast");
+
+				this.application.getAlertBuilder2().error(this.ownerStage, content);
+			}
+
+		} else {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territoryregistry.error.noselection");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+		}
+	}
+
+	private boolean isLastEntity(TerritoryRegistryEntity selectedEntity) {
+
+		return selectedEntity.getID() == this.getLastEntity().getID();
+	}
+
+	private TerritoryRegistryEntity getLastEntity() {
+
+		TerritoryRegistryEntity lastEntity = null;
+		for (TerritoryRegistryEntity entity : this.entityList) {
+
+			if (lastEntity == null) {
+				lastEntity = entity;
+				continue;
+			}
+
+			if (entity.toTimestamp() > lastEntity.toTimestamp()) {
+				lastEntity = entity;
+			}
+		}
+		return lastEntity;
+	}
 
 	private void viewUpdate() {
 
@@ -106,6 +189,12 @@ public class TerritoryRegistryViewer {
 		this.endDateTableColumn.setMinWidth(250);
 		this.endDateTableColumn.setMaxWidth(250);
 		this.publisherTableColumn.setText(this.language.getString("territoryregistry.tablecolumn.publisher"));
+
+		Tooltip deleteTooltip = new Tooltip(this.language.getString("territoryregistry.button.tooltip.delete"));
+		deleteTooltip.getStyleClass().add("tooltip_001");
+		this.deleteButton.setTooltip(deleteTooltip);
+		this.deleteButton.setText("");
+		this.deleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
 
 	}
 

@@ -3,7 +3,7 @@
 
 	<!-- Caricare nel Classpath di ANT (livello progetto) il path del progetto Java -->
 
-	<property name="projectPath" value="D:\GitHub\sm-net-project-4" />
+	<property name="projectPath" value="D:\Workspaces\Eclipse IDE\java-2021-03\sm-net-project-4" />
 	<property name="applicationVendor" value="SM-Net" />
 	<property name="applicationName" value="Support Planner" />
 	<property name="applicationVersion" value="1.0 (beta 7)" />

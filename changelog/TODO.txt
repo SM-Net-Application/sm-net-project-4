@@ -1,4 +1,8 @@
 
+	Congregazione: Nota per i membri
+	
+	Storico: Visualizzare la Nota dei membri
+
 	Comunicazioni: Elimina comunicazioni come privilegio
 
 	Sorvegliante:
@@ -67,7 +71,6 @@
 	
 	- Sostituire la classe Authenticator
 	
-	- Nuova sezione: Territori
 	- Nuova sezione: Letteratura
 	
 	Eliminare AlertBuilder vecchio.
