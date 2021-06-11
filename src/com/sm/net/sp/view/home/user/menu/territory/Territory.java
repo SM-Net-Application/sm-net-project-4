@@ -28,6 +28,7 @@ import com.sm.net.sp.dialogs.territory.TerritoryDialog;
 import com.sm.net.sp.dialogs.territory.TerritoryReturnDateDialog;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Member;
+import com.sm.net.sp.model.TerritoryMap;
 import com.sm.net.sp.model.TerritoryModul;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.model.TerritoryRegistry;
@@ -41,6 +42,10 @@ import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDeleteTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadAllTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryDownloadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryLoadTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryMapsDeleteTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryMapsDownloadAllTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryMapsDownloadTask;
+import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryMapsLoadTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveReturnTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryEntitySaveTask;
 import com.sm.net.sp.view.home.user.menu.territory.task.TerritoryRegistryLoadTask;
@@ -217,9 +222,9 @@ public class Territory extends UpdateDataAdapter {
 	private TextField territoryMapsFilterTextField;
 
 	@FXML
-	private TableView<TerritoryObj> territoryMapsTableView;
+	private TableView<TerritoryMap> territoryMapsTableView;
 	@FXML
-	private TableColumn<TerritoryObj, String> territoryMapsNameTableColumn;
+	private TableColumn<TerritoryMap, String> territoryMapsNameTableColumn;
 
 	@FXML
 	private Label territoryMapsDocsLabel;
@@ -252,6 +257,10 @@ public class Territory extends UpdateDataAdapter {
 	private ObservableList<File> territoryDocs;
 	private ObservableList<File> territoryImages;
 
+	private ObservableList<TerritoryMap> territoryMapList;
+	private ObservableList<File> territoryMapDocs;
+	private ObservableList<File> territoryMapImages;
+
 	private ObservableList<Member> membersList;
 
 	private HashMap<String, String> configs;
@@ -259,6 +268,7 @@ public class Territory extends UpdateDataAdapter {
 	private TerritoryRegistry territoryRegistry;
 	private boolean imageView1;
 	private boolean imageView2;
+	private boolean imageView3;
 
 	@FXML
 	private void initialize() {
@@ -285,6 +295,13 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryDocsNameTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		this.territoryImagesNameTableColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+		this.territoryMapsNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1Property());
+
+		this.territoryMapsDocsNameTableColumn
+				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		this.territoryMapsImagesNameTableColumn
 				.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
 		this.memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
@@ -392,8 +409,14 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryDocs = FXCollections.observableArrayList();
 		this.territoryImages = FXCollections.observableArrayList();
 
+		this.territoryMapDocs = FXCollections.observableArrayList();
+		this.territoryMapImages = FXCollections.observableArrayList();
+
 		this.territoryDocsTableView.setItems(this.territoryDocs);
 		this.territoryImagesTableView.setItems(this.territoryImages);
+
+		this.territoryMapsDocsTableView.setItems(this.territoryMapDocs);
+		this.territoryMapsImagesTableView.setItems(this.territoryMapImages);
 
 		this.territoryTablesVBox.setMinWidth(750);
 		this.territoryTablesVBox.setMaxWidth(750);
@@ -407,10 +430,14 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryList = FXCollections.observableArrayList();
 		this.territoryTableView.setItems(this.territoryList);
 
+		this.territoryMapList = FXCollections.observableArrayList();
+		this.territoryMapsTableView.setItems(this.territoryMapList);
+
 		listeners();
 		viewUpdate();
 
 		updateMembers();
+		updateTerritoryMaps();
 	}
 
 	@Override
@@ -442,6 +469,12 @@ public class Territory extends UpdateDataAdapter {
 	public void updateTerritoryList(ObservableList<TerritoryObj> list) {
 		this.territoryList.clear();
 		this.territoryList.addAll(list);
+	}
+
+	public void updateTerritoryMapList(ObservableList<TerritoryMap> list) {
+		this.territoryMapList.clear();
+		this.territoryMapList.addAll(list);
+		Platform.runLater(() -> this.territoryMapsTableView.refresh());
 	}
 
 	private void viewUpdate() {
@@ -510,7 +543,7 @@ public class Territory extends UpdateDataAdapter {
 				.setText(this.language.getString("territory.tablecolumns.territoryassignedto"));
 
 		this.territoryMapsNameTableColumn.setText(this.language.getString("territory.tablecolumns.mapsname"));
-		
+
 		this.territoryAssignedDateTableColumn
 				.setText(this.language.getString("territory.tablecolumns.territoryassigneddate"));
 		this.territoryAssignedDateTableColumn.setMinWidth(100);
@@ -643,19 +676,21 @@ public class Territory extends UpdateDataAdapter {
 		territoryMapsResourcesDeleteAllTooltip.getStyleClass().add("tooltip_001");
 		this.territoryMapsResourcesDeleteAllButton.setTooltip(territoryMapsResourcesDeleteAllTooltip);
 		this.territoryMapsResourcesDeleteAllButton.setText("");
-		this.territoryMapsResourcesDeleteAllButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
-		
+		this.territoryMapsResourcesDeleteAllButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
+
 		this.territoryDocsLabel.setText(this.language.getString("territory.label.resourcedocs"));
 		this.territoryImagesLabel.setText(this.language.getString("territory.label.resourceimages"));
 
 		this.territoryDocsNameTableColumn.setText(this.language.getString("territory.tablecolumn.resourcedocfilename"));
 		this.territoryImagesNameTableColumn
 				.setText(this.language.getString("territory.tablecolumn.resourceimagefilename"));
-		
+
 		this.territoryMapsDocsLabel.setText(this.language.getString("territory.label.resourcedocs"));
 		this.territoryMapsImagesLabel.setText(this.language.getString("territory.label.resourceimages"));
 
-		this.territoryMapsDocsNameTableColumn.setText(this.language.getString("territory.tablecolumn.resourcedocfilename"));
+		this.territoryMapsDocsNameTableColumn
+				.setText(this.language.getString("territory.tablecolumn.resourcedocfilename"));
 		this.territoryMapsImagesNameTableColumn
 				.setText(this.language.getString("territory.tablecolumn.resourceimagefilename"));
 
@@ -712,6 +747,14 @@ public class Territory extends UpdateDataAdapter {
 				new TerritoryLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
 	}
 
+	public void updateTerritoryMaps() {
+
+		String waitMessage = this.language.getString("territorymaps.wait.load");
+
+		TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+				new TerritoryMapsLoadTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage, this));
+	}
+
 	private void listeners() {
 
 		this.territoryPrintButton.setOnAction(event -> print());
@@ -726,11 +769,27 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryResourcesDeleteAllButton.setOnAction(event -> deleteResourceDirectory());
 		this.territoryAssignButton.setOnAction(event -> assignTerritory());
 
+		this.territoryMapsAddButton.setOnAction(event -> newTerritoryMaps());
+		this.territoryMapsEditButton.setOnAction(event -> editTerritoryMaps());
+		this.territoryMapsRemoveButton.setOnAction(event -> removeTerritoryMaps());
+		this.territoryMapsOpenViewerButton.setOnAction(event -> openTerritoryMapsViewer());
+		this.territoryMapsOpenViewerURLButton.setOnAction(event -> openTerritoryMapsViewerURL());
+		this.territoryMapsResourcesDownloadButton.setOnAction(event -> downloadTerritoryMapsResources());
+		this.territoryMapsResourcesDownloadAllButton.setOnAction(event -> downloadAllTerritoryMapsResources());
+		this.territoryMapsResourcesOpenDirectoryButton.setOnAction(event -> openResourceDirectoryMaps());
+		this.territoryMapsResourcesDeleteAllButton.setOnAction(event -> deleteResourceDirectoryMaps());
+
 		this.territoryTableView.getSelectionModel().selectedIndexProperty()
 				.addListener((obs, oldV, newV) -> selectTerritory());
 
+		this.territoryMapsTableView.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> selectMaps());
+
 		this.territoryImagesTableView.getSelectionModel().selectedIndexProperty()
 				.addListener((obs, oldV, newV) -> selectTerritoryImage());
+
+		this.territoryMapsImagesTableView.getSelectionModel().selectedIndexProperty()
+				.addListener((obs, oldV, newV) -> selectTerritoryMapsImage());
 
 		this.territoryTableView.setRowFactory(param -> {
 			TableRow<TerritoryObj> row = new TableRow<>();
@@ -743,6 +802,19 @@ public class Territory extends UpdateDataAdapter {
 		});
 
 		this.territoryDocsTableView.setRowFactory(param -> {
+			TableRow<File> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					try {
+						CommonUtils.open(row.getItem());
+					} catch (IOException e) {
+					}
+				}
+			});
+			return row;
+		});
+		
+		this.territoryMapsDocsTableView.setRowFactory(param -> {
 			TableRow<File> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -767,9 +839,25 @@ public class Territory extends UpdateDataAdapter {
 			});
 			return row;
 		});
+		
+		this.territoryMapsImagesTableView.setRowFactory(param -> {
+			TableRow<File> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					try {
+						CommonUtils.open(row.getItem());
+					} catch (IOException e) {
+					}
+				}
+			});
+			return row;
+		});
 
 		this.territoryFilterTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterTerritory(newValue));
+
+		this.territoryMapsFilterTextField.textProperty()
+				.addListener((observable, oldValue, newValue) -> updateFilterTerritoryMaps(newValue));
 
 		this.filterMemberTextField.textProperty()
 				.addListener((observable, oldValue, newValue) -> updateFilterMember(newValue));
@@ -781,6 +869,7 @@ public class Territory extends UpdateDataAdapter {
 				.addListener((obs, oldV, newV) -> selectAssignedTerritory());
 
 		this.memberAssignedTerritoryReturnButton.setOnAction(event -> memberAssignedTerritoryReturn());
+		
 		this.territoryReturnButton.setOnAction(event -> assignedTerritoryReturn());
 	}
 
@@ -1062,6 +1151,18 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
+	private void selectTerritoryMapsImage() {
+
+		if (this.territoryMapsImagesTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			File item = this.territoryMapsImagesTableView.getSelectionModel().getSelectedItem();
+			if (item.exists()) {
+				clearImage(this.territoryMapsImageView);
+				fillImage(item, this.territoryMapsImageView);
+			}
+		}
+	}
+
 	private void initImageViewSize(StackPane stackPane, ImageView imageView) {
 
 		double stackPaneWidth = stackPane.getWidth() - 5;
@@ -1083,27 +1184,13 @@ public class Territory extends UpdateDataAdapter {
 			initImageViewSize(this.memberAssignedTerritoryImageViewStackPane, this.memberAssignedTerritoryImageView);
 			this.imageView2 = true;
 		}
+		if (!imageView3) {
+			initImageViewSize(this.territoryMapsImageViewStackPane, this.territoryMapsImageView);
+			this.imageView3 = true;
+		}
 
 		if (fileImage.exists()) {
-
-//			double imageViewFitWidth = imageView.getFitWidth();
-//			double imageViewFitHeight = imageView.getFitHeight();
-
 			Image image = new Image(fileImage.toURI().toString());
-
-//			double imageWidth = image.getWidth();
-//			double imageHeight = image.getHeight();
-//
-//			double newWidth = setNewWidthSize(imageWidth, imageHeight, imageViewFitWidth, imageViewFitHeight);
-//			double newHeight = setNewHeightSize(imageWidth, imageHeight, imageViewFitWidth, imageViewFitHeight);
-//
-//			if (newWidth > imageViewFitWidth || newHeight > imageViewFitHeight) {
-//				newWidth = reverseWidthSize(newWidth, newHeight, imageViewFitWidth, imageViewFitHeight);
-//				newHeight = reverseHeightSize(newWidth, newHeight, imageViewFitWidth, imageViewFitHeight);
-//			}
-//
-//			// imageView.setImage(new Image(fileImage.toURI().toString(), newWidth,
-//			// newHeight, true, true));
 			imageView.setImage(image);
 		}
 	}
@@ -1163,6 +1250,32 @@ public class Territory extends UpdateDataAdapter {
 			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
 
 				TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+				File targetDirectory = territoryObj.buildTargetDirectory();
+
+				try {
+					FileUtils.deleteDirectory(targetDirectory);
+				} catch (IOException e) {
+					this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+				}
+
+				selectTerritory();
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	private void deleteResourceDirectoryMaps() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			String content = this.application.getSettings().getLanguage()
+					.getString("territorymaps.confirm.deleteallresources");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+				TerritoryMap territoryObj = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
 				File targetDirectory = territoryObj.buildTargetDirectory();
 
 				try {
@@ -1244,11 +1357,77 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
+	public void selectMaps() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			this.territoryMapDocs.clear();
+			this.territoryMapImages.clear();
+			this.territoryMapsImageView.setImage(null);
+
+			TerritoryMap territoryObj = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
+			File targetDirectory = territoryObj.buildTargetDirectory();
+
+			ArrayList<TerritoryResource> resources = territoryObj.getResources();
+			for (TerritoryResource territoryResource : resources) {
+
+				File resource = new File(targetDirectory, territoryResource.getResourceName());
+				if (resource.exists()) {
+
+					switch (territoryResource.getType()) {
+					case 0: // Image
+
+						this.territoryMapImages.add(resource);
+
+						break;
+
+					case 1: // Doc
+
+						this.territoryMapDocs.add(resource);
+
+						break;
+
+					default:
+						break;
+					}
+				}
+			}
+
+			Platform.runLater(() -> {
+				this.territoryMapsDocsTableView.refresh();
+				this.territoryMapsImagesTableView.refresh();
+			});
+
+			this.territoryMapsImagesTableView.getSelectionModel().selectFirst();
+		}
+	}
+
 	private void openResourceDirectory() {
 
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
+			File targetDirectory = territoryObj.buildTargetDirectory();
+			if (targetDirectory.exists()) {
+
+				try {
+					Desktop.getDesktop().open(targetDirectory);
+				} catch (IOException e) {
+					this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
+				}
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	private void openResourceDirectoryMaps() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryMap territoryObj = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
 			File targetDirectory = territoryObj.buildTargetDirectory();
 			if (targetDirectory.exists()) {
 
@@ -1289,6 +1468,26 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
+	private void downloadTerritoryMapsResources() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryMap territoryMap = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
+
+			String header = this.application.getSettings().getLanguage()
+					.getString("territorymaps.confirm.downloadresources");
+
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, territoryMap.getSpInf1())) {
+
+				String waitMessage = this.language.getString("territory.wait.download");
+
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new TerritoryMapsDownloadTask(this.application, this.ownerStage, this, territoryMap));
+
+			}
+		}
+	}
+
 	private void downloadAllTerritoryResources() {
 
 		String content = this.application.getSettings().getLanguage()
@@ -1300,6 +1499,21 @@ public class Territory extends UpdateDataAdapter {
 
 			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 					new TerritoryDownloadAllTask(this.application, this.ownerStage, this.territoryList));
+
+		}
+	}
+
+	private void downloadAllTerritoryMapsResources() {
+
+		String content = this.application.getSettings().getLanguage()
+				.getString("territorymaps.confirm.downloadallresources");
+
+		if (this.application.getAlertBuilder2().confirm(this.ownerStage, content)) {
+
+			String waitMessage = this.language.getString("territory.wait.download");
+
+			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+					new TerritoryMapsDownloadAllTask(this.application, this.ownerStage, this.territoryMapList));
 
 		}
 	}
@@ -1344,6 +1558,46 @@ public class Territory extends UpdateDataAdapter {
 		}
 	}
 
+	private void openTerritoryMapsViewer() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryMap territoryMap = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
+
+			String spInf2 = territoryMap.getSpInf2();
+			String spInf3 = territoryMap.getSpInf3();
+
+			if (!(spInf2.isEmpty() || spInf3.isEmpty())) {
+
+				String dbUrl = this.application.getSettings().getDatabaseUrl();
+				int indexOf = dbUrl.indexOf("exchange.php");
+				if (indexOf > -1) {
+
+					String subDbUrl = dbUrl.substring(0, indexOf);
+					String link = subDbUrl + "monitor/mapsviewer.php?mid=%s&amp;lang=%s";
+					link = String.format(link, spInf3, this.language.getString("sp.monitor.language"));
+
+					Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+					if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+						try {
+							desktop.browse(new URI(link));
+						} catch (Exception e) {
+							this.application.getAlertBuilder().error(this.ownerStage, e.getMessage()).show();
+						}
+					}
+				}
+
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("territorymaps.error.nomymapsidorviewerid"));
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territorymaps.error.noterritoryselected"));
+		}
+	}
+
 	private void openTerritoryViewerURL() {
 
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
@@ -1362,6 +1616,40 @@ public class Territory extends UpdateDataAdapter {
 					String subDbUrl = dbUrl.substring(0, indexOf);
 					String link = subDbUrl + "monitor/territoryviewer.php?tid=%s&amp;lang=%s";
 					link = String.format(link, spInf31, this.language.getString("sp.monitor.language"));
+
+					TerritoryDialog.show(this.application, this.ownerStage, link);
+
+				}
+
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("territory.error.nomymapsidorviewerid"));
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("territory.error.noterritoryselected"));
+		}
+	}
+
+	private void openTerritoryMapsViewerURL() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryMap territoryMap = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
+
+			String spInf2 = territoryMap.getSpInf2();
+			String spInf3 = territoryMap.getSpInf3();
+
+			if (!(spInf2.isEmpty() || spInf3.isEmpty())) {
+
+				String dbUrl = this.application.getSettings().getDatabaseUrl();
+				int indexOf = dbUrl.indexOf("exchange.php");
+				if (indexOf > -1) {
+
+					String subDbUrl = dbUrl.substring(0, indexOf);
+					String link = subDbUrl + "monitor/mapsviewer.php?mid=%s&amp;lang=%s";
+					link = String.format(link, spInf3, this.language.getString("sp.monitor.language"));
 
 					TerritoryDialog.show(this.application, this.ownerStage, link);
 
@@ -1402,6 +1690,18 @@ public class Territory extends UpdateDataAdapter {
 		Platform.runLater(() -> territoryTableView.refresh());
 	}
 
+	private void updateFilterTerritoryMaps(String newValue) {
+
+		if (newValue.isEmpty()) {
+			this.territoryMapsTableView.setItems(this.territoryMapList);
+		} else {
+			ObservableList<TerritoryMap> filteredMemberList = buildListTerritoryMaps(newValue);
+			this.territoryMapsTableView.setItems(filteredMemberList);
+		}
+
+		Platform.runLater(() -> territoryTableView.refresh());
+	}
+
 	private ObservableList<Member> buildListMember(String filter) {
 
 		ObservableList<Member> list = FXCollections.observableArrayList();
@@ -1418,6 +1718,16 @@ public class Territory extends UpdateDataAdapter {
 
 		StreamSupport.stream(this.territoryList.spliterator(), false).filter(obj -> matchFilterTerritory(obj, filter))
 				.forEach(obj -> list.add(obj));
+
+		return list;
+	}
+
+	private ObservableList<TerritoryMap> buildListTerritoryMaps(String filter) {
+
+		ObservableList<TerritoryMap> list = FXCollections.observableArrayList();
+
+		StreamSupport.stream(this.territoryMapList.spliterator(), false)
+				.filter(obj -> matchFilterTerritoryMaps(obj, filter)).forEach(obj -> list.add(obj));
 
 		return list;
 	}
@@ -1441,6 +1751,13 @@ public class Territory extends UpdateDataAdapter {
 				|| obj.getSpInf7().toLowerCase().contains(filter) || obj.getSpInf8().toLowerCase().contains(filter)
 				|| obj.getSpInf9().toLowerCase().contains(filter) || obj.getSpInf10().toLowerCase().contains(filter)
 				|| obj.getSpInf31().toLowerCase().contains(filter);
+	}
+
+	private boolean matchFilterTerritoryMaps(TerritoryMap obj, String match) {
+
+		String filter = match.toLowerCase();
+
+		return obj.getSpInf1().toLowerCase().contains(filter);
 	}
 
 	private void newTerritory() {
@@ -1481,6 +1798,53 @@ public class Territory extends UpdateDataAdapter {
 
 				this.territoryTabPane.getTabs().add(newTab);
 				this.territoryTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void newTerritoryMaps() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		if (!isAlreadyOpen(this.territoryMapsTabPane, "")) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_MAPS_EDITOR_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryMapsEditor ctrl = (TerritoryMapsEditor) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.ownerStage);
+				ctrl.setOwnerCtrl(this);
+
+				Tab newTab = new Tab("", layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.PLUS));
+
+				ctrl.setParentTabPane(this.territoryMapsTabPane);
+//				ctrl.setMembersTab(membersTab);
+				ctrl.setNewTab(newTab);
+//				ctrl.setMembersList(this.membersList);
+
+				this.territoryMapsTabPane.getTabs().add(newTab);
+				this.territoryMapsTabPane.getSelectionModel().select(newTab);
 
 				ctrl.objectInitialize();
 
@@ -1543,6 +1907,59 @@ public class Territory extends UpdateDataAdapter {
 
 	}
 
+	private void editTerritoryMaps() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1)
+			editTerritoryMaps(this.territoryMapsTableView.getSelectionModel().getSelectedItem());
+	}
+
+	private void editTerritoryMaps(TerritoryMap territoryMap) {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		if (!isAlreadyOpen(this.territoryMapsTabPane, territoryMap.getSpInf1())) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_MAPS_EDITOR_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryMapsEditor ctrl = (TerritoryMapsEditor) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedTerritory(territoryMap);
+
+				Tab newTab = new Tab(territoryMap.getSpInf1(), layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MAPS_EDIT));
+
+				ctrl.setParentTabPane(this.territoryMapsTabPane);
+				ctrl.setNewTab(newTab);
+
+				this.territoryMapsTabPane.getTabs().add(newTab);
+				this.territoryMapsTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	private void removeTerritory() {
 
 		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
@@ -1572,6 +1989,40 @@ public class Territory extends UpdateDataAdapter {
 
 				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 						new TerritoryDeleteTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
+								this, id));
+
+			}
+		}
+	}
+
+	private void removeTerritoryMaps() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			TerritoryMap territoryMap = this.territoryMapsTableView.getSelectionModel().getSelectedItem();
+
+			String territoryName = territoryMap.getSpInf1();
+
+			String header = this.application.getSettings().getLanguage()
+					.getString("territorymaps.confirm.territoryremove");
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, territoryName)) {
+
+				int id = territoryMap.getSpTerritoryID();
+
+				String waitMessage = this.language.getString("territorymaps.wait.delete");
+
+				TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
+						new TerritoryMapsDeleteTask(this.application.getAlertBuilder2(), this.settings, this.ownerStage,
 								this, id));
 
 			}
@@ -1777,6 +2228,14 @@ public class Territory extends UpdateDataAdapter {
 
 	public void setTerritoryList(ObservableList<TerritoryObj> territoryList) {
 		this.territoryList = territoryList;
+	}
+
+	public TabPane getTerritoryMapsTabPane() {
+		return territoryMapsTabPane;
+	}
+
+	public void setTerritoryMapsTabPane(TabPane territoryMapsTabPane) {
+		this.territoryMapsTabPane = territoryMapsTabPane;
 	}
 
 }

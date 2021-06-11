@@ -19,6 +19,7 @@ import com.sm.net.sp.model.PostImportDoc;
 import com.sm.net.sp.model.PostImportNews;
 import com.sm.net.sp.model.PostNews;
 import com.sm.net.sp.model.Song;
+import com.sm.net.sp.model.TerritoryMap;
 import com.sm.net.sp.model.TerritoryObj;
 import com.sm.net.sp.model.TerritoryRegistryEntity;
 import com.sm.net.sp.model.Week;
@@ -1565,7 +1566,99 @@ public class JSONRequest {
 
 		return jsonObj;
 	}
-	
+
+	public static JSONObject TERRITORY_MAPS_INSERT(TerritoryMap obj) {
+
+		JSONObject jsonObj = create(Integer.valueOf(87));
+
+		jsonObj.put("spInf1", obj.getSpInf1());
+		jsonObj.put("spInf2", obj.getSpInf2());
+		jsonObj.put("spInf3", obj.getSpInf3());
+		jsonObj.put("spInf4", obj.getSpInf4());
+		jsonObj.put("spInf5", obj.getSpInf5());
+		jsonObj.put("spInf6", obj.getSpInf6());
+		jsonObj.put("spInf7", obj.getSpInf7());
+		jsonObj.put("spInf8", obj.getSpInf8());
+		jsonObj.put("spInf9", obj.getSpInf9());
+		jsonObj.put("spInf10", obj.getSpInf10());
+		jsonObj.put("spInf11", obj.getSpInf11());
+		jsonObj.put("spInf12", obj.getSpInf12());
+		jsonObj.put("spInf13", obj.getSpInf13());
+		jsonObj.put("spInf14", obj.getSpInf14());
+		jsonObj.put("spInf15", obj.getSpInf15());
+		jsonObj.put("spInf16", obj.getSpInf16());
+		jsonObj.put("spInf17", obj.getSpInf17());
+		jsonObj.put("spInf18", obj.getSpInf18());
+		jsonObj.put("spInf19", obj.getSpInf19());
+		jsonObj.put("spInf20", obj.getSpInf20());
+		jsonObj.put("spInf21", obj.getSpInf21());
+		jsonObj.put("spInf22", obj.getSpInf22());
+		jsonObj.put("spInf23", obj.getSpInf23());
+		jsonObj.put("spInf24", obj.getSpInf24());
+		jsonObj.put("spInf25", obj.getSpInf25());
+		jsonObj.put("spInf26", obj.getSpInf26());
+		jsonObj.put("spInf27", obj.getSpInf27());
+		jsonObj.put("spInf28", obj.getSpInf28());
+		jsonObj.put("spInf29", obj.getSpInf29());
+		jsonObj.put("spInf30", obj.getSpInf30());
+
+		return jsonObj;
+	}
+
+	public static JSONObject TERRITORY_MAPS_LOAD() {
+
+		JSONObject jsonObj = create(Integer.valueOf(88));
+		return jsonObj;
+	}
+
+	public static JSONObject TERRITORY_MAPS_UPDATE(TerritoryMap obj) {
+
+		JSONObject jsonObj = create(Integer.valueOf(89));
+
+		jsonObj.put("id", obj.getSpTerritoryID());
+		jsonObj.put("spInf1", obj.getSpInf1());
+		jsonObj.put("spInf2", obj.getSpInf2());
+		jsonObj.put("spInf3", obj.getSpInf3());
+		jsonObj.put("spInf4", obj.getSpInf4());
+		jsonObj.put("spInf5", obj.getSpInf5());
+		jsonObj.put("spInf6", obj.getSpInf6());
+		jsonObj.put("spInf7", obj.getSpInf7());
+		jsonObj.put("spInf8", obj.getSpInf8());
+		jsonObj.put("spInf9", obj.getSpInf9());
+		jsonObj.put("spInf10", obj.getSpInf10());
+		jsonObj.put("spInf11", obj.getSpInf11());
+		jsonObj.put("spInf12", obj.getSpInf12());
+		jsonObj.put("spInf13", obj.getSpInf13());
+		jsonObj.put("spInf14", obj.getSpInf14());
+		jsonObj.put("spInf15", obj.getSpInf15());
+		jsonObj.put("spInf16", obj.getSpInf16());
+		jsonObj.put("spInf17", obj.getSpInf17());
+		jsonObj.put("spInf18", obj.getSpInf18());
+		jsonObj.put("spInf19", obj.getSpInf19());
+		jsonObj.put("spInf20", obj.getSpInf20());
+		jsonObj.put("spInf21", obj.getSpInf21());
+		jsonObj.put("spInf22", obj.getSpInf22());
+		jsonObj.put("spInf23", obj.getSpInf23());
+		jsonObj.put("spInf24", obj.getSpInf24());
+		jsonObj.put("spInf25", obj.getSpInf25());
+		jsonObj.put("spInf26", obj.getSpInf26());
+		jsonObj.put("spInf27", obj.getSpInf27());
+		jsonObj.put("spInf28", obj.getSpInf28());
+		jsonObj.put("spInf29", obj.getSpInf29());
+		jsonObj.put("spInf30", obj.getSpInf30());
+
+		return jsonObj;
+	}
+
+	public static JSONObject TERRITORY_MAPS_DELETE(int id) {
+
+		JSONObject jsonObj = create(Integer.valueOf(90));
+
+		jsonObj.put("id", id);
+
+		return jsonObj;
+	}
+
 	private static JSONObject createJSONKeyValue(String key, String value) {
 
 		JSONObject jsonObject = new JSONObject();

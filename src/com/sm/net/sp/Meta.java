@@ -40,6 +40,7 @@ import com.sm.net.sp.view.home.user.menu.publicmeetings.UserMenuPublicMeetings;
 import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor;
+import com.sm.net.sp.view.home.user.menu.territory.TerritoryMapsEditor;
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryRegistryViewer;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.sm.net.sp.view.home.user.menu.usciere.UsciereEditor;
@@ -217,6 +218,8 @@ public class Meta {
 		public static final URL TERRITORY_EDITOR_FXML_URL = TerritoryEditor.class.getResource("TerritoryEditor.fxml");
 		public static final URL TERRITORY_REGISTRY_FXML_URL = TerritoryRegistryViewer.class
 				.getResource("TerritoryRegistryViewer.fxml");
+		public static final URL TERRITORY_MAPS_EDITOR_FXML_URL = TerritoryMapsEditor.class
+				.getResource("TerritoryMapsEditor.fxml");
 	}
 
 	public static class Themes {
@@ -353,7 +356,7 @@ public class Meta {
 		public static final String TERRITORY_ADD = "territoryadd.png";
 		public static final String TERRITORY_REMOVE = "territoryremove.png";
 		public static final String TERRITORY_EDIT = "territoryeditor.png";
-		
+
 		public static final String MAPS_ADD = "mapsglobaladd.png";
 		public static final String MAPS_REMOVE = "mapsglobalremove.png";
 		public static final String MAPS_EDIT = "mapsglobaledit.png";

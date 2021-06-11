@@ -275,6 +275,18 @@ if (! empty($jsonObjPar)) {
                         case 86:
                             include 'query/sp_q86.php';
                             break;
+                        case 87:
+                            include 'query/sp_q87.php';
+                            break;
+                        case 88:
+                            include 'query/sp_q88.php';
+                            break;
+                        case 89:
+                            include 'query/sp_q89.php';
+                            break;
+                        case 90:
+                            include 'query/sp_q90.php';
+                            break;
                     }
 
                 } else {
