@@ -1,6 +1,20 @@
 Data di pubblicazione : __-__-____
 
-	Territori: gestione Mappe generiche
+	Territori:
+		Gestione Mappe
+		MapsViewer (visualizzatore online delle mappe tramite link)
+	
+	Comunicazioni e promemoria:
+		L'eliminazione di una comunicazione ora e' possibile solo se si ha l'autorizzazione.
+		Funzione: unisci alla precedente
+			Quando una comunicazione e' formata da piu' paragrafi, e' ora possibile unirli con questa funzione anziche' manualmente.
+	
+	Congregazione:
+		Nuova informazione: Nota	
+	
+	Storico attivita':
+		Quando si seleziona un componente, viene visualizzata anche l'informazione Nota
 		
 	Database-SQL:
 	CREATE TABLE `smnetzwe_albstadtita`.`sp_terrmaps` (  `id` INT NOT NULL AUTO_INCREMENT,  `spInf1` VARCHAR(250) NOT NULL, `spInf2` VARCHAR(250) NOT NULL, `spInf3` VARCHAR(250) NOT NULL, `spInf4` VARCHAR(250) NOT NULL, `spInf5` VARCHAR(250) NOT NULL, `spInf6` VARCHAR(250) NOT NULL, `spInf7` VARCHAR(250) NOT NULL, `spInf8` VARCHAR(250) NOT NULL, `spInf9` VARCHAR(250) NOT NULL, `spInf10` VARCHAR(250) NOT NULL, `spInf11` VARCHAR(250) NOT NULL, `spInf12` VARCHAR(250) NOT NULL, `spInf13` VARCHAR(250) NOT NULL, `spInf14` VARCHAR(250) NOT NULL, `spInf15` VARCHAR(250) NOT NULL, `spInf16` VARCHAR(250) NOT NULL, `spInf17` VARCHAR(250) NOT NULL, `spInf18` VARCHAR(250) NOT NULL, `spInf19` VARCHAR(250) NOT NULL, `spInf20` VARCHAR(250) NOT NULL, `spInf21` VARCHAR(250) NOT NULL, `spInf22` VARCHAR(250) NOT NULL, `spInf23` VARCHAR(250) NOT NULL, `spInf24` VARCHAR(250) NOT NULL, `spInf25` VARCHAR(250) NOT NULL, `spInf26` VARCHAR(250) NOT NULL, `spInf27` VARCHAR(250) NOT NULL, `spInf28` VARCHAR(250) NOT NULL, `spInf29` VARCHAR(250) NOT NULL, `spInf30` VARCHAR(250) NOT NULL,  PRIMARY KEY (`id`));
+	ALTER TABLE `smnetzwe_albstadtita`.`sp_members` ADD COLUMN `spInf63` TEXT NOT NULL AFTER `spInf62`, ADD COLUMN `spInf64` INT(11) NOT NULL AFTER `spInf63`, ADD COLUMN `spInf65` INT(11) NOT NULL AFTER `spInf64`, ADD COLUMN `spInf66` INT(11) NOT NULL AFTER `spInf65`, ADD COLUMN `spInf67` INT(11) NOT NULL AFTER `spInf66`, ADD COLUMN `spInf68` INT(11) NOT NULL AFTER `spInf67`, ADD COLUMN `spInf69` INT(11) NOT NULL AFTER `spInf68`, ADD COLUMN `spInf70` INT(11) NOT NULL AFTER `spInf69`, ADD COLUMN `spInf71` INT(11) NOT NULL AFTER `spInf70`, ADD COLUMN `spInf72` INT(11) NOT NULL AFTER `spInf71`, ADD COLUMN `spInf73` INT(11) NOT NULL AFTER `spInf72`, ADD COLUMN `spInf74` INT(11) NOT NULL AFTER `spInf73`, ADD COLUMN `spInf75` INT(11) NOT NULL AFTER `spInf74`;

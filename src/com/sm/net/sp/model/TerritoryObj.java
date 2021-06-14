@@ -330,7 +330,7 @@ public class TerritoryObj {
 		String territoryName = this.getSpInf8();
 		String territoryID = String.valueOf(this.getSpTerritoryID());
 
-		File target = Paths.get(userHome, "SupportPlanner", "TerritoryResources",
+		File target = Paths.get(userHome, "SupportPlanner", "TerritoryResources", "Territories",
 				String.format("%s-%s(ID-%s)", territoryNr, territoryName, territoryID)).toFile();
 
 		if (!target.exists())

@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -63,6 +64,9 @@ public class History {
 
 	@FXML
 	private Button selectButton;
+
+	@FXML
+	private TextArea notesTextArea;
 
 	private Language language;
 	private ObservableList<Member> members;
@@ -101,6 +105,8 @@ public class History {
 		privilegesTableView.getStyleClass().add("table_view_001");
 
 		selectButton.getStyleClass().add("button_image_001");
+
+		this.notesTextArea.getStyleClass().add("text_area_001");
 	}
 
 	private void cellValueFactory() {
@@ -286,6 +292,8 @@ public class History {
 			MemberHistory member = this.membersTableView.getSelectionModel().getSelectedItem();
 			this.brotherLabel.setText(String.format(language.getString("sp.history.brotherselected"),
 					member.getMember().getNameStyle1()));
+
+			this.notesTextArea.setText(member.getMember().getSpInf63Decrypted());
 
 			checkPrivilegeMember(member);
 
@@ -563,6 +571,9 @@ public class History {
 
 		selectButton.setText(null);
 		selectButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.OK));
+		
+		this.notesTextArea.setEditable(false);
+		this.notesTextArea.setWrapText(true);
 	}
 
 	private void createMembersPrivilegeList() {

@@ -3,6 +3,7 @@ package com.sm.net.sp.view.home.user.menu.territory.task;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -78,10 +79,18 @@ public class TerritoryDownloadTask implements TaskInterface {
 		case 1:// DOC
 
 			try {
-				InputStream in = new URL(res.getResourceURL()).openStream();
+				
+				URL url = new URL(res.getResourceURL());
+				
+				HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+			    httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+				
+			    InputStream in = httpcon.getInputStream();
 				Files.copy(in, Paths.get(targetFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+				
 				return "";
 			} catch (IOException e) {
+				System.out.println(e.getMessage());
 				return e.getMessage();
 			}
 

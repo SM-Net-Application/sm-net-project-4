@@ -94,6 +94,9 @@ public class PostImport {
 	@FXML
 	private Button newsImportButton;
 
+	@FXML
+	private Button newsMergeButton;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -150,6 +153,8 @@ public class PostImport {
 
 		this.newsDeleteButton.getStyleClass().add("button_image_001");
 		this.newsImportButton.getStyleClass().add("button_image_001");
+
+		this.newsMergeButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -182,6 +187,36 @@ public class PostImport {
 
 		this.newsTextField.focusedProperty().addListener((o, oldV, newV) -> editNewsTitle(newV.booleanValue()));
 		this.newsTextArea.focusedProperty().addListener((o, oldV, newV) -> editNewsText(newV.booleanValue()));
+
+		this.newsMergeButton.setOnAction(event -> merge());
+	}
+
+	private void merge() {
+
+		if (this.newsListView.getSelectionModel().getSelectedIndex() > 0) {
+
+			PostImportNews selectedItem = this.newsListView.getSelectionModel().getSelectedItem();
+			PostImportNews previousItem = this.newsListView.getItems()
+					.get(this.newsListView.getSelectionModel().getSelectedIndex() - 1);
+
+			String header = this.language.getString("post.import.newsmerge.confirm");
+			String content = String.format("%s\n-->\n%s", selectedItem.getTitle(), previousItem.getTitle());
+			if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
+
+				previousItem.setText(String.format("%s\n%s", previousItem.getText(), selectedItem.getText()));
+
+				this.postDoc.getDocNewst().remove(selectedItem);
+				this.comunicazioni.remove(selectedItem);
+
+				this.newsTextField.setText("");
+				this.newsTextArea.setText("");
+
+				Platform.runLater(() -> this.newsListView.refresh());
+
+				this.newsListView.getSelectionModel().select(previousItem);
+				this.viewNews(this.newsListView.getSelectionModel().getSelectedIndex());
+			}
+		}
 	}
 
 	private void saveNews() {
@@ -227,14 +262,25 @@ public class PostImport {
 			String content = postNews.getTitle();
 			if (this.application.getAlertBuilder2().confirm(this.ownerStage, header, content)) {
 
+				String selectedDest = this.destListView.getSelectionModel().getSelectedItem();
+
 				this.postDoc.getDocNewst().remove(postNews);
 				this.comunicazioni.remove(postNews);
 
 				this.newsTextField.setText("");
 				this.newsTextArea.setText("");
 
-				Platform.runLater(() -> this.newsListView.refresh());
-				this.newsListView.getSelectionModel().clearSelection();
+				this.buildList();
+				Platform.runLater(() -> this.destListView.refresh());
+
+				if (this.destinatari.contains(selectedDest)) {
+					this.destListView.getSelectionModel().select(selectedDest);
+					this.checkNews(this.destListView.getSelectionModel().getSelectedIndex());
+				} else {
+					this.destListView.getSelectionModel().clearSelection();
+					this.comunicazioni.clear();
+					Platform.runLater(() -> this.newsListView.refresh());
+				}
 			}
 
 		} else {
@@ -341,15 +387,17 @@ public class PostImport {
 
 	private void buildList() {
 
+		this.destinatari.clear();
+
 		for (PostImportNews news : this.postDoc.getDocNewst()) {
 
 			String dest = news.getDest();
-			if (!destinatari.contains(dest))
-				destinatari.add(dest);
+			if (!this.destinatari.contains(dest))
+				this.destinatari.add(dest);
 		}
 
-		destinatari.sort((o1, o2) -> o1.compareTo(o2));
-		Platform.runLater(() -> destListView.refresh());
+		this.destinatari.sort((o1, o2) -> o1.compareTo(o2));
+		Platform.runLater(() -> this.destListView.refresh());
 	}
 
 	private boolean checkFields() {
@@ -423,6 +471,12 @@ public class PostImport {
 		this.newsDeleteButton.setTooltip(newsDeleteButtonTooltip);
 		this.newsDeleteButton.setText("");
 		this.newsDeleteButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.DELETE));
+
+		Tooltip newsMergeButtonTooltip = new Tooltip(this.language.getString("post.import.button.merge"));
+		newsMergeButtonTooltip.getStyleClass().add("tooltip_001");
+		this.newsMergeButton.setTooltip(newsMergeButtonTooltip);
+		this.newsMergeButton.setText("");
+		this.newsMergeButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.ARROW_UP));
 	}
 
 	private void selectFile() {

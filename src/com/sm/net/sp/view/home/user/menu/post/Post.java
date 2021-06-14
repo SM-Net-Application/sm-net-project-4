@@ -286,6 +286,20 @@ public class Post {
 
 	private void deletePost() {
 
+		if (this.application.getUser().isSpUserSU())
+			deletePostIsAllowed();
+		else {
+			if (this.application.getUser().isSpInf23())
+				deletePostIsAllowed();
+			else {
+				String content = this.language.getString("post.error.authpdfimport");
+				this.application.getAlertBuilder2().error(this.stageSupportPlannerView, content);
+			}
+		}
+	}
+
+	private void deletePostIsAllowed() {
+
 		if (this.tableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			PostNews postNews = this.tableView.getSelectionModel().getSelectedItem();

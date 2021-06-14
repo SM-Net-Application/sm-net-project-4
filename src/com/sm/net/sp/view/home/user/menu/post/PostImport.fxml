@@ -174,15 +174,6 @@
                                                       </Button>
                                                    </children>
                                                 </StackPane>
-                                                <StackPane alignment="CENTER_LEFT">
-                                                   <children>
-                                                      <Button fx:id="newsDeleteButton" mnemonicParsing="false" text="remov">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </Button>
-                                                   </children>
-                                                </StackPane>
                                              </children>
                                           </HBox>
                                           <StackPane>
@@ -238,15 +229,37 @@
                                                             </ListView>
                                                          </children>
                                                       </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
+                                                      <HBox>
                                                          <children>
-                                                            <TextField fx:id="newsTextField">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </TextField>
+                                                            <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <TextField fx:id="newsTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="newsDeleteButton" mnemonicParsing="false" text="remov">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="newsMergeButton" mnemonicParsing="false" text="unisci">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
                                                          </children>
-                                                      </StackPane>
+                                                      </HBox>
                                                       <StackPane alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
                                                          <children>
                                                             <TextArea fx:id="newsTextArea">

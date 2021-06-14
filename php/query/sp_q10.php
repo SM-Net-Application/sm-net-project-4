@@ -9,7 +9,7 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "INSERT INTO sp_members (spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62) VALUES (";
+			$query = "INSERT INTO sp_members (spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62, spInf63, spInf64, spInf65, spInf66, spInf67, spInf68, spInf69, spInf70, spInf71, spInf72, spInf73, spInf74, spInf75) VALUES (";
 			$query .= "'" . $jsonObj ["spInf1"] . "', ";
 			$query .= "'" . $jsonObj ["spInf2"] . "', ";
 			$query .= "'" . $jsonObj ["spInf3"] . "', ";
@@ -71,7 +71,21 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 			$query .= $jsonObj ["spInf59"] . ",";
 			$query .= $jsonObj ["spInf60"] . ",";
 			$query .= $jsonObj ["spInf61"] . ",";
-			$query .= $jsonObj ["spInf62"];
+			$query .= $jsonObj ["spInf62"] . ",";
+			
+			$query .= "'" . $jsonObj ["spInf63"] . "', ";
+			$query .= $jsonObj ["spInf64"] . ",";
+			$query .= $jsonObj ["spInf65"] . ",";
+			$query .= $jsonObj ["spInf66"] . ",";
+			$query .= $jsonObj ["spInf67"] . ",";
+			$query .= $jsonObj ["spInf68"] . ",";
+			$query .= $jsonObj ["spInf69"] . ",";
+			$query .= $jsonObj ["spInf70"] . ",";
+			$query .= $jsonObj ["spInf71"] . ",";
+			$query .= $jsonObj ["spInf72"] . ",";
+			$query .= $jsonObj ["spInf73"] . ",";
+			$query .= $jsonObj ["spInf74"] . ",";
+			$query .= $jsonObj ["spInf75"];
             
 			$query .= ")";
 			

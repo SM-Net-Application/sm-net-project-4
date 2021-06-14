@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -47,7 +48,7 @@
                                  <children>
                                     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <HBox>
+                                          <HBox VBox.vgrow="ALWAYS">
                                              <children>
                                                 <VBox>
                                                    <children>
@@ -99,6 +100,15 @@
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
                                                             <Label fx:id="genderLabel" text="Label">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="notesLabel" text="Label">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>
@@ -191,6 +201,15 @@
                                                                   </StackPane>
                                                                </children>
                                                             </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <TextArea fx:id="notesTextArea">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextArea>
                                                          </children>
                                                       </StackPane>
                                                    </children>

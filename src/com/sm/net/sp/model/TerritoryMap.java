@@ -243,7 +243,7 @@ public class TerritoryMap {
 		String territoryName = this.getSpInf1();
 		String territoryID = String.valueOf(this.getSpTerritoryID());
 
-		File target = Paths.get(userHome, "SupportPlanner", "TerritoryResources",
+		File target = Paths.get(userHome, "SupportPlanner", "TerritoryResources", "Maps",
 				String.format("%s(ID-%s)", territoryName, territoryID)).toFile();
 
 		if (!target.exists())

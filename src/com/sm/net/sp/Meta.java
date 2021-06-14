@@ -69,7 +69,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.2";
+		public static final String VERSION = "1.3";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -366,6 +366,9 @@ public class Meta {
 		public static final String DOWNLOAD = "download.png";
 		public static final String DOWNLOAD2 = "download2.png";
 		public static final String REGISTRY = "registry.png";
+
+		public static final String ARROW_UP = "arrow_up.png";
+		public static final String ARROW_DOWN = "arrow_down.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

@@ -813,7 +813,7 @@ public class Territory extends UpdateDataAdapter {
 			});
 			return row;
 		});
-		
+
 		this.territoryMapsDocsTableView.setRowFactory(param -> {
 			TableRow<File> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
@@ -839,7 +839,7 @@ public class Territory extends UpdateDataAdapter {
 			});
 			return row;
 		});
-		
+
 		this.territoryMapsImagesTableView.setRowFactory(param -> {
 			TableRow<File> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
@@ -869,7 +869,7 @@ public class Territory extends UpdateDataAdapter {
 				.addListener((obs, oldV, newV) -> selectAssignedTerritory());
 
 		this.memberAssignedTerritoryReturnButton.setOnAction(event -> memberAssignedTerritoryReturn());
-		
+
 		this.territoryReturnButton.setOnAction(event -> assignedTerritoryReturn());
 	}
 
@@ -1284,7 +1284,7 @@ public class Territory extends UpdateDataAdapter {
 					this.application.getAlertBuilder2().error(this.ownerStage, e.getMessage());
 				}
 
-				selectTerritory();
+				selectMaps();
 			}
 
 		} else {
@@ -1498,7 +1498,7 @@ public class Territory extends UpdateDataAdapter {
 			String waitMessage = this.language.getString("territory.wait.download");
 
 			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-					new TerritoryDownloadAllTask(this.application, this.ownerStage, this.territoryList));
+					new TerritoryDownloadAllTask(this.application, this.ownerStage, this, this.territoryList));
 
 		}
 	}
@@ -1513,7 +1513,7 @@ public class Territory extends UpdateDataAdapter {
 			String waitMessage = this.language.getString("territory.wait.download");
 
 			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
-					new TerritoryMapsDownloadAllTask(this.application, this.ownerStage, this.territoryMapList));
+					new TerritoryMapsDownloadAllTask(this.application, this.ownerStage, this, this.territoryMapList));
 
 		}
 	}

@@ -29,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -64,6 +65,9 @@ public class HistoryAudio {
 	@FXML
 	private Button selectButton;
 
+	@FXML
+	private TextArea notesTextArea;
+	
 	private Language language;
 	private ObservableList<Member> members;
 	private ObservableList<MemberAudioHistory> membersPrivilege;
@@ -98,6 +102,8 @@ public class HistoryAudio {
 		this.privilegesTableView.getStyleClass().add("table_view_001");
 
 		this.selectButton.getStyleClass().add("button_image_001");
+		
+		this.notesTextArea.getStyleClass().add("text_area_001");
 	}
 
 	private void cellValueFactory() {
@@ -273,6 +279,8 @@ public class HistoryAudio {
 			this.brotherLabel.setText(String.format(language.getString("sp.history.brotherselected"),
 					member.getMember().getNameStyle1()));
 
+			this.notesTextArea.setText(member.getMember().getSpInf63Decrypted());
+			
 			checkPrivilegeMember(member);
 
 		} else
@@ -567,6 +575,9 @@ public class HistoryAudio {
 
 		selectButton.setText(null);
 		selectButton.setGraphic(Meta.Resources.imageViewForButton(Meta.Resources.OK));
+		
+		this.notesTextArea.setEditable(false);
+		this.notesTextArea.setWrapText(true);
 	}
 
 	private void createMembersPrivilegeList() {

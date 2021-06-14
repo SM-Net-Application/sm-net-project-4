@@ -1,14 +1,4 @@
 
-	Congregazione: Nota per i membri
-	
-	Storico: Visualizzare la Nota dei membri
-
-	Comunicazioni: Elimina comunicazioni come privilegio
-
-	Sorvegliante:
-		- Il sorvegliante può venire con un altra coppia (probabile sostituto sorvegliante)
-		- I discorsi possono essere fatti anche dall'altro fratello
-
 	Nuova sezione:
 		- Annunci
 

@@ -70,7 +70,21 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 			$query .= " spInf59=" . $jsonObj ["spInf59"] . ", ";
 			$query .= " spInf60=" . $jsonObj ["spInf60"] . ", ";
 			$query .= " spInf61=" . $jsonObj ["spInf61"] . ", ";
-			$query .= " spInf62=" . $jsonObj ["spInf62"];
+			
+			$query .= " spInf62=" . $jsonObj ["spInf62"] . ", ";
+			$query .= " spInf63='" . $jsonObj ["spInf63"] . "',";
+			$query .= " spInf64=" . $jsonObj ["spInf64"] . ", ";
+			$query .= " spInf65=" . $jsonObj ["spInf65"] . ", ";
+			$query .= " spInf66=" . $jsonObj ["spInf66"] . ", ";
+			$query .= " spInf67=" . $jsonObj ["spInf67"] . ", ";
+			$query .= " spInf68=" . $jsonObj ["spInf68"] . ", ";
+			$query .= " spInf69=" . $jsonObj ["spInf69"] . ", ";
+			$query .= " spInf70=" . $jsonObj ["spInf70"] . ", ";
+			$query .= " spInf71=" . $jsonObj ["spInf71"] . ", ";
+			$query .= " spInf72=" . $jsonObj ["spInf72"] . ", ";
+			$query .= " spInf73=" . $jsonObj ["spInf73"] . ", ";
+			$query .= " spInf74=" . $jsonObj ["spInf74"] . ", ";
+			$query .= " spInf75=" . $jsonObj ["spInf75"];
 			
 			$query .= " WHERE spMemberID=" . $jsonObj ["spMemberID"];
 			

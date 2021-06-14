@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
@@ -295,6 +296,11 @@ public class UserMenuCongrMemberEditor {
 	@FXML
 	private CheckBox serviceMeetingGroupCheckBox;
 
+	@FXML
+	private Label notesLabel;
+	@FXML
+	private TextArea notesTextArea;
+
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -452,6 +458,9 @@ public class UserMenuCongrMemberEditor {
 		this.presidentSecondHallCheckBox.getStyleClass().add("check_box_001");
 		this.serviceMeetingCongrCheckBox.getStyleClass().add("check_box_001");
 		this.serviceMeetingGroupCheckBox.getStyleClass().add("check_box_001");
+
+		this.notesLabel.getStyleClass().add("label_set_001");
+		this.notesTextArea.getStyleClass().add("text_area_001");
 	}
 
 	public void objectInitialize() {
@@ -494,6 +503,11 @@ public class UserMenuCongrMemberEditor {
 			if (!spInf53.isEmpty())
 				this.dateOfBaptismDatePicker.setValue(LocalDate.parse(spInf53));
 
+			// NOTES
+			this.notesTextArea.setText(this.selectedMember.getSpInf63Decrypted());
+
+			// TODO: load others Fields
+			
 			setCheckBoxes();
 
 		} else {
@@ -563,10 +577,12 @@ public class UserMenuCongrMemberEditor {
 		this.usciereZone2WeekendCheckBox.setSelected((this.selectedMember.getSpInf57() == 1));
 		this.usciereZone3MidweekCheckBox.setSelected((this.selectedMember.getSpInf58() == 1));
 		this.usciereZone3WeekendCheckBox.setSelected((this.selectedMember.getSpInf59() == 1));
-		
+
 		this.presidentSecondHallCheckBox.setSelected((this.selectedMember.getSpInf60() == 1));
 		this.serviceMeetingCongrCheckBox.setSelected((this.selectedMember.getSpInf61() == 1));
 		this.serviceMeetingGroupCheckBox.setSelected((this.selectedMember.getSpInf62() == 1));
+
+		// TODO: set other CheckBoxes
 	}
 
 	private void listeners() {
@@ -704,20 +720,38 @@ public class UserMenuCongrMemberEditor {
 			String spInf61 = !this.serviceMeetingCongrCheckBox.isSelected() ? "0" : "1";
 			String spInf62 = !this.serviceMeetingGroupCheckBox.isSelected() ? "0" : "1";
 
+			String spInf63 = Crypt.encrypt(this.notesTextArea.getText(), secretKey);
+			String spInf64 = "0";
+			String spInf65 = "0";
+			String spInf66 = "0";
+			String spInf67 = "0";
+			String spInf68 = "0";
+			String spInf69 = "0";
+			String spInf70 = "0";
+			String spInf71 = "0";
+			String spInf72 = "0";
+			String spInf73 = "0";
+			String spInf74 = "0";
+			String spInf75 = "0";
+
 			if (selectedMember != null)
 				editMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
 						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
+						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62,
+						spInf63, spInf64, spInf65, spInf66, spInf67, spInf68, spInf69, spInf70, spInf71, spInf72,
+						spInf73, spInf74, spInf75);
 			else
 				newMember(spInf1, spInf2, spInf3, spInf4, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12,
 						spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 						spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32,
 						spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42,
 						spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52,
-						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62);
+						spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62,
+						spInf63, spInf64, spInf65, spInf66, spInf67, spInf68, spInf69, spInf70, spInf71, spInf72,
+						spInf73, spInf74, spInf75);
 		}
 //		else
 //			new AlertDesigner(language.getStringWithNewLine("TEXT0004"), ownerStage, AlertType.ERROR,
@@ -735,15 +769,18 @@ public class UserMenuCongrMemberEditor {
 			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
 			String spInf50, String spInf51, String spInf52, String spInf53, String spInf54, String spInf55,
 			String spInf56, String spInf57, String spInf58, String spInf59, String spInf60, String spInf61,
-			String spInf62) {
+			String spInf62, String spInf63, String spInf64, String spInf65, String spInf66, String spInf67,
+			String spInf68, String spInf69, String spInf70, String spInf71, String spInf72, String spInf73,
+			String spInf74, String spInf75) {
 
 		Actions.insertMember(spInf1, spInf2, spInf3, spInf4, "-1", spInf6, spInf7, spInf8, spInf9, spInf10, spInf11,
 				spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22,
 				spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33,
 				spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44,
 				spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51, spInf52, spInf53, spInf54, spInf55,
-				spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62, settings, ownerStage, parentTabPane,
-				newMemberTab, membersTab, ownerCtrl);
+				spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62, spInf63, spInf64, spInf65, spInf66,
+				spInf67, spInf68, spInf69, spInf70, spInf71, spInf72, spInf73, spInf74, spInf75, settings, ownerStage,
+				parentTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private void editMember(String spInf1, String spInf2, String spInf3, String spInf4, String spInf6, String spInf7,
@@ -756,7 +793,9 @@ public class UserMenuCongrMemberEditor {
 			String spInf44, String spInf45, String spInf46, String spInf47, String spInf48, String spInf49,
 			String spInf50, String spInf51, String spInf52, String spInf53, String spInf54, String spInf55,
 			String spInf56, String spInf57, String spInf58, String spInf59, String spInf60, String spInf61,
-			String spInf62) {
+			String spInf62, String spInf63, String spInf64, String spInf65, String spInf66, String spInf67,
+			String spInf68, String spInf69, String spInf70, String spInf71, String spInf72, String spInf73,
+			String spInf74, String spInf75) {
 
 		Actions.updateMember(String.valueOf(selectedMember.getSpMemberID()), spInf1, spInf2, spInf3, spInf4, spInf6,
 				spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18,
@@ -764,7 +803,8 @@ public class UserMenuCongrMemberEditor {
 				spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40,
 				spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48, spInf49, spInf50, spInf51,
 				spInf52, spInf53, spInf54, spInf55, spInf56, spInf57, spInf58, spInf59, spInf60, spInf61, spInf62,
-				settings, ownerStage, parentTabPane, newMemberTab, membersTab, ownerCtrl);
+				spInf63, spInf64, spInf65, spInf66, spInf67, spInf68, spInf69, spInf70, spInf71, spInf72, spInf73,
+				spInf74, spInf75, settings, ownerStage, parentTabPane, newMemberTab, membersTab, ownerCtrl);
 	}
 
 	private boolean checkFields() {
@@ -1109,6 +1149,9 @@ public class UserMenuCongrMemberEditor {
 				.setText(this.language.getString("congregation.memberseditor.presidentsecondhall"));
 		this.serviceMeetingCongrCheckBox.setText(this.language.getString("congregation.memberseditor.servmeetcongr"));
 		this.serviceMeetingGroupCheckBox.setText(this.language.getString("congregation.memberseditor.servmeetgroup"));
+
+		this.notesLabel.setText(this.language.getString("congregation.memberseditor.notes"));
+		this.notesTextArea.setWrapText(true);
 	}
 
 	public Settings getSettings() {
