@@ -1,17 +1,5 @@
 
 	Nuova sezione:
-		- Annunci
-
-	Congregazione:
-		- Stampare gli Elenchi:
-			- Chi ha privilegi
-			- Settaggi: Es. escludi dall'elenco disastri naturali
-			- Chi ha restrizioni
-				- Ad esempio:
-					- Non può fare la preghiera pubblica
-					- Non può commentare
-
-	Nuova sezione:
 		- Adunanze per il servizio di campo (Congregazione)
 			- La key è la seguente anno mese giorno es. 20210131
 			- Il calendario è formato da mesi: ogni riga è un mese
@@ -43,6 +31,19 @@
 				- Un layout che visualizza 2 colonne...conduttore e luogo
 				- Un layout che visualizza solo il conduttore
 				- Le adunanze per il servizio di congregazione devono essere anche stampate sul programma adunanze.
+
+
+	Nuova sezione:
+		- Annunci
+
+	Congregazione:
+		- Stampare gli Elenchi:
+			- Chi ha privilegi
+			- Settaggi: Es. escludi dall'elenco disastri naturali
+			- Chi ha restrizioni
+				- Ad esempio:
+					- Non può fare la preghiera pubblica
+					- Non può commentare
 	
 	Nuova sezione:
 		- Adunanze per il servizio di campo (Gruppo)
@@ -58,8 +59,6 @@
 			- Congressi/Assemblee
 			- Visita del sorvegliante
 			- Commemorazione
-	
-	- Sostituire la classe Authenticator
 	
 	- Nuova sezione: Letteratura
 	

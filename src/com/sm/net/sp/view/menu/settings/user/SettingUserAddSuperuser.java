@@ -2,14 +2,14 @@ package com.sm.net.sp.view.menu.settings.user;
 
 import javax.crypto.SecretKey;
 
-import com.sm.net.auth.Authenticator;
-import com.sm.net.auth.ValidationType;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
+import com.smnet.api.security.PasswordUtils;
+import com.smnet.api.security.PasswordUtils.PasswordSecurityStatus;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -134,14 +134,12 @@ public class SettingUserAddSuperuser {
 	protected boolean checkFields(String user, String password, String key) {
 
 		boolean check = true;
-		// TODO: Sostituire la classe Authenticator
-		check = Authenticator.isValid(user, ValidationType.VERY_STRONG);
+
+		check = (PasswordUtils.isSecure(user) == PasswordSecurityStatus.OK);
 		if (check)
-			// TODO: Sostituire la classe Authenticator
-			check = Authenticator.isValid(password, ValidationType.VERY_STRONG);
+			check = (PasswordUtils.isSecure(password) == PasswordSecurityStatus.OK);
 		if (check)
-			// TODO: Sostituire la classe Authenticator
-			check = Authenticator.isValid(key, ValidationType.VERY_STRONG);
+			check = (PasswordUtils.isSecure(key) == PasswordSecurityStatus.OK);
 
 		return check;
 	}

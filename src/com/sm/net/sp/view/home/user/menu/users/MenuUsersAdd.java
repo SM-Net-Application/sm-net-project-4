@@ -1,13 +1,13 @@
 package com.sm.net.sp.view.home.user.menu.users;
 
-import com.sm.net.auth.Authenticator;
-import com.sm.net.auth.ValidationType;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.util.Crypt;
+import com.smnet.api.security.PasswordUtils;
+import com.smnet.api.security.PasswordUtils.PasswordSecurityStatus;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
@@ -116,7 +116,8 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	public void usernameExists() {
 
 		new AlertDesigner(settings.getLanguage().getString("TEXT0007"), ownerStage, AlertType.ERROR,
-				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
+				Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+				Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").showAndWait();
 	}
 
 	@Override
@@ -140,8 +141,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	private boolean checkUsername(String user) {
 
 		boolean check = true;
-		// TODO: Sostituire la classe Authenticator
-		if (!Authenticator.isValid(user, ValidationType.VERY_STRONG))
+		if (PasswordUtils.isSecure(user) == PasswordSecurityStatus.OK)
 			check = false;
 		return check;
 	}
@@ -149,8 +149,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	private boolean checkPassword(String pwd) {
 
 		boolean check = true;
-		// TODO: Sostituire la classe Authenticator
-		if (!Authenticator.isValid(pwd, ValidationType.VERY_STRONG))
+		if (PasswordUtils.isSecure(pwd) == PasswordSecurityStatus.OK)
 			check = false;
 		return check;
 	}

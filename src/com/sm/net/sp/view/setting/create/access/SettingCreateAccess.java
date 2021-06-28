@@ -1,20 +1,20 @@
 package com.sm.net.sp.view.setting.create.access;
 
-import com.sm.net.auth.Authenticator;
-import com.sm.net.auth.ValidationType;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.view.SupportPlannerView;
+import com.smnet.api.security.PasswordUtils;
+import com.smnet.api.security.PasswordUtils.PasswordSecurityStatus;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.ImageView;
 
 public class SettingCreateAccess {
 
@@ -79,20 +79,21 @@ public class SettingCreateAccess {
 		boolean status = true;
 
 		String password = passwordFieldPassword.getText();
-		// TODO: Sostituire la classe Authenticator
-		status = Authenticator.isValid(password, ValidationType.VERY_STRONG);
+		status = (PasswordUtils.isSecure(password) == PasswordSecurityStatus.OK);
 
 		if (!status) {
 			new AlertDesigner(language.getStringWithNewLine("MEX001"), language.getStringWithNewLine("MEX002"),
 					supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 		} else {
 			String passwordConfirm = passwordFiedlPasswordConfirm.getText();
 			status = passwordConfirm.equals(password);
 			if (!status)
 				new AlertDesigner(language.getStringWithNewLine("MEX001"), language.getStringWithNewLine("MEX003"),
 						supportPlannerViewCtrl.getViewSupportPlannerStage(), AlertType.ERROR,
-						Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+						Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+						Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 		}
 		return status;
 	}

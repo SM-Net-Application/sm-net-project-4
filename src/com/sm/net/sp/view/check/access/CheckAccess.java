@@ -2,14 +2,14 @@ package com.sm.net.sp.view.check.access;
 
 import javax.crypto.SecretKey;
 
-import com.sm.net.auth.Authenticator;
-import com.sm.net.auth.ValidationType;
 import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 import com.sm.net.util.Crypt;
+import com.smnet.api.security.PasswordUtils;
+import com.smnet.api.security.PasswordUtils.PasswordSecurityStatus;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -88,7 +88,8 @@ public class CheckAccess {
 		else
 			new AlertDesigner(language.getStringWithNewLine("MEX001"),
 					ctrlViewSupportPlanner.getViewSupportPlannerStage(), AlertType.ERROR,
-					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(), Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
+					Meta.Application.getFullTitle(), Meta.Resources.getImageApplicationIcon(),
+					Meta.Themes.SUPPORTPLANNER_THEME, "alert_001").show();
 	}
 
 	private boolean checkFields() {
@@ -96,8 +97,9 @@ public class CheckAccess {
 		String password = passwordPasswordField.getText();
 
 		if (!password.isEmpty()) {
-			// TODO: Sostituire la classe Authenticator
-			if (Authenticator.isValid(password, ValidationType.VERY_STRONG)) {
+
+			if (PasswordUtils.isSecure(password) == PasswordSecurityStatus.OK) {
+
 				SecretKey key = Crypt.generateKey(password);
 				String passwordEncrypted = Crypt.encrypt(password, key);
 				if (passwordEncrypted.compareTo(settings.getPasswordEncrypted()) == 0) {
