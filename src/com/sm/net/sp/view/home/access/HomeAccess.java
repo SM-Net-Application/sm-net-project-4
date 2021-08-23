@@ -75,6 +75,9 @@ public class HomeAccess {
 	}
 
 	public void objectInitialize() {
+
+		this.accessButton.setDefaultButton(true);
+
 		listeners();
 		viewUpdate();
 	}
@@ -104,6 +107,29 @@ public class HomeAccess {
 	}
 
 	private void listeners() {
+
+		this.usernameTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+			if (newValue) {
+				this.accessButton.setDefaultButton(false);
+				this.accessNormalButton.setDefaultButton(true);
+			} else {
+				this.accessNormalButton.setDefaultButton(false);
+				this.accessButton.setDefaultButton(true);
+			}
+		});
+
+		this.passwordPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+			if (newValue) {
+				this.accessButton.setDefaultButton(false);
+				this.accessNormalButton.setDefaultButton(true);
+			} else {
+				this.accessNormalButton.setDefaultButton(false);
+				this.accessButton.setDefaultButton(true);
+			}
+		});
+
 		listenerAccessButton();
 		listenerAccessNormalButton();
 	}

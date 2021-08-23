@@ -361,6 +361,15 @@
                                           </CheckBox>
                                        </children>
                                     </StackPane>
+                                    <StackPane alignment="CENTER_LEFT">
+                                       <children>
+                                          <CheckBox fx:id="authTerritoryRegistryCheckBox" mnemonicParsing="false" text="territoryregistry">
+                                             <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </StackPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </StackPane>
                                  </children>
                               </VBox>
                               <StackPane>

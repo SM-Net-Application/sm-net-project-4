@@ -110,9 +110,9 @@ public class Actions {
 								.show();
 						break;
 					case 5:
-						application.getAlertBuilder()
-								.error(viewSupportPlannerStage, settings.getLanguage().getString("sp.login.error2"))
-								.show();
+						
+						callback.downloadNewVersion();
+						
 						break;
 
 					default:

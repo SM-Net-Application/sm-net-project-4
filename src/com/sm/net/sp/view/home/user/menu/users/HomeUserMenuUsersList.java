@@ -108,6 +108,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 	private CheckBox authTerritoryCheckBox;
 	@FXML
 	private CheckBox authTerritoryEditorCheckBox;
+	@FXML
+	private CheckBox authTerritoryRegistryCheckBox;
 	
 	@FXML
 	private Button userAddButton;
@@ -188,6 +190,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		
 		this.authTerritoryCheckBox.getStyleClass().add("check_box_001");
 		this.authTerritoryEditorCheckBox.getStyleClass().add("check_box_001");
+		this.authTerritoryRegistryCheckBox.getStyleClass().add("check_box_001");
+		
 	}
 
 	public void objectInitialize() {
@@ -313,6 +317,9 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		
 		this.authTerritoryEditorCheckBox.setText(language.getString("users.auth.territoryeditor"));
 		this.authTerritoryEditorCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORYEDITOR));
+		
+		this.authTerritoryRegistryCheckBox.setText(language.getString("users.auth.territoryregistry"));
+		this.authTerritoryRegistryCheckBox.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.REGISTRY));
 	}
 
 	@Override
@@ -400,6 +407,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 				
 				this.authTerritoryCheckBox.setSelected(user.isSpInf24());
 				this.authTerritoryEditorCheckBox.setSelected(user.isSpInf25());
+				
+				this.authTerritoryRegistryCheckBox.setSelected(user.isSpInf26());
 			}
 		});
 
@@ -464,7 +473,7 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 			int spInf23 = this.authPDFImportCheckBox.isSelected() ? 1 : 0;
 			int spInf24 = this.authTerritoryCheckBox.isSelected() ? 1 : 0;
 			int spInf25 = this.authTerritoryEditorCheckBox.isSelected() ? 1 : 0;
-			int spInf26 = 0;
+			int spInf26 = this.authTerritoryRegistryCheckBox.isSelected() ? 1 : 0;
 			int spInf27 = 0;
 			int spInf28 = 0;
 			int spInf29 = 0;
@@ -516,6 +525,8 @@ public class HomeUserMenuUsersList extends UpdateDataAdapter {
 		
 		this.authTerritoryCheckBox.setSelected(false);
 		this.authTerritoryEditorCheckBox.setSelected(false);
+		
+		this.authTerritoryRegistryCheckBox.setSelected(false);
 	}
 
 	private void listenerUserPrintButton() {

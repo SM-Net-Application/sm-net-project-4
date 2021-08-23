@@ -1,0 +1,27 @@
+Data di pubblicazione : 23-08-2021
+
+	Utenti:
+		- Nuova autorizzazione: Territori (Registro)
+			- Assegnare/Consegnare territori
+			- Eliminare voci dal registro
+		
+	Accesso:
+		- Il tasto "Accedi" può essere preumuto con il tasto Invio della tastiera.
+			- PS: se il focus è nelle caselle di testo, il tasto Invio tenta di eseguire l'accesso con i dati inseriti  
+
+	Territori:
+		- Le mappe vengono ora caricate in ordine alfabetico
+		- Funzione "Scarica tutte le risorse" adattata alle restrizioni di Google Drive. Se uno dei download fallisce, la funzione viene interrotta.
+		- Aggiunta la possibilità di visualizzare i dettagli dei territori e delle mappe senza poterle modificare 
+
+	Adunanze:
+		- Nuova colonna: visualizza una freccia sulla riga che corrisponde alla settimana corrente.
+		
+	Nuova versione:
+		- Quando è disponibile una nuova versione, è possibile effettuare il download direttamente dal software.
+
+	BugFix/Ottimizzazioni:
+		- Territori:
+			- Aggiunto ToolTip tasto Stampa (prima era null) 
+		- Classe Authenticator sostituita con la classe PasswordUtils
+		- il glitch grafico in seguito all'accesso dovrebbe essere risolto (da testare su Mac)  

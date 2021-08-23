@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sm.net.sp.view.home.user.menu.territory.TerritoryViewer">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane VBox.vgrow="ALWAYS">
+               <children>
+                  <TabPane fx:id="territoryTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="territoryInfoTab" text="info">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <children>
+                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryNumberLabel" text="numero">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryNameLabel" text="nome">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryCoordinatesLabel" text="coordinate">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryLandLabel" text="regione">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryLandkreisLabel" text="distretto">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryKreisstadtLabel" text="capoluogo">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryOrtLabel" text="luogo">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryZipCodeLabel" text="plz">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryOrtsteilLabel" text="frazione">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryMyMapsIDLabel" text="mymapsid">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="territoryViewerIDLabel" text="viewerid">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <TextField fx:id="territoryNumberTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryNameTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryCoordinatesTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryLandTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryLandkreisTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryKreisstadtTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryOrtTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryZipCodeTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryOrtsteilTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryMyMapsIDTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="territoryViewerIDTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab fx:id="imagesTab" text="images">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <children>
+                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image1TitleLabel" text="image1title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image1Label" text="image1">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image2TitleLabel" text="image2title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image2Label" text="image2">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image3TitleLabel" text="image3title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image3Label" text="image3">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image4TitleLabel" text="image4title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image4Label" text="image4">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image5TitleLabel" text="image5title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="image5Label" text="image5">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <TextField fx:id="image1TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image1TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image2TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image2TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image3TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image3TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image4TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image4TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image5TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="image5TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab fx:id="docsTab" text="docs">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                                 <children>
+                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc1TitleLabel" text="doc1title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc1Label" text="doc1">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc2TitleLabel" text="doc2title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc2Label" text="doc2">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc3TitleLabel" text="doc3title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc3Label" text="doc3">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc4TitleLabel" text="doc4title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc4Label" text="doc4">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc5TitleLabel" text="doc5title">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="doc5Label" text="doc5">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Label>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <TextField fx:id="doc1TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc1TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc2TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc2TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc3TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc3TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc4TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc4TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc5TitleTextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane>
+                                                         <children>
+                                                            <TextField fx:id="doc5TextField" maxWidth="1.7976931348623157E308">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </TabPane>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

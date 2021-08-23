@@ -106,6 +106,8 @@ public class Territory extends UpdateDataAdapter {
 	@FXML
 	private Button territoryEditButton;
 	@FXML
+	private Button territoryViewButton;
+	@FXML
 	private Button territoryRemoveButton;
 	@FXML
 	private Button territoryOpenViewerButton;
@@ -203,6 +205,8 @@ public class Territory extends UpdateDataAdapter {
 	private Button territoryMapsAddButton;
 	@FXML
 	private Button territoryMapsEditButton;
+	@FXML
+	private Button territoryMapsViewButton;
 	@FXML
 	private Button territoryMapsRemoveButton;
 	@FXML
@@ -360,6 +364,7 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryOpenViewerURLButton.getStyleClass().add("button_image_001");
 		this.territoryRemoveButton.getStyleClass().add("button_image_001");
 		this.territoryEditButton.getStyleClass().add("button_image_001");
+		this.territoryViewButton.getStyleClass().add("button_image_001");
 		this.territoryResourcesDownloadButton.getStyleClass().add("button_image_001");
 		this.territoryResourcesDownloadAllButton.getStyleClass().add("button_image_001");
 		this.territoryResourcesOpenDirectoryButton.getStyleClass().add("button_image_001");
@@ -370,6 +375,7 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryMapsOpenViewerURLButton.getStyleClass().add("button_image_001");
 		this.territoryMapsRemoveButton.getStyleClass().add("button_image_001");
 		this.territoryMapsEditButton.getStyleClass().add("button_image_001");
+		this.territoryMapsViewButton.getStyleClass().add("button_image_001");
 		this.territoryMapsResourcesDownloadButton.getStyleClass().add("button_image_001");
 		this.territoryMapsResourcesDownloadAllButton.getStyleClass().add("button_image_001");
 		this.territoryMapsResourcesOpenDirectoryButton.getStyleClass().add("button_image_001");
@@ -618,6 +624,18 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryMapsEditButton.setText("");
 		this.territoryMapsEditButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MAPS_EDIT));
 
+		Tooltip territoryViewTooltip = new Tooltip(this.language.getString("territory.tooltip.view"));
+		territoryViewTooltip.getStyleClass().add("tooltip_001");
+		this.territoryViewButton.setTooltip(territoryViewTooltip);
+		this.territoryViewButton.setText("");
+		this.territoryViewButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_VIEW));
+
+		Tooltip territoryMapsViewTooltip = new Tooltip(this.language.getString("territory.tooltip.view"));
+		territoryMapsViewTooltip.getStyleClass().add("tooltip_001");
+		this.territoryMapsViewButton.setTooltip(territoryMapsViewTooltip);
+		this.territoryMapsViewButton.setText("");
+		this.territoryMapsViewButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.TERRITORY_VIEW));
+
 		Tooltip territoryDownloadTooltip = new Tooltip(this.language.getString("territory.tooltip.downloadresources"));
 		territoryDownloadTooltip.getStyleClass().add("tooltip_001");
 		this.territoryResourcesDownloadButton.setTooltip(territoryDownloadTooltip);
@@ -760,6 +778,7 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryPrintButton.setOnAction(event -> print());
 		this.territoryAddButton.setOnAction(event -> newTerritory());
 		this.territoryEditButton.setOnAction(event -> editTerritory());
+		this.territoryViewButton.setOnAction(event -> viewTerritory());
 		this.territoryRemoveButton.setOnAction(event -> removeTerritory());
 		this.territoryOpenViewerButton.setOnAction(event -> openTerritoryViewer());
 		this.territoryOpenViewerURLButton.setOnAction(event -> openTerritoryViewerURL());
@@ -771,6 +790,7 @@ public class Territory extends UpdateDataAdapter {
 
 		this.territoryMapsAddButton.setOnAction(event -> newTerritoryMaps());
 		this.territoryMapsEditButton.setOnAction(event -> editTerritoryMaps());
+		this.territoryMapsViewButton.setOnAction(event -> viewTerritoryMaps());
 		this.territoryMapsRemoveButton.setOnAction(event -> removeTerritoryMaps());
 		this.territoryMapsOpenViewerButton.setOnAction(event -> openTerritoryMapsViewer());
 		this.territoryMapsOpenViewerURLButton.setOnAction(event -> openTerritoryMapsViewerURL());
@@ -917,6 +937,16 @@ public class Territory extends UpdateDataAdapter {
 
 	private void assignedTerritoryReturn() {
 
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf26()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
 			TerritoryObj territoryObj = this.territoryTableView.getSelectionModel().getSelectedItem();
@@ -976,6 +1006,16 @@ public class Territory extends UpdateDataAdapter {
 	}
 
 	private void memberAssignedTerritoryReturn() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf26()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
 
 		if (this.memberAssignedTerritoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
@@ -1042,6 +1082,16 @@ public class Territory extends UpdateDataAdapter {
 	}
 
 	private void assignTerritory() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf26()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
 
 		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1) {
 
@@ -1907,6 +1957,49 @@ public class Territory extends UpdateDataAdapter {
 
 	}
 
+	private void viewTerritory() {
+
+		if (this.territoryTableView.getSelectionModel().getSelectedIndex() > -1)
+			viewTerritory(this.territoryTableView.getSelectionModel().getSelectedItem());
+	}
+
+	private void viewTerritory(TerritoryObj territoryObj) {
+
+		if (!isAlreadyOpen(this.territoryTabPane, territoryObj.getSpInf7())) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_VIEWER_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryViewer ctrl = (TerritoryViewer) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedTerritory(territoryObj);
+
+				Tab newTab = new Tab(territoryObj.getSpInf7(), layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.TERRITORY_VIEW));
+
+				ctrl.setParentTabPane(this.territoryTabPane);
+				ctrl.setNewTab(newTab);
+
+				this.territoryTabPane.getTabs().add(newTab);
+				this.territoryTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	private void editTerritoryMaps() {
 
 		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1)
@@ -1944,6 +2037,49 @@ public class Territory extends UpdateDataAdapter {
 				newTab.setClosable(true);
 				newTab.getStyleClass().add("tab_001");
 				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.MAPS_EDIT));
+
+				ctrl.setParentTabPane(this.territoryMapsTabPane);
+				ctrl.setNewTab(newTab);
+
+				this.territoryMapsTabPane.getTabs().add(newTab);
+				this.territoryMapsTabPane.getSelectionModel().select(newTab);
+
+				ctrl.objectInitialize();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private void viewTerritoryMaps() {
+
+		if (this.territoryMapsTableView.getSelectionModel().getSelectedIndex() > -1)
+			viewTerritoryMaps(this.territoryMapsTableView.getSelectionModel().getSelectedItem());
+	}
+
+	private void viewTerritoryMaps(TerritoryMap territoryMap) {
+
+		if (!isAlreadyOpen(this.territoryMapsTabPane, territoryMap.getSpInf1())) {
+
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(Meta.Views.TERRITORY_MAPS_VIEWER_FXML_URL);
+				AnchorPane layout = (AnchorPane) fxmlLoader.load();
+
+				TerritoryMapsViewer ctrl = (TerritoryMapsViewer) fxmlLoader.getController();
+				ctrl.setApplication(this.application);
+				ctrl.setSettings(this.settings);
+				ctrl.setOwnerStage(this.ownerStage);
+				ctrl.setOwnerCtrl(this);
+				ctrl.setSelectedTerritory(territoryMap);
+
+				Tab newTab = new Tab(territoryMap.getSpInf1(), layout);
+				newTab.setClosable(true);
+				newTab.getStyleClass().add("tab_001");
+				newTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.SEARCH));
 
 				ctrl.setParentTabPane(this.territoryMapsTabPane);
 				ctrl.setNewTab(newTab);

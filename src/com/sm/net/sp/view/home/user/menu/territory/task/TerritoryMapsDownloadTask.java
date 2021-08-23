@@ -81,16 +81,15 @@ public class TerritoryMapsDownloadTask implements TaskInterface {
 			try {
 
 				URL url = new URL(res.getResourceURL());
-				
+
 				HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
-			    httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
-				
-			    InputStream in = httpcon.getInputStream();
+				httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
+
+				InputStream in = httpcon.getInputStream();
 				Files.copy(in, Paths.get(targetFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
-				
+
 				return "";
 			} catch (IOException e) {
-				System.out.println(e.getMessage());
 				return e.getMessage();
 			}
 

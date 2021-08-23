@@ -41,7 +41,9 @@ import com.sm.net.sp.view.home.user.menu.sergroups.UserMenuSerGroupsList;
 import com.sm.net.sp.view.home.user.menu.territory.Territory;
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryEditor;
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryMapsEditor;
+import com.sm.net.sp.view.home.user.menu.territory.TerritoryMapsViewer;
 import com.sm.net.sp.view.home.user.menu.territory.TerritoryRegistryViewer;
+import com.sm.net.sp.view.home.user.menu.territory.TerritoryViewer;
 import com.sm.net.sp.view.home.user.menu.usciere.Usciere;
 import com.sm.net.sp.view.home.user.menu.usciere.UsciereEditor;
 import com.sm.net.sp.view.home.user.menu.users.HomeUserMenuUsersList;
@@ -69,7 +71,7 @@ public class Meta {
 
 		public static final String NAME = "SupportPlanner";
 
-		public static final String VERSION = "1.4";
+		public static final String VERSION = "1.3.1";
 
 		public static String getFullTitle() {
 			return DEVELOPER + ": " + NAME + " " + VERSION;
@@ -216,10 +218,13 @@ public class Meta {
 
 		public static final URL TERRITORY_FXML_URL = Territory.class.getResource("Territory.fxml");
 		public static final URL TERRITORY_EDITOR_FXML_URL = TerritoryEditor.class.getResource("TerritoryEditor.fxml");
+		public static final URL TERRITORY_VIEWER_FXML_URL = TerritoryViewer.class.getResource("TerritoryViewer.fxml");
 		public static final URL TERRITORY_REGISTRY_FXML_URL = TerritoryRegistryViewer.class
 				.getResource("TerritoryRegistryViewer.fxml");
 		public static final URL TERRITORY_MAPS_EDITOR_FXML_URL = TerritoryMapsEditor.class
 				.getResource("TerritoryMapsEditor.fxml");
+		public static final URL TERRITORY_MAPS_VIEWER_FXML_URL = TerritoryMapsViewer.class
+				.getResource("TerritoryMapsViewer.fxml");
 	}
 
 	public static class Themes {
@@ -356,6 +361,7 @@ public class Meta {
 		public static final String TERRITORY_ADD = "territoryadd.png";
 		public static final String TERRITORY_REMOVE = "territoryremove.png";
 		public static final String TERRITORY_EDIT = "territoryeditor.png";
+		public static final String TERRITORY_VIEW = "search.png";
 
 		public static final String MAPS_ADD = "mapsglobaladd.png";
 		public static final String MAPS_REMOVE = "mapsglobalremove.png";

@@ -1,6 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.territory.task;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -79,6 +80,7 @@ public class TerritoryMapsLoadTask implements TaskInterface {
 
 		}
 
+		list.sort(Comparator.comparing(TerritoryMap::getSpInf1));
 		this.view.updateTerritoryMapList(list);
 	}
 }

@@ -51,9 +51,12 @@ import com.sm.net.sp.view.menu.settings.modules.SettingModules;
 import com.sm.net.sp.view.menu.settings.monitor.SettingMonitor;
 import com.sm.net.sp.view.menu.settings.user.SettingUser;
 import com.sm.net.sp.view.setting.create.language.SettingCreateLanguage;
+import com.sm.net.sp.view.task.SupportPlannerDownloadNewVersion;
 import com.sm.net.util.Crypt;
 import com.smnet.core.dialog.AlertBuilder;
+import com.smnet.core.task.TaskManager;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,7 +64,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Screen;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class SupportPlannerView implements SupportPlannerCallback {
@@ -118,9 +121,70 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	}
 
-	private File setMySQLRestoreFile() {
+	@Override
+	public void downloadNewVersion() {
 
-		// TODO: differenziare per sistema operativo
+		String header = this.settings.getLanguage().getString("sp.login.error2");
+		String content = this.settings.getLanguage().getString("sp.login.downloadnewversion");
+
+		if (this.getAlertBuilder().confirm(this.viewSupportPlannerStage, header, content)) {
+
+			DirectoryChooser directoryChooser = new DirectoryChooser();
+			directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+			File selectedDirectory = directoryChooser.showDialog(this.viewSupportPlannerStage);
+			if (selectedDirectory != null) {
+
+				String waitMessage = this.getSettings().getLanguage().getString("sp.login.downloadnewversionwait");
+
+				TaskManager.run(this.getAlertBuilder2(), this.viewSupportPlannerStage, waitMessage,
+						new SupportPlannerDownloadNewVersion(this, this.viewSupportPlannerStage, selectedDirectory));
+
+			}
+		}
+	}
+
+	public String getInstallFilename() {
+
+		switch (this.architecture) {
+		case BIT32:
+
+			return "";
+
+		case BIT64:
+
+			switch (this.system) {
+			case WINDOWS:
+
+				return "splaninstall_winx64.exe";
+
+			case LINUX:
+
+				return "";
+
+			case MAC:
+
+				return "splaninstall_macx64.zip";
+			}
+
+			break;
+		}
+
+		return "";
+	}
+
+	public String getDownloadURL() {
+
+		String downloadURL = "https://sm-netzwerk.com/download/supportplanner/";
+
+		String installFilename = getInstallFilename();
+		if (!installFilename.isEmpty())
+			return downloadURL.concat(installFilename);
+
+		return "";
+	}
+
+	private File setMySQLRestoreFile() {
 
 		File file = new File("tools", "mysql");
 
@@ -402,14 +466,20 @@ public class SupportPlannerView implements SupportPlannerCallback {
 
 	public void viewSupportPlannerHome() {
 
-		this.viewSupportPlannerStage.setMinWidth(1000);
-		this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
-		this.viewSupportPlannerStage.setWidth(Screen.getPrimary().getBounds().getWidth());
-		this.viewSupportPlannerStage.setMinHeight(500);
-		this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
-		this.viewSupportPlannerStage.setHeight(Double.MAX_VALUE);
-		this.viewSupportPlannerStage.setMaximized(true);
 		this.viewSupportPlannerStage.setResizable(true);
+
+		Platform.runLater(() -> {
+
+			this.viewSupportPlannerStage.setMaximized(true);
+			this.viewSupportPlannerStage.setMinWidth(1000);
+			this.viewSupportPlannerStage.setMaxWidth(Double.MAX_VALUE);
+			// this.viewSupportPlannerStage.setWidth(Screen.getPrimary().getBounds().getWidth());
+
+			this.viewSupportPlannerStage.setMinHeight(500);
+			this.viewSupportPlannerStage.setMaxHeight(Double.MAX_VALUE);
+			// this.viewSupportPlannerStage.setHeight(Double.MAX_VALUE);};
+
+		});
 
 		viewSupportPlannerHomeMenu();
 		loadHome();
@@ -1050,11 +1120,11 @@ public class SupportPlannerView implements SupportPlannerCallback {
 			}
 		}
 	}
-	
+
 	public void loadMenuSettingModules() {
 
 		// TODO: Moduli PDF
-		
+
 		if (this.center != 26) {
 			this.center = 26;
 
@@ -1291,4 +1361,5 @@ public class SupportPlannerView implements SupportPlannerCallback {
 	public void setWget(File wget) {
 		this.wget = wget;
 	}
+
 }

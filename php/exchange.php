@@ -1,6 +1,6 @@
 <?php
 
-$phpVersion = "1.3";
+$phpVersion = "1.3.1";
 $response = array();
 $jsonObjPar = file_get_contents('php://input');
 

@@ -110,7 +110,7 @@ public class TerritoryRegistryViewer {
 
 	private void delete() {
 
-		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf25()) {
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf26()) {
 
 			final String content = this.application.getSettings().getLanguage()
 					.getString("territory.error.nopermission");

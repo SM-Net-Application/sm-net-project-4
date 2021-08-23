@@ -113,6 +113,15 @@
                                                             </StackPane>
                                                             <StackPane>
                                                                <children>
+                                                                  <Button fx:id="territoryViewButton" mnemonicParsing="false" text="view">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
                                                                   <Button fx:id="territoryOpenViewerButton" mnemonicParsing="false" text="viewer">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
@@ -474,6 +483,15 @@
                                                             <StackPane>
                                                                <children>
                                                                   <Button fx:id="territoryMapsRemoveButton" mnemonicParsing="false" text="elimina">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Button fx:id="territoryMapsViewButton" mnemonicParsing="false" text="view">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>

@@ -31,6 +31,7 @@ import com.sm.net.util.Crypt;
 import com.sm.net.util.DateUtil;
 import com.smnet.core.task.TaskManager;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -61,6 +63,8 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	private Tab calendarTab;
 	@FXML
 	private TableView<Week> weekTableView;
+	@FXML
+	private TableColumn<Week, ImageView> weekCurrentTableColumn;
 	@FXML
 	private TableColumn<Week, Integer> weekTableColumn;
 	@FXML
@@ -109,6 +113,24 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 	}
 
 	private void cellValueFactory() {
+
+		this.weekCurrentTableColumn.setCellValueFactory(cellData -> {
+
+			Week week = cellData.getValue();
+			if (week.getKey().equals(Week.buildKey(LocalDate.now()))) {
+
+				Image image = Meta.Resources.getImageFromResources(Meta.Resources.ARROW_FRONT, 25, 25);
+
+				// ImageView imageView =
+				// Meta.Resources.getImageFromResources(Meta.Resources.ARROW_FRONT);
+				ImageView imageView = new ImageView();
+				imageView.setImage(image);
+
+				return new SimpleObjectProperty<>(imageView);
+			}
+
+			return null;
+		});
 
 		weekTableColumn.setCellValueFactory(cellData -> cellData.getValue().weekProperty().asObject());
 		fromTableColumn.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
@@ -203,6 +225,11 @@ public class UserMenuMeetings extends UpdateDataAdapter {
 
 		calendarTab.setText(language.getString("TEXT0075"));
 		calendarTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CALENDAR));
+		
+		this.weekCurrentTableColumn.setText("");
+		this.weekCurrentTableColumn.setMinWidth(35);
+		this.weekCurrentTableColumn.setMaxWidth(35);
+		
 		weekTableColumn.setText(language.getString("TEXT0076"));
 		fromTableColumn.setText(language.getString("TEXT0077"));
 		toTableColumn.setText(language.getString("TEXT0078"));

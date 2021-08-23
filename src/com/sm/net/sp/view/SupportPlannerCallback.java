@@ -8,4 +8,5 @@ public interface SupportPlannerCallback {
 
 	public abstract void viewSupportPlannerHomeUser();
 
+	public abstract void downloadNewVersion();
 }

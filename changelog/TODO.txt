@@ -63,6 +63,3 @@
 	- Nuova sezione: Letteratura
 	
 	Eliminare AlertBuilder vecchio.
-	
-	- Installer per MAC
-	- Dump/Ripristino del database per MAC 

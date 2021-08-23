@@ -90,6 +90,7 @@
                                              <children>
                                                 <TableView fx:id="weekTableView">
                                                   <columns>
+                                                      <TableColumn fx:id="weekCurrentTableColumn" prefWidth="75.0" text="Current" />
                                                     <TableColumn fx:id="weekTableColumn" prefWidth="75.0" text="Week" />
                                                     <TableColumn fx:id="fromTableColumn" prefWidth="75.0" text="From" />
                                                       <TableColumn fx:id="toTableColumn" prefWidth="75.0" text="To" />
