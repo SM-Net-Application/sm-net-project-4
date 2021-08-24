@@ -192,7 +192,7 @@ public class UserMenuPublicMeetingsEditor extends UpdateDataAdapter implements U
 				privilege.getTranslatedName(language));
 
 		String historyTitle = String.format(language.getString("sp.history.title"), menuItemText,
-				this.selectedWeek.getFrom().toString());
+				this.selectedWeek.getFrom().toString(), this.selectedWeek.getWeek());
 
 		StackPane graphic = Meta.Resources.imageInStackPaneForMenu(Meta.Resources.SEARCH);
 

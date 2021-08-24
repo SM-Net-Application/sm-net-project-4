@@ -1065,8 +1065,9 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		String menuItemText = String.format(language.getString("sp.meetings.history"),
 				privilege.getTranslatedName(language));
 
-		String historyTitle = String.format(language.getString("sp.history.title"), menuItemText,
-				this.selectedWeek.getFrom().toString());
+		String historyTitle = String.format(language.getString(
+				"sp.history.title"), menuItemText,
+				this.selectedWeek.getFrom().toString(), this.selectedWeek.getWeek());
 
 		StackPane graphic = Meta.Resources.imageInStackPaneForMenu(Meta.Resources.SEARCH);
 
@@ -2641,7 +2642,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		// SEZIONE 3 - Discorsi di esercitazione
 
 		this.ministryPartList.clear();
-		
+
 		if (sections.size() > 2) {
 
 			Element section = sections.get(2);
@@ -2696,7 +2697,7 @@ public class UserMenuMeetingsEditor extends UpdateDataAdapter implements Upgrade
 		// SEZIONE 4 - Vita cristiana
 
 		this.christiansPartList.clear();
-		
+
 		String song2 = "";
 
 		if (sections.size() > 3) {
