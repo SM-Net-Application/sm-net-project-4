@@ -23,7 +23,7 @@ DefaultGroupName=SM-Net
 LicenseFile=
 ;WinXP or above
 MinVersion=0,5.1 
-OutputBaseFilename=Support Planner-1.0 (beta)
+OutputBaseFilename=splaninstall_winx64
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=lowest

@@ -1,0 +1,4 @@
+Data di pubblicazione : 24-08-2021
+
+	Storico:
+		- Nel titolo viene ora mostrato il numero della settimana
