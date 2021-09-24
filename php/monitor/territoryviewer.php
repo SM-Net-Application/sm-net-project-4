@@ -61,6 +61,11 @@ if (file_exists("languages/" . $langIni)) {
         }
     }
 }
+
+function startsWith( $haystack, $needle ) {
+    $length = strlen( $needle );
+    return substr( $haystack, 0, $length ) === $needle;
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -97,15 +102,31 @@ if (file_exists("languages/" . $langIni)) {
 
     <?php
     } else {
-        ?>
 
-        <br>
-        <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
-        <center><h2 class="text-white"><strong><?php echo $plz . " " . $ort; ?></strong></h2></center>
-        <br>
-        <iframe src="https://www.google.com/maps/d/embed?mid=<?php echo $mapsID; ?>" width="100%" height="960"></iframe>
+        if (startsWith($territoryID, 'OldTerr')) {
 
-    <?php
+            ?>
+
+            <br>
+            <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
+            <br>
+            <img src="<?php echo $mapsID; ?>" width="100%">
+
+            <?php
+
+        } else {
+            
+            ?>
+
+            <br>
+            <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
+            <center><h2 class="text-white"><strong><?php echo $plz . " " . $ort; ?></strong></h2></center>
+            <br>
+            <iframe src="https://www.google.com/maps/d/embed?mid=<?php echo $mapsID; ?>" width="100%" height="960"></iframe>
+
+            <?php
+
+        }
     }
 
     ?>
