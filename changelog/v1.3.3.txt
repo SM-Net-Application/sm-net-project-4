@@ -1,0 +1,7 @@
+Data di pubblicazione : __-__-____
+
+	Territori:
+		- I territori vengono ordinati per numero
+
+	Bug-Fix:
+		- Funzione per la verifica delle password conteneva un bug che non permetteva la creazione di nuovi utenti.

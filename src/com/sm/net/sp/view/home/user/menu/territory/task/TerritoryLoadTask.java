@@ -1,6 +1,8 @@
 package com.sm.net.sp.view.home.user.menu.territory.task;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -69,6 +71,7 @@ public class TerritoryLoadTask implements TaskInterface {
 				JSONObject json = (JSONObject) obj;
 				TerritoryObj territory = TerritoryObj.newInstanceByJSONObject(json,
 						this.settings.getDatabaseSecretKey());
+
 				list.add(territory);
 			}
 
@@ -78,6 +81,8 @@ public class TerritoryLoadTask implements TaskInterface {
 			this.alertBuilder.error(this.viewStage, error);
 
 		}
+
+		Collections.sort(list, (t1, t2) -> (new BigDecimal(t1.getSpInf7()).compareTo(new BigDecimal(t2.getSpInf7()))));
 
 		this.view.updateTerritoryList(list);
 		this.view.loadTerritoryRegistry();
