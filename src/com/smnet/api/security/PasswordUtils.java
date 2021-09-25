@@ -12,9 +12,6 @@ public class PasswordUtils {
         status = containsCapitalLetter(password);
         if (status != PasswordSecurityStatus.OK) return status;
 
-        status = containsCapitalLetter(password);
-        if (status != PasswordSecurityStatus.OK) return status;
-
         status = containsLowercaseLetter(password);
         if (status != PasswordSecurityStatus.OK) return status;
 

@@ -141,7 +141,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	private boolean checkUsername(String user) {
 
 		boolean check = true;
-		if (PasswordUtils.isSecure(user) == PasswordSecurityStatus.OK)
+		if (PasswordUtils.isSecure(user) != PasswordSecurityStatus.OK)
 			check = false;
 		return check;
 	}
@@ -149,7 +149,7 @@ public class MenuUsersAdd implements MenuUsersAddCallback {
 	private boolean checkPassword(String pwd) {
 
 		boolean check = true;
-		if (PasswordUtils.isSecure(pwd) == PasswordSecurityStatus.OK)
+		if (PasswordUtils.isSecure(pwd) != PasswordSecurityStatus.OK)
 			check = false;
 		return check;
 	}
