@@ -341,11 +341,11 @@ if (file_exists("languages/" . $langIni)) {
                     }
                 }
 
-                $query_territory = "SELECT sp_territory.spInf7 AS terrnr, sp_territory.spInf8 AS terrname, sp_territory.spInf31 AS terrviewer, sp_terrregistry.spInf3 AS terrass";
+                $query_territory = "SELECT sp_territory.spInf7 AS terrnr, sp_territory.spInf8 AS terrname, sp_territory.spInf31 AS terrviewer, sp_terrregistry.spInf3 AS terrass, sp_terrregistry.spInf4 AS terrend";
                 $query_territory .= " FROM sp_territory";
                 $query_territory .= " INNER JOIN sp_terrregistry";
                 $query_territory .= " ON sp_territory.id = sp_terrregistry.spInf1";
-                $query_territory .= " WHERE sp_terrregistry.spInf4 =''";
+                $query_territory .= " WHERE sp_terrregistry.spInf2=" . $memberID . " AND sp_terrregistry.spInf4 =''";
                 $query_territory .= " ORDER BY sp_terrregistry.spInf3 ASC";
 
                 $result_territory = mysqli_query($database, $query_territory);
@@ -359,6 +359,7 @@ if (file_exists("languages/" . $langIni)) {
                         $row["spInf8"] = $resultRow_territory["terrname"];
                         $row["spInf31"] = $resultRow_territory["terrviewer"];
                         $row["spInf3"] = $resultRow_territory["terrass"];
+                        $row["spInf4"] = $resultRow_territory["terrend"];
 
                         array_push($territory, $row);
                     }
