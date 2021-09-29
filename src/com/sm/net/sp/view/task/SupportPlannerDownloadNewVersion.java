@@ -21,6 +21,7 @@ public class SupportPlannerDownloadNewVersion implements TaskInterface {
 	private SupportPlannerView application;
 	private Stage viewStage;
 	private File targetDirectory;
+	private File targetFile;
 
 	public SupportPlannerDownloadNewVersion(SupportPlannerView application, Stage viewStage, File targetDirectory) {
 		super();
@@ -50,6 +51,7 @@ public class SupportPlannerDownloadNewVersion implements TaskInterface {
 
 	private String download(File targetFile) {
 
+		this.targetFile = targetFile;
 		String downloadURL = this.application.getDownloadURL();
 		if (downloadURL.isEmpty())
 			return this.application.getSettings().getLanguage().getString("sp.login.downloadnewversionfailempty");
@@ -88,9 +90,10 @@ public class SupportPlannerDownloadNewVersion implements TaskInterface {
 
 			if (Desktop.isDesktopSupported()) {
 				Desktop desktop = Desktop.getDesktop();
-				if (this.targetDirectory.exists())
+				if (this.targetFile.exists())
 					try {
-						desktop.open(this.targetDirectory);
+						desktop.open(this.targetFile);
+						System.exit(0);
 					} catch (IOException e) {
 					}
 			}
