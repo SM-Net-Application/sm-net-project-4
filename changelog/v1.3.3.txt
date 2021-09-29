@@ -1,4 +1,4 @@
-Data di pubblicazione : __-__-____
+Data di pubblicazione : 25-09-2021
 
 	Territori:
 		- I territori vengono ordinati per numero

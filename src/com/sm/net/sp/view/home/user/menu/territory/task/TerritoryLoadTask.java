@@ -71,7 +71,7 @@ public class TerritoryLoadTask implements TaskInterface {
 				JSONObject json = (JSONObject) obj;
 				TerritoryObj territory = TerritoryObj.newInstanceByJSONObject(json,
 						this.settings.getDatabaseSecretKey());
-
+				
 				list.add(territory);
 			}
 

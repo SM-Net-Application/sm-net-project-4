@@ -123,10 +123,10 @@ public class TerritoryEditor {
 	private Label image4TitleLabel;
 	@FXML
 	private TextField image4TitleTextField;
-	@FXML
-	private Label image5TitleLabel;
-	@FXML
-	private TextField image5TitleTextField;
+//	@FXML
+//	private Label image5TitleLabel;
+//	@FXML
+//	private TextField image5TitleTextField;
 
 	@FXML
 	private Tab docsTab;
@@ -223,7 +223,7 @@ public class TerritoryEditor {
 		this.image4Label.getStyleClass().add("label_set_001");
 		this.image4TitleLabel.getStyleClass().add("label_set_001");
 		this.image5Label.getStyleClass().add("label_set_001");
-		this.image5TitleLabel.getStyleClass().add("label_set_001");
+//		this.image5TitleLabel.getStyleClass().add("label_set_001");
 
 		this.doc1Label.getStyleClass().add("label_set_001");
 		this.doc1TitleLabel.getStyleClass().add("label_set_001");
@@ -260,7 +260,7 @@ public class TerritoryEditor {
 		this.image4TextField.getStyleClass().add("text_field_001");
 		this.image4TitleTextField.getStyleClass().add("text_field_001");
 		this.image5TextField.getStyleClass().add("text_field_001");
-		this.image5TitleTextField.getStyleClass().add("text_field_001");
+//		this.image5TitleTextField.getStyleClass().add("text_field_001");
 
 		this.doc1TextField.getStyleClass().add("text_field_001");
 		this.doc1TitleTextField.getStyleClass().add("text_field_001");
@@ -313,7 +313,7 @@ public class TerritoryEditor {
 			this.image4TextField.setText(this.selectedTerritory.getSpInf17());
 			this.image4TitleTextField.setText(this.selectedTerritory.getSpInf18());
 			this.image5TextField.setText(this.selectedTerritory.getSpInf19());
-			this.image5TitleTextField.setText(this.selectedTerritory.getSpInf20());
+//			this.image5TitleTextField.setText(this.selectedTerritory.getSpInf20());
 
 			this.doc1TextField.setText(this.selectedTerritory.getSpInf21());
 			this.doc1TitleTextField.setText(this.selectedTerritory.getSpInf22());
@@ -495,8 +495,9 @@ public class TerritoryEditor {
 		this.image3TitleLabel.setText(String.format(imageTitleFormat, 3));
 		this.image4Label.setText(String.format(imageFormat, 4));
 		this.image4TitleLabel.setText(String.format(imageTitleFormat, 4));
-		this.image5Label.setText(String.format(imageFormat, 5));
-		this.image5TitleLabel.setText(String.format(imageTitleFormat, 5));
+//		this.image5Label.setText(String.format(imageFormat, 5));
+//		this.image5TitleLabel.setText(String.format(imageTitleFormat, 5));
+		this.image5Label.setText(this.language.getString("territoryeditor.label.image5"));
 
 		String docFormat = this.language.getString("territoryeditor.label.docformat");
 		String docTitleFormat = this.language.getString("territoryeditor.label.docnameformat");
@@ -743,13 +744,13 @@ public class TerritoryEditor {
 		this.image4TitleTextField = image4TitleTextField;
 	}
 
-	public TextField getImage5TitleTextField() {
-		return image5TitleTextField;
-	}
-
-	public void setImage5TitleTextField(TextField image5TitleTextField) {
-		this.image5TitleTextField = image5TitleTextField;
-	}
+//	public TextField getImage5TitleTextField() {
+//		return image5TitleTextField;
+//	}
+//
+//	public void setImage5TitleTextField(TextField image5TitleTextField) {
+//		this.image5TitleTextField = image5TitleTextField;
+//	}
 
 	public TextField getDoc1TextField() {
 		return doc1TextField;

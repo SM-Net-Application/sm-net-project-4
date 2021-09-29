@@ -111,6 +111,15 @@
                                                                   </Button>
                                                                </children>
                                                             </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="memberMonitorURLButton" mnemonicParsing="false" text="monitor">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane HBox.hgrow="ALWAYS">
                                                                <children>
                                                                   <TextField fx:id="filterMemberTextField">

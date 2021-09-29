@@ -330,15 +330,6 @@
                                                       </StackPane>
                                                       <StackPane alignment="CENTER_LEFT">
                                                          <children>
-                                                            <Label fx:id="image5TitleLabel" text="image5title">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </Label>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane alignment="CENTER_LEFT">
-                                                         <children>
                                                             <Label fx:id="image5Label" text="image5">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -416,15 +407,6 @@
                                                       <StackPane>
                                                          <children>
                                                             <TextField fx:id="image4TextField" maxWidth="1.7976931348623157E308">
-                                                               <StackPane.margin>
-                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                               </StackPane.margin>
-                                                            </TextField>
-                                                         </children>
-                                                      </StackPane>
-                                                      <StackPane>
-                                                         <children>
-                                                            <TextField fx:id="image5TitleTextField" maxWidth="1.7976931348623157E308">
                                                                <StackPane.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </StackPane.margin>

@@ -39,13 +39,26 @@ public class TerritoryDownloadTask implements TaskInterface {
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		ArrayList<TerritoryResource> territoryResourceList = this.territoryObj.getResources();
+		ArrayList<String> errorList = new ArrayList<>();
+
+		download(errorList, territoryObj);
+
+		if (errorList.isEmpty())
+			hashMap.put("status", 0);
+		else {
+			hashMap.put("error", errorList.get(0));
+			hashMap.put("status", 1);
+		}
+	}
+
+	private boolean download(ArrayList<String> errorList, TerritoryObj territoryObj) {
+
+		ArrayList<TerritoryResource> territoryResourceList = territoryObj.getResources();
 
 		if (!territoryResourceList.isEmpty()) {
 
-			File targetDirectory = this.territoryObj.buildTargetDirectory();
+			File targetDirectory = territoryObj.buildTargetDirectory();
 
-			String error = "";
 			for (TerritoryResource territoryResource : territoryResourceList) {
 
 				File targetFile = new File(targetDirectory, territoryResource.getResourceName());
@@ -54,22 +67,16 @@ public class TerritoryDownloadTask implements TaskInterface {
 					String feedback = download(targetFile, territoryResource);
 
 					if (!feedback.isEmpty()) {
-						if (!error.isEmpty())
-							error += "\n\n";
 
-						error += String.format("Download failed: (%s) -> %s", territoryResource.getResourceName(),
-								territoryResource.getResourceURL());
+						errorList.add(targetFile.getName());
+
+						return false;
 					}
 				}
 			}
-
-			if (error.isEmpty())
-				hashMap.put("status", 0);
-			else {
-				hashMap.put("error", error);
-				hashMap.put("status", 1);
-			}
 		}
+
+		return true;
 	}
 
 	private String download(File targetFile, TerritoryResource res) {
@@ -89,7 +96,9 @@ public class TerritoryDownloadTask implements TaskInterface {
 				Files.copy(in, Paths.get(targetFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
 
 				return "";
+
 			} catch (IOException e) {
+
 				return e.getMessage();
 			}
 
@@ -108,7 +117,9 @@ public class TerritoryDownloadTask implements TaskInterface {
 
 		switch (status) {
 		case 1:
-			this.application.getAlertBuilder2().error(this.viewStage, error);
+			String header = this.application.getSettings().getLanguage()
+					.getStringWithNewLine("territory.download.error");
+			this.application.getAlertBuilder2().error(this.viewStage, header, error);
 			break;
 		case 2:
 			this.application.getAlertBuilder2().error(this.viewStage,

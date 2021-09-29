@@ -375,6 +375,8 @@ public class Meta {
 
 		public static final String ARROW_UP = "arrow_up.png";
 		public static final String ARROW_DOWN = "arrow_down.png";
+		
+		public static final String MEMBERMONITORURL = "territoryviewerurl.png";
 
 		public static Image getImageFromResources(String imageName, double width, double height) {
 

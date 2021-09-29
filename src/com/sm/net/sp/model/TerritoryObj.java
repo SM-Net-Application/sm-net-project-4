@@ -146,8 +146,13 @@ public class TerritoryObj {
 		String spInf16 = Crypt.encrypt(editor.getImage3TitleTextField().getText(), sk);
 		String spInf17 = Crypt.encrypt(editor.getImage4TextField().getText(), sk);
 		String spInf18 = Crypt.encrypt(editor.getImage4TitleTextField().getText(), sk);
-		String spInf19 = Crypt.encrypt(editor.getImage5TextField().getText(), sk);
-		String spInf20 = Crypt.encrypt(editor.getImage5TitleTextField().getText(), sk);
+		
+//		String spInf19 = Crypt.encrypt(editor.getImage5TextField().getText(), sk);
+//		String spInf20 = Crypt.encrypt(editor.getImage5TitleTextField().getText(), sk);
+		String spInf19 = editor.getImage5TextField().getText();
+//		String spInf20 = editor.getImage5TitleTextField().getText();
+		String spInf20 = "";
+		
 		String spInf21 = Crypt.encrypt(editor.getDoc1TextField().getText(), sk);
 		String spInf22 = Crypt.encrypt(editor.getDoc1TitleTextField().getText(), sk);
 		String spInf23 = Crypt.encrypt(editor.getDoc2TextField().getText(), sk);
@@ -254,8 +259,12 @@ public class TerritoryObj {
 		String spInf16 = Crypt.decrypt(json.getString("spInf16"), secretKey);
 		String spInf17 = Crypt.decrypt(json.getString("spInf17"), secretKey);
 		String spInf18 = Crypt.decrypt(json.getString("spInf18"), secretKey);
-		String spInf19 = Crypt.decrypt(json.getString("spInf19"), secretKey);
-		String spInf20 = Crypt.decrypt(json.getString("spInf20"), secretKey);
+
+//		String spInf19 = Crypt.decrypt(json.getString("spInf19"), secretKey);
+//		String spInf20 = Crypt.decrypt(json.getString("spInf20"), secretKey);
+		String spInf19 = json.getString("spInf19");
+		String spInf20 = json.getString("spInf20");
+		
 		String spInf21 = Crypt.decrypt(json.getString("spInf21"), secretKey);
 		String spInf22 = Crypt.decrypt(json.getString("spInf22"), secretKey);
 		String spInf23 = Crypt.decrypt(json.getString("spInf23"), secretKey);
@@ -348,7 +357,7 @@ public class TerritoryObj {
 		checkResource(resourceList, 0, this.getSpInf13(), this.getSpInf14());
 		checkResource(resourceList, 0, this.getSpInf15(), this.getSpInf16());
 		checkResource(resourceList, 0, this.getSpInf17(), this.getSpInf18());
-		checkResource(resourceList, 0, this.getSpInf19(), this.getSpInf20());
+//		checkResource(resourceList, 0, this.getSpInf19(), this.getSpInf20());
 
 		// DocList
 		checkResource(resourceList, 1, this.getSpInf21(), this.getSpInf22());

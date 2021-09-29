@@ -465,7 +465,11 @@ public class Territory extends UpdateDataAdapter {
 			return (!isPublisher || isInactive);
 		});
 
-		this.membersTableView.setItems(membersList);
+		// Aggiungi il sorvegliante
+		Member overseeMember = Member.overseerMember(this.language);
+		this.membersList.add(overseeMember);
+
+		this.membersTableView.setItems(this.membersList);
 
 		this.filterMemberTextField.setText("");
 
@@ -962,7 +966,7 @@ public class Territory extends UpdateDataAdapter {
 					DateTimeFormatter dtf = DateTimeFormatter
 							.ofPattern(this.language.getStringWithNewLine("datepattern"));
 
-					if (assignedDate.compareTo(returnDate) < 0) {
+					if (!(assignedDate.compareTo(returnDate) > 0)) {
 
 						String header = this.language.getString("territory.confirm.returnterritory");
 						String content = this.language.getStringWithNewLine("territory.confirm.returnterritorycontent");
@@ -1029,7 +1033,9 @@ public class Territory extends UpdateDataAdapter {
 
 				DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.language.getStringWithNewLine("datepattern"));
 
-				if (assignedDate.compareTo(returnDate) < 0) {
+				// TODO: Verifica se la condizione funziona
+				
+				if (!(assignedDate.compareTo(returnDate) > 0)) {
 
 					String header = this.language.getString("territory.confirm.returnterritory");
 					String content = this.language.getStringWithNewLine("territory.confirm.returnterritorycontent");

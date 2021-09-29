@@ -9,7 +9,9 @@ if (isset ( $jsonObj ["spMemberID"] )) {
 			$response ["status"] = 4;
 			$response ["error"] = mysqli_connect_error ();
 		} else {
-			$query = "DELETE FROM sp_members";
+
+			$query = "UPDATE sp_members";
+			$query .= " SET spInf76=1";
 			$query .= " WHERE spMemberID=" . $jsonObj ["spMemberID"];
 			
 			if ($database->query ( $query ) === TRUE) {

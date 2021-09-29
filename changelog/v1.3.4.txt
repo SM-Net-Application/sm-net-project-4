@@ -1,0 +1,37 @@
+Data di pubblicazione : __-__-____
+
+	Congregazione (Membri):
+	
+		- L'URL del monitor puo' essere visualizzato senza la necessita' di generare il PDF.
+		
+		- Funzione "Elimina membro": non viene piu' eliminato dal database, ma soltando disattivato.
+			Questo e' necessario perche' nel Registro territorio possono essere presenti anche membri eliminati.
+			E' possibile che i membri disattivati vengano ancora visualizzati in qualche lista, da sistemare man mano che si riscontra il problema.
+
+	Territori:
+		
+		- La risorsa (Immagine 5) viene ora utilizzata per l'immagine da visualizzare nel TerritoryViewer
+		
+		- Tra i componenti della congregazione viene aggiunto il componente Sorvegliante.
+			In tal modo e' possibile assegnare i territori al sorvegliante nel Registro (non e' necessario il nome).
+
+	TerritoryViewer:
+	
+		- Se disponibile viene mostrata anche l'immagine del territorio oltre alla mappa di Google.
+
+	Bug-Fix e ottimizzazioni:
+	
+		Territori:
+		
+			- Funzione "Scarica le risorse" (singolo territorio) adattata alle restrizioni di Google Drive.
+				Se uno dei download fallisce, la funzione viene interrotta.
+
+		Congregazione (Famiglie):
+			
+			- Tooltip "Aggiorna l'elenco" era null. Corretto.
+
+	Database Query:
+	
+	UPDATE `sp_territory` SET `spInf19`='',`spInf20`=''
+
+	ALTER TABLE `sp_members` ADD `spInf76` INT NOT NULL AFTER `spInf75`;

@@ -10,6 +10,7 @@ $ort = "";
 $plz = "";
 $nr = "";
 $name = "";
+$newimage = "";
 
 if (isset($_GET["lang"])) {
     if (!empty($_GET["lang"])) {
@@ -35,7 +36,7 @@ if (file_exists("languages/" . $langIni)) {
             if (!$database) {
                 $error = "Database connection error: " . mysqli_connect_error();
             } else {
-                $query_mem = "SELECT spInf4, spInf5, spInf7, spInf8, spInf10";
+                $query_mem = "SELECT spInf4, spInf5, spInf7, spInf8, spInf10, spInf19";
                 $query_mem .= " FROM sp_territory";
                 $query_mem .= " WHERE spInf31 =";
                 $query_mem .= " '" . $territoryID . "'";
@@ -52,6 +53,7 @@ if (file_exists("languages/" . $langIni)) {
                     $plz = $resultRow_mem["spInf5"];
                     $nr = $resultRow_mem["spInf7"];
                     $name = $resultRow_mem["spInf8"];
+                    $newimage = $resultRow_mem["spInf19"];
                 }
 
                 $result_mem->close();
@@ -119,6 +121,23 @@ function startsWith( $haystack, $needle ) {
             ?>
 
             <br>
+
+            <?php
+
+            if(!empty($newimage)){
+
+                ?>
+
+                <img src="<?php echo $newimage; ?>" width="100%">
+                <br>
+                <br>
+
+                <?php
+
+            }
+
+            ?>
+
             <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
             <center><h2 class="text-white"><strong><?php echo $plz . " " . $ort; ?></strong></h2></center>
             <br>

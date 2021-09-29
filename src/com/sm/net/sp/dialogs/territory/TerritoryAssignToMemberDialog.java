@@ -43,6 +43,7 @@ public class TerritoryAssignToMemberDialog {
 	private SupportPlannerView application;
 	private Stage ownerStage;
 	private ObservableList<Member> membersList;
+	private ObservableList<Member> memberListWithoutDisabled;
 
 	public static Member show(SupportPlannerView application, Stage ownerStage, ObservableList<Member> membersList) {
 
@@ -115,7 +116,7 @@ public class TerritoryAssignToMemberDialog {
 		this.filterTextField.getStyleClass().add("text_field_001");
 		this.membersTableView.getStyleClass().add("table_view_001");
 		this.memberIconTableColumn.getStyleClass().add("table_column_002");
-		
+
 		this.memberSurnameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf2DecryptedProperty());
 		this.memberNameTableColumn.setCellValueFactory(cellData -> cellData.getValue().spInf1DecryptedProperty());
 
@@ -139,7 +140,13 @@ public class TerritoryAssignToMemberDialog {
 		this.memberSurnameTableColumn.setText(this.application.getSettings().getLanguage().getString("TEXT0013"));
 		this.memberNameTableColumn.setText(this.application.getSettings().getLanguage().getString("TEXT0014"));
 
-		this.membersTableView.setItems(this.membersList);
+		this.memberListWithoutDisabled = FXCollections.observableArrayList();
+		this.memberListWithoutDisabled.addAll(this.membersList);
+		this.memberListWithoutDisabled.removeIf(member -> member.isDisabled());
+
+		// this.membersTableView.setItems(this.membersList);
+		this.membersTableView.setItems(this.memberListWithoutDisabled);
+
 		this.membersTableView.setMinWidth(500);
 
 		this.filterTextField.textProperty()
@@ -149,7 +156,7 @@ public class TerritoryAssignToMemberDialog {
 	private void updateFilterMember(String newValue) {
 
 		if (newValue.isEmpty())
-			this.membersTableView.setItems(this.membersList);
+			this.membersTableView.setItems(this.memberListWithoutDisabled);
 		else {
 			ObservableList<Member> filteredMemberList = buildListMember(newValue);
 			this.membersTableView.setItems(filteredMemberList);
@@ -162,7 +169,7 @@ public class TerritoryAssignToMemberDialog {
 
 		ObservableList<Member> list = FXCollections.observableArrayList();
 
-		StreamSupport.stream(this.membersList.spliterator(), false).filter(obj -> matchFilterMember(obj, filter))
+		StreamSupport.stream(this.memberListWithoutDisabled.spliterator(), false).filter(obj -> matchFilterMember(obj, filter))
 				.forEach(obj -> list.add(obj));
 
 		return list;

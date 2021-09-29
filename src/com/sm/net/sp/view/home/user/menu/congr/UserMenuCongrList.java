@@ -12,6 +12,7 @@ import com.sm.net.javafx.AlertDesigner;
 import com.sm.net.project.Language;
 import com.sm.net.sp.Meta;
 import com.sm.net.sp.actions.Actions;
+import com.sm.net.sp.dialogs.territory.TerritoryDialog;
 import com.sm.net.sp.model.EnumPrintLayouts;
 import com.sm.net.sp.model.Family;
 import com.sm.net.sp.model.Member;
@@ -23,6 +24,7 @@ import com.sm.net.sp.view.home.user.menu.congr.task.CongrInitDataLoadTask;
 import com.sm.net.sp.view.printlayout.PrintLayout;
 import com.smnet.core.task.TaskManager;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,6 +104,9 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 	private Button membersUpdateButton;
 	@FXML
 	private Button memberMonitorPrintButton;
+
+	@FXML
+	private Button memberMonitorURLButton;
 
 	@FXML
 	private TextField filterMemberTextField;
@@ -279,6 +284,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.filterFamilyTextField.getStyleClass().add("text_field_001");
 		this.totalFamilyTextField.getStyleClass().add("text_field_002");
 		this.totalFilteredFamilyTextField.getStyleClass().add("text_field_002");
+
+		this.memberMonitorURLButton.getStyleClass().add("button_image_001");
 	}
 
 	public void objectInitialize() {
@@ -389,6 +396,13 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.memberMonitorPrintButton.setText("");
 		this.memberMonitorPrintButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.PRINT));
 
+		Tooltip memberMonitorURLTooltip = new Tooltip(
+				this.language.getString("congregation.members.tooltip.monitorurl"));
+		memberMonitorURLTooltip.getStyleClass().add("tooltip_001");
+		this.memberMonitorURLButton.setTooltip(memberMonitorURLTooltip);
+		this.memberMonitorURLButton.setText("");
+		this.memberMonitorURLButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBERMONITORURL));
+
 		familyIDTableColumn.setText(language.getString("TEXT0005"));
 		familyIDTableColumn.setMinWidth(50);
 		familyIDTableColumn.setMaxWidth(50);
@@ -479,6 +493,8 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		listenerMembersUpdateButton();
 		listenerMembersTableView();
 
+		this.memberMonitorURLButton.setOnAction(event -> openMemberMonitorURL());
+
 		listenerFamilyAddButton();
 		listenerFamilyDeleteButton();
 		listenerFamilyUpdateButton();
@@ -495,6 +511,37 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.familiesMapsButton.setOnAction(event -> viewMaps());
 	}
 
+	private void openMemberMonitorURL() {
+
+		if (this.membersTableView.getSelectionModel().getSelectedIndex() > -1) {
+
+			Member member = this.membersTableView.getSelectionModel().getSelectedItem();
+
+			String spInf47 = member.getSpInf47();
+			if (!spInf47.isEmpty()) {
+
+				String dbUrl = this.settings.getDatabaseUrl();
+				int indexOf = dbUrl.indexOf("exchange.php");
+				if (indexOf > -1) {
+
+					String subDbUrl = dbUrl.substring(0, indexOf);
+					String link = subDbUrl + "monitor/index.php?pwmon=%s&amp;lang=%s";
+					link = String.format(link, spInf47, this.language.getString("sp.monitor.language"));
+
+					TerritoryDialog.show(this.application, this.ownerStage, link);
+				}
+
+			} else {
+				this.application.getAlertBuilder2().error(this.ownerStage,
+						this.language.getString("congregation.member.error.nomembermonitorurl"));
+			}
+
+		} else {
+			this.application.getAlertBuilder2().error(this.ownerStage,
+					this.language.getString("congregation.member.error.nomemberselected"));
+		}
+	}
+
 	private void updateFilterMember(String newValue) {
 
 		if (newValue.isEmpty())
@@ -504,7 +551,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			this.membersTableView.setItems(filteredMemberList);
 		}
 
-		this.membersTableView.refresh();
+		Platform.runLater(() -> this.membersTableView.refresh());
 	}
 
 	private void updateFilterFamily(String newValue) {
@@ -520,7 +567,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 			this.totalFilteredFamilyTextField.setText(String.valueOf(filteredMemberList.size()));
 		}
 
-		this.familiesTableView.refresh();
+		Platform.runLater(() -> this.familiesTableView.refresh());
 	}
 
 	private ObservableList<Member> buildListMember(String filter) {
@@ -844,7 +891,10 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.membersList.sort((a, b) -> (a.getSpInf2Decrypted().concat(a.getSpInf1Decrypted())
 				.compareTo(b.getSpInf2Decrypted().concat(b.getSpInf1Decrypted()))));
 
-		this.membersTableView.setItems(membersList);
+		// Rimuovi i componenti disattivati
+		this.membersList.removeIf(member -> member.isDisabled());
+
+		Platform.runLater(() -> this.membersTableView.setItems(this.membersList));
 
 		// RESET FILTRO
 		this.filterMemberTextField.setText("");
@@ -873,7 +923,7 @@ public class UserMenuCongrList extends UpdateDataAdapter {
 		this.familiesList = list;
 		this.familiesList.sort((a, b) -> a.getSpInf1Decrypted().compareTo(b.getSpInf1Decrypted()));
 
-		this.familiesTableView.setItems(familiesList);
+		Platform.runLater(() -> this.familiesTableView.setItems(this.familiesList));
 
 		// RESET FILTRO
 		this.filterFamilyTextField.setText("");
