@@ -1,6 +1,7 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import com.sm.net.project.Language;
@@ -13,9 +14,12 @@ import com.smnet.core.task.TaskManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
@@ -174,6 +178,46 @@ public class TerritoryEditor {
 	private TextField doc5TitleTextField;
 
 	@FXML
+	private Tab territoryOthersTab;
+
+	@FXML
+	private Label blockedLabel;
+	@FXML
+	private Label archivedLabel;
+	@FXML
+	private Label lastAssignLabel;
+	@FXML
+	private Label lastAssignTextLabel;
+	@FXML
+	private Label lastAssignDate1Label;
+	@FXML
+	private Label lastAssignDate2Label;
+	@FXML
+	private Label note1Label;
+	@FXML
+	private Label note2Label;
+
+	@FXML
+	private CheckBox blockedCheckBox;
+	@FXML
+	private CheckBox archivedCheckBox;
+	@FXML
+	private CheckBox lastAssignCheckBox;
+
+	@FXML
+	private TextField lastAssignTextField;
+
+	@FXML
+	private DatePicker lastAssignDate1DatePicker;
+	@FXML
+	private DatePicker lastAssignDate2DatePicker;
+
+	@FXML
+	private TextArea note1TextArea;
+	@FXML
+	private TextArea note2TextArea;
+
+	@FXML
 	private Button saveButton;
 
 	private Settings settings;
@@ -274,6 +318,29 @@ public class TerritoryEditor {
 		this.doc5TitleTextField.getStyleClass().add("text_field_001");
 
 		this.saveButton.getStyleClass().add("button_image_001");
+
+		this.territoryOthersTab.getStyleClass().add("tab_001");
+
+		this.blockedLabel.getStyleClass().add("label_set_001");
+		this.archivedLabel.getStyleClass().add("label_set_001");
+		this.lastAssignLabel.getStyleClass().add("label_set_001");
+		this.lastAssignTextLabel.getStyleClass().add("label_set_001");
+		this.lastAssignDate1Label.getStyleClass().add("label_set_001");
+		this.lastAssignDate2Label.getStyleClass().add("label_set_001");
+		this.note1Label.getStyleClass().add("label_set_001");
+		this.note2Label.getStyleClass().add("label_set_001");
+
+		this.blockedCheckBox.getStyleClass().add("check_box_set_001");
+		this.archivedCheckBox.getStyleClass().add("check_box_set_001");
+		this.lastAssignCheckBox.getStyleClass().add("check_box_set_001");
+
+		this.lastAssignTextField.getStyleClass().add("text_field_001");
+
+		this.lastAssignDate1DatePicker.getStyleClass().add("combo_box_001");
+		this.lastAssignDate2DatePicker.getStyleClass().add("combo_box_001");
+
+		this.note1TextArea.getStyleClass().add("text_area_001");
+		this.note2TextArea.getStyleClass().add("text_area_001");
 	}
 
 	public void objectInitialize() {
@@ -327,6 +394,22 @@ public class TerritoryEditor {
 			this.doc5TitleTextField.setText(this.selectedTerritory.getSpInf30());
 
 			// I campi da 32 a 40 non sono ancora utilizzati
+
+			this.blockedCheckBox.setSelected(this.selectedTerritory.getSpInf41() == 1);
+			this.archivedCheckBox.setSelected(this.selectedTerritory.getSpInf42() == 1);
+			this.lastAssignCheckBox.setSelected(this.selectedTerritory.getSpInf43() == 1);
+			this.lastAssignTextField.setText(this.selectedTerritory.getSpInf44());
+
+			String date1 = this.selectedTerritory.getSpInf45();
+			if (!date1.isEmpty())
+				this.lastAssignDate1DatePicker.setValue(LocalDate.parse(date1));
+
+			String date2 = this.selectedTerritory.getSpInf46();
+			if (!date2.isEmpty())
+				this.lastAssignDate2DatePicker.setValue(LocalDate.parse(date2));
+
+			this.note1TextArea.setText(this.selectedTerritory.getSpInf47());
+			this.note2TextArea.setText(this.selectedTerritory.getSpInf48());
 		}
 	}
 
@@ -518,6 +601,22 @@ public class TerritoryEditor {
 		this.docsTab.setTooltip(docsTooltip);
 		this.docsTab.setText("");
 		this.docsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.DOCS));
+
+		Tooltip territoryOthersTooltip = new Tooltip(
+				this.language.getString("territoryeditor.tab.tooltip.territoryothers"));
+		territoryOthersTooltip.getStyleClass().add("tooltip_001");
+		this.territoryOthersTab.setTooltip(territoryOthersTooltip);
+		this.territoryOthersTab.setText("");
+		this.territoryOthersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONFIG));
+
+		this.lastAssignLabel.setText(this.language.getString("territoryeditor.label.lastassign"));
+		this.lastAssignTextLabel.setText(this.language.getString("territoryeditor.label.lastassigntext"));
+		this.lastAssignDate1Label.setText(this.language.getString("territoryeditor.label.lastassigndate1"));
+		this.lastAssignDate2Label.setText(this.language.getString("territoryeditor.label.lastassigndate2"));
+		this.blockedLabel.setText(this.language.getString("territoryeditor.label.blocked"));
+		this.archivedLabel.setText(this.language.getString("territoryeditor.label.archived"));
+		this.note1Label.setText(this.language.getString("territoryeditor.label.note1"));
+		this.note2Label.setText(this.language.getString("territoryeditor.label.note2"));
 	}
 
 	public Settings getSettings() {
@@ -838,5 +937,429 @@ public class TerritoryEditor {
 
 	public void setSelectedTerritory(TerritoryObj selectedTerritory) {
 		this.selectedTerritory = selectedTerritory;
+	}
+
+	public TabPane getTerritoryTabPane() {
+		return territoryTabPane;
+	}
+
+	public Tab getTerritoryInfoTab() {
+		return territoryInfoTab;
+	}
+
+	public Label getTerritoryNumberLabel() {
+		return territoryNumberLabel;
+	}
+
+	public Label getTerritoryNameLabel() {
+		return territoryNameLabel;
+	}
+
+	public Label getTerritoryCoordinatesLabel() {
+		return territoryCoordinatesLabel;
+	}
+
+	public Label getTerritoryLandLabel() {
+		return territoryLandLabel;
+	}
+
+	public Label getTerritoryLandkreisLabel() {
+		return territoryLandkreisLabel;
+	}
+
+	public Label getTerritoryKreisstadtLabel() {
+		return territoryKreisstadtLabel;
+	}
+
+	public Label getTerritoryOrtLabel() {
+		return territoryOrtLabel;
+	}
+
+	public Label getTerritoryZipCodeLabel() {
+		return territoryZipCodeLabel;
+	}
+
+	public Label getTerritoryOrtsteilLabel() {
+		return territoryOrtsteilLabel;
+	}
+
+	public Label getTerritoryMyMapsIDLabel() {
+		return territoryMyMapsIDLabel;
+	}
+
+	public Label getTerritoryViewerIDLabel() {
+		return territoryViewerIDLabel;
+	}
+
+	public Tab getImagesTab() {
+		return imagesTab;
+	}
+
+	public Label getImage1Label() {
+		return image1Label;
+	}
+
+	public Label getImage2Label() {
+		return image2Label;
+	}
+
+	public Label getImage3Label() {
+		return image3Label;
+	}
+
+	public Label getImage4Label() {
+		return image4Label;
+	}
+
+	public Label getImage5Label() {
+		return image5Label;
+	}
+
+	public Label getImage1TitleLabel() {
+		return image1TitleLabel;
+	}
+
+	public Label getImage2TitleLabel() {
+		return image2TitleLabel;
+	}
+
+	public Label getImage3TitleLabel() {
+		return image3TitleLabel;
+	}
+
+	public Label getImage4TitleLabel() {
+		return image4TitleLabel;
+	}
+
+	public Tab getDocsTab() {
+		return docsTab;
+	}
+
+	public Label getDoc1Label() {
+		return doc1Label;
+	}
+
+	public Label getDoc2Label() {
+		return doc2Label;
+	}
+
+	public Label getDoc3Label() {
+		return doc3Label;
+	}
+
+	public Label getDoc4Label() {
+		return doc4Label;
+	}
+
+	public Label getDoc5Label() {
+		return doc5Label;
+	}
+
+	public Label getDoc1TitleLabel() {
+		return doc1TitleLabel;
+	}
+
+	public Label getDoc2TitleLabel() {
+		return doc2TitleLabel;
+	}
+
+	public Label getDoc3TitleLabel() {
+		return doc3TitleLabel;
+	}
+
+	public Label getDoc4TitleLabel() {
+		return doc4TitleLabel;
+	}
+
+	public Label getDoc5TitleLabel() {
+		return doc5TitleLabel;
+	}
+
+	public Tab getTerritoryOthersTab() {
+		return territoryOthersTab;
+	}
+
+	public Label getBlockedLabel() {
+		return blockedLabel;
+	}
+
+	public Label getArchivedLabel() {
+		return archivedLabel;
+	}
+
+	public Label getLastAssignLabel() {
+		return lastAssignLabel;
+	}
+
+	public Label getLastAssignTextLabel() {
+		return lastAssignTextLabel;
+	}
+
+	public Label getLastAssignDate1Label() {
+		return lastAssignDate1Label;
+	}
+
+	public Label getLastAssignDate2Label() {
+		return lastAssignDate2Label;
+	}
+
+	public Label getNote1Label() {
+		return note1Label;
+	}
+
+	public Label getNote2Label() {
+		return note2Label;
+	}
+
+	public CheckBox getBlockedCheckBox() {
+		return blockedCheckBox;
+	}
+
+	public CheckBox getArchivedCheckBox() {
+		return archivedCheckBox;
+	}
+
+	public CheckBox getLastAssignCheckBox() {
+		return lastAssignCheckBox;
+	}
+
+	public TextField getLastAssignTextField() {
+		return lastAssignTextField;
+	}
+
+	public DatePicker getLastAssignDate1DatePicker() {
+		return lastAssignDate1DatePicker;
+	}
+
+	public DatePicker getLastAssignDate2DatePicker() {
+		return lastAssignDate2DatePicker;
+	}
+
+	public TextArea getNote1TextArea() {
+		return note1TextArea;
+	}
+
+	public TextArea getNote2TextArea() {
+		return note2TextArea;
+	}
+
+	public Button getSaveButton() {
+		return saveButton;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setTerritoryTabPane(TabPane territoryTabPane) {
+		this.territoryTabPane = territoryTabPane;
+	}
+
+	public void setTerritoryInfoTab(Tab territoryInfoTab) {
+		this.territoryInfoTab = territoryInfoTab;
+	}
+
+	public void setTerritoryNumberLabel(Label territoryNumberLabel) {
+		this.territoryNumberLabel = territoryNumberLabel;
+	}
+
+	public void setTerritoryNameLabel(Label territoryNameLabel) {
+		this.territoryNameLabel = territoryNameLabel;
+	}
+
+	public void setTerritoryCoordinatesLabel(Label territoryCoordinatesLabel) {
+		this.territoryCoordinatesLabel = territoryCoordinatesLabel;
+	}
+
+	public void setTerritoryLandLabel(Label territoryLandLabel) {
+		this.territoryLandLabel = territoryLandLabel;
+	}
+
+	public void setTerritoryLandkreisLabel(Label territoryLandkreisLabel) {
+		this.territoryLandkreisLabel = territoryLandkreisLabel;
+	}
+
+	public void setTerritoryKreisstadtLabel(Label territoryKreisstadtLabel) {
+		this.territoryKreisstadtLabel = territoryKreisstadtLabel;
+	}
+
+	public void setTerritoryOrtLabel(Label territoryOrtLabel) {
+		this.territoryOrtLabel = territoryOrtLabel;
+	}
+
+	public void setTerritoryZipCodeLabel(Label territoryZipCodeLabel) {
+		this.territoryZipCodeLabel = territoryZipCodeLabel;
+	}
+
+	public void setTerritoryOrtsteilLabel(Label territoryOrtsteilLabel) {
+		this.territoryOrtsteilLabel = territoryOrtsteilLabel;
+	}
+
+	public void setTerritoryMyMapsIDLabel(Label territoryMyMapsIDLabel) {
+		this.territoryMyMapsIDLabel = territoryMyMapsIDLabel;
+	}
+
+	public void setTerritoryViewerIDLabel(Label territoryViewerIDLabel) {
+		this.territoryViewerIDLabel = territoryViewerIDLabel;
+	}
+
+	public void setImagesTab(Tab imagesTab) {
+		this.imagesTab = imagesTab;
+	}
+
+	public void setImage1Label(Label image1Label) {
+		this.image1Label = image1Label;
+	}
+
+	public void setImage2Label(Label image2Label) {
+		this.image2Label = image2Label;
+	}
+
+	public void setImage3Label(Label image3Label) {
+		this.image3Label = image3Label;
+	}
+
+	public void setImage4Label(Label image4Label) {
+		this.image4Label = image4Label;
+	}
+
+	public void setImage5Label(Label image5Label) {
+		this.image5Label = image5Label;
+	}
+
+	public void setImage1TitleLabel(Label image1TitleLabel) {
+		this.image1TitleLabel = image1TitleLabel;
+	}
+
+	public void setImage2TitleLabel(Label image2TitleLabel) {
+		this.image2TitleLabel = image2TitleLabel;
+	}
+
+	public void setImage3TitleLabel(Label image3TitleLabel) {
+		this.image3TitleLabel = image3TitleLabel;
+	}
+
+	public void setImage4TitleLabel(Label image4TitleLabel) {
+		this.image4TitleLabel = image4TitleLabel;
+	}
+
+	public void setDocsTab(Tab docsTab) {
+		this.docsTab = docsTab;
+	}
+
+	public void setDoc1Label(Label doc1Label) {
+		this.doc1Label = doc1Label;
+	}
+
+	public void setDoc2Label(Label doc2Label) {
+		this.doc2Label = doc2Label;
+	}
+
+	public void setDoc3Label(Label doc3Label) {
+		this.doc3Label = doc3Label;
+	}
+
+	public void setDoc4Label(Label doc4Label) {
+		this.doc4Label = doc4Label;
+	}
+
+	public void setDoc5Label(Label doc5Label) {
+		this.doc5Label = doc5Label;
+	}
+
+	public void setDoc1TitleLabel(Label doc1TitleLabel) {
+		this.doc1TitleLabel = doc1TitleLabel;
+	}
+
+	public void setDoc2TitleLabel(Label doc2TitleLabel) {
+		this.doc2TitleLabel = doc2TitleLabel;
+	}
+
+	public void setDoc3TitleLabel(Label doc3TitleLabel) {
+		this.doc3TitleLabel = doc3TitleLabel;
+	}
+
+	public void setDoc4TitleLabel(Label doc4TitleLabel) {
+		this.doc4TitleLabel = doc4TitleLabel;
+	}
+
+	public void setDoc5TitleLabel(Label doc5TitleLabel) {
+		this.doc5TitleLabel = doc5TitleLabel;
+	}
+
+	public void setTerritoryOthersTab(Tab territoryOthersTab) {
+		this.territoryOthersTab = territoryOthersTab;
+	}
+
+	public void setBlockedLabel(Label blockedLabel) {
+		this.blockedLabel = blockedLabel;
+	}
+
+	public void setArchivedLabel(Label archivedLabel) {
+		this.archivedLabel = archivedLabel;
+	}
+
+	public void setLastAssignLabel(Label lastAssignLabel) {
+		this.lastAssignLabel = lastAssignLabel;
+	}
+
+	public void setLastAssignTextLabel(Label lastAssignTextLabel) {
+		this.lastAssignTextLabel = lastAssignTextLabel;
+	}
+
+	public void setLastAssignDate1Label(Label lastAssignDate1Label) {
+		this.lastAssignDate1Label = lastAssignDate1Label;
+	}
+
+	public void setLastAssignDate2Label(Label lastAssignDate2Label) {
+		this.lastAssignDate2Label = lastAssignDate2Label;
+	}
+
+	public void setNote1Label(Label note1Label) {
+		this.note1Label = note1Label;
+	}
+
+	public void setNote2Label(Label note2Label) {
+		this.note2Label = note2Label;
+	}
+
+	public void setBlockedCheckBox(CheckBox blockedCheckBox) {
+		this.blockedCheckBox = blockedCheckBox;
+	}
+
+	public void setArchivedCheckBox(CheckBox archivedCheckBox) {
+		this.archivedCheckBox = archivedCheckBox;
+	}
+
+	public void setLastAssignCheckBox(CheckBox lastAssignCheckBox) {
+		this.lastAssignCheckBox = lastAssignCheckBox;
+	}
+
+	public void setLastAssignTextField(TextField lastAssignTextField) {
+		this.lastAssignTextField = lastAssignTextField;
+	}
+
+	public void setLastAssignDate1DatePicker(DatePicker lastAssignDate1DatePicker) {
+		this.lastAssignDate1DatePicker = lastAssignDate1DatePicker;
+	}
+
+	public void setLastAssignDate2DatePicker(DatePicker lastAssignDate2DatePicker) {
+		this.lastAssignDate2DatePicker = lastAssignDate2DatePicker;
+	}
+
+	public void setNote1TextArea(TextArea note1TextArea) {
+		this.note1TextArea = note1TextArea;
+	}
+
+	public void setNote2TextArea(TextArea note2TextArea) {
+		this.note2TextArea = note2TextArea;
+	}
+
+	public void setSaveButton(Button saveButton) {
+		this.saveButton = saveButton;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 }

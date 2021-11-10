@@ -56,7 +56,16 @@ if (isset ( $jsonObj ["id"] ) && isset ( $jsonObj ["spInf1"] ) && isset ( $jsonO
         $query .= "spInf37='" . $jsonObj ["spInf37"] . "', ";
         $query .= "spInf38='" . $jsonObj ["spInf38"] . "', ";
         $query .= "spInf39='" . $jsonObj ["spInf39"] . "', ";
-        $query .= "spInf40='" . $jsonObj ["spInf40"] . "' ";
+        $query .= "spInf40='" . $jsonObj ["spInf40"] . "', ";
+
+        $query .= "spInf41=" . $jsonObj ["spInf41"] . ", ";
+        $query .= "spInf42=" . $jsonObj ["spInf42"] . ", ";
+        $query .= "spInf43=" . $jsonObj ["spInf43"] . ", ";
+        $query .= "spInf44='" . $jsonObj ["spInf44"] . "', ";
+        $query .= "spInf45='" . $jsonObj ["spInf45"] . "', ";
+        $query .= "spInf46='" . $jsonObj ["spInf46"] . "', ";
+        $query .= "spInf47='" . $jsonObj ["spInf47"] . "', ";
+        $query .= "spInf48='" . $jsonObj ["spInf48"] . "' ";
 
         $query .= "WHERE id=". $jsonObj ["id"];
         

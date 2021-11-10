@@ -64,6 +64,15 @@ public class TerritoryObj {
 	private StringProperty spInf39;
 	private StringProperty spInf40;
 
+	private IntegerProperty spInf41;
+	private IntegerProperty spInf42;
+	private IntegerProperty spInf43;
+	private StringProperty spInf44;
+	private StringProperty spInf45;
+	private StringProperty spInf46;
+	private StringProperty spInf47;
+	private StringProperty spInf48;
+
 	private Member assignedMember;
 	private ObjectProperty<LocalDate> assignedDate;
 
@@ -113,6 +122,15 @@ public class TerritoryObj {
 		this.spInf39 = new SimpleStringProperty();
 		this.spInf40 = new SimpleStringProperty();
 
+		this.spInf41 = new SimpleIntegerProperty();
+		this.spInf42 = new SimpleIntegerProperty();
+		this.spInf43 = new SimpleIntegerProperty();
+		this.spInf44 = new SimpleStringProperty();
+		this.spInf45 = new SimpleStringProperty();
+		this.spInf46 = new SimpleStringProperty();
+		this.spInf47 = new SimpleStringProperty();
+		this.spInf48 = new SimpleStringProperty();
+
 		this.assignedDate = new SimpleObjectProperty<>();
 	}
 
@@ -146,13 +164,13 @@ public class TerritoryObj {
 		String spInf16 = Crypt.encrypt(editor.getImage3TitleTextField().getText(), sk);
 		String spInf17 = Crypt.encrypt(editor.getImage4TextField().getText(), sk);
 		String spInf18 = Crypt.encrypt(editor.getImage4TitleTextField().getText(), sk);
-		
+
 //		String spInf19 = Crypt.encrypt(editor.getImage5TextField().getText(), sk);
 //		String spInf20 = Crypt.encrypt(editor.getImage5TitleTextField().getText(), sk);
 		String spInf19 = editor.getImage5TextField().getText();
 //		String spInf20 = editor.getImage5TitleTextField().getText();
 		String spInf20 = "";
-		
+
 		String spInf21 = Crypt.encrypt(editor.getDoc1TextField().getText(), sk);
 		String spInf22 = Crypt.encrypt(editor.getDoc1TitleTextField().getText(), sk);
 		String spInf23 = Crypt.encrypt(editor.getDoc2TextField().getText(), sk);
@@ -176,6 +194,20 @@ public class TerritoryObj {
 		String spInf38 = emptyStringEncrypted;
 		String spInf39 = emptyStringEncrypted;
 		String spInf40 = emptyStringEncrypted;
+
+		int spInf41 = editor.getBlockedCheckBox().isSelected() ? 1 : 0;
+		int spInf42 = editor.getArchivedCheckBox().isSelected() ? 1 : 0;
+		int spInf43 = editor.getLastAssignCheckBox().isSelected() ? 1 : 0;
+		String spInf44 = Crypt.encrypt(editor.getLastAssignTextField().getText(), sk);
+
+		LocalDate date1 = editor.getLastAssignDate1DatePicker().getValue();
+		String spInf45 = date1 != null ? Crypt.encrypt(date1.toString(), sk) : emptyStringEncrypted;
+
+		LocalDate date2 = editor.getLastAssignDate2DatePicker().getValue();
+		String spInf46 = date2 != null ? Crypt.encrypt(date2.toString(), sk) : emptyStringEncrypted;
+
+		String spInf47 = editor.getNote1TextArea().getText();
+		String spInf48 = Crypt.encrypt(editor.getNote2TextArea().getText(), sk);
 
 		// Set data
 
@@ -226,6 +258,15 @@ public class TerritoryObj {
 		territory.setSpInf39(spInf39);
 		territory.setSpInf40(spInf40);
 
+		territory.setSpInf41(spInf41);
+		territory.setSpInf42(spInf42);
+		territory.setSpInf43(spInf43);
+		territory.setSpInf44(spInf44);
+		territory.setSpInf45(spInf45);
+		territory.setSpInf46(spInf46);
+		territory.setSpInf47(spInf47);
+		territory.setSpInf48(spInf48);
+
 		return territory;
 	}
 
@@ -264,7 +305,7 @@ public class TerritoryObj {
 //		String spInf20 = Crypt.decrypt(json.getString("spInf20"), secretKey);
 		String spInf19 = json.getString("spInf19");
 		String spInf20 = json.getString("spInf20");
-		
+
 		String spInf21 = Crypt.decrypt(json.getString("spInf21"), secretKey);
 		String spInf22 = Crypt.decrypt(json.getString("spInf22"), secretKey);
 		String spInf23 = Crypt.decrypt(json.getString("spInf23"), secretKey);
@@ -285,6 +326,15 @@ public class TerritoryObj {
 		String spInf38 = Crypt.decrypt(json.getString("spInf38"), secretKey);
 		String spInf39 = Crypt.decrypt(json.getString("spInf39"), secretKey);
 		String spInf40 = Crypt.decrypt(json.getString("spInf40"), secretKey);
+
+		int spInf41 = json.getInt("spInf41");
+		int spInf42 = json.getInt("spInf42");
+		int spInf43 = json.getInt("spInf43");
+		String spInf44 = Crypt.decrypt(json.getString("spInf44"), secretKey);
+		String spInf45 = Crypt.decrypt(json.getString("spInf45"), secretKey);
+		String spInf46 = Crypt.decrypt(json.getString("spInf46"), secretKey);
+		String spInf47 = json.getString("spInf47");
+		String spInf48 = Crypt.decrypt(json.getString("spInf48"), secretKey);
 
 		territory.setSpTerritoryID(id);
 		territory.setSpInf1(spInf1);
@@ -327,6 +377,15 @@ public class TerritoryObj {
 		territory.setSpInf38(spInf38);
 		territory.setSpInf39(spInf39);
 		territory.setSpInf40(spInf40);
+
+		territory.setSpInf41(spInf41);
+		territory.setSpInf42(spInf42);
+		territory.setSpInf43(spInf43);
+		territory.setSpInf44(spInf44);
+		territory.setSpInf45(spInf45);
+		territory.setSpInf46(spInf46);
+		territory.setSpInf47(spInf47);
+		territory.setSpInf48(spInf48);
 
 		return territory;
 	}
@@ -876,6 +935,102 @@ public class TerritoryObj {
 
 	public final void setSpInf40(final String spInf40) {
 		this.spInf40Property().set(spInf40);
+	}
+
+	public final IntegerProperty spInf41Property() {
+		return this.spInf41;
+	}
+
+	public final int getSpInf41() {
+		return this.spInf41.get();
+	}
+
+	public final void setSpInf41(final int spInf41) {
+		this.spInf41Property().set(spInf41);
+	}
+
+	public final IntegerProperty spInf42Property() {
+		return this.spInf42;
+	}
+
+	public final int getSpInf42() {
+		return this.spInf42.get();
+	}
+
+	public final void setSpInf42(final int spInf42) {
+		this.spInf42Property().set(spInf42);
+	}
+
+	public final IntegerProperty spInf43Property() {
+		return this.spInf43;
+	}
+
+	public final int getSpInf43() {
+		return this.spInf43.get();
+	}
+
+	public final void setSpInf43(final int spInf43) {
+		this.spInf43Property().set(spInf43);
+	}
+
+	public final StringProperty spInf44Property() {
+		return this.spInf44;
+	}
+
+	public final String getSpInf44() {
+		return this.spInf44.get();
+	}
+
+	public final void setSpInf44(final String spInf44) {
+		this.spInf44Property().set(spInf44);
+	}
+
+	public final StringProperty spInf45Property() {
+		return this.spInf45;
+	}
+
+	public final String getSpInf45() {
+		return this.spInf45.get();
+	}
+
+	public final void setSpInf45(final String spInf45) {
+		this.spInf45Property().set(spInf45);
+	}
+
+	public final StringProperty spInf46Property() {
+		return this.spInf46;
+	}
+
+	public final String getSpInf46() {
+		return this.spInf46.get();
+	}
+
+	public final void setSpInf46(final String spInf46) {
+		this.spInf46Property().set(spInf46);
+	}
+
+	public final StringProperty spInf47Property() {
+		return this.spInf47;
+	}
+
+	public final String getSpInf47() {
+		return this.spInf47.get();
+	}
+
+	public final void setSpInf47(final String spInf47) {
+		this.spInf47Property().set(spInf47);
+	}
+
+	public final StringProperty spInf48Property() {
+		return this.spInf48;
+	}
+
+	public final String getSpInf48() {
+		return this.spInf48.get();
+	}
+
+	public final void setSpInf48(final String spInf48) {
+		this.spInf48Property().set(spInf48);
 	}
 
 	public Member getAssignedMember() {

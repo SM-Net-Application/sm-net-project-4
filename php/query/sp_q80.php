@@ -64,6 +64,15 @@ if (! $database) {
         $row ["spInf39"] = $resultRow ["spInf39"];
         $row ["spInf40"] = $resultRow ["spInf40"];
 
+        $row ["spInf41"] = $resultRow ["spInf41"];
+        $row ["spInf42"] = $resultRow ["spInf42"];
+        $row ["spInf43"] = $resultRow ["spInf43"];
+        $row ["spInf44"] = $resultRow ["spInf44"];
+        $row ["spInf45"] = $resultRow ["spInf45"];
+        $row ["spInf46"] = $resultRow ["spInf46"];
+        $row ["spInf47"] = $resultRow ["spInf47"];
+        $row ["spInf48"] = $resultRow ["spInf48"];
+
         array_push ( $response ["result"], $row );
         
     }

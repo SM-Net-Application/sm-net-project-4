@@ -13,7 +13,7 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
 
     } else {
 
-        $query = "INSERT INTO sp_territory (spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40) VALUES (";
+        $query = "INSERT INTO sp_territory (spInf1, spInf2, spInf3, spInf4, spInf5, spInf6, spInf7, spInf8, spInf9, spInf10, spInf11, spInf12, spInf13, spInf14, spInf15, spInf16, spInf17, spInf18, spInf19, spInf20, spInf21, spInf22, spInf23, spInf24, spInf25, spInf26, spInf27, spInf28, spInf29, spInf30, spInf31, spInf32, spInf33, spInf34, spInf35, spInf36, spInf37, spInf38, spInf39, spInf40, spInf41, spInf42, spInf43, spInf44, spInf45, spInf46, spInf47, spInf48) VALUES (";
         $query .= "'" . $jsonObj ["spInf1"] . "', ";
         $query .= "'" . $jsonObj ["spInf2"] . "', ";
         $query .= "'" . $jsonObj ["spInf3"] . "', ";
@@ -53,7 +53,17 @@ if (isset ( $jsonObj ["spInf1"] ) && isset ( $jsonObj ["spInf2"] ) && isset ( $j
         $query .= "'" . $jsonObj ["spInf37"] . "', ";
         $query .= "'" . $jsonObj ["spInf38"] . "', ";
         $query .= "'" . $jsonObj ["spInf39"] . "', ";
-        $query .= "'" . $jsonObj ["spInf40"] . "'";
+        $query .= "'" . $jsonObj ["spInf40"] . "', ";
+
+        $query .= $jsonObj ["spInf41"] . ", ";
+        $query .= $jsonObj ["spInf42"] . ", ";
+        $query .= $jsonObj ["spInf43"] . ", ";
+        $query .= "'" . $jsonObj ["spInf44"] . "', ";
+        $query .= "'" . $jsonObj ["spInf45"] . "', ";
+        $query .= "'" . $jsonObj ["spInf46"] . "', ";
+        $query .= "'" . $jsonObj ["spInf47"] . "', ";
+        $query .= "'" . $jsonObj ["spInf48"] . "'";
+
         $query .= ")";
 
         if ($database->query ( $query ) === TRUE) {

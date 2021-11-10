@@ -1,5 +1,6 @@
 package com.sm.net.sp.view.home.user.menu.territory;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import com.sm.net.project.Language;
@@ -9,9 +10,12 @@ import com.sm.net.sp.settings.Settings;
 import com.sm.net.sp.view.SupportPlannerView;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
@@ -169,6 +173,46 @@ public class TerritoryViewer {
 	@FXML
 	private TextField doc5TitleTextField;
 
+	@FXML
+	private Tab territoryOthersTab;
+	
+	@FXML
+	private Label blockedLabel;
+	@FXML
+	private Label archivedLabel;
+	@FXML
+	private Label lastAssignLabel;
+	@FXML
+	private Label lastAssignTextLabel;
+	@FXML
+	private Label lastAssignDate1Label;
+	@FXML
+	private Label lastAssignDate2Label;
+	@FXML
+	private Label note1Label;
+	@FXML
+	private Label note2Label;
+	
+	@FXML
+	private CheckBox blockedCheckBox;
+	@FXML
+	private CheckBox archivedCheckBox;
+	@FXML
+	private CheckBox lastAssignCheckBox;
+	
+	@FXML
+	private TextField lastAssignTextField;
+	
+	@FXML
+	private DatePicker lastAssignDate1DatePicker;
+	@FXML
+	private DatePicker lastAssignDate2DatePicker;
+	
+	@FXML
+	private TextArea note1TextArea;
+	@FXML
+	private TextArea note2TextArea;
+	
 	private Settings settings;
 	private Language language;
 	private Stage ownerStage;
@@ -266,6 +310,28 @@ public class TerritoryViewer {
 		this.doc5TextField.getStyleClass().add("text_field_001");
 		this.doc5TitleTextField.getStyleClass().add("text_field_001");
 
+		this.territoryOthersTab.getStyleClass().add("tab_001");
+		
+		this.blockedLabel.getStyleClass().add("label_set_001");
+		this.archivedLabel.getStyleClass().add("label_set_001");
+		this.lastAssignLabel.getStyleClass().add("label_set_001");
+		this.lastAssignTextLabel.getStyleClass().add("label_set_001");
+		this.lastAssignDate1Label.getStyleClass().add("label_set_001");
+		this.lastAssignDate2Label.getStyleClass().add("label_set_001");
+		this.note1Label.getStyleClass().add("label_set_001");
+		this.note2Label.getStyleClass().add("label_set_001");
+		
+		this.blockedCheckBox.getStyleClass().add("check_box_set_001");
+		this.archivedCheckBox.getStyleClass().add("check_box_set_001");
+		this.lastAssignCheckBox.getStyleClass().add("check_box_set_001");
+		
+		this.lastAssignTextField.getStyleClass().add("text_field_001");
+		
+		this.lastAssignDate1DatePicker.getStyleClass().add("combo_box_001");
+		this.lastAssignDate2DatePicker.getStyleClass().add("combo_box_001");
+		
+		this.note1TextArea.getStyleClass().add("text_area_001");
+		this.note2TextArea.getStyleClass().add("text_area_001");
 	}
 
 	public void objectInitialize() {
@@ -319,6 +385,22 @@ public class TerritoryViewer {
 			this.doc5TitleTextField.setText(this.selectedTerritory.getSpInf30());
 
 			// I campi da 32 a 40 non sono ancora utilizzati
+			
+			this.blockedCheckBox.setSelected(this.selectedTerritory.getSpInf41() == 1);
+			this.archivedCheckBox.setSelected(this.selectedTerritory.getSpInf42() == 1);
+			this.lastAssignCheckBox.setSelected(this.selectedTerritory.getSpInf43() == 1);
+			this.lastAssignTextField.setText(this.selectedTerritory.getSpInf44());
+
+			String date1 = this.selectedTerritory.getSpInf45();
+			if (!date1.isEmpty())
+				this.lastAssignDate1DatePicker.setValue(LocalDate.parse(date1));
+
+			String date2 = this.selectedTerritory.getSpInf46();
+			if (!date2.isEmpty())
+				this.lastAssignDate2DatePicker.setValue(LocalDate.parse(date2));
+
+			this.note1TextArea.setText(this.selectedTerritory.getSpInf47());
+			this.note2TextArea.setText(this.selectedTerritory.getSpInf48());
 		}
 	}
 
@@ -395,6 +477,22 @@ public class TerritoryViewer {
 		this.docsTab.setText("");
 		this.docsTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.DOCS));
 
+		Tooltip territoryOthersTooltip = new Tooltip(
+				this.language.getString("territoryeditor.tab.tooltip.territoryothers"));
+		territoryOthersTooltip.getStyleClass().add("tooltip_001");
+		this.territoryOthersTab.setTooltip(territoryOthersTooltip);
+		this.territoryOthersTab.setText("");
+		this.territoryOthersTab.setGraphic(Meta.Resources.imageForTab(Meta.Resources.CONFIG));
+		
+		this.lastAssignLabel.setText(this.language.getString("territoryeditor.label.lastassign"));
+		this.lastAssignTextLabel.setText(this.language.getString("territoryeditor.label.lastassigntext"));
+		this.lastAssignDate1Label.setText(this.language.getString("territoryeditor.label.lastassigndate1"));
+		this.lastAssignDate2Label.setText(this.language.getString("territoryeditor.label.lastassigndate2"));
+		this.blockedLabel.setText(this.language.getString("territoryeditor.label.blocked"));
+		this.archivedLabel.setText(this.language.getString("territoryeditor.label.archived"));
+		this.note1Label.setText(this.language.getString("territoryeditor.label.note1"));
+		this.note2Label.setText(this.language.getString("territoryeditor.label.note2"));
+		
 		setReadOnly();
 	}
 
@@ -433,6 +531,15 @@ public class TerritoryViewer {
 		this.doc4TextField.setEditable(false);
 		this.doc5TitleTextField.setEditable(false);
 		this.doc5TextField.setEditable(false);
+		
+		this.blockedCheckBox.setDisable(true);
+		this.archivedCheckBox.setDisable(true);
+		this.lastAssignCheckBox.setDisable(true);
+		this.lastAssignTextField.setEditable(false);
+		this.lastAssignDate1DatePicker.setDisable(true);
+		this.lastAssignDate2DatePicker.setDisable(true);
+		this.note1TextArea.setEditable(false);
+		this.note2TextArea.setEditable(false);
 	}
 
 	public Settings getSettings() {

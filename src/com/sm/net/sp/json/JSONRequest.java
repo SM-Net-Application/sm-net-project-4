@@ -1489,6 +1489,15 @@ public class JSONRequest {
 		jsonObj.put("spInf38", obj.getSpInf38());
 		jsonObj.put("spInf39", obj.getSpInf39());
 		jsonObj.put("spInf40", obj.getSpInf40());
+		
+		jsonObj.put("spInf41", obj.getSpInf41());
+		jsonObj.put("spInf42", obj.getSpInf42());
+		jsonObj.put("spInf43", obj.getSpInf43());
+		jsonObj.put("spInf44", obj.getSpInf44());
+		jsonObj.put("spInf45", obj.getSpInf45());
+		jsonObj.put("spInf46", obj.getSpInf46());
+		jsonObj.put("spInf47", obj.getSpInf47());
+		jsonObj.put("spInf48", obj.getSpInf48());
 
 		return jsonObj;
 	}
@@ -1544,6 +1553,15 @@ public class JSONRequest {
 		jsonObj.put("spInf38", obj.getSpInf38());
 		jsonObj.put("spInf39", obj.getSpInf39());
 		jsonObj.put("spInf40", obj.getSpInf40());
+		
+		jsonObj.put("spInf41", obj.getSpInf41());
+		jsonObj.put("spInf42", obj.getSpInf42());
+		jsonObj.put("spInf43", obj.getSpInf43());
+		jsonObj.put("spInf44", obj.getSpInf44());
+		jsonObj.put("spInf45", obj.getSpInf45());
+		jsonObj.put("spInf46", obj.getSpInf46());
+		jsonObj.put("spInf47", obj.getSpInf47());
+		jsonObj.put("spInf48", obj.getSpInf48());
 
 		return jsonObj;
 	}
