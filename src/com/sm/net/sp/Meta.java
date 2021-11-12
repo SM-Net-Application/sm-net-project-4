@@ -450,5 +450,13 @@ public class Meta {
 
 			return imageView;
 		}
+		
+		public static ImageView imageForTableColumnRow(String imageName) {
+
+			Image image = getImageFromResources(imageName, 25, 25);
+			ImageView imageView = new ImageView(image);
+
+			return imageView;
+		}
 	}
 }

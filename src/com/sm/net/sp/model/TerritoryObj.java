@@ -4,6 +4,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import javax.crypto.SecretKey;
@@ -19,6 +20,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 
 public class TerritoryObj {
 
@@ -76,6 +78,10 @@ public class TerritoryObj {
 	private Member assignedMember;
 	private ObjectProperty<LocalDate> assignedDate;
 
+	private ObjectProperty<LocalDate> lastDoneDate;
+
+	private ObjectProperty<LocalDate> preacherLastDoneDate;
+
 	public TerritoryObj() {
 		super();
 
@@ -132,6 +138,10 @@ public class TerritoryObj {
 		this.spInf48 = new SimpleStringProperty();
 
 		this.assignedDate = new SimpleObjectProperty<>();
+
+		this.lastDoneDate = new SimpleObjectProperty<>();
+		this.preacherLastDoneDate = new SimpleObjectProperty<>();
+
 	}
 
 	public static TerritoryObj newInstanceByView(TerritoryEditor editor, SecretKey sk) {
@@ -437,12 +447,59 @@ public class TerritoryObj {
 		return this.getAssignedMember() == null;
 	}
 
+	public boolean isBlocked() {
+		return this.getSpInf41() == 1;
+	}
+
 	public void updateAssignedMember(Member member) {
 		this.setAssignedMember(member);
 	}
 
 	public void updateAssignedDate(LocalDate assignedDate) {
 		this.setAssignedDate(assignedDate);
+	}
+
+	public void checkLastDoneDate(TerritoryRegistry territoryRegistry) {
+
+		ObservableList<TerritoryRegistryEntity> entityList = territoryRegistry
+				.findTerritoryEntityList(this.getSpTerritoryID());
+
+		if (!entityList.isEmpty()) {
+
+			entityList.sort((a1, a2) -> a2.getEndDate().compareTo(a1.getEndDate()));
+			TerritoryRegistryEntity registryEntity = entityList.get(0);
+			if (registryEntity != null)
+				this.lastDoneDate.set(registryEntity.getEndDate());
+		}
+	}
+
+	public LocalDate ownGetLastDoneDate() {
+
+		LocalDate lastDoneDate = this.getLastDoneDate();
+		return lastDoneDate != null ? lastDoneDate : LocalDate.of(1901, Month.JANUARY, 1);
+	}
+
+	public void checkPreacherLastDoneDate(Member selectedMember, TerritoryRegistry territoryRegistry) {
+
+		ObservableList<TerritoryRegistryEntity> entityList = territoryRegistry
+				.findTerritoryEntityList(this.getSpTerritoryID());
+
+		entityList.sort((a1, a2) -> a2.getEndDate().compareTo(a1.getEndDate()));
+
+		if (!entityList.isEmpty()) {
+
+			boolean found = false;
+			for (TerritoryRegistryEntity entity : entityList) {
+
+				// TODO: is SPINF2 MemberID?
+				if (entity.getSpInf2() == selectedMember.getSpMemberID()) {
+					this.preacherLastDoneDate.set(entity.getEndDate());
+					break;
+				}
+			}
+			if (!found)
+				this.preacherLastDoneDate.set(null);
+		}
 	}
 
 	public final IntegerProperty spTerritoryIDProperty() {
@@ -1053,4 +1110,27 @@ public class TerritoryObj {
 		this.assignedDateProperty().set(assignedDate);
 	}
 
+	public final ObjectProperty<LocalDate> lastDoneDateProperty() {
+		return this.lastDoneDate;
+	}
+
+	public final LocalDate getLastDoneDate() {
+		return this.lastDoneDate.get();
+	}
+
+	public final void setLastDoneDate(final LocalDate lastDoneDate) {
+		this.lastDoneDateProperty().set(lastDoneDate);
+	}
+
+	public final ObjectProperty<LocalDate> preacherLastDoneDateProperty() {
+		return this.preacherLastDoneDate;
+	}
+
+	public final LocalDate getPreacherLastDoneDate() {
+		return this.preacherLastDoneDate.get();
+	}
+
+	public final void setPreacherLastDoneDate(final LocalDate preacherLastDoneDate) {
+		this.preacherLastDoneDateProperty().set(preacherLastDoneDate);
+	}
 }

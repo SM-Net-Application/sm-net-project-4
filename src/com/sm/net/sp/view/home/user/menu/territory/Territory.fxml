@@ -75,6 +75,15 @@
                                                       </StackPane>
                                                       <HBox>
                                                          <children>
+                                                            <StackPane alignment="CENTER_LEFT">
+                                                               <children>
+                                                                  <Button fx:id="territoryShowLastAssignButton" mnemonicParsing="false" text="lastAssign">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane>
                                                                <children>
                                                                   <Button fx:id="territoryPrintButton" mnemonicParsing="false" text="print">
@@ -224,6 +233,7 @@
                                                                      <children>
                                                                         <TableView fx:id="territoryTableView">
                                                                           <columns>
+                                                                              <TableColumn fx:id="territoryAssignedBlockedTableColumn" prefWidth="75.0" text="blocked" />
                                                                             <TableColumn fx:id="territoryNumberTableColumn" prefWidth="75.0" text="number" />
                                                                               <TableColumn fx:id="territoryNameTableColumn" prefWidth="75.0" text="name" />
                                                                             <TableColumn fx:id="territoryAssignedToTableColumn" prefWidth="75.0" text="assignedto" />
@@ -379,11 +389,38 @@
                                                          <children>
                                                             <StackPane alignment="CENTER_LEFT">
                                                                <children>
-                                                                  <Label fx:id="memberAssignedTerritoryLabel" text="docs">
+                                                                  <Label fx:id="memberAssignedTerritoryLabel" text="territori">
                                                                      <StackPane.margin>
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
                                                                   </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_RIGHT">
+                                                               <children>
+                                                                  <Button fx:id="memberTerritoryOpenViewerButton" mnemonicParsing="false" text="urlbrowser">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_RIGHT">
+                                                               <children>
+                                                                  <Button fx:id="memberTerritoryOpenViewerURLButton" mnemonicParsing="false" text="url">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_RIGHT">
+                                                               <children>
+                                                                  <Button fx:id="memberTerritoryResourcesOpenDirectoryButton" mnemonicParsing="false" text="risorse">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Button>
                                                                </children>
                                                             </StackPane>
                                                             <StackPane alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
