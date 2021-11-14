@@ -1,4 +1,4 @@
-Data di pubblicazione : __-__-____
+Data di pubblicazione : 29-09-2021
 
 	Congregazione (Membri):
 	
@@ -29,6 +29,10 @@ Data di pubblicazione : __-__-____
 		Congregazione (Famiglie):
 			
 			- Tooltip "Aggiorna l'elenco" era null. Corretto.
+			
+		Download software:
+		
+			- Dopo aver scaricato il file di installazione della nuova versione, questa viene automaticamente avviata e il software chiuso.
 
 	Database Query:
 	

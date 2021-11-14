@@ -296,7 +296,7 @@ public class JSONRequest {
 		jsonObj.put("spInf60", spInf60);
 		jsonObj.put("spInf61", spInf61);
 		jsonObj.put("spInf62", spInf62);
-		
+
 		jsonObj.put("spInf63", spInf63);
 		jsonObj.put("spInf64", spInf64);
 		jsonObj.put("spInf65", spInf65);
@@ -1489,7 +1489,7 @@ public class JSONRequest {
 		jsonObj.put("spInf38", obj.getSpInf38());
 		jsonObj.put("spInf39", obj.getSpInf39());
 		jsonObj.put("spInf40", obj.getSpInf40());
-		
+
 		jsonObj.put("spInf41", obj.getSpInf41());
 		jsonObj.put("spInf42", obj.getSpInf42());
 		jsonObj.put("spInf43", obj.getSpInf43());
@@ -1553,7 +1553,7 @@ public class JSONRequest {
 		jsonObj.put("spInf38", obj.getSpInf38());
 		jsonObj.put("spInf39", obj.getSpInf39());
 		jsonObj.put("spInf40", obj.getSpInf40());
-		
+
 		jsonObj.put("spInf41", obj.getSpInf41());
 		jsonObj.put("spInf42", obj.getSpInf42());
 		jsonObj.put("spInf43", obj.getSpInf43());
@@ -1576,7 +1576,7 @@ public class JSONRequest {
 	}
 
 	public static JSONObject TERRITORY_REGISTRY_INSERT(TerritoryObj territoryObj, Member member, LocalDate assignDate,
-			SecretKey secretKey) {
+			boolean territoryGroup, SecretKey secretKey) {
 
 		JSONObject jsonObj = create(Integer.valueOf(83));
 
@@ -1586,6 +1586,7 @@ public class JSONRequest {
 //		jsonObj.put("spInf4", Crypt.encrypt("", secretKey));
 		jsonObj.put("spInf3", assignDate.toString());
 		jsonObj.put("spInf4", "");
+		jsonObj.put("spInf5", territoryGroup ? "1" : "0");
 
 		return jsonObj;
 	}

@@ -82,6 +82,7 @@ public class TerritoryRegistryLoadTask implements TaskInterface {
 
 		this.view.updateTerritoryRegistryList(list);
 		this.view.updateTerritoryAssignedMember();
+		this.view.updateCounts();
 		this.view.territoryTableViewRefresh();
 	}
 }

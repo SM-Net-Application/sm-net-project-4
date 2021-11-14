@@ -28,9 +28,10 @@ public class TerritoryRegistryEntitySaveTask implements TaskInterface {
 	private TerritoryObj territoryObj;
 	private Member member;
 	private LocalDate assignDate;
+	private boolean territoryGroup;
 
 	public TerritoryRegistryEntitySaveTask(AlertBuilder alertBuilder, Settings settings, Stage viewStage,
-			Territory view, TerritoryObj territoryObj, Member member, LocalDate assignDate) {
+			Territory view, TerritoryObj territoryObj, Member member, LocalDate assignDate, boolean territoryGroup) {
 		super();
 
 		this.view = view;
@@ -40,12 +41,13 @@ public class TerritoryRegistryEntitySaveTask implements TaskInterface {
 		this.territoryObj = territoryObj;
 		this.member = member;
 		this.assignDate = assignDate;
+		this.territoryGroup = territoryGroup;
 	}
 
 	@Override
 	public void start(HashMap<String, Object> hashMap) {
 
-		JSONObject json = JSONRequest.TERRITORY_REGISTRY_INSERT(this.territoryObj, this.member, this.assignDate,
+		JSONObject json = JSONRequest.TERRITORY_REGISTRY_INSERT(this.territoryObj, this.member, this.assignDate, this.territoryGroup,
 				this.settings.getDatabaseSecretKey());
 
 		String url = this.settings.getDatabaseUrl();

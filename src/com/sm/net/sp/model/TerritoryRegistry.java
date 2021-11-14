@@ -3,6 +3,8 @@ package com.sm.net.sp.model;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.sm.net.sp.view.SupportPlannerView;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -125,8 +127,8 @@ public class TerritoryRegistry {
 		return null;
 	}
 
-	public ArrayList<ArrayList<TerritoryModul>> build(ObservableList<TerritoryObj> territoryList,
-			ObservableList<Member> membersList, DateTimeFormatter dtf) {
+	public ArrayList<ArrayList<TerritoryModul>> build(SupportPlannerView application,
+			ObservableList<TerritoryObj> territoryList, ObservableList<Member> membersList, DateTimeFormatter dtf) {
 
 		ArrayList<ArrayList<TerritoryModul>> list = new ArrayList<>();
 
@@ -146,12 +148,16 @@ public class TerritoryRegistry {
 
 			ObservableList<TerritoryRegistryEntity> entityList = this
 					.findTerritoryEntityList(territoryObj.getSpTerritoryID());
+
 			entityList.forEach(entity -> entity.updatePublisher(membersList));
+			TerritoryRegistryEntity lastEntity = territoryObj.checkLastEntity();
+			if (lastEntity != null)
+				entityList.add(0, lastEntity);
 
 			TerritoryModul territoryModul = new TerritoryModul(territoryCount, territoryObj);
 
 			for (TerritoryRegistryEntity entity : entityList) {
-				territoryModul.processEntity(entity, dtf);
+				territoryModul.processEntity(application, entity, dtf);
 			}
 
 			currList.add(territoryModul);

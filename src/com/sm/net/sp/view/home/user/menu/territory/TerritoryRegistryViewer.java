@@ -36,6 +36,8 @@ public class TerritoryRegistryViewer {
 	private TableColumn<TerritoryRegistryEntity, String> publisherTableColumn;
 	@FXML
 	private TableColumn<TerritoryRegistryEntity, LocalDate> endDateTableColumn;
+	@FXML
+	private TableColumn<TerritoryRegistryEntity, String> typeColumn;
 
 	@FXML
 	private Button deleteButton;
@@ -62,13 +64,6 @@ public class TerritoryRegistryViewer {
 	private void initialize() {
 
 		styleClasses();
-
-		this.startDateTableColumn.setCellValueFactory(
-				cellData -> new SimpleObjectProperty<LocalDate>(cellData.getValue().getStartDate()));
-		this.endDateTableColumn
-				.setCellValueFactory(cellData -> new SimpleObjectProperty<LocalDate>(cellData.getValue().getEndDate()));
-		this.publisherTableColumn.setCellValueFactory(
-				cellData -> new SimpleStringProperty(cellData.getValue().getPublisher().getNameStyle1()));
 	}
 
 	private void styleClasses() {
@@ -82,6 +77,23 @@ public class TerritoryRegistryViewer {
 	}
 
 	public void objectInitialize() {
+
+		this.startDateTableColumn.setCellValueFactory(
+				cellData -> new SimpleObjectProperty<LocalDate>(cellData.getValue().getStartDate()));
+		this.endDateTableColumn
+				.setCellValueFactory(cellData -> new SimpleObjectProperty<LocalDate>(cellData.getValue().getEndDate()));
+		this.publisherTableColumn.setCellValueFactory(
+				cellData -> new SimpleStringProperty(cellData.getValue().getPublisher().getNameStyle1()));
+
+		this.typeColumn.setCellValueFactory(cellData -> {
+			int spInf5 = cellData.getValue().getSpInf5();
+			if (spInf5 == 1) {
+				return new SimpleStringProperty(
+						this.application.getSettings().getLanguage().getString("territoryregistry.type.group"));
+			} else
+				return new SimpleStringProperty(
+						this.application.getSettings().getLanguage().getString("territoryregistry.type.own"));
+		});
 
 		viewUpdate();
 
@@ -190,6 +202,8 @@ public class TerritoryRegistryViewer {
 		this.endDateTableColumn.setMaxWidth(250);
 		this.publisherTableColumn.setText(this.language.getString("territoryregistry.tablecolumn.publisher"));
 
+		this.typeColumn.setText(this.language.getString("territoryregistry.tablecolumn.type"));
+		
 		Tooltip deleteTooltip = new Tooltip(this.language.getString("territoryregistry.button.tooltip.delete"));
 		deleteTooltip.getStyleClass().add("tooltip_001");
 		this.deleteButton.setTooltip(deleteTooltip);

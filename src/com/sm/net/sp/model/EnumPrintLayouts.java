@@ -37,7 +37,9 @@ public enum EnumPrintLayouts {
 
 	SERVICE_GROUP_WITHOUT_EXCLUSIONS("sp.printlayout.servicegroupexcl"),
 	
-	MODULE_S13("sp.printlayout.module.s13");
+	MODULE_S13("sp.printlayout.module.s13"),
+	MODULE_S13_ARCHIVED("sp.printlayout.module.s13archived"),
+	MODULE_S13_EXLCLUDED("sp.printlayout.module.s13exclarchived");
 
 	private String key;
 

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.StreamSupport;
@@ -61,6 +62,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -129,6 +131,21 @@ public class Territory extends UpdateDataAdapter {
 	private TextField territoryFilterTextField;
 
 	@FXML
+	private Label totalCountLabel;
+	@FXML
+	private TextField totalCountTextField;
+	@FXML
+	private Label assignedCountLabel;
+	@FXML
+	private TextField assignedCountTextField;
+	@FXML
+	private Label availableCountLabel;
+	@FXML
+	private TextField availableCountTextField;
+	@FXML
+	private TextField memberAssignedCountTextField;
+
+	@FXML
 	private TableView<TerritoryObj> territoryTableView;
 	@FXML
 	private TableColumn<TerritoryObj, BigDecimal> territoryNumberTableColumn;
@@ -184,6 +201,8 @@ public class Territory extends UpdateDataAdapter {
 	private Button memberTerritoryResourcesOpenDirectoryButton;
 	@FXML
 	private Button memberAssignedTerritoryReturnButton;
+	@FXML
+	private Button memberTerritoryShowLastAssignButton;
 
 	@FXML
 	private TextField filterMemberTextField;
@@ -261,6 +280,9 @@ public class Territory extends UpdateDataAdapter {
 	private StackPane territoryMapsImageViewStackPane;
 	@FXML
 	private ImageView territoryMapsImageView;
+
+	@FXML
+	private CheckBox showTerritoryArchivedCheckBox;
 
 	private Settings settings;
 	private Language language;
@@ -428,6 +450,28 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryAssignedDateTableColumn.getStyleClass().add("table_column_002");
 
 		this.territoryAssignButton.getStyleClass().add("button_image_001");
+
+		this.showTerritoryArchivedCheckBox.getStyleClass().add("check_box_001");
+
+		this.memberTerritoryShowLastAssignButton.getStyleClass().add("button_image_001");
+
+		this.totalCountLabel.getStyleClass().add("label_001");
+		this.assignedCountLabel.getStyleClass().add("label_001");
+		this.availableCountLabel.getStyleClass().add("label_001");
+
+		this.totalCountTextField.getStyleClass().add("text_field_002");
+		this.totalCountTextField.setMinWidth(50);
+		this.totalCountTextField.setMaxWidth(50);
+		this.assignedCountTextField.getStyleClass().add("text_field_002");
+		this.assignedCountTextField.setMinWidth(50);
+		this.assignedCountTextField.setMaxWidth(50);
+		this.availableCountTextField.getStyleClass().add("text_field_002");
+		this.availableCountTextField.setMinWidth(50);
+		this.availableCountTextField.setMaxWidth(50);
+
+		this.memberAssignedCountTextField.getStyleClass().add("text_field_002");
+		this.memberAssignedCountTextField.setMinWidth(50);
+		this.memberAssignedCountTextField.setMaxWidth(50);
 	}
 
 	public void objectInitialize() {
@@ -503,7 +547,31 @@ public class Territory extends UpdateDataAdapter {
 
 	public void updateTerritoryList(ObservableList<TerritoryObj> list) {
 		this.territoryList.clear();
-		this.territoryList.addAll(list);
+
+		if (this.showTerritoryArchivedCheckBox.isSelected())
+			this.territoryList.addAll(list);
+		else {
+			list.removeIf(territory -> territory.isArchived());
+			this.territoryList.addAll(list);
+		}
+	}
+
+	public void updateCounts() {
+
+		this.totalCountTextField.setText(String.valueOf(this.territoryList.size()));
+
+		int assigned = 0;
+		int available = 0;
+
+		for (TerritoryObj territory : this.territoryList) {
+			if (territory.isAvailable()) {
+				available++;
+			} else
+				assigned++;
+		}
+
+		this.assignedCountTextField.setText(String.valueOf(assigned));
+		this.availableCountTextField.setText(String.valueOf(available));
 	}
 
 	public void updateTerritoryMapList(ObservableList<TerritoryMap> list) {
@@ -759,6 +827,14 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryShowLastAssignButton.setText("");
 		this.territoryShowLastAssignButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CALENDAR));
 
+		Tooltip memberTerritoryShowLastAssignTooltip = new Tooltip(
+				this.language.getString("territory.tooltip.showlastassign"));
+		memberTerritoryShowLastAssignTooltip.getStyleClass().add("tooltip_001");
+		this.memberTerritoryShowLastAssignButton.setTooltip(memberTerritoryShowLastAssignTooltip);
+		this.memberTerritoryShowLastAssignButton.setText("");
+		this.memberTerritoryShowLastAssignButton
+				.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.CALENDAR));
+
 		this.territoryDocsLabel.setText(this.language.getString("territory.label.resourcedocs"));
 		this.territoryImagesLabel.setText(this.language.getString("territory.label.resourceimages"));
 
@@ -807,6 +883,12 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryAssignButton.setTooltip(territoryAssignTooltip);
 		this.territoryAssignButton.setText("");
 		this.territoryAssignButton.setGraphic(Meta.Resources.imageForButtonSmall(Meta.Resources.MEMBER));
+
+		this.showTerritoryArchivedCheckBox.setText(this.language.getString("territory.checkbox.archivedterritory"));
+
+		this.totalCountLabel.setText(this.language.getString("territory.label.totalcount"));
+		this.assignedCountLabel.setText(this.language.getString("territory.label.assignedcount"));
+		this.availableCountLabel.setText(this.language.getString("territory.label.availablecount"));
 	}
 
 	public void loadTerritoryRegistry() {
@@ -854,6 +936,7 @@ public class Territory extends UpdateDataAdapter {
 		this.territoryAssignButton.setOnAction(event -> assignTerritory());
 
 		this.territoryShowLastAssignButton.setOnAction(event -> showLastAssign());
+		this.memberTerritoryShowLastAssignButton.setOnAction(event -> showMemberLastAssign());
 
 		this.territoryMapsAddButton.setOnAction(event -> newTerritoryMaps());
 		this.territoryMapsEditButton.setOnAction(event -> editTerritoryMaps());
@@ -958,6 +1041,14 @@ public class Territory extends UpdateDataAdapter {
 		this.memberAssignedTerritoryReturnButton.setOnAction(event -> memberAssignedTerritoryReturn());
 
 		this.territoryReturnButton.setOnAction(event -> assignedTerritoryReturn());
+
+		this.showTerritoryArchivedCheckBox.selectedProperty()
+				.addListener((observable, oldValue, newValue) -> showTerritoryArchived());
+	}
+
+	private void showTerritoryArchived() {
+		resetSelectionAllTable();
+		updateTerritory();
 	}
 
 	private void showRegistry(TerritoryObj territoryObj) {
@@ -1143,8 +1234,12 @@ public class Territory extends UpdateDataAdapter {
 			ObservableList<TerritoryObj> territoryList = this.territoryRegistry
 					.findActualTerritoriesByPublisher(this.territoryList, publisher);
 
+			territoryList.sort(Comparator.comparing(TerritoryObj::getAssignedDate));
+
 			this.memberAssignedTerritoryTableView.setItems(territoryList);
 			Platform.runLater(() -> this.memberAssignedTerritoryTableView.refresh());
+
+			this.memberAssignedCountTextField.setText(String.valueOf(territoryList.size()));
 		}
 	}
 
@@ -1179,8 +1274,15 @@ public class Territory extends UpdateDataAdapter {
 							this.membersList);
 					if (member != null) {
 
-						LocalDate assignDate = TerritoryAssignDateDialog.show(this.application, this.ownerStage,
+						HashMap<String, Object> map = TerritoryAssignDateDialog.show(this.application, this.ownerStage,
 								territoryObj, member);
+
+						LocalDate assignDate = map.get("assignDate") != null ? (LocalDate) map.get("assignDate") : null;
+						boolean territoryGroup = map.get("territoryGroup") != null ? (boolean) map.get("territoryGroup")
+								: false;
+
+//						LocalDate assignDate = TerritoryAssignDateDialog.show(this.application, this.ownerStage,
+//								territoryObj, member);
 
 						if (assignDate != null) {
 
@@ -1199,9 +1301,9 @@ public class Territory extends UpdateDataAdapter {
 									this.application.getAlertBuilder2().error(this.ownerStage, content);
 
 								} else
-									assignTerritoryRun(territoryObj, member, assignDate);
+									assignTerritoryRun(territoryObj, member, assignDate, territoryGroup);
 							} else
-								assignTerritoryRun(territoryObj, member, assignDate);
+								assignTerritoryRun(territoryObj, member, assignDate, territoryGroup);
 
 						} else {
 							this.application.getAlertBuilder2().error(this.ownerStage,
@@ -1246,14 +1348,49 @@ public class Territory extends UpdateDataAdapter {
 				this.territoryRegistry, null);
 	}
 
-	private void assignTerritoryRun(TerritoryObj territoryObj, Member member, LocalDate assignDate) {
+	private void showMemberLastAssign() {
+
+		if (!this.application.getUser().isSpUserSU() && !this.application.getUser().isSpInf26()) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nopermission");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		Member selectedItem = this.membersTableView.getSelectionModel().getSelectedItem();
+
+		if (selectedItem == null) {
+
+			final String content = this.application.getSettings().getLanguage()
+					.getString("territory.error.nomemberselected");
+
+			this.application.getAlertBuilder2().error(this.ownerStage, content);
+
+			return;
+		}
+
+		TerritoryLastAssignDialog.show(this.application, this.ownerStage, this.membersList, this.territoryList,
+				this.territoryRegistry, this.membersTableView.getSelectionModel().getSelectedItem());
+	}
+
+	private void assignTerritoryRun(TerritoryObj territoryObj, Member member, LocalDate assignDate,
+			boolean territoryGroup) {
 
 		String header = this.application.getSettings().getLanguage().getString("territory.error.registryentityheader");
 
 		String contentFormat = this.application.getSettings().getLanguage()
 				.getStringWithNewLine("territory.error.registryentitycontentformat");
 
+		String group = this.application.getSettings().getLanguage().getString("territory.error.registryentitygroup");
+
 		String territoryName = String.format("%s - %s", territoryObj.getSpInf7(), territoryObj.getSpInf8());
+		if (territoryGroup) {
+			territoryName += String.format(" %s", group);
+		}
+
 		String memberName = member.getNameStyle1();
 
 		String datePattern = this.application.getSettings().getLanguage().getString("datepattern");
@@ -1267,7 +1404,7 @@ public class Territory extends UpdateDataAdapter {
 
 			TaskManager.run(this.application.getAlertBuilder2(), this.ownerStage, waitMessage,
 					new TerritoryRegistryEntitySaveTask(this.application.getAlertBuilder2(), this.settings,
-							this.ownerStage, this, territoryObj, member, assignDate));
+							this.ownerStage, this, territoryObj, member, assignDate, territoryGroup));
 
 		}
 	}
@@ -2365,6 +2502,7 @@ public class Territory extends UpdateDataAdapter {
 	private void print() {
 
 		EnumPrintLayouts selectedLayout = PrintLayout.dialogPrintLayout(this.ownerStage, this.language, null,
+				EnumPrintLayouts.MODULE_S13_EXLCLUDED, EnumPrintLayouts.MODULE_S13_ARCHIVED,
 				EnumPrintLayouts.MODULE_S13);
 
 		if (selectedLayout != null) {
@@ -2372,18 +2510,23 @@ public class Territory extends UpdateDataAdapter {
 			switch (selectedLayout) {
 
 			case MODULE_S13:
-
-				printModuleS13();
-
+				printModuleS13(false, false, false);
 				break;
 
+			case MODULE_S13_ARCHIVED:
+				printModuleS13(true, false, true);
+				break;
+
+			case MODULE_S13_EXLCLUDED:
+				printModuleS13(false, true, true);
+				break;
 			default:
 				break;
 			}
 		}
 	}
 
-	private void printModuleS13() {
+	private void printModuleS13(boolean removeCurrent, boolean removeArchived, boolean removeBlocked) {
 
 		String s13Path = this.settings.getModuleS13Decrypted();
 		if (s13Path.isEmpty()) {
@@ -2421,8 +2564,18 @@ public class Territory extends UpdateDataAdapter {
 			saveDirectory.mkdirs();
 		}
 
-		ArrayList<ArrayList<TerritoryModul>> modules = this.territoryRegistry.build(this.territoryList,
-				this.membersList, DateTimeFormatter.ofPattern(this.language.getString("datepattern")));
+		ObservableList<TerritoryObj> currentTerritories = FXCollections.observableArrayList();
+		currentTerritories.addAll(this.territoryList);
+		if (removeCurrent)
+			currentTerritories.removeIf(territory -> (!territory.isArchived() && !territory.isBlocked()));
+		if (removeArchived)
+			currentTerritories.removeIf(territory -> territory.isArchived());
+		if (removeBlocked)
+			currentTerritories.removeIf(territory -> (!territory.isArchived() && territory.isBlocked()));
+
+		ArrayList<ArrayList<TerritoryModul>> modules = this.territoryRegistry.build(this.application,
+				currentTerritories, this.membersList,
+				DateTimeFormatter.ofPattern(this.language.getString("datepattern")));
 
 		if (this.application.getAlertBuilder2().confirm(this.ownerStage,
 				this.application.getSettings().getLanguage().getString("territory.confirm.saves13"))) {

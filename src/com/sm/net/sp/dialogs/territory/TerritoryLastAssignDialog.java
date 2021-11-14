@@ -122,8 +122,8 @@ public class TerritoryLastAssignDialog {
 		this.tableView.getStyleClass().add("table_view_001");
 		this.territoryNrTableColumn.getStyleClass().add("table_column_002");
 		this.lastDoneTableColumn.getStyleClass().add("table_column_002");
-
-		// TODO: setCellValueFactory
+		this.preacherHadTableColumn.getStyleClass().add("table_column_002");
+		this.preacherHadDateTableColumn.getStyleClass().add("table_column_002");
 
 		this.territoryNrTableColumn.setCellValueFactory(
 				cellData -> new SimpleObjectProperty<BigDecimal>(new BigDecimal(cellData.getValue().getSpInf7())));
@@ -145,6 +145,9 @@ public class TerritoryLastAssignDialog {
 	}
 
 	public void init() {
+
+		if (this.selectedMember != null)
+			this.preacherTextField.setText(this.selectedMember.getNameStyle1());
 
 		this.membersWithoutDisabledList = FXCollections.observableArrayList();
 		this.territoryAvailableList = FXCollections.observableArrayList();
@@ -175,8 +178,8 @@ public class TerritoryLastAssignDialog {
 		this.lastDoneTableColumn.setMinWidth(200);
 
 		this.preacherHadTableColumn.setText("");
-		this.preacherHadTableColumn.setMinWidth(30);
-		this.preacherHadTableColumn.setMaxWidth(30);
+		this.preacherHadTableColumn.setMinWidth(50);
+		this.preacherHadTableColumn.setMaxWidth(50);
 
 		this.preacherHadDateTableColumn.setText(this.application.getSettings().getLanguage()
 				.getString("territory.dialog.lastassign.tablecolumn.lastdonepreacher"));
@@ -189,6 +192,8 @@ public class TerritoryLastAssignDialog {
 		// BUILD TERRITORY LIST AND DELETE NOT AVIALABLE
 		this.territoryAvailableList.addAll(this.territoryList);
 		this.territoryAvailableList.removeIf(territory -> !territory.isAvailable());
+		this.territoryAvailableList.removeIf(territory -> territory.isBlocked());
+		this.territoryAvailableList.removeIf(territory -> territory.isArchived());
 		this.territoryAvailableList.forEach(territory -> territory.checkLastDoneDate(this.territoryRegistry));
 		this.territoryAvailableListCheckSelectedPreacher();
 

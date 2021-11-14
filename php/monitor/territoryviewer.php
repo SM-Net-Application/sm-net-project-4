@@ -11,6 +11,7 @@ $plz = "";
 $nr = "";
 $name = "";
 $newimage = "";
+$note = "";
 
 if (isset($_GET["lang"])) {
     if (!empty($_GET["lang"])) {
@@ -36,7 +37,7 @@ if (file_exists("languages/" . $langIni)) {
             if (!$database) {
                 $error = "Database connection error: " . mysqli_connect_error();
             } else {
-                $query_mem = "SELECT spInf4, spInf5, spInf7, spInf8, spInf10, spInf19";
+                $query_mem = "SELECT spInf4, spInf5, spInf7, spInf8, spInf10, spInf19, spInf47";
                 $query_mem .= " FROM sp_territory";
                 $query_mem .= " WHERE spInf31 =";
                 $query_mem .= " '" . $territoryID . "'";
@@ -54,6 +55,7 @@ if (file_exists("languages/" . $langIni)) {
                     $nr = $resultRow_mem["spInf7"];
                     $name = $resultRow_mem["spInf8"];
                     $newimage = $resultRow_mem["spInf19"];
+                    $note = $resultRow_mem["spInf47"];
                 }
 
                 $result_mem->close();
@@ -111,6 +113,25 @@ function startsWith( $haystack, $needle ) {
 
             <br>
             <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
+
+            <?php
+
+            if(!empty($note)){
+
+                ?>
+
+                <br>
+                <center><h3 class="text-white"><strong><?php echo $language['territoryviewenote'] ?></strong></h2></center>
+
+                <br>
+                <center><h4 class="text-white"><?php echo $note; ?></h4><center>
+
+                <?php
+
+            }
+
+            ?>
+
             <br>
             <img src="<?php echo $mapsID; ?>" width="100%">
 
@@ -118,6 +139,24 @@ function startsWith( $haystack, $needle ) {
 
         } else {
             
+            ?>
+
+            <?php
+
+            if(!empty($note)){
+
+                ?>
+
+                <br>
+                <center><h3 class="text-white"><strong><?php echo $language['territoryviewenote'] ?></strong></h2></center>
+
+                <br>
+                <center><h4 class="text-white"><?php echo $note; ?></h4><center>
+
+                <?php
+
+            }
+
             ?>
 
             <br>
@@ -138,8 +177,10 @@ function startsWith( $haystack, $needle ) {
 
             ?>
 
-            <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center><br>
+            <center><h2 class="text-white"><strong><?php echo $nr . " - " . $name; ?></strong></h2></center>
+            <br>
             <center><h2 class="text-white"><strong><?php echo $plz . " " . $ort; ?></strong></h2></center>
+
             <br>
             <iframe src="https://www.google.com/maps/d/embed?mid=<?php echo $mapsID; ?>" width="100%" height="960"></iframe>
 

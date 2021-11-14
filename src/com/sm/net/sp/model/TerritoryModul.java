@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
+import com.sm.net.sp.view.SupportPlannerView;
+
 public class TerritoryModul {
 
 	private int index;
@@ -52,7 +54,7 @@ public class TerritoryModul {
 
 	}
 
-	public void processEntity(TerritoryRegistryEntity entity, DateTimeFormatter dtf) {
+	public void processEntity(SupportPlannerView application, TerritoryRegistryEntity entity, DateTimeFormatter dtf) {
 
 		Member publisher = entity.getPublisher();
 
@@ -60,12 +62,23 @@ public class TerritoryModul {
 
 			this.count++;
 
-			this.infos.put(String.format("Name_%03d", this.nameIndex), publisher.getNameStyle3());
+			String publisherName = publisher.getNameStyle3();
+			if (entity.isGroup()) {
+				publisherName += String.format(" (%s)",
+						application.getSettings().getLanguage().getString("modules13.territorygroupmarker"));
+			}
+
+			this.infos.put(String.format("Name_%03d", this.nameIndex), publisherName);
 			// this.nameIndex++;
 			this.nameIndex += 5;
 
 			LocalDate startDate = entity.getStartDate();
-			this.infos.put(String.format("Date_%03d", this.dateIndex), dtf.format(startDate));
+
+			if (startDate != null)
+				this.infos.put(String.format("Date_%03d", this.dateIndex), dtf.format(startDate));
+			else
+				this.infos.put(String.format("Date_%03d", this.dateIndex), "");
+
 			this.dateIndex++;
 
 			LocalDate endDate = entity.getEndDate();
@@ -77,7 +90,6 @@ public class TerritoryModul {
 
 			this.dateIndex += 9;
 		}
-
 	}
 
 	public HashMap<String, String> getInfos() {

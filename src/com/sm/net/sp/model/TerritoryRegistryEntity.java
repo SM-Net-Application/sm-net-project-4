@@ -20,6 +20,7 @@ public class TerritoryRegistryEntity {
 	private IntegerProperty spInf2;
 	private StringProperty spInf3;
 	private StringProperty spInf4;
+	private IntegerProperty spInf5;
 
 	private LocalDate startDate;
 	private LocalDate endDate;
@@ -35,6 +36,7 @@ public class TerritoryRegistryEntity {
 		this.spInf2 = new SimpleIntegerProperty();
 		this.spInf3 = new SimpleStringProperty();
 		this.spInf4 = new SimpleStringProperty();
+		this.spInf5 = new SimpleIntegerProperty();
 	}
 
 //	public static TerritoryRegistryEntity newInstanceByView(TerritoryEditor editor, SecretKey sk) {
@@ -151,12 +153,14 @@ public class TerritoryRegistryEntity {
 //		String spInf4 = Crypt.decrypt(json.getString("spInf4"), secretKey);
 		String spInf3 = json.getString("spInf3");
 		String spInf4 = json.getString("spInf4");
+		int spInf5 = json.getInt("spInf5");
 
 		territoryRegistryEntity.setID(id);
 		territoryRegistryEntity.setSpInf1(spInf1);
 		territoryRegistryEntity.setSpInf2(spInf2);
 		territoryRegistryEntity.setSpInf3(spInf3);
 		territoryRegistryEntity.setSpInf4(spInf4);
+		territoryRegistryEntity.setSpInf5(spInf5);
 
 		territoryRegistryEntity.processData();
 
@@ -196,6 +200,10 @@ public class TerritoryRegistryEntity {
 			timestampString += "99991231";
 
 		return Long.valueOf(timestampString);
+	}
+
+	public boolean isGroup() {
+		return this.getSpInf5() == 1;
 	}
 
 	public final IntegerProperty idProperty() {
@@ -280,5 +288,17 @@ public class TerritoryRegistryEntity {
 
 	public void setPublisher(Member publisher) {
 		this.publisher = publisher;
+	}
+
+	public final IntegerProperty spInf5Property() {
+		return this.spInf5;
+	}
+
+	public final Integer getSpInf5() {
+		return this.spInf5.get();
+	}
+
+	public final void setSpInf5(final int spInf5) {
+		this.spInf5Property().set(spInf5);
 	}
 }

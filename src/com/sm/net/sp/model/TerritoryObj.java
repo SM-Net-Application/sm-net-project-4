@@ -451,6 +451,10 @@ public class TerritoryObj {
 		return this.getSpInf41() == 1;
 	}
 
+	public boolean isArchived() {
+		return this.getSpInf42() == 1;
+	}
+
 	public void updateAssignedMember(Member member) {
 		this.setAssignedMember(member);
 	}
@@ -491,15 +495,45 @@ public class TerritoryObj {
 			boolean found = false;
 			for (TerritoryRegistryEntity entity : entityList) {
 
-				// TODO: is SPINF2 MemberID?
 				if (entity.getSpInf2() == selectedMember.getSpMemberID()) {
 					this.preacherLastDoneDate.set(entity.getEndDate());
+					found = true;
 					break;
 				}
 			}
 			if (!found)
 				this.preacherLastDoneDate.set(null);
 		}
+	}
+
+	public TerritoryRegistryEntity checkLastEntity() {
+
+		// TODO
+
+		if (this.getSpInf43() == 1) {
+
+			TerritoryRegistryEntity entity = new TerritoryRegistryEntity();
+
+			LocalDate date1 = null;
+			String date1String = this.getSpInf45();
+			if (!date1String.isEmpty()) {
+				date1 = LocalDate.parse(date1String);
+			}
+
+			LocalDate date2 = null;
+			String date2String = this.getSpInf46();
+			if (!date2String.isEmpty()) {
+				date2 = LocalDate.parse(date2String);
+			}
+
+			entity.setStartDate(date1);
+			entity.setEndDate(date2);
+			entity.setPublisher(Member.territoryLastAssignText(this.getSpInf44()));
+
+			return entity;
+		}
+
+		return null;
 	}
 
 	public final IntegerProperty spTerritoryIDProperty() {

@@ -305,6 +305,102 @@ public class Member {
 		return member;
 	}
 
+	public static Member territoryLastAssignText(String text) {
+		Member member = new Member();
+
+		member.spMemberID = new SimpleIntegerProperty(0);
+		member.spInf1Encrypted = new SimpleStringProperty("");
+		member.spInf1Decrypted = new SimpleStringProperty("");
+		member.spInf2Encrypted = new SimpleStringProperty("");
+		member.spInf2Decrypted = new SimpleStringProperty(text);
+		member.spInf3Encrypted = new SimpleStringProperty("");
+		member.spInf3Decrypted = new SimpleStringProperty("");
+		member.spInf4 = new SimpleIntegerProperty(0);
+		member.spInf5 = new SimpleIntegerProperty(0);
+		member.spInf6 = new SimpleIntegerProperty(0);
+		member.spInf7 = new SimpleIntegerProperty(0);
+		member.spInf8 = new SimpleIntegerProperty(0);
+		member.spInf9 = new SimpleIntegerProperty(0);
+		member.spInf10 = new SimpleIntegerProperty(0);
+		member.spInf11 = new SimpleIntegerProperty(0);
+		member.spInf12 = new SimpleIntegerProperty(0);
+		member.spInf13 = new SimpleIntegerProperty(0);
+		member.spInf14 = new SimpleIntegerProperty(0);
+		member.spInf15 = new SimpleIntegerProperty(0);
+		member.spInf16 = new SimpleIntegerProperty(0);
+		member.spInf17 = new SimpleIntegerProperty(0);
+		member.spInf18 = new SimpleIntegerProperty(0);
+		member.spInf19 = new SimpleIntegerProperty(0);
+		member.spInf20 = new SimpleIntegerProperty(0);
+		member.spInf21 = new SimpleIntegerProperty(0);
+		member.spInf22 = new SimpleIntegerProperty(0);
+		member.spInf23 = new SimpleIntegerProperty(0);
+		member.spInf24 = new SimpleIntegerProperty(0);
+		member.spInf25 = new SimpleIntegerProperty(0);
+		member.spInf26 = new SimpleIntegerProperty(0);
+		member.spInf27 = new SimpleIntegerProperty(0);
+		member.spInf28 = new SimpleIntegerProperty(0);
+		member.spInf29 = new SimpleIntegerProperty(0);
+		member.spInf30 = new SimpleIntegerProperty(0);
+		member.spInf31 = new SimpleIntegerProperty(0);
+		member.spInf32 = new SimpleIntegerProperty(0);
+		member.spInf33 = new SimpleIntegerProperty(0);
+		member.spInf34 = new SimpleIntegerProperty(0);
+		member.spInf35 = new SimpleIntegerProperty(0);
+		member.spInf36 = new SimpleIntegerProperty(0);
+		member.spInf37 = new SimpleIntegerProperty(0);
+		member.spInf38 = new SimpleIntegerProperty(0);
+		member.spInf39Encrypted = new SimpleStringProperty("");
+		member.spInf39Decrypted = new SimpleStringProperty("");
+		member.spInf40Encrypted = new SimpleStringProperty("");
+		member.spInf40Decrypted = new SimpleStringProperty("");
+		member.spInf41Encrypted = new SimpleStringProperty("");
+		member.spInf41Decrypted = new SimpleStringProperty("");
+		member.spInf42 = new SimpleIntegerProperty(0);
+		member.spInf43 = new SimpleIntegerProperty(0);
+		member.spInf44 = new SimpleIntegerProperty(0);
+		member.spInf45 = new SimpleIntegerProperty(0);
+		member.spInf46 = new SimpleIntegerProperty(0);
+		member.spInf47 = new SimpleStringProperty("");
+		member.spInf48 = new SimpleIntegerProperty(0);
+		member.spInf49 = new SimpleIntegerProperty(0);
+		member.spInf50 = new SimpleIntegerProperty(0);
+		member.spInf51 = new SimpleIntegerProperty(0);
+		member.spInf52Encrypted = new SimpleStringProperty("");
+		member.spInf52Decrypted = new SimpleStringProperty("");
+		member.spInf53Encrypted = new SimpleStringProperty("");
+		member.spInf53Decrypted = new SimpleStringProperty("");
+		member.spInf54 = new SimpleIntegerProperty(0);
+		member.spInf55 = new SimpleIntegerProperty(0);
+		member.spInf56 = new SimpleIntegerProperty(0);
+		member.spInf57 = new SimpleIntegerProperty(0);
+		member.spInf58 = new SimpleIntegerProperty(0);
+		member.spInf59 = new SimpleIntegerProperty(0);
+
+		member.spInf60 = new SimpleIntegerProperty(0);
+		member.spInf61 = new SimpleIntegerProperty(0);
+		member.spInf62 = new SimpleIntegerProperty(0);
+
+		member.spInf63Encrypted = new SimpleStringProperty("");
+		member.spInf63Decrypted = new SimpleStringProperty("");
+		member.spInf64 = new SimpleIntegerProperty(0);
+		member.spInf65 = new SimpleIntegerProperty(0);
+		member.spInf66 = new SimpleIntegerProperty(0);
+		member.spInf67 = new SimpleIntegerProperty(0);
+		member.spInf68 = new SimpleIntegerProperty(0);
+		member.spInf69 = new SimpleIntegerProperty(0);
+		member.spInf70 = new SimpleIntegerProperty(0);
+		member.spInf71 = new SimpleIntegerProperty(0);
+		member.spInf72 = new SimpleIntegerProperty(0);
+		member.spInf73 = new SimpleIntegerProperty(0);
+		member.spInf74 = new SimpleIntegerProperty(0);
+		member.spInf75 = new SimpleIntegerProperty(0);
+
+		member.spInf76 = new SimpleIntegerProperty(0);
+
+		return member;
+	}
+	
 	public static Member overseerMember(Language language) {
 
 		Member member = new Member();

@@ -38,6 +38,7 @@
                       <TableColumn fx:id="startDateTableColumn" prefWidth="75.0" text="datastart" />
                         <TableColumn fx:id="endDateTableColumn" prefWidth="75.0" text="dataend" />
                       <TableColumn fx:id="publisherTableColumn" prefWidth="75.0" text="publisher" />
+                        <TableColumn fx:id="typeColumn" prefWidth="75.0" text="type" />
                     </columns>
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

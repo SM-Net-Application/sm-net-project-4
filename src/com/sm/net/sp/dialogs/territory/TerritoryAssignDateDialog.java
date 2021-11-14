@@ -2,6 +2,7 @@ package com.sm.net.sp.dialogs.territory;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Optional;
 
 import com.sm.net.sp.Meta;
@@ -14,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -38,18 +40,20 @@ public class TerritoryAssignDateDialog {
 	private TextField memberTextField;
 	@FXML
 	private DatePicker assignDatePicker;
+	@FXML
+	private CheckBox territoryGroupCheckBox;
 
 	private SupportPlannerView application;
 	private Stage ownerStage;
 	private TerritoryObj territoryObj;
 	private Member member;
 
-	public static LocalDate show(SupportPlannerView application, Stage ownerStage, TerritoryObj territoryObj,
+	public static HashMap<String, Object> show(SupportPlannerView application, Stage ownerStage, TerritoryObj territoryObj,
 			Member member) {
 
 		try {
 
-			Dialog<LocalDate> dialog = new Dialog<>();
+			Dialog<HashMap<String, Object>> dialog = new Dialog<>();
 			dialog.setTitle(application.getSettings().getLanguage().getString("territory.dialog.assigndate"));
 
 			DialogPane dialogPane = dialog.getDialogPane();
@@ -83,7 +87,7 @@ public class TerritoryAssignDateDialog {
 			dialogPane.setContent(content);
 			dialog.setResultConverter(param -> resultConverter(param, ctrl));
 
-			Optional<LocalDate> result = dialog.showAndWait();
+			Optional<HashMap<String, Object>> result = dialog.showAndWait();
 
 			if (result.isPresent())
 				return result.get();
@@ -95,7 +99,7 @@ public class TerritoryAssignDateDialog {
 		return null;
 	}
 
-	private static LocalDate resultConverter(ButtonType param, TerritoryAssignDateDialog ctrl) {
+	private static HashMap<String, Object> resultConverter(ButtonType param, TerritoryAssignDateDialog ctrl) {
 
 		if (param != null)
 			if (param.getButtonData() == ButtonData.OK_DONE)
@@ -104,8 +108,14 @@ public class TerritoryAssignDateDialog {
 		return null;
 	}
 
-	private LocalDate getSelected() {
-		return this.assignDatePicker.getValue();
+	private HashMap<String, Object> getSelected() {
+
+		HashMap<String, Object> map = new HashMap<>();
+
+		map.put("assignDate", this.assignDatePicker.getValue());
+		map.put("territoryGroup", this.territoryGroupCheckBox.isSelected());
+
+		return map;
 	}
 
 	@FXML
@@ -118,6 +128,8 @@ public class TerritoryAssignDateDialog {
 		this.territoryTextField.getStyleClass().add("text_field_001");
 		this.memberTextField.getStyleClass().add("text_field_001");
 		this.assignDatePicker.getStyleClass().add("combo_box_001");
+
+		this.territoryGroupCheckBox.getStyleClass().add("check_box_001");
 	}
 
 	public void init() {
@@ -128,6 +140,9 @@ public class TerritoryAssignDateDialog {
 				this.application.getSettings().getLanguage().getString("territory.dialog.assigndate.label.member"));
 		this.dateLabel.setText(
 				this.application.getSettings().getLanguage().getString("territory.dialog.assigndate.label.date"));
+
+		this.territoryGroupCheckBox.setText(this.application.getSettings().getLanguage()
+				.getString("territory.dialog.assigndate.checkbox.territorygroup"));
 
 		this.territoryTextField.setMinWidth(400);
 		this.territoryTextField.setEditable(false);

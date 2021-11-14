@@ -13,11 +13,12 @@ if (isset ( $jsonObj ["spInf3"] ) && isset ( $jsonObj ["spInf4"] )) {
 
     } else {
 
-        $query = "INSERT INTO sp_terrregistry (spInf1, spInf2, spInf3, spInf4) VALUES (";
+        $query = "INSERT INTO sp_terrregistry (spInf1, spInf2, spInf3, spInf4, spInf5) VALUES (";
         $query .= $jsonObj ["spInf1"] . ", ";
         $query .= $jsonObj ["spInf2"] . ", ";
         $query .= "'" . $jsonObj ["spInf3"] . "', ";
-        $query .= "'" . $jsonObj ["spInf4"] . "'";
+        $query .= "'" . $jsonObj ["spInf4"] . "', ";
+        $query .= $jsonObj ["spInf5"];
         $query .= ")";
 
         if ($database->query ( $query ) === TRUE) {

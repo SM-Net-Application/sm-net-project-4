@@ -1,6 +1,41 @@
-Data di pubblicazione : __-__-____
+Data di pubblicazione : 14-11-2021
 
-		
+	- Territori:
+    - Nuove informazioni aggiunte ai singoli territori:
+        - Territorio archiviato (non visualizzato nella tabella)
+            - Se un territorio e' archiviato, non viene visualizzato nella tabella, a meno che non si inserisce la spunta "Mostra territori archiviati"
+        - Territorio bloccato (non assegnabile)
+            - Se un territorio e' bloccato, viene visualizzato nella tabella il simbolo di un lucchetto
+            - Non e' possibile assegnare un territorio bloccato
+        - Ultima assegnazione personalizzata
+            - Se si stampa il modulo S-13 questa viene aggiunta come ultima registrazione
+        - Nota pubblica (viene visualizzata nel monitor online, nella pagina del territorio)
+        - Nota privata (utilizzata soltanto nel software)
+	- Registro:
+        - Quando si assegna un territorio e' possibile indicare se si tratta di un territorio di gruppo
+        - Nel modulo S-13 se il territorio e' stato assegnato per il gruppo, viene aggiunta la dicitura (Gr.) al nome der proclamatore
+    - Tabella ultime assegnazioni:
+        - Questa tabella serve per valutare quale territorio assegnare
+        - Vengono mostrati i territori che non vengono lavorati da piu' tempo
+        - E' possibile inoltre selezionare il proclamatore per cui si sta cercando un territorio. In tal modo verranno fornite ulteriori informazioni:
+            - Se il proclamatore ha gia' avuto quel territorio viene visualizzato il simbolo di una spunta e la data di restituzione di quell'assegnazione
+    - Nuove informazioni:
+        - Numero totale dei territori
+        - Numero totale dei territori assegnati
+        - Numero totale dei territori disponibili
+    - Nel tab Proclamatori, aggiunte le seguenti funzioni:
+        - Tabella ultime assegnazioni per il proclamatore selezionato
+        - Numero totale territori assegnati al proclamatore
+        - Apri link del territorio nel browser
+        - Mostra link del territorio
+        - Apri cartella risorse del territorio
+    - Stampa del modulo S-13:
+        - Stampa i territori escludendo quelli archiviati e bloccati
+        - Stampa soltanto i territori archiviati
+        - Stampa tutti i territori
 
 	Database Query:
 	
+	ALTER TABLE `sp_territory` ADD `spInf41` INT NOT NULL AFTER `spInf40`, ADD `spInf42` INT NOT NULL AFTER `spInf41`, ADD `spInf43` INT NOT NULL AFTER `spInf42`, ADD `spInf44` VARCHAR(255) NOT NULL AFTER `spInf43`, ADD `spInf45` VARCHAR(255) NOT NULL AFTER `spInf44`, ADD `spInf46` VARCHAR(255) NOT NULL AFTER `spInf45`, ADD `spInf47` TEXT NOT NULL AFTER `spInf46`, ADD `spInf48` TEXT NOT NULL AFTER `spInf47`;
+	
+	ALTER TABLE `sp_terrregistry` ADD `spInf5` INT NOT NULL AFTER `spInf4`;

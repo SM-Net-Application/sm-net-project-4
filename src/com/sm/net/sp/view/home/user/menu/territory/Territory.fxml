@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -129,24 +130,6 @@
                                                                   </Button>
                                                                </children>
                                                             </StackPane>
-                                                            <StackPane>
-                                                               <children>
-                                                                  <Button fx:id="territoryOpenViewerButton" mnemonicParsing="false" text="viewer">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </Button>
-                                                               </children>
-                                                            </StackPane>
-                                                            <StackPane>
-                                                               <children>
-                                                                  <Button fx:id="territoryOpenViewerURLButton" mnemonicParsing="false" text="viewerLink">
-                                                                     <StackPane.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </StackPane.margin>
-                                                                  </Button>
-                                                               </children>
-                                                            </StackPane>
                                                             <StackPane alignment="CENTER_LEFT">
                                                                <children>
                                                                   <Button fx:id="territoryResourcesDownloadAllButton" mnemonicParsing="false" text="downloadAll">
@@ -154,6 +137,69 @@
                                                                         <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                                                                      </StackPane.margin>
                                                                   </Button>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <Label fx:id="totalCountLabel" text="total">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <TextField fx:id="totalCountTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Label fx:id="assignedCountLabel" text="assigned">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <TextField fx:id="assignedCountTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <Label fx:id="availableCountLabel" text="available">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane>
+                                                               <children>
+                                                                  <TextField fx:id="availableCountTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
+                                                            <StackPane alignment="CENTER_RIGHT">
+                                                               <children>
+                                                                  <CheckBox fx:id="showTerritoryArchivedCheckBox" mnemonicParsing="false" text="CheckBox">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </CheckBox>
                                                                </children>
                                                             </StackPane>
                                                          </children>
@@ -198,6 +244,24 @@
                                                                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                                  </StackPane.margin>
                                                                               </TextField>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane>
+                                                                           <children>
+                                                                              <Button fx:id="territoryOpenViewerButton" mnemonicParsing="false" text="viewer">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </Button>
+                                                                           </children>
+                                                                        </StackPane>
+                                                                        <StackPane>
+                                                                           <children>
+                                                                              <Button fx:id="territoryOpenViewerURLButton" mnemonicParsing="false" text="viewerLink">
+                                                                                 <StackPane.margin>
+                                                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                                 </StackPane.margin>
+                                                                              </Button>
                                                                            </children>
                                                                         </StackPane>
                                                                         <StackPane alignment="CENTER_LEFT">
@@ -348,15 +412,28 @@
                                        <children>
                                           <VBox fx:id="memberAssignedTerritoryTablesVBox" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <StackPane>
+                                                <HBox>
                                                    <children>
-                                                      <TextField fx:id="filterMemberTextField">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </TextField>
+                                                      <StackPane alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Button fx:id="memberTerritoryShowLastAssignButton" mnemonicParsing="false" text="lastAssign">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </Button>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane HBox.hgrow="ALWAYS">
+                                                         <children>
+                                                            <TextField fx:id="filterMemberTextField">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </StackPane>
                                                    </children>
-                                                </StackPane>
+                                                </HBox>
                                                 <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                                    <children>
                                                       <TableView fx:id="membersTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
@@ -396,6 +473,15 @@
                                                                   </Label>
                                                                </children>
                                                             </StackPane>
+                                                            <StackPane alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                                               <children>
+                                                                  <TextField fx:id="memberAssignedCountTextField">
+                                                                     <StackPane.margin>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </StackPane.margin>
+                                                                  </TextField>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane alignment="CENTER_RIGHT">
                                                                <children>
                                                                   <Button fx:id="memberTerritoryOpenViewerButton" mnemonicParsing="false" text="urlbrowser">
@@ -423,7 +509,7 @@
                                                                   </Button>
                                                                </children>
                                                             </StackPane>
-                                                            <StackPane alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                                            <StackPane>
                                                                <children>
                                                                   <Button fx:id="memberAssignedTerritoryReturnButton" mnemonicParsing="false" text="consegna">
                                                                      <StackPane.margin>
